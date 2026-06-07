@@ -1,0 +1,40 @@
+# .env and secrets
+.env
+*.env
+**/*.env
+.env.*
+
+# Standard Flutter
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# iOS/macOS
+.DS_Store
+ios/Flutter/Generated.xcconfig
+ios/Flutter/app.flx
+ios/Flutter/app.zip
+ios/Flutter/flutter_assets/
+ios/Flutter/flutter_export_environment.sh
+ios/Pods/
+ios/.symlinks/
+
+# Android
+android/.gradle/
+android/.kotlin/
+android/local.properties
+android/key.properties
+**/*.keystore
+**/*.jks
+android/app/src/main/res/values/secrets.xml
+
+# IDEs
+.idea/
+*.iml
+
+# Code Generation
+*.g.dart
+*.freezed.dart
+*.mocks.dart
