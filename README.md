@@ -1,42 +1,43 @@
 # Stasisly
 
-Plataforma integral de bienestar físico y mental con agentes de inteligencia artificial especializados.
+Stasisly es una plataforma de bienestar con arquitectura Flutter/Supabase y una
+definición documental centrada en Stasis como sistema nervioso central.
 
-## Requisitos Previos
+## Estado actual
 
-- Flutter SDK `^3.10.0`
-- Dart SDK `^3.10.0`
-- Configuración de variables de entorno (Supabase, Firebase, Sentry)
+El proyecto está en fase de estabilización local y modo demo explícito. Backend
+real, producción, datos reales, IA, Stasis Engine, pagos y wiring UI/providers
+requieren aprobación documental y técnica antes de activarse.
 
-## Configuración de Entorno
+## Requisitos
 
-Crea un archivo de configuración para tus variables de entorno si lo deseas, o inyéctalas directamente en el comando de compilación:
+- Flutter SDK compatible con el proyecto.
+- Dart SDK compatible con el proyecto.
+- Docker Desktop para pruebas Supabase locales.
+- Supabase CLI para migraciones y harnesses locales.
 
-```bash
-flutter run --dart-define=SUPABASE_URL="https://tu-proyecto.supabase.co" \
-            --dart-define=SUPABASE_ANON_KEY="tu-anon-key"
-```
-
-## Arquitectura
-
-El proyecto sigue **Clean Architecture** combinada con **Arquitectura Hexagonal** y el patrón **MVVM** en la capa de presentación. 
-El manejo de dependencias y estado se realiza mediante **Riverpod**.
-
-Para más detalles, consulta `docs/ARCHITECTURE.md`.
-
-## Documentación
-
-La definición completa del proyecto y requisitos se encuentra en `docs/PROJECT_DEFINITION_FINAL.md`.
-El seguimiento de cambios se documenta en `docs/SESSION_TRACKER.md`.
-
-## Testing
+## Comandos útiles
 
 ```bash
+dart run build_runner build --delete-conflicting-outputs
+flutter analyze --no-fatal-infos
 flutter test
 ```
 
-Para correr el linter con reglas estrictas:
+Para pruebas Supabase locales, usar únicamente entorno local/efímero y seguir
+los harnesses documentados en `supabase/tests/`.
 
-```bash
-flutter analyze
-```
+## Documentación principal
+
+- `docs/PROJECT_DEFINITION.md`
+- `docs/ARCHITECTURE.md`
+- `docs/SESSION_TRACKER.md`
+- `docs/stasisly_definition/`
+- `docs/stasisly_definition/adr/`
+
+## Reglas de seguridad
+
+- No versionar secretos, tokens ni archivos `.env`.
+- No ejecutar migraciones contra remoto sin aprobación explícita.
+- No conectar datos reales sin RLS, autorización, auditoría y tests.
+- No presentar modo demo, mocks o fixtures como producto real.
