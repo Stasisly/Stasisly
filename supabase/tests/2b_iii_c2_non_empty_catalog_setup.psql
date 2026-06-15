@@ -1,0 +1,92 @@
+\set ON_ERROR_STOP on
+
+do $$
+begin
+  if exists (
+    select 1 from public.specialists where name like 'test_only_c2%'
+  ) or exists (
+    select 1
+    from public.specialist_catalog c
+    join public.specialists s on s.id = c.specialist_id
+    where s.name like 'test_only_c2%'
+  ) then
+    raise exception 'C2 fixtures already exist; cleanup is required first';
+  end if;
+
+  if exists (select 1 from public.specialist_catalog) then
+    raise exception 'C2 requires an otherwise empty specialist_catalog';
+  end if;
+end
+$$;
+
+insert into public.specialists (
+  id, name, category, prompt_template, is_premium, is_active
+) values
+  ('c2000000-0000-4000-8000-000000000001', 'test_only_c2_stasis',
+    'orquestador', '{"marker":"test_only_c2_non_production"}', false, false),
+  ('c2000000-0000-4000-8000-000000000002', 'test_only_c2_nutrition',
+    'nutricion', '{"marker":"test_only_c2_non_production"}', false, false),
+  ('c2000000-0000-4000-8000-000000000003', 'test_only_c2_wellness_premium',
+    'mental', '{"marker":"test_only_c2_non_production"}', true, false),
+  ('c2000000-0000-4000-8000-000000000004', 'test_only_c2_sleep_stress',
+    'mental', '{"marker":"test_only_c2_non_production"}', false, false);
+
+insert into public.specialists (
+  id, name, category, prompt_template, is_premium, is_active
+)
+select
+  ('c2000000-0000-4000-8000-' || lpad((100 + n)::text, 12, '0'))::uuid,
+  'test_only_c2_aux_' || lpad(n::text, 2, '0'),
+  'salud',
+  '{"marker":"test_only_c2_non_production"}'::jsonb,
+  false,
+  false
+from generate_series(1, 17) as n;
+
+insert into public.specialist_catalog (
+  id, specialist_id, display_name, product_area, short_description,
+  is_published, availability_status, access_tier, sort_order
+) values
+  ('c2100000-0000-4000-8000-000000000001',
+    'c2000000-0000-4000-8000-000000000001',
+    'Stasis', 'stasis', 'Fixture test_only_c2 no apto para producción.',
+    true, 'available', 'free', 10),
+  ('c2100000-0000-4000-8000-000000000002',
+    'c2000000-0000-4000-8000-000000000002',
+    'Nutrición', 'nutrition', 'Fixture test_only_c2 no apto para producción.',
+    true, 'available', 'free', 20),
+  ('c2100000-0000-4000-8000-000000000003',
+    'c2000000-0000-4000-8000-000000000003',
+    'Wellness premium', 'wellness',
+    'Fixture test_only_c2 no apto para producción.',
+    true, 'available', 'premium', 30),
+  ('c2100000-0000-4000-8000-000000000004',
+    'c2000000-0000-4000-8000-000000000004',
+    'Sueño y estrés', 'wellness',
+    'Fixture test_only_c2 no apto para producción.',
+    true, 'unavailable', 'free', 40);
+
+insert into public.specialist_catalog (
+  id, specialist_id, display_name, product_area, short_description,
+  is_published, availability_status, access_tier, sort_order
+)
+select
+  ('c2100000-0000-4000-8000-' || lpad((100 + n)::text, 12, '0'))::uuid,
+  ('c2000000-0000-4000-8000-' || lpad((100 + n)::text, 12, '0'))::uuid,
+  'test_only_c2 auxiliary ' || lpad(n::text, 2, '0'),
+  'health',
+  'Fixture auxiliar test_only_c2 no apto para producción.',
+  true,
+  'available',
+  'free',
+  100 + n
+from generate_series(1, 17) as n;
+
+do $$
+begin
+  if (select count(*) from public.specialists where name like 'test_only_c2%') <> 21
+    or (select count(*) from public.specialist_catalog) <> 21 then
+    raise exception 'C2 setup did not create exactly 21 fixtures';
+  end if;
+end
+$$;

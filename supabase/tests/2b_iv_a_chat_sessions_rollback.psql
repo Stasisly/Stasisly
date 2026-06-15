@@ -1,0 +1,51 @@
+\set ON_ERROR_STOP on
+
+-- Local/ephemeral rollback only. Security deny-all is deliberately preserved.
+BEGIN;
+
+ALTER TABLE public.chat_sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.chat_sessions NO FORCE ROW LEVEL SECURITY;
+REVOKE ALL PRIVILEGES ON TABLE public.chat_sessions
+  FROM PUBLIC, anon, authenticated;
+
+ALTER TABLE public.chat_sessions
+  DROP CONSTRAINT IF EXISTS chat_sessions_status_valid,
+  DROP CONSTRAINT IF EXISTS chat_sessions_message_count_nonnegative,
+  DROP CONSTRAINT IF EXISTS chat_sessions_chronology_valid,
+  ALTER COLUMN user_id DROP NOT NULL,
+  ALTER COLUMN specialist_id DROP NOT NULL,
+  ALTER COLUMN started_at DROP NOT NULL,
+  ALTER COLUMN last_message_at DROP NOT NULL,
+  ALTER COLUMN status DROP NOT NULL,
+  ALTER COLUMN message_count DROP NOT NULL,
+  ADD CONSTRAINT chat_sessions_status_check
+    CHECK (status IN ('active', 'archived'));
+
+DROP INDEX IF EXISTS public.idx_chat_sessions_owner_listing;
+CREATE INDEX IF NOT EXISTS idx_chat_sessions_user
+ON public.chat_sessions(user_id);
+
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM pg_catalog.pg_policies
+    WHERE schemaname = 'public' AND tablename = 'chat_sessions'
+  ) OR EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    WHERE c.oid = 'public.chat_sessions'::regclass
+      AND (NOT c.relrowsecurity OR c.relforcerowsecurity)
+  ) THEN
+    RAISE EXCEPTION '2B-IV-A rollback must preserve deny-all';
+  END IF;
+END
+$$;
+
+COMMIT;
+
+SELECT
+  c.relrowsecurity AS rls_enabled,
+  c.relforcerowsecurity AS force_rls,
+  (SELECT count(*) FROM pg_catalog.pg_policies
+    WHERE schemaname = 'public' AND tablename = 'chat_sessions') AS policies
+FROM pg_catalog.pg_class c
+WHERE c.oid = 'public.chat_sessions'::regclass;

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:stasisly/features/chat/domain/usecases/send_message_usecase.dart';
 import 'package:stasisly/features/chat/presentation/viewmodels/chat_providers.dart';
 
 part 'chat_controller.g.dart';
@@ -21,7 +20,7 @@ class ChatController extends _$ChatController {
     state = const AsyncLoading();
 
     final useCase = ref.read(sendMessageUseCaseProvider);
-    
+
     // In a real app we'd map attachments to a proper JSON/List structure.
     final result = await useCase(
       sessionId: sessionId,

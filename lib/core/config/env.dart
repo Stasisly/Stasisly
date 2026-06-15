@@ -6,16 +6,22 @@
 /// flutter run --dart-define=SUPABASE_URL=https://xxx.supabase.co
 /// ```
 abstract final class Env {
+  /// Runtime mode: demo, backendReal or production. Demo is the safe default.
+  static const String appMode = String.fromEnvironment(
+    'APP_MODE',
+    defaultValue: 'demo',
+  );
+
   /// Supabase project URL.
   static const String supabaseUrl = String.fromEnvironment(
     'SUPABASE_URL',
-    defaultValue: 'https://your-project.supabase.co',
+    defaultValue: '',
   );
 
   /// Supabase anonymous key (public).
   static const String supabaseAnonKey = String.fromEnvironment(
     'SUPABASE_ANON_KEY',
-    defaultValue: 'your-anon-key',
+    defaultValue: '',
   );
 
   /// Sentry DSN for error tracking.

@@ -1,0 +1,42 @@
+export type ArchiveErrorCode =
+  | "methodNotAllowed"
+  | "unauthenticated"
+  | "invalidSession"
+  | "invalidRequest"
+  | "sessionNotFound"
+  | "permissionDenied"
+  | "archiveUnconfirmed"
+  | "contractViolation"
+  | "backendMisconfigured"
+  | "unexpectedError";
+
+const ERROR_STATUS: Record<ArchiveErrorCode, number> = {
+  methodNotAllowed: 405,
+  unauthenticated: 401,
+  invalidSession: 401,
+  invalidRequest: 400,
+  sessionNotFound: 404,
+  permissionDenied: 403,
+  archiveUnconfirmed: 409,
+  contractViolation: 502,
+  backendMisconfigured: 503,
+  unexpectedError: 500,
+};
+
+export function errorResponse(
+  code: ArchiveErrorCode,
+  requestId: string,
+): Response {
+  return Response.json(
+    { error: { code, requestId } },
+    { status: ERROR_STATUS[code], headers: { "cache-control": "no-store" } },
+  );
+}
+
+export function errorCodeFrom(error: unknown): ArchiveErrorCode {
+  if (error instanceof Error) {
+    const candidate = error.message as ArchiveErrorCode;
+    if (candidate in ERROR_STATUS) return candidate;
+  }
+  return "unexpectedError";
+}

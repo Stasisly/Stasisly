@@ -1,0 +1,24 @@
+\set ON_ERROR_STOP on
+
+delete from public.specialist_catalog c
+using public.specialists s
+where c.specialist_id = s.id
+  and s.name like 'test_only_c2%';
+
+delete from public.specialists
+where name like 'test_only_c2%';
+
+do $$
+begin
+  if exists (
+    select 1 from public.specialists where name like 'test_only_c2%'
+  ) or exists (
+    select 1
+    from public.specialist_catalog c
+    join public.specialists s on s.id = c.specialist_id
+    where s.name like 'test_only_c2%'
+  ) then
+    raise exception 'C2 cleanup left fixtures behind';
+  end if;
+end
+$$;

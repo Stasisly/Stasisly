@@ -22,7 +22,6 @@ abstract class AuthRepository {
   Future<Either<Failure, UserEntity>> signUpWithEmail({
     required String email,
     required String password,
-    String? displayName,
   });
 
   /// Signs out the current user.

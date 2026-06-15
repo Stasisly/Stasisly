@@ -66,7 +66,7 @@ class AuthController extends _$AuthController {
   Future<bool> signIn(String email, String password) async {
     final useCase = ref.read(signInUseCaseProvider);
     final result = await useCase(email: email, password: password);
-    
+
     return result.fold(
       (failure) => throw Exception(failure.message),
       (user) => true,
@@ -74,14 +74,10 @@ class AuthController extends _$AuthController {
   }
 
   /// Attempts to sign up. Returns true if successful, throws on failure.
-  Future<bool> signUp(String email, String password, String displayName) async {
+  Future<bool> signUp(String email, String password) async {
     final useCase = ref.read(signUpUseCaseProvider);
-    final result = await useCase(
-      email: email,
-      password: password,
-      displayName: displayName,
-    );
-    
+    final result = await useCase(email: email, password: password);
+
     return result.fold(
       (failure) => throw Exception(failure.message),
       (user) => true,

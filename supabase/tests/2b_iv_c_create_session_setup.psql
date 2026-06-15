@@ -1,0 +1,41 @@
+\set ON_ERROR_STOP on
+
+do $$
+begin
+  if exists (
+    select 1 from public.specialists where name like 'test_only_2b_iv_c%'
+  ) or exists (
+    select 1 from public.chat_sessions
+    where id::text like '4c400000-0000-4000-8000-%'
+  ) then
+    raise exception '2B-IV-C fixtures already exist';
+  end if;
+end
+$$;
+
+insert into public.specialists (
+  id, name, category, prompt_template, is_premium, is_active
+) values
+  ('4c200000-0000-4000-8000-000000000001', 'test_only_2b_iv_c_free',
+   'mental', '{"marker":"test_only_2b_iv_c"}', false, true),
+  ('4c200000-0000-4000-8000-000000000002', 'test_only_2b_iv_c_premium',
+   'mental', '{"marker":"test_only_2b_iv_c"}', true, true),
+  ('4c200000-0000-4000-8000-000000000003', 'test_only_2b_iv_c_unavailable',
+   'mental', '{"marker":"test_only_2b_iv_c"}', false, true);
+
+insert into public.specialist_catalog (
+  id, specialist_id, display_name, product_area, short_description,
+  is_published, availability_status, access_tier, sort_order
+) values
+  ('4c300000-0000-4000-8000-000000000001',
+   '4c200000-0000-4000-8000-000000000001',
+   'test_only_2b_iv_c free', 'wellness', 'Fixture local no productivo.',
+   true, 'available', 'free', 1),
+  ('4c300000-0000-4000-8000-000000000002',
+   '4c200000-0000-4000-8000-000000000002',
+   'test_only_2b_iv_c premium', 'wellness', 'Fixture local no productivo.',
+   true, 'available', 'premium', 2),
+  ('4c300000-0000-4000-8000-000000000003',
+   '4c200000-0000-4000-8000-000000000003',
+   'test_only_2b_iv_c unavailable', 'wellness', 'Fixture local no productivo.',
+   true, 'unavailable', 'free', 3);

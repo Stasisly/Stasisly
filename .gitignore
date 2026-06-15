@@ -38,3 +38,7 @@ android/app/src/main/res/values/secrets.xml
 *.g.dart
 *.freezed.dart
 *.mocks.dart
+
+# Supabase local CLI state
+supabase/.temp/
+supabase/.branches/

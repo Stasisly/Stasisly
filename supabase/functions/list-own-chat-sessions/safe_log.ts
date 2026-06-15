@@ -1,0 +1,14 @@
+export interface SafeLogEvent {
+  operation: "listOwnChatSessions";
+  result: "success" | "error";
+  latency: number;
+  count: number;
+  contract_version: "1";
+  request_id: string;
+}
+
+export type LogWriter = (serializedEvent: string) => void;
+
+export function safeLog(event: SafeLogEvent, writer: LogWriter): void {
+  writer(JSON.stringify(event));
+}

@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 import 'package:stasisly/core/error/exceptions.dart';
+import 'package:stasisly/features/chat/data/datasources/chat_remote_datasource.dart';
 import 'package:stasisly/features/chat/domain/entities/chat_session_entity.dart';
 import 'package:stasisly/features/chat/domain/entities/message_entity.dart';
 
-class SupabaseChatDataSource {
+class SupabaseChatDataSource implements ChatRemoteDataSource {
   const SupabaseChatDataSource(this._supabase);
 
   final supabase.SupabaseClient _supabase;
 
+  @override
   Future<ChatSessionEntity> getOrCreateSession({
     required String userId,
     required String specialistId,
@@ -30,10 +32,7 @@ class SupabaseChatDataSource {
       // Si no existe, crearla
       final insertResponse = await _supabase
           .from('chat_sessions')
-          .insert({
-            'user_id': userId,
-            'specialist_id': specialistId,
-          })
+          .insert({'user_id': userId, 'specialist_id': specialistId})
           .select()
           .single();
 
@@ -45,6 +44,7 @@ class SupabaseChatDataSource {
     }
   }
 
+  @override
   Future<MessageEntity> sendMessage({
     required String sessionId,
     required String role,
@@ -53,17 +53,15 @@ class SupabaseChatDataSource {
     try {
       final response = await _supabase
           .from('messages')
-          .insert({
-            'session_id': sessionId,
-            'role': role,
-            'content': content,
-          })
+          .insert({'session_id': sessionId, 'role': role, 'content': content})
           .select()
           .single();
 
       // Actualizar la sesión
-      await _supabase
-          .rpc('increment_message_count', params: {'sess_id': sessionId});
+      await _supabase.rpc<void>(
+        'increment_message_count',
+        params: {'sess_id': sessionId},
+      );
 
       return _mapMessage(response);
     } on supabase.PostgrestException catch (e) {
@@ -73,6 +71,7 @@ class SupabaseChatDataSource {
     }
   }
 
+  @override
   Stream<List<MessageEntity>> watchMessages(String sessionId) {
     return _supabase
         .from('messages')

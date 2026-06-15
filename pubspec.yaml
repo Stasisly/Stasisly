@@ -60,10 +60,6 @@ flutter:
   uses-material-design: true
   generate: true
 
-  assets:
-    - assets/images/
-    - assets/fonts/
-
   # fonts:
   #   - family: Inter
   #     fonts:

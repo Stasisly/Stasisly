@@ -35,11 +35,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
     setState(() => _isLoading = true);
 
     try {
-      await ref.read(authControllerProvider.notifier).signUp(
-            _emailController.text.trim(),
-            _passwordController.text,
-            _nameController.text.trim(),
-          );
+      await ref
+          .read(authControllerProvider.notifier)
+          .signUp(_emailController.text.trim(), _passwordController.text);
       // Routing is handled automatically by GoRouter redirect
     } on Exception catch (e) {
       if (!mounted) return;

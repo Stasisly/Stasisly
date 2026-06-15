@@ -1,3 +1,17 @@
+# ARCHIVADO — NO EJECUTAR
+
+Este archivo es histórico. No debe copiarse ni pegarse en Codex como prompt
+vigente.
+
+Fue sustituido por:
+
+`docs/stasisly_definition/orchestrator/ORQUESTADOR_MAESTRO_CODEX.md`
+
+Su contenido se conserva únicamente como referencia histórica del proceso
+inicial de creación del equipo AAA.
+
+---
+
 # Prompt para Codex — Equipo AAA de Stasisly
 
 Copia y pega este prompt completo en el chat de Codex dentro de tu IDE.

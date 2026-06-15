@@ -12,12 +12,7 @@ class SignUpUseCase {
   Future<Either<Failure, UserEntity>> call({
     required String email,
     required String password,
-    String? displayName,
   }) {
-    return _repository.signUpWithEmail(
-      email: email,
-      password: password,
-      displayName: displayName,
-    );
+    return _repository.signUpWithEmail(email: email, password: password);
   }
 }

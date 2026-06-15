@@ -38,7 +38,9 @@ class SupabaseAuthDataSource {
 
       final user = response.user;
       if (user == null) {
-        throw const AuthException(message: 'Error al iniciar sesión. Usuario no encontrado.');
+        throw const AuthException(
+          message: 'Error al iniciar sesión. Usuario no encontrado.',
+        );
       }
 
       return UserModel.fromSupabase(user);
@@ -53,21 +55,18 @@ class SupabaseAuthDataSource {
   Future<UserModel> signUpWithEmail({
     required String email,
     required String password,
-    String? displayName,
   }) async {
     try {
       final response = await _supabase.auth.signUp(
         email: email,
         password: password,
-        data: {
-          if (displayName != null) 'display_name': displayName,
-          'role': 'user', // Default role
-        },
       );
 
       final user = response.user;
       if (user == null) {
-        throw const AuthException(message: 'Error al registrar. Usuario no creado.');
+        throw const AuthException(
+          message: 'Error al registrar. Usuario no creado.',
+        );
       }
 
       return UserModel.fromSupabase(user);

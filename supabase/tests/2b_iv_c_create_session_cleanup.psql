@@ -1,0 +1,30 @@
+\set ON_ERROR_STOP on
+
+delete from public.chat_sessions
+where specialist_id in (
+  select id from public.specialists where name like 'test_only_2b_iv_c%'
+);
+
+delete from public.specialist_catalog c
+using public.specialists s
+where c.specialist_id = s.id and s.name like 'test_only_2b_iv_c%';
+
+delete from public.specialists where name like 'test_only_2b_iv_c%';
+delete from public.users where display_name like 'test_only_2b_iv_c%';
+delete from auth.users where email like 'test_only_2b_iv_c_%@stasisly.local';
+
+do $$
+begin
+  if exists (select 1 from public.specialists where name like 'test_only_2b_iv_c%')
+    or exists (select 1 from public.specialist_catalog where display_name like 'test_only_2b_iv_c%')
+    or exists (select 1 from public.users where display_name like 'test_only_2b_iv_c%')
+    or exists (select 1 from auth.users where email like 'test_only_2b_iv_c_%@stasisly.local')
+    or exists (
+      select 1 from public.chat_sessions
+      where specialist_id::text like '4c200000-0000-4000-8000-%'
+    )
+  then
+    raise exception '2B-IV-C cleanup left fixtures behind';
+  end if;
+end
+$$;

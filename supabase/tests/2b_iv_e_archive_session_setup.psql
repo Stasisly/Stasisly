@@ -1,0 +1,20 @@
+\set ON_ERROR_STOP on
+
+do $$
+begin
+  if exists (select 1 from public.specialists where name like 'test_only_2b_iv_e%') then
+    raise exception '2B-IV-E fixtures already exist';
+  end if;
+end
+$$;
+
+insert into public.specialists (
+  id, name, category, prompt_template, is_premium, is_active
+) values (
+  '4e200000-0000-4000-8000-000000000001',
+  'test_only_2b_iv_e specialist',
+  'mental',
+  '{"marker":"test_only_2b_iv_e"}',
+  false,
+  true
+);

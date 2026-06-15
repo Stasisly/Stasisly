@@ -1,30 +1,9 @@
-import 'package:equatable/equatable.dart';
+import 'package:stasisly/core/domain/entities/current_identity.dart';
 
-/// Represents an authenticated user in the domain layer.
-class UserEntity extends Equatable {
-  const UserEntity({
-    required this.id,
-    required this.email,
-    this.displayName,
-    this.avatarUrl,
-    this.role = 'user',
-  });
-
-  /// The unique identifier of the user (UUID from Supabase Auth).
-  final String id;
-
-  /// The user's email address.
-  final String email;
-
-  /// The user's chosen display name.
-  final String? displayName;
-
-  /// URL to the user's avatar image.
-  final String? avatarUrl;
-
-  /// The user's role ('user' or 'admin'). Defaults to 'user'.
-  final String role;
-
-  @override
-  List<Object?> get props => [id, email, displayName, avatarUrl, role];
+/// Authenticated identity returned by an auth provider.
+///
+/// It contains no profile, role, permission, or administrative authority.
+class UserEntity extends CurrentIdentity {
+  const UserEntity({required String id, required String email})
+    : super(id: id, source: IdentitySource.authenticated, email: email);
 }
