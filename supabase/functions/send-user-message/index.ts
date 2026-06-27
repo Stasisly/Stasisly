@@ -1,0 +1,223 @@
+import {
+  parseSendMessageBody,
+  sanitizeRpcResult,
+  type SendMessageCommand,
+} from "./contract.ts";
+import {
+  errorCodeFrom,
+  errorResponse,
+  type SendMessageErrorCode,
+} from "./errors.ts";
+import { type LogWriter, safeLog } from "./safe_log.ts";
+
+const OPERATION = "sendUserMessage";
+const LOCAL_ENDPOINTS = new Set([
+  "127.0.0.1:54321",
+  "localhost:54321",
+  "host.docker.internal:54321",
+  "kong:8000",
+]);
+
+export interface RuntimeConfig {
+  supabaseUrl: string;
+  anonKey: string;
+  serviceRoleKey: string;
+  allowLocalOnly: string;
+}
+
+export interface HandlerDependencies {
+  fetcher?: typeof fetch;
+  now?: () => number;
+  requestId?: () => string;
+  logWriter?: LogWriter;
+}
+
+export function readRuntimeConfig(): RuntimeConfig {
+  return {
+    supabaseUrl: Deno.env.get("SUPABASE_URL") ?? "",
+    anonKey: Deno.env.get("SUPABASE_ANON_KEY") ?? "",
+    serviceRoleKey: Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+    allowLocalOnly: Deno.env.get("STASISLY_ALLOW_LOCAL_ONLY") ?? "",
+  };
+}
+
+export function assertLocalRuntime(config: RuntimeConfig): URL {
+  if (
+    config.allowLocalOnly !== "true" || !config.anonKey ||
+    !config.serviceRoleKey
+  ) {
+    throw new Error("backendMisconfigured");
+  }
+  let url: URL;
+  try {
+    url = new URL(config.supabaseUrl);
+  } catch {
+    throw new Error("backendMisconfigured");
+  }
+  if (url.protocol !== "http:" || !LOCAL_ENDPOINTS.has(url.host)) {
+    throw new Error("backendMisconfigured");
+  }
+  return url;
+}
+
+function bearerToken(request: Request): string {
+  const match = /^Bearer ([^\s]+)$/u.exec(
+    request.headers.get("authorization") ?? "",
+  );
+  if (!match) throw new Error("unauthenticated");
+  return match[1];
+}
+
+async function requestJson(
+  fetcher: typeof fetch,
+  input: URL,
+  init: RequestInit,
+  errorCode: SendMessageErrorCode,
+): Promise<unknown> {
+  const response = await fetcher(input, init);
+  if (!response.ok) throw new Error(errorCode);
+  if (response.status === 204) throw new Error("contractViolation");
+  return await response.json();
+}
+
+function privilegedHeaders(serviceRoleKey: string): HeadersInit {
+  return {
+    apikey: serviceRoleKey,
+    authorization: `Bearer ${serviceRoleKey}`,
+    accept: "application/json",
+  };
+}
+
+async function validateLocalUser(
+  fetcher: typeof fetch,
+  baseUrl: URL,
+  anonKey: string,
+  token: string,
+): Promise<string> {
+  const body = await requestJson(
+    fetcher,
+    new URL("/auth/v1/user", baseUrl),
+    { headers: { apikey: anonKey, authorization: `Bearer ${token}` } },
+    "invalidSession",
+  );
+  if (
+    typeof body !== "object" || body === null || Array.isArray(body) ||
+    typeof (body as Record<string, unknown>).id !== "string"
+  ) {
+    throw new Error("invalidSession");
+  }
+  return (body as Record<string, string>).id;
+}
+
+function mapRpcErrorBody(body: unknown): SendMessageErrorCode {
+  const message = typeof body === "object" && body !== null &&
+      !Array.isArray(body) &&
+      typeof (body as Record<string, unknown>).message === "string"
+    ? String((body as Record<string, unknown>).message)
+    : "";
+  if (message.includes("content_too_long")) return "contentTooLong";
+  if (message.includes("content_invalid")) return "contentInvalid";
+  if (message.includes("session_archived")) return "sessionArchived";
+  if (message.includes("session_not_found")) return "sessionNotFound";
+  if (message.includes("invalid_request")) return "invalidRequest";
+  if (message.includes("write_unconfirmed")) return "writeUnconfirmed";
+  if (message.includes("permission denied")) return "permissionDenied";
+  if (message.includes("function") || message.includes("schema cache")) {
+    return "backendMisconfigured";
+  }
+  return "unexpectedError";
+}
+
+async function invokeSendMessageRpc(
+  fetcher: typeof fetch,
+  baseUrl: URL,
+  serviceRoleKey: string,
+  ownerId: string,
+  command: SendMessageCommand,
+): Promise<unknown> {
+  const url = new URL("/rest/v1/rpc/send_user_message_core", baseUrl);
+  const response = await fetcher(url, {
+    method: "POST",
+    headers: {
+      ...privilegedHeaders(serviceRoleKey),
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      p_session_id: command.sessionId,
+      p_owner_user_id: ownerId,
+      p_content: command.content,
+    }),
+  });
+  if (!response.ok) {
+    let body: unknown = null;
+    try {
+      body = await response.json();
+    } catch {
+      // Keep response body opaque and map by status below.
+    }
+    if (response.status === 401) throw new Error("invalidSession");
+    if (response.status === 403) throw new Error("permissionDenied");
+    throw new Error(mapRpcErrorBody(body));
+  }
+  if (response.status === 204) throw new Error("contractViolation");
+  return await response.json();
+}
+
+export function createHandler(
+  config: RuntimeConfig,
+  dependencies: HandlerDependencies = {},
+): (request: Request) => Promise<Response> {
+  const fetcher = dependencies.fetcher ?? fetch;
+  const now = dependencies.now ?? Date.now;
+  const requestId = dependencies.requestId ?? (() => crypto.randomUUID());
+  const logWriter = dependencies.logWriter ?? console.log;
+
+  return async (request: Request): Promise<Response> => {
+    const startedAt = now();
+    const id = requestId();
+    let result: "success" | "error" = "error";
+    let errorCode: SendMessageErrorCode | undefined;
+    try {
+      if (request.method !== "POST") throw new Error("methodNotAllowed");
+      const baseUrl = assertLocalRuntime(config);
+      const command = await parseSendMessageBody(request);
+      const token = bearerToken(request);
+      const ownerId = await validateLocalUser(
+        fetcher,
+        baseUrl,
+        config.anonKey,
+        token,
+      );
+      const rows = await invokeSendMessageRpc(
+        fetcher,
+        baseUrl,
+        config.serviceRoleKey,
+        ownerId,
+        command,
+      );
+      const payload = sanitizeRpcResult(rows);
+      result = "success";
+      return Response.json(payload, {
+        status: 201,
+        headers: {
+          "cache-control": "no-store",
+          "content-type": "application/json",
+        },
+      });
+    } catch (error) {
+      errorCode = errorCodeFrom(error);
+      return errorResponse(errorCode, id);
+    } finally {
+      safeLog({
+        operation: OPERATION,
+        result,
+        latency: Math.max(0, now() - startedAt),
+        contract_version: "1",
+        request_id: id,
+        ...(errorCode ? { error_code: errorCode } : {}),
+      }, logWriter);
+    }
+  };
+}
+
+if (import.meta.main) Deno.serve(createHandler(readRuntimeConfig()));

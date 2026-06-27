@@ -1,0 +1,61 @@
+\set ON_ERROR_STOP on
+
+-- Local/ephemeral rollback only. Security deny-all is deliberately preserved.
+BEGIN;
+
+ALTER TABLE public.messages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.messages NO FORCE ROW LEVEL SECURITY;
+REVOKE ALL PRIVILEGES ON TABLE public.messages
+  FROM PUBLIC, anon, authenticated;
+
+ALTER TABLE public.messages
+  DROP CONSTRAINT IF EXISTS messages_role_check,
+  DROP CONSTRAINT IF EXISTS messages_role_valid,
+  DROP CONSTRAINT IF EXISTS messages_content_not_blank,
+  DROP CONSTRAINT IF EXISTS messages_content_max_length,
+  DROP CONSTRAINT IF EXISTS messages_attachments_null_mvp,
+  ALTER COLUMN session_id DROP NOT NULL,
+  ALTER COLUMN created_at DROP NOT NULL,
+  ADD CONSTRAINT messages_role_check
+    CHECK (role IN ('user', 'assistant', 'system', 'chief_intervention'));
+
+DROP INDEX IF EXISTS public.idx_messages_session_created_id;
+CREATE INDEX IF NOT EXISTS idx_messages_session
+ON public.messages(session_id);
+
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM pg_catalog.pg_policies
+    WHERE schemaname = 'public' AND tablename = 'messages'
+  ) OR EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    WHERE c.oid = 'public.messages'::regclass
+      AND (NOT c.relrowsecurity OR c.relforcerowsecurity)
+  ) THEN
+    RAISE EXCEPTION '2B-V-A rollback must preserve deny-all';
+  END IF;
+
+  IF has_table_privilege('anon', 'public.messages', 'SELECT')
+    OR has_table_privilege('anon', 'public.messages', 'INSERT')
+    OR has_table_privilege('anon', 'public.messages', 'UPDATE')
+    OR has_table_privilege('anon', 'public.messages', 'DELETE')
+    OR has_table_privilege('authenticated', 'public.messages', 'SELECT')
+    OR has_table_privilege('authenticated', 'public.messages', 'INSERT')
+    OR has_table_privilege('authenticated', 'public.messages', 'UPDATE')
+    OR has_table_privilege('authenticated', 'public.messages', 'DELETE')
+  THEN
+    RAISE EXCEPTION '2B-V-A rollback must preserve zero client privileges';
+  END IF;
+END
+$$;
+
+COMMIT;
+
+SELECT
+  c.relrowsecurity AS rls_enabled,
+  c.relforcerowsecurity AS force_rls,
+  (SELECT count(*) FROM pg_catalog.pg_policies
+    WHERE schemaname = 'public' AND tablename = 'messages') AS policies
+FROM pg_catalog.pg_class c
+WHERE c.oid = 'public.messages'::regclass;

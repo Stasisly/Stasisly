@@ -34,7 +34,7 @@ select is(
       and c.relname <> 'users'
       and c.relrowsecurity
   ),
-  '{chat_sessions,specialist_catalog,specialists}',
+  '{chat_sessions,messages,specialist_catalog,specialists}',
   'only the approved later deny-all tables additionally have RLS'
 );
 

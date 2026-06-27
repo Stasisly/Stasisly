@@ -314,7 +314,7 @@ select is(
       and c.relkind in ('r', 'p')
       and c.relrowsecurity
   ),
-  '{chat_sessions,specialist_catalog,specialists,users}',
+  '{chat_sessions,messages,specialist_catalog,specialists,users}',
   'only the approved public deny-all/profile tables have RLS enabled'
 );
 

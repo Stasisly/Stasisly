@@ -1,0 +1,47 @@
+\set ON_ERROR_STOP on
+
+BEGIN;
+
+DROP FUNCTION IF EXISTS public.send_user_message_core(uuid, uuid, text);
+
+DO $$
+BEGIN
+  IF to_regprocedure('public.send_user_message_core(uuid, uuid, text)') IS NOT NULL THEN
+    RAISE EXCEPTION '2B-V-C1 rollback failed to remove RPC';
+  END IF;
+
+  IF EXISTS (
+    SELECT 1
+    FROM pg_catalog.pg_policies
+    WHERE schemaname = 'public'
+      AND tablename IN ('messages', 'chat_sessions')
+  ) THEN
+    RAISE EXCEPTION '2B-V-C1 rollback must preserve zero policies';
+  END IF;
+
+  IF EXISTS (
+    SELECT 1
+    FROM pg_catalog.pg_class c
+    WHERE c.oid IN ('public.messages'::regclass, 'public.chat_sessions'::regclass)
+      AND (NOT c.relrowsecurity OR c.relforcerowsecurity)
+  ) THEN
+    RAISE EXCEPTION '2B-V-C1 rollback must preserve deny-all RLS state';
+  END IF;
+
+  IF has_table_privilege('anon', 'public.messages', 'SELECT')
+    OR has_table_privilege('authenticated', 'public.messages', 'SELECT')
+    OR has_table_privilege('anon', 'public.chat_sessions', 'SELECT')
+    OR has_table_privilege('authenticated', 'public.chat_sessions', 'SELECT')
+  THEN
+    RAISE EXCEPTION '2B-V-C1 rollback must not open client grants';
+  END IF;
+END
+$$;
+
+COMMIT;
+
+SELECT
+  to_regprocedure('public.send_user_message_core(uuid, uuid, text)') IS NULL AS rpc_removed,
+  (SELECT count(*) FROM pg_catalog.pg_policies
+    WHERE schemaname = 'public'
+      AND tablename IN ('messages', 'chat_sessions')) AS policies;

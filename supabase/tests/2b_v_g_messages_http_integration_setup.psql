@@ -1,0 +1,38 @@
+\set ON_ERROR_STOP on
+
+do $$
+begin
+  if exists (select 1 from public.specialists where name like 'test_only_2b_v_g%')
+    or exists (select 1 from public.specialist_catalog where display_name like 'test_only_2b_v_g%')
+    or exists (select 1 from public.chat_sessions where specialist_id::text like '5e200000-0000-4000-8000-%')
+  then
+    raise exception '2B-V-G fixtures already exist';
+  end if;
+end
+$$;
+
+insert into public.specialists (
+  id, name, category, prompt_template, is_premium, is_active
+) values (
+  '5e200000-0000-4000-8000-000000000001',
+  'test_only_2b_v_g specialist',
+  'mental',
+  '{"marker":"test_only_2b_v_g"}',
+  false,
+  true
+);
+
+insert into public.specialist_catalog (
+  id, specialist_id, display_name, product_area, short_description,
+  is_published, availability_status, access_tier, sort_order
+) values (
+  '5e300000-0000-4000-8000-000000000001',
+  '5e200000-0000-4000-8000-000000000001',
+  'test_only_2b_v_g public specialist',
+  'wellness',
+  'Fixture local no productivo.',
+  true,
+  'available',
+  'free',
+  1
+);

@@ -192,10 +192,10 @@ select is(
 );
 select ok(
   (
-    select not c.relrowsecurity and not c.relforcerowsecurity
+    select c.relrowsecurity and not c.relforcerowsecurity
     from pg_catalog.pg_class c where c.oid = 'public.messages'::regclass
   ),
-  'messages RLS state remains unchanged'
+  'messages has deny-all RLS after 2B-V-A'
 );
 select is(
   (

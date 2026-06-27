@@ -1,0 +1,41 @@
+\set ON_ERROR_STOP on
+
+delete from public.messages
+where session_id in (
+  select id from public.chat_sessions
+  where specialist_id::text like '5c200000-0000-4000-8000-%'
+);
+
+delete from public.chat_sessions
+where specialist_id::text like '5c200000-0000-4000-8000-%';
+
+delete from public.specialist_catalog
+where display_name like 'test_only_2b_v_c2%';
+
+delete from public.specialists
+where name like 'test_only_2b_v_c2%';
+
+delete from public.users
+where display_name like 'test_only_2b_v_c2%';
+
+delete from auth.users
+where email like 'test_only_2b_v_c2_%@stasisly.local';
+
+do $$
+begin
+  if exists (select 1 from auth.users where email like 'test_only_2b_v_c2_%@stasisly.local')
+    or exists (select 1 from public.users where display_name like 'test_only_2b_v_c2%')
+    or exists (select 1 from public.specialists where name like 'test_only_2b_v_c2%')
+    or exists (select 1 from public.specialist_catalog where display_name like 'test_only_2b_v_c2%')
+    or exists (select 1 from public.chat_sessions where specialist_id::text like '5c200000-0000-4000-8000-%')
+    or exists (
+      select 1
+      from public.messages m
+      join public.chat_sessions s on s.id = m.session_id
+      where s.specialist_id::text like '5c200000-0000-4000-8000-%'
+    )
+  then
+    raise exception '2B-V-C2 cleanup left fixtures behind';
+  end if;
+end
+$$;

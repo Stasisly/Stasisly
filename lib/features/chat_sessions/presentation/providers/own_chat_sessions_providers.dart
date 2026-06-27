@@ -1,0 +1,97 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:stasisly/core/config/app_environment.dart';
+import 'package:stasisly/features/chat_sessions/application/own_chat_sessions_controller.dart';
+import 'package:stasisly/features/chat_sessions/application/own_chat_sessions_state.dart';
+import 'package:stasisly/features/chat_sessions/data/repositories/backend_blocked_own_chat_sessions_repository.dart';
+import 'package:stasisly/features/chat_sessions/data/repositories/demo_own_chat_sessions_repository.dart';
+import 'package:stasisly/features/chat_sessions/domain/repositories/own_chat_sessions_repository.dart';
+
+final ownChatSessionsRepositoryProvider = Provider<OwnChatSessionsRepository>((
+  ref,
+) {
+  final environment = ref.watch(appEnvironmentProvider);
+  if (environment.isDemo) {
+    return DemoOwnChatSessionsRepository();
+  }
+
+  // ADR-006/ADR-007: backend wiring for chat_sessions remains blocked until a
+  // separate package approves provider-to-datasource activation.
+  return const BackendBlockedOwnChatSessionsRepository();
+});
+
+final demoOwnChatSessionsRepositoryProvider =
+    Provider<OwnChatSessionsRepository>((ref) {
+      return DemoOwnChatSessionsRepository();
+    });
+
+final backendBlockedOwnChatSessionsRepositoryProvider =
+    Provider<OwnChatSessionsRepository>((ref) {
+      return const BackendBlockedOwnChatSessionsRepository();
+    });
+
+final ownChatSessionsControllerProvider =
+    StateNotifierProvider<
+      OwnChatSessionsControllerNotifier,
+      OwnChatSessionsState
+    >((ref) {
+      final repository = ref.watch(ownChatSessionsRepositoryProvider);
+      return OwnChatSessionsControllerNotifier(
+        OwnChatSessionsController(repository: repository),
+      );
+    });
+
+final ownChatSessionsStateProvider = Provider<OwnChatSessionsState>((ref) {
+  return ref.watch(ownChatSessionsControllerProvider);
+});
+
+class OwnChatSessionsControllerNotifier
+    extends StateNotifier<OwnChatSessionsState> {
+  OwnChatSessionsControllerNotifier(this._controller)
+    : super(_controller.state);
+
+  final OwnChatSessionsController _controller;
+
+  Future<void> loadInitial() async {
+    state = state.copyWith(isInitialLoading: true, lastListError: null);
+    await _controller.loadInitial();
+    _syncState();
+  }
+
+  Future<void> refresh() async {
+    state = state.copyWith(isRefreshing: true, lastListError: null);
+    await _controller.refresh();
+    _syncState();
+  }
+
+  Future<void> createSession(String selectableSpecialistId) async {
+    state = state.copyWith(isCreating: true, lastCreateError: null);
+    await _controller.createSession(selectableSpecialistId);
+    _syncState();
+  }
+
+  Future<void> archiveSession(String sessionId) async {
+    state = state.copyWith(isArchiving: true, lastArchiveError: null);
+    await _controller.archiveSession(sessionId);
+    _syncState();
+  }
+
+  void selectSession(String sessionId) {
+    _controller.selectSession(sessionId);
+    _syncState();
+  }
+
+  void clearSelection() {
+    _controller.clearSelection();
+    _syncState();
+  }
+
+  void clear() {
+    _controller.clear();
+    _syncState();
+  }
+
+  void _syncState() {
+    state = _controller.state;
+  }
+}

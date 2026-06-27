@@ -449,6 +449,311 @@ Controles críticos:
 
 No ejecutar `link`, `deploy`, `db push`, remoto o datos reales.
 
+## Micro-paquete 2B-V-D
+
+Objetivo: validar localmente `list-session-messages` mediante una Edge Function
+de solo lectura que lista mensajes de una sesión propia activa o archivada sin
+exponer campos internos ni modificar estado.
+
+Archivos principales:
+
+```text
+../functions/list-session-messages/
+2b_v_d_list_session_messages_setup.psql
+2b_v_d_list_session_messages_cleanup.psql
+2b_v_d_list_session_messages_http_test.sh
+```
+
+Controles críticos:
+
+- JWT local obligatorio; sin JWT o JWT inválido devuelve 401.
+- Query allowlist: solo `sessionId`, `limit` y `cursor`.
+- Sesión propia activa lista mensajes.
+- Sesión propia archivada lista mensajes históricos.
+- Sesión ajena e inexistente devuelven el mismo `sessionNotFound` 404 opaco.
+- Paginación keyset estable por `created_at ASC, id ASC` sin duplicados.
+- Respuesta pública sin `user_id`, `specialist_id`, `prompt_template`,
+  `service_role`, JWT, attachments ni metadata interna.
+- La función no modifica `messages`, `chat_sessions`, `message_count`,
+  `last_message_at`, catálogo ni especialistas.
+- Logs sanitizados sin secretos, IDs internos ni contenido de mensajes.
+- Fixtures confirmados solo en local con cleanup compensatorio obligatorio.
+- Postcondición final exacta: `0|0|0|0|0|0`.
+
+Resultado local verificado el 2026-06-21:
+
+- `supabase db reset --local --no-seed`: `00001`-`00007`;
+- suite SQL acumulada: 394/394;
+- `deno fmt --check supabase/functions/list-session-messages`: correcto;
+- `deno check` de D: correcto;
+- test Deno D: 6/6;
+- harness HTTP D: PASS;
+- cleanup final: `0|0|0|0|0|0`;
+- ejecución solo local, sin `link`, `db push`, deploy, remoto, producción,
+  datos reales ni tokens reales versionados.
+
+No ejecutar todavía contrato Flutter, datasource Flutter, UI/providers, IA,
+Stasis Engine, remoto o producción dentro de este paquete.
+
+## Micro-paquete 2B-V-A
+
+Objetivo: endurecer localmente `public.messages` con deny-all y constraints
+mínimos antes de permitir cualquier escritura o lectura real de mensajes.
+
+Archivos principales:
+
+```text
+../migrations/00006_harden_messages_deny_all.sql
+2b_v_a_messages_deny_all_test.sql
+2b_v_a_messages_preflight_test.sh
+2b_v_a_messages_rollback.psql
+```
+
+Controles críticos:
+
+- RLS habilitada en `messages` sin FORCE;
+- cero policies en `messages`;
+- cero grants cliente para `anon` y `authenticated`;
+- `session_id` es `NOT NULL`;
+- `created_at` es `NOT NULL DEFAULT now()`;
+- `role` permite solo `user`, `assistant`, `system` y `tool`;
+- `chief_intervention` y cualquier role no aprobado fallan cerrado;
+- contenido vacío, whitespace-only o mayor de 4000 caracteres falla cerrado;
+- `attachments` queda obligado a `NULL` para MVP local;
+- índice estable por `(session_id, created_at, id)`;
+- `message_count` y `last_message_at` de `chat_sessions` no se modifican;
+- rollback conserva deny-all y cero grants cliente;
+- el preflight aborta ante filas incompatibles y no transforma parcialmente.
+
+Resultado local verificado:
+
+- `supabase db reset --local --no-seed` aplicó `00001` a `00006`;
+- test específico 2B-V-A: 57/57;
+- suite SQL acumulada: 276/276;
+- preflight incompatible abortó con
+  `2B-V-A preflight rejected 1 incompatible messages rows`;
+- rollback dejó `RLS=true`, `FORCE=false`, `policies=0`, `messages=0` y cero
+  grants cliente;
+- reaplicación posterior volvió a dejar la suite completa en verde;
+- ejecución solo local, sin `link`, `db push`, deploy, remoto, producción,
+  datos reales ni tokens reales versionados.
+
+No ejecutar Flutter, Edge Functions de mensajes, UI/providers, IA, Stasis
+Engine, remoto o datos reales dentro de este paquete.
+
+## Micro-paquete 2B-V-B
+
+Objetivo: validar fixtures locales transaccionales de `public.messages` sin
+crear seed persistente, sin modificar migraciones y sin habilitar envío o
+listado real de mensajes.
+
+Archivos principales:
+
+```text
+2b_v_b_messages_fixtures_test.sql
+2b_v_b_messages_fixtures_zz_postconditions_test.sql
+```
+
+Controles críticos:
+
+- todos los fixtures usan marcador `test_only_2b_v_b`;
+- el test principal usa `BEGIN` y `ROLLBACK`;
+- no hay `COMMIT`, seed persistente ni cleanup compensatorio;
+- se crean owner/other user, perfil público, especialista interno, catálogo,
+  sesiones activa/archivada/ajena y mensajes solo dentro de la transacción;
+- existe un mensaje histórico en sesión archivada, pero eso no autoriza crear
+  mensajes nuevos en sesiones archivadas;
+- `chief_intervention` y roles inválidos se rechazan;
+- roles internos `user`, `assistant`, `system` y `tool` se aceptan solo como
+  inserciones internas directas de test;
+- contenido inválido y attachments no `NULL` se rechazan;
+- orden estable por `created_at ASC, id ASC`;
+- `messages` conserva RLS sin FORCE, cero policies y cero grants cliente;
+- anon/authenticated no tienen CRUD;
+- `message_count` y `last_message_at` no se actualizan automáticamente por
+  fixtures directos;
+- postcondición externa exacta esperada: `0|0|0|0|0|0`.
+
+Resultado local verificado:
+
+- test específico B: 55/55;
+- postcondiciones B: 7/7;
+- suite SQL acumulada: 338/338;
+- consulta externa posterior: `0|0|0|0|0|0`;
+- estado externo de `messages`: `RLS=true`, `FORCE=false`, `policies=0`,
+  `client_grants=0`;
+- ejecución solo local, sin `link`, `db push`, deploy, remoto, producción,
+  datos reales ni tokens reales versionados.
+
+No ejecutar `send-user-message`, `list-session-messages`, Flutter, UI,
+providers, IA, Stasis Engine, remoto o producción dentro de este paquete.
+
+## Micro-paquete 2B-V-C1
+
+Objetivo: validar localmente la RPC transaccional interna
+`send_user_message_core` como núcleo SQL para un futuro `send-user-message`,
+sin exponer HTTP, Flutter, remoto ni datos reales.
+
+Archivos principales:
+
+```text
+../migrations/00007_create_send_user_message_core_rpc.sql
+2b_v_c1_send_user_message_core_test.sql
+2b_v_c1_send_user_message_core_zz_postconditions_test.sql
+2b_v_c1_send_user_message_core_rollback.psql
+```
+
+Controles críticos:
+
+- RPC `public.send_user_message_core(uuid, uuid, text)` existente;
+- no usa `SECURITY DEFINER`;
+- `anon` y `authenticated` no tienen `EXECUTE`;
+- `service_role` local/controlado sí tiene `EXECUTE`;
+- `PUBLIC` no conserva grant de ejecución;
+- no se crean policies permisivas en `messages` ni `chat_sessions`;
+- cliente `anon`/`authenticated` sigue sin grants CRUD relevantes;
+- sesión propia activa crea exactamente un mensaje `role=user`;
+- sesión ajena, archivada, inexistente y contenido inválido fallan;
+- `attachments` queda `NULL`;
+- `created_at` lo gestiona servidor;
+- `message_count` incrementa exactamente una vez;
+- `last_message_at` coincide con `created_at` del mensaje insertado;
+- no se crean mensajes `assistant`, `system` o `tool`;
+- fallos de validación no dejan mensajes ni cambios parciales;
+- catálogo y especialistas permanecen sin cambios fuera de fixtures
+  transaccionales;
+- rollback elimina la RPC sin abrir policies;
+- reaplicación por reset vuelve a pasar la suite;
+- postcondición externa exacta esperada: `0|0|0|0|0|0`.
+
+Resultado local verificado:
+
+- test específico C1: 48/48;
+- postcondiciones C1: 8/8;
+- suite SQL acumulada: 394/394;
+- catálogo PostgreSQL:
+  `security_definer=false`, `anon_execute=false`,
+  `authenticated_execute=false`, `service_role_execute=true`;
+- rollback eliminó la RPC y conservó cero policies;
+- reaplicación local pasó la suite completa;
+- ejecución solo local, sin `link`, `db push`, deploy, remoto, producción,
+  datos reales ni tokens reales versionados.
+
+No ejecutar todavía Edge Function `send-user-message`, `list-session-messages`,
+Flutter, UI, providers, IA, Stasis Engine, remoto o producción dentro de este
+paquete.
+
+## Micro-paquete 2B-V-C2
+
+Objetivo: validar localmente la Edge Function `send-user-message` como frontera
+HTTP segura para enviar mensajes de usuario mediante la RPC
+`public.send_user_message_core`.
+
+Archivos principales:
+
+```text
+../functions/send-user-message/
+2b_v_c2_send_user_message_setup.psql
+2b_v_c2_send_user_message_cleanup.psql
+2b_v_c2_send_user_message_http_test.sh
+```
+
+Controles críticos:
+
+- JWT obligatorio y validado contra Auth local;
+- owner derivado desde JWT, nunca desde body;
+- body exacto con `sessionId` y `content`;
+- rechazo de campos internos/extra como `role`, `userId`, `specialistId`,
+  timestamps, contadores, attachments y metadata;
+- content trimmeado, no vacío y máximo 4000 caracteres tras trim;
+- llamada exclusiva a `/rest/v1/rpc/send_user_message_core`;
+- sin rutas directas `/rest/v1/messages` ni `/rest/v1/chat_sessions` en el
+  runtime;
+- sin inserts directos en `messages`;
+- sin updates directos en `chat_sessions`;
+- sin dos escrituras REST separadas;
+- sesión ajena e inexistente devuelven el mismo `sessionNotFound` 404;
+- sesión propia archivada devuelve `sessionArchived` 409;
+- segundo mensaje incrementa contador y mueve `last_message_at`;
+- respuesta pública no expone `user_id`, `specialist_id`, `prompt_template`,
+  `service_role`, JWT, attachments ni metadata interna;
+- no se modifica `specialist_catalog` ni `specialists`;
+- no IA, streaming, listado, Flutter, UI/providers, remoto ni producción;
+- cleanup obligatorio y postcondición externa exacta `0|0|0|0|0|0`.
+
+Resultado local verificado:
+
+- `supabase db reset --local --no-seed`: `00001`-`00007`;
+- suite SQL acumulada: 394/394;
+- `deno fmt --check supabase/functions/send-user-message`: correcto;
+- `deno check` de C2: correcto;
+- test Deno C2: 7/7;
+- harness HTTP C2: PASS;
+- cleanup final: `0|0|0|0|0|0`;
+- `git diff --check`: correcto;
+- ejecución solo local, sin `link`, `db push`, deploy, remoto, producción,
+  datos reales ni tokens reales versionados.
+
+No ejecutar todavía `list-session-messages`, Flutter, UI, providers, IA,
+Stasis Engine, remoto o producción dentro de este paquete.
+
+## Micro-paquete 2B-V-G
+
+Objetivo: validar localmente la integración real entre el datasource Flutter
+HTTP local de mensajes, las Edge Functions `send-user-message` y
+`list-session-messages`, la RPC `public.send_user_message_core` y Supabase
+local.
+
+Archivos principales:
+
+```text
+2b_v_g_messages_http_integration_setup.psql
+2b_v_g_messages_http_integration_cleanup.psql
+2b_v_g_messages_http_integration_test.sh
+../../test/integration/two_b_v_g_local_http_chat_messages_integration_test.dart
+```
+
+Controles críticos:
+
+- fixtures marcados como `test_only_2b_v_g`;
+- JWT local efímero obtenido desde Auth local, pasado solo por `dart-define`;
+- env file temporal fuera del repo, con permisos restrictivos y borrado al
+  final;
+- `service_role` local solo en runtime Edge Functions, nunca versionado;
+- base URL local-only: `http://127.0.0.1:<puerto>` o
+  `http://localhost:<puerto>`;
+- preflight anti-remoto bloquea configuración con `supabase.co`, project ref o
+  token remoto;
+- `sendUserMessage` valida sesión propia activa, content trimmeado, `role=user`,
+  `message_count +1` y `last_message_at` actualizado;
+- `listSessionMessages` valida sesión propia activa, sesión propia archivada,
+  paginación estable y cursor inválido;
+- sesión ajena e inexistente devuelven `sessionNotFound` opaco;
+- sesión archivada es legible, pero no escribible;
+- el datasource no envía `role`, `userId`, `specialistId`, attachments ni
+  metadata;
+- respuestas públicas pasan por `OwnChatMessagesPayloadValidator`;
+- `list-session-messages` no modifica `messages`, `chat_sessions`,
+  `message_count` ni `last_message_at`;
+- no se modifica `specialists` ni `specialist_catalog`;
+- logs locales no contienen JWT completo, `service_role`, content completo,
+  owner completo, IDs internos, `prompt_template` ni metadata interna;
+- cleanup obligatorio y postcondición externa exacta `0|0|0|0|0|0`;
+- sin providers, UI, chat heredado, remoto, producción, IA, Stasis Engine, MCP
+  ni streaming.
+
+Resultado local verificado:
+
+- `supabase start` requirió excluir servicios auxiliares no necesarios por
+  conflicto local de puerto `54327`;
+- `supabase db reset --local --no-seed`: `00001`-`00007`;
+- suite SQL acumulada: 394/394;
+- harness HTTP G: PASS;
+- test Flutter de integración G: 3/3;
+- cleanup final: `0|0|0|0|0|0`;
+- ejecución solo local, sin `link`, `db push`, deploy, remoto, producción,
+  datos reales ni tokens reales versionados.
+
 ## Micro-paquete 2B-IV-E
 
 Objetivo: validar localmente `archiveOwnChatSession` mediante una Edge Function
