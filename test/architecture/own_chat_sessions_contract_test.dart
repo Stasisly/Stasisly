@@ -86,6 +86,74 @@ void main() {
     }
   });
 
+  test('secure session chat sessions token provider stays local-safe', () {
+    final source = File(
+      'lib/features/chat_sessions/data/local/'
+      'secure_session_chat_sessions_token_provider.dart',
+    ).readAsStringSync();
+
+    expect(source, contains('SecureSessionChatSessionsTokenProvider'));
+    expect(source, contains('LocalSessionTokenProvider'));
+    expect(source, contains('SecureSessionToLocalSessionTokenAdapter'));
+    expect(source, contains('readLocalSessionToken'));
+
+    for (final forbidden in [
+      'features/auth',
+      'auth_providers',
+      'AuthController',
+      'SupabaseAuthDataSource',
+      'Supabase.instance.client',
+      'supabase_flutter',
+      'supabase',
+      'package:dio/',
+      'package:http/',
+      '/functions/v1/',
+      'service_role',
+      'serviceRole',
+      'Bearer ',
+      'BuildContext',
+      'Widget',
+      'userId',
+      'user_id',
+      'ownerUserId',
+      'specialistId',
+      'specialist_id',
+      'agentId',
+      'role',
+      'roles',
+      'permissions',
+      'StasisEngine',
+      'MCP',
+      'streaming',
+    ]) {
+      expect(source, isNot(contains(forbidden)));
+    }
+  });
+
+  test('core auth session still does not import chat sessions feature', () {
+    final coreFiles = Directory('lib/core/auth/session')
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where((file) => file.path.endsWith('.dart'))
+        .toList(growable: false);
+
+    expect(coreFiles, isNotEmpty);
+
+    for (final file in coreFiles) {
+      final source = file.readAsStringSync();
+      expect(
+        source,
+        isNot(contains('features/chat_sessions')),
+        reason: file.path,
+      );
+      expect(
+        source,
+        isNot(contains('LocalSessionTokenProvider')),
+        reason: file.path,
+      );
+    }
+  });
+
   test('public domain and repository contracts contain no internal ids', () {
     final publicFiles = [
       File('lib/features/chat_sessions/domain/entities/own_chat_session.dart'),
@@ -234,6 +302,10 @@ void main() {
           'BuildContext',
           'supabase_flutter',
           'Supabase.instance',
+          'features/auth/',
+          'auth_providers',
+          'AuthController',
+          'SupabaseAuthDataSource',
           'package:dio/',
           'package:http/',
           '/functions/v1/',
@@ -255,6 +327,10 @@ void main() {
           'role',
           'roles',
           'permissions',
+          'service_role',
+          'serviceRole',
+          '/chat/:id',
+          '/orchestrator/chat',
           'StasisEngine',
           'MCP',
           'streaming',

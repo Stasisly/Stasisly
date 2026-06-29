@@ -3,7 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:stasisly/core/config/env.dart';
 
 /// Runtime modes supported by the stabilized prototype.
-enum AppRuntimeMode { demo, backendReal, production }
+enum AppRuntimeMode {
+  local,
+  demo,
+  development,
+  staging,
+  backendReal,
+  production,
+}
 
 /// Raised when a runtime mode cannot start safely.
 class AppConfigurationException implements Exception {
@@ -35,28 +42,52 @@ class AppEnvironment {
   final String supabaseUrl;
   final String supabaseAnonKey;
 
+  bool get isLocal => mode == AppRuntimeMode.local;
   bool get isDemo => mode == AppRuntimeMode.demo;
-  bool get usesBackend => !isDemo;
+  bool get isDevelopment => mode == AppRuntimeMode.development;
+  bool get isStaging => mode == AppRuntimeMode.staging;
+  bool get isBackendRealLegacy => mode == AppRuntimeMode.backendReal;
+  bool get isProduction => mode == AppRuntimeMode.production;
+  bool get usesBackend => !(isLocal || isDemo);
+  bool get allowsRemoteSupabase => false;
+  bool get allowsRealAuth => false;
+  bool get allowsRealData => false;
+  bool get allowsSyntheticData => !isProduction;
+  bool get allowsDevRoutes => isLocal || isDemo || isDevelopment;
+  bool get allowsConversationsRoute => false;
+  bool get requiresSecrets => usesBackend;
 
   String get visibleLabel => switch (mode) {
+    AppRuntimeMode.local => 'LOCAL · SIN BACKEND REAL',
     AppRuntimeMode.demo => 'MODO DEMO · DATOS FICTICIOS',
+    AppRuntimeMode.development => 'DEVELOPMENT · BLOQUEADO',
+    AppRuntimeMode.staging => 'STAGING · BLOQUEADO',
     AppRuntimeMode.backendReal => 'BACKEND REAL · NO PRODUCCIÓN',
     AppRuntimeMode.production => 'PRODUCCIÓN',
   };
 
   /// Validates configuration without activating a real backend.
-  void validateForStartup({bool backendActivationApproved = false}) {
-    if (isDemo) return;
+  void validateForStartup({
+    bool backendActivationApproved = false,
+    bool productionActivationApproved = false,
+  }) {
+    if (isLocal || isDemo) return;
 
     if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
-      throw const AppConfigurationException(
-        'Backend real bloqueado: faltan SUPABASE_URL o SUPABASE_ANON_KEY.',
+      throw AppConfigurationException(
+        '${_modeLabel()} bloqueado: faltan SUPABASE_URL o SUPABASE_ANON_KEY.',
       );
     }
 
     if (!backendActivationApproved) {
+      throw AppConfigurationException(
+        '${_modeLabel()} bloqueado por ADR-006 hasta aprobar auth, RLS y pruebas.',
+      );
+    }
+
+    if (isProduction && !productionActivationApproved) {
       throw const AppConfigurationException(
-        'Backend real bloqueado por ADR-006 hasta aprobar auth, RLS y pruebas.',
+        'Production bloqueado por ADR-006 hasta aprobar gates de producción.',
       );
     }
   }
@@ -64,15 +95,27 @@ class AppEnvironment {
   static AppRuntimeMode parseMode(String value) {
     return switch (value.trim().toLowerCase()) {
       '' || 'demo' => AppRuntimeMode.demo,
+      'local' => AppRuntimeMode.local,
+      'development' || 'dev' => AppRuntimeMode.development,
+      'staging' || 'stage' => AppRuntimeMode.staging,
       'backend' ||
       'backendreal' ||
       'backend_real' => AppRuntimeMode.backendReal,
       'production' || 'produccion' => AppRuntimeMode.production,
       _ => throw AppConfigurationException(
-        'APP_MODE no válido: "$value". Usa demo, backendReal o production.',
+        'APP_MODE no válido: "$value". Usa local, demo, development, staging, backendReal o production.',
       ),
     };
   }
+
+  String _modeLabel() => switch (mode) {
+    AppRuntimeMode.local => 'Local',
+    AppRuntimeMode.demo => 'Demo',
+    AppRuntimeMode.development => 'Development',
+    AppRuntimeMode.staging => 'Staging',
+    AppRuntimeMode.backendReal => 'Backend real legacy',
+    AppRuntimeMode.production => 'Production',
+  };
 }
 
 /// Overridden at application startup and in tests.

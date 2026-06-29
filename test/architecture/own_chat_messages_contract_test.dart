@@ -187,6 +187,74 @@ void main() {
     },
   );
 
+  test(
+    'secure session messages wrapper stays local-safe and feature-scoped',
+    () {
+      final file = File(
+        'lib/features/chat_messages/data/local/'
+        'secure_session_chat_messages_token_provider.dart',
+      );
+      final source = file.readAsStringSync();
+
+      expect(source, contains('SecureSessionToLocalSessionTokenAdapter'));
+      expect(source, contains('LocalSessionTokenProvider'));
+      for (final forbidden in [
+        'features/auth/',
+        'auth_providers',
+        'AuthController',
+        'SupabaseAuthDataSource',
+        'Supabase.instance.client',
+        'supabase_flutter',
+        'package:dio/',
+        'package:http/',
+        'dart:io',
+        'dart:html',
+        '/functions/v1/',
+        'send-user-message',
+        'list-session-messages',
+        'service_role',
+        'serviceRole',
+        'Bearer ',
+        'BuildContext',
+        'Widget',
+        'userId',
+        'user_id',
+        'specialistId',
+        'specialist_id',
+        'role',
+        'attachments',
+        'metadata',
+        'StasisEngine',
+        'MCP',
+        'streaming',
+      ]) {
+        expect(source, isNot(contains(forbidden)), reason: file.path);
+      }
+    },
+  );
+
+  test('core auth session does not depend on chat messages feature', () {
+    final coreFiles = Directory('lib/core/auth/session')
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where((file) => file.path.endsWith('.dart'))
+        .toList(growable: false);
+
+    expect(coreFiles, isNotEmpty);
+    for (final file in coreFiles) {
+      final source = file.readAsStringSync();
+      for (final forbidden in [
+        'features/chat_messages/',
+        'OwnChatMessages',
+        'LocalSessionTokenProvider',
+        'send-user-message',
+        'list-session-messages',
+      ]) {
+        expect(source, isNot(contains(forbidden)), reason: file.path);
+      }
+    }
+  });
+
   test('messages widgets stay isolated from transport and internal ids', () {
     final widgetFiles =
         Directory('lib/features/chat_messages/presentation/widgets')
@@ -284,7 +352,7 @@ void main() {
     },
   );
 
-  test('messages safe shell stays isolated from legacy chat runtime', () {
+  test('messages shells stay isolated from legacy chat runtime', () {
     final shellFiles =
         Directory('lib/features/chat_messages/presentation/shell')
             .listSync(recursive: true)
@@ -295,6 +363,24 @@ void main() {
     expect(shellFiles, isNotEmpty);
     for (final file in shellFiles) {
       final source = file.readAsStringSync();
+      final isComposedShell = file.path.endsWith(
+        'own_chat_composed_safe_shell.dart',
+      );
+      if (isComposedShell) {
+        expect(
+          source,
+          contains('features/chat_sessions/presentation/'),
+          reason: file.path,
+        );
+        expect(source, contains('selectedSessionId'), reason: file.path);
+        expect(source, contains('OwnChatMessagesSafeShell'), reason: file.path);
+      } else {
+        expect(
+          source,
+          isNot(contains('features/chat_sessions/')),
+          reason: file.path,
+        );
+      }
       for (final forbidden in [
         'Supabase.instance.client',
         'SupabaseChatDataSource',
@@ -319,7 +405,6 @@ void main() {
         'accessToken',
         'refresh_token',
         'refreshToken',
-        'chat_sessions',
         'messages.insert',
         "from('messages')",
         'from("messages")',
@@ -334,6 +419,58 @@ void main() {
       ]) {
         expect(source, isNot(contains(forbidden)), reason: file.path);
       }
+    }
+  });
+
+  test('composed messages shell is local-safe and route-free', () {
+    final source = File(
+      'lib/features/chat_messages/presentation/shell/'
+      'own_chat_composed_safe_shell.dart',
+    ).readAsStringSync();
+
+    expect(source, contains('ownChatSessionsStateProvider'));
+    expect(source, contains('selectedSessionId'));
+    expect(source, contains('OwnChatMessagesSafeShell'));
+    expect(source, contains('OwnChatSessionsPanel'));
+    for (final forbidden in [
+      'features/auth/',
+      'auth_providers',
+      'AuthController',
+      'SupabaseAuthDataSource',
+      'Supabase.instance.client',
+      'features/chat/',
+      'AgentChatWrapper',
+      'ChatPage',
+      'ChatController',
+      'chat_providers',
+      'SupabaseChatDataSource',
+      '/chat/:id',
+      '/orchestrator/chat',
+      'GoRouter',
+      'AppRouter',
+      'service_role',
+      'serviceRole',
+      'accessToken',
+      'refreshToken',
+      'Bearer ',
+      'package:dio/',
+      'package:http/',
+      'supabase',
+      'Supabase',
+      'userId',
+      'user_id',
+      'ownerUserId',
+      'owner_user_id',
+      'specialistId',
+      'specialist_id',
+      'agentId',
+      'attachments',
+      'metadata',
+      'MCP',
+      'StasisEngine',
+      'streaming',
+    ]) {
+      expect(source, isNot(contains(forbidden)), reason: forbidden);
     }
   });
 }

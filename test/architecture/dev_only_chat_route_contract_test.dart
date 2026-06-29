@@ -7,12 +7,24 @@ void main() {
     final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
 
     expect(routesSource, contains("path: '/dev/chat/session/:sessionId'"));
+    expect(routesSource, contains("path: '/dev/chat/composed'"));
     expect(routesSource, contains('kReleaseMode || !environment.isDemo'));
     expect(routesSource, contains('OwnChatMessagesRouteParamsAdapter'));
     expect(routesSource, contains('OwnChatMessagesSafeShell'));
+    expect(routesSource, contains('OwnChatComposedSafeShell'));
     expect(routesSource, contains('sessionIdFrom(state.pathParameters)'));
     expect(routesSource, isNot(contains("path: '/dev/chat/session/:id'")));
     expect(routesSource, isNot(contains("path: '/dev/chat/session/:agentId'")));
+    expect(routesSource, isNot(contains("path: '/dev/chat/composed/:id'")));
+    expect(
+      routesSource,
+      isNot(contains("path: '/dev/chat/composed/:agentId'")),
+    );
+    expect(
+      routesSource,
+      isNot(contains("path: '/dev/chat/composed/:sessionId'")),
+    );
+    expect(routesSource, isNot(contains("path: '/chat/:sessionId'")));
   });
 
   test(

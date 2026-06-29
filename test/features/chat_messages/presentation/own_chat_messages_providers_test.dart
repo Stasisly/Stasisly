@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:stasisly/core/auth/session/secure_session.dart';
 import 'package:stasisly/core/config/app_environment.dart';
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_state.dart';
 import 'package:stasisly/features/chat_messages/data/repositories/backend_blocked_own_chat_messages_repository.dart';
@@ -53,6 +54,75 @@ void main() {
       );
     }
   });
+
+  test('local session token provider maps secure success token', () async {
+    final container = ProviderContainer(
+      overrides: [
+        secureSessionTokenProvider.overrideWithValue(
+          _FakeSecureSessionTokenProvider(
+            SecureSessionTokenResult.success('fake-messages-token'),
+          ),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    final tokenProvider = container.read(
+      ownChatMessagesLocalSessionTokenProvider,
+    );
+
+    expect(await tokenProvider.readLocalSessionToken(), 'fake-messages-token');
+  });
+
+  test(
+    'local session token provider maps demo and backendBlocked to null',
+    () async {
+      for (final result in [
+        const SecureSessionTokenResult.demo(),
+        const SecureSessionTokenResult.backendBlocked(),
+      ]) {
+        final container = ProviderContainer(
+          overrides: [
+            secureSessionTokenProvider.overrideWithValue(
+              _FakeSecureSessionTokenProvider(result),
+            ),
+          ],
+        );
+        addTearDown(container.dispose);
+
+        final tokenProvider = container.read(
+          ownChatMessagesLocalSessionTokenProvider,
+        );
+
+        expect(await tokenProvider.readLocalSessionToken(), isNull);
+      }
+    },
+  );
+
+  test(
+    'throwing secure session provider returns null without activating backend',
+    () async {
+      final container = ProviderContainer(
+        overrides: [
+          appEnvironmentProvider.overrideWithValue(
+            const AppEnvironment(mode: AppRuntimeMode.backendReal),
+          ),
+          secureSessionTokenProvider.overrideWithValue(
+            _ThrowingSecureSessionTokenProvider(),
+          ),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      final tokenProvider = container.read(
+        ownChatMessagesLocalSessionTokenProvider,
+      );
+      final repository = container.read(ownChatMessagesRepositoryProvider);
+
+      expect(await tokenProvider.readLocalSessionToken(), isNull);
+      expect(repository, isA<BackendBlockedOwnChatMessagesRepository>());
+    },
+  );
 
   test('controller provider exposes initial state', () {
     final container = _containerWithRepository(
@@ -487,4 +557,49 @@ class _SendCall {
 
   final String sessionId;
   final String content;
+}
+
+class _FakeSecureSessionTokenProvider implements SecureSessionTokenProvider {
+  const _FakeSecureSessionTokenProvider(this.result);
+
+  final SecureSessionTokenResult result;
+
+  @override
+  Future<SecureSessionAuthState> currentAuthState() async {
+    return const SecureSessionAuthState.unauthenticated();
+  }
+
+  @override
+  Future<SecureSessionTokenResult> getAccessToken() async {
+    return result;
+  }
+
+  @override
+  Future<SecureSessionTokenResult> refreshIfNeeded() async {
+    return result;
+  }
+
+  @override
+  Future<void> clearSession() async {}
+}
+
+class _ThrowingSecureSessionTokenProvider
+    implements SecureSessionTokenProvider {
+  @override
+  Future<SecureSessionAuthState> currentAuthState() async {
+    return const SecureSessionAuthState.unauthenticated();
+  }
+
+  @override
+  Future<SecureSessionTokenResult> getAccessToken() {
+    throw StateError('fake secure session failure');
+  }
+
+  @override
+  Future<SecureSessionTokenResult> refreshIfNeeded() {
+    throw StateError('fake secure session failure');
+  }
+
+  @override
+  Future<void> clearSession() async {}
 }

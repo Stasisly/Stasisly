@@ -1,11 +1,24 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:stasisly/core/auth/session/secure_session.dart';
 import 'package:stasisly/core/config/app_environment.dart';
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_controller.dart';
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_state.dart';
+import 'package:stasisly/features/chat_messages/data/local/local_session_token_provider.dart';
+import 'package:stasisly/features/chat_messages/data/local/secure_session_chat_messages_token_provider.dart';
 import 'package:stasisly/features/chat_messages/data/repositories/backend_blocked_own_chat_messages_repository.dart';
 import 'package:stasisly/features/chat_messages/data/repositories/demo_own_chat_messages_repository.dart';
 import 'package:stasisly/features/chat_messages/domain/repositories/own_chat_messages_repository.dart';
+
+final ownChatMessagesLocalSessionTokenProvider =
+    Provider<LocalSessionTokenProvider>((ref) {
+      final tokenProvider = ref.watch(secureSessionTokenProvider);
+      return SecureSessionChatMessagesTokenProvider(
+        adapter: SecureSessionToLocalSessionTokenAdapter(
+          tokenProvider: tokenProvider,
+        ),
+      );
+    });
 
 final ownChatMessagesRepositoryProvider = Provider<OwnChatMessagesRepository>((
   ref,

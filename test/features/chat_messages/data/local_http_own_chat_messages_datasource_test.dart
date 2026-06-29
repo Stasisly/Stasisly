@@ -1,8 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:stasisly/core/auth/session/secure_session.dart';
 import 'package:stasisly/features/chat_messages/data/datasources/local_http_own_chat_messages_datasource.dart';
 import 'package:stasisly/features/chat_messages/data/local/local_only_host_policy.dart';
 import 'package:stasisly/features/chat_messages/data/local/local_session_token_provider.dart';
 import 'package:stasisly/features/chat_messages/data/local/own_chat_messages_http_transport.dart';
+import 'package:stasisly/features/chat_messages/data/local/secure_session_chat_messages_token_provider.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message_results.dart';
 
 void main() {
@@ -68,6 +70,44 @@ void main() {
         expect(transport.requests, isEmpty);
       }
     });
+
+    test('secure session wrapper null never executes transport', () async {
+      final transport = _FakeTransport();
+      final result = await _source(
+        tokenProvider: _secureTokenProvider(
+          const SecureSessionTokenResult.demo(),
+        ),
+        transport: transport,
+      ).sendUserMessage(sessionId: 'session-1', content: 'hola');
+
+      expect(
+        result,
+        const SendUserMessageFailure(
+          SendOwnChatMessageFailureType.unauthenticated,
+        ),
+      );
+      expect(transport.requests, isEmpty);
+    });
+
+    test('secure session wrapper exceptions never execute transport', () async {
+      final transport = _FakeTransport();
+      final result = await _source(
+        tokenProvider: SecureSessionChatMessagesTokenProvider(
+          adapter: SecureSessionToLocalSessionTokenAdapter(
+            tokenProvider: _ThrowingSecureSessionTokenProvider(),
+          ),
+        ),
+        transport: transport,
+      ).listSessionMessages(sessionId: 'session-1');
+
+      expect(
+        result,
+        const ListSessionMessagesFailure(
+          ListOwnChatMessagesFailureType.unauthenticated,
+        ),
+      );
+      expect(transport.requests, isEmpty);
+    });
   });
 
   group('exact local requests', () {
@@ -97,6 +137,36 @@ void main() {
         expect(request.body, isNot(containsPair(forbidden, anything)));
       }
     });
+
+    test(
+      'secure session wrapper supplies Authorization without payload leak',
+      () async {
+        final transport = _FakeTransport(response: _sendSuccess());
+
+        await _source(
+          tokenProvider: _secureTokenProvider(
+            SecureSessionTokenResult.success('fake-secure-message-token'),
+          ),
+          transport: transport,
+        ).sendUserMessage(sessionId: 'session-1', content: 'hola');
+
+        final request = transport.requests.single;
+        expect(
+          request.headers['Authorization'],
+          'Bearer fake-secure-message-token',
+        );
+        expect(request.body, {'sessionId': 'session-1', 'content': 'hola'});
+        for (final forbidden in [
+          'role',
+          'userId',
+          'specialistId',
+          'attachments',
+          'metadata',
+        ]) {
+          expect(request.body, isNot(containsPair(forbidden, anything)));
+        }
+      },
+    );
 
     test('list gets only sessionId, limit and cursor', () async {
       final transport = _FakeTransport(response: _listSuccess());
@@ -280,7 +350,7 @@ LocalHttpOwnChatMessagesDataSource _source({
   LocalOnlyHostPolicy policy = const LocalOnlyHostPolicy(
     localValidationEnabled: true,
   ),
-  _FakeTokenProvider? tokenProvider,
+  LocalSessionTokenProvider? tokenProvider,
   _FakeTransport? transport,
 }) {
   return LocalHttpOwnChatMessagesDataSource(
@@ -359,6 +429,61 @@ Map<String, Object?> _message() {
     'content': 'hola',
     'createdAt': '2026-06-21T10:00:00Z',
   };
+}
+
+SecureSessionChatMessagesTokenProvider _secureTokenProvider(
+  SecureSessionTokenResult result,
+) {
+  return SecureSessionChatMessagesTokenProvider(
+    adapter: SecureSessionToLocalSessionTokenAdapter(
+      tokenProvider: _FakeSecureSessionTokenProvider(result),
+    ),
+  );
+}
+
+class _FakeSecureSessionTokenProvider implements SecureSessionTokenProvider {
+  const _FakeSecureSessionTokenProvider(this.result);
+
+  final SecureSessionTokenResult result;
+
+  @override
+  Future<SecureSessionAuthState> currentAuthState() async {
+    return const SecureSessionAuthState.unauthenticated();
+  }
+
+  @override
+  Future<SecureSessionTokenResult> getAccessToken() async {
+    return result;
+  }
+
+  @override
+  Future<SecureSessionTokenResult> refreshIfNeeded() async {
+    return result;
+  }
+
+  @override
+  Future<void> clearSession() async {}
+}
+
+class _ThrowingSecureSessionTokenProvider
+    implements SecureSessionTokenProvider {
+  @override
+  Future<SecureSessionAuthState> currentAuthState() async {
+    return const SecureSessionAuthState.unauthenticated();
+  }
+
+  @override
+  Future<SecureSessionTokenResult> getAccessToken() {
+    throw StateError('fake secure session failure');
+  }
+
+  @override
+  Future<SecureSessionTokenResult> refreshIfNeeded() {
+    throw StateError('fake secure session failure');
+  }
+
+  @override
+  Future<void> clearSession() async {}
 }
 
 Map<String, Object?> _listBodyWithItem(Map<String, Object?> override) {

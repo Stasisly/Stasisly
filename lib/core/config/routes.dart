@@ -10,6 +10,7 @@ import 'package:stasisly/features/auth/presentation/pages/onboarding_page.dart';
 import 'package:stasisly/features/auth/presentation/pages/register_page.dart';
 import 'package:stasisly/features/auth/presentation/viewmodels/auth_providers.dart';
 import 'package:stasisly/features/chat/presentation/pages/agent_chat_wrapper.dart';
+import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_composed_safe_shell.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_messages_route_params_adapter.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_messages_safe_shell.dart';
 import 'package:stasisly/features/health/presentation/pages/health_page.dart';
@@ -117,6 +118,10 @@ List<RouteBase> _devOnlyChatMessageRoutes(AppEnvironment environment) {
 
   return [
     GoRoute(
+      path: '/dev/chat/composed',
+      builder: _buildDevOnlyComposedChatRoute,
+    ),
+    GoRoute(
       path: '/dev/chat/session/:sessionId',
       builder: (context, state) {
         final sessionId = const OwnChatMessagesRouteParamsAdapter()
@@ -128,4 +133,11 @@ List<RouteBase> _devOnlyChatMessageRoutes(AppEnvironment environment) {
       },
     ),
   ];
+}
+
+Widget _buildDevOnlyComposedChatRoute(
+  BuildContext context,
+  GoRouterState state,
+) {
+  return const Scaffold(body: OwnChatComposedSafeShell());
 }

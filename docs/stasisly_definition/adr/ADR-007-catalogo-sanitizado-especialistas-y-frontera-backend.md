@@ -142,6 +142,50 @@ providers, rutas, navegación, Supabase, remoto, producción ni datos reales.
 Dart puro de token provider seguro queda implementado y verificado el
 2026-06-28, sin conectar auth real, auth heredado, Supabase, remoto,
 producción, datos reales, rutas, navegación, `chat_sessions` ni `messages`.
+2B-Z-C2 controller/providers auth/session safe queda implementado y verificado
+el 2026-06-28; mantiene separados `agentId`, `selectableSpecialistId`,
+`specialistId` interno y `sessionId`, no expone token en estado público, no
+importa auth heredado y no conecta `chat_sessions` ni `messages`. 2B-Z-C2
+queda aprobado y cerrado formalmente el 2026-06-28. 2B-Z-D1 plan de frontera
+auth real / auth heredado queda preparado documentalmente el 2026-06-28; no
+conecta auth real, auth heredado, catálogo, sesiones, mensajes, routing,
+remoto, producción ni datos reales.
+2B-Z-D1 queda aprobado y cerrado formalmente el 2026-06-28. 2B-Z-D2 contrato
+de implementación auth real segura queda implementado y verificado el
+2026-06-28 como contrato/base local-safe; no conecta auth real, auth heredado,
+catálogo, sesiones, mensajes, routing, remoto, producción ni datos reales.
+2B-Z-D2 queda aprobado y cerrado formalmente el 2026-06-28. 2B-Z-D3 separación
+auth heredado / auth seguro queda preparada el 2026-06-28 como documentación y
+tests arquitectónicos; mantiene catálogo, sesiones y mensajes separados del
+auth heredado. 2B-Z-D3 queda aprobado y cerrado formalmente el 2026-06-28.
+2B-Z-E token provider real local-safe mockable queda preparado
+documentalmente el 2026-06-28; no implementa código, no conecta catálogo,
+sesiones, mensajes, routing, Supabase real, auth heredado, remoto, producción
+ni datos reales. 2B-Z-E queda aprobado y cerrado formalmente el 2026-06-28.
+2B-Z-E1 token provider real local-safe mockable queda implementado y verificado
+el 2026-06-28; usa source fake/in-memory y fixtures fake, pero no conecta
+catálogo, sesiones, mensajes, routing, Supabase real, auth heredado, remoto,
+producción ni datos reales. 2B-Z-E1 queda aprobado y cerrado formalmente el
+2026-06-28. 2B-Z-F cierre auth/session local-safe completo queda preparado
+documentalmente el 2026-06-28; no conecta catálogo, sesiones, mensajes,
+routing, Supabase real, auth heredado, remoto, producción ni datos reales.
+2B-Z-F queda aprobado y cerrado formalmente el 2026-06-28. 2B-AA plan de
+conexión controlada `chat_sessions/messages` con `SecureSession` queda
+preparado documentalmente y aprobado el 2026-06-28. 2B-AA1 adapter
+`SecureSession -> LocalSessionTokenProvider` queda implementado y verificado
+el 2026-06-28 como adapter neutro en `core/auth/session`, sin conectar
+catálogo, sesiones, mensajes, routing, Supabase real, auth heredado, remoto,
+producción ni datos reales. 2B-AA2 conexión local-safe de `chat_sessions` al
+adapter queda implementada y verificada el 2026-06-28 mediante wrapper de
+feature y provider overrideable, sin conectar catálogo real, mensajes, routing,
+Supabase real, auth heredado, remoto, producción ni datos reales. 2B-AA3
+conexión local-safe de `messages/chat_messages` al adapter queda implementada
+y verificada el 2026-06-28 mediante wrapper de feature y provider overrideable,
+sin conectar catálogo real, `chat_sessions -> messages`, routing, Supabase real,
+auth heredado, remoto, producción ni datos reales. 2B-AA4 cierre documental de
+conexión controlada local-safe completa queda preparado el 2026-06-28; cierra
+formalmente 2B-AA/AA1/AA2/AA3 como local-safe, dev-test-safe y mockable, no
+productivo, no remoto, sin datos reales y sin routing productivo.
 
 ## Contexto
 
@@ -9378,3 +9422,3301 @@ El test arquitectónico bloquea en `core/auth/session`:
 Preparar `2B-Z-C2 — controller/providers auth/session safe`, manteniendo
 bloqueada cualquier conversión de `agentId`, `selectableSpecialistId` o
 `specialistId` interno en `sessionId`.
+
+## Implementación 2B-Z-C2 — controller/providers auth/session safe
+
+### Estado
+
+2B-Z-C1 queda aprobado y cerrado formalmente. 2B-Z-C2 añade estado, controller
+y providers Riverpod seguros para auth/session en `core/auth/session`, sin
+conectar catálogo, sesiones ni mensajes.
+
+### Frontera de catálogo preservada
+
+La capa auth/session no transforma ningún identificador de catálogo en sesión:
+
+```text
+agentId != selectableSpecialistId != specialistId interno != sessionId
+```
+
+No se modifican `chat_sessions`, `chat_messages`, rutas ni wrappers heredados.
+
+### Estado público
+
+`SecureSessionState` expone estado auth y errores tipados, pero no token,
+refresh token ni secretos. `subjectId` autenticado futuro no se interpreta como
+ownership, especialista, sesión ni permiso.
+
+### Providers
+
+`secureSessionTokenProvider` selecciona demo solo en entorno demo explícito.
+Backend real y producción permanecen bloqueados mediante provider
+`backendBlocked`. Los providers son overrideables en tests y no importan auth
+heredado, chat heredado, Supabase ni HTTP.
+
+### Relación futura con chat_sessions/messages
+
+La relación futura sigue siendo:
+
+```text
+auth/session segura -> chat_sessions crea/lista sesión propia -> sessionId -> messages
+```
+
+Quedan prohibidos:
+
+```text
+agentId -> messages
+selectableSpecialistId -> messages
+specialistId interno -> messages
+subjectId -> permiso cliente
+token en UI
+```
+
+### Riesgos residuales
+
+- No existe token provider real.
+- No existe conexión revisada con auth heredado.
+- No hay adaptador seguro hacia `chat_sessions` o `messages`.
+- Routing productivo sigue bloqueado.
+
+### Siguiente paso recomendado
+
+Preparar una decisión separada sobre frontera auth real/auth heredado antes de
+conectar sesiones, mensajes o rutas productivas.
+
+## Plan 2B-Z-D1 — frontera auth real / auth heredado
+
+### Estado
+
+2B-Z-C2 queda aprobado y cerrado formalmente. La capa auth/session safe queda
+local-safe y no conecta catálogo, `chat_sessions`, `messages`, rutas
+productivas, remoto ni producción.
+
+### Frontera que debe preservarse
+
+La decisión de catálogo sigue intacta:
+
+```text
+agentId != selectableSpecialistId != specialistId interno != sessionId
+```
+
+La frontera auth no puede convertir identidad, catálogo o agente en sesión.
+Auth solo puede aportar estado de sesión, errores tipados y, en el futuro,
+token encapsulado para datasources autorizados. La UI no debe recibir token ni
+enviar `userId`, `role`, `ownerUserId`, `specialistId` interno o permisos.
+
+### Hallazgos relevantes
+
+- Auth heredado vive en `features/auth/presentation/viewmodels/auth_providers.dart`.
+- Ese provider expone `Supabase.instance.client` desde presentation.
+- `routes.dart` importa `auth_providers.dart` para redirects fuera de demo.
+- `LoginPage` y `RegisterPage` llaman al `AuthController` heredado.
+- La capa segura nueva en `core/auth/session` no importa auth heredado,
+  catálogo, sesiones, mensajes, Supabase ni HTTP.
+
+### Opciones evaluadas
+
+#### Opción A — Auth real seguro paralelo
+
+Dirección recomendada. Crear una implementación futura controlada de
+`SecureSessionTokenProvider` sin importar `auth_providers.dart` heredado.
+
+Ventaja principal: mantiene intactas las fronteras entre auth, catálogo,
+sesiones y mensajes.
+
+#### Opción B — Encapsular auth heredado
+
+Solo aceptable si un wrapper seguro impide que `Supabase.instance.client`,
+`AuthController` heredado o providers de presentation entren al flujo nuevo.
+
+Riesgo principal: contaminación de la frontera nueva con acoplamientos
+heredados.
+
+#### Opción C — Refactor auth heredado primero
+
+Opción de coste alto y blast radius amplio. Debe tratarse como paquete separado
+si se elige.
+
+#### Opción D — Mantener auth real bloqueado
+
+Opción válida si se decide avanzar otro bloque local-safe antes de auth real.
+
+### Recomendación
+
+Mantener como dirección **Opción A**. No conectar auth heredado al flujo nuevo.
+No avanzar `chat_sessions -> messages` ni routing productivo hasta que exista
+un `SecureSessionTokenProvider` real aprobado y testeado.
+
+### Gates antes de conectar sesiones/mensajes
+
+- `SecureSessionTokenProvider` real aprobado;
+- errores auth visibles;
+- `backendBlocked`/`misconfigured` explícitos;
+- UI no pasa token;
+- UI no pasa `userId`;
+- UI no decide ownership;
+- datasource añade `Authorization`;
+- backend valida ownership;
+- sin writes directos desde Flutter;
+- sin Supabase directo desde UI;
+- tests contract y de integración local;
+- rollback definido.
+
+### Siguiente paquete recomendado
+
+```text
+2B-Z-D2 — contrato implementación auth real segura
+```
+
+D2 debe diseñar contrato, ubicación, dependencias permitidas, tests y rollback
+antes de cualquier implementación real.
+
+## Implementación 2B-Z-D2 — contrato implementación auth real segura
+
+### Estado
+
+2B-Z-D1 queda aprobado y cerrado formalmente. 2B-Z-D2 crea una frontera
+contractual para auth real futura sin conectar catálogo, sesiones, mensajes,
+rutas, Supabase real ni auth heredado.
+
+### Frontera de catálogo preservada
+
+La frontera sigue intacta:
+
+```text
+agentId != selectableSpecialistId != specialistId interno != sessionId
+```
+
+El contrato auth real solo puede aportar estado de sesión y token interno futuro
+para infraestructura autorizada. No puede transformar agente, catálogo o
+identidad en sesión.
+
+### Elementos creados
+
+- `SecureRealSessionSource`;
+- `SecureRealSessionSnapshot`;
+- `SecureRealSessionConfig`;
+- `SecureRealSessionGuard`;
+- `SecureRealSessionError`;
+- `BaseSecureRealSessionTokenProvider`.
+
+### Reglas preservadas
+
+- No existe implementación Supabase real.
+- No se importa `features/auth`.
+- No se importa `auth_providers`.
+- No se usa `AuthController`.
+- No se usa `SupabaseAuthDataSource`.
+- No se conecta `chat_sessions`.
+- No se conecta `messages`.
+- No se modifica routing.
+- No hay fallback demo desde error real.
+
+### Guard
+
+El guard bloquea demo/backend/producción no autorizados antes de tocar la fuente
+real. Backend o producción bloqueados no pueden caer a demo ni crear sesión.
+
+### Relación futura con chat_sessions/messages
+
+`chat_sessions` y `messages` solo podrán conectarse cuando exista un provider
+real aprobado y testeado. Incluso entonces:
+
+```text
+UI no pasa token
+UI no pasa userId
+UI no decide ownership
+datasource añade Authorization
+backend valida ownership
+sessionId sigue siendo entrada explícita para messages
+```
+
+### Siguiente paso recomendado
+
+Revisar y aprobar 2B-Z-D2. Después decidir si conviene preparar
+`2B-Z-D3 — separación auth heredado/auth seguro` o
+`2B-Z-E — token provider real local-safe mockable`.
+
+## Preparación 2B-Z-D3 — separación auth heredado / auth seguro
+
+### Estado
+
+2B-Z-D2 queda aprobado y cerrado formalmente. 2B-Z-D3 blinda que el frente
+seguro de auth/session, catálogo, sesiones y mensajes no dependa del auth
+heredado.
+
+### Fronteras preservadas
+
+```text
+features/auth heredado != core/auth/session seguro
+agentId != selectableSpecialistId != specialistId interno != sessionId
+```
+
+El auth heredado no puede entrar en `chat_sessions` ni `chat_messages`. El auth
+seguro futuro tampoco puede convertir identidad en catálogo, especialista o
+sesión.
+
+### Gates reforzados
+
+Se añade un test arquitectónico específico para validar:
+
+- `core/auth/session` no importa auth heredado;
+- `chat_sessions` no importa auth heredado;
+- `chat_messages` no importa auth heredado;
+- no hay `Supabase.instance.client` ni SDK Supabase directo en la frontera
+  segura;
+- no hay tokens hardcodeados ni `service_role`;
+- auth heredado se reconoce como existente, pero no aprobado para flujo seguro.
+
+### Estrategia futura
+
+Recomendada: mantener auth heredado aislado y avanzar a
+`2B-Z-E — token provider real local-safe mockable`.
+
+Alternativas:
+
+- encapsular auth heredado detrás de `SecureRealSessionSource` con paquete
+  separado;
+- refactor auth heredado antes de token provider real, con mayor coste y mayor
+  blast radius.
+
+### Siguiente paso recomendado
+
+Preparar `2B-Z-E` solo como local-safe/mockable. No desbloquea remoto,
+producción, datos reales, catálogo real, sesiones reales ni mensajes reales.
+
+## Plan 2B-Z-E — token provider real local-safe mockable
+
+### Estado
+
+2B-Z-D3 queda aprobado y cerrado formalmente. La frontera queda así:
+
+```text
+features/auth heredado != core/auth/session seguro
+agentId != selectableSpecialistId != specialistId interno != sessionId
+```
+
+2B-Z-E solo prepara el diseño de un provider futuro para
+`SecureSessionTokenProvider`. No conecta catálogo, sesiones, mensajes ni rutas.
+
+### Definición
+
+`token provider real local-safe mockable` significa:
+
+- implementa el contrato real de sesión, no un éxito demo;
+- se compone con `SecureRealSessionSource`, `SecureRealSessionGuard`,
+  `SecureRealSessionConfig` y `BaseSecureRealSessionTokenProvider`;
+- usa source fake o local controlada para tests/dev;
+- no usa remoto, producción, datos reales ni secretos reales;
+- no usa auth heredado ni `Supabase.instance.client`.
+
+### Relación con catálogo y sesiones
+
+El token provider solo puede aportar estado de sesión y token interno futuro
+para infraestructura autorizada. No puede:
+
+- transformar `agentId` en `sessionId`;
+- transformar `selectableSpecialistId` en sesión;
+- decidir ownership;
+- crear sesiones;
+- listar mensajes;
+- abrir rutas;
+- exponer `userId`, `specialistId` interno o token a UI.
+
+`chat_sessions` y `messages` seguirán bloqueados hasta paquete posterior.
+
+### Fuentes permitidas y bloqueadas
+
+| Fuente | Estado | Decisión |
+| --- | --- | --- |
+| Fake in-memory source | Permitida y recomendada para E1 | Primera implementación futura. |
+| Local harness source | Permitida solo con aislamiento | Sin secretos reales ni remoto. |
+| Supabase source real | Bloqueada | Requiere paquete separado. |
+| Auth heredado wrapped | Bloqueada | Requiere paquete separado y gates adicionales. |
+
+### Reglas de seguridad
+
+- sin `service_role` cliente;
+- sin tokens hardcodeados o versionados;
+- sin logs de token;
+- sin Supabase directo;
+- sin `features/auth`;
+- sin HTTP/Dio ni Edge paths;
+- sin fallback demo desde error real;
+- guard antes que source;
+- backend/producción bloqueados antes de cualquier source;
+- errores visibles y tipados.
+
+### Tests requeridos para E1
+
+- fake authenticated produce token fake no real;
+- estados `unauthenticated`, `expired`, `refreshFailed`, `misconfigured` y
+  `backendBlocked` se mapean sin demo fallback;
+- guard backend/producción bloquea antes de source;
+- source no se llama si guard bloquea;
+- `clearSession` delega sin filtrar token;
+- gate arquitectónico sigue bloqueando auth heredado, Supabase, HTTP/Dio y
+  Edge paths.
+
+### Riesgos
+
+| Riesgo | Severidad | Control |
+| --- | --- | --- |
+| Confundir token provider con autorización de producto | Alto | Backend mantiene ownership y permisos. |
+| Usar token fake parecido a real | Alto | Token inequívocamente fake y no secreto. |
+| Reactivar auth heredado | Alto | D3 y tests arquitectónicos. |
+| Conectar sesiones/mensajes demasiado pronto | Medio | E1 no puede tocar `chat_sessions`, `messages` ni routing. |
+
+### Siguiente paquete propuesto
+
+Recomendado:
+
+```text
+2B-Z-E1 — implementar token provider real local-safe mockable
+```
+
+Alternativa si aparece riesgo previo:
+
+```text
+2B-Z-E0 — reforzar guards/arquitectura antes de implementar
+```
+
+## Implementación 2B-Z-E1 — token provider real local-safe mockable
+
+### Estado
+
+2B-Z-E queda aprobado y cerrado formalmente. 2B-Z-E1 implementa un token
+provider real local-safe y mockable para validar estados y tokens fake
+controlados sin abrir catálogo, sesiones, mensajes ni routing.
+
+### Piezas creadas
+
+- `SecureRealSessionFixtures`;
+- `MockableSecureRealSessionSource`;
+- `MockableSecureRealSessionTokenProvider`;
+- tests de source, provider, guard y arquitectura.
+
+### Fronteras preservadas
+
+Siguen vigentes:
+
+```text
+features/auth heredado != core/auth/session seguro
+agentId != selectableSpecialistId != specialistId interno != sessionId
+```
+
+El token provider no puede transformar catálogo o agente en sesión. Tampoco
+puede decidir ownership, crear sesiones, listar mensajes ni abrir rutas.
+
+### Uso permitido
+
+Solo local-safe/dev-test:
+
+- source fake/in-memory;
+- tokens fake inequívocos;
+- `SecureRealSessionGuard` antes de source;
+- provider overrideable en tests;
+- sin exposición de token en estado público.
+
+### Uso bloqueado
+
+Sigue bloqueado:
+
+- Supabase real;
+- auth heredado;
+- remoto;
+- producción;
+- datos reales;
+- `chat_sessions`;
+- `messages`;
+- `chat_messages`;
+- routing productivo;
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- IA, Stasis Engine, MCP, streaming y adjuntos.
+
+### Relación futura con chat_sessions/messages
+
+Una conexión futura, si se aprueba, deberá seguir:
+
+```text
+datasource/repository -> SecureSessionTokenProvider -> Authorization controlado
+```
+
+Nunca:
+
+```text
+UI -> token
+UI -> userId
+UI -> ownerUserId
+UI -> permisos
+```
+
+### Riesgos residuales
+
+| Riesgo | Estado |
+| --- | --- |
+| Confundir token provider con autorización de producto | Bloqueado documentalmente. |
+| Conectar sesiones/mensajes demasiado pronto | Sigue fuera de alcance. |
+| Usar source Supabase real | Bloqueado hasta paquete separado. |
+| Reusar auth heredado | Bloqueado por D3 y gates. |
+
+### Siguiente paso recomendado
+
+Revisar y aprobar 2B-Z-E1. Cualquier conexión posterior con datasources locales
+o sesiones/mensajes requiere paquete separado y aprobación explícita.
+
+## Cierre 2B-Z-F — auth/session local-safe completo
+
+### Estado
+
+2B-Z-E1 queda aprobado y cerrado formalmente. El frente `auth/session` queda
+cerrado como local-safe completo, dev-test-safe y mockable. Este cierre no abre
+catálogo real, sesiones, mensajes, routing, remoto, producción ni datos reales.
+
+### Fronteras cerradas
+
+Siguen vigentes:
+
+```text
+features/auth heredado != core/auth/session seguro
+agentId != selectableSpecialistId != specialistId interno != sessionId
+```
+
+El token provider seguro no transforma catálogo o agente en sesión. Tampoco
+decide ownership, crea sesiones, lista mensajes ni abre rutas.
+
+### Capacidades disponibles local-safe
+
+- `SecureSessionTokenProvider`;
+- `SecureSessionController`;
+- providers overrideables;
+- `SecureRealSessionSource`;
+- `SecureRealSessionGuard`;
+- `BaseSecureRealSessionTokenProvider`;
+- `MockableSecureRealSessionSource`;
+- `MockableSecureRealSessionTokenProvider`;
+- fixtures fake/local-safe;
+- tests arquitectónicos de frontera.
+
+### Bloqueos vigentes
+
+Sigue bloqueado:
+
+- `chat_sessions` conectado a `SecureSession`;
+- `messages` conectado a `SecureSession`;
+- `chat_messages` conectado a auth/session real;
+- routing productivo;
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- catálogo real remoto;
+- Supabase real/remoto;
+- auth heredado;
+- producción;
+- datos reales;
+- IA, Stasis Engine, MCP, streaming y adjuntos.
+
+### Gates antes de conectar sesiones o mensajes
+
+Antes de cualquier conexión futura se exige:
+
+- aprobación explícita;
+- paquete separado;
+- archivos exactos aprobados;
+- rollback definido;
+- `SecureSessionTokenProvider` aprobado;
+- UI no pasa token, `userId`, `ownerUserId` ni permisos;
+- datasource añade `Authorization`;
+- backend valida ownership;
+- sin Supabase directo desde UI;
+- sin writes directos desde Flutter;
+- tests unitarios, datasource/repository, arquitectura y anti-fallback demo.
+
+### Relación futura permitida
+
+Solo en paquete posterior:
+
+```text
+repository/datasource -> SecureSessionTokenProvider -> Authorization
+backend valida ownership
+```
+
+Nunca:
+
+```text
+UI -> token
+UI -> userId
+UI -> ownerUserId
+UI -> permisos
+UI -> Supabase directo
+error real -> demo
+```
+
+### Recomendación final
+
+Cerrar `auth/session` como local-safe completo antes de conectar nada.
+
+Siguiente ruta recomendada: preparar un plan de conexión controlada
+`chat_sessions/messages` con `SecureSession`, sin implementarlo todavía.
+
+## Plan 2B-AA — conexión controlada chat_sessions/messages con SecureSession
+
+### Estado
+
+2B-Z-F queda aprobado y cerrado formalmente. 2B-AA diseña la conexión futura
+entre `SecureSessionTokenProvider` y los datasources locales de
+`chat_sessions/messages`, sin implementarla.
+
+No autoriza catálogo real, sesiones reales remotas, mensajes reales remotos,
+routing productivo, Supabase real, auth heredado, producción ni datos reales.
+
+### Auditoría de puntos actuales
+
+`chat_sessions`:
+
+- usa `LocalSessionTokenProvider.readLocalSessionToken()`;
+- `LocalHttpOwnChatSessionsDataSource` añade `Authorization`;
+- host remoto/no permitido devuelve `backendBlocked` antes de leer token;
+- token `null` devuelve `unauthenticated`;
+- token vacío devuelve `invalidSession`;
+- UI solo pasa `selectableSpecialistId`, filtros, cursor o `sessionId`;
+- no se expone `userId`, `ownerUserId` ni ownership.
+
+`messages/chat_messages`:
+
+- usa `LocalSessionTokenProvider.readLocalSessionToken()`;
+- `LocalHttpOwnChatMessagesDataSource` añade `Authorization`;
+- host remoto/no permitido devuelve `backendBlocked` antes de leer token;
+- token `null` o vacío devuelve `unauthenticated`;
+- UI solo pasa `sessionId`, `content`, `limit` y `cursor`;
+- no se expone `userId`, `ownerUserId` ni ownership.
+
+Ambos providers de presentación siguen seleccionando demo en modo demo y
+backendBlocked fuera de demo. No hay wiring con `SecureSession` todavía.
+
+### Frontera propuesta
+
+Adapter futuro recomendado:
+
+```text
+SecureSessionToLocalSessionTokenAdapter
+```
+
+Dirección permitida:
+
+```text
+datasource/repository -> LocalSessionTokenProvider adapter -> SecureSessionTokenProvider -> Authorization
+backend valida ownership
+```
+
+Prohibido:
+
+```text
+UI -> token
+UI -> userId
+UI -> ownerUserId
+UI -> permisos
+UI -> ownership
+```
+
+### Opciones
+
+| Opción | Decisión |
+| --- | --- |
+| A — Adapter común para `chat_sessions` y `messages` | Recomendada. |
+| B — Migrar datasources a `SecureSessionTokenProvider` directo | No ahora por mayor acoplamiento. |
+| C — Mantener providers locales sin conectar | Válida si se pospone wiring. |
+| D — Conexión productiva/remota | Bloqueada. |
+
+### Gates
+
+Antes de implementación futura:
+
+- aprobación explícita;
+- paquete separado;
+- archivos exactos aprobados;
+- rollback definido;
+- adapter local-safe;
+- sin Supabase real;
+- sin auth heredado;
+- sin tokens reales;
+- sin datos reales;
+- sin remoto;
+- sin producción;
+- UI no pasa token ni IDs internos;
+- datasource añade `Authorization`;
+- backend valida ownership;
+- errores auth visibles;
+- `backendBlocked` y `misconfigured` explícitos;
+- no fallback demo;
+- tests unitarios, datasource, providers y arquitectura.
+
+### Routing
+
+2B-AA no autoriza routing productivo. La única ruta de prueba sigue siendo:
+
+```text
+/dev/chat/session/:sessionId
+```
+
+Siguen bloqueados `/chat/:id`, `/orchestrator/chat`, navegación real y routing
+productivo.
+
+### Siguiente paquete propuesto
+
+Secuencia recomendada:
+
+- `2B-AA1 — implementar adapter SecureSession -> LocalSessionTokenProvider`;
+- `2B-AA2 — conectar chat_sessions datasource al adapter local-safe`;
+- `2B-AA3 — conectar messages datasource al adapter local-safe`;
+- `2B-AB — UX segura chat_sessions -> messages`.
+
+## Implementación 2B-AA1 — adapter SecureSession -> LocalSessionTokenProvider
+
+### Estado
+
+2B-AA queda aprobado y cerrado formalmente como plan de conexión controlada.
+2B-AA1 implementa únicamente un adapter neutro dentro de `core/auth/session`.
+
+Este paquete no conecta catálogo, `chat_sessions`, `messages`,
+`chat_messages`, datasources, repositories, providers, UI, rutas, navegación,
+Supabase, auth heredado, remoto, producción ni datos reales.
+
+### Frontera creada
+
+Archivo:
+
+```text
+lib/core/auth/session/adapters/secure_session_to_local_session_token_adapter.dart
+```
+
+Dirección de dependencia:
+
+```text
+consumidor local futuro -> adapter neutro -> SecureSessionTokenProvider
+```
+
+El adapter no importa features y no conoce `selectableSpecialistId`,
+`agentId`, `specialistId`, `sessionId`, ownership ni catálogo. Por tanto, no
+puede transformar identificadores de catálogo en sesiones ni autorizar acceso a
+mensajes.
+
+### Mapeo de seguridad
+
+Solo `SecureSessionTokenResult.success(token)` con token no vacío produce un
+token. Todo estado no exitoso devuelve `null`:
+
+- `unauthenticated`;
+- `expired`;
+- `refreshFailed`;
+- `backendBlocked`;
+- `misconfigured`;
+- `demo`;
+- excepción inesperada del provider.
+
+Esto conserva la separación: un error real no se convierte en demo y el token
+no se expone a UI ni estado público.
+
+### Relación con chat_sessions/messages
+
+2B-AA1 no implementa los contratos locales de feature porque hacerlo desde
+`core` contaminaría la dirección de dependencias.
+
+La conexión concreta queda bloqueada hasta paquetes separados:
+
+- `2B-AA2`: conectar `chat_sessions` mediante wrapper local-safe;
+- `2B-AA3`: conectar `messages/chat_messages` mediante wrapper local-safe.
+
+Cada paquete deberá demostrar que:
+
+- no se envían `userId`, `ownerUserId`, `specialistId` ni `role`;
+- el datasource añade `Authorization`;
+- host remoto queda bloqueado antes de token/transporte;
+- backend valida ownership;
+- no hay fallback demo desde error real;
+- no se toca routing productivo.
+
+### Tests y evidencia
+
+Se añaden tests unitarios del adapter y test arquitectónico para impedir
+imports de features, Supabase, HTTP/Dio, UI, rutas, Edge Functions,
+`service_role`, MCP, Stasis Engine o streaming.
+
+### Bloqueos vigentes
+
+Siguen bloqueados:
+
+- catálogo remoto real;
+- creación de sesión remota productiva;
+- listado/archivo remoto productivo;
+- envío/listado remoto productivo de mensajes;
+- wrappers concretos de feature;
+- providers reales;
+- routing productivo;
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- Supabase real;
+- auth heredado;
+- remoto;
+- producción;
+- datos reales;
+- IA, Stasis Engine, MCP, streaming y adjuntos.
+
+### Siguiente paso recomendado
+
+Revisar y aprobar 2B-AA1. Después, preparar o implementar 2B-AA2 como paquete
+separado y limitado a `chat_sessions`, sin conectar routing productivo ni
+remoto.
+
+## Implementación 2B-AA2 — chat_sessions conectado al adapter local-safe
+
+### Estado
+
+2B-AA1 queda aprobado y cerrado formalmente. 2B-AA2 conecta únicamente
+`chat_sessions` al adapter seguro, sin tocar `messages`, `chat_messages`,
+routing productivo, catálogo real, Supabase real, remoto, producción ni datos
+reales.
+
+### Frontera creada
+
+Archivo:
+
+```text
+lib/features/chat_sessions/data/local/secure_session_chat_sessions_token_provider.dart
+```
+
+Flujo local-safe:
+
+```text
+secureSessionTokenProvider
+-> SecureSessionToLocalSessionTokenAdapter
+-> SecureSessionChatSessionsTokenProvider
+-> LocalSessionTokenProvider.readLocalSessionToken()
+```
+
+Esta conexión no transforma `selectableSpecialistId` en `sessionId`, no crea
+sesiones por sí misma, no decide ownership y no autoriza acceso a mensajes.
+
+### Provider overrideable
+
+Se añade:
+
+```text
+ownChatSessionsLocalSessionTokenProvider
+```
+
+El provider permite componer `chat_sessions` con `SecureSession` en pruebas y
+paquetes posteriores, pero 2B-AA2 no activa `LocalHttpOwnChatSessionsDataSource`
+en el provider de repositorio por defecto. Demo sigue demo y backend/producción
+siguen `backendBlocked`.
+
+### Contrato de seguridad
+
+Se conserva:
+
+- UI no pasa token;
+- UI no pasa `userId`;
+- UI no pasa `ownerUserId`;
+- UI no pasa `specialistId`;
+- UI no decide ownership;
+- create envía solo `selectableSpecialistId`;
+- list/archive usan solo datos públicos aprobados;
+- host remoto queda bloqueado antes de token/transporte;
+- token `null` queda `unauthenticated`;
+- token vacío directo sigue `invalidSession`;
+- token válido añade `Authorization`;
+- error real no cae a demo.
+
+### Tests y evidencia
+
+AA2 añade/refuerza:
+
+- tests del wrapper de `chat_sessions`;
+- tests del datasource local con fake transport usando el wrapper seguro;
+- tests de provider overrideable;
+- gates arquitectónicos contra auth heredado, Supabase, HTTP/Dio nuevo,
+  rutas productivas, `/chat/:id`, `/orchestrator/chat`, `service_role`, tokens
+  reales, IDs internos, MCP, Stasis Engine y streaming;
+- gate de dirección: `core/auth/session` no importa `features/chat_sessions`.
+
+### Bloqueos vigentes
+
+Siguen bloqueados:
+
+- conexión de `messages`;
+- conexión de `chat_messages`;
+- conexión `chat_sessions -> messages`;
+- catálogo remoto real;
+- routing productivo;
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- navegación real;
+- chat heredado;
+- auth heredado;
+- Supabase real;
+- remoto;
+- producción;
+- datos reales;
+- IA, Stasis Engine, MCP, streaming y adjuntos.
+
+### Siguiente paso recomendado
+
+Revisar y aprobar 2B-AA2. Después, preparar 2B-AA3 para
+`messages/chat_messages` como paquete separado, sin routing productivo y sin
+conectar navegación real.
+
+## Implementación 2B-AA3 — messages/chat_messages conectado al adapter local-safe
+
+### Estado
+
+2B-AA2 queda aprobado y cerrado formalmente. 2B-AA3 conecta únicamente
+`messages/chat_messages` al adapter seguro mediante wrapper de feature y
+provider overrideable. No conecta catálogo real, no conecta selección de sesión
+con mensajes, no conecta rutas, no habilita producto y no usa datos reales.
+
+### Frontera creada
+
+Archivo:
+
+```text
+lib/features/chat_messages/data/local/secure_session_chat_messages_token_provider.dart
+```
+
+Flujo local-safe:
+
+```text
+secureSessionTokenProvider
+-> SecureSessionToLocalSessionTokenAdapter
+-> SecureSessionChatMessagesTokenProvider
+-> LocalSessionTokenProvider.readLocalSessionToken()
+```
+
+Esta frontera exige `sessionId` explícito para mensajes. No acepta `agentId`,
+no interpreta `selectableSpecialistId` como sesión, no inventa sesión y no
+expone `userId` ni `specialistId`.
+
+### Provider overrideable
+
+Se añade:
+
+```text
+ownChatMessagesLocalSessionTokenProvider
+```
+
+El provider queda disponible para tests y paquetes posteriores, pero 2B-AA3 no
+activa el datasource local HTTP como repositorio por defecto. Demo sigue demo y
+backend/producción siguen `backendBlocked`.
+
+### Seguridad de catálogo y frontera backend
+
+Se conserva:
+
+- `selectableSpecialistId` pertenece al frente de sesiones, no a mensajes;
+- `sessionId` explícito es obligatorio para mensajes;
+- `/chat/:id` sigue siendo `agentId` heredado, no `sessionId` seguro;
+- `/orchestrator/chat` sigue bloqueado;
+- `chat_sessions -> messages` sigue sin conectarse;
+- no hay conversión catálogo/sesión en Flutter;
+- no hay Supabase directo;
+- no hay auth heredado;
+- no hay tokens reales versionados.
+
+### Tests y evidencia
+
+AA3 añade/refuerza:
+
+- wrapper de token para `chat_messages`;
+- datasource local con fake transport y token seguro;
+- provider overrideable sin activar backend real;
+- arquitectura sin auth heredado, Supabase, HTTP/Dio nuevo, rutas productivas,
+  IDs internos, `service_role`, MCP, Stasis Engine ni streaming;
+- gate de dirección: `core/auth/session` no importa `features/chat_messages`.
+
+### Bloqueos vigentes
+
+Siguen bloqueados:
+
+- catálogo remoto real;
+- `chat_sessions -> messages`;
+- routing productivo por `sessionId`;
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- chat heredado;
+- auth heredado;
+- Supabase real;
+- remoto;
+- producción;
+- datos reales;
+- IA, Stasis Engine, MCP, streaming y adjuntos.
+
+### Siguiente paso recomendado
+
+Revisar y aprobar 2B-AA3. Después, cerrar formalmente el frente 2B-AA completo
+o preparar un plan separado de UX/routing seguro, sin implementación todavía.
+
+## Cierre 2B-AA4 — conexión controlada local-safe completa
+
+### Estado
+
+2B-AA3 queda aprobado y cerrado formalmente. 2B-AA4 cierra documentalmente el
+frente de conexión controlada `chat_sessions/messages` con `SecureSession` como
+completo en modo local-safe, dev-test-safe, mockable, no productivo, no remoto,
+sin datos reales, sin routing productivo y sin chat heredado.
+
+### Paquetes cerrados
+
+Quedan cerrados:
+
+- `2B-AA` — plan conexión controlada `chat_sessions/messages` con
+  `SecureSession`;
+- `2B-AA1` — adapter `SecureSession -> LocalSessionTokenProvider`;
+- `2B-AA2` — `chat_sessions` conectado al adapter local-safe;
+- `2B-AA3` — `messages/chat_messages` conectado al adapter local-safe;
+- `2B-AA4` — cierre conexión controlada local-safe completa.
+
+### Capacidades terminadas
+
+Queda disponible:
+
+- adapter neutro en `core/auth/session`;
+- wrappers específicos en `chat_sessions` y `chat_messages`;
+- providers overrideables por feature;
+- datasources locales testeados con fake transport;
+- `Authorization` añadido solo desde datasource;
+- UI sin token;
+- UI sin `userId`;
+- UI sin `ownerUserId`;
+- UI sin permisos;
+- backend ownership como autoridad.
+
+### Decisiones firmes
+
+- `core/auth/session` no depende de features.
+- `features/chat_sessions` puede depender de `core/auth/session`.
+- `features/chat_messages` puede depender de `core/auth/session`.
+- `selectableSpecialistId` solo pertenece a creación/selección de sesión.
+- `sessionId` explícito es el único identificador válido para mensajes.
+- `/chat/:id` es `agentId` heredado, no `sessionId` seguro.
+- UI no decide ownership.
+- Errores auth no caen a demo.
+
+### Bloqueos vigentes
+
+Siguen bloqueados:
+
+- routing productivo;
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- navegación real;
+- chat heredado;
+- `AgentChatWrapper` heredado;
+- `ChatPage` heredado;
+- `ChatController` heredado;
+- `chat_providers` heredado;
+- `SupabaseChatDataSource` heredado;
+- auth heredado;
+- Supabase real;
+- Supabase remoto;
+- producción;
+- datos reales;
+- auth real productivo;
+- login/register real;
+- refresh real contra backend;
+- IA;
+- Stasis Engine;
+- MCP;
+- streaming;
+- adjuntos.
+
+### Gates antes de UX segura chat_sessions -> messages
+
+Antes de unir UX de sesiones y mensajes se exige:
+
+- aprobación explícita;
+- paquete separado;
+- sin routing productivo;
+- sin `/chat/:id`;
+- sin `/orchestrator/chat`;
+- `sessionId` explícito obligatorio;
+- `selectableSpecialistId` solo crea sesión;
+- `sessionId` solo abre mensajes;
+- no `agentId` como `sessionId`;
+- no inherited `id` como `sessionId`;
+- UI no pasa token;
+- UI no pasa `userId`;
+- UI no pasa `ownerUserId`;
+- UI no decide ownership;
+- providers overrideables;
+- demo explícito separado;
+- `backendBlocked` explícito;
+- errores visibles;
+- tests widget;
+- tests providers;
+- tests arquitectura;
+- rollback definido.
+
+### Gates antes de routing productivo
+
+Antes de routing productivo se exige plan separado, aprobación explícita,
+revisión de `/chat/:id` y `/orchestrator/chat`, aislamiento del chat heredado,
+`sessionId` explícito, no `agentId` heredado, no Supabase directo desde Flutter,
+no writes directos desde Flutter, auth/session aprobado, `chat_sessions`
+aprobado, `messages` aprobado, UX segura aprobada, tests anti-regresión, tests
+de arquitectura y rollback definido.
+
+### Relación futura permitida
+
+El flujo futuro permitido será:
+
+```text
+chat_sessions selecciona/crea sessionId
+sessionId explícito entra en messages
+messages usa SecureSessionTokenProvider vía adapter
+datasource añade Authorization
+backend valida ownership
+```
+
+Sigue prohibido `agentId -> messages`, `/chat/:id -> messages`,
+`/orchestrator/chat -> messages`, `UI -> token`, `UI -> userId`,
+`UI -> ownerUserId`, `UI -> permisos`, `UI -> Supabase directo` y
+`error real -> demo`.
+
+### Recomendación final
+
+Cerrar 2B-AA antes de UX/routing. Después del cierre, la ruta recomendada es
+`2B-AB — plan UX segura chat_sessions -> messages`, sin implementación todavía.
+
+## Plan 2B-AB — UX segura chat_sessions -> messages
+
+### Estado
+
+2B-AA4 queda aprobado y cerrado formalmente. 2B-AB prepara únicamente el plan
+para una UX futura que conecte:
+
+```text
+chat_sessions -> sessionId explícito -> messages
+```
+
+No implementa UX, no conecta rutas, no conecta chat heredado, no conecta
+Supabase real/remoto, no usa producción y no usa datos reales.
+
+### Auditoría UX en solo lectura
+
+Piezas verificadas:
+
+- `OwnChatSessionsPanel`: puede crear con `selectableSpecialistId`, seleccionar
+  con `sessionId` y archivar con `sessionId`.
+- `OwnChatSessionsSafeShell`: shell seguro de sesiones sin conexión a mensajes.
+- `OwnChatSessionsPanelDevHost`: host dev con overrides.
+- `OwnChatMessagesPanel`: consume `sessionId`; el input envía solo contenido.
+- `OwnChatMessagesSafeShell`: exige `sessionId` explícito y normalizado.
+- `OwnChatMessagesPanelDevHost`: host dev con overrides.
+- Providers/controladores de ambos frentes: separados, overrideables y
+  bloqueados por defecto en backend/producción.
+
+No se detecta en las piezas seguras auditadas:
+
+- uso de chat heredado;
+- Supabase directo desde UI;
+- token enviado desde UI;
+- `userId` enviado desde UI;
+- ownership decidido por UI;
+- conversión de `selectableSpecialistId` en `sessionId` para mensajes.
+
+Riesgos externos al flujo seguro:
+
+- `/chat/:id` existe y usa `agentId` heredado.
+- `/orchestrator/chat` existe y usa chat heredado.
+- `/dev/chat/session/:sessionId` existe como puerta dev-only, pero no se
+  modifica en 2B-AB.
+
+### Flujo permitido
+
+El flujo futuro permitido será:
+
+1. Usuario ve sesiones propias.
+2. Usuario crea sesión con `selectableSpecialistId` si procede.
+3. Backend devuelve `sessionId`.
+4. UI selecciona `sessionId` explícito.
+5. Mensajes reciben solo `sessionId`.
+6. Mensajes usan `SecureSession` vía adapter.
+7. Datasource añade `Authorization`.
+8. Backend valida ownership.
+
+Prohibiciones:
+
+- `agentId -> messages`;
+- `/chat/:id -> messages`;
+- `/orchestrator/chat -> messages`;
+- inherited `id -> sessionId`;
+- `selectableSpecialistId -> messages`;
+- `UI -> token`;
+- `UI -> userId`;
+- `UI -> ownership`.
+
+### Opciones UX
+
+Opción A — shell seguro compuesto sin routing:
+
+- compone `OwnChatSessionsPanel` + `OwnChatMessagesPanel`;
+- pasa solo `selectedSessionId`;
+- no toca rutas productivas;
+- recomendada.
+
+Opción B — host/dev compuesto:
+
+- valida interacción con overrides;
+- no toca routing productivo;
+- recomendada como primer paso si se quiere aislar más.
+
+Opción C — route dev-only compuesta:
+
+- posible solo con aprobación futura explícita;
+- no puede usar `/chat/:id`.
+
+Opción D — routing productivo:
+
+- bloqueada.
+
+### Recomendación
+
+Preparar como siguiente paquete:
+
+```text
+2B-AB1 — shell UX compuesto local-safe sin routing
+```
+
+Mantener `2B-AB0 — auditoría UX/shell previa` como alternativa si se quiere una
+revisión adicional antes de crear el shell.
+
+### Gates
+
+Antes de implementar UX:
+
+- aprobación explícita;
+- paquete separado;
+- sin routing productivo;
+- sin `/chat/:id`;
+- sin `/orchestrator/chat`;
+- sin chat heredado;
+- `sessionId` explícito obligatorio;
+- no `agentId`;
+- no inherited `id`;
+- no `selectableSpecialistId` en messages;
+- UI sin token;
+- UI sin `userId`;
+- UI sin `ownerUserId`;
+- UI sin ownership;
+- providers overrideables;
+- demo explícito;
+- `backendBlocked` explícito;
+- errores visibles;
+- tests widget;
+- tests providers;
+- tests arquitectura;
+- rollback definido.
+
+### Riesgos clasificados
+
+Bloqueantes: `agentId` como `sessionId`, reutilizar `/chat/:id`, conectar
+`/orchestrator/chat`, UI pasando token, UI enviando `userId`, UI decidiendo
+ownership o reintroducir Supabase directo.
+
+Altos: enviar `selectableSpecialistId` a mensajes, reactivar chat heredado,
+fallback demo desde error real o cargar mensajes sin `sessionId` explícito.
+
+Medios: sesión archivada mal gestionada, errores borrando estado útil o
+providers no overrideables.
+
+Bajos: textos visuales ambiguos o estados vacíos incompletos.
+
+### Relación con routing
+
+2B-AB no autoriza routing productivo. Siguen bloqueados `/chat/:id`,
+`/orchestrator/chat`, `AgentChatWrapper`, `ChatPage`, `ChatController`,
+`chat_providers` y `SupabaseChatDataSource`.
+
+La ruta `/dev/chat/session/:sessionId` sigue siendo solo dev-only y no se
+modifica en este paquete.
+
+## Implementación 2B-AB1 — shell UX compuesto local-safe sin routing
+
+### Estado
+
+2B-AB queda aprobado y cerrado formalmente. 2B-AB1 implementa solo un shell UX
+compuesto local-safe para unir sesiones y mensajes mediante `sessionId`
+explícito. No conecta rutas productivas, navegación real, chat heredado,
+Supabase real/remoto, producción ni datos reales.
+
+### Ubicación
+
+Archivo:
+
+```text
+lib/features/chat_messages/presentation/shell/own_chat_composed_safe_shell.dart
+```
+
+Se ubica en `chat_messages` porque el lado sensible del flujo es abrir mensajes
+con `sessionId`. La dependencia hacia `chat_sessions` queda limitada a leer el
+estado seguro `selectedSessionId` y renderizar el panel de sesiones aprobado.
+
+### Flujo implementado
+
+```text
+OwnChatSessionsPanel
+-> ownChatSessionsStateProvider.selectedSessionId
+-> OwnChatMessagesSafeShell(sessionId)
+```
+
+Reglas preservadas:
+
+- `selectableSpecialistId` solo crea sesión;
+- `sessionId` abre mensajes;
+- `agentId` no abre mensajes;
+- inherited `id` no abre mensajes;
+- UI no pasa token;
+- UI no pasa `userId`;
+- UI no decide ownership;
+- backend valida ownership.
+
+### Seguridad
+
+El shell compuesto no importa ni usa:
+
+- `features/auth`;
+- auth heredado;
+- `features/chat` heredado;
+- `AgentChatWrapper`;
+- `ChatPage`;
+- `ChatController`;
+- `chat_providers`;
+- `SupabaseChatDataSource`;
+- GoRouter;
+- Supabase;
+- HTTP/Dio;
+- tokens reales;
+- `service_role`;
+- MCP;
+- Stasis Engine;
+- streaming.
+
+### Tests y evidencia
+
+Se añaden tests de shell compuesto para:
+
+- render de panel de sesiones;
+- estado sin sesión seleccionada;
+- selección explícita de `sessionId`;
+- montaje de mensajes con `sessionId`;
+- desmontaje al limpiar selección;
+- desmontaje al archivar sesión seleccionada;
+- create con `selectableSpecialistId` sin pasarlo a mensajes;
+- estados demo/backendBlocked/error visibles;
+- ausencia de campos de autoridad interna en UI.
+
+Se refuerza test arquitectónico del shell compuesto.
+
+### Bloqueos vigentes
+
+Siguen bloqueados `/chat/:id`, `/orchestrator/chat`, routing productivo,
+navegación real, chat heredado, auth heredado, Supabase real/remoto,
+producción, datos reales, IA, Stasis Engine, MCP, streaming y adjuntos.
+
+### Siguiente paso recomendado
+
+Revisar y aprobar 2B-AB1. Después, cerrar documentalmente AB o preparar un plan
+separado de integración dev-only/productiva segura.
+
+## Cierre 2B-AB2 — UX segura local-safe completa
+
+### Estado
+
+2B-AB1 queda aprobado y cerrado formalmente. 2B-AB2 cierra documentalmente la
+frontera UX `chat_sessions -> messages` como completa en modo local-safe,
+dev-test-safe, sin routing productivo, sin chat heredado, sin Supabase real, sin
+remoto, sin producción y sin datos reales.
+
+### Paquetes cerrados
+
+Quedan cerrados:
+
+- `2B-AB — plan UX segura chat_sessions -> messages`;
+- `2B-AB1 — shell UX compuesto local-safe sin routing`;
+- `2B-AB2 — cierre UX segura local-safe completa`.
+
+### Capacidades terminadas
+
+Queda disponible local-safe:
+
+- `OwnChatComposedSafeShell`;
+- composición `OwnChatSessionsPanel + OwnChatMessagesSafeShell`;
+- `sessionId` explícito como única entrada a messages;
+- estado sin sesión seleccionada;
+- estado con sesión seleccionada;
+- desmontaje de messages al limpiar selección;
+- desmontaje de messages al archivar sesión seleccionada;
+- errores visibles;
+- demo explícito;
+- `backendBlocked` explícito;
+- providers overrideables;
+- tests widget;
+- tests providers/overrides;
+- tests arquitectura.
+
+### Decisiones firmes de catálogo y sesión
+
+- `selectableSpecialistId` solo crea sesión.
+- `sessionId` abre mensajes.
+- `agentId` no abre mensajes.
+- `id` heredado no abre mensajes.
+- `/chat/:id` no abre mensajes.
+- `/orchestrator/chat` no abre mensajes.
+- UI no transforma catálogo en sesión.
+- UI no pasa token.
+- UI no pasa `userId`.
+- UI no pasa `ownerUserId`.
+- UI no pasa `role`.
+- UI no pasa `specialistId`.
+- UI no decide ownership.
+- Backend valida ownership.
+- Chat heredado no se reutiliza.
+
+### Bloqueos vigentes
+
+Siguen bloqueados:
+
+- routing productivo;
+- routing dev-only compuesto;
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- navegación real;
+- chat heredado;
+- `AgentChatWrapper` heredado;
+- `ChatPage` heredado;
+- `ChatController` heredado;
+- `chat_providers` heredado;
+- `SupabaseChatDataSource` heredado;
+- auth heredado;
+- Supabase real;
+- Supabase remoto;
+- producción;
+- datos reales;
+- auth real productivo;
+- login/register real;
+- refresh real contra backend;
+- IA;
+- Stasis Engine;
+- MCP;
+- streaming;
+- adjuntos.
+
+### Gates antes de routing dev-only compuesto
+
+Antes de crear una ruta dev-only compuesta se exige:
+
+- aprobación explícita;
+- paquete separado;
+- ruta dev-only explícita;
+- sin `/chat/:id`;
+- sin `/orchestrator/chat`;
+- sin chat heredado;
+- `kReleaseMode` bloqueado;
+- `environment.isDemo` obligatorio;
+- `sessionId` explícito si aplica;
+- sin `agentId`;
+- sin inherited `id`;
+- sin Supabase real;
+- sin remoto;
+- sin producción;
+- tests de routing dev-only;
+- tests arquitectura;
+- rollback definido.
+
+### Gates antes de routing productivo
+
+Antes de routing productivo se exige:
+
+- plan separado;
+- aprobación explícita;
+- auditoría de `/chat/:id`;
+- auditoría de `/orchestrator/chat`;
+- aislamiento o retirada del chat heredado;
+- `sessionId` explícito obligatorio;
+- no `agentId` heredado;
+- no Supabase directo desde Flutter;
+- no writes directos desde Flutter;
+- auth/session aprobado;
+- `chat_sessions` aprobado;
+- messages aprobado;
+- UX segura aprobada;
+- tests anti-regresión;
+- tests arquitectura;
+- rollback definido.
+
+### Relación futura permitida
+
+El flujo futuro permitido será:
+
+```text
+chat_sessions crea/lista/selecciona sessionId
+OwnChatComposedSafeShell pasa selectedSessionId explícito
+OwnChatMessagesSafeShell recibe sessionId
+messages usa SecureSessionTokenProvider vía adapter
+datasource añade Authorization
+backend valida ownership
+```
+
+Sigue prohibido:
+
+- `agentId -> messages`;
+- `selectableSpecialistId -> messages`;
+- `/chat/:id -> messages`;
+- `/orchestrator/chat -> messages`;
+- `UI -> token`;
+- `UI -> userId`;
+- `UI -> ownerUserId`;
+- `UI -> permisos`;
+- `UI -> Supabase directo`;
+- `error real -> demo`.
+
+### Recomendación final
+
+Cerrar 2B-AB antes de cualquier routing. Después del cierre, el siguiente paso
+prudente es `2B-AC — plan ruta dev-only compuesta para UX segura`, sin
+implementación todavía. Alternativas válidas: plan de routing productivo seguro,
+plan auth real/Supabase real seguro, backend remoto seguro, otro bloque técnico
+u otra área de Stasisly.
+
+## Plan 2B-AC — ruta dev-only compuesta para UX segura
+
+### Estado
+
+2B-AB2 queda aprobado y cerrado formalmente. 2B-AC prepara solo el plan de una
+ruta dev-only futura para probar `OwnChatComposedSafeShell`. No implementa
+código, no modifica rutas, no modifica `go_router`, no modifica `app.dart`, no
+modifica `main.dart`, no modifica widgets, no modifica providers, no modifica
+controllers y no conecta Supabase real, remoto, producción ni datos reales.
+
+### Routing actual inspeccionado
+
+Archivos inspeccionados en solo lectura:
+
+- `lib/core/config/routes.dart`;
+- `lib/app.dart`;
+- `lib/main.dart`.
+
+Estado verificado:
+
+- `routerProvider` vive en `lib/core/config/routes.dart`.
+- `App` consume `routerProvider` y `appEnvironmentProvider` en `lib/app.dart`.
+- `main.dart` inicializa Supabase solo cuando `environment.usesBackend` es true.
+- `/orchestrator/chat` monta `OrchestratorChatPage` heredado.
+- `/chat/:id` monta `AgentChatWrapper(agentId: id)` y por tanto `id` es
+  `agentId` heredado, no `sessionId` seguro.
+- Existe ruta dev-only `/dev/chat/session/:sessionId`.
+- La ruta `/dev/chat/session/:sessionId` se registra solo si
+  `!kReleaseMode && environment.isDemo`.
+- La ruta dev-only existente monta `OwnChatMessagesSafeShell` con `sessionId`
+  explícito, pero no compone selector de sesiones.
+
+Rutas que no deben tocarse en 2B-AC:
+
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- `/dev/chat/session/:sessionId`;
+- rutas principales del shell de producto.
+
+### Ruta dev-only compuesta propuesta
+
+Ruta futura recomendada:
+
+```text
+/dev/chat/composed
+```
+
+Componente futuro:
+
+```text
+OwnChatComposedSafeShell
+```
+
+Reglas:
+
+- solo dev/demo;
+- nunca release;
+- nunca producción;
+- sin remoto;
+- sin datos reales;
+- sin auth heredado;
+- sin chat heredado;
+- sin `/chat/:id`;
+- sin `/orchestrator/chat`;
+- sin `agentId`;
+- sin inherited `id`;
+- sin interpretar `selectableSpecialistId` como `sessionId`;
+- sin token en UI;
+- sin `userId`;
+- sin ownership decidido por UI.
+
+### Guards futuros mínimos
+
+La ruta futura debe usar el patrón aprobado:
+
+```text
+!kReleaseMode && environment.isDemo
+```
+
+Además debe mantener:
+
+- `environment.usesBackend == false` o bloqueo explícito equivalente;
+- sin Supabase real;
+- sin remoto;
+- sin producción;
+- sin datos reales;
+- sin fallback de error real a demo.
+
+Si el guard falla, la ruta no debe existir o debe quedar inaccesible de forma
+explícita. No debe redirigir a chat heredado ni montar `AgentChatWrapper`.
+
+### Opciones evaluadas
+
+| Opción | Descripción | Ventajas | Riesgos | Decisión |
+| --- | --- | --- | --- | --- |
+| A | Ruta dev-only compuesta `/dev/chat/composed` | Prueba UX completa sin parámetros y sin tocar producto | Puede confundirse con ruta productiva si no se blinda | Recomendada para implementación futura |
+| B | Reutilizar `/dev/chat/session/:sessionId` | Ya existe y está guardada | No prueba selector de sesiones ni composición completa | Mantener intacta |
+| C | Host/dev sin router | Menor superficie de routing | Menos parecido al uso real de navegación | Alternativa si se quiere máxima prudencia |
+| D | Routing productivo | Daría camino de producto | Bloqueante: aún no autorizado | Bloqueada |
+
+### Tests requeridos para futura implementación
+
+La implementación futura de 2B-AC1 debe demostrar:
+
+- ruta existe solo en demo/dev;
+- ruta no existe en release;
+- ruta no existe si `environment.isDemo == false`;
+- ruta monta `OwnChatComposedSafeShell`;
+- ruta no monta chat heredado;
+- `/chat/:id` no cambia;
+- `/orchestrator/chat` no cambia;
+- no `AgentChatWrapper`;
+- no `ChatPage` heredado;
+- no `ChatController` heredado;
+- no `SupabaseChatDataSource`;
+- no Supabase real;
+- no `agentId` como `sessionId`;
+- no inherited `id`;
+- no `selectableSpecialistId` como `sessionId`;
+- no token en UI;
+- no `userId`;
+- no ownership decidido por UI.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- exponer ruta dev-only en release;
+- exponer ruta dev-only en producción;
+- reutilizar `/chat/:id`;
+- reutilizar `/orchestrator/chat`;
+- montar chat heredado por accidente;
+- interpretar `agentId` como `sessionId`;
+- permitir Supabase real o datos reales.
+
+Altos:
+
+- confundir ruta dev con ruta productiva;
+- aceptar inherited `id`;
+- pasar `selectableSpecialistId` a messages;
+- ocultar fallo de backend como demo;
+- acoplar UI a auth heredado.
+
+Medios:
+
+- no cubrir estados de demo/backendBlocked/error;
+- no probar que `/chat/:id` y `/orchestrator/chat` quedan intactas;
+- no definir rollback de ruta.
+
+Bajos:
+
+- naming visual ambiguo;
+- copy que no deje claro que es dev-only/local-safe.
+
+### Relación con routing productivo
+
+2B-AC no autoriza routing productivo. Siguen bloqueados:
+
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- `AgentChatWrapper` heredado;
+- `ChatPage` heredado;
+- `ChatController` heredado;
+- `chat_providers` heredado;
+- `SupabaseChatDataSource` heredado;
+- navegación real de usuario;
+- remoto;
+- producción;
+- datos reales.
+
+### Siguiente paquete propuesto
+
+Siguiente paquete recomendado:
+
+```text
+2B-AC1 — implementar ruta dev-only compuesta /dev/chat/composed
+```
+
+Solo debería aprobarse si se acepta que es una puerta de prueba, no una puerta
+de producto. Si aparecen dudas sobre guards o acoplamientos, usar antes:
+
+```text
+2B-AC0 — reforzar arquitectura/routing antes de implementar
+```
+
+## Implementación 2B-AC1 — ruta dev-only compuesta /dev/chat/composed
+
+### Estado
+
+2B-AC queda aprobado y cerrado formalmente. 2B-AC1 implementa únicamente la
+ruta dev-only compuesta `/dev/chat/composed` para montar
+`OwnChatComposedSafeShell` en entorno demo/dev. No autoriza routing productivo,
+no modifica `/chat/:id`, no modifica `/orchestrator/chat`, no conecta chat
+heredado, no conecta Supabase real/remoto, no usa producción y no usa datos
+reales.
+
+### Ruta creada
+
+Ruta:
+
+```text
+/dev/chat/composed
+```
+
+Guard:
+
+```text
+!kReleaseMode && environment.isDemo
+```
+
+Componente montado:
+
+```text
+Scaffold -> OwnChatComposedSafeShell
+```
+
+La ruta no acepta parámetros. Quedan prohibidas:
+
+- `/dev/chat/composed/:id`;
+- `/dev/chat/composed/:agentId`;
+- `/dev/chat/composed/:sessionId`.
+
+### Relación con catálogo, sesión y rutas existentes
+
+Se mantiene intacta la ruta dev-only existente:
+
+```text
+/dev/chat/session/:sessionId
+```
+
+Se mantienen intactas y bloqueadas para el flujo seguro nuevo:
+
+- `/chat/:id`, que sigue siendo `agentId` heredado;
+- `/orchestrator/chat`, que sigue siendo chat heredado.
+
+Decisiones preservadas:
+
+- `selectableSpecialistId` solo crea sesión;
+- `sessionId` abre mensajes;
+- `agentId` no abre mensajes;
+- inherited `id` no abre mensajes;
+- UI no transforma catálogo en sesión.
+
+### Seguridad
+
+La ruta compuesta:
+
+- no usa `AgentChatWrapper`;
+- no usa `ChatPage` heredado;
+- no usa `OrchestratorChatPage`;
+- no usa `ChatController`;
+- no usa `chat_providers` heredado;
+- no usa `SupabaseChatDataSource`;
+- no usa `Supabase.instance.client`;
+- no usa `service_role`;
+- no pasa token a UI;
+- no pasa `userId`;
+- no pasa `agentId`;
+- no interpreta inherited `id` como `sessionId`;
+- no interpreta `selectableSpecialistId` como `sessionId`.
+
+### Tests y evidencia requerida
+
+AC1 añade/refuerza tests para:
+
+- existencia de `/dev/chat/composed` solo bajo el bloque dev-only;
+- montaje de `OwnChatComposedSafeShell`;
+- ausencia de parámetros en la ruta compuesta;
+- conservación de `/dev/chat/session/:sessionId`;
+- no modificación de `/chat/:id`;
+- no modificación de `/orchestrator/chat`;
+- ausencia de chat heredado, Supabase, tokens reales, `service_role`, IA,
+  Stasis Engine, MCP y streaming en el bloque dev-only.
+
+### Bloqueos vigentes
+
+Siguen bloqueados:
+
+- routing productivo;
+- `/chat/:id` como entrada segura;
+- `/orchestrator/chat` como entrada segura;
+- navegación real de usuario;
+- chat heredado;
+- auth heredado;
+- Supabase real;
+- Supabase remoto;
+- producción;
+- datos reales;
+- IA;
+- Stasis Engine;
+- MCP;
+- streaming;
+- adjuntos.
+
+### Siguiente paso recomendado
+
+Revisar y aprobar 2B-AC1. Después, preparar un cierre documental 2B-AC2 o un
+plan separado de validación UX/dev-only antes de cualquier routing productivo.
+
+## Cierre 2B-AC2 — ruta dev-only compuesta cerrada
+
+### Estado
+
+2B-AC1 queda aprobado y cerrado formalmente. 2B-AC2 cierra documentalmente el
+frente 2B-AC como completo en modo dev-only, demo-only, local-safe, no
+productivo, sin remoto, sin datos reales, sin chat heredado y sin Supabase real.
+
+### Paquetes cerrados
+
+Quedan cerrados:
+
+- `2B-AC — plan ruta dev-only compuesta para UX segura`;
+- `2B-AC1 — ruta dev-only compuesta /dev/chat/composed`;
+- `2B-AC2 — cierre ruta dev-only compuesta`.
+
+### Capacidades terminadas
+
+Queda disponible:
+
+- `/dev/chat/composed`;
+- guard `!kReleaseMode && environment.isDemo`;
+- montaje `Scaffold -> OwnChatComposedSafeShell`;
+- ruta sin parámetros;
+- ruta separada de `/chat/:id`;
+- ruta separada de `/orchestrator/chat`;
+- tests de routing dev-only;
+- tests de no regresión de rutas existentes;
+- tests arquitectónicos.
+
+### Decisiones firmes de catálogo, sesión y routing
+
+- `/dev/chat/composed` es puerta de prueba.
+- `/dev/chat/composed` no es ruta productiva.
+- `/dev/chat/composed` no acepta `agentId`.
+- `/dev/chat/composed` no acepta `id` heredado.
+- `/dev/chat/composed` no acepta `sessionId` por parámetro.
+- `/chat/:id` sigue siendo heredada y bloqueada para el flujo seguro.
+- `/orchestrator/chat` sigue heredada y bloqueada para el flujo seguro.
+- `selectableSpecialistId` solo crea sesión.
+- `sessionId` abre mensajes.
+- Routing productivo sigue bloqueado.
+
+### Bloqueos vigentes
+
+Siguen bloqueados:
+
+- routing productivo;
+- `/chat/:id` como ruta segura;
+- `/orchestrator/chat` como ruta segura;
+- navegación real;
+- chat heredado;
+- `AgentChatWrapper` heredado;
+- `ChatPage` heredado;
+- `ChatController` heredado;
+- `chat_providers` heredado;
+- `SupabaseChatDataSource` heredado;
+- auth heredado;
+- Supabase real;
+- Supabase remoto;
+- producción;
+- datos reales;
+- auth real productivo;
+- login/register real;
+- refresh real contra backend;
+- IA;
+- Stasis Engine;
+- MCP;
+- streaming;
+- adjuntos.
+
+### Gates antes de routing productivo
+
+Antes de cualquier routing productivo se exige:
+
+- plan separado;
+- aprobación explícita;
+- auditoría completa de `/chat/:id`;
+- auditoría completa de `/orchestrator/chat`;
+- decisión sobre retirada o aislamiento del chat heredado;
+- `sessionId` explícito obligatorio;
+- no `agentId` heredado;
+- no inherited `id`;
+- no Supabase directo desde Flutter;
+- no writes directos desde Flutter;
+- auth/session aprobado;
+- `chat_sessions` aprobado;
+- messages aprobado;
+- UX segura aprobada;
+- ruta dev-only validada;
+- tests anti-regresión;
+- tests arquitectura;
+- rollback definido.
+
+### Relación futura permitida
+
+El flujo dev-only permitido es:
+
+```text
+/dev/chat/composed
+-> OwnChatComposedSafeShell
+-> chat_sessions selecciona/crea sessionId
+-> OwnChatMessagesSafeShell(sessionId)
+-> messages usa SecureSessionTokenProvider vía adapter
+-> datasource añade Authorization
+-> backend valida ownership
+```
+
+Sigue prohibido:
+
+- `agentId -> messages`;
+- `selectableSpecialistId -> messages`;
+- `/chat/:id -> messages`;
+- `/orchestrator/chat -> messages`;
+- `UI -> token`;
+- `UI -> userId`;
+- `UI -> ownerUserId`;
+- `UI -> permisos`;
+- `UI -> Supabase directo`;
+- `error real -> demo`.
+
+### Recomendación final
+
+Cerrar 2B-AC antes de cualquier routing productivo. Después del cierre, la ruta
+prudente recomendada es plan de validación UX dev-only antes de plantear routing
+productivo. Alternativas válidas: `2B-AD — plan routing productivo seguro`,
+plan auth real/Supabase real seguro, backend remoto seguro, otro bloque técnico
+u otra área de Stasisly.
+
+## Plan 2B-AD — validación UX dev-only
+
+### Estado
+
+2B-AC2 queda aprobado y cerrado formalmente. 2B-AD prepara únicamente el plan de
+validación manual y técnica de la UX dev-only segura en `/dev/chat/composed`,
+antes de plantear cualquier routing productivo. No implementa código, no
+modifica rutas, no modifica widgets, no modifica providers, no modifica
+controllers, no modifica datasources, no modifica Supabase, no modifica CI y no
+conecta remoto, producción ni datos reales.
+
+### Alcance de validación UX dev-only
+
+La validación debe cubrir:
+
+- render inicial;
+- estado sin sesión seleccionada;
+- lista de sesiones;
+- creación de sesión si está disponible;
+- selección de `sessionId` explícito;
+- montaje de mensajes;
+- envío de mensaje fake/local-safe si el entorno lo permite;
+- listado de mensajes;
+- archivado de sesión seleccionada;
+- desmontaje de mensajes al limpiar selección;
+- desmontaje de mensajes al archivar la sesión seleccionada;
+- errores visibles;
+- demo explícito;
+- `backendBlocked` explícito.
+
+### Checklist manual
+
+Checklist manual para entorno demo/dev:
+
+1. Abrir `/dev/chat/composed`.
+2. Confirmar que no hay red remota.
+3. Confirmar que no usa datos reales.
+4. Confirmar que no aparece chat heredado.
+5. Confirmar que no aparece `/chat/:id`.
+6. Confirmar que no aparece `/orchestrator/chat`.
+7. Confirmar que no hay tokens visibles.
+8. Crear o seleccionar sesión.
+9. Verificar que solo `sessionId` abre mensajes.
+10. Enviar mensaje fake/local-safe si el entorno lo permite.
+11. Archivar sesión y comprobar desmontaje de mensajes.
+12. Comprobar errores demo/backendBlocked.
+
+### Checklist técnico
+
+Verificaciones técnicas mínimas:
+
+- `flutter analyze --no-fatal-infos`;
+- `flutter test`;
+- tests focales de route/dev-only;
+- tests widget de `OwnChatComposedSafeShell`;
+- tests arquitectura;
+- diff prohibido;
+- búsqueda de Supabase/auth heredado/chat heredado;
+- búsqueda de `/chat/:id` y `/orchestrator/chat` en nuevas piezas.
+
+### Criterios de aceptación
+
+La validación solo puede considerarse aprobada si:
+
+- la ruta es solo dev/demo;
+- no está disponible en release;
+- no es productiva;
+- no usa Supabase real;
+- no usa chat heredado;
+- no usa auth heredado;
+- no usa datos reales;
+- `sessionId` explícito es obligatorio;
+- `selectableSpecialistId` no entra en messages;
+- `agentId` no entra en messages;
+- UI no muestra token;
+- UI no pasa `userId`;
+- UI no decide ownership;
+- errores son visibles;
+- ningún error real cae a demo;
+- tests están en verde;
+- rollback queda claro.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- ruta dev visible fuera de demo;
+- uso accidental de datos reales;
+- Supabase real inicializado;
+- chat heredado renderizado;
+- `agentId` usado como `sessionId`;
+- token visible en UI.
+
+Altos:
+
+- `selectableSpecialistId` usado como `sessionId`;
+- mensaje enviado sin `sessionId`;
+- error real cae a demo;
+- ownership decidido por UI.
+
+Medios:
+
+- archivado deja mensajes montados;
+- estados demo/backendBlocked no son claros;
+- checklist manual incompleto.
+
+Bajos:
+
+- copy dev-only ambiguo;
+- falta de evidencia visual en la validación.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AD1 — ejecutar/automatizar validación UX dev-only
+```
+
+Alternativas válidas:
+
+- `2B-AE — plan routing productivo seguro`;
+- `2B-AF — plan auth real/Supabase seguro`;
+- `2B-AG — backend remoto seguro`.
+
+## Ejecución 2B-AD1 — validación UX dev-only
+
+### Estado
+
+2B-AD queda aprobado y cerrado formalmente. 2B-AD1 ejecuta la validación
+automatizada de la UX dev-only segura en `/dev/chat/composed`, manteniendo la
+separación estricta entre catálogo, selección de especialista y sesión segura.
+La ruta sigue siendo solo una puerta de prueba local-safe/dev-test:
+
+```text
+/dev/chat/composed
+-> OwnChatComposedSafeShell
+-> selectableSpecialistId solo para crear sesión
+-> selectedSessionId explícito
+-> OwnChatMessagesSafeShell(sessionId)
+```
+
+No se autoriza interpretar `agentId`, inherited `id` ni
+`selectableSpecialistId` como `sessionId`.
+
+### Evidencia automatizada
+
+Validaciones ejecutadas:
+
+- `dart format lib/core/config lib/features/chat_sessions lib/features/chat_messages test/core test/features/chat_sessions test/features/chat_messages test/architecture`;
+- `dart run build_runner build --delete-conflicting-outputs`;
+- `flutter analyze --no-fatal-infos`;
+- `flutter test test/core/config test/features/chat_sessions test/features/chat_messages test/architecture`;
+- `flutter test`;
+- `git diff --check`;
+- `git diff --name-only -- lib/features/auth lib/features/chat lib/app.dart lib/main.dart pubspec.yaml supabase`.
+
+Resultados:
+
+- `build_runner`: correcto, 0 outputs generados.
+- `flutter analyze --no-fatal-infos`: correcto; solo infos no fatales.
+- tests focales dev-only/sesiones/mensajes/arquitectura: 259 tests pasados.
+- suite completa: 358 tests pasados, 2 tests saltados por harness local
+  explícito.
+- `git diff --check`: sin salida.
+- diff prohibido sobre `features/auth`, `features/chat`, `app.dart`,
+  `main.dart`, `pubspec.yaml` y `supabase`: sin salida.
+
+### Criterios validados
+
+2B-AD1 valida que:
+
+- el catálogo no abre mensajes directamente;
+- `selectableSpecialistId` no entra en contratos de messages;
+- la salida usable para messages sigue siendo siempre `sessionId` explícito;
+- `/chat/:id` sigue siendo `agentId` heredado y no `sessionId` seguro;
+- `/orchestrator/chat` sigue bloqueado como entrada segura;
+- no se importa chat heredado ni Supabase real en la ruta dev-only compuesta;
+- no se expone token, `userId`, `ownerUserId` ni permisos en UI;
+- errores y `backendBlocked` no se convierten en demo.
+
+### Validación manual
+
+No se abrió una sesión interactiva de navegador ni dispositivo. La validación
+manual queda sustituida en este paquete por pruebas widget, pruebas de ruta y
+gates arquitectónicos ejecutables. Una validación visual humana puede añadirse
+después sin cambiar el estado local-safe de la ruta.
+
+### Bloqueos vigentes
+
+Siguen bloqueados:
+
+- routing productivo;
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- chat heredado;
+- auth heredado;
+- Supabase real/remoto;
+- producción;
+- datos reales;
+- catálogo real productivo;
+- IA;
+- Stasis Engine;
+- MCP;
+- streaming;
+- adjuntos.
+
+### Decisión solicitada
+
+Revisar y aprobar el cierre de 2B-AD1. Siguiente paso prudente recomendado:
+`2B-AE — plan routing productivo seguro`, todavía sin implementación, o una
+validación visual humana dev-only si se quiere evidencia UX adicional.
+
+## Plan 2B-AE — routing productivo seguro
+
+### Estado
+
+2B-AD1 queda aprobado y cerrado formalmente. La validación UX dev-only queda
+ejecutada sobre `/dev/chat/composed`. 2B-AE prepara solo el plan documental para
+routing productivo seguro y mantiene bloqueado cualquier cambio de rutas,
+widgets, providers, controllers, datasources, Supabase, chat heredado, remoto,
+producción y datos reales.
+
+### Auditoría de rutas productivas heredadas
+
+Estado verificado en lectura:
+
+- `/chat/:id` está definido en `lib/core/config/routes.dart` y pasa el
+  parámetro `id` como `AgentChatWrapper(agentId: id)`.
+- `AgentChatWrapper` usa `agentByIdProvider(agentId)` y monta `ChatPage`.
+- `ChatPage` usa `activeChatSessionProvider(widget.agentId)`, por lo que el
+  identificador de ruta se interpreta como agente/especialista heredado.
+- `chat_providers.dart` usa `Supabase.instance.client` para construir
+  `SupabaseChatDataSource` fuera de demo.
+- `SupabaseChatDataSource` consulta e inserta directamente en `chat_sessions` y
+  `messages`, usa `specialist_id`, recibe `user_id`, inserta `role`, hace
+  `select()` y llama a RPC heredada `increment_message_count`.
+- `ChatController` envía `role: 'user'` desde Flutter.
+- `/orchestrator/chat` monta `OrchestratorChatPage`, que busca
+  `stasis_core` y monta el mismo `ChatPage` heredado.
+
+Piezas heredadas/bloqueadas para la frontera segura:
+
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- `AgentChatWrapper`;
+- `ChatPage`;
+- `ChatController`;
+- `chat_providers`;
+- `SupabaseChatDataSource`;
+- `ChatRepositoryImpl`;
+- entidades heredadas que exponen `userId`, `specialistId`, `role` o
+  `attachments`.
+
+### Problema central
+
+`/chat/:id` no puede conectarse directamente al flujo seguro porque `:id` es
+`agentId` heredado, no `sessionId` seguro.
+
+`/orchestrator/chat` no puede conectarse directamente al flujo seguro porque
+monta `OrchestratorChatPage -> ChatPage`, es decir, el flujo heredado.
+
+La regla de frontera se mantiene:
+
+```text
+selectableSpecialistId crea o solicita sesión;
+sessionId explícito abre messages;
+agentId/inherited id/selectableSpecialistId nunca son sessionId.
+```
+
+### Opciones de routing productivo
+
+#### Opción A — Nueva ruta productiva segura separada
+
+Crear en el futuro una ruta nueva, por ejemplo `/chat/sessions`, `/chat/new` o
+`/chat/safe`, que monte el flujo seguro compuesto y mantenga explícita la
+secuencia catálogo -> sesión -> mensajes.
+
+Ventajas:
+
+- evita contaminar el flujo seguro con significado heredado;
+- permite conservar `/chat/:id` bloqueado o deprecado hasta migración formal;
+- mantiene `sessionId` como única entrada a messages;
+- facilita tests de frontera.
+
+Costes:
+
+- requiere decisión de naming y UX;
+- requiere estrategia de producto para no duplicar chats visibles.
+
+#### Opción B — Migrar `/chat/:id`
+
+Solo viable si se elimina o cambia formalmente el significado heredado de `:id`.
+No se recomienda todavía.
+
+#### Opción C — Migrar `/orchestrator/chat`
+
+Solo viable cuando Stasis tenga contrato explícito para crear/seleccionar
+`sessionId` seguro. No se recomienda todavía.
+
+#### Opción D — Mantener dev-only
+
+Mantener `/dev/chat/composed` como única puerta validada hasta aprobar auth real,
+backend remoto, RLS/ownership y política de datos reales.
+
+### Recomendación
+
+Recomendación de 2B-AE:
+
+```text
+No migrar /chat/:id todavía.
+No migrar /orchestrator/chat todavía.
+No reutilizar AgentChatWrapper ni ChatPage heredados como ruta segura.
+No reactivar SupabaseChatDataSource.
+Diseñar primero una nueva ruta productiva segura separada o mantener dev-only.
+```
+
+La ruta productiva futura debe partir del flujo seguro ya validado, no del chat
+heredado.
+
+### Gates antes de cualquier implementación productiva
+
+Antes de implementar una ruta productiva segura:
+
+- aprobación explícita;
+- paquete separado;
+- URL productiva aprobada;
+- auth real aprobada o bloqueo productivo explícito;
+- backend/Supabase real aprobado si aplica;
+- RLS/ownership verificados si hay datos reales;
+- catálogo no expone IDs internos ni prompts sensibles;
+- `selectableSpecialistId` no entra en messages;
+- `sessionId` explícito obligatorio;
+- no `agentId` como `sessionId`;
+- no inherited `id`;
+- sin chat heredado;
+- sin `SupabaseChatDataSource`;
+- sin writes directos desde Flutter;
+- UI sin token, `userId`, `ownerUserId` ni ownership;
+- backend valida ownership;
+- errores visibles;
+- sin fallback demo desde error real;
+- tests de routing, widgets, providers, integración local y arquitectura;
+- rollback documentado.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- interpretar catálogo/agente como sesión;
+- conectar `/chat/:id` a messages;
+- montar `ChatPage` heredado en una ruta declarada segura;
+- usar Supabase real o datos reales sin gates aprobados.
+
+Altos:
+
+- reactivar `SupabaseChatDataSource`;
+- permitir writes directos desde Flutter;
+- UI enviando `userId`, token u ownership;
+- fallback demo desde error real;
+- romper `/chat/:id` sin plan de migración.
+
+Medios:
+
+- confundir ruta dev con productiva;
+- duplicar experiencia de chat sin señalización;
+- no definir deprecación de chat heredado.
+
+Bajos:
+
+- naming ambiguo de la ruta futura;
+- copy insuficiente para usuarios internos/testers.
+
+### Relación con auth real/backend remoto
+
+Routing productivo seguro puede depender de auth real, token provider real,
+backend remoto, Supabase real y verificación de RLS/ownership en entorno no
+local. 2B-AE no autoriza ninguna de esas conexiones.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AE1 — plan nueva ruta productiva segura separada
+```
+
+Alternativas válidas:
+
+- `2B-AF — plan auth real/Supabase real seguro`;
+- `2B-AG — backend remoto seguro`;
+- mantener dev-only y realizar validación visual humana adicional.
+
+## Plan 2B-AE1 — nueva ruta productiva segura separada
+
+### Estado
+
+2B-AE queda aprobado y cerrado formalmente. 2B-AE1 diseña solo una ruta
+productiva segura separada del chat heredado, sin implementarla y sin modificar
+routing, widgets, providers, controllers, datasources, Supabase, migraciones,
+CI, remoto, producción ni datos reales.
+
+### Nombres candidatos de ruta
+
+| Ruta candidata | Claridad | Riesgo de confundir catálogo/sesión | Encaje con Stasis | Evaluación |
+| --- | --- | --- | --- | --- |
+| `/chat` | Alta | Alto por cercanía a `/chat/:id` heredado | Media | No recomendada ahora. |
+| `/chat/sessions` | Media-alta | Medio por prefijo heredado | Media | Viable, pero no ideal. |
+| `/chat/safe` | Media | Medio | Baja-media | Útil internamente, débil para producto. |
+| `/conversations` | Alta | Bajo | Alta | Recomendada como candidata principal. |
+| `/conversations/:sessionId` | Alta | Bajo si se valida ownership | Alta | Futura fase, no primera puerta. |
+| `/stasis/chat` | Alta para Stasis | Bajo | Muy alta | Viable si Stasis es única entrada. |
+| `/stasis/sessions` | Media | Bajo | Alta | Viable si producto decide entrada Stasis. |
+
+La candidata recomendada es `/conversations`, porque no reutiliza `/chat/:id`,
+no acepta parámetros ambiguos y permite preservar la secuencia segura:
+
+```text
+catálogo sanitizado -> selectableSpecialistId -> create session -> sessionId -> messages
+```
+
+### Semántica correcta
+
+Reglas obligatorias:
+
+```text
+selectableSpecialistId crea sesión
+sessionId abre mensajes
+agentId no abre mensajes
+id heredado no abre mensajes
+/chat/:id no se reutiliza
+/orchestrator/chat no se reutiliza
+```
+
+El catálogo no puede exponer ni inferir `sessionId`. La UI no puede convertir
+`selectableSpecialistId`, `agentId` ni inherited `id` en una sesión.
+
+### Opciones productivas
+
+#### Opción A — Ruta productiva sin parámetro `/chat`
+
+Familiar para producto, pero demasiado cercana al heredado `/chat/:id`. No se
+recomienda como primera ruta segura.
+
+#### Opción B — Ruta productiva nueva separada `/conversations`
+
+Monta shell compuesto seguro sin parámetro. Es la opción recomendada porque
+separa producto nuevo del chat heredado y conserva `sessionId` como estado
+interno seguro.
+
+#### Opción C — Ruta por `sessionId` explícito `/conversations/:sessionId`
+
+Debe esperar a auth real, backend real, ownership, RLS, 404 opaco y tests de no
+filtrado. No es primera fase.
+
+#### Opción D — Mantener dev-only
+
+Válida si todavía no se quiere una puerta productiva visual.
+
+### Recomendación
+
+Recomendación de 2B-AE1:
+
+```text
+No reutilizar /chat/:id.
+No reutilizar /orchestrator/chat.
+Preferir /conversations como futura ruta productiva segura separada sin parámetro.
+No implementar /conversations/:sessionId todavía.
+```
+
+La ruta futura debe partir del flujo seguro validado, no de
+`AgentChatWrapper`, `ChatPage`, `chat_providers` ni `SupabaseChatDataSource`.
+
+### Requisitos antes de implementación futura
+
+Antes de implementar:
+
+- aprobación explícita;
+- paquete separado;
+- nombre de ruta aprobado;
+- sin tocar `/chat/:id`;
+- sin tocar `/orchestrator/chat`;
+- sin chat heredado;
+- sin `SupabaseChatDataSource`;
+- `OwnChatComposedSafeShell` o shell productivo equivalente;
+- `selectableSpecialistId` solo para crear sesión;
+- `sessionId` explícito para messages;
+- UI sin token, `userId`, `ownerUserId` ni ownership;
+- backend valida ownership;
+- sin Supabase directo desde UI;
+- sin writes directos desde Flutter;
+- auth/session, `chat_sessions`, `messages` y adapter aprobados;
+- tests routing, widget, providers, arquitectura y rollback.
+
+### Relación con auth real/backend remoto
+
+Una ruta productiva visual puede existir solo si sigue `backendBlocked` o demo
+explícito. Una ruta productiva real con datos reales requiere auth real, backend
+real, RLS y ownership aprobados.
+
+Variantes:
+
+- ruta productiva bloqueada visualmente;
+- ruta productiva no registrada todavía;
+- ruta productiva real con datos reales, bloqueada hasta gates de seguridad.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- colisión con `/chat/:id`;
+- `agentId` tratado como `sessionId`;
+- `sessionId` tratado como `agentId`;
+- `/orchestrator/chat` reusado;
+- chat heredado montado;
+- datos reales sin auth/RLS.
+
+Altos:
+
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- UI enviando `userId`;
+- UI decidiendo ownership;
+- fallback demo desde error real.
+
+Medios:
+
+- nombre de ruta confuso;
+- coexistencia temporal con chat heredado;
+- navegación de Stasis no decidida.
+
+Bajos:
+
+- copy insuficiente para testers;
+- falta de validación visual humana adicional.
+
+### Plan de migración futura
+
+Fases posibles:
+
+1. Ruta productiva separada bloqueada/backendBlocked.
+2. Auth/backend real aprobado.
+3. Datos reales bajo RLS y ownership.
+4. Deprecación o aislamiento de `/chat/:id`.
+5. Decisión sobre `/orchestrator/chat`.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AE2 — decidir nombre y semántica de ruta productiva segura
+```
+
+Alternativas válidas:
+
+- `2B-AF — plan auth real/Supabase real seguro`;
+- `2B-AG — backend remoto seguro`;
+- mantener dev-only.
+
+## Decisión 2B-AE2 — nombre y semántica de ruta productiva segura
+
+### Estado
+
+2B-AE1 queda aprobado y cerrado formalmente. La futura ruta productiva segura
+queda decidida como `/conversations`, pero no se registra todavía. Routing
+productivo sigue bloqueado y esta decisión no implementa código, rutas,
+providers, widgets, datasources, Supabase, remoto, producción ni datos reales.
+
+### Nombre de ruta decidido
+
+Nombre aprobado:
+
+```text
+/conversations
+```
+
+Motivos:
+
+- evita reutilizar `/chat/:id`;
+- evita `id` ambiguo;
+- no sugiere `agentId`;
+- permite que el catálogo sanitizado cree o solicite sesión sin abrir messages
+  directamente;
+- puede convivir con chat heredado hasta una migración explícita;
+- permite una fase futura `/conversations/:sessionId` solo si se aprueban auth,
+  backend, ownership, 404 opaco y RLS.
+
+Opciones descartadas para primera ruta:
+
+- `/chat`;
+- `/chat/sessions`;
+- `/chat/safe`;
+- `/stasis/chat`;
+- `/stasis/sessions`;
+- `/conversations/:sessionId`.
+
+### Semántica decidida
+
+Semántica formal:
+
+```text
+/conversations = puerta productiva segura futura para flujo compuesto de conversaciones
+```
+
+Reglas de frontera:
+
+- `selectableSpecialistId` crea sesión;
+- `sessionId` abre mensajes;
+- `agentId` no abre mensajes;
+- inherited `id` no abre mensajes;
+- catálogo no expone `sessionId`;
+- UI no convierte catálogo/agente en sesión;
+- backend valida ownership.
+
+### Lo que no significa la ruta
+
+`/conversations` no significa:
+
+- `agentId`;
+- `specialistId` interno;
+- `selectableSpecialistId`;
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- chat heredado;
+- `SupabaseChatDataSource`;
+- writes directos desde Flutter;
+- datos reales;
+- deep link por `sessionId` en esta fase.
+
+### Relación con rutas heredadas
+
+Decisión:
+
+```text
+/chat/:id permanece heredada hasta decisión futura.
+/orchestrator/chat permanece heredada hasta decisión futura.
+/conversations no reemplaza automáticamente a /chat/:id.
+/conversations no reemplaza automáticamente a /orchestrator/chat.
+```
+
+Cualquier migración, retirada, redirección o aislamiento requiere paquete
+separado.
+
+### Variante inicial decidida
+
+Se elige Variante B:
+
+```text
+Decidir nombre y semántica, pero no registrar /conversations todavía.
+```
+
+Motivo: aún no hay auth real, Supabase real, backend remoto ni RLS productivo
+aprobados. Registrar una puerta visual antes de esos gates puede confundirse con
+capacidad productiva real.
+
+### Requisitos antes de implementación futura
+
+Antes de implementar `/conversations`:
+
+- aprobación explícita;
+- paquete separado;
+- sin tocar `/chat/:id`;
+- sin tocar `/orchestrator/chat`;
+- sin chat heredado;
+- sin `SupabaseChatDataSource`;
+- sin writes directos desde Flutter;
+- sin Supabase directo desde UI;
+- `selectableSpecialistId` solo para crear sesión;
+- `sessionId` explícito obligatorio para messages;
+- UI sin token, `userId`, `ownerUserId` ni ownership;
+- backend valida ownership;
+- `backendBlocked`/demo explícitos si no hay backend real;
+- tests routing, widget, providers y arquitectura;
+- rollback definido.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- registrar `/conversations` demasiado pronto con datos reales;
+- `agentId` tratado como `sessionId`;
+- `selectableSpecialistId` tratado como `sessionId`;
+- chat heredado montado por accidente;
+- datos reales sin auth/RLS.
+
+Altos:
+
+- colisión mental con `/chat/:id`;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- UI enviando `userId`;
+- fallback demo desde error real.
+
+Medios:
+
+- falta de estrategia de convivencia con chat heredado;
+- navegación Stasis no decidida;
+- copy de producto ambiguo.
+
+Bajos:
+
+- ausencia de validación visual previa a implementación;
+- naming alternativo reabierto sin ADR.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AE3 — cierre decisión routing productivo seguro
+```
+
+Alternativas válidas:
+
+- `2B-AF — plan auth real/Supabase real seguro`;
+- `2B-AG — backend remoto seguro`;
+- `2B-AE3 — plan implementación futura /conversations backendBlocked`.
+
+## Cierre 2B-AE3 — decisión routing productivo seguro
+
+### Estado completo de 2B-AE
+
+2B-AE2 queda aprobado y cerrado formalmente. El frente 2B-AE queda cerrado como
+decisión documental de routing productivo seguro, sin registrar `/conversations`
+y sin implementar código.
+
+Quedan cerrados:
+
+- `2B-AE — plan routing productivo seguro`;
+- `2B-AE1 — plan nueva ruta productiva segura separada`;
+- `2B-AE2 — decisión nombre y semántica de ruta productiva segura`;
+- `2B-AE3 — cierre decisión routing productivo seguro`.
+
+### Decisiones finales de routing
+
+Decisiones firmes:
+
+- `/conversations` será la futura ruta productiva segura candidata.
+- `/conversations` no se registra hasta paquete separado.
+- `/conversations` no acepta parámetros inicialmente.
+- `/conversations/:sessionId` queda reservado para fase futura.
+- `/chat/:id` no se reutiliza.
+- `/orchestrator/chat` no se reutiliza.
+- `/chat/:id` sigue siendo `agentId` heredado.
+- `/orchestrator/chat` sigue siendo flujo heredado.
+- chat heredado no se toca en este frente.
+
+La frontera se mantiene:
+
+```text
+selectableSpecialistId crea sesión
+sessionId abre messages
+agentId no abre messages
+```
+
+### Bloqueos vigentes
+
+Siguen bloqueados:
+
+- registro de `/conversations`;
+- routing productivo;
+- `/chat/:id` como ruta segura;
+- `/orchestrator/chat` como ruta segura;
+- navegación real;
+- chat heredado;
+- `AgentChatWrapper` heredado;
+- `ChatPage` heredado;
+- `ChatController` heredado;
+- `chat_providers` heredado;
+- `SupabaseChatDataSource` heredado;
+- auth heredado;
+- Supabase real/remoto;
+- producción;
+- datos reales;
+- auth real productivo;
+- login/register real;
+- refresh real contra backend;
+- IA;
+- Stasis Engine;
+- MCP;
+- streaming;
+- adjuntos.
+
+### Requisitos antes de registrar /conversations
+
+Antes de implementar `/conversations`:
+
+- aprobación explícita;
+- paquete separado;
+- decisión sobre `backendBlocked` visual o auth/backend real;
+- sin tocar `/chat/:id`;
+- sin tocar `/orchestrator/chat`;
+- sin chat heredado;
+- sin `SupabaseChatDataSource`;
+- sin writes directos desde Flutter;
+- sin Supabase directo desde UI;
+- `OwnChatComposedSafeShell` o shell productivo equivalente;
+- `selectableSpecialistId` solo para crear sesión;
+- `sessionId` explícito obligatorio para messages;
+- UI sin token, `userId`, `ownerUserId` ni ownership;
+- backend valida ownership;
+- `backendBlocked`/demo explícitos si no hay backend real;
+- sin fallback demo desde error real;
+- tests routing, widget, providers y arquitectura;
+- rollback definido.
+
+### Relación con auth real/backend remoto
+
+2B-AE no autoriza auth real, Supabase real, backend remoto, RLS productivo ni
+datos reales. Antes de una ruta productiva real con datos reales conviene
+abordar `2B-AF — plan auth real/Supabase real seguro` o `2B-AG — backend remoto
+seguro`.
+
+### Riesgos residuales
+
+Riesgos que permanecen:
+
+- confundir decisión de nombre con implementación;
+- registrar `/conversations` demasiado pronto;
+- reutilizar `/chat/:id` por comodidad;
+- reutilizar `/orchestrator/chat` por comodidad;
+- tratar `agentId` como `sessionId`;
+- tratar `selectableSpecialistId` como `sessionId`;
+- reactivar `SupabaseChatDataSource`;
+- introducir writes directos desde Flutter;
+- introducir datos reales sin auth/RLS;
+- fallback demo desde error real.
+
+### Recomendación final
+
+Cerrar 2B-AE. No implementar `/conversations` todavía.
+
+Siguiente bloque prudente:
+
+```text
+2B-AF — plan auth real/Supabase real seguro
+```
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AF — plan auth real/Supabase real seguro
+```
+
+Alternativas válidas:
+
+- `2B-AG — backend remoto seguro`;
+- `2B-AE4 — plan implementación /conversations backendBlocked visual`;
+- otro bloque técnico.
+
+## Plan 2B-AF — auth real/Supabase real seguro
+
+### Estado
+
+2B-AE3 queda aprobado y cerrado formalmente. `/conversations` queda decidido
+como nombre futuro de ruta productiva segura, pero no se registra ni se
+implementa. La frontera de catálogo y backend sigue siendo local-safe/dev-test
+hasta autorización explícita.
+
+2B-AF es documental. No autoriza Supabase real, auth real, backend remoto,
+producción, datos reales, routing productivo ni conexión del chat heredado.
+
+### Auditoría de frontera relevante para ADR-007
+
+Estado verificado:
+
+- `specialist_catalog` existe como catálogo sanitizado y está protegido por
+  deny-all/RLS local.
+- `create-own-chat-session` usa identificador seguro de catálogo
+  `selectableSpecialistId` para crear sesión y devuelve `sessionId` explícito.
+- `chat_sessions` y `messages` están endurecidas con RLS y sin grants cliente
+  directos.
+- `send-user-message` llama a la RPC `send_user_message_core`; no debe hacer
+  writes directos desde Edge Function ni desde Flutter.
+- Los datasources seguros Flutter hablan con Edge Functions locales mediante
+  host policy local, token provider inyectado y transporte inyectable.
+- El chat heredado conserva `SupabaseChatDataSource`, `specialistId`, `userId`,
+  `role` y writes directos; queda bloqueado para la frontera segura.
+
+### Frontera futura obligatoria
+
+La frontera aprobable para Supabase real debe permanecer:
+
+```text
+Flutter -> Edge Functions -> RPC/RLS -> tables
+```
+
+No se autoriza:
+
+- Flutter escribiendo tablas Supabase directamente;
+- Flutter usando `service_role`;
+- UI enviando `userId`, `ownerUserId`, `specialist_id` interno o `role`;
+- `agentId` usado como `sessionId`;
+- `selectableSpecialistId` usado como `sessionId`;
+- `/chat/:id` o `/orchestrator/chat` conectados al flujo seguro;
+- `SupabaseChatDataSource` reutilizado;
+- respuestas públicas exponiendo ids internos no aprobados.
+
+Solo puede aprobarse más adelante:
+
+- `Authorization: Bearer` gestionado por datasource, no por UI;
+- Edge Function validando JWT;
+- backend obteniendo usuario desde JWT validado;
+- backend resolviendo catálogo y ownership;
+- RPC transaccional para writes;
+- RLS como segunda barrera;
+- logs sin tokens, secretos ni datos sensibles.
+
+### Gates antes de Supabase real
+
+Antes de llevar la frontera a Supabase real/remoto:
+
+- entorno development/staging aprobado;
+- secretos fuera del repo;
+- host remoto permitido solo por configuración aprobada;
+- auth real detrás de `SecureSession`;
+- tests negativos RLS por tabla usada;
+- tests anti-spoofing de `userId`, `specialist_id`, `role` y ownership;
+- tests que bloqueen `SupabaseChatDataSource`;
+- tests que demuestren que `/chat/:id` sigue siendo `agentId`;
+- tests que demuestren que `/conversations` no se registra hasta paquete
+  separado;
+- rollback a `backendBlocked`;
+- revisión de AppSec, privacidad y arquitectura backend.
+
+### Recomendación
+
+No conectar catálogo, sesiones ni mensajes a Supabase real todavía.
+
+Siguiente paquete prudente:
+
+```text
+2B-AF1 — plan entorno development/staging Supabase seguro
+```
+
+Debe decidir entorno, secretos, allowlist de hosts, despliegue remoto de Edge
+Functions, validación JWT, pruebas y rollback antes de tocar implementación.
+
+## Plan 2B-AF1 — entorno development/staging Supabase seguro
+
+### Estado
+
+2B-AF queda aprobado y cerrado formalmente. AF1 define entornos
+`development` y `staging` para la frontera backend/catálogo sin conectar nada.
+No autoriza catálogo real remoto, Edge Functions remotas, Supabase real,
+producción, datos reales ni `/conversations`.
+
+### Implicación para catálogo y frontera backend
+
+Estado verificado:
+
+- El catálogo sanitizado local-safe existe y sigue protegido.
+- `selectableSpecialistId` sigue siendo identificador de selección/creación,
+  no `sessionId`.
+- `sessionId` sigue siendo la única entrada válida hacia mensajes.
+- `agentId` heredado no puede entrar al flujo seguro.
+- `SupabaseChatDataSource` sigue bloqueado.
+- Las Edge Functions actuales son local-safe/dev-test, no remotas ni
+  productivas.
+
+### Development
+
+Para la frontera backend, `development` solo podrá existir como entorno remoto
+no productivo si se aprueba un paquete futuro. Reglas:
+
+- proyecto Supabase development separado;
+- catálogo con datos sintéticos o sanitizados, nunca catálogo real sensible;
+- Edge Functions remotas solo tras revisión;
+- host remoto allowlisted explícitamente;
+- logs técnicos sin tokens ni prompts sensibles;
+- seeds marcados como no productivos y limpiables;
+- cero `service_role` en Flutter;
+- cero writes directos desde Flutter;
+- cero `userId`, `specialist_id` o `role` desde UI.
+
+### Staging
+
+Para la frontera backend, `staging` será preproductivo y aislado. Reglas:
+
+- proyecto Supabase staging separado;
+- migraciones aplicadas de forma controlada;
+- catálogo sintético o sanitizado, no catálogo real sensible inicialmente;
+- Edge Functions remotas solo tras aprobación;
+- RLS/RPC verificadas antes de cualquier dato sensible;
+- logs minimizados;
+- rollback definido;
+- nunca usar claves production.
+
+### Gates antes de exponer catálogo/Edge Functions remotas
+
+Antes de exponer catálogo o funciones remotas:
+
+- AF2 aprobado;
+- entorno development o staging definido;
+- secretos fuera del repo;
+- allowlist de hosts;
+- tests de que `agentId` no es `sessionId`;
+- tests de que `selectableSpecialistId` no abre mensajes;
+- tests de que respuestas públicas no exponen ids internos no aprobados;
+- tests de no fallback demo;
+- tests de no `SupabaseChatDataSource`;
+- tests de RLS y RPC;
+- cleanup de fixtures;
+- rollback a `backendBlocked`.
+
+### Riesgos
+
+Bloqueantes:
+
+- catálogo real sensible en development/staging;
+- `service_role` en cliente;
+- Edge Function remota aceptando `userId` o `specialist_id` desde UI;
+- reactivar `SupabaseChatDataSource`;
+- usar production keys fuera de production.
+
+Altos:
+
+- seeds persistentes sin cleanup;
+- logs con tokens o prompts internos;
+- remoto habilitado sin allowlist;
+- asumir tests locales como staging.
+
+### Recomendación
+
+No conectar catálogo ni Edge Functions remotas todavía. Siguiente paquete
+prudente:
+
+```text
+2B-AF2 — decisión matriz de entornos y configuración segura
+```
+
+## Decisión 2B-AF2 — matriz de entornos y configuración segura
+
+### Estado
+
+2B-AF1 queda aprobado y cerrado formalmente. La matriz oficial de entornos se
+decide también para la frontera de catálogo y backend. Esta decisión no conecta
+catálogo real, Supabase remoto, Edge Functions remotas ni datos reales.
+
+### Entornos oficiales para frontera backend
+
+Se aceptan como entornos oficiales:
+
+```text
+local
+demo
+development
+staging
+production
+```
+
+`backendReal` queda como nombre histórico/transitorio del prototipo. La
+frontera backend objetivo debe hablar en términos de `development`, `staging` y
+`production`.
+
+### Reglas por entorno para catálogo
+
+| Entorno | Catálogo permitido | Supabase | Edge Functions | Datos | Respuesta pública |
+| --- | --- | --- | --- | --- | --- |
+| local | Fixtures locales/test-only | Local/efímero | Locales | Sintéticos con cleanup | Sanitizada |
+| demo | Mock/fake visible | No remoto | No remotas | Ficticios | Sanitizada |
+| development | Catálogo sintético/sanitizado | Futuro proyecto dev | Futuras remotas aprobadas | No reales | Sanitizada, sin ids internos no aprobados |
+| staging | Catálogo sintético/sanitizado controlado | Futuro proyecto staging | Futuras remotas aprobadas | No reales inicialmente | Sanitizada, sin ids internos no aprobados |
+| production | Catálogo real futuro | Bloqueado hasta gates | Bloqueadas hasta gates | Bloqueados hasta gates | Sanitizada y auditada |
+
+Decisiones firmes:
+
+- `selectableSpecialistId` crea sesión, no abre mensajes.
+- `sessionId` abre mensajes.
+- `agentId` heredado no entra al flujo seguro.
+- `/chat/:id` no se convierte en ruta segura.
+- `/orchestrator/chat` no se convierte en ruta segura.
+- `/conversations` no se registra por ahora.
+- `SupabaseChatDataSource` no se reutiliza.
+- ninguna respuesta pública debe exponer `specialist_id` interno si no está
+  aprobado expresamente.
+
+### Reglas de configuración para frontera backend
+
+- `SUPABASE_URL` debe estar separado por entorno.
+- `SUPABASE_ANON_KEY` debe estar separado por entorno.
+- `SUPABASE_SERVICE_ROLE_KEY` nunca puede llegar a Flutter.
+- production keys no pueden usarse en development ni staging.
+- development/staging no pueden contener catálogo real sensible.
+- staging no puede caer a demo ni local si falla configuración.
+- misconfiguration bloquea la frontera backend.
+
+### Gates antes de implementar configuración backend
+
+Antes de cualquier skeleton o conexión:
+
+- AF2 aprobado y cerrado;
+- paquete separado;
+- nombres oficiales aceptados;
+- variables por entorno definidas;
+- secrets fuera del repo;
+- host allowlist por entorno;
+- tests de no `SupabaseChatDataSource`;
+- tests de no `agentId -> sessionId`;
+- tests de no `selectableSpecialistId -> messages`;
+- tests de no `service_role` en cliente;
+- tests de no ids internos en respuestas públicas;
+- rollback a `backendBlocked`.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- catálogo real sensible en development/staging;
+- Edge Function remota aceptando `userId` o `specialist_id` desde UI;
+- production keys fuera de production;
+- `service_role` en cliente;
+- reactivar `SupabaseChatDataSource`.
+
+Altos:
+
+- registrar `/conversations` antes de auth/RLS;
+- exponer ids internos;
+- seeds persistentes sin cleanup;
+- staging tratado como demo;
+- remoto sin allowlist.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AF3 — cierre matriz de entornos y configuración segura
+```
+
+## Cierre 2B-AF3 — matriz de entornos y configuración segura
+
+### Estado completo de AF para frontera backend
+
+2B-AF2 queda aprobado y cerrado formalmente. La matriz oficial de entornos
+queda cerrada también para catálogo sanitizado, sesiones, mensajes y Edge
+Functions. No se implementó configuración real, remoto ni Supabase real.
+
+Quedan cerrados:
+
+- `2B-AF — plan auth real/Supabase real seguro`;
+- `2B-AF1 — plan entorno development/staging Supabase seguro`;
+- `2B-AF2 — decisión matriz de entornos y configuración segura`;
+- `2B-AF3 — cierre matriz de entornos y configuración segura`.
+
+### Decisiones finales para catálogo/backend
+
+Decisiones firmes:
+
+- `local` usa fixtures locales/test-only.
+- `demo` usa mock/fake visible.
+- `development` solo podrá usar catálogo sintético o sanitizado.
+- `staging` solo podrá usar catálogo sintético o sanitizado inicialmente.
+- `production` queda bloqueado hasta gates futuros.
+- `backendReal` queda como histórico/transitorio.
+- `selectableSpecialistId` crea sesión y no abre mensajes.
+- `sessionId` abre mensajes.
+- `agentId` heredado no entra al flujo seguro.
+- `/conversations` no se registra en ningún entorno por ahora.
+
+### Bloqueos vigentes
+
+Mantener bloqueado:
+
+- catálogo real sensible en development/staging;
+- Supabase real;
+- Edge Functions remotas;
+- backend remoto;
+- production;
+- datos reales;
+- `service_role` en cliente;
+- production keys en development/staging;
+- `/conversations`;
+- `/chat/:id` como ruta segura;
+- `/orchestrator/chat` como ruta segura;
+- `SupabaseChatDataSource`;
+- writes directos desde Flutter;
+- UI enviando `userId`, `specialist_id` o `role`;
+- respuestas públicas exponiendo ids internos no aprobados;
+- logs con tokens, prompts sensibles o `Authorization`.
+
+### Requisitos antes de implementar configuración backend
+
+Antes de cualquier skeleton o conexión:
+
+- aprobación explícita;
+- paquete separado;
+- matriz aceptada;
+- variables por entorno definidas;
+- secrets fuera del repo;
+- host allowlist por entorno;
+- tests de no `SupabaseChatDataSource`;
+- tests de no `agentId -> sessionId`;
+- tests de no `selectableSpecialistId -> messages`;
+- tests de no `service_role` en cliente;
+- tests de no ids internos en respuestas públicas;
+- startup fail-closed;
+- rollback a `backendBlocked`;
+- no datos reales.
+
+### Riesgos residuales
+
+Riesgos que permanecen:
+
+- confundir matriz decidida con remoto implementado;
+- `backendReal` ambiguo demasiado tiempo;
+- catálogo real sensible en development/staging;
+- production keys fuera de production;
+- `service_role` en cliente;
+- `/conversations` registrada antes de auth/RLS;
+- rutas `/dev` visibles en release;
+- seeds persistentes sin cleanup;
+- logs con tokens o prompts internos.
+
+### Recomendación final
+
+Cerrar 2B-AF3. Siguiente recomendado:
+
+```text
+2B-AF4 — plan skeleton de entornos sin conectar Supabase
+```
+
+El skeleton futuro debe ser fail-closed y no debe conectar catálogo remoto,
+Edge Functions remotas, Supabase real ni datos reales.
+
+## Plan 2B-AF4 — skeleton de entornos sin conectar Supabase
+
+### Estado para frontera backend
+
+2B-AF3 queda aprobado y cerrado formalmente. AF4 prepara un skeleton futuro de
+entornos sin conectar catálogo remoto, Edge Functions remotas, Supabase real ni
+datos reales.
+
+### Skeleton backend futuro
+
+El skeleton futuro debe permitir que la frontera backend distinga:
+
+- `local`: fixtures locales/test-only;
+- `demo`: mocks/fakes visibles;
+- `development`: catálogo sintético/sanitizado no productivo;
+- `staging`: catálogo sintético/sanitizado preproductivo;
+- `production`: bloqueado hasta gates;
+- `backendReal`: legacy/transitional.
+
+No debe cambiar todavía:
+
+- funciones Edge;
+- migraciones;
+- RLS/RPC;
+- rutas;
+- `SupabaseChatDataSource`;
+- datasources Flutter;
+- catálogo real.
+
+### Flags backend derivados propuestos
+
+Para la frontera backend, el skeleton futuro debe exponer o derivar:
+
+- `allowsRemoteCatalog`;
+- `allowsRemoteEdgeFunctions`;
+- `allowsRealSpecialistCatalog`;
+- `allowsSyntheticCatalog`;
+- `allowsInternalIdsInPublicResponses`;
+- `allowsDirectFlutterWrites`;
+- `allowsServiceRoleInClient`.
+
+Reglas:
+
+- `allowsRemoteCatalog = false` hasta aprobación separada;
+- `allowsRemoteEdgeFunctions = false` hasta aprobación separada;
+- `allowsRealSpecialistCatalog = false` hasta gates futuros;
+- `allowsSyntheticCatalog = true` en local/development/staging controlados;
+- `allowsInternalIdsInPublicResponses = false` por defecto;
+- `allowsDirectFlutterWrites = false` siempre;
+- `allowsServiceRoleInClient = false` siempre.
+
+### Validación fail-closed backend
+
+Comportamiento futuro:
+
+- entorno desconocido bloquea frontera backend;
+- development/staging sin allowlist bloquean remoto;
+- production sin gates bloquea;
+- catálogo real solicitado sin aprobación bloquea;
+- Edge Function remota solicitada sin aprobación bloquea;
+- respuesta pública con ids internos no aprobados falla contrato;
+- `SupabaseChatDataSource` no puede activarse por entorno.
+
+### Tests futuros backend
+
+Tests mínimos:
+
+- local solo permite fixtures;
+- demo solo permite mock/fake;
+- development no permite catálogo real;
+- staging no permite catálogo real inicialmente;
+- production bloquea catálogo real sin gates;
+- remote Edge Functions false por defecto;
+- no `service_role` en cliente;
+- no direct writes desde Flutter;
+- `agentId` no es `sessionId`;
+- `selectableSpecialistId` no abre messages;
+- respuestas públicas no exponen ids internos no aprobados;
+- rollback conserva `backendBlocked`.
+
+### Riesgos
+
+Bloqueantes:
+
+- skeleton interpretado como remoto activo;
+- catálogo real expuesto en development/staging;
+- `service_role` en cliente;
+- `SupabaseChatDataSource` reactivado;
+- Edge Function remota aceptando ids desde UI.
+
+Altos:
+
+- flags backend con nombres ambiguos;
+- seeds sin cleanup;
+- logs con prompts/tokens;
+- staging tratado como demo.
+
+### Recomendación
+
+Siguiente recomendado:
+
+```text
+2B-AF5 — implementar skeleton de entornos fail-closed sin conectar Supabase
+```
+
+La implementación futura debe mantener catálogo remoto, Supabase real, Edge
+Functions remotas y datos reales bloqueados.
+
+## Implementación 2B-AF5 — skeleton de entornos fail-closed sin conectar Supabase
+
+### Estado para frontera backend
+
+2B-AF4 queda aprobado y cerrado formalmente. AF5 implementa el skeleton mínimo
+de entornos sin conectar catálogo remoto, Edge Functions remotas, Supabase real
+ni datos reales.
+
+### Impacto en catálogo y backend
+
+El skeleton permite distinguir conceptualmente:
+
+- `local`;
+- `demo`;
+- `development`;
+- `staging`;
+- `backendReal` legacy/transitional;
+- `production`.
+
+La frontera backend sigue bloqueada:
+
+- `allowsRemoteSupabase = false`;
+- `allowsRealAuth = false`;
+- `allowsRealData = false`;
+- `allowsConversationsRoute = false`;
+- `usesBackend` no autoriza remoto;
+- `backendReal` sigue legacy/transitional.
+
+### Garantías mantenidas
+
+Se mantiene:
+
+- catálogo real remoto bloqueado;
+- Edge Functions remotas bloqueadas;
+- `service_role` en cliente bloqueado;
+- `SupabaseChatDataSource` bloqueado;
+- writes directos desde Flutter bloqueados;
+- `/conversations` no registrada;
+- `agentId` no es `sessionId`;
+- `selectableSpecialistId` no abre messages;
+- respuestas públicas con ids internos no aprobados bloqueadas por contrato
+  futuro.
+
+### Tests relevantes
+
+AF5 añade/refuerza tests de arquitectura para:
+
+- no secrets en skeleton de entorno;
+- no `SUPABASE_SERVICE_ROLE_KEY` en `lib/core/config`;
+- no `Authorization`/`refresh_token` hardcodeados;
+- no `SupabaseChatDataSource`;
+- `/conversations` no registrada.
+
+### Riesgos residuales
+
+Riesgos que permanecen:
+
+- `backendReal` sigue existiendo por compatibilidad;
+- el skeleton no equivale a remoto validado;
+- todavía falta una fase de cierre y otra de backend remoto si se decide
+  avanzar.
+
+### Siguiente paso propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AF6 — cierre skeleton de entornos fail-closed
+```

@@ -1,9 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:stasisly/core/auth/session/secure_session.dart';
 import 'package:stasisly/features/chat_sessions/data/datasources/local_http_own_chat_sessions_datasource.dart';
 import 'package:stasisly/features/chat_sessions/data/local/local_only_host_policy.dart';
 import 'package:stasisly/features/chat_sessions/data/local/local_session_token_provider.dart';
 import 'package:stasisly/features/chat_sessions/data/local/own_chat_sessions_http_transport.dart';
+import 'package:stasisly/features/chat_sessions/data/local/secure_session_chat_sessions_token_provider.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
 
 void main() {
@@ -63,6 +65,63 @@ void main() {
   });
 
   group('exact local requests', () {
+    test(
+      'secure session wrapper token adds approved Authorization header',
+      () async {
+        final transport = _FakeTransport();
+
+        await _source(
+          tokenProvider: _secureSessionTokenProvider(
+            SecureSessionTokenResult.success('fake-secure-session-token'),
+          ),
+          transport: transport,
+        ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+
+        final request = transport.requests.single;
+        expect(
+          request.headers['Authorization'],
+          'Bearer fake-secure-session-token',
+        );
+        expect(request.body, {'selectableSpecialistId': 'catalog-public'});
+        expect(request.body, isNot(containsPair('userId', anything)));
+        expect(request.body, isNot(containsPair('ownerUserId', anything)));
+        expect(request.body, isNot(containsPair('specialistId', anything)));
+      },
+    );
+
+    test('secure session wrapper null token remains unauthenticated', () async {
+      final transport = _FakeTransport();
+
+      final response = await _source(
+        tokenProvider: _secureSessionTokenProvider(
+          const SecureSessionTokenResult.expired(),
+        ),
+        transport: transport,
+      ).listOwnChatSessions(status: ChatSessionStatusFilter.active, limit: 20);
+
+      expect(response.errorCode, 'unauthenticated');
+      expect(transport.requests, isEmpty);
+    });
+
+    test(
+      'secure session wrapper errors never become demo or transport calls',
+      () async {
+        final transport = _FakeTransport();
+
+        final response = await _source(
+          tokenProvider: SecureSessionChatSessionsTokenProvider(
+            adapter: SecureSessionToLocalSessionTokenAdapter(
+              tokenProvider: _ThrowingSecureSessionTokenProvider(),
+            ),
+          ),
+          transport: transport,
+        ).archiveOwnChatSession(sessionId: 'session-public');
+
+        expect(response.errorCode, 'unauthenticated');
+        expect(transport.requests, isEmpty);
+      },
+    );
+
     test(
       'create sends only selectable catalog id and approved headers',
       () async {
@@ -178,7 +237,7 @@ LocalHttpOwnChatSessionsDataSource _source({
   LocalOnlyHostPolicy policy = const LocalOnlyHostPolicy(
     localValidationEnabled: true,
   ),
-  _FakeTokenProvider? tokenProvider,
+  LocalSessionTokenProvider? tokenProvider,
   _FakeTransport? transport,
 }) {
   return LocalHttpOwnChatSessionsDataSource(
@@ -186,6 +245,16 @@ LocalHttpOwnChatSessionsDataSource _source({
     hostPolicy: policy,
     tokenProvider: tokenProvider ?? _FakeTokenProvider('local-jwt'),
     transport: transport ?? _FakeTransport(),
+  );
+}
+
+SecureSessionChatSessionsTokenProvider _secureSessionTokenProvider(
+  SecureSessionTokenResult result,
+) {
+  return SecureSessionChatSessionsTokenProvider(
+    adapter: SecureSessionToLocalSessionTokenAdapter(
+      tokenProvider: _FakeSecureSessionTokenProvider(result),
+    ),
   );
 }
 
@@ -200,6 +269,51 @@ class _FakeTokenProvider implements LocalSessionTokenProvider {
     calls++;
     return token;
   }
+}
+
+class _FakeSecureSessionTokenProvider implements SecureSessionTokenProvider {
+  const _FakeSecureSessionTokenProvider(this.result);
+
+  final SecureSessionTokenResult result;
+
+  @override
+  Future<SecureSessionAuthState> currentAuthState() async {
+    return const SecureSessionAuthState.unauthenticated();
+  }
+
+  @override
+  Future<SecureSessionTokenResult> getAccessToken() async {
+    return result;
+  }
+
+  @override
+  Future<SecureSessionTokenResult> refreshIfNeeded() async {
+    return result;
+  }
+
+  @override
+  Future<void> clearSession() async {}
+}
+
+class _ThrowingSecureSessionTokenProvider
+    implements SecureSessionTokenProvider {
+  @override
+  Future<SecureSessionAuthState> currentAuthState() async {
+    return const SecureSessionAuthState.unauthenticated();
+  }
+
+  @override
+  Future<SecureSessionTokenResult> getAccessToken() {
+    throw StateError('fake secure session failure');
+  }
+
+  @override
+  Future<SecureSessionTokenResult> refreshIfNeeded() {
+    throw StateError('fake secure session failure');
+  }
+
+  @override
+  Future<void> clearSession() async {}
 }
 
 class _FakeTransport implements OwnChatSessionsHttpTransport {
