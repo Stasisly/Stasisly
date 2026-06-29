@@ -12720,3 +12720,121 @@ Siguiente recomendado:
 ```text
 2B-AF6 — cierre skeleton de entornos fail-closed
 ```
+
+## Cierre 2B-AF6 — skeleton de entornos fail-closed
+
+### Estado para frontera backend
+
+2B-AF5 queda aprobado y cerrado formalmente. El skeleton de entornos
+fail-closed queda cerrado como base segura de frontera backend, sin catálogo
+remoto real, Edge Functions remotas reales, Supabase real, auth real, production
+ni datos reales.
+
+Con este cierre quedan cerrados dentro del frente AF:
+
+- 2B-AF — plan auth real/Supabase real seguro;
+- 2B-AF1 — plan entorno development/staging Supabase seguro;
+- 2B-AF2 — decisión matriz de entornos y configuración segura;
+- 2B-AF3 — cierre matriz de entornos y configuración segura;
+- 2B-AF4 — plan skeleton de entornos sin conectar Supabase;
+- 2B-AF5 — skeleton de entornos fail-closed sin conectar Supabase;
+- 2B-AF6 — cierre skeleton de entornos fail-closed.
+
+### Garantías de frontera backend
+
+Queda documentado que el skeleton:
+
+- distingue `local`, `demo`, `development`, `staging`, `backendReal` legacy y
+  `production`;
+- mantiene `backendReal` como modo histórico/transitorio, no como arquitectura
+  objetivo;
+- no autoriza remoto por el mero hecho de que `usesBackend` sea verdadero;
+- no registra `/conversations`;
+- no conecta `/chat/:id`;
+- no conecta `/orchestrator/chat`;
+- no reactiva chat heredado;
+- no reactiva `SupabaseChatDataSource`;
+- no expone `service_role` en cliente;
+- no introduce logs con tokens, `Authorization` o `refresh_token`;
+- no permite catálogo real remoto;
+- no permite Edge Functions remotas;
+- no permite writes directos desde Flutter;
+- no permite fallback demo desde error real.
+
+### Bloqueos vigentes
+
+Siguen bloqueados:
+
+- conexión real development;
+- conexión real staging;
+- Supabase real;
+- auth real;
+- backend remoto;
+- catálogo real;
+- production;
+- datos reales;
+- `service_role` en cliente;
+- production keys en development/staging;
+- `/conversations`;
+- routing productivo;
+- `/chat/:id` como ruta segura;
+- `/orchestrator/chat` como ruta segura;
+- chat heredado;
+- `SupabaseChatDataSource`;
+- writes directos desde Flutter;
+- fallback demo desde error real;
+- logs con tokens;
+- logs con `Authorization`;
+- logs con `refresh_token`.
+
+### Gates antes de backend real
+
+Antes de permitir cualquier backend remoto real sobre catálogo, sesiones,
+mensajes o auth se exige:
+
+- aprobación explícita;
+- paquete separado;
+- proyecto Supabase development/staging separado;
+- secretos fuera del repositorio;
+- variables por entorno definidas;
+- RLS revisada;
+- RPC revisadas;
+- Edge Functions revisadas;
+- tests de integración local;
+- tests de arquitectura;
+- tests no-secrets;
+- tests de aislamiento entre usuarios;
+- datos sintéticos;
+- startup fail-closed;
+- rollback a `backendBlocked`;
+- no production keys;
+- no `service_role` en Flutter;
+- no datos reales.
+
+### Riesgos residuales
+
+Riesgos que permanecen:
+
+- interpretar skeleton como conexión real;
+- mantener `backendReal` legacy demasiado tiempo;
+- registrar `/conversations` antes de auth/RLS;
+- conectar catálogo real en development/staging sin paquete separado;
+- desbloquear production por error;
+- introducir ids internos en contratos públicos;
+- reactivar chat heredado o `SupabaseChatDataSource`;
+- introducir datos reales antes de RLS, autorización y auditoría completas.
+
+### Siguiente paso propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AG — plan backend remoto seguro
+```
+
+Alternativas válidas:
+
+- plan de conexión controlada development/staging;
+- UX segura `chat_sessions -> messages`;
+- otro bloque técnico pendiente;
+- otra área de Stasisly.

@@ -16068,3 +16068,137 @@ Alternativa válida:
 ```text
 2B-AG — backend remoto seguro
 ```
+
+## Cierre 2B-AF6 — skeleton de entornos fail-closed
+
+### Estado
+
+2B-AF5 queda aprobado y cerrado formalmente. El skeleton de entornos
+fail-closed queda implementado como base de configuración segura, sin conexión
+real de Supabase, auth real, remoto, production ni datos reales.
+
+Con este cierre quedan documentados como cerrados dentro del frente AF:
+
+- 2B-AF — plan auth real/Supabase real seguro;
+- 2B-AF1 — plan entorno development/staging Supabase seguro;
+- 2B-AF2 — decisión matriz de entornos y configuración segura;
+- 2B-AF3 — cierre matriz de entornos y configuración segura;
+- 2B-AF4 — plan skeleton de entornos sin conectar Supabase;
+- 2B-AF5 — skeleton de entornos fail-closed sin conectar Supabase;
+- 2B-AF6 — cierre skeleton de entornos fail-closed.
+
+### Capacidades cerradas
+
+Quedan cerradas como capacidades implementadas o documentadas según su alcance:
+
+- modelo de entornos extendido;
+- parser explícito de `APP_MODE`;
+- alias controlados para modos oficiales y transicionales;
+- `backendReal` mantenido solo como legacy/transitional;
+- flags derivados de entorno;
+- validación de startup fail-closed;
+- tests de parsing;
+- tests de flags;
+- tests de startup validation;
+- tests no-secrets y arquitectura;
+- documentación ADR/tracker actualizada.
+
+### Garantías fail-closed
+
+Se mantienen las siguientes garantías:
+
+- Supabase real no conectado;
+- auth real no conectada;
+- remoto no conectado;
+- production no desbloqueado;
+- datos reales no habilitados;
+- `/conversations` no registrada;
+- `/chat/:id` no tocado como ruta segura;
+- `/orchestrator/chat` no tocado como ruta segura;
+- chat heredado no conectado;
+- `SupabaseChatDataSource` no reactivado;
+- `service_role` no añadido al cliente;
+- tokens no logueados;
+- `Authorization` no logueado;
+- `refresh_token` no logueado;
+- `usesBackend` no basta para conectar Supabase;
+- `validateForStartup` bloquea `development`, `staging`, `backendReal` y
+  `production` sin configuración y aprobación explícita;
+- `production` exige aprobación específica de producción.
+
+### Bloqueos vigentes
+
+Siguen bloqueados hasta paquete separado y aprobación explícita:
+
+- conexión real development;
+- conexión real staging;
+- Supabase real;
+- auth real;
+- backend remoto;
+- production;
+- datos reales;
+- `service_role` en cliente;
+- claves de production en development/staging;
+- registro de `/conversations`;
+- routing productivo;
+- `/chat/:id` como ruta segura;
+- `/orchestrator/chat` como ruta segura;
+- chat heredado;
+- `SupabaseChatDataSource`;
+- writes directos desde Flutter;
+- fallback demo desde error real;
+- logs con tokens;
+- logs con `Authorization`;
+- logs con `refresh_token`.
+
+### Gates antes de conexión real
+
+Antes de cualquier conexión real futura se exige como mínimo:
+
+- aprobación explícita del cliente;
+- paquete separado;
+- proyecto Supabase development/staging separado;
+- secretos fuera del repositorio;
+- variables por entorno definidas;
+- RLS revisada;
+- RPC revisadas;
+- Edge Functions revisadas;
+- tests de integración local;
+- tests de arquitectura;
+- tests no-secrets;
+- tests de aislamiento entre usuarios;
+- datos sintéticos;
+- startup fail-closed;
+- rollback a `backendBlocked`;
+- ausencia de production keys;
+- ausencia de `service_role` en Flutter;
+- ausencia de datos reales.
+
+### Riesgos residuales
+
+Riesgos que permanecen:
+
+- confundir skeleton con conexión real;
+- mantener `backendReal` legacy demasiado tiempo;
+- `APP_MODE` vacío cayendo a `demo` fuera de contexto local;
+- conectar development/staging sin paquete separado;
+- desbloquear production por error;
+- introducir `service_role` en cliente;
+- usar datos reales prematuros;
+- registrar `/conversations` antes de auth/RLS;
+- mezclar cambios preexistentes de worktree con cierres futuros.
+
+### Siguiente paso propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AG — plan backend remoto seguro
+```
+
+Alternativas válidas:
+
+- plan de conexión controlada development/staging;
+- UX segura `chat_sessions -> messages`;
+- otro bloque técnico pendiente;
+- otra área de Stasisly.
