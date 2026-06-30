@@ -16202,3 +16202,2911 @@ Alternativas válidas:
 - UX segura `chat_sessions -> messages`;
 - otro bloque técnico pendiente;
 - otra área de Stasisly.
+
+## Plan 2B-AG — backend remoto seguro
+
+### Estado
+
+2B-AF6 queda aprobado y cerrado formalmente. El frente AF completo queda
+cerrado con skeleton de entornos fail-closed implementado y documentado.
+
+2B-AG abre solo una fase de planificacion para backend remoto seguro. No
+conecta Supabase real, auth real, development remoto, staging remoto,
+production ni datos reales.
+
+### Backend local actual auditado
+
+Auditoria en solo lectura:
+
+- `supabase/migrations/00001_initial_schema.sql`: esquema inicial con `users`,
+  `memberships`, `user_memberships`, `specialists`, `branch_chiefs`,
+  `subcategory_chiefs`, `chat_sessions`, `messages`, `user_health_data`,
+  `calendar_events`, `reminders`, `orchestator_summaries`,
+  `chief_write_permissions` y `specialist_temporary_disables`.
+- `supabase/migrations/00002_enable_rls_public_users_deny_all.sql`: habilita
+  RLS en `public.users` sin politicas permisivas.
+- `supabase/migrations/00003_public_users_owner_profile_minimal.sql`: permite
+  perfil propio minimo solo para `id` y `display_name`, con grants por columna.
+- `supabase/migrations/00004_create_specialist_catalog_deny_all.sql`: crea
+  `specialist_catalog`, endurece `specialists`, habilita RLS y revoca acceso
+  cliente.
+- `supabase/migrations/00005_harden_chat_sessions_deny_all.sql`: endurece
+  `chat_sessions`, habilita RLS, deja cero politicas y cero privilegios
+  cliente.
+- `supabase/migrations/00006_harden_messages_deny_all.sql`: endurece
+  `messages`, habilita RLS, deja cero politicas y cero privilegios cliente.
+- `supabase/migrations/00007_create_send_user_message_core_rpc.sql`: crea
+  `public.send_user_message_core` transaccional, sin `SECURITY DEFINER`, con
+  `EXECUTE` revocado a `anon/authenticated` y concedido solo a `service_role`.
+- Edge Functions locales existentes: `list-selectable-specialists`,
+  `create-own-chat-session`, `list-own-chat-sessions`,
+  `archive-own-chat-session`, `send-user-message` y
+  `list-session-messages`.
+- Tests locales existentes: pgTAP/SQL, shell HTTP local, cleanup con cero
+  fixtures y tests Dart/arquitectura para contratos local-safe.
+
+Piezas aptas como base conceptual para remoto:
+
+- contratos estrictos de payload;
+- derivacion de owner desde JWT;
+- respuestas publicas sanitizadas;
+- RLS y grants restrictivos;
+- RPC transaccional para envio de mensaje;
+- tests de aislamiento, logs y cleanup;
+- frontera `SecureSessionTokenProvider -> datasource HTTP`.
+
+Piezas que no deben desplegarse tal cual:
+
+- scripts y README marcados como local/efimero;
+- harness con `--no-verify-jwt`;
+- fixtures `test_only`;
+- uso de `service_role` dentro de funciones sin decision remota especifica;
+- `supabase link`, `db push` o `functions deploy`;
+- chat heredado y `SupabaseChatDataSource`;
+- rutas productivas no aprobadas.
+
+### Arquitectura backend remoto objetivo
+
+Arquitectura objetivo futura:
+
+```text
+Flutter
+-> SecureSessionTokenProvider
+-> datasource HTTP
+-> Edge Function remota
+-> JWT validation
+-> RPC transaccional
+-> RLS
+-> tablas
+```
+
+Reglas obligatorias:
+
+- Flutter no escribe directo en tablas;
+- Flutter no usa `service_role`;
+- Flutter no envia `userId`;
+- Flutter no envia `ownerUserId`;
+- Flutter no decide ownership;
+- Edge Function obtiene usuario desde JWT validado;
+- backend valida ownership antes de operar;
+- RPC escribe transaccionalmente cuando haya cambios compuestos;
+- RLS protege lectura y escritura;
+- logs no contienen tokens, `Authorization`, `refresh_token`, PII sensible,
+  prompts internos ni IDs internos no aprobados;
+- errores reales no caen a demo.
+
+### Entornos remotos
+
+Relación inicial:
+
+- `development`: remoto futuro con datos sinteticos, nunca datos reales, y solo
+  tras aprobacion explicita;
+- `staging`: remoto futuro aislado con datos sinteticos o seed controlado, solo
+  tras development validado;
+- `production`: bloqueado;
+- `backendReal`: legacy/transitional, no arquitectura objetivo.
+
+### Supabase projects futuros
+
+Se requieren proyectos separados:
+
+- Supabase development;
+- Supabase staging;
+- Supabase production futuro.
+
+Reglas:
+
+- no mezclar claves entre entornos;
+- no usar production keys en development/staging;
+- no usar `service_role` en Flutter;
+- secretos fuera del repo;
+- anon key como configuracion publica controlada, no como secreto;
+- secrets de Edge Functions gestionados fuera del repo;
+- logs sin tokens;
+- ningun dato real en development/staging.
+
+### Estrategia de migraciones remotas
+
+Estrategia futura:
+
+1. mantener migraciones versionadas;
+2. aplicar primero en development remoto;
+3. validar con datos sinteticos;
+4. verificar RLS, grants, RPC y ownership;
+5. promover a staging solo tras aprobacion;
+6. validar aislamiento usuario/usuario y logs;
+7. mantener production bloqueado hasta gates;
+8. documentar rollback antes de cada despliegue.
+
+Prohibido en 2B-AG:
+
+- `supabase link`;
+- `supabase db push` remoto;
+- `supabase functions deploy`;
+- deploy a production;
+- cambios de migraciones.
+
+### Estrategia Edge Functions remotas
+
+Funciones relevantes para revision futura:
+
+- `create-own-chat-session`;
+- `list-own-chat-sessions`;
+- `archive-own-chat-session`;
+- `send-user-message`;
+- `list-session-messages`.
+
+Estrategia:
+
+- deployment primero en development;
+- verificacion JWT real, sin `--no-verify-jwt` como contrato remoto;
+- validacion estricta de payload;
+- no aceptar `userId`, `ownerUserId`, `specialist_id`, `role`, `metadata` ni
+  campos internos desde UI;
+- owner derivado desde JWT;
+- writes compuestos mediante RPC;
+- errores explicitos y opacos ante recursos ajenos;
+- sin fallback demo;
+- logs minimizados;
+- rollback por funcion documentado.
+
+### Gates antes de development remoto
+
+Gates obligatorios:
+
+- aprobacion explicita;
+- paquete separado;
+- Supabase development creado;
+- secrets fuera del repo;
+- environment `development` configurado fail-closed;
+- auth real o token strategy aprobada;
+- migraciones revisadas;
+- RLS revisada;
+- RPC revisada;
+- Edge Functions revisadas;
+- datos sinteticos;
+- tests de integracion local pasados;
+- tests de arquitectura pasados;
+- rollback definido.
+
+### Gates antes de staging remoto
+
+Gates obligatorios:
+
+- development remoto validado;
+- aprobacion explicita;
+- paquete separado;
+- Supabase staging separado;
+- secrets staging fuera del repo;
+- migraciones aplicadas controladamente;
+- Edge Functions staging desplegadas;
+- RLS/RPC verificadas;
+- datos sinteticos o seed controlado;
+- tests de aislamiento entre usuarios;
+- logs minimizados;
+- rollback definido.
+
+### Gates antes de production
+
+Production sigue bloqueado. Gates futuros minimos:
+
+- staging validado;
+- auditoria AppSec;
+- RLS/ownership auditado;
+- privacidad, retencion y borrado definidos;
+- observabilidad segura;
+- backups;
+- rollback;
+- datos reales autorizados;
+- ADR especifico de datos sensibles, salud o memoria si aplica;
+- aprobacion explicita.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- `supabase link` accidental contra remoto;
+- `supabase db push` remoto accidental;
+- `supabase functions deploy` accidental;
+- production keys en development/staging;
+- `service_role` en cliente;
+- datos reales en development/staging;
+- RLS incompleta sobre tablas sensibles;
+- Edge Function aceptando `userId`/ownership desde UI.
+
+Altos:
+
+- ownership decidido por UI;
+- logs con tokens o PII sensible;
+- fallback demo desde error real;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- RPC con grants cliente incorrectos;
+- funciones remotas usando `--no-verify-jwt` como supuesto operativo.
+
+Medios:
+
+- `backendReal` legacy mantenido demasiado tiempo;
+- seeds de staging persistentes sin cleanup;
+- errores publicos filtrando existencia de recursos ajenos;
+- cursor o paginacion duplicando/filtrando sesiones;
+- contratos publicos exponiendo IDs internos.
+
+Bajos:
+
+- nombres de entorno ambiguos;
+- documentacion duplicada;
+- copy de errores poco claro.
+
+### Recomendacion
+
+No conectar backend remoto todavia. Cerrar AG como plan y preparar despues una
+decision especifica de development/staging remoto con estrategia de despliegue,
+secrets, rollback y pruebas.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AG1 — decision backend remoto development/staging y estrategia de despliegue
+```
+
+Alternativas validas:
+
+- `2B-AG1 — plan conexion development remoto con datos sinteticos`;
+- `2B-AF7 — plan conexion development Supabase sintetica`;
+- `2B-AE4 — plan /conversations backendBlocked visual`.
+
+No implementar todavia.
+
+## Resolución 2B-AG11 — evidencia externa DEV LINK sin secretos
+
+### Estado
+
+2B-AG10 queda aprobado y cerrado formalmente. AG11 revisa la evidencia externa
+necesaria para DEV LINK sin ejecutar remoto, sin leer ni pegar secrets, sin
+conectar Supabase real y sin modificar código, Supabase, migraciones, Edge
+Functions, CI ni rutas.
+
+Readiness final:
+
+```text
+READY WITH BLOCKERS
+```
+
+No se ha aportado evidencia externa suficiente para pasar a `READY FOR DEV
+LINK`. El bloqueo sigue siendo externo/operativo.
+
+### Proyecto development
+
+| Elemento | Estado | Decisión |
+| --- | --- | --- |
+| Proyecto Supabase development existe | Pendiente | Bloqueante |
+| Nombre indica claramente dev/development | Pendiente | Bloqueante |
+| Organización/cuenta correcta | Pendiente | Bloqueante |
+| Región documentada | Pendiente | Bloqueante |
+| Owner/responsable identificado por rol | Pendiente | Bloqueante |
+| Project ref development verificado fuera del repo | Pendiente | Bloqueante |
+| Project ref development no pegado en docs | Verificado | Cumplido |
+| Project ref development distinto de production | Pendiente | Bloqueante |
+| Project ref development distinto de staging | Pendiente si staging existe | Condicional |
+
+### Production
+
+Clasificación:
+
+```text
+pendiente bloqueante
+```
+
+No se ha aportado evidencia externa de que production no exista/no se use o de
+que production exista y sea claramente distinto de development.
+
+### Staging
+
+Clasificación:
+
+```text
+pendiente no bloqueante si no existe; pendiente bloqueante si existe y no se
+verifica distinto
+```
+
+No se ha aportado evidencia externa de existencia o inexistencia de staging.
+
+### Secrets development fuera del repo
+
+| Elemento | Estado | Decisión |
+| --- | --- | --- |
+| `SUPABASE_URL` development | Pendiente fuera del repo | Bloqueante |
+| `SUPABASE_ANON_KEY` development | Pendiente fuera del repo | Bloqueante |
+| `PROJECT_REF` development | Pendiente fuera del repo | Bloqueante |
+| Edge Function secrets development | Pendiente | No bloqueante para link si no se despliegan funciones |
+| JWT config development | Pendiente | No bloqueante para link si no se prueba auth real |
+| Rollback env vars | Pendiente | No bloqueante para link si no se ejecuta push/deploy |
+
+Regla mantenida: no registrar valores reales en docs, prompts, tracker ni
+capturas.
+
+### Rollback remoto
+
+Clasificación:
+
+```text
+completo como runbook documental; no probado contra remoto
+```
+
+Sigue cubriendo detección de link incorrecto, revisión futura de
+`supabase/.temp/project-ref`, abortar antes de migraciones/functions, limpieza
+local, reversión de variables, rotación de secrets si hubiera exposición,
+vuelta a `backendBlocked`, confirmación local/demo, production intacto y
+registro de incidente.
+
+### Checks locales mínimos AG11
+
+Resultados:
+
+- `git status --short`: solo ADR-006, ADR-007 y tracker modificados;
+- `git diff --check`: sin salida;
+- diff crítico de código/Supabase/test/rutas: sin salida;
+- `.env` existe localmente, está vacío, ignorado y no versionado;
+- `supabase/.temp` contiene solo `cli-latest`;
+- no existe `supabase/.temp/project-ref`;
+- no existe `supabase/.temp/pooler-url`;
+- no existe `supabase/.temp/access-token`.
+
+### Checks no-secrets/no-remoto
+
+Resultado AG11:
+
+- no se detectan secrets reales versionados;
+- los hits de `service_role`, `SUPABASE_SERVICE_ROLE_KEY`, `Authorization`,
+  `/functions/v1/`, `access_token`, `refresh_token` y URLs de ejemplo se
+  clasifican como falsos positivos esperados en tests, harness local, README,
+  Edge Functions locales, contratos de bloqueo o ejemplos;
+- `SupabaseChatDataSource` sigue existiendo únicamente en chat heredado
+  bloqueado;
+- no hay evidencia de link remoto en `supabase/.temp`.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- project ref development incorrecto o no verificado;
+- production ref confundido con development;
+- staging ref confundido con development si staging existe;
+- secrets reales pegados en docs/prompts/screenshots;
+- link ejecutado accidentalmente.
+
+Altos:
+
+- `service_role` en Flutter;
+- production keys en development;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- rollback remoto no probado.
+
+Medios:
+
+- `.env` local ignorado mal interpretado;
+- falsos positivos de tests/harness confundidos con leaks reales;
+- worktree documental acumulado.
+
+Bajos:
+
+- duplicidad documental;
+- nombres largos de paquetes.
+
+### Decisión AG11
+
+AG11 no desbloquea DEV LINK real.
+
+```text
+READY WITH BLOCKERS
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG12 — resolver bloqueantes externos restantes DEV LINK
+```
+
+AG12 debe aportar evidencia externa real sin secretos. Si esa evidencia se
+completa, podrá proponerse `READY FOR DEV LINK`; si no, debe mantenerse
+`READY WITH BLOCKERS`.
+
+## Resolución 2B-AG12 — evidencia externa real DEV LINK sin secretos
+
+### Estado
+
+2B-AG11 queda aprobado y cerrado formalmente. AG12 revisa si existe evidencia
+externa real sin secretos suficiente para desbloquear DEV LINK, sin ejecutar
+remoto, sin leer ni registrar secrets reales, sin conectar Supabase real y sin
+modificar código, Supabase, migraciones, Edge Functions, CI ni rutas.
+
+Readiness final:
+
+```text
+READY WITH BLOCKERS
+```
+
+No se ha aportado evidencia externa real suficiente para pasar a `READY FOR DEV
+LINK`. No hay bloqueo local/técnico nuevo; el bloqueo sigue siendo
+externo/operativo.
+
+### Cierre formal de AG11
+
+Queda registrado:
+
+- 2B-AG11 cerrado formalmente;
+- readiness previa `READY WITH BLOCKERS` confirmada;
+- sin `supabase link`;
+- sin `supabase db push`;
+- sin `supabase migration up` remoto;
+- sin `supabase functions deploy`;
+- sin `supabase secrets set`;
+- sin backend remoto, Supabase real, auth real, production ni datos reales;
+- sin cambios de código, migraciones, Edge Functions, CI ni rutas;
+- `/conversations`, `/chat/:id`, `/orchestrator/chat`, chat heredado y
+  `SupabaseChatDataSource` siguen bloqueados.
+
+### Proyecto development
+
+| Elemento | Estado | Decisión |
+| --- | --- | --- |
+| Proyecto Supabase development existe | Pendiente | Bloqueante |
+| Nombre indica claramente dev/development | Pendiente | Bloqueante |
+| Organización/cuenta correcta | Pendiente | Bloqueante |
+| Región documentada | Pendiente | Bloqueante |
+| Owner/responsable identificado por rol | Pendiente | Bloqueante |
+| Project ref development verificado fuera del repo | Pendiente | Bloqueante |
+| Project ref development no pegado en docs | Verificado | Cumplido |
+| Project ref development distinto de production | Pendiente | Bloqueante |
+| Project ref development distinto de staging | Pendiente si staging existe | Condicional |
+
+### Production
+
+Clasificación:
+
+```text
+pendiente bloqueante
+```
+
+No se ha aportado evidencia externa real de que production no exista/no se use
+o de que production exista y sea claramente distinto de development.
+
+### Staging
+
+Clasificación:
+
+```text
+pendiente no bloqueante si no existe; pendiente bloqueante si existe y no se
+verifica distinto
+```
+
+No se ha aportado evidencia externa real de existencia o inexistencia de
+staging.
+
+### Secrets development fuera del repo
+
+| Elemento | Estado | Decisión |
+| --- | --- | --- |
+| `SUPABASE_URL` development | Pendiente fuera del repo | Bloqueante |
+| `SUPABASE_ANON_KEY` development | Pendiente fuera del repo | Bloqueante |
+| `PROJECT_REF` development | Pendiente fuera del repo | Bloqueante |
+| Edge Function secrets development | Pendiente | No bloqueante para link si no se despliegan funciones |
+| JWT config development | Pendiente | No bloqueante para link si no se prueba auth real |
+| Rollback env vars | Pendiente | No bloqueante para link si no se ejecuta push/deploy |
+
+No se han registrado valores reales en documentación, prompts, tracker ni
+capturas.
+
+### Rollback remoto
+
+Clasificación:
+
+```text
+completo como runbook documental; no probado contra remoto
+```
+
+Sigue cubriendo detección de link incorrecto, revisión futura de
+`supabase/.temp/project-ref`, abortar antes de migraciones/functions, limpieza
+local, reversión de variables, rotación de secrets si hubiera exposición,
+vuelta a `backendBlocked`, confirmación local/demo, production intacto y
+registro de incidente.
+
+### Checks locales mínimos AG12
+
+Resultados:
+
+- `git status --short`: solo ADR-006, ADR-007 y tracker modificados;
+- `git diff --check`: sin salida;
+- diff crítico de código/Supabase/test/rutas: sin salida;
+- `.env` existe localmente, está vacío, ignorado y no versionado;
+- `supabase/.temp` contiene solo `cli-latest`;
+- no existe `supabase/.temp/project-ref`;
+- no existe `supabase/.temp/pooler-url`;
+- no existe `supabase/.temp/access-token`.
+
+### Checks no-secrets/no-remoto
+
+Resultado AG12:
+
+- no se detectan secrets reales versionados;
+- los hits de `service_role`, `SUPABASE_SERVICE_ROLE_KEY`, `Authorization`,
+  `/functions/v1/`, `access_token`, `refresh_token` y URLs de ejemplo se
+  clasifican como falsos positivos esperados en tests, harness local, README,
+  Edge Functions locales, contratos de bloqueo o ejemplos;
+- `SupabaseChatDataSource` sigue existiendo únicamente en chat heredado
+  bloqueado;
+- no hay evidencia de link remoto en `supabase/.temp`.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- project ref development incorrecto o no verificado;
+- production ref confundido con development;
+- staging ref confundido con development si staging existe;
+- secrets reales pegados en docs/prompts/screenshots;
+- link ejecutado accidentalmente.
+
+Altos:
+
+- `service_role` en Flutter;
+- production keys en development;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- rollback remoto no probado.
+
+Medios:
+
+- `.env` local ignorado mal interpretado;
+- falsos positivos de tests/harness confundidos con leaks reales;
+- worktree documental acumulado.
+
+Bajos:
+
+- duplicidad documental;
+- nombres largos de paquetes.
+
+### Decisión AG12
+
+AG12 no desbloquea DEV LINK real.
+
+```text
+READY WITH BLOCKERS
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG13 — resolver bloqueantes externos restantes DEV LINK
+```
+
+AG13 debe aportar evidencia externa real sin secretos. Si esa evidencia se
+completa, podrá proponerse `READY FOR DEV LINK` y preparar un paquete posterior
+para ejecutar `supabase link` controlado; si no, debe mantenerse `READY WITH
+BLOCKERS`.
+
+## Resolución 2B-AG10 — bloqueantes externos DEV LINK
+
+### Estado
+
+2B-AG9 queda aprobado y cerrado formalmente. AG10 revisa los bloqueantes
+externos restantes para DEV LINK sin ejecutar remoto, sin leer secrets y sin
+modificar código, Supabase, migraciones, Edge Functions, CI ni rutas.
+
+Readiness final:
+
+```text
+READY WITH BLOCKERS
+```
+
+El bloqueo actual no es local/técnico: AG8 conserva el preflight local aprobado
+y AG10 mantiene los checks locales mínimos limpios. El bloqueo sigue siendo
+externo/operativo porque no se ha aportado evidencia verificable fuera del repo
+de project refs, separación de entornos y secrets development.
+
+### Cierre formal de AG9
+
+Queda registrado:
+
+- 2B-AG9 cerrado formalmente;
+- readiness previa `READY WITH BLOCKERS` confirmada;
+- sin `supabase link`;
+- sin `supabase db push`;
+- sin `supabase migration up` remoto;
+- sin `supabase functions deploy`;
+- sin `supabase secrets set`;
+- sin backend remoto, Supabase real, auth real, production ni datos reales;
+- sin cambios de código, migraciones, Edge Functions, CI ni rutas;
+- `/conversations`, `/chat/:id`, `/orchestrator/chat`, chat heredado y
+  `SupabaseChatDataSource` siguen bloqueados.
+
+### Proyecto development
+
+Estado AG10:
+
+| Elemento | Estado | Decisión |
+| --- | --- | --- |
+| Proyecto Supabase development existe | Pendiente | Bloqueante |
+| Nombre claro dev/development | Pendiente | Bloqueante |
+| Organización/cuenta correcta | Pendiente | Bloqueante |
+| Región documentada | Pendiente | Bloqueante |
+| Owner/responsable identificado por rol | Pendiente | Bloqueante |
+| Project ref development verificado fuera del repo | Pendiente | Bloqueante |
+| Project ref development no pegado en docs | Verificado | Cumplido |
+| Development distinto de production/staging | Pendiente | Bloqueante |
+
+No se debe pegar el project ref real en documentación ni en tracker. Evidencia
+aceptable futura: “verificado fuera del repo, no pegado”.
+
+### Separación production
+
+Estado AG10:
+
+```text
+pendiente bloqueante
+```
+
+Falta confirmar una de estas dos opciones:
+
+- production no existe/no se usa todavía; o
+- production existe, es distinto de development y no recibirá migraciones,
+  funciones, datos ni keys de este flujo.
+
+Hasta que esa separación quede verificada fuera del repo, DEV LINK no se
+autoriza.
+
+### Separación staging
+
+Estado AG10:
+
+```text
+pendiente no bloqueante si staging no existe; bloqueante si existe y no se
+verifica distinto
+```
+
+Si staging existe, debe quedar confirmado fuera del repo que su ref es distinto
+de development y production, y que no se toca en DEV LINK. Si staging no existe,
+no bloquea DEV LINK siempre que development quede separado de production.
+
+### Secrets development fuera del repo
+
+Estado AG10:
+
+| Elemento | Estado | Decisión |
+| --- | --- | --- |
+| `SUPABASE_URL` development | Pendiente fuera del repo | Bloqueante |
+| `SUPABASE_ANON_KEY` development | Pendiente fuera del repo | Bloqueante |
+| `PROJECT_REF` development | Pendiente fuera del repo | Bloqueante |
+| Edge Function secrets development | Pendiente | No bloqueante para link si no se despliegan funciones |
+| JWT config development | Pendiente | No bloqueante para link si no se prueba auth real |
+| Rollback env vars | Pendiente | No bloqueante para link si el link se aprueba sin push/deploy |
+
+Reglas confirmadas:
+
+- no secrets en docs;
+- no secrets en tracker;
+- no service role en Flutter;
+- no production keys en development;
+- no tokens en logs;
+- no `Authorization` real en logs.
+
+### Rollback remoto
+
+Runbook documental clasificado como:
+
+```text
+completo como procedimiento; no probado contra remoto
+```
+
+Incluye detectar link incorrecto, revisar `supabase/.temp/project-ref` tras
+link futuro, abortar antes de migraciones/functions, limpiar estado local,
+revertir variables, rotar secrets si se exponen, volver a `backendBlocked`,
+confirmar demo/local funcional, confirmar production intacto y registrar
+incidente.
+
+### Checks locales mínimos AG10
+
+Resultados:
+
+- `git status --short`: solo ADR-006, ADR-007 y tracker modificados;
+- `git diff --check`: sin salida;
+- diff crítico de código/Supabase/test/rutas: sin salida;
+- `.env` existe localmente, está vacío, ignorado y no versionado;
+- `supabase/.temp` contiene solo `cli-latest`;
+- no existe `supabase/.temp/project-ref`;
+- no existe `supabase/.temp/pooler-url`;
+- no existe `supabase/.temp/access-token`.
+
+### Checks no-secrets/no-remoto
+
+Resultado AG10:
+
+- no se detectan secrets reales versionados;
+- los hits de `service_role`, `Authorization`, `/functions/v1/` y tokens son
+  falsos positivos esperados en tests, harness local, README, Edge Functions
+  locales y contratos de bloqueo;
+- `SupabaseChatDataSource` sigue existiendo solo en chat heredado ya bloqueado;
+- los datasources `chat_sessions` y `chat_messages` locales usan rutas
+  `/functions/v1/` como harness local-safe, no como remoto productivo;
+- `lib/core/config/env.dart` mantiene ejemplo documental de URL Supabase, no key
+  real.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- project ref development incorrecto o no verificado;
+- production ref confundido con development;
+- staging ref confundido con development si staging existe;
+- secrets reales pegados en docs/prompts/screenshots;
+- link ejecutado accidentalmente.
+
+Altos:
+
+- `service_role` en Flutter;
+- production keys en development;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- rollback remoto no probado.
+
+Medios:
+
+- `.env` local ignorado mal interpretado;
+- falsos positivos de tests/harness confundidos con leaks reales;
+- worktree documental acumulado.
+
+Bajos:
+
+- duplicidad documental;
+- nombres largos de paquetes;
+- infos no fatales conocidas.
+
+### Decisión AG10
+
+AG10 no desbloquea DEV LINK real.
+
+```text
+READY WITH BLOCKERS
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG11 — resolver bloqueantes externos restantes DEV LINK
+```
+
+AG11 debe aportar evidencia externa sin secretos de project ref development,
+separación production/staging y secrets development fuera del repo. Solo si esa
+evidencia queda completa podrá proponerse `READY FOR DEV LINK` y preparar un
+paquete posterior para ejecutar `supabase link` controlado.
+
+## Evidence pack 2B-AG2 — backend remoto development
+
+### Estado
+
+2B-AG1 queda aprobado y cerrado formalmente. La estrategia futura decidida es:
+
+```text
+development remoto -> staging remoto -> production bloqueado
+```
+
+AG2 prepara evidencia local antes de cualquier conexion remota a Supabase
+development. No se ejecuta `supabase link`, `supabase db push`,
+`supabase migration up` remoto, `supabase functions deploy` ni
+`supabase secrets set`.
+
+### Estado Git/worktree
+
+Evidencia local:
+
+- `git status --short`: solo muestra cambios documentales en
+  `docs/SESSION_TRACKER.md`, `ADR-006` y `ADR-007`.
+- `git diff --check`: limpio.
+- `git diff --name-only`: solo tres documentos.
+- `git diff --name-only -- lib/core/config lib/core/auth/session
+  lib/features/auth lib/features/chat lib/features/chat_sessions
+  lib/features/chat_messages lib/app.dart lib/main.dart test pubspec.yaml
+  supabase`: vacio.
+
+Clasificacion:
+
+- cambios del frente actual: ADR-006, ADR-007 y tracker;
+- cambios preexistentes fuera del frente: ninguno detectado en esta revision;
+- cambios prohibidos: ninguno detectado.
+
+### Migraciones locales auditadas
+
+Migraciones existentes:
+
+- `00001_initial_schema.sql`: crea tablas base `users`, membresias,
+  especialistas, jefaturas, `chat_sessions`, `messages`, datos de salud,
+  calendario, recordatorios, summaries y permisos. Riesgo antes de remoto:
+  contiene tablas sensibles que no forman parte del primer despliegue remoto y
+  requieren RLS/gates especificos.
+- `00002_enable_rls_public_users_deny_all.sql`: habilita RLS en `public.users`
+  sin politicas; base deny-by-default.
+- `00003_public_users_owner_profile_minimal.sql`: crea politicas owner
+  minimas para `id` y `display_name`, con grants por columna. Riesgo:
+  confirmar comportamiento PostgREST remoto antes de abrir development.
+- `00004_create_specialist_catalog_deny_all.sql`: crea catalogo sanitizado y
+  cierra `specialists`/`specialist_catalog` a cliente.
+- `00005_harden_chat_sessions_deny_all.sql`: endurece `chat_sessions`, activa
+  RLS, revoca privilegios cliente, añade constraints e indice owner listing.
+- `00006_harden_messages_deny_all.sql`: endurece `messages`, activa RLS,
+  revoca privilegios cliente, añade constraints e indice de lectura por sesion.
+- `00007_create_send_user_message_core_rpc.sql`: crea RPC transaccional
+  `send_user_message_core`, sin `SECURITY DEFINER`, con `EXECUTE` revocado a
+  `anon/authenticated` y concedido solo a `service_role`.
+
+Dependencias de orden:
+
+- `00001` define tablas base.
+- `00002`/`00003` dependen de `public.users`.
+- `00004` depende de `public.specialists`.
+- `00005` depende de `users` y `specialists`.
+- `00006` depende de `chat_sessions`.
+- `00007` depende de `messages` y `chat_sessions`.
+
+### RLS/grants auditados
+
+Evidencia documental/local:
+
+- `users`: RLS activo; owner profile minimo; grants solo para
+  `SELECT(id, display_name)` y `UPDATE(display_name)`.
+- `specialists` y `specialist_catalog`: RLS activo, sin politicas permisivas y
+  privilegios cliente revocados.
+- `chat_sessions`: RLS activo, `NO FORCE ROW LEVEL SECURITY`, cero policies y
+  cero privilegios cliente.
+- `messages`: RLS activo, `NO FORCE ROW LEVEL SECURITY`, cero policies y cero
+  privilegios cliente.
+- RPC `send_user_message_core`: `anon/authenticated` no tienen `EXECUTE`;
+  `service_role` solo para backend controlado.
+
+Huecos antes de remoto:
+
+- revalidar SQL/pgTAP en entorno local inmediatamente antes de link/deploy;
+- decidir estrategia segura de `service_role` dentro de Edge Functions remotas;
+- confirmar que tablas sensibles de `00001` no quedan accesibles por accidente.
+
+### RPC auditada
+
+RPC: `public.send_user_message_core(uuid, uuid, text)`.
+
+Entrada:
+
+- `p_session_id`;
+- `p_owner_user_id`;
+- `p_content`.
+
+Validaciones:
+
+- session id no nulo;
+- owner user id no nulo;
+- contenido no nulo, trim no vacio y maximo 4000 caracteres;
+- sesion pertenece al owner;
+- sesion existe;
+- sesion no archivada;
+- sesion esta activa.
+
+Transaccionalidad:
+
+- hace `SELECT ... FOR UPDATE`;
+- inserta mensaje `role = user`;
+- actualiza `message_count` y `last_message_at`;
+- devuelve resultado confirmado;
+- falla con `write_unconfirmed` si la actualizacion no queda confirmada.
+
+Riesgos antes de remoto:
+
+- usa `p_owner_user_id`; en remoto solo debe venir de Edge Function tras JWT,
+  nunca desde UI;
+- requiere que cliente no pueda invocarla directamente;
+- exige tests de ownership y grants en development antes de staging.
+
+### Edge Functions locales auditadas
+
+Funciones revisadas en solo lectura:
+
+- `create-own-chat-session`: payload permitido
+  `{ selectableSpecialistId }`; rechaza campos internos; deriva owner desde JWT
+  local; crea siempre sesion nueva; respuesta sin `user_id` ni `specialist_id`.
+- `list-own-chat-sessions`: permite filtros publicos controlados; deriva owner
+  desde JWT; respuesta sanitizada; catalogo roto falla cerrado.
+- `archive-own-chat-session`: payload `{ sessionId }`; deriva owner desde JWT;
+  actualiza solo `status`; error opaco para inexistente/ajena/archivada.
+- `send-user-message`: payload `{ sessionId, content }`; deriva owner desde
+  JWT; llama solo a RPC; no hace writes directos.
+- `list-session-messages`: query `sessionId`; deriva owner desde JWT; solo
+  lectura; permite sesion propia activa o archivada; no modifica counters.
+
+Riesgos antes de deploy:
+
+- hoy son funciones locales/efimeras;
+- usan `--no-verify-jwt` en harness local, no valido como contrato remoto;
+- usan `SUPABASE_SERVICE_ROLE_KEY` en runtime local; remoto exige decision y
+  gestion de secrets separada;
+- requieren auditoria AppSec antes de development remoto.
+
+### Datasources Flutter seguros auditados
+
+Piezas seguras auditadas:
+
+- `lib/core/auth/session/`: contrato `SecureSessionTokenProvider` y providers
+  overrideables; estados no exitosos no exponen token.
+- `lib/features/chat_sessions/data/datasources/local_http_own_chat_sessions_datasource.dart`:
+  HTTP local hacia Edge Functions; `Authorization` se construye en datasource;
+  payloads usan `selectableSpecialistId` o `sessionId`, no `userId`.
+- `lib/features/chat_messages/data/datasources/local_http_own_chat_messages_datasource.dart`:
+  HTTP local hacia `send-user-message` y `list-session-messages`; UI envia
+  `content` y `sessionId`, no ownership ni role.
+- `LocalOnlyHostPolicy`: bloquea hosts remotos/HTTPS/missing port en modo
+  local-safe.
+
+Observaciones:
+
+- UI no ve tokens directamente;
+- providers son overrideables;
+- errores no se convierten en demo;
+- no dependen del chat heredado para el flujo local-safe.
+
+### Piezas heredadas bloqueadas
+
+Piezas heredadas detectadas y bloqueadas para flujo seguro:
+
+- `lib/features/chat/data/datasources/supabase_chat_datasource.dart`;
+- `lib/features/chat/presentation/viewmodels/chat_providers.dart`;
+- `ChatController`;
+- `ChatPage`;
+- `AgentChatWrapper`;
+- `lib/features/auth/presentation/viewmodels/auth_providers.dart`;
+- `Supabase.instance.client` en auth/chat heredado.
+
+Estas piezas no forman parte del flujo seguro remoto futuro hasta refactor o
+retiro explicito.
+
+### Tests locales ejecutados
+
+Ejecutado:
+
+- `flutter analyze --no-fatal-infos`: pasa con 43 infos no fatales conocidas.
+- `flutter test test/core/config test/architecture`: pasa.
+- `flutter test test/features/chat_sessions test/features/chat_messages`:
+  pasa, 202 tests.
+- `flutter test`: pasa, 367 tests y 2 skips esperados.
+
+Skips esperados:
+
+- `two_b_iv_h_local_http_chat_sessions_integration_test`;
+- `two_b_v_g_local_http_chat_messages_integration_test`.
+
+No ejecutado en AG2:
+
+- harness SQL/pgTAP Supabase local;
+- harness HTTP shell de Supabase local.
+
+Motivo documental: AG2 no abre remoto ni despliegue; estos harness deben
+revalidarse inmediatamente antes de cualquier link/deploy futuro.
+
+### Checks no-secrets/no-remoto
+
+Ejecutado:
+
+- busqueda de `.env`, `.env.*`, `*secret*`, `*token*` hasta profundidad 3:
+  sin resultados.
+- busqueda de URLs Supabase reales, service role asignado, JWT-like,
+  `sbp_`, `supabase link`, `supabase db push` y
+  `supabase functions deploy`.
+
+Resultados:
+
+- no se detectan archivos `.env` versionados;
+- no se detectan tokens reales ni project refs reales;
+- coincidencias de `https://example.supabase.co` y
+  `https://project.supabase.co` aparecen en tests/placeholders;
+- `SUPABASE_SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY` aparece solo en scripts locales
+  de harness;
+- `service_role` aparece en migraciones/tests/docs y funciones locales, no en
+  Flutter como secreto;
+- `SupabaseChatDataSource` sigue presente solo en chat heredado y tests/docs de
+  bloqueo.
+
+### Checklist variables/secrets futuro
+
+Pendiente para paquete futuro:
+
+- `SUPABASE_URL` development;
+- `SUPABASE_ANON_KEY` development;
+- Edge Function secrets development;
+- JWT validation config;
+- project ref development;
+- rollback env vars.
+
+Reglas:
+
+- secrets fuera del repo;
+- no `service_role` en Flutter;
+- no production keys;
+- no logs con tokens;
+- anon key solo como configuracion publica controlada.
+
+### Rollback checklist
+
+Rollback futuro minimo:
+
+- desvincular proyecto equivocado si aplica;
+- revertir env vars;
+- rollback de migraciones si procede;
+- rollback de Edge Functions;
+- volver a `backendBlocked`;
+- mantener local/demo funcional;
+- no tocar production;
+- registrar evidencia antes/despues.
+
+### Readiness development remoto
+
+Clasificacion:
+
+```text
+READY WITH BLOCKERS
+```
+
+Motivo:
+
+- Flutter analyze y tests locales Dart pasan;
+- arquitectura local-safe esta protegida;
+- no hay cambios de codigo/Supabase en AG2;
+- no se detectan secrets reales versionados;
+- quedan pendientes de revalidacion los harness SQL/pgTAP y HTTP locales de
+  Supabase antes de cualquier link/deploy;
+- hay piezas heredadas con Supabase directo que siguen bloqueadas y no deben
+  mezclarse con remoto seguro.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- ejecutar `supabase link` contra proyecto equivocado;
+- ejecutar `db push` contra production;
+- secrets reales en repo;
+- `service_role` en Flutter;
+- datos reales en development/staging;
+- reactivar `SupabaseChatDataSource`.
+
+Altos:
+
+- RLS incompleta en tablas sensibles de `00001`;
+- RPC invocada directamente por cliente;
+- Edge Function aceptando `userId` desde UI;
+- logs con tokens;
+- fallback demo desde error real;
+- tests SQL/HTTP locales no reejecutados justo antes de remoto.
+
+Medios:
+
+- worktree documental mezclando AG, AG1 y AG2 si no se commitea agrupado;
+- seeds sinteticos persistentes sin cleanup;
+- production mencionada en docs/tests confundida con uso real;
+- chat heredado visible en codigo confundido con flujo seguro.
+
+Bajos:
+
+- warnings informativos de analyzer;
+- duplicidad documental;
+- nombres legacy como `backendReal`.
+
+### Recomendacion final
+
+No conectar remoto todavia. Cerrar AG2 como evidence pack local y preparar
+AG3 solo como plan de conexion development remoto con datos sinteticos.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AG3 — plan conexion development remoto con datos sinteticos
+```
+
+Alternativa si se quiere cerrar los blockers antes:
+
+```text
+2B-AG3 — resolver bloqueantes evidence pack backend remoto development
+```
+
+No implementar remoto todavia.
+
+## Plan 2B-AG3 — conexión development remoto con datos sintéticos
+
+### Estado
+
+2B-AG2 queda aprobado y cerrado formalmente. El evidence pack local queda
+preparado con readiness:
+
+```text
+READY WITH BLOCKERS
+```
+
+Evidencia aprobada:
+
+- `git status --short`: solo docs modificados;
+- `git diff --check`: limpio;
+- diff en codigo/Supabase/tests/rutas solicitadas: vacio;
+- `flutter analyze --no-fatal-infos`: pasa con 43 infos no fatales;
+- `flutter test test/core/config test/architecture`: pasa;
+- `flutter test test/features/chat_sessions test/features/chat_messages`:
+  pasa, 202 tests;
+- `flutter test`: pasa, 367 tests y 2 skips esperados.
+
+Bloqueos vigentes:
+
+- revalidar SQL/pgTAP local antes de cualquier link/deploy;
+- revalidar HTTP shell local antes de cualquier link/deploy;
+- definir secrets remotos development;
+- mantener chat heredado fuera del flujo remoto;
+- mantener `SupabaseChatDataSource` bloqueado.
+
+AG3 prepara solo el plan de conexion futura a Supabase development remoto con
+datos sinteticos. No ejecuta conexion remota.
+
+### Objetivo de development remoto
+
+`development` remoto sera:
+
+- entorno no productivo;
+- proyecto Supabase separado;
+- datos sinteticos unicamente;
+- sin datos reales;
+- sin production keys;
+- sin `service_role` en Flutter;
+- sin chat heredado;
+- sin `SupabaseChatDataSource`;
+- sin writes directos desde Flutter.
+
+### Prerrequisitos antes de link
+
+Antes de cualquier `supabase link` se exige:
+
+- aprobacion explicita;
+- paquete separado;
+- proyecto Supabase development identificado;
+- project ref verificado;
+- cuenta/organizacion verificada;
+- production project ref explicitamente distinto;
+- `git status` revisado;
+- evidence pack actualizado;
+- secrets fuera del repo;
+- rollback checklist aprobado.
+
+`supabase link` sigue prohibido en AG3.
+
+### Prerrequisitos antes de migraciones remotas
+
+Antes de migraciones remotas se exige:
+
+- migraciones auditadas;
+- RLS auditada;
+- grants auditados;
+- RPC auditada;
+- orden de migraciones verificado;
+- base remota vacia o estado inicial conocido;
+- no datos reales;
+- backup/snapshot si procede;
+- rollback documentado.
+
+Comandos remotos siguen prohibidos en AG3.
+
+### Prerrequisitos antes de Edge Functions remotas
+
+Antes de deploy de funciones se exige:
+
+- functions auditadas;
+- JWT validation auditada;
+- payload estricto auditado;
+- rechazo de `userId`/`ownerUserId`/`role` desde UI;
+- logs minimizados;
+- errores explicitos;
+- sin fallback demo;
+- secrets function fuera del repo;
+- rollback por funcion.
+
+Funciones relevantes:
+
+- `create-own-chat-session`;
+- `list-own-chat-sessions`;
+- `archive-own-chat-session`;
+- `send-user-message`;
+- `list-session-messages`.
+
+### Datos sintéticos permitidos
+
+Permitidos en development remoto futuro:
+
+- usuarios sinteticos;
+- perfiles sinteticos;
+- especialistas de catalogo sinteticos/sanitizados;
+- `chat_sessions` sinteticas;
+- `messages` sinteticos;
+- fixtures sin PII;
+- seeds controlados.
+
+Prohibido:
+
+- datos reales;
+- datos de salud reales;
+- datos personales reales;
+- tokens reales en fixtures;
+- emails reales salvo dominios reservados tipo `example.com`;
+- nombres reales identificables.
+
+### Variables/secrets development
+
+Checklist futuro:
+
+- `SUPABASE_URL` development;
+- `SUPABASE_ANON_KEY` development;
+- `PROJECT_REF` development;
+- Edge Function secrets development;
+- JWT config development;
+- rollback env vars.
+
+Reglas:
+
+- secrets fuera del repo;
+- no `service_role` en Flutter;
+- no production keys;
+- no logs con tokens;
+- no `Authorization` en logs;
+- no `refresh_token` en logs.
+
+### Comandos prohibidos y futuros comandos candidatos
+
+En AG3 siguen prohibidos:
+
+- `supabase link`;
+- `supabase db push`;
+- `supabase migration up` remoto;
+- `supabase functions deploy`;
+- `supabase secrets set` remoto;
+- deploy staging;
+- deploy production.
+
+En un paquete futuro podrian proponerse, con aprobacion explicita:
+
+- `supabase link --project-ref <development-ref>`;
+- `supabase migration up` remoto contra development;
+- `supabase functions deploy` contra development;
+- `supabase secrets set` contra development.
+
+No ejecutarlos en AG3.
+
+### Estrategia de pruebas development remoto futura
+
+Pruebas futuras:
+
+- verificar migraciones aplicadas;
+- verificar RLS activa;
+- verificar grants minimos;
+- verificar RPC;
+- verificar Edge Functions;
+- crear usuario sintetico;
+- crear sesion sintetica;
+- enviar mensaje sintetico;
+- listar mensajes propios;
+- verificar aislamiento entre usuarios sinteticos;
+- verificar errores ownership;
+- verificar logs sin tokens.
+
+### Rollback remoto futuro
+
+Rollback futuro:
+
+- desvincular proyecto si es incorrecto;
+- revertir env vars;
+- deshabilitar Edge Functions si procede;
+- rollback de migracion si procede;
+- volver a `backendBlocked`;
+- mantener local/demo funcional;
+- documentar incidente;
+- no tocar production.
+
+### Readiness objetivo
+
+El objetivo del siguiente paquete sera pasar desde:
+
+```text
+READY WITH BLOCKERS
+```
+
+a uno de:
+
+- `READY FOR DEV LINK`;
+- `READY WITH BLOCKERS`;
+- `NOT READY`.
+
+AG3 no ejecuta link.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- link al proyecto equivocado;
+- production keys en development;
+- `service_role` en cliente;
+- datos reales en development;
+- secrets en repo;
+- `db push` remoto accidental;
+- `functions deploy` accidental.
+
+Altos:
+
+- RLS incompleta;
+- Edge Function acepta `userId` desde UI;
+- logs con tokens;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- fallback demo desde error real.
+
+Medios:
+
+- SQL/pgTAP local no revalidado;
+- HTTP shell local no revalidado;
+- project ref mal copiado;
+- seed sintetico sin cleanup;
+- `backendReal` legacy confundido con development.
+
+Bajos:
+
+- duplicidad documental;
+- copy de errores ambiguo;
+- warnings informativos no fatales.
+
+### Recomendacion final
+
+No conectar development remoto en AG3. Cerrar AG3 como plan. Despues preparar
+AG4 para decidir si se alcanza `READY FOR DEV LINK` o si primero se resuelven
+bloqueantes.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AG4 — decisión READY FOR DEV LINK o resolver bloqueantes
+```
+
+Alternativas:
+
+- `2B-AG4 — resolver bloqueantes SQL/pgTAP y HTTP shell local`;
+- `2B-AG4 — plan supabase link development controlado`.
+
+No ejecutar remoto todavia.
+
+## Decisión 2B-AG4 — READY FOR DEV LINK o resolver bloqueantes
+
+### Estado
+
+2B-AG3 queda aprobado y cerrado formalmente. La conexión a `development`
+remoto queda planificada con datos sintéticos, pero no ejecutada. No se ejecutó
+`supabase link`, `supabase db push`, `supabase migration up` remoto,
+`supabase functions deploy`, `supabase secrets set`, staging, production,
+auth real, Supabase real ni datos reales.
+
+AG4 decide readiness documental para un futuro paquete de `DEV LINK`. La
+decisión final es:
+
+```text
+READY WITH BLOCKERS
+```
+
+No se autoriza todavía ningún comando remoto.
+
+### Bloqueantes AG2/AG3 revalidados
+
+| Bloqueante | Clasificación AG4 | Estado |
+| --- | --- | --- |
+| Revalidar SQL/pgTAP local antes de cualquier link/deploy | Requiere ejecución local; bloqueante para DEV LINK | Existen tests SQL y harnesses locales, pero no se han reejecutado en AG4. |
+| Revalidar HTTP shell local antes de cualquier link/deploy | Requiere ejecución local; bloqueante para DEV LINK | Existen scripts `2b_iv_h` y `2b_v_g`; `flutter test` los mantiene como skips esperados. |
+| Definir secrets remotos development | Requiere paquete separado; bloqueante para DEV LINK | La política existe, pero no hay checklist final de valores/ubicación/verificación remota. |
+| Mantener chat heredado fuera | Resuelto documentalmente; no bloqueante para plan futuro | Tests de arquitectura siguen bloqueando rutas seguras contra chat heredado. |
+| Mantener `SupabaseChatDataSource` bloqueado | Resuelto documentalmente; no bloqueante para plan futuro | Sigue existiendo en `lib/features/chat/` heredado, pero no está conectado al flujo seguro nuevo. |
+
+### Criterios READY FOR DEV LINK
+
+Solo se podrá clasificar como `READY FOR DEV LINK` cuando todo lo siguiente
+esté demostrado en el mismo paquete o en evidence pack inmediatamente anterior:
+
+- `git status` entendido, sin cambios prohibidos y con worktree apto para
+  separar documentación de ejecución remota;
+- migraciones auditadas;
+- RLS y grants auditados;
+- RPC auditada;
+- Edge Functions auditadas;
+- `flutter analyze --no-fatal-infos` pasado;
+- tests de arquitectura pasados;
+- tests Flutter completos pasados;
+- checks no-secrets y no-remoto pasados;
+- SQL/pgTAP local revalidado o justificación formal explícita aceptada;
+- HTTP shell local revalidado o justificación formal explícita aceptada;
+- project ref de development identificado, verificado y no usado todavía;
+- production project ref explícitamente distinto;
+- checklist de secrets development definido, sin valores en repo;
+- rollback checklist operativo;
+- datos reales prohibidos;
+- staging y production bloqueados.
+
+### Criterios READY WITH BLOCKERS
+
+Se mantiene `READY WITH BLOCKERS` si:
+
+- los tests Dart/Flutter y checks documentales pasan;
+- no hay evidencia de secrets reales ni conexión remota;
+- las piezas local-safe parecen coherentes;
+- pero SQL/pgTAP local o HTTP shell local no han sido revalidados;
+- el project ref development no está verificado;
+- los secrets remotos development no están definidos;
+- el rollback remoto todavía no es suficientemente operativo;
+- existe worktree documental pendiente que conviene separar antes de ejecutar
+  remoto.
+
+Este es el estado de AG4.
+
+### Criterios NOT READY
+
+Debe clasificarse como `NOT READY` si aparece cualquiera de estos hechos:
+
+- fallos de tests críticos;
+- secrets reales o production keys detectadas;
+- `service_role` en Flutter;
+- datos reales en development;
+- RLS incompleta bloqueante para tablas que se pretendan exponer;
+- Edge Function aceptando `userId`, `ownerUserId` o `role` desde UI;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- chat heredado conectado al flujo seguro;
+- fallback demo desde error real;
+- tokens en logs o repo.
+
+### Verificaciones locales ejecutadas en AG4
+
+Se ejecutaron verificaciones locales permitidas:
+
+- `git status --short`: solo documentación modificada;
+- `git diff --check`: sin salida;
+- `git diff --name-only -- lib/core/config lib/core/auth/session lib/features/auth lib/features/chat lib/features/chat_sessions lib/features/chat_messages lib/app.dart lib/main.dart test pubspec.yaml supabase`: sin salida;
+- `find . -name '.env*' -type f -not -path './.git/*' -print`: sin salida;
+- `flutter analyze --no-fatal-infos`: pasa con 43 infos no fatales;
+- `flutter test test/core/config test/architecture`: pasa;
+- `flutter test test/features/chat_sessions test/features/chat_messages`: pasa con 202 tests;
+- `flutter test`: pasa con 367 tests y 2 skips esperados de harness local HTTP;
+- `find supabase/.temp -maxdepth 1 -type f -print`: solo
+  `supabase/.temp/cli-latest`;
+- comprobación explícita de `supabase/.temp/project-ref`,
+  `supabase/.temp/pooler-url` y `supabase/.temp/access-token`: sin salida;
+- listado de `supabase/tests/`: existen tests SQL/pgTAP, `.psql` y shell HTTP
+  locales que deben revalidarse en paquete separado.
+
+### Checks no-secrets/no-remoto
+
+La búsqueda local de patrones sensibles detecta falsos positivos esperados en:
+
+- tests de arquitectura que bloquean `service_role`, tokens, `/functions/v1/`
+  y `SupabaseChatDataSource`;
+- documentación y READMEs que describen prohibiciones o harness local;
+- Edge Functions locales que leen `SUPABASE_SERVICE_ROLE_KEY` solo desde
+  runtime local/efímero;
+- scripts shell locales que obtienen tokens efímeros de usuarios de prueba;
+- `supabase/config.toml` con `project_id = "Stasisly"` local, sin project ref
+  remoto;
+- chat heredado en `lib/features/chat/`, documentado como bloqueado para el
+  flujo seguro.
+
+No se detectaron `.env*`, project ref remoto, access token Supabase remoto ni
+archivo de vínculo remoto en `supabase/.temp`.
+
+### Readiness final
+
+```text
+READY WITH BLOCKERS
+```
+
+Justificación: la evidencia Dart/Flutter y anti-remoto actual pasa, no hay
+cambios prohibidos ni secretos reales detectados, y las fronteras seguras
+siguen bloqueando chat heredado y remoto. Pero no es correcto declarar
+`READY FOR DEV LINK` porque SQL/pgTAP local, HTTP shell local, project ref
+development, checklist de secrets y rollback remoto aún requieren paquete
+separado y evidencia fresca.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- clasificar `READY FOR DEV LINK` sin SQL/pgTAP local revalidado;
+- clasificar `READY FOR DEV LINK` sin HTTP shell local revalidado;
+- link al proyecto equivocado;
+- production keys en development;
+- `service_role` en cliente;
+- secrets en repo;
+- datos reales en development;
+- rollback remoto no operativo.
+
+Altos:
+
+- RLS incompleta en tablas que se pretendan exponer;
+- Edge Function aceptando `userId` desde UI;
+- logs con tokens;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- fallback demo desde error real.
+
+Medios:
+
+- project ref development aún no verificado;
+- secrets remotos development no definidos;
+- SQL/pgTAP y HTTP shell existentes pero no reejecutados en AG4;
+- worktree documental acumulado pendiente de commit;
+- staging confundido con development.
+
+Bajos:
+
+- duplicidad documental entre ADR-006, ADR-007 y tracker;
+- warnings informativos no fatales de `flutter analyze`;
+- nombres heredados que siguen presentes solo en piezas bloqueadas.
+
+### Recomendación final
+
+No ejecutar `supabase link` todavía. Cerrar AG4 como decisión de readiness y
+abrir un paquete separado para resolver bloqueantes antes de cualquier link,
+push, deploy o secrets remotos.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AG5 — resolver bloqueantes readiness development remoto
+```
+
+Alcance recomendado para AG5:
+
+- reejecutar SQL/pgTAP local;
+- reejecutar HTTP shell local para `chat_sessions` y `messages`;
+- confirmar cleanup local;
+- definir checklist de secrets development sin valores;
+- definir project ref development como dato externo verificado, sin ejecutar
+  `supabase link`;
+- preparar rollback operativo.
+
+No ejecutar remoto todavía.
+
+## Revisión 2B-AG5 — resolver bloqueantes readiness development remoto
+
+### Estado
+
+2B-AG4 queda aprobado y cerrado formalmente con readiness:
+
+```text
+READY WITH BLOCKERS
+```
+
+AG5 revalida los bloqueantes locales permitidos sin ejecutar conexión remota.
+No se ejecutó `supabase link`, `supabase db push`, `supabase migration up`
+remoto, `supabase functions deploy`, `supabase secrets set`, staging,
+production, auth real, Supabase real ni datos reales.
+
+Readiness final tras AG5:
+
+```text
+READY WITH BLOCKERS
+```
+
+La diferencia frente a AG4 es que SQL/pgTAP local y HTTP shell local quedan
+revalidados. Persisten como bloqueantes externos/documentales antes de cualquier
+DEV LINK: project ref development real, separación explícita frente a production
+ref, secrets checklist con ubicación real fuera del repo y rollback remoto
+operativo aprobado.
+
+### SQL/pgTAP local
+
+Harness encontrado:
+
+- `supabase/tests/*.sql`;
+- `supabase/tests/README.md`;
+- comando local `supabase test db --local`.
+
+Ejecución AG5:
+
+```text
+supabase start -x studio,realtime,storage-api,imgproxy,mailpit,postgres-meta,logflare,vector,supavisor
+supabase db reset --local --no-seed
+supabase test db --local
+```
+
+Resultado:
+
+```text
+Files=12, Tests=394, Result: PASS
+```
+
+SQL/pgTAP local queda revalidado para:
+
+- `public.users`;
+- `specialist_catalog`;
+- `chat_sessions`;
+- `messages`;
+- fixtures transaccionales/postcondiciones;
+- RPC `send_user_message_core`;
+- RLS/grants/zero policies esperadas.
+
+### HTTP shell local
+
+Harnesses encontrados:
+
+- `supabase/tests/2b_iv_h_local_http_integration_test.sh`;
+- `supabase/tests/2b_v_g_messages_http_integration_test.sh`;
+- tests Dart integrados en `test/integration/`.
+
+Ejecuciones AG5:
+
+```text
+bash supabase/tests/2b_iv_h_local_http_integration_test.sh
+bash supabase/tests/2b_v_g_messages_http_integration_test.sh
+```
+
+Resultados:
+
+```text
+2B-IV-H local HTTP integration harness: PASS
+2B-V-G messages local HTTP integration harness: PASS
+```
+
+Ambos harnesses ejecutaron preflight anti-remoto, sirvieron Edge Functions solo
+localmente, ejecutaron integración Dart contra `127.0.0.1`, validaron logs
+seguros y terminaron con:
+
+```text
+0|0|0|0|0|0
+```
+
+Además se verificó postcondición global contra la base local:
+
+```text
+0|0|0|0|0|0
+```
+
+### Checklist project ref development
+
+Checklist documental requerido antes de cualquier paquete de DEV LINK:
+
+- `project ref development` identificado como dato externo, no escrito en docs
+  si se considera sensible: `<DEV_PROJECT_REF>`;
+- `project ref production` explícitamente distinto:
+  `<PRODUCTION_PROJECT_REF>`;
+- organización/cuenta verificada;
+- nombre de proyecto claramente development;
+- región documentada si aplica;
+- owner/admin verificado;
+- riesgo de confusión con production mitigado;
+- captura o evidencia humana guardada fuera del repo si incluye valores;
+- `supabase/.temp/project-ref` inexistente antes de link;
+- comando futuro escrito con placeholder, nunca ejecutado en AG5.
+
+Estado AG5:
+
+```text
+Pendiente de verificación externa.
+```
+
+No se puede declarar resuelto hasta que el cliente confirme el proyecto
+development real y su separación explícita frente a production.
+
+### Checklist secrets development
+
+Checklist documental requerido:
+
+- `SUPABASE_URL` development;
+- `SUPABASE_ANON_KEY` development;
+- `PROJECT_REF` development;
+- Edge Function secrets development;
+- JWT validation config;
+- rollback env vars;
+- ubicación segura fuera del repo;
+- responsable de rotación;
+- confirmación de que no hay production keys;
+- confirmación de que `service_role` nunca llega a Flutter;
+- confirmación de que logs no incluyen `Authorization`, `refresh_token`,
+  `access_token`, JWT completo ni secrets;
+- confirmación de que no se pegan secrets en screenshots, tracker ni ADRs.
+
+Estado AG5:
+
+```text
+Checklist definido, valores reales pendientes y fuera del repo.
+```
+
+La CLI local puede imprimir claves locales efímeras durante `supabase start` o
+`supabase status`; no deben copiarse a documentación ni tracker.
+
+### Rollback remoto operativo documental
+
+Rollback requerido antes de cualquier DEV LINK:
+
+1. confirmar entorno objetivo antes de link;
+2. abortar si el project ref no coincide exactamente con `<DEV_PROJECT_REF>`;
+3. si se enlaza proyecto equivocado, ejecutar desvinculación local y registrar
+   incidente;
+4. revertir variables de entorno locales;
+5. volver a `backendBlocked` en configuración de app;
+6. deshabilitar Edge Functions development si fueron desplegadas en paquete
+   futuro;
+7. aplicar rollback de migraciones development solo si existe plan aprobado y
+   datos sintéticos;
+8. conservar local/demo funcional;
+9. no tocar staging;
+10. no tocar production;
+11. rotar cualquier secret expuesto accidentalmente;
+12. registrar evidencia post-rollback.
+
+Estado AG5:
+
+```text
+Rollback documental definido; ejecución remota pendiente de paquete futuro.
+```
+
+### Checks no-secrets/no-remoto
+
+Verificaciones AG5:
+
+- `find . -name '.env*' -type f -not -path './.git/*' -print`: sin salida;
+- `supabase/.temp/project-ref`: inexistente;
+- `supabase/.temp/pooler-url`: inexistente;
+- `supabase/.temp/access-token`: inexistente;
+- búsqueda de patrones remoto/secrets: falsos positivos en docs, tests,
+  harness local y ejemplos bloqueados.
+
+Falsos positivos esperados:
+
+- tests que usan `project.supabase.co` para validar bloqueo de remoto;
+- scripts shell con preflight anti-remoto;
+- documentación que enumera comandos prohibidos;
+- ejemplos de `SUPABASE_URL` en comentarios;
+- Edge Functions locales que leen `SUPABASE_SERVICE_ROLE_KEY` desde runtime
+  local/efímero, no desde Flutter ni repo;
+- `SupabaseChatDataSource` heredado sigue presente como pieza bloqueada.
+
+No se detectó vínculo remoto ni archivo `.env`.
+
+### Verificaciones locales base
+
+AG5 ejecutó:
+
+- `git status --short`: solo documentación modificada;
+- `git diff --check`: limpio;
+- `flutter analyze --no-fatal-infos`: pasa con 43 infos no fatales;
+- `flutter test test/core/config test/architecture`: pasa;
+- `flutter test test/features/chat_sessions test/features/chat_messages`: pasa
+  con 202 tests;
+- `flutter test`: pasa con 367 tests y 2 skips esperados;
+- `git diff --name-only -- lib/core/config lib/core/auth/session lib/features/auth lib/features/chat lib/features/chat_sessions lib/features/chat_messages lib/app.dart lib/main.dart test pubspec.yaml supabase`: sin salida.
+
+Los 2 skips esperados de `flutter test` corresponden a harnesses locales HTTP
+que AG5 ejecutó explícitamente por shell y ambos pasaron.
+
+### Readiness final
+
+```text
+READY WITH BLOCKERS
+```
+
+Bloqueantes resueltos en AG5:
+
+- SQL/pgTAP local revalidado;
+- HTTP shell local `chat_sessions` revalidado;
+- HTTP shell local `messages` revalidado;
+- cleanup local confirmado en `0|0|0|0|0|0`;
+- no-secrets/no-remoto local sin hallazgos reales;
+- tests Flutter/arquitectura pasados.
+
+Bloqueantes restantes:
+
+- project ref development real no verificado;
+- production ref distinto no verificado;
+- secrets development no configurados ni validados fuera del repo;
+- rollback remoto definido documentalmente pero no probado;
+- worktree documental acumulado pendiente de commit.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- declarar `READY FOR DEV LINK` sin project ref development real verificado;
+- confundir development con production;
+- introducir secrets reales en docs o tracker;
+- usar production keys en development;
+- poner `service_role` en cliente;
+- ejecutar `supabase link` sin paquete separado.
+
+Altos:
+
+- rollback remoto no probado;
+- logs con tokens;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- fallback demo desde error real.
+
+Medios:
+
+- worktree documental acumulado;
+- CLI local imprime claves efímeras si no se redacta salida;
+- nombres heredados aún presentes solo en módulos bloqueados.
+
+Bajos:
+
+- duplicidad documental;
+- infos no fatales de análisis;
+- dependencia de Docker/Supabase local para repetir evidence pack.
+
+### Recomendación final
+
+No ejecutar `supabase link` todavía. AG5 reduce los bloqueantes a elementos de
+entorno remoto y gobierno de secrets. El siguiente paquete debe decidir y
+validar datos externos de development sin ejecutar link.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AG6 — preparar DEV LINK controlado sin ejecutarlo
+```
+
+Alcance recomendado:
+
+- verificar cuenta/organización Supabase;
+- registrar placeholders aprobados para `<DEV_PROJECT_REF>` y
+  `<PRODUCTION_PROJECT_REF>` sin valores sensibles;
+- preparar checklist de secrets fuera del repo;
+- preparar comando candidato de link sin ejecutarlo;
+- definir evidencia requerida para pasar a `READY FOR DEV LINK`.
+
+## Runbook 2B-AG6 — DEV LINK controlado sin ejecución remota
+
+### Estado
+
+2B-AG5 queda aprobado y cerrado formalmente. Los bloqueantes locales quedaron
+resueltos: SQL/pgTAP local, HTTP shell local, cleanup local, no-secrets local y
+tests Flutter/arquitectura pasaron. La readiness sigue siendo:
+
+```text
+READY WITH BLOCKERS
+```
+
+AG6 prepara el runbook exacto para un futuro `supabase link` contra un proyecto
+`development`, pero no ejecuta link ni ningún comando remoto.
+
+### Checklist de identidad del proyecto development
+
+Antes de autorizar cualquier paquete AG7 que ejecute `supabase link`, debe
+existir evidencia externa, no secreta y revisada de:
+
+| Campo | Placeholder permitido | Regla |
+| --- | --- | --- |
+| Project ref development | `<DEV_PROJECT_REF>` | Verificado visualmente en Supabase dashboard; no escribir valor real si se considera sensible. |
+| Nombre development | `<DEV_PROJECT_NAME>` | Debe contener `development` o `dev` de forma inequívoca. |
+| Organización/cuenta | `<DEV_ORG_NAME>` | Debe coincidir con la cuenta/organización aprobada para Stasisly. |
+| Región | `<DEV_REGION>` | Documentar región si aplica; no debe confundirse con production. |
+| Owner/admin | `<DEV_OWNER_EMAIL_OR_ROLE>` | Verificar rol/capacidad de administración sin publicar email sensible si no procede. |
+| Project ref production | `<PRODUCTION_PROJECT_REF>` | Debe ser explícitamente distinto a `<DEV_PROJECT_REF>`. |
+| Project ref staging | `<STAGING_PROJECT_REF>` | Si existe, debe ser explícitamente distinto a development y production. |
+
+Reglas:
+
+- las capturas de pantalla, si se usan como evidencia, deben ocultar secrets,
+  keys, tokens, connection strings y datos personales;
+- no copiar secrets al repo;
+- no copiar valores reales al tracker si no son estrictamente necesarios;
+- si el ref se documenta, debe revisarse que no sea production;
+- cualquier duda sobre cuenta, org, región o nombre bloquea AG7.
+
+### Checklist de secrets development
+
+Antes de cualquier link o deploy remoto debe existir checklist externo, fuera
+del repo, para:
+
+- `SUPABASE_URL` development;
+- `SUPABASE_ANON_KEY` development;
+- `PROJECT_REF` development;
+- JWT config development;
+- Edge Function secrets development;
+- variables de rollback.
+
+Reglas:
+
+- secrets fuera del repo;
+- no secrets en docs;
+- no secrets en `SESSION_TRACKER.md`;
+- no secrets en prompts;
+- no secrets en screenshots visibles;
+- no `service_role` en Flutter;
+- no production keys;
+- no tokens en logs;
+- no `Authorization` en logs;
+- no `refresh_token` ni `access_token` en logs;
+- no compartir salidas CLI que muestren claves sin redactarlas.
+
+### Preflight obligatorio antes de link
+
+El paquete que aspire a ejecutar link deberá repetir, justo antes del comando,
+este preflight local:
+
+```bash
+git status --short
+git diff --check
+supabase db reset --local --no-seed
+supabase test db --local
+bash supabase/tests/2b_iv_h_local_http_integration_test.sh
+bash supabase/tests/2b_v_g_messages_http_integration_test.sh
+flutter analyze --no-fatal-infos
+flutter test test/core/config test/architecture
+flutter test test/features/chat_sessions test/features/chat_messages
+flutter test
+```
+
+Checks no-secrets/no-remoto obligatorios:
+
+- ausencia de `.env*` versionables;
+- ausencia de `supabase/.temp/project-ref`;
+- ausencia de `supabase/.temp/pooler-url`;
+- ausencia de `supabase/.temp/access-token`;
+- revisión de `service_role` y `SUPABASE_SERVICE_ROLE_KEY`;
+- ausencia de `Authorization` hardcodeado;
+- ausencia de `refresh_token` hardcodeado;
+- ausencia de `access_token` hardcodeado;
+- ausencia de production URL/key;
+- `SupabaseChatDataSource` no reactivado;
+- `/functions/v1/` solo en datasources/harness locales aprobados;
+- diff de código, tests y Supabase entendido antes de remoto.
+
+Falsos positivos esperados deben documentarse y ser explicables como tests,
+docs, harness local o pieza heredada bloqueada.
+
+### Comando candidato futuro
+
+Comando candidato para un paquete futuro, no ejecutable en AG6:
+
+```bash
+supabase link --project-ref <DEV_PROJECT_REF>
+```
+
+Reglas:
+
+- solo contra development;
+- solo con aprobación explícita futura;
+- solo tras project ref verificado;
+- solo tras preflight limpio;
+- solo tras rollback checklist aprobado;
+- nunca contra production;
+- abortar si el dashboard, CLI o `.temp/project-ref` no coinciden exactamente.
+
+### Comandos prohibidos en AG6
+
+AG6 prohíbe:
+
+```bash
+supabase link --project-ref <DEV_PROJECT_REF>
+supabase db push
+supabase migration up
+supabase functions deploy
+supabase secrets set
+```
+
+También quedan prohibidos:
+
+- deploy staging;
+- deploy production;
+- datos reales;
+- auth real;
+- Supabase real conectado desde Flutter;
+- registrar `/conversations`;
+- tocar `/chat/:id`;
+- tocar `/orchestrator/chat`;
+- conectar chat heredado;
+- reactivar `SupabaseChatDataSource`;
+- writes directos desde Flutter.
+
+### Rollback si link futuro es incorrecto
+
+Runbook de rollback para un futuro paquete con link:
+
+1. detener ejecución inmediatamente;
+2. no ejecutar migraciones;
+3. no desplegar funciones;
+4. verificar `supabase/.temp/project-ref`;
+5. si el ref no es `<DEV_PROJECT_REF>`, desvincular/eliminar referencia local
+   siguiendo el procedimiento aprobado para la CLI vigente;
+6. limpiar variables locales equivocadas;
+7. rotar cualquier secret si se expuso;
+8. volver a `backendBlocked`;
+9. abrir incidente documental;
+10. confirmar production intacto;
+11. confirmar staging intacto;
+12. registrar evidencia post-rollback.
+
+Si hubo contacto con production, el estado pasa automáticamente a `NOT READY`
+y se exige paquete de incidente antes de continuar.
+
+### Evidence pack para AG7
+
+AG7 solo podrá autorizarse si existe:
+
+- project ref development verificado;
+- production ref distinto;
+- staging ref distinto si existe;
+- secrets checklist completo fuera del repo;
+- rollback checklist completo;
+- preflight local fresco;
+- worktree controlado;
+- aprobación explícita;
+- comando exacto preparado;
+- no datos reales;
+- no production;
+- no secretos en docs, tracker, prompts ni screenshots visibles;
+- decisión explícita de si AG7 ejecutará link o solo verificará valores.
+
+### Readiness al cierre de AG6
+
+AG6 mantiene:
+
+```text
+READY WITH BLOCKERS
+```
+
+No se pasa a `READY FOR DEV LINK` porque AG6 no verifica valores reales de
+project refs ni secrets. Para pasar a `READY FOR DEV LINK` deberán quedar
+verificados documentalmente, sin exponer valores sensibles:
+
+- `<DEV_PROJECT_REF>`;
+- `<PRODUCTION_PROJECT_REF>` distinto;
+- secrets development fuera del repo;
+- rollback remoto aprobado;
+- preflight fresco.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- ejecutar link en AG6;
+- usar project ref equivocado;
+- usar production ref;
+- copiar secrets en docs, tracker, prompts o screenshots;
+- production keys en development;
+- `service_role` en cliente.
+
+Altos:
+
+- preflight obsoleto;
+- rollback remoto ambiguo;
+- worktree mezclado;
+- logs con tokens;
+- fallback demo desde error real;
+- `SupabaseChatDataSource` reactivado.
+
+Medios:
+
+- evidencia visual incompleta;
+- nombre de proyecto ambiguo;
+- región no documentada;
+- duplicidad documental.
+
+Bajos:
+
+- warnings informativos de análisis;
+- cambios de CLI Supabase que alteren comandos de unlink/rollback;
+- necesidad de repetir harness local por tiempo de espera.
+
+### Recomendación final
+
+No ejecutar link en AG6. Cerrar AG6 como runbook/checklist de DEV LINK
+controlado. Después decidir AG7 solo si se verifican project ref, secrets y
+rollback fuera del repo.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AG7 — verificar project ref/secrets/rollback para DEV LINK
+```
+
+AG7 deberá seguir sin ejecutar remoto salvo aprobación explícita distinta.
+
+## Verificación 2B-AG7 — project ref/secrets/rollback para DEV LINK
+
+### Estado
+
+2B-AG6 queda aprobado y cerrado formalmente. AG7 verifica readiness para DEV
+LINK sin ejecutar `supabase link`, `supabase db push`, `supabase migration up`
+remoto, `supabase functions deploy` ni `supabase secrets set`.
+
+Readiness final:
+
+```text
+READY WITH BLOCKERS
+```
+
+La base local queda revalidada, pero no se puede declarar `READY FOR DEV LINK`
+porque la identidad real del proyecto Supabase development, la separación con
+production/staging y el checklist de secrets reales siguen sin quedar
+verificados fuera del repo.
+
+### Identidad proyecto development
+
+| Elemento | Estado | Evidencia / decisión |
+|---|---|---|
+| Proyecto Supabase development existe | Pendiente | No se aportó evidencia externa verificable en AG7. |
+| Nombre claramente development/dev | Pendiente | Debe verificarse en dashboard/organización antes de link. |
+| Organización/cuenta correcta | Pendiente | Debe verificarse fuera del repo. |
+| Región documentada | Pendiente | No se registra valor real en docs. |
+| Owner/responsable por rol | Pendiente | Debe registrarse como rol, no como secreto ni dato innecesario. |
+| Project ref development | Pendiente | No se pega en repo; falta marcarlo como verificado externamente. |
+| Distinto de production | Bloqueante | No se puede declarar listo sin comparar refs fuera del repo. |
+| Distinto de staging | Pendiente / no aplica si staging no existe | Staging pendiente no bloquea si production queda separado. |
+
+### Separación staging/production
+
+Decisión vigente:
+
+- production no se toca;
+- production no se vincula;
+- production no recibe migraciones;
+- production no recibe Edge Functions;
+- production no recibe datos reales;
+- staging, si no existe, queda pendiente y no bloquea DEV LINK siempre que
+  production quede explícitamente separado;
+- no se deben usar production keys ni staging keys en development.
+
+AG7 no verifica refs reales, por tanto la separación queda como bloqueante
+documental pendiente.
+
+### Checklist secrets development
+
+| Elemento | Estado | Regla |
+|---|---|---|
+| `SUPABASE_URL` development | Pendiente | Verificar fuera del repo; no pegar valor real. |
+| `SUPABASE_ANON_KEY` development | Pendiente | Verificar fuera del repo; no pegar valor real. |
+| `PROJECT_REF` development | Pendiente | Verificar fuera del repo; no pegar valor real. |
+| Edge Function secrets development | Pendiente | No usar `service_role` en Flutter; solo runtime backend. |
+| JWT validation config | Pendiente | Debe validarse antes de remoto real. |
+| Rollback env vars | Pendiente | Deben quedar definidas fuera del repo. |
+
+Reglas reafirmadas:
+
+- no secrets en repo;
+- no secrets en docs;
+- no secrets en `SESSION_TRACKER.md`;
+- no secrets en prompts;
+- no screenshots con secrets visibles;
+- no `service_role` en Flutter;
+- no production keys;
+- no tokens en logs;
+- no `Authorization` ni `refresh_token` en logs.
+
+### Rollback remoto operativo
+
+Rollback definido como runbook, pero no probado contra remoto:
+
+1. detener ejecución si el ref no coincide;
+2. no ejecutar migraciones;
+3. no desplegar funciones;
+4. comprobar `supabase/.temp/project-ref` solo cuando exista link futuro;
+5. eliminar estado local equivocado si aplica;
+6. revertir env vars equivocadas;
+7. rotar secrets si se expusieron;
+8. volver a `backendBlocked`;
+9. mantener local/demo funcional;
+10. confirmar production intacto;
+11. registrar incidente.
+
+Clasificación: parcial. Es suficiente como runbook previo, pero bloquea
+`READY FOR DEV LINK` hasta verificar refs/secrets reales.
+
+### Preflight fresco AG7
+
+| Comando | Resultado |
+|---|---|
+| `git status --short` | Solo docs modificados: ADR-006, ADR-007 y tracker. |
+| `git diff --check` | Sin salida. |
+| `supabase start` | Primer intento falló por `logflare` unhealthy; arranque local recuperado con `supabase start -x logflare`. |
+| `supabase db reset --local --no-seed` | PASS; migraciones 00001-00007 aplicadas localmente. |
+| `supabase test db --local` | PASS; 12 files, 394 tests. |
+| `bash supabase/tests/2b_iv_h_local_http_integration_test.sh` | PASS; cleanup `0|0|0|0|0|0`. |
+| `bash supabase/tests/2b_v_g_messages_http_integration_test.sh` | PASS; cleanup `0|0|0|0|0|0`. |
+| `flutter analyze --no-fatal-infos` | PASS con 43 infos preexistentes. |
+| `flutter test test/core/config test/architecture` | PASS; 66 tests. |
+| `flutter test test/features/chat_sessions test/features/chat_messages` | PASS; 202 tests. |
+| `flutter test` | PASS; 367 tests y 2 skips esperados. |
+
+Nota de seguridad: `supabase start` imprime claves locales efímeras propias de
+la CLI. No se registran en este ADR, no se versionan y no autorizan remoto.
+
+### Checks no-secrets/no-remoto
+
+Resultado:
+
+- no hay `.env*` en el workspace;
+- `supabase/.temp` contiene solo `cli-latest`;
+- no existen `supabase/.temp/project-ref`, `supabase/.temp/pooler-url` ni
+  `supabase/.temp/access-token`;
+- no hay cambios en `lib/`, `test/`, `pubspec.yaml` ni `supabase/` dentro del
+  diff de AG7;
+- los hits de `service_role`, `Authorization`, `access_token`,
+  `refresh_token`, `/functions/v1/` y `SupabaseChatDataSource` corresponden a
+  harness/tests locales, docs, Edge Functions locales o piezas heredadas
+  auditadas y bloqueadas;
+- los hits `supabase.co`/production corresponden a tests de bloqueo, ejemplos,
+  fixtures no productivas o documentación.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- project ref development real no verificado;
+- production ref no confirmado distinto;
+- checklist de secrets reales pendiente fuera del repo;
+- rollback remoto no probado contra proyecto real;
+- `supabase start` requiere excluir `logflare` en este entorno local.
+
+Altos:
+
+- link accidental al proyecto equivocado;
+- secrets reales pegados en docs/prompts/screenshots;
+- production keys usadas en development;
+- `service_role` en Flutter;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter.
+
+Medios:
+
+- worktree con cambios documentales acumulados;
+- falsos positivos de secretos en tests/docs que requieren interpretación;
+- preflight local dependiente del estado Docker/Supabase CLI.
+
+Bajos:
+
+- duplicidad documental entre ADR-006 y ADR-007;
+- nombres de paquete largos;
+- necesidad de recordar excluir `logflare` si vuelve a fallar analytics local.
+
+### Decisión AG7
+
+AG7 se cierra como verificación local fresca y preparación documental. No
+desbloquea `supabase link`.
+
+Decisión final:
+
+```text
+READY WITH BLOCKERS
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG8 — resolver bloqueantes finales DEV LINK
+```
+
+Objetivo: aportar evidencia externa sin secretos de project refs development /
+production, clasificar secrets reales fuera del repo y confirmar rollback antes
+de autorizar un paquete separado que ejecute `supabase link`.
+
+## Resolución 2B-AG8 — bloqueantes finales DEV LINK
+
+### Estado
+
+2B-AG7 queda aprobado y cerrado formalmente. AG8 revisa los bloqueantes finales
+de DEV LINK, repite preflight local y actualiza readiness sin ejecutar
+`supabase link`, `supabase db push`, `supabase migration up` remoto,
+`supabase functions deploy` ni `supabase secrets set`.
+
+Readiness final:
+
+```text
+READY WITH BLOCKERS
+```
+
+Motivo: la evidencia local vuelve a pasar, pero no se aportó evidencia externa
+sin secretos para project ref development, production ref distinto, staging si
+aplica ni checklist real de secrets development.
+
+### Project ref development
+
+| Elemento | Estado AG8 | Observación |
+|---|---|---|
+| Proyecto Supabase development existe | Pendiente bloqueante | No se aportó evidencia externa verificable. |
+| Nombre contiene dev/development | Pendiente bloqueante | Debe verificarse fuera del repo. |
+| Organización/cuenta correcta | Pendiente bloqueante | Debe verificarse fuera del repo. |
+| Región documentada | Pendiente | No se registra valor real en docs. |
+| Owner/responsable por rol | Pendiente | Debe registrarse como rol, no como secreto. |
+| Project ref development verificado | Pendiente bloqueante | No se escribe valor real en documentación. |
+| Development no es production | Pendiente bloqueante | Requiere comparación externa de refs. |
+| Development no es staging | Pendiente / no aplica | Depende de si staging existe. |
+
+### Production ref distinto
+
+Estado: pendiente bloqueante.
+
+AG8 no recibió evidencia externa para declarar que production ref es distinto o
+que production no existe/no se usa todavía de forma inequívoca. Production sigue
+bloqueado: no link, no migraciones, no funciones, no datos reales y no keys.
+
+### Staging ref si aplica
+
+Estado: pendiente / no aplica hasta que se confirme externamente.
+
+Si staging existe, debe verificarse distinto de development y production. Si no
+existe, debe registrarse como pendiente/no creado y no bloqueante siempre que
+production quede claramente separado.
+
+### Secrets development fuera del repo
+
+| Elemento | Estado AG8 | Bloqueo |
+|---|---|---|
+| `SUPABASE_URL` development | Pendiente | Bloqueante para link real. |
+| `SUPABASE_ANON_KEY` development | Pendiente | Bloqueante para link real si el flujo la requiere. |
+| `PROJECT_REF` development | Pendiente | Bloqueante. |
+| Edge Function secrets development | Pendiente | Bloqueante antes de deploy, no antes de solo link si AG9 lo limita estrictamente. |
+| JWT config development | Pendiente | Bloqueante antes de validar auth real/remoto. |
+| Rollback env vars | Pendiente | Bloqueante antes de link real. |
+
+Reglas reafirmadas:
+
+- no secrets en repo;
+- no secrets en docs;
+- no secrets en `SESSION_TRACKER.md`;
+- no secrets en prompts;
+- no secrets en screenshots visibles;
+- no tokens en logs;
+- no `Authorization` ni `refresh_token` en logs;
+- `service_role` nunca en Flutter;
+- production keys nunca en development.
+
+### Rollback remoto operativo
+
+Clasificación AG8:
+
+```text
+completo como runbook documental; no probado contra remoto
+```
+
+AG8 deja definido cómo:
+
+1. detectar link a proyecto incorrecto;
+2. comprobar `supabase/.temp/project-ref` tras un link futuro;
+3. abortar antes de migraciones/functions;
+4. limpiar estado local equivocado;
+5. revertir env vars;
+6. decidir cuándo rotar secrets;
+7. volver a `backendBlocked`;
+8. confirmar local/demo funcional;
+9. confirmar production intacto;
+10. registrar incidente.
+
+No se eleva a prueba remota porque AG8 no ejecuta link ni toca remoto.
+
+### Preflight local fresco AG8
+
+| Comando | Resultado |
+|---|---|
+| `git status --short` | Solo docs modificados: ADR-006, ADR-007 y tracker. |
+| `git diff --check` | Sin salida. |
+| `supabase start -x logflare` | PASS local; se excluye `logflare` por el fallo conocido de analytics local. |
+| `supabase db reset --local --no-seed` | PASS; migraciones 00001-00007 aplicadas localmente. |
+| `supabase test db --local` | PASS; 12 files, 394 tests. |
+| `bash supabase/tests/2b_iv_h_local_http_integration_test.sh` | PASS; cleanup `0|0|0|0|0|0`. |
+| `bash supabase/tests/2b_v_g_messages_http_integration_test.sh` | PASS; cleanup `0|0|0|0|0|0`. |
+| `flutter analyze --no-fatal-infos` | PASS con 43 infos preexistentes. |
+| `flutter test test/core/config test/architecture` | PASS; 66 tests. |
+| `flutter test test/features/chat_sessions test/features/chat_messages` | PASS; 202 tests. |
+| `flutter test` | PASS; 367 tests y 2 skips esperados. |
+| `supabase stop` | PASS; entorno local detenido. |
+
+Nota de seguridad: la CLI puede imprimir claves locales efímeras al arrancar
+Supabase local. No se registran en ADRs ni tracker y no autorizan remoto.
+
+### Checks no-secrets/no-remoto
+
+Resultado AG8:
+
+- `.env` existe, está vacío, no aparece en `git status` y está ignorado por
+  `.gitignore`;
+- `supabase/.temp` contiene solo `cli-latest`;
+- no existen `supabase/.temp/project-ref`, `supabase/.temp/pooler-url` ni
+  `supabase/.temp/access-token`;
+- no hay cambios de AG8 en `lib/`, `test/`, `pubspec.yaml` ni `supabase/`;
+- los hits de `service_role`, `SUPABASE_SERVICE_ROLE_KEY`, `Authorization`,
+  `access_token`, `refresh_token`, `/functions/v1/`, `supabase.co` y
+  `SupabaseChatDataSource` corresponden a tests, harness local, README local,
+  funciones locales o piezas heredadas auditadas y bloqueadas.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- project ref development real no verificado;
+- production ref no confirmado distinto o inexistente/no usado;
+- secrets development reales no verificados fuera del repo;
+- rollback no probado contra remoto real;
+- ejecutar link accidental antes de aportar evidencia externa.
+
+Altos:
+
+- production keys confundidas con development;
+- staging ref confundido con development;
+- secrets reales pegados en docs/prompts/screenshots;
+- `service_role` en Flutter;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter.
+
+Medios:
+
+- `.env` local vacío ignorado que debe permanecer no versionado;
+- falsos positivos de patrones sensibles en tests/harness/docs;
+- dependencia de `supabase start -x logflare` para el entorno local actual;
+- worktree documental acumulado.
+
+Bajos:
+
+- duplicidad documental entre ADR-006 y ADR-007;
+- nombres largos de paquetes;
+- infos no fatales de Flutter analyze.
+
+### Decisión AG8
+
+AG8 no desbloquea DEV LINK real. La decisión final permanece:
+
+```text
+READY WITH BLOCKERS
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG9 — resolver bloqueantes restantes DEV LINK
+```
+
+AG9 debe aportar evidencia externa sin secretos de project refs y secrets antes
+de plantear un paquete posterior que ejecute `supabase link`.
+
+## Revisión 2B-AG9 — bloqueantes externos DEV LINK
+
+### Estado
+
+2B-AG8 queda aprobado y cerrado formalmente. AG9 revisa los bloqueantes
+externos restantes para DEV LINK sin ejecutar `supabase link`, `supabase db
+push`, `supabase migration up` remoto, `supabase functions deploy` ni
+`supabase secrets set`.
+
+Readiness final:
+
+```text
+READY WITH BLOCKERS
+```
+
+No se puede pasar a `READY FOR DEV LINK` porque AG9 no aporta evidencia externa
+sin secretos que verifique el proyecto Supabase development, la separación con
+production/staging ni la ubicación real de secrets development fuera del repo.
+
+### Proyecto development verificado
+
+| Elemento | Estado AG9 | Clasificación |
+|---|---|---|
+| Proyecto Supabase development existe | Pendiente | Bloqueante |
+| Nombre indica dev/development | Pendiente | Bloqueante |
+| Organización/cuenta correcta | Pendiente | Bloqueante |
+| Región documentada | Pendiente | Pendiente |
+| Owner/responsable por rol | Pendiente | Pendiente |
+| Project ref development verificado fuera del repo | Pendiente | Bloqueante |
+| Project ref development no pegado en docs | Cumplido | No bloqueante |
+
+### Separación production
+
+Estado AG9:
+
+```text
+pendiente bloqueante
+```
+
+No consta evidencia externa de que production no exista/no se use todavía, ni
+de que production exista con ref distinto al development ref. Production sigue
+bloqueado: no se toca, no recibe migraciones, no recibe funciones, no contiene
+datos tocados por este flujo y no se usan production keys.
+
+### Separación staging si aplica
+
+Estado AG9:
+
+```text
+pendiente / no aplica hasta confirmación externa
+```
+
+Si staging existe, debe verificarse que su ref es distinto de development y
+production. Si staging no existe, debe registrarse como pendiente/no creado y
+no bloqueante siempre que development quede separado de production.
+
+### Secrets development fuera del repo
+
+| Elemento | Estado AG9 | Clasificación |
+|---|---|---|
+| `SUPABASE_URL` development | Pendiente | Pendiente bloqueante para conexión real |
+| `SUPABASE_ANON_KEY` development | Pendiente | Pendiente bloqueante para conexión real |
+| `PROJECT_REF` development | Pendiente | Pendiente bloqueante |
+| Edge Function secrets development | Pendiente | Pendiente antes de deploy |
+| JWT config development | Pendiente | Pendiente antes de auth real/remoto |
+| Rollback env vars | Pendiente | Pendiente bloqueante antes de link real |
+
+Reglas vigentes:
+
+- no secrets en docs;
+- no secrets en `SESSION_TRACKER.md`;
+- no secrets en prompts;
+- no secrets en screenshots visibles;
+- no `service_role` en Flutter;
+- no production keys en development;
+- no tokens en logs;
+- no `Authorization` ni `refresh_token` en logs.
+
+### Rollback remoto operativo
+
+Clasificación AG9:
+
+```text
+completo como runbook documental; no probado contra remoto
+```
+
+El runbook cubre:
+
+- detección de link a proyecto incorrecto;
+- comprobación futura de `supabase/.temp/project-ref`;
+- aborto antes de migraciones/functions;
+- limpieza de estado local equivocado;
+- reversión de env vars;
+- criterios de rotación de secrets si hubo exposición;
+- vuelta a `backendBlocked`;
+- confirmación de local/demo funcional;
+- confirmación de production intacto;
+- registro de incidente.
+
+### Preflight local
+
+AG9 no reejecuta el preflight pesado porque el objetivo del paquete es resolver
+bloqueantes externos y AG8 dejó evidencia local fresca aprobada:
+
+- `supabase start -x logflare`: PASS;
+- `supabase db reset --local --no-seed`: PASS;
+- `supabase test db --local`: PASS, 394 tests;
+- harness 2B-IV-H: PASS, cleanup `0|0|0|0|0|0`;
+- harness 2B-V-G: PASS, cleanup `0|0|0|0|0|0`;
+- `flutter analyze --no-fatal-infos`: PASS con 43 infos;
+- core/architecture: PASS, 66 tests;
+- chat_sessions/chat_messages: PASS, 202 tests;
+- `flutter test`: PASS, 367 tests y 2 skips esperados;
+- `supabase stop`: PASS.
+
+En AG9 se ejecutan checks finales de diff/no-remoto antes del cierre.
+
+### Checks no-secrets/no-remoto
+
+Resultado AG9:
+
+- `git diff --check`: sin salida;
+- diff de rutas críticas/código/Supabase/test: sin salida;
+- cambios limitados a ADR-006, ADR-007 y tracker;
+- `.env` local sigue tratado como archivo local ignorado/no versionado; no se
+  debe leer ni registrar su contenido;
+- `supabase/.temp/project-ref`, `pooler-url` y `access-token` no deben existir
+  antes de un paquete de link.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- project ref development incorrecto o no verificado;
+- production ref confundido con development;
+- staging ref confundido con development;
+- secrets reales pegados en docs/prompts/screenshots;
+- rollback no probado contra remoto;
+- link ejecutado accidentalmente.
+
+Altos:
+
+- `service_role` en Flutter;
+- production keys en development;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- tokens en logs.
+
+Medios:
+
+- `.env` local vacío/ignorado mal interpretado;
+- dependencia local de `supabase start -x logflare`;
+- worktree documental acumulado;
+- preflight pesado no reejecutado en AG9.
+
+Bajos:
+
+- duplicidad documental;
+- nombres largos de paquetes;
+- infos no fatales de análisis ya conocidas.
+
+### Decisión AG9
+
+AG9 no desbloquea DEV LINK real.
+
+```text
+READY WITH BLOCKERS
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG10 — resolver bloqueantes externos DEV LINK
+```
+
+AG10 debe aportar evidencia externa sin secretos de project refs, separación de
+entornos y secrets development. Si esa evidencia queda completa, podrá cerrar
+como `READY FOR DEV LINK` y preparar un paquete posterior para ejecutar link
+controlado.
+
+## Decisión 2B-AG1 — backend remoto development/staging y estrategia de despliegue
+
+### Estado
+
+2B-AG queda aprobado y cerrado formalmente. Backend remoto seguro queda
+planificado, no implementado. No se ha conectado Supabase real, auth real,
+development remoto, staging remoto, production ni datos reales.
+
+AG1 toma la decisión documental sobre secuencia de entornos remotos y estrategia
+de despliegue futura. No ejecuta comandos remotos ni prepara credenciales.
+
+### Secuencia de entornos remotos decidida
+
+Se comparan tres opciones:
+
+- Opcion A: development remoto primero con datos sinteticos; staging despues de
+  development validado; production bloqueado.
+- Opcion B: staging directamente.
+- Opcion C: continuar solo local-safe y retrasar remoto.
+
+Decision:
+
+```text
+Opcion A — development remoto primero.
+```
+
+Justificacion:
+
+- reduce blast radius;
+- permite validar migraciones, RLS, RPC, Edge Functions y logs con datos
+  sinteticos;
+- evita tratar staging como entorno experimental;
+- mantiene production bloqueado;
+- conserva rollback y evidence pack antes de promover.
+
+Staging queda posterior a un evidence pack de development validado y aprobacion
+explicita.
+
+### Estrategia de Supabase projects
+
+Decision objetivo:
+
+- Supabase development separado;
+- Supabase staging separado;
+- Supabase production futuro separado.
+
+Reglas:
+
+- no mezclar claves;
+- no usar production keys en development;
+- no usar production keys en staging;
+- secrets fuera del repo;
+- anon key como configuracion publica controlada;
+- `service_role` nunca en Flutter;
+- Edge Function secrets fuera del repo;
+- logs sin tokens.
+
+### Estrategia de despliegue futura
+
+Fases futuras decididas:
+
+1. Fase 0: evidence pack local actual.
+2. Fase 1: preparar proyecto development remoto.
+3. Fase 2: aplicar migraciones en development remoto con aprobacion.
+4. Fase 3: desplegar Edge Functions en development remoto con aprobacion.
+5. Fase 4: pruebas sinteticas development.
+6. Fase 5: promocion a staging con aprobacion.
+7. Fase 6: production bloqueado.
+
+No se ejecuta ninguna fase en AG1.
+
+### Comandos permitidos y prohibidos
+
+Prohibidos en AG1:
+
+- `supabase link`;
+- `supabase db push`;
+- `supabase migration up` remoto;
+- `supabase functions deploy`;
+- `supabase secrets set` remoto;
+- deploy staging;
+- deploy production.
+
+En paquetes futuros solo podran ejecutarse si existe:
+
+- aprobacion explicita;
+- entorno objetivo claro;
+- proyecto Supabase no productivo;
+- secrets fuera del repo;
+- rollback definido;
+- evidence pack previo.
+
+### Evidence pack antes de remoto
+
+Antes de tocar remoto debe existir como minimo:
+
+- `git status` limpio o cambios identificados;
+- migraciones auditadas;
+- RLS auditada;
+- RPC auditada;
+- Edge Functions auditadas;
+- tests SQL/local pasados;
+- tests HTTP/local pasados;
+- tests Flutter pasados;
+- tests arquitectura pasados;
+- tests no-secrets pasados;
+- checklist de variables/secrets;
+- checklist de rollback.
+
+### Estrategia de migraciones development
+
+Proceso futuro:
+
+1. crear proyecto development;
+2. vincular solo con aprobacion;
+3. aplicar migraciones controladamente;
+4. verificar tablas;
+5. verificar grants;
+6. verificar RLS;
+7. verificar RPC;
+8. cargar seed sintetico si se aprueba;
+9. confirmar ausencia de datos reales;
+10. documentar rollback.
+
+No se ejecuta en AG1.
+
+### Estrategia Edge Functions development
+
+Proceso futuro:
+
+- desplegar funciones solo en development;
+- validar JWT real;
+- validar payload;
+- rechazar `userId`/`ownerUserId` desde UI;
+- rechazar `role` desde UI;
+- errores explicitos y opacos cuando corresponda;
+- sin fallback demo;
+- logs minimizados;
+- rollback de funcion.
+
+Funciones relevantes:
+
+- `create-own-chat-session`;
+- `list-own-chat-sessions`;
+- `archive-own-chat-session`;
+- `send-user-message`;
+- `list-session-messages`.
+
+### Criterios para pasar a staging
+
+Staging solo podra abrirse si:
+
+- development remoto esta validado;
+- solo se usaron datos sinteticos;
+- tests de integracion remota pasaron;
+- RLS ownership fue validada;
+- Edge Functions fueron validadas;
+- logs fueron auditados;
+- no hay leaks de tokens;
+- rollback esta probado o documentado;
+- existe aprobacion explicita.
+
+### Production bloqueado
+
+Decision firme:
+
+- production no se toca;
+- production no se vincula;
+- production no recibe migraciones;
+- production no recibe Edge Functions;
+- production no recibe datos reales;
+- production requiere ADR y gates separados.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- link al proyecto equivocado;
+- `db push` contra production;
+- `functions deploy` contra production;
+- production keys en development;
+- production keys en staging;
+- `service_role` en cliente;
+- secrets en repo;
+- datos reales en development/staging.
+
+Altos:
+
+- RLS incompleta;
+- Edge Function acepta `userId` desde UI;
+- logs con tokens;
+- fallback demo desde error real;
+- `SupabaseChatDataSource` reactivado;
+- writes directos desde Flutter;
+- staging tratado como development experimental.
+
+Medios:
+
+- evidence pack incompleto;
+- rollback no probado;
+- seeds sinteticos persistentes sin cleanup;
+- `backendReal` legacy confundido con modo objetivo;
+- errores remotos filtrando existencia de recursos ajenos.
+
+Bajos:
+
+- nombres de entorno ambiguos;
+- documentacion duplicada;
+- copy de errores poco claro.
+
+### Recomendacion final
+
+Cerrar AG1 como decision. No conectar remoto todavia. Preparar primero un
+evidence pack de backend remoto development antes de cualquier `link`, push o
+deploy.
+
+### Siguiente paquete propuesto
+
+Siguiente recomendado:
+
+```text
+2B-AG2 — evidence pack backend remoto development
+```
+
+Alternativas:
+
+- `2B-AG2 — plan conexion development remoto con datos sinteticos`;
+- `2B-AF7 — plan conexion development Supabase sintetica`;
+- `2B-AE4 — plan /conversations backendBlocked visual`.
+
+No implementar todavia.
