@@ -17,7 +17,7 @@ END
 $$;
 
 CREATE TABLE public.specialist_catalog (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT extensions.uuid_generate_v4(),
   specialist_id UUID NOT NULL UNIQUE
     REFERENCES public.specialists(id) ON DELETE RESTRICT,
   display_name TEXT NOT NULL,

@@ -17,9 +17,15 @@ if rg -n 'supabase\.co([/:]|$)|project_ref|SUPABASE_ACCESS_TOKEN' \
 fi
 
 eval "$(supabase status -o env 2>/dev/null | sed -n '/^[A-Z_]*=/p')"
-case "${API_URL:-}|${FUNCTIONS_URL:-}" in
-  http://127.0.0.1:54321\|http://127.0.0.1:54321/functions/v1|\
-  http://localhost:54321\|http://localhost:54321/functions/v1) ;;
+case "${API_URL:-}" in
+  http://127.0.0.1:54321|http://localhost:54321) ;;
+  *) echo "Supabase API endpoint is not an approved local endpoint" >&2; exit 1 ;;
+esac
+if [ -z "${FUNCTIONS_URL:-}" ]; then
+  FUNCTIONS_URL="${API_URL%/}/functions/v1"
+fi
+case "$FUNCTIONS_URL" in
+  http://127.0.0.1:54321/functions/v1|http://localhost:54321/functions/v1) ;;
   *) echo "Supabase endpoints are not approved local endpoints" >&2; exit 1 ;;
 esac
 

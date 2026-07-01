@@ -1,5 +1,6 @@
 -- Extensión para UUID
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA extensions;
+SET search_path = public, extensions;
 
 -- Usuarios (extiende auth.users)
 CREATE TABLE public.users (

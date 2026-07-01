@@ -13082,6 +13082,1339 @@ Alternativas validas:
 
 No implementar todavia.
 
+## Intento 2B-AG17 — migration up development controlado
+
+### Estado para catálogo y frontera backend
+
+2B-AG16 queda aprobado y cerrado formalmente como `MIGRATION STRATEGY READY`.
+AG17 fue autorizado para ejecutar una única vez `supabase migration up` contra
+Stasisly Development, sin deploy de Edge Functions, sin `secrets set`, sin
+Flutter remoto y sin datos reales, solo si el preflight local completo pasaba.
+
+AG17 se bloquea antes de cualquier comando remoto modificador.
+
+### Preflight ejecutado
+
+Evidencia no sensible:
+
+- `git status --short`: solo cambios documentales pendientes en ADR-006,
+  ADR-007 y tracker;
+- `git diff --check`: sin salida;
+- `supabase/.temp/project-ref`: existe;
+- `supabase/.temp/project-ref`: ignorado por Git;
+- `.env`: ignorado por Git;
+- `supabase migration list`: locales `00001` a `00007`, remoto sin
+  migraciones aplicadas.
+
+Bloqueo:
+
+```text
+supabase db reset --local --no-seed
+```
+
+Resultado:
+
+```text
+supabase start is not running.
+```
+
+### Decisión
+
+Al fallar el preflight, no se ejecuta:
+
+- `supabase migration up`;
+- `supabase db push`;
+- `supabase functions deploy`;
+- `supabase secrets set`;
+- `supabase db pull`;
+- `supabase db reset` remoto;
+- `supabase db remote commit`.
+
+No se modifican migraciones, Edge Functions, Flutter, rutas, chat heredado,
+`/conversations`, `/chat/:id`, `/orchestrator/chat`, `SupabaseChatDataSource`,
+auth real, backend real desde Flutter, datos reales, staging ni production.
+
+### Readiness final
+
+```text
+MIGRATION UP BLOCKED
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG17-R — reintento migration up development controlado
+```
+
+El reintento debe arrancar Supabase local explícitamente, repetir todo el
+preflight y mantener `supabase migration up` como único comando remoto
+modificador autorizado si todos los gates pasan.
+
+## Reintento 2B-AG17-R — migration up development controlado
+
+### Estado para catálogo y frontera backend
+
+2B-AG17 queda aprobado como bloqueo correcto. AG17-R arranca Supabase local,
+repite el preflight completo y ejecuta una única vez el comando autorizado:
+
+```text
+supabase migration up
+```
+
+### Supabase local
+
+El arranque normal falla por `analytics/logflare` no saludable. Se usa una sola
+vez el fallback autorizado:
+
+```text
+supabase start -x logflare
+```
+
+Supabase local queda arrancado con API, DB, Auth, REST y Edge Functions locales
+disponibles. Las claves locales efímeras impresas por la CLI no se registran en
+documentación.
+
+### Preflight ejecutado
+
+Preflight completado:
+
+- `git status --short`: solo cambios documentales en ADR-006, ADR-007 y
+  tracker;
+- `git diff --check`: sin salida;
+- `supabase/.temp/project-ref`: existe y está ignorado;
+- `.env`: ignorado;
+- `supabase migration list`: remoto sin migraciones aplicadas, locales `00001`
+  a `00007`;
+- `supabase db reset --local --no-seed`: pasa y aplica `00001` a `00007` en
+  local;
+- `supabase test db --local`: PASS, 394 tests;
+- `2b_iv_h_local_http_integration_test.sh`: PASS, cleanup `0|0|0|0|0|0`;
+- `2b_v_g_messages_http_integration_test.sh`: PASS, cleanup `0|0|0|0|0|0`;
+- `flutter analyze --no-fatal-infos`: PASS con 43 infos;
+- `flutter test test/core/config test/architecture`: PASS;
+- `flutter test test/features/chat_sessions test/features/chat_messages`: PASS;
+- `flutter test`: PASS con 367 tests y 2 skips esperados.
+
+### Resultado de migration up
+
+El comando autorizado se ejecuta una única vez:
+
+```text
+supabase migration up
+```
+
+Resultado observado:
+
+```text
+Connecting to local database...
+Local database is up to date.
+```
+
+La ayuda de la CLI instalada indica que `supabase migration up` aplica por
+defecto contra la base local y que para el proyecto enlazado requiere
+`--linked`. Como `--linked` no estaba autorizado explícitamente en AG17-R, no se
+repite el comando ni se cambian flags.
+
+### Estado remoto posterior
+
+`supabase migration list` posterior confirma:
+
+- locales: `00001` a `00007`;
+- remoto: sin migraciones aplicadas;
+- remoto development: sin cambios por AG17-R.
+
+### Decisión
+
+AG17-R queda bloqueado por semántica de CLI/target no alcanzado. No se ejecuta:
+
+- `supabase db push`;
+- `supabase functions deploy`;
+- `supabase secrets set`;
+- `supabase db pull`;
+- `supabase db reset` remoto;
+- `supabase db remote commit`;
+- `supabase migration up --linked`.
+
+No se modifican migraciones, Edge Functions, Flutter, rutas, chat heredado,
+`/conversations`, `/chat/:id`, `/orchestrator/chat`, `SupabaseChatDataSource`,
+auth real, backend real desde Flutter, datos reales, staging ni production.
+
+### Readiness final
+
+```text
+MIGRATION FAILED / BLOCKED
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG18 — autorizar migration up --linked development o corrección de comando
+```
+
+AG18 debe decidir explícitamente si se autoriza `supabase migration up --linked`
+contra Stasisly Development, repitiendo antes el preflight requerido.
+
+## Ejecución 2B-AG18 — migration up --linked development controlado
+
+### Estado para catálogo y frontera backend
+
+2B-AG17-R queda aprobado como bloqueo correcto por semántica de CLI: el comando
+`supabase migration up` apuntó a local por defecto y no aplicó migraciones
+remotas. AG18 autoriza explícitamente:
+
+```text
+supabase migration up --linked
+```
+
+como único comando remoto modificador contra Stasisly Development.
+
+### Preflight ejecutado
+
+Preflight completo aprobado:
+
+- Supabase local ya estaba arrancado; servicios críticos disponibles;
+- `git status --short`: solo cambios documentales en ADR-006, ADR-007 y
+  tracker;
+- `git diff --check`: sin salida;
+- `supabase/.temp/project-ref`: existe y está ignorado;
+- `.env`: ignorado;
+- `supabase migration list`: remoto sin migraciones aplicadas, locales `00001`
+  a `00007`;
+- `supabase db reset --local --no-seed`: PASS;
+- `supabase test db --local`: PASS, 394 tests;
+- `2b_iv_h_local_http_integration_test.sh`: PASS, cleanup `0|0|0|0|0|0`;
+- `2b_v_g_messages_http_integration_test.sh`: PASS, cleanup `0|0|0|0|0|0`;
+- `flutter analyze --no-fatal-infos`: PASS con 43 infos;
+- `flutter test test/core/config test/architecture`: PASS;
+- `flutter test test/features/chat_sessions test/features/chat_messages`: PASS;
+- `flutter test`: PASS con 367 tests y 2 skips esperados.
+
+### Target confirmado
+
+- proyecto objetivo: Stasisly Development;
+- región: eu-central-1;
+- production: NO;
+- staging: NO;
+- datos reales: NO;
+- migraciones remotas antes: ninguna;
+- migraciones locales pendientes: `00001` a `00007`.
+
+### Resultado de migration up --linked
+
+El comando remoto autorizado se ejecuta una única vez:
+
+```text
+supabase migration up --linked
+```
+
+Falla al aplicar `00001_initial_schema.sql`:
+
+```text
+ERROR: function uuid_generate_v4() does not exist (SQLSTATE 42883)
+```
+
+Contexto no sensible: el fallo ocurre al crear `public.memberships`, cuyo `id`
+usa `DEFAULT uuid_generate_v4()`. La CLI mostró previamente un aviso de que la
+extensión `uuid-ossp` ya existía, pero la función no queda disponible en el
+contexto esperado por la migración remota.
+
+### Estado remoto posterior
+
+`supabase migration list` posterior confirma:
+
+- locales: `00001` a `00007`;
+- remoto: sin migraciones aplicadas;
+- historial remoto: ninguna versión marcada como aplicada.
+
+### Decisión
+
+AG18 queda bloqueado por fallo de migración remota. No se ejecuta:
+
+- `supabase db push`;
+- `supabase functions deploy`;
+- `supabase secrets set`;
+- `supabase db pull`;
+- `supabase db reset` remoto;
+- `supabase db remote commit`;
+- `supabase migration repair`;
+- `supabase migration squash`;
+- arreglos manuales remotos.
+
+No se modifican migraciones, Edge Functions, Flutter, rutas, chat heredado,
+`/conversations`, `/chat/:id`, `/orchestrator/chat`, `SupabaseChatDataSource`,
+auth real, backend real desde Flutter, datos reales, staging ni production.
+
+### Readiness final
+
+```text
+MIGRATION FAILED / BLOCKED
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG19 — rollback/corrección migration development
+```
+
+AG19 debe analizar la causa de `uuid_generate_v4()` ausente en remoto y decidir
+la corrección mínima sin usar `db push`, sin repair automático, sin production,
+sin staging y sin datos reales.
+
+## Corrección 2B-AG19 — uuid_generate_v4 development
+
+### Estado para catálogo y frontera backend
+
+2B-AG18 queda aprobado como bloqueo correcto: `supabase migration up --linked`
+falló en `00001_initial_schema.sql` antes de registrar migraciones remotas como
+aplicadas. AG19 corrige únicamente la causa local de resolución de
+`uuid_generate_v4()` y no reintenta migraciones remotas.
+
+### Causa verificada
+
+`00001_initial_schema.sql` ya creaba la extensión `uuid-ossp`, pero usaba
+`uuid_generate_v4()` sin cualificar. La inspección local confirmó que la función
+está disponible como:
+
+```text
+extensions.uuid_generate_v4
+```
+
+Por tanto, el fallo remoto se clasifica como problema de `search_path`/esquema
+de extensión: la extensión existía, pero la función no estaba resoluble en el
+contexto de ejecución remoto.
+
+### Corrección aplicada
+
+Se modifica solo `supabase/migrations/00001_initial_schema.sql`:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA extensions;
+SET search_path = public, extensions;
+```
+
+No se modifican otras migraciones, tablas, políticas, Edge Functions, Flutter,
+rutas, CI ni configuración.
+
+### Validación local
+
+Validación ejecutada y aprobada:
+
+- `git diff --check`: sin salida;
+- `supabase db reset --local --no-seed`: PASS, aplica `00001` a `00007`;
+- `supabase test db --local`: PASS, 394 tests;
+- `2b_iv_h_local_http_integration_test.sh`: PASS, cleanup `0|0|0|0|0|0`;
+- `2b_v_g_messages_http_integration_test.sh`: PASS, cleanup `0|0|0|0|0|0`;
+- `flutter analyze --no-fatal-infos`: PASS con 43 infos existentes;
+- `flutter test test/core/config test/architecture`: PASS;
+- `flutter test test/features/chat_sessions test/features/chat_messages`: PASS,
+  202 tests;
+- `flutter test`: PASS, 367 tests y 2 skips esperados.
+
+### Inspección remota no destructiva
+
+No se ejecuta `supabase migration up --linked`. Inspección remota:
+
+- `supabase migration list`: remoto sin migraciones aplicadas;
+- `supabase inspect db table-stats --linked`: no devuelve tablas visibles;
+- `supabase db dump --linked --schema public`: falla por autenticación del
+  usuario interno de la CLI contra el pooler, sin modificar remoto.
+
+Conclusión: no se detectan tablas parciales ni historial remoto aplicado, pero
+la evidencia de esquema remoto queda clasificada como parcial porque el dump de
+`public` no pudo repetirse en AG19.
+
+### Readiness final
+
+```text
+UUID FIX READY
+```
+
+### Riesgos residuales
+
+- Riesgo bajo-medio: el dump remoto de `public` falló por autenticación del
+  usuario interno de la CLI; `migration list` e inspección de tablas sí
+  apuntan a remoto sin migraciones ni tablas visibles.
+- Riesgo bajo: `00004_create_specialist_catalog_deny_all.sql` también usa
+  `uuid_generate_v4()` sin cualificar, pero el reset local completo aplicó
+  `00001` a `00007` correctamente tras fijar el `search_path` en `00001`.
+- Riesgo controlado: cualquier nuevo reintento remoto debe repetir preflight y
+  detenerse ante el primer fallo.
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG20 — reintento migration up --linked development tras uuid fix
+```
+
+AG20 debe repetir preflight local completo, confirmar de nuevo estado remoto
+sin migraciones aplicadas y ejecutar `supabase migration up --linked` solo si se
+aprueba explícitamente.
+
+## Ejecución 2B-AG20 — migration up --linked development tras UUID fix
+
+### Estado para catálogo y frontera backend
+
+2B-AG19 queda aprobado y cerrado formalmente como `UUID FIX READY`. AG20 queda
+autorizado para reintentar una única vez:
+
+```text
+supabase migration up --linked
+```
+
+contra Stasisly Development, tras repetir preflight local completo.
+
+### Preflight ejecutado
+
+Preflight completo aprobado:
+
+- Supabase local ya estaba arrancado; servicios críticos disponibles;
+- `git status --short`: cambios preexistentes de AG19 en documentación y
+  `supabase/migrations/00001_initial_schema.sql`;
+- `git diff --check`: sin salida;
+- `supabase/.temp/project-ref`: existe y está ignorado;
+- `.env`: ignorado;
+- `supabase migration list`: antes del reintento, remoto sin migraciones
+  aplicadas, locales `00001` a `00007`;
+- `supabase db reset --local --no-seed`: PASS, aplica `00001` a `00007`;
+- `supabase test db --local`: PASS, 394 tests;
+- `2b_iv_h_local_http_integration_test.sh`: PASS, cleanup `0|0|0|0|0|0`;
+- `2b_v_g_messages_http_integration_test.sh`: PASS, cleanup `0|0|0|0|0|0`;
+- `flutter analyze --no-fatal-infos`: PASS con 43 infos existentes;
+- `flutter test test/core/config test/architecture`: PASS;
+- `flutter test test/features/chat_sessions test/features/chat_messages`: PASS,
+  202 tests;
+- `flutter test`: PASS, 367 tests y 2 skips esperados.
+
+### Target confirmado
+
+- proyecto objetivo: Stasisly Development;
+- región: eu-central-1;
+- production: NO;
+- staging: NO;
+- datos reales: NO;
+- migraciones remotas antes del reintento: ninguna;
+- migraciones locales pendientes antes del reintento: `00001` a `00007`;
+- corrección UUID de `00001`: aplicada y validada localmente.
+
+### Resultado de migration up --linked
+
+El único comando remoto modificador autorizado se ejecuta una vez:
+
+```text
+supabase migration up --linked
+```
+
+Resultado:
+
+- `00001_initial_schema.sql`: aplicado;
+- `00002_enable_rls_public_users_deny_all.sql`: aplicado;
+- `00003_public_users_owner_profile_minimal.sql`: aplicado;
+- `00004_create_specialist_catalog_deny_all.sql`: falla.
+
+Error no sensible:
+
+```text
+ERROR: function uuid_generate_v4() does not exist (SQLSTATE 42883)
+```
+
+Contexto: el fallo ocurre al crear `public.specialist_catalog`, cuyo `id` usa
+`DEFAULT uuid_generate_v4()`. `00004` también requiere corrección de resolución
+de UUID.
+
+### Estado remoto posterior
+
+`supabase migration list` posterior confirma:
+
+- remoto aplicado: `00001`, `00002`, `00003`;
+- remoto pendiente: `00004`, `00005`, `00006`, `00007`;
+- estado: remoto parcialmente migrado.
+
+`supabase inspect db table-stats --linked` muestra tablas visibles de las
+migraciones aplicadas con 0 filas estimadas. No se ejecuta limpieza, reparación
+ni rollback remoto.
+
+### Decisión
+
+AG20 queda bloqueado por fallo en `00004`. No se ejecuta:
+
+- `supabase db push`;
+- `supabase migration up` sin `--linked`;
+- `supabase functions deploy`;
+- `supabase secrets set`;
+- `supabase db pull`;
+- `supabase db reset` remoto;
+- `supabase db remote commit`;
+- `supabase migration repair`;
+- `supabase migration squash`;
+- arreglos manuales remotos.
+
+No se modifican migraciones en AG20, Edge Functions, Flutter, rutas, chat
+heredado, `/conversations`, `/chat/:id`, `/orchestrator/chat`,
+`SupabaseChatDataSource`, auth real, backend real desde Flutter, datos reales,
+staging ni production.
+
+### Readiness final
+
+```text
+MIGRATION FAILED / BLOCKED
+```
+
+### Riesgos clasificados
+
+- Bloqueante: remoto development queda parcialmente migrado con `00001` a
+  `00003` aplicadas y `00004` a `00007` pendientes.
+- Bloqueante: `00004` usa `uuid_generate_v4()` sin contexto resoluble en remoto.
+- Medio: las tablas visibles del remoto tienen 0 filas estimadas, pero el estado
+  parcial requiere estrategia antes de cualquier reintento.
+- Bajo: no se detecta exposición de secrets en documentación; las claves locales
+  efímeras impresas por CLI no se registran.
+- Bajo: no se ejecutó `db push`, `migration repair`, `migration squash`,
+  deploy, secrets set, production ni staging.
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG21 — rollback/corrección migration development
+```
+
+AG21 debe decidir cómo tratar el estado parcial remoto development y corregir
+`00004` sin usar `db push`, sin repair/squash automático, sin production,
+sin staging y sin datos reales.
+
+## Corrección 2B-AG21 — 00004 y remoto parcial development
+
+### Estado para catálogo y frontera backend
+
+2B-AG20 queda aprobado como bloqueo correcto. El remoto development quedó
+parcialmente migrado:
+
+- aplicadas: `00001`, `00002`, `00003`;
+- pendientes: `00004`, `00005`, `00006`, `00007`;
+- fallo: `uuid_generate_v4()` no resoluble en `00004`.
+
+AG21 queda autorizado solo para corrección local de `00004`, validación local e
+inspección remota no destructiva. No se autoriza reintentar
+`supabase migration up --linked`.
+
+### Revisión de 00004
+
+`supabase/migrations/00004_create_specialist_catalog_deny_all.sql` contenía una
+única llamada a `uuid_generate_v4()`:
+
+```sql
+id UUID PRIMARY KEY DEFAULT uuid_generate_v4()
+```
+
+La migración no declaraba `SET search_path` ni cualificaba la función. Por tanto
+dependía de un `search_path` no garantizado en remoto.
+
+### Búsqueda de patrón UUID
+
+Resultado de búsqueda:
+
+- `00001_initial_schema.sql`: mantiene llamadas sin cualificar, pero AG19 añadió
+  `CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA extensions;` y
+  `SET search_path = public, extensions;`; validado localmente.
+- `00004_create_specialist_catalog_deny_all.sql`: tenía una llamada sin
+  cualificar; corregida en AG21.
+- `00005` a `00007`: no contienen `uuid_generate_v4()`.
+
+### Corrección aplicada
+
+Se modifica solo `00004_create_specialist_catalog_deny_all.sql`:
+
+```sql
+id UUID PRIMARY KEY DEFAULT extensions.uuid_generate_v4()
+```
+
+No se cambian tablas, constraints, RLS, políticas, datos, nombres ni semántica
+de catálogo.
+
+### Validación local
+
+Validación ejecutada:
+
+- `git diff --check`: sin salida;
+- `supabase db reset --local --no-seed`: PASS, aplica `00001` a `00007`;
+- `supabase test db --local`: PASS, 394 tests;
+- `2b_iv_h_local_http_integration_test.sh`: bloqueado en preflight
+  anti-remoto.
+
+El harness 2B-IV-H falla con:
+
+```text
+Supabase endpoints are not approved local endpoints
+```
+
+Inspección local no sensible posterior muestra que `supabase status -o env`
+emite `API_URL`, pero no `FUNCTIONS_URL`, y el harness exige ambas variables
+para ejecutar únicamente contra endpoints locales aprobados.
+
+Por la regla de AG21, se detiene la validación al primer fallo. No se ejecutan
+los pasos posteriores ni la inspección remota de AG21.
+
+### Estado remoto parcial
+
+No se ejecuta inspección remota adicional en AG21 tras el fallo local del
+harness. Se conserva el último estado verificado en AG20:
+
+- remoto aplicado: `00001`, `00002`, `00003`;
+- remoto pendiente: `00004`, `00005`, `00006`, `00007`;
+- tablas visibles: sí, con 0 filas estimadas según AG20;
+- datos reales: no detectados en AG20 por filas estimadas, no revalidado en
+  AG21.
+
+### Readiness final
+
+```text
+UUID FIX BLOCKED
+```
+
+### Riesgos clasificados
+
+- Bloqueante: la validación local completa de AG21 no termina porque el harness
+  HTTP local no recibe `FUNCTIONS_URL` desde `supabase status -o env`.
+- Bloqueante: remoto development sigue parcialmente migrado con `00001` a
+  `00003` aplicadas y `00004` a `00007` pendientes.
+- Medio: `00004` queda corregida localmente, pero no se autoriza reintento
+  remoto hasta resolver/revalidar el harness.
+- Bajo: no se ejecutó `db push`, `migration up`, `migration up --linked`,
+  repair, squash, reset remoto, deploy, secrets set, production ni staging.
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG22 — corrección adicional 00004
+```
+
+AG22 debe resolver la causa local del harness 2B-IV-H sin exponer secretos y
+repetir la validación antes de decidir cualquier reintento remoto.
+
+## Corrección 2B-AG22 — FUNCTIONS_URL local-safe
+
+### Estado para catálogo y frontera backend
+
+2B-AG21 queda aprobado como bloqueo correcto. `00004` quedó corregida
+localmente, pero la validación completa se bloqueó porque los harness HTTP
+locales esperaban `FUNCTIONS_URL` desde `supabase status -o env`, y la CLI no lo
+emitía.
+
+AG22 queda autorizado solo para corregir los harness locales, sin tocar remoto
+ni reintentar migraciones.
+
+### Inspección de harness
+
+Los harness afectados eran:
+
+- `supabase/tests/2b_iv_h_local_http_integration_test.sh`;
+- `supabase/tests/2b_v_g_messages_http_integration_test.sh`.
+
+Ambos validaban el par `API_URL|FUNCTIONS_URL` contra endpoints locales exactos,
+pero si `FUNCTIONS_URL` faltaba abortaban antes de poder derivarlo de un
+`API_URL` local aprobado.
+
+### Corrección aplicada
+
+En ambos harness:
+
+- se valida primero que `API_URL` sea exactamente
+  `http://127.0.0.1:54321` o `http://localhost:54321`;
+- si `FUNCTIONS_URL` falta, se deriva como
+  `${API_URL%/}/functions/v1`;
+- se valida después que `FUNCTIONS_URL` sea exactamente
+  `http://127.0.0.1:54321/functions/v1` o
+  `http://localhost:54321/functions/v1`;
+- cualquier valor vacío, `https`, remoto, dominio externo, project ref, pooler
+  URL o connection string queda bloqueado por el preflight existente o por la
+  validación exacta.
+
+No se relaja el control anti-remoto.
+
+### Validación local
+
+Validación ejecutada y aprobada:
+
+- `git diff --check`: sin salida;
+- `supabase db reset --local --no-seed`: PASS, aplica `00001` a `00007`;
+- `supabase test db --local`: PASS, 394 tests;
+- `2b_iv_h_local_http_integration_test.sh`: PASS, cleanup `0|0|0|0|0|0`;
+- `2b_v_g_messages_http_integration_test.sh`: PASS, cleanup `0|0|0|0|0|0`;
+- `flutter analyze --no-fatal-infos`: PASS con 43 infos existentes;
+- `flutter test test/core/config test/architecture`: PASS;
+- `flutter test test/features/chat_sessions test/features/chat_messages`: PASS,
+  202 tests;
+- `flutter test`: PASS, 367 tests y 2 skips esperados.
+
+### Estado remoto parcial
+
+Única inspección remota ejecutada:
+
+```text
+supabase migration list
+```
+
+Resultado:
+
+- remoto aplicado: `00001`, `00002`, `00003`;
+- remoto pendiente: `00004`, `00005`, `00006`, `00007`;
+- no se ejecuta `migration up --linked`, `db push`, repair, squash, reset
+  remoto, deploy ni secrets set.
+
+### Readiness final
+
+```text
+HARNESS FIX READY
+```
+
+### Riesgos clasificados
+
+- Bloqueante: remoto development sigue parcialmente migrado hasta aprobar un
+  reintento o estrategia de limpieza.
+- Medio: un futuro reintento remoto debe arrancar desde `00004` y detenerse al
+  primer fallo.
+- Bajo: anti-remoto sigue estricto; `FUNCTIONS_URL` solo se deriva desde
+  `API_URL` local exacto.
+- Bajo: no se ejecutaron comandos remotos modificadores ni se expusieron
+  secretos.
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG23 — reintento migration up --linked desde 00004
+```
+
+AG23 debe repetir el preflight local completo y ejecutar `supabase migration up
+--linked` solo si se aprueba explícitamente.
+
+## Ejecución 2B-AG23 — migration up --linked desde 00004
+
+### Estado para catálogo y frontera backend
+
+2B-AG22 queda aprobado y cerrado formalmente como `HARNESS FIX READY`.
+AG23 queda autorizado para reintentar una sola vez:
+
+```text
+supabase migration up --linked
+```
+
+contra el proyecto Supabase development enlazado, sin `db push`, sin deploy,
+sin secrets, sin repair, sin squash, sin reset remoto, sin production, sin
+staging y sin datos reales.
+
+### Preflight local
+
+Antes del remoto modificador se repite el preflight local completo:
+
+- Supabase local: arrancado sin registrar claves locales efímeras.
+- `git status --short`: solo muestra cambios esperados de documentación,
+  migraciones previas AG19/AG21 y harness AG22.
+- `git diff --check`: sin salida.
+- `supabase/.temp/project-ref`: existe y está ignorado.
+- `.env`: ignorado.
+- `supabase migration list` antes: remoto con `00001`, `00002`, `00003`
+  aplicadas y `00004`, `00005`, `00006`, `00007` pendientes.
+- `supabase db reset --local --no-seed`: PASS, aplica `00001` a `00007`.
+- `supabase test db --local`: PASS, 394 tests.
+- `2b_iv_h_local_http_integration_test.sh`: PASS, cleanup
+  `0|0|0|0|0|0`.
+- `2b_v_g_messages_http_integration_test.sh`: PASS, cleanup
+  `0|0|0|0|0|0`.
+- `flutter analyze --no-fatal-infos`: PASS con 43 infos existentes.
+- `flutter test test/core/config test/architecture`: PASS.
+- `flutter test test/features/chat_sessions test/features/chat_messages`:
+  PASS, 202 tests.
+- `flutter test`: PASS, 367 tests y 2 skips esperados.
+
+### Target confirmado
+
+Target confirmado documentalmente:
+
+- proyecto objetivo: Stasisly Development;
+- región: `eu-central-1`;
+- production: NO;
+- staging: NO;
+- datos reales: NO;
+- estado remoto antes: `00001` a `00003` aplicadas, `00004` a `00007`
+  pendientes;
+- corrección `00004` aplicada localmente: sí;
+- harness local-safe corregido: sí.
+
+No se registra project ref, anon key, service role, JWT secret, tokens, pooler
+URL, connection strings ni claves locales efímeras.
+
+### Ejecución remota autorizada
+
+Se ejecuta una sola vez:
+
+```text
+supabase migration up --linked
+```
+
+Resultado: PASS.
+
+Migraciones aplicadas en remoto development durante AG23:
+
+- `00004_create_specialist_catalog_deny_all.sql`;
+- `00005_harden_chat_sessions_deny_all.sql`;
+- `00006_harden_messages_deny_all.sql`;
+- `00007_create_send_user_message_core_rpc.sql`.
+
+### Verificación post-migration
+
+Verificación posterior:
+
+- `supabase migration list`: local y remoto alineados de `00001` a `00007`.
+- `supabase inspect db table-stats --linked`: tablas visibles en `public`
+  con 0 filas estimadas.
+- `git status --short`: sin cambios inesperados de código; solo cambios
+  conocidos/versionables ya identificados.
+- `git diff --check`: sin salida.
+
+### Comandos explícitamente no ejecutados
+
+No se ejecutan:
+
+- `supabase db push`;
+- `supabase migration up` sin `--linked`;
+- `supabase functions deploy`;
+- `supabase secrets set`;
+- `supabase db pull`;
+- reset remoto;
+- `supabase db remote commit`;
+- `supabase migration repair`;
+- `supabase migration squash`.
+
+Tampoco se modifica Flutter, rutas, Edge Functions, chat heredado, auth real,
+backend real desde Flutter, production, staging ni datos reales.
+
+### Readiness final
+
+```text
+MIGRATIONS APPLIED
+```
+
+### Riesgos clasificados
+
+- Bloqueante resuelto en AG23: remoto development ya no queda parcialmente
+  migrado entre `00003` y `00004`.
+- Alto residual: development remoto ya tiene esquema aplicado, pero no implica
+  backend productivo, auth real, datos reales, funciones desplegadas ni UI
+  conectada.
+- Medio: falta evidence post-migration remoto específico de catálogo,
+  sesiones, mensajes, RLS, grants, RPC, Edge Functions y ausencia de datos
+  reales más allá de filas estimadas.
+- Bajo: `migration up --linked` fue el único comando remoto modificador
+  ejecutado y quedó alineado con el historial local.
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG24 — evidence post-migration development
+```
+
+AG24 debe obtener evidencia remota no destructiva posterior a migraciones, sin
+deploy de Edge Functions, sin secrets set, sin conectar Flutter y sin datos
+reales.
+
+## Evidence 2B-AG24 — post-migration development no destructivo
+
+### Estado para catálogo y frontera backend
+
+2B-AG23 queda aprobado y cerrado formalmente como `MIGRATIONS APPLIED`.
+Development remoto tiene migraciones `00001` a `00007` aplicadas y AG24 queda
+autorizado solo para evidence post-migration no destructivo.
+
+AG24 no autoriza deploy de Edge Functions, `secrets set`, `db push`, nuevas
+migraciones, SQL remoto directo, dumps, seeds, datos reales, Flutter, rutas,
+auth real, backend real desde Flutter, production ni staging.
+
+### Migraciones verificadas
+
+Comando no destructivo ejecutado:
+
+```text
+supabase migration list
+```
+
+Resultado:
+
+- local/remoto alineados;
+- development remoto tiene `00001`, `00002`, `00003`, `00004`, `00005`,
+  `00006` y `00007` aplicadas;
+- no hay migraciones pendientes detectadas.
+
+### Tablas y ausencia de datos
+
+Comando no destructivo ejecutado:
+
+```text
+supabase inspect db table-stats --linked
+```
+
+Resultado:
+
+- tablas visibles en `public`;
+- todas las tablas visibles muestran 0 filas estimadas;
+- no se insertan datos;
+- no se ejecuta seed;
+- no se limpian datos;
+- no se hace dump remoto.
+
+Tablas visibles con 0 filas estimadas:
+
+- `specialist_catalog`;
+- `messages`;
+- `orchestator_summaries`;
+- `subcategory_chiefs`;
+- `branch_chiefs`;
+- `chat_sessions`;
+- `user_health_data`;
+- `specialist_temporary_disables`;
+- `calendar_events`;
+- `memberships`;
+- `user_memberships`;
+- `specialists`;
+- `users`;
+- `reminders`;
+- `chief_write_permissions`.
+
+### RLS, policies y grants
+
+AG24 no verifica remotamente RLS, policies ni grants con SQL directo, porque el
+CLI de inspección disponible no expone un comando específico de metadatos para
+RLS/policies/grants sin abrir una conexión SQL/dump adicional.
+
+Estado:
+
+- RLS/policies/grants: no verificados remotamente en AG24.
+- Validación local previa: cubierta por `supabase test db --local` con 394
+  tests pgTAP y por los harness locales aprobados.
+- Evidencia remota destructiva: ninguna.
+
+Si se quiere evidencia remota específica de RLS/policies/grants, debe abrirse
+un paquete posterior con SQL remoto controlado, salida sanitizada y sin datos
+reales.
+
+### RPC
+
+AG24 no ejecuta la RPC `send_user_message_core`, no inserta mensajes, no crea
+sesiones y no llama Edge Functions.
+
+Estado:
+
+- RPC `send_user_message_core`: no ejecutada remotamente.
+- Existencia remota: inferida por migración `00007` aplicada y alineada.
+- Validación funcional local: cubierta por pgTAP y harness HTTP local.
+- Evidencia remota directa de RPC: pendiente de paquete posterior si se
+  requiere SQL remoto controlado.
+
+### Flutter y auth real
+
+Diff crítico verificado:
+
+```text
+git diff --name-only -- lib/core/config lib/core/auth/session lib/features/auth lib/features/chat lib/features/chat_sessions lib/features/chat_messages lib/app.dart lib/main.dart
+```
+
+Resultado: sin salida.
+
+Por tanto:
+
+- Flutter no queda conectado a Supabase real en AG24;
+- auth real no queda activada;
+- rutas no se modifican;
+- chat heredado no se reactiva;
+- `SupabaseChatDataSource` no se toca.
+
+### Comandos explícitamente no ejecutados
+
+No se ejecutan:
+
+- `supabase migration up --linked`;
+- `supabase migration up`;
+- `supabase db push`;
+- `supabase functions deploy`;
+- `supabase secrets set`;
+- `supabase db pull`;
+- reset remoto;
+- `supabase db remote commit`;
+- `supabase migration repair`;
+- `supabase migration squash`.
+
+### Readiness final
+
+```text
+POST-MIGRATION EVIDENCE PARTIAL
+```
+
+Se verifican migraciones, tablas visibles y filas estimadas 0. RLS, policies,
+grants y RPC quedan justificados por validación local y migraciones aplicadas,
+pero no verificados remotamente con SQL directo en AG24.
+
+### Riesgos clasificados
+
+- Bloqueante: ninguno detectado en AG24.
+- Alto: no se debe desplegar Edge Functions ni conectar Flutter hasta validar
+  evidencia remota específica de RLS/RPC/grants si se exige gate remoto.
+- Medio: RLS, policies, grants y RPC no tienen prueba remota directa en AG24.
+- Medio: filas estimadas 0 no sustituyen una auditoría SQL remota específica
+  si más adelante se requiere evidencia fuerte de ausencia de datos.
+- Bajo: migraciones local/remoto alineadas y table-stats no muestra filas.
+- Bajo: no se ejecutaron comandos remotos modificadores ni se registraron
+  secretos.
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG25 — evidence SQL remoto controlado para RLS/RPC/grants
+```
+
+AG25 debe ser explícitamente no destructivo, sin datos reales, con salida
+sanitizada y sin deploy ni conexión Flutter.
+
+## Bloqueo 2B-AG25 — evidence SQL remoto controlado
+
+### Estado para catálogo y frontera backend
+
+2B-AG24 queda aprobado y cerrado formalmente como
+`POST-MIGRATION EVIDENCE PARTIAL`. AG25 queda autorizado solo para evidence SQL
+remoto controlado de RLS, policies, grants, RPC y conteos seguros, sin deploy,
+sin `db push`, sin migraciones, sin SQL modificador, sin RPC funcional, sin
+datos reales, sin Flutter, sin auth real, sin production y sin staging.
+
+### Preflight no destructivo
+
+Preflight ejecutado:
+
+- `git status --short`: solo muestra cambios esperados de documentación y
+  cambios previos de AG19/AG21/AG22.
+- `git diff --check`: sin salida.
+- `.env`: ignorado por Git.
+- `supabase/.temp/project-ref`: ignorado por Git.
+- `supabase migration list`: local/remoto alineados de `00001` a `00007`, sin
+  migraciones pendientes detectadas.
+- Diff crítico de Flutter/rutas/auth/chat: sin salida.
+
+### Método SQL evaluado
+
+La CLI disponible no ofrece `supabase db execute` ni un inspector directo de
+RLS/policies/grants/RPC.
+
+Se evalúa un método controlado usando `psql` dentro del contenedor local de
+Supabase, con la URL remota leída desde `supabase/.temp/pooler-url`, archivo
+ignorado por Git, y pasada por variable de entorno no registrada.
+
+Resultado: bloqueado. El cliente SQL solicita autenticación y falla antes de
+ejecutar consultas de catálogo. No se introduce password, no se imprime
+connection string, no se pegan secrets y no se reintenta por otra vía.
+
+### Consultas no ejecutadas
+
+No se ejecutan las consultas remotas previstas sobre:
+
+- `pg_class` / `pg_namespace` para RLS;
+- `pg_policies`;
+- `information_schema.role_table_grants`;
+- `information_schema.routines` o equivalente para RPC;
+- conteos remotos seguros de `chat_sessions`, `messages` y
+  `specialist_catalog`.
+
+Por tanto, AG25 no obtiene evidencia remota SQL directa de RLS/policies/grants
+ni RPC.
+
+### Estado de evidencia
+
+- Migraciones remotas: verificadas previamente y alineadas `00001` a `00007`.
+- Tablas y 0 filas estimadas: verificadas en AG24 mediante `table-stats`.
+- RLS/policies/grants: no verificados remotamente en AG25.
+- RPC `send_user_message_core`: no verificada remotamente en AG25 y no
+  ejecutada.
+- Datos reales: no se consultan filas ni contenidos.
+- Flutter/auth/rutas/chat heredado: sin cambios.
+
+### Comandos explícitamente no ejecutados
+
+No se ejecutan:
+
+- `supabase migration up --linked`;
+- `supabase migration up`;
+- `supabase db push`;
+- `supabase functions deploy`;
+- `supabase secrets set`;
+- `supabase db pull`;
+- reset remoto;
+- `supabase db remote commit`;
+- `supabase migration repair`;
+- `supabase migration squash`;
+- SQL `insert`, `update`, `delete`, `truncate`, `drop`, `alter`, `create`,
+  `grant`, `revoke`, `comment`;
+- `select public.send_user_message_core(...)`;
+- llamadas a Edge Functions.
+
+### Readiness final
+
+```text
+REMOTE SQL EVIDENCE BLOCKED
+```
+
+### Riesgos clasificados
+
+- Bloqueante: no hay método SQL remoto operativo en AG25 sin aportar
+  credenciales adicionales fuera del flujo actual.
+- Alto: no se debe avanzar a deploy de Edge Functions ni conexión Flutter si el
+  gate exige evidencia remota directa de RLS/RPC/grants.
+- Medio: RLS, policies, grants y RPC siguen cubiertos por validación local,
+  pero no por evidencia SQL remota.
+- Bajo: no se ejecutó SQL modificador, no se ejecutaron comandos remotos
+  modificadores y no se registraron secretos.
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG26 — definir método seguro de inspección SQL remoto
+```
+
+AG26 debe decidir cómo suministrar credenciales o un mecanismo de SQL remoto
+read-only sin exponer secretos, por ejemplo mediante SQL Editor manual con
+salida sanitizada, entorno local seguro con password no registrado o un runbook
+de inspección operado por el propietario.
+
+## Método 2B-AG26 — inspección SQL remota segura
+
+### Estado para catálogo y frontera backend
+
+2B-AG25 queda aprobado como bloqueo seguro con readiness
+`REMOTE SQL EVIDENCE BLOCKED`. El motivo aceptado es que no hubo método SQL
+remoto operativo sin credenciales en el flujo de Codex.
+
+AG26 queda autorizado solo para definir el método seguro de inspección SQL
+remota. No ejecuta SQL remoto, no modifica remoto, no usa credenciales, no
+despliega Edge Functions, no conecta Flutter, no activa auth real, no usa datos
+reales y no toca production ni staging.
+
+### Método oficial elegido
+
+Método oficial para AG27:
+
+```text
+Supabase Dashboard SQL Editor manual
+```
+
+Condiciones:
+
+- el propietario entra manualmente al Dashboard;
+- selecciona el proyecto Stasisly Development;
+- confirma región `eu-central-1`;
+- confirma que no es production;
+- confirma que no es staging;
+- ejecuta solo consultas `SELECT`;
+- no pega credenciales en Codex;
+- no copia connection strings, passwords, tokens, anon key, service role ni
+  JWT secrets;
+- copia solo resultados resumidos y sanitizados.
+
+### Métodos no recomendados
+
+No usar por ahora:
+
+- `psql` con connection string pegada;
+- `psql` con password en chat;
+- pooler URL en terminal visible;
+- `SUPABASE_DB_PASSWORD` en `.env`;
+- `service_role`;
+- `supabase db pull`;
+- dump remoto.
+
+### Checklist manual AG27
+
+1. Abrir Supabase Dashboard.
+2. Seleccionar Stasisly Development.
+3. Confirmar región `eu-central-1`.
+4. Confirmar que no es production ni staging.
+5. Abrir SQL Editor.
+6. Ejecutar solo las consultas `SELECT` aprobadas.
+7. No ejecutar `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `ALTER`, `DROP`,
+   `GRANT`, `REVOKE`, `TRUNCATE` ni `COMMENT`.
+8. No ejecutar `select public.send_user_message_core(...)`.
+9. Copiar solo resultados resumidos.
+10. No copiar credenciales, tokens, connection strings ni datos sensibles.
+
+### Consultas SQL read-only aprobadas para AG27
+
+#### RLS por tabla crítica
+
+```sql
+select
+  n.nspname as schema_name,
+  c.relname as table_name,
+  c.relrowsecurity as rls_enabled,
+  c.relforcerowsecurity as rls_forced
+from pg_class c
+join pg_namespace n on n.oid = c.relnamespace
+where n.nspname = 'public'
+  and c.relkind = 'r'
+  and c.relname in (
+    'chat_sessions',
+    'messages',
+    'specialist_catalog'
+  )
+order by c.relname;
+```
+
+#### Policies por tabla crítica
+
+```sql
+select
+  schemaname,
+  tablename,
+  policyname,
+  permissive,
+  roles,
+  cmd
+from pg_policies
+where schemaname = 'public'
+  and tablename in (
+    'chat_sessions',
+    'messages',
+    'specialist_catalog'
+  )
+order by tablename, policyname;
+```
+
+#### Grants por tabla crítica
+
+```sql
+select
+  table_schema,
+  table_name,
+  grantee,
+  privilege_type
+from information_schema.role_table_grants
+where table_schema = 'public'
+  and table_name in (
+    'chat_sessions',
+    'messages',
+    'specialist_catalog'
+  )
+order by table_name, grantee, privilege_type;
+```
+
+#### RPC existence
+
+```sql
+select
+  routine_schema,
+  routine_name,
+  routine_type
+from information_schema.routines
+where routine_schema = 'public'
+  and routine_name = 'send_user_message_core';
+```
+
+#### Conteos seguros
+
+```sql
+select 'chat_sessions' as table_name, count(*) as row_count from public.chat_sessions
+union all
+select 'messages' as table_name, count(*) as row_count from public.messages
+union all
+select 'specialist_catalog' as table_name, count(*) as row_count from public.specialist_catalog;
+```
+
+### Formato seguro de resultados
+
+AG27 debe devolver solo un resumen de este tipo:
+
+```text
+RLS:
+chat_sessions: true/false
+messages: true/false
+specialist_catalog: true/false
+
+Policies:
+chat_sessions: numero + nombres
+messages: numero + nombres
+specialist_catalog: numero + nombres
+
+Grants:
+resumen por tabla/grantee/privilege
+
+RPC:
+send_user_message_core: existe/no existe
+
+Conteos:
+chat_sessions: 0
+messages: 0
+specialist_catalog: 0
+```
+
+No devolver:
+
+- connection strings;
+- passwords;
+- tokens;
+- datos de usuarios;
+- contenido de mensajes;
+- filas completas con datos sensibles.
+
+### Flutter y auth real
+
+Diff crítico verificado:
+
+```text
+git diff --name-only -- lib/core/config lib/core/auth/session lib/features/auth lib/features/chat lib/features/chat_sessions lib/features/chat_messages lib/app.dart lib/main.dart
+```
+
+Resultado: sin salida.
+
+Flutter sigue desconectado de Supabase real, auth real sigue desactivada, rutas
+no modificadas y chat heredado no reactivado.
+
+### Comandos explícitamente no ejecutados
+
+No se ejecutan:
+
+- `supabase migration up --linked`;
+- `supabase migration up`;
+- `supabase db push`;
+- `supabase functions deploy`;
+- `supabase secrets set`;
+- `supabase db pull`;
+- reset remoto;
+- `supabase db remote commit`;
+- `supabase migration repair`;
+- `supabase migration squash`;
+- SQL remoto;
+- SQL modificador;
+- RPC funcional;
+- Edge Functions.
+
+### Readiness final
+
+```text
+REMOTE SQL METHOD READY
+```
+
+### Riesgos clasificados
+
+- Bloqueante: ninguno si el usuario confirma proyecto development antes de
+  ejecutar.
+- Alto: usuario podría seleccionar proyecto incorrecto o production en el
+  Dashboard.
+- Alto: usuario podría copiar credenciales o datos sensibles al chat.
+- Medio: usuario podría ejecutar SQL modificador por error si no sigue el
+  checklist.
+- Bajo: Codex no maneja credenciales ni connection strings en este método.
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG27 — ejecución manual Dashboard SQL evidence
+```
+
+AG27 debe consistir en que el usuario ejecute manualmente las consultas
+aprobadas en Dashboard SQL Editor y comparta solo el resumen seguro.
+
 ## Resolución 2B-AG11 — evidencia externa DEV LINK sin secretos
 
 ### Estado para frontera backend
@@ -13410,6 +14743,609 @@ AG13 debe aportar evidencia externa real sin secretos. Si esa evidencia se
 completa, podrá proponerse `READY FOR DEV LINK` y preparar un paquete posterior
 para ejecutar `supabase link` controlado; si no, debe mantenerse `READY WITH
 BLOCKERS`.
+
+## Ejecución 2B-AG13 — Supabase DEV LINK controlado
+
+### Estado para frontera backend
+
+2B-AG12 queda aprobado y cerrado formalmente con readiness elevada a `READY FOR
+DEV LINK` por evidencia externa aportada fuera del repo:
+
+- proyecto objetivo: Stasisly Development;
+- región: eu-central-1;
+- project ref development presente en `.env`;
+- `SUPABASE_URL` development presente en `.env`;
+- `SUPABASE_ANON_KEY` development presente en `.env`;
+- `.env` ignorado por Git;
+- `.env.example` sin secretos reales;
+- production no existe/no se usa todavía;
+- staging no existe/no se usa todavía;
+- sin datos reales.
+
+AG13 ejecuta únicamente el vínculo local de Supabase CLI contra development.
+
+### Comando ejecutado
+
+Se ejecutó solo:
+
+```text
+supabase link --project-ref <DEV_PROJECT_REF>
+```
+
+No se registra el project ref real en este ADR.
+
+### Verificación post-link
+
+Resultado:
+
+- `supabase/.temp/project-ref` existe;
+- `supabase/.temp/project-ref` está ignorado por Git;
+- `.env` sigue ignorado por Git;
+- `git status --short -- supabase/.temp .env .env.example .gitignore` sin
+  salida;
+- `git diff --check` sin salida;
+- diff crítico de código/Supabase/test/rutas sin salida.
+
+### Comandos remotos no ejecutados
+
+Quedan explícitamente no ejecutados:
+
+- `supabase db push`;
+- `supabase migration up` remoto;
+- `supabase functions deploy`;
+- `supabase secrets set`.
+
+### Bloqueos vigentes
+
+AG13 no conecta Flutter a Supabase real, no activa auth real, no usa datos
+reales, no usa production, no registra `/conversations`, no toca `/chat/:id`,
+no toca `/orchestrator/chat`, no conecta chat heredado y no reactiva
+`SupabaseChatDataSource`.
+
+### Readiness final
+
+```text
+DEV LINK DONE
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG14 — plan post-link development sin migraciones remotas
+```
+
+AG14 debe seguir sin ejecutar migraciones, deploy de funciones ni `secrets set`
+salvo aprobación explícita separada.
+
+## Plan 2B-AG14 — post-link development sin migraciones remotas
+
+### Estado para frontera backend
+
+2B-AG13 queda aprobado y cerrado formalmente como `DEV LINK DONE`. AG14 prepara
+el plan posterior al link development sin ejecutar migraciones remotas, sin
+`db push`, sin deploy de Edge Functions y sin `secrets set`.
+
+### Estado post-link verificado
+
+Resultado de checks no destructivos:
+
+- `supabase/.temp/project-ref` existe;
+- `supabase/.temp/project-ref` está ignorado por Git;
+- `.env` está ignorado por Git;
+- `git diff --check`: sin salida;
+- diff crítico de código/Supabase/test/rutas: sin salida;
+- cambios versionables limitados a documentación de ADR-006, ADR-007 y tracker.
+
+No se imprime ni registra el project ref real.
+
+### Comandos remotos prohibidos en AG14
+
+Siguen prohibidos y no ejecutados:
+
+- `supabase db push`;
+- `supabase migration up` remoto;
+- `supabase functions deploy`;
+- `supabase secrets set`.
+
+### Plan de migraciones development
+
+Opciones evaluadas:
+
+- Opción A: `supabase db push`. No recomendada todavía porque el estado remoto
+  debe inspeccionarse antes y `db push` puede aplicar cambios persistentes sin
+  suficiente granularidad de revisión.
+- Opción B: `supabase migration up`. Opción preferida futura si se confirma que
+  el flujo remoto debe basarse en migraciones versionadas y el estado remoto es
+  compatible.
+- Opción C: recrear/limpiar proyecto development antes de aplicar migraciones.
+  Válida solo si se confirma que development está vacío, no contiene datos
+  reales y se aprueba explícitamente operar sobre una base limpia.
+
+Decisión AG14:
+
+```text
+No ejecutar db push todavía.
+Preparar primero un evidence pack remoto no destructivo.
+Después decidir si se aplica migration up contra development.
+```
+
+### Plan de verificación remota no destructiva
+
+Paquete futuro candidato: `2B-AG15 — evidence pack remoto no destructivo
+development`.
+
+Comandos candidatos a evaluar antes de ejecutar:
+
+- `supabase status`;
+- `supabase projects list`;
+- `supabase migration list`.
+
+Solo podrán ejecutarse si se confirma que no imprimen secrets ni información
+sensible no controlada. AG14 no los ejecuta.
+
+### Plan de Edge Functions development
+
+Funciones candidatas futuras:
+
+- `create-own-chat-session`;
+- `list-own-chat-sessions`;
+- `archive-own-chat-session`;
+- `send-user-message`;
+- `list-session-messages`.
+
+Antes de cualquier deploy se exige:
+
+- auditoría de payload;
+- validación JWT;
+- rechazo de `userId`, `ownerUserId` y `role` desde UI;
+- logs sin tokens ni contenido sensible;
+- secrets remotos definidos fuera del repo;
+- rollback por función;
+- aprobación explícita separada.
+
+AG14 no despliega funciones.
+
+### Plan de secrets development
+
+Secrets potencialmente necesarios en development:
+
+- secrets de Edge Functions;
+- configuración de validación JWT;
+- CORS/origin config si aplica;
+- variables de rollback.
+
+Reglas:
+
+- no secrets en docs;
+- no secrets en tracker;
+- no secrets en prompts;
+- no `service_role` en Flutter;
+- no production keys;
+- no `supabase secrets set` en AG14.
+
+### Rollback antes de migraciones
+
+Antes de cualquier migración remota futura:
+
+- confirmar proyecto Stasisly Development;
+- confirmar no production;
+- confirmar no staging;
+- confirmar backup/snapshot si aplica;
+- confirmar estado inicial remoto;
+- confirmar migraciones a aplicar;
+- abortar si hay datos reales;
+- abortar si el proyecto no está vacío cuando se esperaba vacío;
+- volver a `backendBlocked`;
+- documentar incidente.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- `db push` accidental;
+- `migration up` accidental;
+- `functions deploy` accidental;
+- `secrets set` accidental;
+- link contra proyecto equivocado;
+- production tocado;
+- datos reales;
+- secrets en repo.
+
+Altos:
+
+- estado remoto desconocido;
+- `service_role` en Flutter;
+- `SupabaseChatDataSource` reactivado;
+- secrets en docs o tracker;
+- Edge Function con logs sensibles.
+
+Medios:
+
+- elegir `db push` sin evidence pack;
+- proyecto development no vacío;
+- diferencias entre migraciones locales y remoto;
+- rollback insuficiente por función.
+
+Bajos:
+
+- CLI desactualizada;
+- duplicidad documental;
+- nombres largos de paquetes.
+
+### Readiness final
+
+```text
+POST-LINK PLAN READY
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG15 — evidence pack remoto no destructivo development
+```
+
+AG15 no debe ejecutar migraciones, deploy de funciones ni `secrets set` salvo
+aprobación explícita separada.
+
+## Evidence pack 2B-AG15 — remoto no destructivo development
+
+### Estado para frontera backend
+
+2B-AG14 queda aprobado y cerrado formalmente como `POST-LINK PLAN READY`.
+AG15 prepara evidencia remota no destructiva del proyecto development ya
+vinculado, sin migraciones remotas, sin `db push`, sin deploy de Edge Functions
+y sin `secrets set`.
+
+### Estado local del link
+
+Checks ejecutados:
+
+- `git status --short`: solo documentación pendiente;
+- `git diff --check`: sin salida;
+- `supabase/.temp/project-ref` existe;
+- `supabase/.temp/project-ref` está ignorado por Git;
+- `.env` está ignorado por Git;
+- diff crítico de código/Supabase/test/rutas: sin salida.
+
+No se imprime ni registra el project ref real.
+
+### Comandos evaluados
+
+| Comando | Clasificación | Decisión AG15 |
+| --- | --- | --- |
+| `supabase status` | Dudoso | No ejecutado porque puede imprimir estado local con claves/URLs. |
+| `supabase projects list` | Dudoso | No ejecutado porque puede listar refs/proyectos no necesarios para AG15. |
+| `supabase migration list` | Seguro para AG15 | Ejecutado; no modifica remoto ni imprime secrets. |
+
+### Evidence remoto no destructivo
+
+Comando ejecutado:
+
+```text
+supabase migration list
+```
+
+Resultado resumido:
+
+- conectó a la base remota development vinculada;
+- no imprimió secrets;
+- no modificó remoto;
+- no ejecutó migraciones;
+- no desplegó funciones;
+- no configuró secrets.
+
+### Estado de migraciones remoto
+
+Resultado resumido sin project ref:
+
+- migraciones locales detectadas: `00001` a `00007`;
+- migraciones remotas detectadas: ninguna;
+- divergencia: las migraciones locales aún no están aplicadas en remoto;
+- riesgo antes de `migration up`: confirmar estado remoto vacío o esperado,
+  ausencia de datos reales y estrategia de aplicación.
+
+No se ejecutó `migration up` ni `db push`.
+
+### Estado remoto inicial
+
+Estado conocido:
+
+- proyecto vinculado correcto: Stasisly Development;
+- región aprobada: eu-central-1;
+- estado remoto: parcialmente verificado por `migration list`;
+- migraciones aplicadas en remoto: ninguna detectada;
+- se requiere comprobar base vacía antes de escribir;
+- se requiere decidir estrategia de migración antes de cualquier cambio remoto.
+
+### Checks no-secrets/no-remoto destructivo
+
+Resultado AG15:
+
+- `.env` existe y está ignorado;
+- `.env.example` existe y es versionable;
+- `supabase/.temp/project-ref` existe y está ignorado;
+- `supabase/.temp/pooler-url` existe en estado local ignorado por Git; no se
+  imprime su contenido;
+- los hits de `service_role`, `SUPABASE_SERVICE_ROLE_KEY`, `Authorization`,
+  `/functions/v1/`, `access_token`, `refresh_token` y URLs de ejemplo se
+  clasifican como falsos positivos esperados en tests, harness local, README,
+  Edge Functions locales, contratos de bloqueo o ejemplos;
+- `SupabaseChatDataSource` sigue existiendo únicamente en chat heredado
+  bloqueado.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- `db push` accidental;
+- `migration up` accidental;
+- `functions deploy` accidental;
+- `secrets set` accidental;
+- production tocado;
+- staging tocado;
+- secrets en repo.
+
+Altos:
+
+- estado remoto todavía parcialmente desconocido;
+- divergencia de migraciones locales/remotas;
+- datos reales inesperados en development;
+- `service_role` en Flutter;
+- `SupabaseChatDataSource` reactivado.
+
+Medios:
+
+- elegir estrategia de migración sin evidence adicional;
+- remoto no vacío cuando se esperaba vacío;
+- CLI desactualizada.
+
+Bajos:
+
+- falsos positivos de tests/harness;
+- duplicidad documental;
+- nombres largos de paquetes.
+
+### Readiness final
+
+```text
+REMOTE EVIDENCE READY
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG16 — decisión migration strategy development
+```
+
+AG16 debe decidir entre `migration up` controlado, recrear/limpiar development,
+inspección adicional o bloqueo por divergencia. No debe ejecutar migraciones
+sin aprobación explícita separada.
+
+## Decisión 2B-AG16 — migration strategy development
+
+### Estado para frontera backend
+
+2B-AG15 queda aprobado y cerrado formalmente como `REMOTE EVIDENCE READY`.
+AG16 decide la estrategia segura para aplicar en un paquete posterior las
+migraciones locales `00001` a `00007` contra Supabase development.
+
+AG16 no ejecuta migraciones, no ejecuta `db push`, no despliega Edge Functions,
+no configura secrets y no modifica remoto.
+
+### Estado de migraciones
+
+Estado documentado desde AG15:
+
+- migraciones locales: `00001` a `00007`;
+- migraciones remotas: ninguna;
+- remoto: sin historial de migraciones aplicado;
+- estado remoto: parcialmente conocido;
+- base remota: falta confirmar si está vacía antes de escribir.
+
+### Comparación de estrategias
+
+#### Opción A — `supabase db push`
+
+Descripción: sincronizar esquema local hacia remoto.
+
+Riesgos:
+
+- menor trazabilidad;
+- puede aplicar cambios amplios;
+- depende del estado remoto;
+- no es ideal si el flujo debe quedar gobernado por migraciones versionadas.
+
+Decisión:
+
+```text
+No usar todavía.
+```
+
+#### Opción B — `supabase migration up`
+
+Descripción: aplicar migraciones versionadas pendientes contra development.
+
+Ventajas:
+
+- más trazable;
+- alineado con migraciones `00001` a `00007`;
+- mejor para auditoría;
+- mejor para futura promoción a staging.
+
+Riesgos:
+
+- requiere confirmar ausencia de datos reales;
+- requiere confirmar que development puede recibir las migraciones desde cero;
+- requiere rollback/documentación;
+- puede fallar si hay objetos remotos previos no gestionados.
+
+Decisión:
+
+```text
+Candidata principal, no ejecutable en AG16.
+```
+
+#### Opción C — Recrear/limpiar development antes de migrar
+
+Descripción: asegurar una base remota limpia antes de aplicar migraciones.
+
+Ventajas:
+
+- reduce incertidumbre si el proyecto tiene objetos previos;
+- útil si development fue creado manualmente.
+
+Riesgos:
+
+- puede borrar objetos si existieran;
+- exige confirmación visual extrema;
+- no debe hacerse si hay datos reales.
+
+Decisión:
+
+```text
+Solo si se confirma que development no contiene datos necesarios.
+```
+
+#### Opción D — Inspección adicional
+
+Descripción: ampliar evidence remoto no destructivo antes de decidir ejecución.
+
+Decisión:
+
+```text
+Usar si no se puede confirmar base vacía o ausencia de datos reales.
+```
+
+### Estrategia recomendada
+
+Decisión AG16:
+
+```text
+No usar db push.
+Preparar migration up controlado contra development como estrategia preferida,
+pero solo después de confirmar base remota vacía/sin datos reales y tener
+rollback.
+```
+
+### Gates antes de `migration up`
+
+Antes de autorizar `supabase migration up` se exige:
+
+- aprobación explícita;
+- paquete separado;
+- confirmar proyecto: Stasisly Development;
+- confirmar región: eu-central-1;
+- confirmar no production;
+- confirmar no staging;
+- confirmar migraciones remotas: ninguna;
+- confirmar base sin datos reales;
+- confirmar datos sintéticos o base vacía;
+- confirmar rollback documental;
+- confirmar no secrets en repo;
+- confirmar worktree controlado;
+- preflight local fresco.
+
+### Preflight futuro antes de migrar
+
+Preflight recomendado para futuro paquete:
+
+```text
+git status --short
+git diff --check
+supabase migration list
+supabase db reset --local --no-seed
+supabase test db --local
+bash supabase/tests/2b_iv_h_local_http_integration_test.sh
+bash supabase/tests/2b_v_g_messages_http_integration_test.sh
+flutter analyze --no-fatal-infos
+flutter test test/core/config test/architecture
+flutter test test/features/chat_sessions test/features/chat_messages
+flutter test
+```
+
+No se ejecuta este preflight pesado en AG16.
+
+### Comando candidato futuro
+
+Comando candidato para paquete posterior, no ejecutable en AG16:
+
+```text
+supabase migration up
+```
+
+Debe ejecutarse solo si el target es development y los gates previos están
+aprobados.
+
+### Rollback si migración falla
+
+Procedimiento:
+
+- detener ejecución inmediatamente;
+- no desplegar functions;
+- no configurar secrets;
+- capturar error sin secrets;
+- verificar estado de `supabase migration list`;
+- no tocar production/staging;
+- si el proyecto queda inconsistente, decidir reset/recreate de development en
+  paquete separado;
+- volver a `backendBlocked`;
+- registrar incidente.
+
+### Plan después de migraciones
+
+Si en paquete futuro se aplican migraciones correctamente:
+
+```text
+2B-AG18 — evidence post-migration development
+```
+
+No desplegar functions automáticamente. No conectar Flutter automáticamente.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- `db push` accidental;
+- `migration up` accidental en AG16;
+- production tocado;
+- staging tocado;
+- datos reales inesperados;
+- secrets expuestos.
+
+Altos:
+
+- estado remoto parcialmente desconocido;
+- rollback insuficiente;
+- `service_role` en Flutter;
+- `SupabaseChatDataSource` reactivado;
+- logs con secrets.
+
+Medios:
+
+- base development no vacía;
+- objetos remotos previos no gestionados;
+- divergencia local/remoto;
+- CLI desactualizada.
+
+Bajos:
+
+- duplicidad documental;
+- nombres largos de paquetes.
+
+### Readiness final
+
+```text
+MIGRATION STRATEGY READY
+```
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG17 — ejecutar migration up development controlado
+```
+
+AG17 debe ser aprobado explícitamente y no debe incluir deploy de funciones ni
+`secrets set`.
 
 ## Resolución 2B-AG10 — bloqueantes externos DEV LINK
 
