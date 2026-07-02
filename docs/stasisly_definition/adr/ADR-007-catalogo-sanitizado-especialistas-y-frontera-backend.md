@@ -13082,6 +13082,1130 @@ Alternativas validas:
 
 No implementar todavia.
 
+## 2B-AG29 — runtime y CORS de Edge Functions
+
+Estado: completado como `EDGE RUNTIME CODE READY`, sin deploy remoto.
+
+### Cierre formal de AG28
+
+AG28 queda cerrado como `EDGE DEPLOY PLAN BLOCKED`: el catalogo sanitizado y
+las funciones relacionadas estaban bloqueadas para deployment remoto por guard
+local-only y no tenian CORS/preflight explicito.
+
+### Decision aplicada
+
+Se introduce una frontera compartida para funciones:
+
+- `local`: solo endpoints locales aprobados con
+  `STASISLY_ALLOW_LOCAL_ONLY=true`.
+- `development`: solo con `STASISLY_RUNTIME_MODE=development`,
+  `STASISLY_ALLOW_DEVELOPMENT_REMOTE=true` y URL HTTPS no local.
+- `staging`, `production` y remoto `unknown`: bloqueados.
+
+El catalogo y las sesiones conservan sus contratos publicos:
+
+- `list-selectable-specialists` no expone `specialist_id`.
+- `create-own-chat-session` recibe solo `selectableSpecialistId` y devuelve
+  `sessionId` explicito.
+- `list-own-chat-sessions` no expone `user_id` ni `specialist_id`.
+- `archive-own-chat-session` mantiene respuesta minima.
+- `send-user-message` sigue llamando a la RPC y no hace writes directos.
+- `list-session-messages` mantiene lectura por `sessionId` propio.
+
+### CORS/preflight
+
+Se anade helper CORS compartido:
+
+- `OPTIONS` responde antes de auth y backend.
+- Headers permitidos: `authorization`, `content-type`, `apikey`.
+- No wildcard.
+- Origenes locales permitidos para harness.
+- Origenes development futuros mediante `CORS_ALLOWED_ORIGINS`.
+
+### Validacion
+
+Validacion ejecutada:
+
+- `deno test supabase/functions/_shared ...`: 51 tests OK.
+- `supabase db reset --local --no-seed`: OK.
+- `supabase test db --local`: 394 tests OK.
+- `2b_iv_h_local_http_integration_test.sh`: PASS, cleanup
+  `0|0|0|0|0|0`.
+- `2b_v_g_messages_http_integration_test.sh`: PASS, cleanup
+  `0|0|0|0|0|0`.
+- `flutter analyze --no-fatal-infos`: OK con infos preexistentes.
+- `flutter test test/core/config test/architecture`: OK.
+- `flutter test test/features/chat_sessions test/features/chat_messages`: OK.
+- `flutter test`: OK.
+- `git diff --check`: OK.
+- `supabase migration list`: no destructivo OK.
+
+### Fuera de alcance
+
+No hubo deploy, `secrets set`, migraciones remotas, `db push`, SQL modificador,
+Flutter/rutas, auth real, datos reales, staging ni production.
+
+### Siguiente paso
+
+Siguiente recomendado:
+
+```text
+2B-AG30 — preparar secrets development para Edge Functions
+```
+
+No desplegar funciones hasta tener secrets development revisados y aprobados.
+
+## 2B-AG30 — secrets development para Edge Functions
+
+Estado: completado con bloqueo controlado.
+
+Readiness final:
+
+```text
+EDGE SECRETS PLAN BLOCKED
+```
+
+### Decision
+
+2B-AG29 queda aprobado y cerrado formalmente como `EDGE RUNTIME CODE READY`.
+AG30 prepara la gestion de secrets development para las funciones de catalogo,
+sesiones y mensajes, pero no configura secrets ni despliega funciones.
+
+### Variables requeridas por las funciones
+
+Todas las funciones candidatas usan el mismo conjunto logico:
+
+- `SUPABASE_URL`.
+- `SUPABASE_ANON_KEY`.
+- `SUPABASE_SERVICE_ROLE_KEY`.
+- `STASISLY_RUNTIME_MODE`.
+- `STASISLY_ALLOW_DEVELOPMENT_REMOTE`.
+- `STASISLY_ALLOW_LOCAL_ONLY`.
+- `CORS_ALLOWED_ORIGINS`.
+
+Funciones afectadas:
+
+- `list-selectable-specialists`;
+- `create-own-chat-session`;
+- `list-own-chat-sessions`;
+- `archive-own-chat-session`;
+- `send-user-message`;
+- `list-session-messages`.
+
+### Matriz de configuracion development
+
+| Variable | Clasificacion | Valor conceptual | Estado |
+|---|---|---|---|
+| `SUPABASE_URL` | Config sensible/semi-sensible | URL de Stasisly Development | Preparado |
+| `SUPABASE_ANON_KEY` | Secret sensible operativo | Anon key development | Preparado sin valor |
+| `SUPABASE_SERVICE_ROLE_KEY` | Secret critico | Service role development solo Edge Functions | Preparado sin valor |
+| `STASISLY_RUNTIME_MODE` | Config critica | `development` | Preparado |
+| `STASISLY_ALLOW_DEVELOPMENT_REMOTE` | Config critica | `true` | Preparado |
+| `STASISLY_ALLOW_LOCAL_ONLY` | Config critica | `false` | Preparado |
+| `CORS_ALLOWED_ORIGINS` | Config sensible/semi-sensible | Origen development aprobado | Bloqueado |
+
+No se permite wildcard CORS ni dominio inventado.
+
+### Comando futuro
+
+Plantilla no ejecutada:
+
+```bash
+supabase secrets set \
+  SUPABASE_URL="<development-url>" \
+  SUPABASE_ANON_KEY="<development-anon-key>" \
+  SUPABASE_SERVICE_ROLE_KEY="<development-service-role-key>" \
+  STASISLY_RUNTIME_MODE="development" \
+  STASISLY_ALLOW_DEVELOPMENT_REMOTE="true" \
+  STASISLY_ALLOW_LOCAL_ONLY="false" \
+  CORS_ALLOWED_ORIGINS="<approved-development-origin>"
+```
+
+Estado:
+
+```text
+NO EJECUTADO EN AG30
+```
+
+### Checklist humano
+
+1. Abrir Supabase Dashboard.
+2. Seleccionar Stasisly Development.
+3. Confirmar region `eu-central-1`.
+4. Confirmar que no es production.
+5. Confirmar que no es staging.
+6. Ir a Project Settings / API.
+7. Obtener `SUPABASE_URL`.
+8. Obtener anon key.
+9. Obtener service role key solo para runtime Edge Functions.
+10. No pegar valores en Codex/chat/docs.
+11. Configurar solo mediante paquete futuro aprobado.
+
+### Metodo recomendado
+
+Dashboard y CLI son validos. CLI solo si los valores se introducen localmente y
+no quedan registrados. Dashboard puede ser preferible si evita eco accidental en
+terminal.
+
+### Validacion futura
+
+Tras configurar secrets en un paquete futuro:
+
+- `supabase secrets list` solo si no imprime valores;
+- confirmar presencia de nombres logicos;
+- confirmar runtime development;
+- confirmar ausencia de production/staging;
+- confirmar CORS sin wildcard.
+
+### Rollback
+
+Si un secret se configura mal:
+
+- no desplegar funciones;
+- corregir secrets en paquete separado;
+- si se filtra un valor, rotarlo;
+- registrar incidente sin valor;
+- confirmar que Flutter no fue conectado.
+
+### Evidencia
+
+AG30 ejecuto solo inspecciones:
+
+- busquedas estaticas de `Deno.env.get`, `SUPABASE_`, `STASISLY_` y
+  `CORS_ALLOWED_ORIGINS`;
+- diff Flutter/rutas/auth/chat vacio;
+- `git diff --check` OK;
+- `supabase migration list` no destructivo OK con `00001`-`00007` alineadas.
+
+No se ejecuto `supabase secrets set`, deploy, migraciones remotas, `db push`,
+datos reales, RPC funcional, llamadas a Edge Functions remotas, Flutter, auth
+real, production ni staging.
+
+### Siguiente paquete
+
+```text
+2B-AG31 — resolver CORS/secrets pendientes
+```
+
+No se puede autorizar `secrets set` hasta decidir
+`CORS_ALLOWED_ORIGINS` para development.
+
+## 2B-AG31 — CORS/secrets development resueltos
+
+Estado: completado.
+
+Readiness final:
+
+```text
+EDGE SECRETS READY FOR SET
+```
+
+### Cierre formal de AG30
+
+2B-AG30 queda aprobado como `EDGE SECRETS PLAN BLOCKED`. El bloqueo se debia a
+`CORS_ALLOWED_ORIGINS` pendiente. AG31 resuelve ese bloqueo sin configurar
+secrets y sin desplegar funciones.
+
+### Decision CORS
+
+Origenes development aprobados:
+
+```text
+http://localhost:3000
+http://127.0.0.1:3000
+```
+
+Valor aprobado:
+
+```text
+CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+```
+
+No se aprueba:
+
+- wildcard;
+- production;
+- staging;
+- dominios remotos;
+- HTTPS externo;
+- localhost dinamico.
+
+Si se prueba Flutter Web contra Edge Functions development, debe usarse puerto
+fijo:
+
+```bash
+flutter run -d chrome --web-port=3000
+```
+
+### Matriz final development
+
+| Variable | Valor conceptual development |
+|---|---|
+| `SUPABASE_URL` | URL de Stasisly Development |
+| `SUPABASE_ANON_KEY` | Anon key development |
+| `SUPABASE_SERVICE_ROLE_KEY` | Service role development, solo Edge Functions |
+| `STASISLY_RUNTIME_MODE` | `development` |
+| `STASISLY_ALLOW_DEVELOPMENT_REMOTE` | `true` |
+| `STASISLY_ALLOW_LOCAL_ONLY` | `false` |
+| `CORS_ALLOWED_ORIGINS` | `http://localhost:3000,http://127.0.0.1:3000` |
+
+No se documentan valores reales de Supabase.
+
+### Comando futuro
+
+Plantilla no ejecutada:
+
+```bash
+supabase secrets set \
+  SUPABASE_URL="<development-url>" \
+  SUPABASE_ANON_KEY="<development-anon-key>" \
+  SUPABASE_SERVICE_ROLE_KEY="<development-service-role-key>" \
+  STASISLY_RUNTIME_MODE="development" \
+  STASISLY_ALLOW_DEVELOPMENT_REMOTE="true" \
+  STASISLY_ALLOW_LOCAL_ONLY="false" \
+  CORS_ALLOWED_ORIGINS="http://localhost:3000,http://127.0.0.1:3000"
+```
+
+Estado:
+
+```text
+NO EJECUTADO EN AG31
+```
+
+### Checklist humano final
+
+1. Abrir Supabase Dashboard.
+2. Seleccionar Stasisly Development.
+3. Confirmar region `eu-central-1`.
+4. Confirmar que NO es production.
+5. Confirmar que NO es staging.
+6. Copiar URL development.
+7. Copiar anon key development.
+8. Copiar service role key development solo para Edge Functions.
+9. No pegar valores en Codex/chat/docs.
+10. Ejecutar `secrets set` solo en paquete futuro aprobado.
+
+### Validacion futura
+
+En AG32 o paquete equivalente, tras configurar secrets:
+
+```bash
+supabase secrets list
+```
+
+Solo si no imprime valores. Confirmar nombres presentes, runtime development,
+CORS origins, y ausencia de production/staging.
+
+### Rollback
+
+- CORS mal configurado: no desplegar y corregir secrets.
+- Runtime flags mal configurados: no desplegar.
+- `service_role` filtrado: rotar inmediatamente.
+- Proyecto equivocado: detener, registrar incidente y corregir.
+- Flutter sigue desconectado hasta deploy y pruebas sinteticas aprobadas.
+
+### Evidencia
+
+AG31 ejecuto solo inspecciones:
+
+- diff Flutter/rutas/auth/chat vacio;
+- `git diff --check` OK;
+- `git diff --name-only -- ... supabase` muestra cambios preexistentes de
+  AG29 en `supabase/functions`;
+- `supabase migration list` no destructivo OK con `00001`-`00007` alineadas.
+
+No se ejecuto `supabase secrets set`, deploy, migraciones, `db push`, `db pull`,
+SQL modificador, datos reales, RPC funcional, llamadas a funciones remotas,
+Flutter, auth real, production ni staging.
+
+### Siguiente paquete
+
+```text
+2B-AG32 — configurar secrets development para Edge Functions
+```
+
+Solo si el usuario confirma que tiene valores listos localmente y sin pegarlos
+en chat.
+
+## 2B-AG32 — configurar secrets development
+
+Estado: bloqueado seguro.
+
+Readiness final:
+
+```text
+EDGE SECRETS SET BLOCKED
+```
+
+### Cierre formal de AG31
+
+2B-AG31 queda aprobado y cerrado formalmente como
+`EDGE SECRETS READY FOR SET`. El origen CORS development aprobado se mantiene:
+
+```text
+CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+```
+
+### Preflight
+
+Se ejecuto preflight local:
+
+- `git status --short`;
+- `git diff --check`;
+- `git check-ignore -v .env`;
+- `git check-ignore -v supabase/.temp/project-ref`;
+- `supabase migration list`.
+
+Resultado:
+
+- `.env` ignorado por Git.
+- `supabase/.temp/project-ref` ignorado por Git.
+- migraciones `00001`-`00007` alineadas.
+- no se detecto whitespace invalido.
+
+### Valores requeridos
+
+Verificacion local sin imprimir valores:
+
+```text
+SUPABASE_URL: presente
+SUPABASE_ANON_KEY: presente
+SUPABASE_SERVICE_ROLE_KEY: faltante
+```
+
+### Resultado
+
+No se ejecuto `supabase secrets set` porque falta `SUPABASE_SERVICE_ROLE_KEY`.
+El paquete queda bloqueado de forma segura antes de modificar remoto.
+
+### Fuera de alcance respetado
+
+No hubo deploy, migraciones, `db push`, `db pull`, SQL modificador, datos
+reales, RPC funcional, llamadas a funciones remotas, Flutter, auth real,
+production ni staging.
+
+### Siguiente paquete
+
+```text
+2B-AG33 — corregir secrets development
+```
+
+Debe introducirse `SUPABASE_SERVICE_ROLE_KEY` localmente sin pegarlo en chat ni
+documentacion. Despues podra reintentarse AG32 o un reintento controlado.
+
+## 2B-AG32-R — reintento configurar secrets development
+
+Estado: bloqueado seguro.
+
+Readiness final:
+
+```text
+EDGE SECRETS SET BLOCKED
+```
+
+### Resultado
+
+El reintento no configuro secrets porque `SUPABASE_SERVICE_ROLE_KEY` sigue
+faltando segun verificacion local segura sin imprimir valores:
+
+```text
+SUPABASE_URL: presente
+SUPABASE_ANON_KEY: presente
+SUPABASE_SERVICE_ROLE_KEY: faltante
+```
+
+No se ejecuto `supabase secrets set`.
+
+### Preflight
+
+Preflight ejecutado:
+
+- `git status --short`;
+- `git diff --check`;
+- `.env` ignorado;
+- `supabase/.temp/project-ref` ignorado;
+- `supabase migration list` no destructivo.
+
+Resultado: migraciones `00001`-`00007` alineadas y remoto sin cambios.
+
+### Fuera de alcance respetado
+
+No hubo deploy, `secrets set`, `secrets list`, migraciones, `db push`, `db pull`,
+SQL modificador, llamadas remotas, datos reales, Flutter, auth real, production
+ni staging.
+
+### Siguiente paquete
+
+```text
+2B-AG33 — corregir secrets development
+```
+
+La correccion debe asegurar que `.env` contiene exactamente
+`SUPABASE_SERVICE_ROLE_KEY` con valor no vacio, sin revelar el valor.
+
+## 2B-AG32-R2 — reintento configurar secrets development
+
+Estado: ejecutado con verificacion parcial.
+
+Readiness final:
+
+```text
+EDGE SECRETS SET BLOCKED
+```
+
+### Resultado
+
+`.env` se cargo en shell sin imprimir valores y los tres valores requeridos
+estaban presentes:
+
+```text
+SUPABASE_URL: presente
+SUPABASE_ANON_KEY: presente
+SUPABASE_SERVICE_ROLE_KEY: presente
+```
+
+Se ejecuto `supabase secrets set` una sola vez. Los valores reales no se
+imprimieron ni se registraron.
+
+### Verificacion
+
+`supabase secrets list` confirmo:
+
+- `STASISLY_RUNTIME_MODE`;
+- `STASISLY_ALLOW_DEVELOPMENT_REMOTE`;
+- `STASISLY_ALLOW_LOCAL_ONLY`;
+- `CORS_ALLOWED_ORIGINS`.
+
+No confirmo:
+
+- `SUPABASE_URL`;
+- `SUPABASE_ANON_KEY`;
+- `SUPABASE_SERVICE_ROLE_KEY`.
+
+El estado queda bloqueado para deploy hasta aclarar si las variables
+`SUPABASE_*` son reservadas/inyectadas por Supabase o requieren otra estrategia
+de verificacion.
+
+### Remoto sin deploy
+
+`supabase migration list` no destructivo confirmo migraciones `00001`-`00007`
+alineadas. No hubo deploy, migraciones, `db push`, SQL modificador, datos
+reales, llamadas remotas, Flutter, auth real, production ni staging.
+
+### Siguiente paquete
+
+```text
+2B-AG33 — verificar comportamiento de secrets SUPABASE_* en Supabase Edge Functions
+```
+
+No desplegar funciones hasta resolver la verificacion de secrets.
+
+## 2B-AG33 — comportamiento de secrets `SUPABASE_*` en Edge Functions
+
+Estado: completado.
+
+Readiness final:
+
+```text
+EDGE SUPABASE DEFAULT SECRETS VERIFIED
+```
+
+### Resultado
+
+AG32-R2 queda aprobado como bloqueo seguro por verificacion parcial. AG33
+verifico con documentacion oficial que:
+
+- `SUPABASE_URL` es un default secret disponible en Edge Functions.
+- `SUPABASE_ANON_KEY` es legacy key disponible.
+- `SUPABASE_SERVICE_ROLE_KEY` es legacy key disponible.
+- `service_role`/secret keys tienen privilegios elevados y bypass RLS, por lo
+  que nunca deben usarse en navegador.
+
+La ausencia de `SUPABASE_*` en `supabase secrets list` queda razonablemente
+explicada porque son default/legacy vars, no custom secrets listados como
+`STASISLY_*` o `CORS_ALLOWED_ORIGINS`.
+
+### CLI y estado actual
+
+Comandos help/no destructivos ejecutados:
+
+- `supabase secrets --help`;
+- `supabase secrets list --help`;
+- `supabase functions --help`;
+- `supabase functions deploy --help`.
+
+`supabase secrets list` sanitizado confirmo:
+
+- `STASISLY_RUNTIME_MODE`;
+- `STASISLY_ALLOW_DEVELOPMENT_REMOTE`;
+- `STASISLY_ALLOW_LOCAL_ONLY`;
+- `CORS_ALLOWED_ORIGINS`.
+
+No confirmo `SUPABASE_*`, consistente con default/legacy vars.
+
+### Codigo local
+
+Las funciones de catalogo/sesiones/mensajes leen `SUPABASE_URL`,
+`SUPABASE_ANON_KEY` y `SUPABASE_SERVICE_ROLE_KEY` mediante
+`Deno.env.get(...)`.
+
+### Decision
+
+Decision A:
+
+```text
+SUPABASE_* son default/legacy vars disponibles en Edge Functions y no bloquean
+el plan de deploy por no aparecer en custom secrets list.
+```
+
+### Recomendacion
+
+Mantener nombres actuales para el plan de deploy development. Evaluar en fase
+posterior migrar a nuevas keys (`SUPABASE_PUBLISHABLE_KEYS`,
+`SUPABASE_SECRET_KEYS`) o a nombres propios `STASISLY_SUPABASE_*` si se decide
+aislar el contrato.
+
+### Remoto sin deploy
+
+`supabase migration list` no destructivo confirma `00001`-`00007` alineadas.
+No hubo deploy, `secrets set` adicional, migraciones, `db push`, SQL
+modificador, llamadas remotas, datos reales, Flutter, auth real, production ni
+staging.
+
+### Siguiente paquete
+
+```text
+2B-AG34 — plan deploy Edge Functions development
+```
+
+## 2B-AG34 — plan deploy Edge Functions development
+
+Estado: bloqueado.
+
+Readiness final:
+
+```text
+EDGE DEPLOY PLAN BLOCKED
+```
+
+### Resultado
+
+AG34 preparo el preflight inicial y el inventario, pero bloqueo el plan antes
+del deploy porque no pasaron los gates locales completos.
+
+El primer gate pesado:
+
+```text
+supabase db reset --local --no-seed
+```
+
+fallo porque Docker daemon no esta disponible.
+
+### Inventario
+
+Funciones candidatas presentes:
+
+- `list-selectable-specialists`;
+- `list-own-chat-sessions`;
+- `create-own-chat-session`;
+- `archive-own-chat-session`;
+- `list-session-messages`;
+- `send-user-message`.
+
+Orden recomendado para paquete futuro:
+
+1. `list-selectable-specialists`;
+2. `list-own-chat-sessions`;
+3. `create-own-chat-session`;
+4. `archive-own-chat-session`;
+5. `list-session-messages`;
+6. `send-user-message`.
+
+### Comandos futuros
+
+NO EJECUTADO EN AG34:
+
+```bash
+supabase functions deploy list-selectable-specialists
+supabase functions deploy list-own-chat-sessions
+supabase functions deploy create-own-chat-session
+supabase functions deploy archive-own-chat-session
+supabase functions deploy list-session-messages
+supabase functions deploy send-user-message
+```
+
+### Stop conditions
+
+- Fallo en gate local: detener.
+- Fallo de deploy de una funcion: no desplegar la siguiente.
+- Proyecto incorrecto: detener.
+- Secrets impresos: detener.
+- Production/staging: detener.
+- Cambios Flutter/rutas/auth/chat: detener.
+- `OPTIONS` ejecuta logica sensible: detener.
+- Authorization omitido en metodos no `OPTIONS`: detener.
+
+### Estado de secrets/config
+
+- Custom secrets `STASISLY_*` y `CORS_ALLOWED_ORIGINS`: configurados.
+- `SUPABASE_URL`: default var disponible.
+- `SUPABASE_ANON_KEY`: legacy/default var disponible.
+- `SUPABASE_SERVICE_ROLE_KEY`: legacy/default var disponible.
+
+### Fuera de alcance respetado
+
+No hubo deploy, `secrets set`, migraciones, `db push`, SQL modificador, llamadas
+remotas, datos reales, Flutter, auth real, production ni staging.
+
+### Siguiente paquete
+
+```text
+2B-AG35 — resolver bloqueantes deploy Edge Functions
+```
+
+Arrancar Docker y reejecutar gates locales antes de cualquier deploy.
+
+## 2B-AG35 — resolver Docker local y gates Edge Functions antes de deploy
+
+Estado: completado.
+
+Readiness final:
+
+```text
+EDGE LOCAL GATES READY
+```
+
+### Resultado
+
+AG35 resuelve el bloqueo local de AG34: Docker daemon esta disponible,
+Supabase local arranca y todos los gates locales obligatorios pasan antes de
+plantear cualquier deploy development.
+
+No se desplegaron Edge Functions en AG35.
+
+### Evidencia local
+
+Ejecutado y aprobado:
+
+- `docker info`: Docker daemon disponible.
+- `supabase start`: Supabase local ya estaba arrancado.
+- `git diff --check`: OK.
+- `.env`: ignorado por Git.
+- `supabase/.temp/project-ref`: ignorado por Git.
+- `supabase migration list`: `00001`-`00007` alineadas local/remoto.
+- `supabase db reset --local --no-seed`: OK.
+- `supabase test db --local`: OK, 12 archivos pgTAP, 394 tests.
+- `2b_iv_h_local_http_integration_test.sh`: OK, cleanup `0|0|0|0|0|0`.
+- `2b_v_g_messages_http_integration_test.sh`: OK, cleanup `0|0|0|0|0|0`.
+- `flutter analyze --no-fatal-infos`: OK con infos existentes.
+- `flutter test test/core/config test/architecture`: OK.
+- `flutter test test/features/chat_sessions test/features/chat_messages`: OK.
+- `flutter test`: OK, 367 tests pasados y 2 skips esperados de harness local.
+
+### Remoto sin deploy
+
+No se ejecuto:
+
+- `supabase functions deploy`;
+- `supabase secrets set`;
+- migraciones remotas nuevas;
+- `db push`;
+- SQL modificador;
+- llamadas a Edge Functions remotas.
+
+`supabase migration list` posterior mantiene `00001`-`00007` alineadas.
+
+### Frontera Flutter/backend
+
+No hay cambios en:
+
+- `lib/core/config`;
+- `lib/core/auth/session`;
+- `lib/features/auth`;
+- `lib/features/chat`;
+- `lib/features/chat_sessions`;
+- `lib/features/chat_messages`;
+- `lib/app.dart`;
+- `lib/main.dart`.
+
+Flutter sigue sin conectarse a Supabase real, auth real no se activa, rutas no
+se modifican y chat heredado no se reactiva.
+
+### Riesgos clasificados
+
+Bloqueante resuelto:
+
+- Docker local no disponible.
+
+Altos vigentes:
+
+- deploy accidental;
+- `service_role` expuesto;
+- secrets impresos;
+- production/staging tocado;
+- Flutter conectado antes de tiempo.
+
+Medios vigentes:
+
+- CORS o runtime development mal configurados;
+- gates locales no repetidos antes de deploy futuro;
+- rollback insuficiente si se despliega mas de una funcion sin stop.
+
+Bajos:
+
+- analyzer mantiene infos existentes;
+- cambios AG29 en `supabase/functions` siguen pendientes y deben entenderse
+  como base del futuro deploy, no como cambios de AG35.
+
+### Siguiente paquete
+
+```text
+2B-AG36 — deploy Edge Functions development controlado
+```
+
+AG36 debe desplegar solo development, por funcion, con stop inmediato ante fallo
+y sin conectar Flutter ni usar datos reales.
+
+## 2B-AG36 — deploy Edge Functions development controlado
+
+Estado: completado.
+
+Readiness final:
+
+```text
+EDGE FUNCTIONS DEPLOYED
+```
+
+### Proyecto objetivo
+
+Confirmado de forma segura antes del deploy:
+
+- Proyecto: Stasisly Development.
+- Region: eu-central-1.
+- Production: NO.
+- Staging: NO.
+- Datos reales: NO.
+
+No se documentan project refs, tokens, keys, URLs con refs ni connection
+strings.
+
+### Deploy ejecutado
+
+Se desplegaron una por una, con stop inmediato preparado ante fallo:
+
+1. `list-selectable-specialists`: PASS.
+2. `list-own-chat-sessions`: PASS.
+3. `create-own-chat-session`: PASS.
+4. `archive-own-chat-session`: PASS.
+5. `list-session-messages`: PASS.
+6. `send-user-message`: PASS.
+
+La salida de deploy no imprimio secrets. La CLI mostro identificadores del
+proyecto y URLs de dashboard; no se registran en documentacion.
+
+### Verificacion post-deploy
+
+`supabase functions list` confirma las seis funciones como `ACTIVE`:
+
+- `list-selectable-specialists`;
+- `list-own-chat-sessions`;
+- `create-own-chat-session`;
+- `archive-own-chat-session`;
+- `list-session-messages`;
+- `send-user-message`.
+
+`supabase migration list` confirma que `00001`-`00007` siguen alineadas
+local/remoto.
+
+### Fuera de alcance respetado
+
+No se ejecuto:
+
+- `supabase secrets set`;
+- migraciones remotas nuevas;
+- `db push`;
+- `db pull`;
+- SQL modificador;
+- llamadas remotas funcionales a Edge Functions;
+- RPC funcional;
+- conexion Flutter;
+- auth real desde Flutter;
+- datos reales;
+- production;
+- staging.
+
+No se modificaron Edge Functions, Flutter, migraciones, tests ni harness en
+AG36. Los cambios en `supabase/functions` son preexistentes de AG29.
+
+### Riesgos clasificados
+
+Altos vigentes:
+
+- falta verificacion remota sin datos reales;
+- uso accidental de datos reales en AG37 o posterior;
+- Flutter conectado antes de terminar verificaciones;
+- production/staging tocado por error;
+- `service_role` expuesto en logs futuros.
+
+Medios:
+
+- runtime/CORS development aun pendiente de validacion remota;
+- `send-user-message` desplegada pero sin prueba remota sintetica;
+- rollback/redeploy no probado.
+
+Bajos:
+
+- IDs internos visibles en `functions list`; no deben copiarse innecesariamente.
+
+### Siguiente paquete
+
+```text
+2B-AG37 — verificacion remota Edge Functions sin datos reales
+```
+
+AG37 debe empezar por checks no funcionales/no sensibles y no conectar Flutter.
+
+## 2B-AG37 — verificacion remota Edge Functions sin datos reales
+
+Estado: completado con verificacion parcial segura.
+
+Readiness final:
+
+```text
+EDGE REMOTE VERIFY PARTIAL
+```
+
+### Proyecto y funciones
+
+Confirmado:
+
+- Proyecto: Stasisly Development.
+- Region: eu-central-1.
+- Production: NO.
+- Staging: NO.
+- Datos reales: NO.
+
+Funciones `ACTIVE`:
+
+- `list-selectable-specialists`;
+- `list-own-chat-sessions`;
+- `create-own-chat-session`;
+- `archive-own-chat-session`;
+- `list-session-messages`;
+- `send-user-message`.
+
+No se registran IDs internos, project refs, URLs completas ni tokens.
+
+### Verificacion remota no funcional
+
+OPTIONS/preflight remoto:
+
+- origen `http://localhost:3000`: status 204 y CORS permitido en las seis
+  funciones;
+- origen `http://127.0.0.1:3000`: status 204 y CORS permitido en las seis
+  funciones.
+
+Rechazo sin Authorization:
+
+- las seis funciones devuelven 401;
+- no hay 2xx funcional;
+- no se imprimen secrets.
+
+Rechazo con token invalido:
+
+- las seis funciones devuelven 401;
+- no hay 2xx funcional;
+- no se imprimen secrets.
+
+### Conteos y datos
+
+Los conteos remotos de `chat_sessions`, `messages` y `specialist_catalog` quedan
+pendientes porque no se uso connection string, SQL Editor manual, dump remoto ni
+credenciales. La CLI disponible no ofrece un `query` remoto seguro para esta
+tarea.
+
+Estado: PARTIAL.
+
+La ausencia de insercion se infiere parcialmente por el tipo de llamadas
+ejecutadas: `OPTIONS`, sin Authorization y token invalido. No se llamaron flujos
+autenticados ni RPC funcional.
+
+### Remoto y Flutter
+
+`supabase migration list` posterior mantiene `00001`-`00007` alineadas
+local/remoto.
+
+No se ejecuto:
+
+- deploy adicional;
+- `secrets set`;
+- migraciones;
+- `db push`;
+- SQL modificador;
+- RPC funcional;
+- Flutter;
+- auth real;
+- datos reales;
+- production;
+- staging.
+
+### Riesgos clasificados
+
+Altos:
+
+- conteos remotos no verificados por metodo seguro;
+- falta usuario sintetico para pruebas autenticadas;
+- uso accidental de datos reales en pasos futuros.
+
+Medios:
+
+- CORS y rechazos basicos pasan, pero aun no hay prueba remota positiva
+  sintetica;
+- rollback/redeploy no probado.
+
+Bajos:
+
+- IDs internos aparecen en CLI pero no se documentan.
+
+### Siguiente paquete
+
+```text
+2B-AG38 — completar verificacion remota pendiente
+```
+
+AG38 debe decidir entre conteos read-only seguros o plan de usuario sintetico
+development con limpieza obligatoria.
+
+## 2B-AG38 — completar verificacion remota pendiente con conteos read-only
+
+Estado: completado por evidencia manual aprobada.
+
+Readiness final:
+
+```text
+EDGE REMOTE BASIC VERIFY READY
+```
+
+### Resultado
+
+AG38 queda cerrado con conteos read-only ejecutados manualmente en Supabase
+Dashboard SQL Editor del proyecto Stasisly Development.
+
+Conteos reportados:
+
+- `chat_sessions`: 0.
+- `messages`: 0.
+- `specialist_catalog`: 0.
+
+Condiciones:
+
+- SQL modificador ejecutado: NO.
+- Credenciales copiadas: NO.
+- Datos sensibles copiados: NO.
+- Production/staging: NO.
+
+Con `chat_sessions = 0` y `messages = 0`, queda confirmado que las llamadas
+OPTIONS/sin Authorization/token invalido de AG37 no insertaron sesiones ni
+mensajes.
+
+## 2B-AG39 — plan usuario sintetico development para pruebas autenticadas
+
+Estado: preparado.
+
+Readiness final:
+
+```text
+SYNTHETIC USER PLAN READY
+```
+
+### Usuario sintetico
+
+Usuario conceptual propuesto:
+
+```text
+stasisly-dev-synthetic-user
+```
+
+No es usuario real, no usa email personal, no se usara en production/staging y
+debe poder eliminarse o aislarse.
+
+### Creacion y JWT
+
+Metodo recomendado de creacion:
+
+- Supabase Dashboard Auth manual en Stasisly Development.
+
+Motivo:
+
+- evita `service_role` en terminal;
+- evita scripts con credenciales;
+- evita tokens en logs;
+- mantiene control humano sobre el proyecto.
+
+JWT futuro:
+
+- obtener token temporal solo del usuario sintetico;
+- no imprimir `access_token`;
+- no imprimir `refresh_token`;
+- no guardar token en docs/chat/logs;
+- usar variable de shell efimera o herramienta local futura.
+
+No se crea usuario ni se obtiene JWT en AG39.
+
+### Pruebas positivas futuras
+
+Orden:
+
+1. conteos iniciales read-only;
+2. crear/listar sesion sintetica;
+3. listar sesiones propias;
+4. enviar mensaje sintetico;
+5. listar mensajes;
+6. archivar sesion sintetica;
+7. conteos finales;
+8. cleanup;
+9. conteos post-cleanup.
+
+Payload ejemplo:
+
+```json
+{
+  "content": "synthetic-development-message-ag40"
+}
+```
+
+### Cleanup
+
+Obligatorio antes de ejecutar pruebas:
+
+- eliminar o aislar sesiones sinteticas;
+- eliminar mensajes sinteticos si el modelo lo permite;
+- si no hay delete, documentar retencion sintetica;
+- conteos antes/despues y post-cleanup;
+- no dejar datos reales.
+
+### Riesgos
+
+Altos:
+
+- usuario real usado por error;
+- token impreso;
+- `service_role` expuesto;
+- payload con datos reales;
+- production/staging tocado.
+
+Medios:
+
+- cleanup insuficiente;
+- datos sinteticos persistentes;
+- usuario sintetico no aislado.
+
+### Siguiente paquete
+
+```text
+2B-AG40 — crear usuario sintetico development y obtener JWT temporal sin imprimirlo
+```
+
 ## Intento 2B-AG17 — migration up development controlado
 
 ### Estado para catálogo y frontera backend
@@ -14414,6 +15538,204 @@ REMOTE SQL METHOD READY
 
 AG27 debe consistir en que el usuario ejecute manualmente las consultas
 aprobadas en Dashboard SQL Editor y comparta solo el resumen seguro.
+
+## Plan 2B-AG28 — Edge Functions development deploy
+
+### Estado para catálogo y frontera backend
+
+2B-AG27 queda aprobado y cerrado formalmente como
+`REMOTE SQL EVIDENCE READY`: RLS, policies, grants, RPC y conteos remotos fueron
+verificados manualmente desde Supabase Dashboard SQL Editor para Stasisly
+Development, región `eu-central-1`, sin SQL modificador, sin credenciales
+copiadas, sin datos sensibles y sin production/staging.
+
+AG28 queda autorizado solo para planificar el futuro deploy de Edge Functions
+en development. No ejecuta `supabase functions deploy`, no ejecuta
+`supabase secrets set`, no modifica remoto, no llama Edge Functions remotas, no
+inserta datos, no llama RPC funcionalmente, no modifica Flutter, no activa auth
+real y no toca production ni staging.
+
+### Inventario de funciones locales
+
+Funciones candidatas encontradas en `supabase/functions/`:
+
+| Función | Existe | Archivo principal | Estado AG28 |
+| --- | --- | --- | --- |
+| `list-own-chat-sessions` | Sí | `supabase/functions/list-own-chat-sessions/index.ts` | Bloqueada para deploy remoto hasta separar runtime local-only |
+| `create-own-chat-session` | Sí | `supabase/functions/create-own-chat-session/index.ts` | Bloqueada para deploy remoto hasta separar runtime local-only |
+| `archive-own-chat-session` | Sí | `supabase/functions/archive-own-chat-session/index.ts` | Bloqueada para deploy remoto hasta separar runtime local-only |
+| `list-session-messages` | Sí | `supabase/functions/list-session-messages/index.ts` | Bloqueada para deploy remoto hasta separar runtime local-only |
+| `send-user-message` | Sí | `supabase/functions/send-user-message/index.ts` | Bloqueada para deploy remoto hasta separar runtime local-only |
+
+Función adicional local inspeccionada como dependencia de catálogo, no candidata
+principal en AG28:
+
+- `list-selectable-specialists`.
+
+### Auditoría de payloads
+
+Resultado por función:
+
+- `create-own-chat-session`: acepta únicamente `selectableSpecialistId`.
+  Rechaza por contrato cualquier `userId`, `ownerUserId`, `specialistId`,
+  `role`, permisos o campos extra.
+- `list-own-chat-sessions`: acepta solo query params `status`, `limit` y
+  `cursor`; deriva usuario desde JWT; no acepta `userId`, `ownerUserId` ni
+  `role`.
+- `archive-own-chat-session`: acepta únicamente `sessionId`; rechaza campos
+  extra como `userId`, `ownerUserId`, `specialistId` o `role`.
+- `send-user-message`: acepta únicamente `sessionId` y `content`; rechaza
+  `userId`, `ownerUserId`, `role`, `specialistId`, `attachments`, `metadata`
+  y campos arbitrarios.
+- `list-session-messages`: acepta `sessionId`, `limit` y `cursor`; rechaza
+  queries no aprobadas como `userId`, `specialistId`, `role`, `attachments` o
+  `metadata`.
+
+No se detecta payload de autoridad enviado por cliente como requisito funcional.
+
+### Auditoría Authorization/JWT
+
+Todas las candidatas:
+
+- requieren header `Authorization: Bearer ...`;
+- rechazan ausencia de token con error `unauthenticated`;
+- validan el token llamando a `/auth/v1/user` con anon key;
+- derivan `ownerId` desde la respuesta de Auth;
+- no confían en `userId` enviado por cliente;
+- usan backend/service role internamente para leer/escribir bajo control del
+  servidor.
+
+Bloqueante detectado: todas las candidatas usan `assertLocalRuntime`, que exige
+`STASISLY_ALLOW_LOCAL_ONLY=true`, `SUPABASE_URL` con protocolo `http:` y host
+local (`127.0.0.1:54321`, `localhost:54321`, `host.docker.internal:54321` o
+`kong:8000`). Esto bloquea el deploy remoto development tal como está, porque
+un runtime remoto esperará URL `https` del proyecto development.
+
+### Service role y secrets
+
+Secrets lógicos usados por todas las candidatas:
+
+- `SUPABASE_URL`: requerido.
+- `SUPABASE_ANON_KEY`: requerido para validar `/auth/v1/user`.
+- `SUPABASE_SERVICE_ROLE_KEY`: requerido para llamadas backend controladas.
+- `STASISLY_ALLOW_LOCAL_ONLY`: requerido por la implementación actual local-only.
+
+No se registran valores. `service_role` no se usa en Flutter ni se imprime en
+logs. Para deploy remoto futuro se requiere paquete separado de secrets
+development y rediseño/adaptación del guard local-only.
+
+### Logs
+
+Las candidatas usan `safeLog` y registran solo:
+
+- operación;
+- resultado;
+- latencia;
+- `request_id`;
+- `contract_version`;
+- `count` cuando aplica;
+- `error_code` cuando aplica.
+
+No se observaron logs de Authorization header, JWT, access token, refresh
+token, anon key, service role, connection string, payload completo, contenido
+de mensajes o datos personales.
+
+### CORS
+
+No se observó implementación explícita de CORS ni manejo `OPTIONS` en las
+funciones candidatas. Para development remoto, antes de deploy real debe
+definirse:
+
+- orígenes locales/dev permitidos si procede;
+- headers mínimos, incluyendo `Authorization` y `content-type`;
+- métodos mínimos por función;
+- preflight `OPTIONS`;
+- prohibición futura de wildcard en production salvo decisión explícita.
+
+### Orden futuro de deploy
+
+Orden recomendado, una vez resuelto el bloqueo local-only y secrets/CORS:
+
+1. `list-own-chat-sessions`;
+2. `create-own-chat-session`;
+3. `archive-own-chat-session`;
+4. `list-session-messages`;
+5. `send-user-message`.
+
+Motivo: validar primero lectura/listado, después creación, después archivo y
+solo al final mensajes y escritura transaccional.
+
+### Verificaciones post-deploy futuras
+
+AG29 o paquete posterior debe planificar/ejecutar, solo en development:
+
+- verificar función desplegada;
+- `OPTIONS`/preflight si aplica;
+- request sin Authorization debe fallar;
+- request con token inválido debe fallar;
+- no usar datos reales;
+- no usar usuario real;
+- no insertar mensajes reales salvo paquete sintético específico;
+- no conectar Flutter durante la validación backend.
+
+### Rollback por función
+
+Plan:
+
+- desplegar una función cada vez;
+- no desplegar la siguiente si falla una;
+- registrar función fallida y error seguro;
+- no tocar migraciones;
+- no tocar Flutter;
+- no configurar secrets adicionales si el deploy falla;
+- si una función queda mal desplegada, abrir paquete separado de
+  redeploy/disable controlado.
+
+### Gates antes de deploy real
+
+Antes de autorizar deploy real:
+
+- AG28 aprobado;
+- bloqueo `assertLocalRuntime` resuelto o planificado en paquete de corrección;
+- CORS definido;
+- secrets lógicos development preparados sin valores en repo;
+- payloads seguros;
+- JWT/Authorization revisado;
+- logs sin secrets;
+- rollback definido;
+- production/staging bloqueados;
+- sin datos reales;
+- Flutter desconectado.
+
+### Readiness final
+
+```text
+EDGE DEPLOY PLAN BLOCKED
+```
+
+Motivo: las funciones son sólidas para local-safe, pero todas están bloqueadas
+para remoto por `assertLocalRuntime` y no tienen CORS/preflight explícito.
+
+### Riesgos clasificados
+
+- Bloqueante: runtime local-only impide deploy remoto development útil.
+- Bloqueante: CORS/preflight no definido explícitamente.
+- Alto: configurar `SUPABASE_SERVICE_ROLE_KEY` remoto sin runbook separado.
+- Alto: desplegar antes de resolver guard local-only.
+- Medio: orden de deploy incorrecto podría activar escritura antes de validar
+  lectura/listado.
+- Medio: rollback por función aún no ejecutado.
+- Bajo: payloads, JWT, logs y rechazo de campos de autoridad están bien
+  encaminados para la frontera backend.
+
+### Siguiente paquete propuesto
+
+```text
+2B-AG29 — corregir Edge Functions antes de deploy
+```
+
+AG29 debe planificar la separación de runtime local-only vs development remoto,
+incluyendo CORS y secrets, sin desplegar todavía.
 
 ## Resolución 2B-AG11 — evidencia externa DEV LINK sin secretos
 

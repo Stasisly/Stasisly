@@ -23,6 +23,9 @@ const LOCAL_CONFIG: RuntimeConfig = {
   anonKey: "local-anon-placeholder",
   serviceRoleKey: "local-service-role-placeholder",
   allowLocalOnly: "true",
+  runtimeMode: "local",
+  allowDevelopmentRemote: "false",
+  corsAllowedOrigins: "",
 };
 const CATALOG_ROW = {
   id: SELECTABLE_ID,
@@ -219,6 +222,32 @@ Deno.test("handler rejects missing and invalid JWT", async () => {
   assertEquals(calls, 0);
   assertEquals((await handler(request(undefined, "invalid"))).status, 401);
   assertEquals(calls, 1);
+});
+
+Deno.test("preflight returns before auth and backend access", async () => {
+  let calls = 0;
+  const handler = createHandler(LOCAL_CONFIG, {
+    fetcher: (async () => {
+      calls++;
+      return new Response(null, { status: 500 });
+    }) as typeof fetch,
+    logWriter: () => {},
+  });
+  const response = await handler(
+    new Request(
+      "http://127.0.0.1:54321/functions/v1/create-own-chat-session",
+      {
+        method: "OPTIONS",
+        headers: { origin: "http://localhost:3000" },
+      },
+    ),
+  );
+  assertEquals(response.status, 204);
+  assertEquals(calls, 0);
+  assertEquals(
+    response.headers.get("access-control-allow-origin"),
+    "http://localhost:3000",
+  );
 });
 
 Deno.test("local runtime and logs fail closed", async () => {

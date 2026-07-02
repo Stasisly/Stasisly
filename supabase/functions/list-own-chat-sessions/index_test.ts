@@ -21,6 +21,9 @@ const LOCAL_CONFIG: RuntimeConfig = {
   anonKey: "local-anon-placeholder",
   serviceRoleKey: "local-service-role-placeholder",
   allowLocalOnly: "true",
+  runtimeMode: "local",
+  allowDevelopmentRemote: "false",
+  corsAllowedOrigins: "",
 };
 const CATALOG = [{
   id: SELECTABLE,

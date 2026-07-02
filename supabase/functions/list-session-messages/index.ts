@@ -1,4 +1,10 @@
 import {
+  corsHeadersFor,
+  preflightResponse,
+  withCorsHeaders,
+} from "../_shared/cors.ts";
+import { assertAllowedRuntime } from "../_shared/runtime_guard.ts";
+import {
   assertOwnedSession,
   buildMessagesResponse,
   type CursorValue,
@@ -12,18 +18,16 @@ import {
 import { type LogWriter, safeLog } from "./safe_log.ts";
 
 const OPERATION = "listSessionMessages";
-const LOCAL_ENDPOINTS = new Set([
-  "127.0.0.1:54321",
-  "localhost:54321",
-  "host.docker.internal:54321",
-  "kong:8000",
-]);
+const METHODS = ["GET", "OPTIONS"];
 
 export interface RuntimeConfig {
   supabaseUrl: string;
   anonKey: string;
   serviceRoleKey: string;
   allowLocalOnly: string;
+  runtimeMode: string;
+  allowDevelopmentRemote: string;
+  corsAllowedOrigins: string;
 }
 
 export interface HandlerDependencies {
@@ -39,26 +43,16 @@ export function readRuntimeConfig(): RuntimeConfig {
     anonKey: Deno.env.get("SUPABASE_ANON_KEY") ?? "",
     serviceRoleKey: Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
     allowLocalOnly: Deno.env.get("STASISLY_ALLOW_LOCAL_ONLY") ?? "",
+    runtimeMode: Deno.env.get("STASISLY_RUNTIME_MODE") ?? "",
+    allowDevelopmentRemote: Deno.env.get(
+      "STASISLY_ALLOW_DEVELOPMENT_REMOTE",
+    ) ?? "",
+    corsAllowedOrigins: Deno.env.get("CORS_ALLOWED_ORIGINS") ?? "",
   };
 }
 
 export function assertLocalRuntime(config: RuntimeConfig): URL {
-  if (
-    config.allowLocalOnly !== "true" || !config.anonKey ||
-    !config.serviceRoleKey
-  ) {
-    throw new Error("backendMisconfigured");
-  }
-  let url: URL;
-  try {
-    url = new URL(config.supabaseUrl);
-  } catch {
-    throw new Error("backendMisconfigured");
-  }
-  if (url.protocol !== "http:" || !LOCAL_ENDPOINTS.has(url.host)) {
-    throw new Error("backendMisconfigured");
-  }
-  return url;
+  return assertAllowedRuntime(config);
 }
 
 function bearerToken(request: Request): string {
@@ -147,6 +141,9 @@ export function createHandler(
   const logWriter = dependencies.logWriter ?? console.log;
 
   return async (request: Request): Promise<Response> => {
+    if (request.method === "OPTIONS") {
+      return preflightResponse(request, config, METHODS);
+    }
     const startedAt = now();
     const id = requestId();
     let count = 0;
@@ -187,13 +184,19 @@ export function createHandler(
       return Response.json(response, {
         status: 200,
         headers: {
+          ...corsHeadersFor(request, config, METHODS),
           "cache-control": "no-store",
           "content-type": "application/json",
         },
       });
     } catch (error) {
       errorCode = errorCodeFrom(error);
-      return errorResponse(errorCode, id);
+      return withCorsHeaders(
+        errorResponse(errorCode, id),
+        request,
+        config,
+        METHODS,
+      );
     } finally {
       safeLog({
         operation: OPERATION,
