@@ -13082,6 +13082,82 @@ Alternativas validas:
 
 No implementar todavia.
 
+## Registro 2B-AG62 — fixture remoto y frontera UX dev-only validados
+
+Estado:
+
+```text
+FLUTTER DEV UX REMOTE VALIDATED
+```
+
+AG62 corrige el bloqueo de autenticacion de AG61 renovando el token sintetico
+local sin exponer secretos. La lectura remota de `chat_sessions` y `messages`
+queda validada solo lectura contra el fixture retenido:
+
+- `active=0`;
+- `all=2`;
+- `archived=2`;
+- mensajes sinteticos totales `2`;
+- catalogo/usuario sintetico siguen tratados como fixture development, no como
+  datos reales.
+
+La frontera Flutter/UX se mantiene:
+
+- `/dev/chat/composed` es ruta dev-only;
+- `/dev/chat/session/:sessionId` usa `sessionId` explicito;
+- `/chat/:id` no se interpreta como `sessionId`;
+- `/orchestrator/chat` no se conecta;
+- `/conversations` no se registra;
+- `SupabaseChatDataSource` no participa en el flujo nuevo;
+- no se exponen `userId` ni `specialistId` como contrato publico del flujo
+  nuevo;
+- no se ejecutan escrituras.
+
+Siguiente paso recomendado:
+
+```text
+2B-AG63 — decision ruta producto futura vs hardening dev-only vs cleanup
+```
+
+Cualquier cleanup, escritura adicional o ruta producto requiere aprobacion
+separada.
+
+## Registro 2B-AG61 — frontera UX dev-only y fixture remoto
+
+Estado:
+
+```text
+FLUTTER DEV UX VALIDATION BLOCKED
+```
+
+AG60 queda aprobado y cerrado como `FLUTTER DEV UX ROUTING IMPLEMENTED`.
+AG61 confirma que la frontera Flutter dev-only mantiene la separacion segura:
+
+- la shell compuesta usa `sessionId` explicito;
+- no interpreta `/chat/:id` como `sessionId`;
+- no conecta `/orchestrator/chat`;
+- no registra `/conversations`;
+- no reactiva chat heredado;
+- no usa `SupabaseChatDataSource`;
+- no expone `userId` ni `specialistId` en contratos publicos del flujo nuevo;
+- no ejecuta escrituras.
+
+La UI dev-only pasa con fixture sintetico local equivalente a la forma remota
+retenida (`active=0`, `all=2`, `archived=2`, dos mensajes sinteticos). La lectura
+remota real queda bloqueada por `unauthenticated` en `list-own-chat-sessions`.
+El bloqueo no debe resolverse con fallback demo, datos reales, rutas producto ni
+escrituras exploratorias.
+
+Siguiente paso:
+
+```text
+2B-AG62 — corregir bloqueo UX dev-only remoto
+```
+
+AG62 debe limitarse a revisar/renovar la sesion sintetica development y repetir
+solo lectura. Cualquier create/send/archive/cleanup o ruta producto requiere
+aprobacion separada.
+
 ## 2B-AG29 — runtime y CORS de Edge Functions
 
 Estado: completado como `EDGE RUNTIME CODE READY`, sin deploy remoto.
@@ -14204,6 +14280,2132 @@ Medios:
 
 ```text
 2B-AG40 — crear usuario sintetico development y obtener JWT temporal sin imprimirlo
+```
+
+## 2B-AG40 — crear usuario sintetico development y obtener JWT temporal sin imprimirlo
+
+Estado: bloqueado seguro.
+
+Readiness final:
+
+```text
+SYNTHETIC USER SETUP BLOCKED
+```
+
+### Resultado
+
+El proyecto development queda confirmado y las funciones siguen `ACTIVE`, pero
+AG40 no crea usuario ni obtiene JWT porque el metodo aprobado para creacion es
+Dashboard Auth manual y no hay usuario/password/token sintetico disponible en el
+entorno local.
+
+Variables comprobadas sin imprimir valores:
+
+- `SYNTHETIC_USER_EMAIL`: faltante.
+- `SYNTHETIC_USER_PASSWORD`: faltante.
+- `SYNTHETIC_ACCESS_TOKEN`: faltante.
+- `SYNTHETIC_REFRESH_TOKEN`: faltante.
+
+### Seguridad preservada
+
+No se imprimio:
+
+- access token;
+- refresh token;
+- password;
+- anon key;
+- service role;
+- connection string.
+
+No se ejecuto:
+
+- llamada funcional a Edge Functions;
+- RPC funcional;
+- SQL modificador;
+- deploy adicional;
+- `secrets set`;
+- migraciones;
+- `db push`;
+- Flutter;
+- auth real desde Flutter.
+
+### Siguiente paquete
+
+```text
+2B-AG41 — resolver usuario sintetico/JWT
+```
+
+Requiere accion manual previa o aprobacion explicita de un metodo alternativo
+seguro para crear/confirmar usuario sintetico y obtener token temporal sin
+imprimirlo.
+
+## 2B-AG40-R — reintento usuario sintetico/JWT development
+
+Estado: bloqueado seguro.
+
+Readiness final:
+
+```text
+SYNTHETIC USER SETUP BLOCKED
+```
+
+### Resultado
+
+AG40-R confirma Stasisly Development y que las seis funciones siguen `ACTIVE`,
+pero se detiene antes del login porque faltan variables locales sinteticas
+requeridas.
+
+Variables comprobadas sin imprimir valores:
+
+- `SYNTHETIC_USER_EMAIL`: faltante.
+- `SYNTHETIC_USER_PASSWORD`: faltante.
+- `SUPABASE_URL`: presente.
+- `SUPABASE_ANON_KEY`: presente.
+
+### Seguridad preservada
+
+No se imprimio:
+
+- access token;
+- refresh token;
+- password;
+- anon key;
+- service role;
+- connection string.
+
+No se ejecuto:
+
+- login;
+- llamada funcional a Edge Functions;
+- RPC funcional;
+- SQL modificador;
+- deploy adicional;
+- `secrets set`;
+- migraciones;
+- `db push`;
+- Flutter;
+- auth real desde Flutter.
+
+### Siguiente paquete
+
+```text
+2B-AG41 — resolver usuario sintetico/JWT
+```
+
+Accion previa recomendada: anadir `SYNTHETIC_USER_EMAIL` y
+`SYNTHETIC_USER_PASSWORD` al `.env` local con esos nombres exactos, sin
+imprimirlos ni versionarlos.
+
+## 2B-AG40-R2 — reintento usuario sintetico/JWT development
+
+Estado: completado.
+
+Readiness final:
+
+```text
+SYNTHETIC USER READY
+```
+
+### Resultado
+
+AG40-R2 confirma variables sinteticas locales, realiza login seguro contra
+Supabase Auth development y obtiene token temporal sin imprimirlo.
+
+Presencia confirmada sin valores:
+
+- `SYNTHETIC_USER_EMAIL`: presente.
+- `SYNTHETIC_USER_PASSWORD`: presente.
+- `SUPABASE_URL`: presente.
+- `SUPABASE_ANON_KEY`: presente.
+- `SYNTHETIC_ACCESS_TOKEN`: presente.
+- `SYNTHETIC_REFRESH_TOKEN`: presente.
+
+### Seguridad preservada
+
+No se imprimio:
+
+- access token;
+- refresh token;
+- password;
+- anon key;
+- service role;
+- connection string.
+
+No se ejecuto:
+
+- llamada funcional a Edge Functions;
+- RPC funcional;
+- SQL modificador;
+- deploy adicional;
+- `secrets set`;
+- migraciones;
+- `db push`;
+- Flutter;
+- auth real desde Flutter.
+
+Los tokens no se guardaron en repo, docs ni chat. Quedaron solo en el proceso
+efimero de login.
+
+### Siguiente paquete
+
+```text
+2B-AG41 — pruebas positivas autenticadas Edge Functions con usuario sintetico
+```
+
+AG41 debe reobtener o usar un token efimero local sin imprimirlo, ejecutar
+conteos antes/despues y hacer cleanup.
+
+## 2B-AG41 — pruebas positivas autenticadas Edge Functions con usuario sintetico
+
+Estado: bloqueado seguro.
+
+Readiness final:
+
+```text
+SYNTHETIC AUTH FLOW BLOCKED
+```
+
+### Cierre formal de AG40-R2
+
+2B-AG40-R2 queda aprobado y cerrado formalmente como `SYNTHETIC USER READY`.
+El usuario sintetico development y el login seguro previo quedan validados sin
+tokens versionados, sin tokens impresos y sin llamadas funcionales.
+
+### Preflight no destructivo
+
+Resultado:
+
+- `.env` ignorado por Git.
+- `supabase/.temp/project-ref` ignorado por Git.
+- migraciones `00001`-`00007` alineadas local/remoto.
+- seis Edge Functions `ACTIVE`.
+- variables requeridas presentes sin imprimir secretos.
+- `APP_MODE=development`.
+- `ENABLE_REMOTE_BACKEND=false`.
+- `ENABLE_REAL_AUTH=false`.
+- `ENABLE_REAL_DATA=false`.
+
+### Motivo de bloqueo
+
+AG41 no ejecuta el flujo positivo porque antes de crear una sesion o mensaje
+sintetico debe confirmarse el estado global de:
+
+- `public.chat_sessions`;
+- `public.messages`;
+- `public.specialist_catalog`.
+
+El metodo aprobado para esos conteos es read-only seguro, preferentemente
+Dashboard SQL Editor manual. Codex no dispone en esta fase de una via SQL
+read-only remota aprobada que no implique credenciales de BD, service role,
+`db dump`, `db pull` o comandos fuera del alcance.
+
+### Impacto sobre catalogo y funciones
+
+No se ejecuto:
+
+- `list-selectable-specialists` con JWT valido;
+- `list-own-chat-sessions` con JWT valido;
+- `create-own-chat-session`;
+- `send-user-message`;
+- `list-session-messages`;
+- `archive-own-chat-session`.
+
+Por tanto:
+
+- no se comprobo aun el catalogo sanitizado remoto con usuario sintetico;
+- no se capturo `selectableSpecialistId`;
+- no se genero `sessionId`;
+- no se creo sesion;
+- no se creo mensaje;
+- no se archivo sesion;
+- no hay cleanup pendiente creado por AG41.
+
+### Seguridad preservada
+
+No se imprimio:
+
+- access token;
+- refresh token;
+- password;
+- anon key;
+- service role;
+- connection string.
+
+No se uso:
+
+- usuario real;
+- dato real;
+- production;
+- staging;
+- Flutter;
+- auth real desde Flutter;
+- chat heredado;
+- `/chat/:id`;
+- `/orchestrator/chat`.
+
+### Siguiente paquete
+
+```text
+2B-AG42 — desbloquear conteos read-only seguros o aportar evidencia manual de Dashboard antes de reintentar flujo sintetico positivo
+```
+
+## 2B-AG41-R — reintento pruebas autenticadas sinteticas con conteos iniciales confirmados
+
+Estado: bloqueado seguro.
+
+Readiness final:
+
+```text
+SYNTHETIC AUTH FLOW BLOCKED
+```
+
+### Desbloqueo de AG41
+
+El usuario aporta conteos iniciales manuales desde Supabase Dashboard SQL Editor
+en Stasisly Development:
+
+- `chat_sessions`: 0;
+- `messages`: 0;
+- `specialist_catalog`: 0;
+- SQL modificador ejecutado: NO;
+- credenciales copiadas: NO;
+- datos sensibles copiados: NO.
+
+AG41 queda desbloqueado respecto a conteos iniciales.
+
+### Preflight
+
+Resultado:
+
+- `.env` ignorado por Git.
+- `supabase/.temp/project-ref` ignorado por Git.
+- migraciones `00001`-`00007` alineadas.
+- seis Edge Functions `ACTIVE`.
+- sin cambios inesperados de codigo.
+
+### Flujo autenticado ejecutado
+
+Se reobtiene JWT sintetico de forma efimera con `curl`, sin imprimir token,
+refresh token, password ni anon key.
+
+Se ejecuta solo:
+
+- `list-selectable-specialists` con JWT sintetico.
+
+Resultado:
+
+- status: 200.
+- items: 0.
+- secrets impresos: NO.
+
+### Motivo de bloqueo
+
+`specialist_catalog=0` y `list-selectable-specialists items=0` significan que no
+hay `selectableSpecialistId` seguro disponible. Por tanto:
+
+- no se llama `create-own-chat-session`;
+- no se genera `sessionId`;
+- no se llama `send-user-message`;
+- no se llama `list-session-messages`;
+- no se llama `archive-own-chat-session`;
+- no se crea dato sintetico.
+
+No se permite inventar catalogo, usar `agentId`, usar IDs internos no
+sanitizados ni crear sesion sin especialista selectable.
+
+### Impacto sobre catalogo
+
+El catalogo remoto development necesita un paquete separado para definir si se
+crea seed/catalogo sintetico minimo, con alcance, rollback y cleanup. Ese
+paquete debe seguir sin usar datos reales y sin exponer `specialist_id` o
+detalles internos en contratos publicos.
+
+### Seguridad preservada
+
+No se imprimio:
+
+- access token;
+- refresh token;
+- password;
+- anon key;
+- service role;
+- connection string.
+
+No se uso:
+
+- usuario real;
+- dato real;
+- production;
+- staging;
+- Flutter;
+- auth real desde Flutter;
+- chat heredado;
+- `/chat/:id`;
+- `/orchestrator/chat`.
+
+### Siguiente paquete
+
+```text
+2B-AG42 — preparar catalogo sintetico development o seed minimo aprobado antes de reintentar flujo positivo
+```
+
+## 2B-AG42 — catalogo sintetico development minimo
+
+Estado: completado.
+
+Readiness final:
+
+```text
+SYNTHETIC CATALOG PLAN READY
+```
+
+### Cierre formal de AG41-R
+
+2B-AG41-R queda bloqueado correctamente porque `list-selectable-specialists`
+responde `200` con `items=0`. No existe `selectableSpecialistId` seguro para
+crear sesion.
+
+### Auditoria de catalogo
+
+`public.specialist_catalog` se crea en
+`00004_create_specialist_catalog_deny_all.sql` y referencia obligatoriamente a
+`public.specialists(id)`. Por tanto, el catalogo sintetico minimo necesita:
+
+- una fila interna sintetica en `public.specialists`;
+- una fila publicada, disponible y free en `public.specialist_catalog`.
+
+Campos de `specialist_catalog` relevantes para frontera publica:
+
+- `id`;
+- `specialist_id`;
+- `display_name`;
+- `product_area`;
+- `short_description`;
+- `is_published`;
+- `availability_status`;
+- `access_tier`;
+- `sort_order`.
+
+RLS esta habilitada, no hay FORCE RLS, no hay policies permisivas y cliente
+directo no tiene grants.
+
+### Auditoria de `list-selectable-specialists`
+
+La funcion:
+
+- valida JWT contra Auth;
+- lee catalogo con `service_role` solo dentro de Edge Function;
+- acepta solo `GET`/`OPTIONS`;
+- acepta solo filtro opcional `area`;
+- filtra `is_published=true`;
+- ordena por `sort_order`, `display_name`, `id`;
+- limita a 20;
+- devuelve solo contrato publico sanitizado:
+  `id`, `displayName`, `area`, `shortDescription`, `accessState`, `isDemo`.
+
+Para desbloquear `create-own-chat-session`, la fila debe tener:
+
+- `is_published=true`;
+- `availability_status='available'`;
+- `access_tier='free'`;
+- `product_area` valido;
+- `display_name` y `short_description` validos;
+- `specialist_id` apuntando a un especialista interno existente.
+
+### Entrada sintetica minima futura
+
+Fila interna:
+
+- `public.specialists.name`: `Synthetic Development Specialist`;
+- `category`: `orquestador`;
+- `subcategory`: `development`;
+- `prompt_template`: fixture sintetico minimo, sin claims ni datos reales;
+- `is_premium=false`;
+- `is_active=true`.
+
+Fila de catalogo:
+
+- `display_name`: `Synthetic Development Specialist`;
+- `product_area`: `stasis`;
+- `short_description`: `Synthetic development-only specialist for authenticated Edge Function tests.`;
+- `is_published=true`;
+- `availability_status='available'`;
+- `access_tier='free'`;
+- `sort_order=9999`.
+
+No contiene persona real, especialidad medica real, claims sanitarios, datos
+nutricionales/entrenamiento/wellness reales, credenciales ni secretos.
+
+### Metodo futuro recomendado
+
+Recomendado para AG43:
+
+```text
+Dashboard SQL Editor manual en Stasisly Development
+```
+
+No ejecutar en AG42.
+
+Motivos:
+
+- evita `db push`;
+- evita migracion global accidental;
+- evita production/staging;
+- evita service role en terminal;
+- deja una accion humana explicita sobre el entorno development.
+
+### SQL futuro
+
+El SQL futuro queda definido en ADR-006. En resumen:
+
+- `BEGIN`;
+- crear fila sintetica en `public.specialists` solo si no existe;
+- crear fila sintetica en `public.specialist_catalog` solo si no existe;
+- usar defaults de DB para UUID/timestamps;
+- no inventar IDs;
+- verificar count sintetico;
+- `COMMIT`.
+
+NO EJECUTADO EN AG42.
+
+### Verificacion futura
+
+Tras AG43:
+
+- `specialist_catalog` sintetico visible: 1;
+- `list-selectable-specialists`: 200;
+- `items`: 1;
+- item sintetico sin datos sensibles;
+- `chat_sessions`: 0 antes de reintentar flujo;
+- `messages`: 0 antes de reintentar flujo.
+
+### Rollback/cleanup futuro
+
+Si no hay sesiones sinteticas asociadas, se podra borrar la fila de catalogo y
+la fila interna sintetica exacta.
+
+Si ya hay sesiones sinteticas asociadas, no borrar `public.specialists` porque
+`chat_sessions.specialist_id` tiene cascada desde `public.specialists`; preferir
+despublicar catalogo con `is_published=false` y
+`availability_status='unavailable'`.
+
+### Riesgos
+
+Bloqueantes:
+
+- usar catalogo real;
+- usar especialista real;
+- tocar production/staging;
+- insertar sin rollback.
+
+Altos:
+
+- seed global accidental;
+- IDs inventados;
+- delete con cascada sobre sesiones sinteticas;
+- exponer `specialist_id` interno en contratos publicos.
+
+Medios:
+
+- duplicado si se reejecuta manualmente;
+- fixture publicado mas tiempo del necesario;
+- confusion entre dato development y dato productivo.
+
+### Siguiente paquete
+
+```text
+2B-AG43 — insertar catalogo sintetico development minimo y verificar list-selectable-specialists
+```
+
+## 2B-AG43 — insertar catalogo sintetico development minimo y verificar list-selectable-specialists
+
+Estado: bloqueado seguro.
+
+Readiness final:
+
+```text
+SYNTHETIC CATALOG INSERT BLOCKED
+```
+
+### Cierre formal de AG42
+
+AG42 queda aprobado como `SYNTHETIC CATALOG PLAN READY`, pero AG43 no ejecuta la
+insercion porque el metodo aprobado es Dashboard SQL Editor manual en Stasisly
+Development.
+
+### Preflight
+
+Resultado:
+
+- `.env` ignorado por Git.
+- `supabase/.temp/project-ref` ignorado por Git.
+- migraciones `00001`-`00007` alineadas.
+- seis Edge Functions `ACTIVE`.
+- Flutter/rutas/auth/chat sin cambios.
+
+### Motivo de bloqueo
+
+Codex no tiene una sesion autenticada de Supabase Dashboard y no debe convertir
+la accion manual aprobada en ejecucion por terminal. No se usa:
+
+- service role en terminal;
+- connection string;
+- `db push`;
+- migraciones;
+- `db pull`;
+- `db dump`;
+- SQL remoto fuera de Dashboard.
+
+### Estado del catalogo
+
+No se creo:
+
+- fila sintetica en `public.specialists`;
+- fila sintetica en `public.specialist_catalog`.
+
+Por tanto `list-selectable-specialists` sigue sin un item seleccionable seguro
+hasta que se ejecute la accion manual o se apruebe otro metodo.
+
+### Siguiente accion requerida
+
+Opcion A:
+
+- usuario ejecuta manualmente en Dashboard SQL Editor el SQL aprobado en AG42;
+- usuario aporta evidencia resumida sin UUIDs ni secretos;
+- se abre AG43-R para verificar `list-selectable-specialists`.
+
+Opcion B:
+
+- el usuario autoriza explicitamente otro metodo remoto seguro;
+- debe definirse antes si usa SQL directo, API administrativa o paquete de seed.
+
+### Riesgos
+
+Bloqueantes:
+
+- ejecutar INSERT desde un canal no aprobado;
+- tocar production/staging.
+
+Altos:
+
+- insertar especialista real;
+- usar datos reales;
+- filtrar IDs internos;
+- duplicar catalogo sintetico;
+- rollback amplio.
+
+Medios:
+
+- falta evidence posterior;
+- `list-selectable-specialists` seguira devolviendo `items=0`.
+
+### Siguiente paquete
+
+```text
+2B-AG43-R — ejecutar manualmente SQL en Dashboard y aportar conteos/verificacion, o autorizar un metodo remoto seguro alternativo
+```
+
+## 2B-AG43-R — verificar list-selectable-specialists tras catalogo sintetico
+
+Estado: completado.
+
+Readiness final:
+
+```text
+SYNTHETIC CATALOG VERIFIED
+```
+
+### Insercion manual aprobada
+
+El usuario confirma que el INSERT corregido se ejecuto manualmente en Supabase
+Dashboard SQL Editor sobre Stasisly Development:
+
+- production: NO;
+- staging: NO;
+- SQL fuera del aprobado: NO;
+- credenciales copiadas: NO;
+- datos sensibles copiados: NO.
+
+Conteos/evidencia:
+
+- `specialists=1`;
+- `specialist_catalog=1`;
+- `chat_sessions=0`;
+- `messages=0`;
+- fila sintetica visible: SI.
+
+Catalogo sintetico:
+
+- `display_name`: `Synthetic Development Specialist`;
+- `product_area`: `stasis`;
+- `is_published=true`;
+- `availability_status=available`;
+- `access_tier=free`;
+- `sort_order=9999`.
+
+### Verificacion Edge Function
+
+`list-selectable-specialists` se llamo con JWT sintetico efimero, sin imprimir
+tokens ni secrets.
+
+Resultado:
+
+- status: 200;
+- items: 1;
+- item sintetico visible: si;
+- displayName: `Synthetic Development Specialist`;
+- area: `stasis`;
+- accessState: `available`;
+- isDemo: `false`.
+
+No se imprimieron IDs internos. No se llamo `create-own-chat-session`.
+
+### Estado de frontera backend
+
+La frontera de catalogo sanitizado ya devuelve un item sintetico seleccionable
+en development. Esto desbloquea planificadamente AG44 para probar el flujo
+positivo end-to-end, manteniendo bloqueados:
+
+- Flutter;
+- rutas productivas;
+- chat heredado;
+- datos reales;
+- production/staging.
+
+### Riesgos
+
+Altos:
+
+- crear sesiones/mensajes sinteticos en AG44 sin registrar aislamiento;
+- imprimir IDs/tokens;
+- confundir `accessState=available` con `access_tier=free`.
+
+Medios:
+
+- fixture sintetico permanece publicado en development;
+- falta cleanup/admin cleanup posterior.
+
+### Siguiente paquete
+
+```text
+2B-AG44 — reintentar flujo positivo sintetico end-to-end
+```
+
+## 2B-AG44 — flujo positivo sintetico end-to-end
+
+Estado: bloqueado seguro.
+
+Readiness final:
+
+```text
+SYNTHETIC E2E FLOW BLOCKED
+```
+
+### Resultado
+
+El catalogo sanitizado funciona y permite capturar un
+`selectableSpecialistId` sintetico, pero la creacion de sesion queda bloqueada.
+
+### Pasos ejecutados
+
+JWT sintetico:
+
+- PASS.
+- token no impreso.
+
+`list-selectable-specialists`:
+
+- PASS.
+- status: 200.
+- items: 1.
+- item sintetico visible: si.
+- `selectableSpecialistId` capturado: si.
+
+`list-own-chat-sessions` inicial:
+
+- PASS.
+- status: 200.
+- sessions_count: 0.
+
+`create-own-chat-session`:
+
+- BLOCKED.
+- status: 403.
+- `sessionId` capturado: no.
+
+### Pasos no ejecutados
+
+No se llamo:
+
+- `send-user-message`;
+- `list-session-messages`;
+- `archive-own-chat-session`;
+- `send_user_message_core`.
+
+No se creo mensaje y no se conecto Flutter.
+
+### Lectura de frontera backend
+
+La frontera de catalogo ya no es el bloqueo. El bloqueo se traslada a
+`create-own-chat-session`, probablemente en validacion de owner/profile o
+autorizacion, pero no se fija causa definitiva sin evidencia.
+
+### Riesgos
+
+Bloqueantes:
+
+- `create-own-chat-session` devuelve 403.
+
+Altos:
+
+- crear perfiles o corregir permisos con SQL no aprobado;
+- usar service role/connection string para diagnostico no autorizado;
+- asumir que no hubo efecto parcial sin conteos read-only.
+
+Medios:
+
+- catalogo sintetico publicado;
+- falta conteo final manual tras intento.
+
+### Siguiente paquete
+
+```text
+2B-AG45 — corregir bloqueo create-own-chat-session 403
+```
+
+Debe empezar por diagnostico seguro de perfil owner/autorizacion y conteos
+read-only, sin conectar Flutter ni usar datos reales.
+
+## 2B-AG45 — diagnostico seguro del 403 en create-own-chat-session
+
+Estado: completado.
+
+Readiness final:
+
+```text
+CREATE SESSION 403 DIAGNOSED
+```
+
+### Resultado
+
+La causa probable del 403 no esta en el catalogo. El catalogo sintetico ya fue
+verificado y el contrato `list-selectable-specialists` ->
+`create-own-chat-session` esta alineado:
+
+- `list-selectable-specialists` devuelve `id` de `specialist_catalog`;
+- `create-own-chat-session` espera `selectableSpecialistId`;
+- `create-own-chat-session` busca `specialist_catalog.id`;
+- despues traduce a `specialist_id` interno.
+
+### Punto de fallo
+
+`create-own-chat-session` valida antes el owner:
+
+1. valida JWT en Auth;
+2. obtiene `ownerId`;
+3. exige fila en `public.users` mediante `assertOwnerProfile`;
+4. solo despues resuelve catalogo y crea sesion.
+
+`assertOwnerProfile` lanza `permissionDenied` si no hay exactamente una fila
+`public.users.id = ownerId`. `permissionDenied` mapea a 403.
+
+### Diagnostico
+
+Categoria:
+
+```text
+MISSING_SYNTHETIC_PROFILE
+```
+
+Causa probable:
+
+El usuario sintetico existe en Auth, pero falta o no es resoluble su fila en
+`public.users`. La creacion de sesion queda correctamente bloqueada porque
+`chat_sessions.user_id` referencia `public.users(id)`.
+
+### Fuera de alcance respetado
+
+No se ejecuto:
+
+- correccion;
+- SQL modificador;
+- insercion de perfil;
+- nueva reproduccion de create;
+- send/list/archive;
+- deploy;
+- Flutter.
+
+### Siguiente paquete
+
+```text
+2B-AG46 — preparar perfil publico sintetico development
+```
+
+Debe confirmar por evidencia read-only si existe `public.users` para el usuario
+sintetico y preparar una correccion minima sin ejecutarla todavia.
+
+## 2B-AG46 — preparar perfil publico sintetico development
+
+Estado: completado.
+
+Readiness final:
+
+```text
+SYNTHETIC PROFILE PLAN READY
+```
+
+### Impacto en catalogo/frontera
+
+AG46 confirma que el bloqueo actual no exige cambiar el catalogo ni las Edge
+Functions. `list-selectable-specialists` y el contrato de
+`selectableSpecialistId` permanecen validos.
+
+La correccion necesaria se prepara en la frontera de identidad:
+
+- fila minima en `public.users`;
+- `id` derivado desde `auth.users.id` del usuario sintetico;
+- `role='user'`;
+- sin privilegios elevados;
+- sin tocar `auth.users`.
+
+### Relacion con create-own-chat-session
+
+`create-own-chat-session` necesita que el owner derivado desde Auth exista en
+`public.users` antes de crear `chat_sessions`. Esto es coherente con:
+
+- `chat_sessions.user_id` FK a `public.users(id)`;
+- `chat_sessions.user_id NOT NULL`;
+- contrato que no acepta `userId` desde cliente.
+
+### Fuera de alcance respetado
+
+No se ejecuto:
+
+- INSERT en `public.users`;
+- UPDATE/DELETE;
+- SQL modificador;
+- cambios en Edge Functions;
+- cambios Flutter;
+- create/send/list/archive;
+- deploy o migraciones.
+
+### Siguiente paquete
+
+```text
+2B-AG47 — insertar perfil publico sintetico development y verificar create-own-chat-session
+```
+
+AG47 debera mantener el catalogo intacto y verificar que el perfil owner permite
+desbloquear create sin exponer `user_id` ni `specialist_id` en contrato publico.
+
+## 2B-AG47 — insertar perfil publico sintetico development y verificar create-own-chat-session
+
+Estado: bloqueado seguro.
+
+Readiness final:
+
+```text
+SYNTHETIC PROFILE INSERT BLOCKED
+```
+
+### Resultado
+
+No se inserta perfil en AG47 porque el metodo aprobado es Dashboard SQL Editor
+manual en Stasisly Development y Codex no debe sustituirlo por terminal,
+connection string ni service role.
+
+### Impacto en frontera backend
+
+No se reintenta `create-own-chat-session`, por lo que el bloqueo de create sigue
+pendiente hasta que exista evidencia de `public.users` para el usuario
+sintetico.
+
+El catalogo sintetico permanece validado y no requiere cambios en este paquete.
+
+### Fuera de alcance respetado
+
+No se ejecuto:
+
+- INSERT/UPDATE/DELETE en `public.users`;
+- cambios en `auth.users`;
+- `create-own-chat-session`;
+- send/list/archive;
+- deploy;
+- migraciones;
+- Flutter.
+
+### Siguiente paquete
+
+```text
+2B-AG47-R — ejecutar manualmente perfil publico sintetico en Dashboard y aportar evidencia, o autorizar metodo remoto seguro alternativo
+```
+
+## 2B-AG47-R — verificar create-own-chat-session tras perfil publico sintetico
+
+Estado: completado con conteos finales pendientes.
+
+Readiness final:
+
+```text
+SYNTHETIC PROFILE PARTIAL
+```
+
+### Resultado
+
+Tras insertar manualmente el perfil publico sintetico en Dashboard, la frontera
+`create-own-chat-session` ya permite crear sesion:
+
+- catalogo sintetico visible: si;
+- `list-own-chat-sessions` inicial: 200, count 0;
+- `create-own-chat-session`: 201;
+- `sessionId` capturado en memoria efimera: si.
+
+### Alcance respetado
+
+AG47-R se detiene despues de create. No se llama:
+
+- `send-user-message`;
+- `list-session-messages`;
+- `archive-own-chat-session`.
+
+No se imprimen IDs, tokens ni secrets.
+
+### Estado de frontera backend
+
+El bloqueo por perfil publico queda resuelto funcionalmente. Queda pendiente
+completar el flujo de mensajes:
+
+- enviar mensaje sintetico;
+- listar mensajes;
+- archivar sesion;
+- confirmar conteos finales/retencion.
+
+### Siguiente paquete
+
+```text
+2B-AG48 — aportar conteos finales y completar send/list/archive
+
+## 2B-AG48 — completar flujo E2E sintetico send/list/archive
+
+Estado:
+
+```text
+SYNTHETIC E2E SEND FLOW BLOCKED
+```
+
+### Decision de frontera
+
+AG47-R confirma parcialmente la frontera backend: el catalogo sanitizado permite
+crear una sesion sintetica y devuelve un `sessionId` sin imprimirlo. AG48 queda
+bloqueado antes de mensajes porque faltan los conteos iniciales manuales
+obligatorios para demostrar que el estado remoto previo es el esperado.
+
+### Conteos requeridos antes de mensajes
+
+Para no mezclar estado remoto no verificado con pruebas funcionales, el flujo
+send/list/archive exige confirmar previamente:
+
+- `chat_sessions=1`;
+- `messages=0`;
+- `specialist_catalog=1`;
+- `users=1`.
+
+La solicitud actual no incluye esa evidencia, asi que no se recupera sesion
+propia ni se llama a funciones de mensajes.
+
+### Bloqueos mantenidos
+
+- No se interpreta ningun `agentId` como `sessionId`.
+- No se usa `/chat/:id`.
+- No se conecta `/orchestrator/chat`.
+- No se conecta Flutter.
+- No se reactivan datasources heredados.
+- No se imprime `sessionId`.
+- No se imprime token.
+- No se usa `service_role` para pruebas funcionales.
+- No se ejecuta SQL remoto.
+- No se modifican datos desde Codex.
+
+### Evidencia permitida en reintento
+
+El siguiente reintento debe empezar por evidencia manual/read-only de los
+conteos iniciales. Solo despues se puede recuperar la sesion via
+`list-own-chat-sessions` autenticado del propio usuario sintetico y continuar
+con `send-user-message`, `list-session-messages` y `archive-own-chat-session`.
+
+### Siguiente paso
+
+```text
+2B-AG48-R — aportar conteos iniciales manuales y reintentar send/list/archive
+
+## 2B-AG48-R — completar send/list/archive con conteos iniciales aprobados
+
+Estado:
+
+```text
+SYNTHETIC E2E SEND FLOW PARTIAL
+```
+
+### Decision de frontera
+
+AG48-R valida funcionalmente la frontera remota development para el flujo
+sintetico `chat_sessions -> messages` sin conectar Flutter ni rutas
+productivas. El `sessionId` procede exclusivamente de `list-own-chat-sessions`
+autenticado del propio usuario sintetico; no se acepta `agentId`, no se usa
+`/chat/:id` y no se conecta `/orchestrator/chat`.
+
+### Evidencia inicial aprobada
+
+El usuario aporto conteos manuales iniciales:
+
+- `chat_sessions=1`;
+- `messages=0`;
+- `specialist_catalog=1`;
+- `users=1`;
+- datos reales: NO;
+- production: NO;
+- staging: NO;
+- SQL modificador adicional: NO.
+
+### Resultado funcional
+
+- Recuperacion de sesion propia: PASS, status `200`, `sessions_count=1`.
+- `send-user-message`: PASS, status `201`, mensaje sintetico creado.
+- `list-session-messages`: PASS, status `200`, `messages_count=1`, mensaje
+  sintetico visible.
+- `archive-own-chat-session`: PASS, status `200`, sesion archivada.
+- Listado activo final: PASS, status `200`, `active_sessions_count=0`.
+- Listado `all` final: PASS, `all_sessions_count=1`, archivo reflejado.
+
+No se imprimen IDs internos ni tokens. La respuesta publica sigue siendo
+sanitizada y el cliente no envia `userId`, `ownerUserId`, `role`,
+`specialistId`, `selectableSpecialistId`, `metadata` ni `attachments`.
+
+### Limitacion
+
+Quedan pendientes conteos finales manuales/read-only desde Dashboard SQL
+Editor. El estado queda parcial porque Codex no debe usar connection string,
+dump, `db pull`, SQL terminal ni service role para cerrar esos conteos.
+
+Conteo final esperado:
+
+- `chat_sessions=1`;
+- `messages=1`;
+- `specialist_catalog=1`;
+- `users=1`.
+
+### Retencion temporal
+
+Quedan persistidos en Stasisly Development:
+
+- perfil publico sintetico;
+- catalogo sintetico;
+- sesion sintetica archivada;
+- mensaje sintetico.
+
+La decision de cleanup/retencion pertenece a AG49.
+
+### Siguiente paso
+
+```text
+2B-AG49 — aportar conteos finales y cerrar E2E sintetico
+
+## 2B-AG49 — conteos finales manuales E2E sintetico
+
+Estado:
+
+```text
+SYNTHETIC E2E REMOTE FLOW COMPLETE
+```
+
+AG49 queda aprobado y cerrado formalmente. El usuario aporto conteos finales
+manuales validos desde Supabase Dashboard SQL Editor:
+
+- `chat_sessions=1`;
+- `messages=1`;
+- `specialist_catalog=1`;
+- `users=1`.
+
+El flujo remoto development queda validado de extremo a extremo para usuario
+sintetico, perfil publico sintetico, catalogo sanitizado, sesiones y mensajes,
+sin production, staging, datos reales, SQL modificador adicional ni credenciales
+copiadas.
+
+## 2B-AG50 — decision cleanup/retencion de datos sinteticos development
+
+Estado:
+
+```text
+SYNTHETIC RETENTION DECISION READY
+```
+
+### Decision
+
+Se decide recomendar retencion temporal del fixture sintetico completo en
+Stasisly Development hasta completar la primera conexion Flutter development
+segura.
+
+Esta decision mantiene:
+
+- usuario sintetico en `public.users`;
+- especialista sintetico en `public.specialists`;
+- entrada sintetica publicada en `public.specialist_catalog`;
+- sesion sintetica archivada en `public.chat_sessions`;
+- mensaje sintetico en `public.messages`.
+
+### Justificacion desde frontera backend
+
+Mantener el fixture aporta valor porque:
+
+- ya valida `list-selectable-specialists`;
+- ya valida `create-own-chat-session`;
+- ya valida `send-user-message`;
+- ya valida `list-session-messages`;
+- ya valida `archive-own-chat-session`;
+- permite probar UI development contra una sesion archivada real-sintetica;
+- evita recrear catalogo/perfil en cada paquete;
+- no expone datos reales ni sensibles.
+
+### Riesgos aceptados temporalmente
+
+- el catalogo sintetico queda visible en development;
+- los datos sinteticos persistentes pueden confundirse si no se documentan;
+- cleanup queda pendiente;
+- staging/production no deben heredar este fixture.
+
+### Politica de identificacion
+
+Fixture:
+
+```text
+stasisly-development-synthetic-e2e-fixture
+```
+
+Uso permitido:
+
+- pruebas de development;
+- primera conexion Flutter development;
+- validacion de lectura de estado archivado;
+- validacion de respuestas sanitizadas.
+
+Uso prohibido:
+
+- staging;
+- production;
+- demos con datos reales;
+- usuarios reales;
+- decisiones de producto basadas en datos sinteticos;
+- entrenamiento o IA real.
+
+### Cleanup futuro — NO EJECUTAR EN AG50
+
+Si se decide limpiar en paquete posterior, el orden conceptual debe ser:
+
+1. mensajes sinteticos;
+2. sesiones sinteticas;
+3. entrada sintetica de `specialist_catalog`;
+4. especialista sintetico;
+5. perfil publico sintetico;
+6. `auth.users` queda fuera salvo decision separada.
+
+El cleanup futuro debe usar condiciones exactas, dry-run/read-only previo,
+transaccion con `rollback` inicial y confirmacion manual de conteos antes de
+commit. AG50 no ejecuta SQL modificador.
+
+### Bloqueos mantenidos
+
+- No cleanup fisico.
+- No borrar ni actualizar filas.
+- No tocar `auth.users`.
+- No connection string ni service role en terminal.
+- No `db push`, `db pull`, `db dump`.
+- No deploy ni migraciones.
+- No conectar Flutter.
+- No production/staging.
+
+### Siguiente paso
+
+```text
+2B-AG51 — plan conexion Flutter development segura contra backend remoto
+
+## 2B-AG51 — plan conexion Flutter development segura contra backend remoto
+
+Estado:
+
+```text
+FLUTTER DEVELOPMENT CONNECTION PLAN READY
+```
+
+## 2B-AG52 — conexion Flutter development dev-only contra Edge Functions remotas
+
+Estado:
+
+```text
+FLUTTER DEVELOPMENT DEV-ONLY CONNECTION IMPLEMENTED
+```
+
+### Frontera implementada
+
+Flutter development puede preparar una comunicacion dev-only con Edge Functions
+remotas mediante:
+
+- `SecureSessionTokenProvider`;
+- `DevelopmentSyntheticSecureSessionTokenProvider` bajo gate explicito;
+- providers remotos dev-only de sesiones y mensajes;
+- datasources HTTP seguros;
+- host policy remota development allowlisted.
+
+La frontera no usa:
+
+- `SupabaseChatDataSource`;
+- `Supabase.instance.client` para el flujo nuevo;
+- escritura directa a tablas;
+- `service_role`;
+- `userId`, `ownerUserId`, `role`, permisos u ownership desde UI.
+
+### Rutas
+
+Se permite dev-only:
+
+- `/dev/chat/composed`;
+- `/dev/chat/session/:sessionId`.
+
+Condiciones:
+
+- no release;
+- `environment.allowsDevRoutes`;
+- session route usa `sessionId`, no `id` ni `agentId`.
+
+No se registra:
+
+- `/conversations`.
+
+No se modifica:
+
+- `/chat/:id`, que sigue siendo `agentId` heredado;
+- `/orchestrator/chat`.
+
+### Politica remota
+
+La politica remota development esta separada de `LocalOnlyHostPolicy`. Esto
+evita contaminar el modo local-safe y permite auditar de forma explicita el
+paso a remoto.
+
+La base remota solo acepta el host exacto derivado de `SUPABASE_URL` y dominio
+`.supabase.co`, sin query, fragment, userInfo, path peligroso ni puerto
+explicito.
+
+### Fixture
+
+AG52 no llama Edge Functions funcionalmente. El fixture sintetico retenido por
+AG50 queda intacto para AG53.
+
+### Validacion final
+
+- `dart format .` ejecutado; formateo accidental fuera de alcance revertido;
+- `flutter analyze --no-fatal-infos` OK con infos no fatales existentes;
+- `flutter test` OK, 385 tests y 2 skips controlados;
+- `supabase migration list` confirma `00001`-`00007` alineadas;
+- `supabase functions list` confirma seis funciones `ACTIVE`;
+- `git diff --check` OK;
+- scope diff limitado a archivos permitidos.
+
+### Riesgos residuales
+
+- el token sintetico se debe pasar solo por entorno local y nunca versionarse;
+- el fixture sintetico podria confundirse con datos reales si se ignora la
+  documentacion;
+- AG53 debe validar manualmente la experiencia Flutter sin crear datos nuevos
+  salvo aprobacion expresa.
+
+### Siguiente paso
+
+```text
+2B-AG53 — prueba funcional Flutter development dev-only contra fixture sintetico remoto
+```
+
+## 2B-AG53 — prueba funcional Flutter development dev-only contra fixture sintetico remoto
+
+Estado:
+
+```text
+FLUTTER DEV REMOTE READ BLOCKED
+```
+
+### Resultado
+
+AG53 no llega a ejecutar lectura remota de catalogo/sesiones/mensajes desde
+Flutter layer porque el entorno local no esta listo para el gate development
+seguro.
+
+Comprobado sin imprimir valores:
+
+- `APP_MODE=development`: OK;
+- `ENABLE_REMOTE_BACKEND=true`: FAIL;
+- `ENABLE_REAL_AUTH=true`: FAIL;
+- `ENABLE_REAL_DATA=false`: OK;
+- `ALLOW_DEV_ROUTES=true`: OK;
+- `ENABLE_CONVERSATIONS_ROUTE=false`: OK;
+- `SYNTHETIC_ACCESS_TOKEN`: faltante.
+
+### Frontera preservada
+
+Se preserva:
+
+- no `/conversations`;
+- no `/chat/:id` como `sessionId`;
+- no `/orchestrator/chat`;
+- no chat heredado;
+- no `SupabaseChatDataSource`;
+- no `Supabase.instance.client` para flujo nuevo;
+- no SQL, deploy, migraciones ni cleanup;
+- no datos nuevos;
+- no production ni staging;
+- no secretos impresos.
+
+### Fixture
+
+El fixture sintetico retenido para la prueba futura queda intacto. AG53 no crea,
+envia, archiva ni limpia datos.
+
+### Siguiente paso
+
+```text
+2B-AG54 — corregir bloqueo Flutter dev remote read
+```
+
+Antes de reintentar la lectura remota, el entorno local debe tener
+`ENABLE_REMOTE_BACKEND=true`, `ENABLE_REAL_AUTH=true` y
+`SYNTHETIC_ACCESS_TOKEN` presente, sin registrar valores reales.
+
+## 2B-AG54 — corregir entorno y probar lectura remota Flutter dev-only
+
+Estado:
+
+```text
+FLUTTER DEV REMOTE READ PASSED
+```
+
+### Resultado
+
+AG53 queda cerrado como bloqueo seguro por entorno incompleto. AG54 reintenta la
+lectura remota desde Flutter layer tras corregir el entorno local, sin imprimir
+secretos ni valores reales.
+
+El test focal dev-only anadido:
+
+```text
+test/features/chat_sessions/data/development_remote_read_test.dart
+```
+
+valida contra Stasisly Development:
+
+- `list-own-chat-sessions` activo: PASS, sin sesiones activas;
+- `list-own-chat-sessions` con estado `all`: PASS, una sesion sintetica
+  archivada;
+- `list-session-messages`: PASS, un mensaje sintetico leido mediante
+  `sessionId` propio obtenido desde la sesion.
+
+### Frontera preservada
+
+Se preserva:
+
+- no `/conversations`;
+- no `/chat/:id` como `sessionId`;
+- no `/orchestrator/chat`;
+- no chat heredado;
+- no `SupabaseChatDataSource`;
+- no `Supabase.instance.client` para el flujo nuevo;
+- no SQL, deploy, migraciones, `secrets set` ni cleanup;
+- no `create-own-chat-session`;
+- no `send-user-message`;
+- no `archive-own-chat-session`;
+- no datos nuevos;
+- no datos reales;
+- no production ni staging;
+- no secretos impresos.
+
+### Catalogo y contratos
+
+AG54 no expone `specialist_id`, `user_id`, permisos ni `role` al contrato
+publico Flutter. La lectura de mensajes no acepta `agentId`; usa solo el
+`sessionId` sanitizado devuelto por el listado de sesiones propias.
+
+### Fixture
+
+El fixture sintetico retenido permanece como evidencia development:
+
+- sesion sintetica archivada;
+- un mensaje sintetico;
+- catalogo sintetico;
+- usuario sintetico.
+
+AG54 no crea, envia, archiva ni limpia datos.
+
+### Validacion
+
+Validaciones ejecutadas:
+
+- test remoto dev-only focal: PASS;
+- `flutter test test/features/chat_sessions`: PASS, 107 tests;
+- `flutter test test/features/chat_messages`: PASS, 106 tests;
+- `flutter test test/architecture`: PASS, 53 tests;
+- `flutter test`: PASS, 386 tests y 2 skips;
+- `flutter analyze --no-fatal-infos`: OK con infos existentes;
+- `git diff --check`: OK;
+- `supabase migration list`: `00001`-`00007` alineadas;
+- `supabase functions list`: seis funciones `ACTIVE`.
+
+### Siguiente paso
+
+```text
+2B-AG55 — decidir siguiente prueba Flutter development dev-only
+```
+
+No avanzar a routing productivo. Si se prueba escritura desde Flutter dev-only,
+debe autorizarse como paquete separado y seguir bloqueando datos reales,
+production, staging y rutas producto.
+
+## 2B-AG55 — decision prueba escritura Flutter dev-only o cierre antes de UX
+
+Estado:
+
+```text
+FLUTTER DEV WRITE TEST DECISION READY
+```
+
+### Cierre formal de AG54
+
+AG54 queda aprobado y cerrado formalmente como `FLUTTER DEV REMOTE READ PASSED`.
+Flutter development dev-only leyo sesiones y mensajes remotos con contratos
+sanitizados, sin exponer ids internos, sin producto y sin datos reales.
+
+### Estado de frontera
+
+Estado actual:
+
+- backend remoto development E2E: completo;
+- Flutter dev-only conexion remota: implementada;
+- Flutter dev-only lectura remota: validada;
+- Flutter dev-only escritura remota: pendiente;
+- producto/rutas reales: pendiente;
+- UX/routing producto: pendiente;
+- cleanup fixture: pendiente futuro.
+
+### Decision recomendada
+
+Se recomienda:
+
+```text
+Opcion A — prueba controlada de escritura Flutter development dev-only.
+```
+
+Motivo: antes de UX/routing, falta validar que Flutter dev-only puede ejecutar
+create/send/list/archive usando la misma frontera segura que ya funciono en
+backend remoto y lectura Flutter.
+
+No se recomienda pasar ya a UX/routing porque podria disenar producto sobre una
+integracion de escritura todavia no validada desde Flutter layer.
+
+No se recomienda mas lectura como paso principal porque AG54 ya cubrio activo,
+`all`, archivado y mensajes historicos.
+
+No se recomienda cleanup previo porque el fixture sintetico sigue siendo util
+como evidencia development.
+
+### Contratos permitidos para AG56
+
+Crear sesion futura:
+
+```json
+{
+  "selectableSpecialistId": "<id_sanitizado_obtenido_por_list-selectable-specialists>"
+}
+```
+
+Enviar mensaje futuro:
+
+```json
+{
+  "sessionId": "<sessionId_propio_sintetico>",
+  "content": "synthetic-development-message-ag56"
+}
+```
+
+Prohibido:
+
+- `userId`;
+- `ownerUserId`;
+- `role`;
+- `permissions`;
+- `ownership`;
+- `specialistId` interno cuando el contrato publico exige
+  `selectableSpecialistId`;
+- metadata arbitraria;
+- attachments;
+- datos reales.
+
+### Conteos esperados si se autoriza AG56
+
+Antes de AG56, si nada cambio desde AG54:
+
+```text
+chat_sessions: 1
+messages: 1
+specialist_catalog: 1
+users: 1
+```
+
+Despues de AG56 si create/send/archive pasa:
+
+```text
+chat_sessions: 2
+messages: 2
+specialist_catalog: 1
+users: 1
+```
+
+AG56 debe pedir conteos manuales finales. No debe ejecutar cleanup automatico.
+
+### Frontera preservada
+
+AG55 no ejecuta escritura ni modifica datos.
+
+AG56, si se aprueba, debe mantener:
+
+- no `/conversations`;
+- no `/chat/:id` como `sessionId`;
+- no `/orchestrator/chat`;
+- no chat heredado;
+- no `SupabaseChatDataSource`;
+- no `Supabase.instance.client` para flujo nuevo;
+- no SQL desde Flutter;
+- no `service_role` en cliente;
+- no production;
+- no staging;
+- no datos reales.
+
+### Riesgos
+
+Bloqueantes:
+
+- aceptar `agentId` o `specialistId` interno como entrada de create;
+- exponer `userId`, `specialistId` o `role`;
+- conectar rutas producto antes de validar escritura;
+- usar datos reales o production/staging.
+
+Altos:
+
+- escritura parcial desde Flutter;
+- token sintetico local filtrado;
+- cleanup destructivo accidental;
+- UX sobre flujo no validado.
+
+Medios:
+
+- fixture sintetico persistente confundido con dato real;
+- conteos finales omitidos;
+- errores de backend convertidos en demo.
+
+### Siguiente paso
+
+```text
+2B-AG56 — prueba controlada escritura Flutter dev-only create/send/list/archive
+```
+
+Solo con aprobacion explicita, conteos iniciales manuales y sin tocar producto.
+
+## 2B-AG56 — prueba controlada escritura Flutter dev-only create/send/list/archive
+
+Estado:
+
+```text
+FLUTTER DEV WRITE FLOW BLOCKED
+```
+
+### Cierre formal de AG55
+
+AG55 queda aprobado y cerrado formalmente como
+`FLUTTER DEV WRITE TEST DECISION READY`.
+
+AG56 queda autorizado solo para escritura sintetica Flutter dev-only si se
+cumplen los gates previos.
+
+### Gate de entorno
+
+Comprobado sin imprimir secretos:
+
+- `APP_MODE=development`: OK;
+- `ENABLE_REMOTE_BACKEND=true`: OK;
+- `ENABLE_REAL_AUTH=true`: OK;
+- `ENABLE_REAL_DATA=false`: OK;
+- `ALLOW_DEV_ROUTES=true`: OK;
+- `ENABLE_CONVERSATIONS_ROUTE=false`: OK;
+- `SYNTHETIC_ACCESS_TOKEN`: presente.
+
+### Gate de conteos iniciales
+
+AG56 se bloquea antes de cualquier llamada funcional porque la solicitud actual
+no aporta conteos iniciales manuales del Dashboard.
+
+Conteos requeridos para reintento:
+
+```text
+chat_sessions: 1
+messages: 1
+specialist_catalog: 1
+users: 1
+```
+
+Sin esos conteos, no se debe capturar `selectableSpecialistId`, crear sesion,
+enviar mensaje, listar mensajes de la nueva sesion ni archivar.
+
+### Frontera preservada
+
+No se ejecuta:
+
+- `list-selectable-specialists`;
+- `create-own-chat-session`;
+- `send-user-message`;
+- `list-session-messages`;
+- `archive-own-chat-session`;
+- listados finales;
+- SQL;
+- cleanup;
+- deploy;
+- migraciones;
+- `secrets set`;
+- producto.
+
+Sigue bloqueado:
+
+- `/conversations`;
+- `/chat/:id` como `sessionId`;
+- `/orchestrator/chat`;
+- chat heredado;
+- `SupabaseChatDataSource`;
+- `Supabase.instance.client` para flujo nuevo;
+- datos reales;
+- production;
+- staging.
+
+### Siguiente paso
+
+```text
+2B-AG57 — aportar conteos iniciales manuales y reintentar escritura Flutter dev-only
+```
+
+## 2B-AG57 — escritura Flutter dev-only controlada create/send/list/archive
+
+Estado:
+
+```text
+FLUTTER DEV WRITE FLOW PARTIAL
+```
+
+### Cierre de AG56
+
+AG56 queda aprobado como bloqueo seguro. El usuario aporta conteos iniciales
+manuales validos:
+
+```text
+chat_sessions: 1
+messages: 1
+specialist_catalog: 1
+users: 1
+```
+
+### Resultado funcional
+
+AG57 ejecuta correctamente el flujo dev-only desde Flutter layer:
+
+- `list-selectable-specialists`: PASS;
+- especialista sintetico visible: si;
+- `selectableSpecialistId` capturado desde contrato publico sanitizado: si;
+- `create-own-chat-session`: PASS;
+- `sessionId` propio sintetico capturado sin imprimirlo: si;
+- `send-user-message`: PASS;
+- mensaje `synthetic-development-message-ag57` creado: si;
+- `list-session-messages`: PASS;
+- mensaje AG57 visible: si;
+- `archive-own-chat-session`: PASS;
+- sesion AG57 archivada: si;
+- listado activo final: `0`;
+- listado `all` final: `2`;
+- archivo reflejado: si.
+
+### Frontera de catalogo y sesiones
+
+La prueba mantiene la frontera aprobada:
+
+- create usa `selectableSpecialistId`;
+- messages usa solo `sessionId` propio sintetico;
+- no usa `agentId`;
+- no usa `specialistId` interno;
+- no pasa `userId`, `ownerUserId`, `role`, permisos u ownership;
+- no expone ids completos en documentacion;
+- no conecta producto.
+
+### Conteos finales
+
+Pendiente de evidencia manual del Dashboard SQL Editor.
+
+Esperado:
+
+```text
+chat_sessions: 2
+messages: 2
+specialist_catalog: 1
+users: 1
+```
+
+Por eso el readiness queda `FLUTTER DEV WRITE FLOW PARTIAL`, no cierre completo.
+
+### Validacion
+
+Ejecutado:
+
+- tests focales previos de sesiones, mensajes y arquitectura: PASS;
+- test remoto AG57: PASS;
+- `flutter analyze --no-fatal-infos`: OK con infos existentes;
+- `flutter test`: PASS, 385 tests y 4 skips sin entorno remoto cargado;
+- `git diff --check`: OK;
+- `supabase migration list`: `00001`-`00007` alineadas;
+- `supabase functions list`: seis funciones `ACTIVE`.
+
+### Fuera de alcance
+
+No hubo:
+
+- SQL;
+- cleanup;
+- deploy;
+- migraciones;
+- `secrets set`;
+- `db push`, `db pull` ni `db dump`;
+- datos reales;
+- production;
+- staging;
+- `/conversations`;
+- `/chat/:id`;
+- `/orchestrator/chat`;
+- chat heredado;
+- `SupabaseChatDataSource`.
+
+### Siguiente paso
+
+```text
+2B-AG58 — aportar conteos finales manuales o decidir cierre/UX/routing
+```
+
+## 2B-AG59 — decision UX/routing dev-only vs cleanup/retencion
+
+Estado:
+
+```text
+FLUTTER DEV UX ROUTING DECISION READY
+```
+
+### Cierre formal de AG58
+
+AG58 queda aprobado y cerrado como:
+
+```text
+FLUTTER DEV-ONLY REMOTE READ/WRITE COMPLETE
+```
+
+Conteos finales manuales aportados por el usuario:
+
+```text
+chat_sessions: 2
+messages: 2
+specialist_catalog: 1
+users: 1
+```
+
+Proyecto declarado: Stasisly Development, region eu-central-1. No es
+production, no es staging y no contiene datos reales.
+
+### Decision de frontera
+
+Se recomienda avanzar a UX/routing dev-only sobre el fixture sintetico retenido,
+pero sin abrir ruta productiva.
+
+La razon es que la frontera backend ya valida:
+
+- catalogo sanitizado mediante `selectableSpecialistId`;
+- creacion de sesion devolviendo `sessionId` explicito;
+- envio y lectura de mensajes por `sessionId`;
+- archivado de sesion propia;
+- listado active/all;
+- no exposicion de `userId` ni `specialistId` en contratos publicos.
+
+El siguiente paso debe validar como se entra visualmente en una sesion segura,
+no reabrir chat heredado ni reinterpretar `agentId` como `sessionId`.
+
+### Politica de retencion temporal
+
+Fixture:
+
+```text
+stasisly-development-synthetic-e2e-fixture
+```
+
+Estado:
+
+```text
+retenido temporalmente
+```
+
+Conteos esperados:
+
+```text
+chat_sessions=2
+messages=2
+specialist_catalog=1
+users=1
+```
+
+Uso permitido:
+
+- UX dev-only;
+- pruebas development dev-only;
+- inspeccion de sesiones propias archivadas;
+- validacion de entrada por `sessionId` explicito.
+
+Uso prohibido:
+
+- producto;
+- demo publica;
+- production;
+- staging;
+- datos reales;
+- usuarios reales;
+- ruta `/conversations`;
+- ruta `/chat/:id`;
+- ruta `/orchestrator/chat`;
+- chat heredado;
+- `SupabaseChatDataSource`.
+
+### Criterios para AG60
+
+AG60 debe mantener:
+
+- `/chat/:id` como `agentId` heredado, no `sessionId`;
+- `sessionId` como identificador explicito para mensajes;
+- `selectableSpecialistId` como unica entrada valida para crear sesion desde
+  catalogo sanitizado;
+- contratos publicos sin `userId`, `specialistId`, ownership, permisos ni
+  tokens;
+- errores reales visibles, sin fallback demo.
+
+AG60 no debe:
+
+- registrar `/conversations`;
+- conectar `/chat/:id`;
+- conectar `/orchestrator/chat`;
+- tocar chat heredado;
+- usar `SupabaseChatDataSource`;
+- ejecutar cleanup;
+- tocar production, staging o datos reales.
+
+### Readiness final
+
+```text
+FLUTTER DEV UX ROUTING DECISION READY
+```
+
+### Siguiente paso
+
+```text
+2B-AG60 — UX/routing dev-only sobre fixture sintetico retenido
+```
+
+## 2B-AG60 — UX/routing dev-only sobre fixture sintetico retenido
+
+Estado:
+
+```text
+FLUTTER DEV UX ROUTING IMPLEMENTED
+```
+
+### Frontera mantenida
+
+AG60 implementa solo una UX/dev-shell development dev-only. No convierte el
+flujo en producto ni registra rutas publicas.
+
+La frontera de catalogo y mensajes se mantiene:
+
+- crear sesion sigue dependiendo de `selectableSpecialistId`;
+- mensajes siguen dependiendo de `sessionId` explicito;
+- `/chat/:id` sigue siendo `agentId` heredado, no `sessionId`;
+- `/orchestrator/chat` sigue fuera del flujo nuevo;
+- `/conversations` sigue no registrado.
+
+### Cambios de UX dev-only
+
+La shell compuesta dev-only muestra:
+
+- `DEV ONLY`;
+- `REMOTE DEVELOPMENT`;
+- `SYNTHETIC DATA`;
+- `NOT PRODUCT`;
+- estado de backend remoto;
+- estado de auth;
+- `real data`;
+- `dev routes`;
+- `conversations route`.
+
+El panel de sesiones:
+
+- carga `all` en la shell compuesta dev-only;
+- muestra contadores active/all/archived;
+- diferencia sesiones archivadas mediante el contrato existente;
+- expone apertura por callback dev-only a `/dev/chat/session/:sessionId`;
+- mantiene acciones de escritura visibles como dev-only y no automaticas.
+
+El detalle:
+
+- recibe solo `sessionId`;
+- no usa `agentId`;
+- no usa `id`;
+- no expone `userId`, `specialistId`, permisos, ownership ni tokens;
+- muestra mensajes sinteticos si el datasource remoto dev-only los entrega.
+
+### Fixture
+
+El fixture retenido sigue siendo:
+
+```text
+stasisly-development-synthetic-e2e-fixture
+```
+
+Conteos esperados:
+
+```text
+chat_sessions=2
+messages=2
+specialist_catalog=1
+users=1
+```
+
+AG60 no crea, no modifica y no borra datos.
+
+### Bloqueos
+
+Siguen bloqueados:
+
+- `/conversations`;
+- `/chat/:id` como `sessionId`;
+- `/orchestrator/chat`;
+- chat heredado;
+- `SupabaseChatDataSource`;
+- `Supabase.instance.client` para flujo nuevo;
+- Flutter directo a tablas;
+- service role en cliente;
+- datos reales;
+- production;
+- staging;
+- SQL modificador;
+- deploy;
+- migraciones;
+- cleanup.
+
+### Readiness final
+
+```text
+FLUTTER DEV UX ROUTING IMPLEMENTED
+```
+
+### Siguiente paso
+
+```text
+2B-AG61 — validar UX dev-only contra fixture remoto retenido solo lectura
+```
+
+### Frontera aprobada para planificar AG52
+
+Flutter solo podra comunicarse con backend remoto development mediante:
+
+- Edge Functions;
+- JWT obtenido desde `SecureSessionTokenProvider`;
+- datasources HTTP seguros de `chat_sessions` y `chat_messages`;
+- contratos sanitizados ya auditados.
+
+Flutter no debe:
+
+- escribir directo en tablas Supabase;
+- usar `service_role`;
+- pasar `userId`, `ownerUserId`, `role`, permisos u ownership;
+- usar `SupabaseChatDataSource` heredado;
+- usar `/chat/:id` como `sessionId`;
+- usar `/orchestrator/chat`;
+- activar production/staging;
+- usar datos reales.
+
+### Estado de piezas existentes
+
+Piezas seguras:
+
+- `LocalHttpOwnChatSessionsDataSource` envia payloads seguros a Edge Functions
+  de sesiones.
+- `LocalHttpOwnChatMessagesDataSource` envia solo `sessionId` y `content` para
+  mensajes.
+- `OwnChatSessionsRepository` y `OwnChatMessagesRepository` son contratos
+  overrideables.
+- `OwnChatComposedSafeShell` y `OwnChatMessagesSafeShell` existen y no dependen
+  de chat heredado.
+- `/dev/chat/composed` y `/dev/chat/session/:sessionId` existen como rutas dev.
+- Los tests protegen contra `:id`/`:agentId` en rutas dev.
+
+Piezas bloqueadas:
+
+- providers reales siguen devolviendo demo/backendBlocked;
+- `LocalOnlyHostPolicy` bloquea hosts remotos y debe separarse de cualquier
+  politica development remota;
+- `secureSessionTokenProvider` fuera de demo sigue backendBlocked;
+- `/conversations` no esta registrado;
+- `/chat/:id` sigue siendo `agentId` heredado;
+- `/orchestrator/chat` sigue heredado.
+
+### Estrategia AG52
+
+AG52 debe ser una implementacion pequena:
+
+1. No tocar rutas producto.
+2. No registrar `/conversations`.
+3. No tocar `/chat/:id`.
+4. No tocar `/orchestrator/chat`.
+5. Abrir solo una experiencia dev-only, preferiblemente `/dev/chat/composed`,
+   bajo `APP_MODE=development` y no release.
+6. Introducir politica remota development allowlisted, separada de
+   `LocalOnlyHostPolicy`.
+7. Activar repositorios HTTP mediante providers environment-gated.
+8. Usar `SecureSessionTokenProvider` como unica fuente de token.
+9. Mantener todos los providers overrideables.
+10. Validar contra fixture sintetico retenido por AG50.
+
+### Prueba futura esperada
+
+- Abrir app en development.
+- Entrar en ruta dev-only.
+- Listar sesiones propias.
+- Ver comportamiento con la sesion sintetica archivada.
+- No crear datos nuevos salvo autorizacion separada.
+- No exponer `sessionId`, `userId`, `specialistId` ni tokens en UI/logs.
+- Confirmar que errores reales no caen a demo.
+
+### Readiness
+
+La frontera backend queda lista para plan de implementacion AG52, pero no queda
+conectada todavia.
+
+```text
+FLUTTER DEVELOPMENT CONNECTION PLAN READY
+```
+```
+```
+```
 ```
 
 ## Intento 2B-AG17 — migration up development controlado
@@ -18519,3 +20721,314 @@ Alternativas:
 - `2B-AE4 — plan /conversations backendBlocked visual`.
 
 No implementar todavia.
+
+## Registro 2B-AG63 — decision ruta producto futura vs hardening dev-only vs cleanup
+
+Estado: aceptado como decision documental. Sin cambios funcionales.
+
+### Cierre formal de AG62
+
+`2B-AG62` queda aprobado y cerrado formalmente con readiness:
+
+```text
+FLUTTER DEV UX REMOTE VALIDATED
+```
+
+La frontera remota development queda validada para UX dev-only de solo lectura
+tras renovar el token sintetico local. No se imprimieron secretos ni se
+modificaron datos remotos en AG63.
+
+### Estado actual de la frontera
+
+- Las seis Edge Functions development estan activas.
+- Migraciones `00001`-`00007` estan alineadas local/remoto.
+- El fixture sintetico retenido permite validar sesiones y mensajes dev-only.
+- Flutter dev-only puede leer el fixture remoto sin fallback demo.
+- El flujo nuevo no debe usar `SupabaseChatDataSource`.
+- `selectableSpecialistId` sigue siendo la entrada segura para crear sesiones.
+- `sessionId` explicito sigue siendo la unica salida valida para mensajes.
+- `agentId`, `user_id`, `specialist_id` y rutas heredadas no son contratos
+  publicos para el flujo seguro.
+
+### Decision sobre opciones AG63
+
+La opcion elegida es:
+
+```text
+B — hardening dev-only final antes de abrir ruta producto.
+```
+
+Se difieren:
+
+- Opcion A, abrir `/conversations` producto.
+- Opcion C, limpiar fixture sintetico.
+- Opcion D, preparar UX producto sin registrar ruta.
+- Opcion E, cerrar 2B como fase producto.
+
+Razon: la integracion remota y la UX dev-only ya funcionan, pero la frontera
+backend debe quedar blindada ante token caducado, rutas heredadas, fallback demo,
+release/staging/production y retencion del fixture antes de exponer cualquier
+superficie producto.
+
+### Politica de fixture y catalogo
+
+- El fixture sintetico se retiene temporalmente.
+- Conteos esperados: `chat_sessions=2`, `messages=2`,
+  `specialist_catalog=1`, `users=1`.
+- El fixture solo puede usarse en development/dev-only.
+- No debe presentarse como producto, staging, production ni dato real.
+- El cleanup requiere paquete separado con SQL exacto, revision manual y
+  evidencia de conteos antes/despues.
+- No se debe recrear ni ampliar catalogo sin aprobacion explicita.
+
+### Bloqueos vigentes
+
+- No registrar `/conversations`.
+- No conectar `/chat/:id` al flujo seguro.
+- No interpretar `agentId` como `sessionId`.
+- No conectar `/orchestrator/chat`.
+- No reactivar chat heredado.
+- No usar `SupabaseChatDataSource` en el flujo nuevo.
+- No usar `Supabase.instance.client` para chat nuevo.
+- No usar `service_role` en cliente.
+- No hacer writes directos desde Flutter a tablas.
+- No usar datos reales, staging ni production.
+
+### Criterios para AG64
+
+`2B-AG64 — hardening dev-only final antes de ruta producto` debe verificar o
+reforzar:
+
+- token sintetico caducado/invalido = error cerrado;
+- `.env` incompleto = error cerrado;
+- error real remoto nunca cae a demo;
+- rutas dev-only bloqueadas fuera de development/local permitido;
+- `/conversations` sigue no registrado;
+- `/chat/:id` sigue documentado como `agentId` heredado;
+- `/orchestrator/chat` sigue fuera del flujo seguro;
+- `SupabaseChatDataSource` no participa;
+- fixture retenido queda etiquetado como sintetico;
+- cleanup queda diferido a paquete separado.
+
+### Riesgos clasificados
+
+Bloqueantes:
+
+- abrir producto prematuramente;
+- registrar `/conversations` sin hardening;
+- confundir `agentId` con `sessionId`;
+- exponer datos reales;
+- usar `service_role` o tokens en cliente.
+
+Altos:
+
+- fallback demo ante error real;
+- token sintetico caducado;
+- rutas dev expuestas en production/staging;
+- fixture confundido con producto;
+- auth producto no definida.
+
+Medios:
+
+- cleanup accidental;
+- fixture retenido demasiado tiempo;
+- errores remotos poco claros.
+
+Bajos:
+
+- duplicidad documental;
+- nomenclatura larga de paquetes;
+- copy dev-only perfectible.
+
+### Readiness
+
+```text
+FLUTTER DEV HARDENING DECISION READY
+```
+
+Siguiente paquete recomendado:
+
+```text
+2B-AG64 — hardening dev-only final antes de ruta producto
+```
+
+## Registro 2B-AG64 — hardening dev-only final antes de ruta producto
+
+Estado: completado. Readiness:
+
+```text
+FLUTTER DEV HARDENING COMPLETE
+```
+
+### Decision ejecutada
+
+`2B-AG63` queda aprobado y cerrado. Se ejecuta la opcion B aprobada:
+hardening dev-only final antes de abrir `/conversations` o cualquier ruta
+producto.
+
+### Frontera backend protegida
+
+- Token sintetico local solo se acepta si tiene forma JWT-like.
+- Token ausente, vacio, con espacios o mal formado queda en error cerrado.
+- Token remoto invalido/caducado se modela localmente como respuesta 401 y se
+  expone como `unauthenticated`, no como demo.
+- Staging y production no pueden activar el provider sintetico.
+- Development remoto exige flags explicitos y `ENABLE_REAL_DATA=false`.
+- Host policy remota acepta solo HTTPS al host Supabase development aprobado.
+- Host policy rechaza localhost remoto, pooler, DB URL, userinfo, query keys,
+  fragmentos, puertos, paths y hosts no aprobados.
+
+### Frontera de rutas protegida
+
+- `/conversations` sigue no registrado.
+- `/chat/:id` sigue siendo ruta heredada `agentId`, no `sessionId`.
+- `/orchestrator/chat` sigue bloqueado para el flujo seguro.
+- Rutas dev-only siguen bajo `/dev/*`.
+- `OwnChatMessagesSafeShell` y `OwnChatComposedSafeShell` no se montan desde
+  rutas heredadas.
+
+### Frontera cliente protegida
+
+Quedan reforzados por tests:
+
+- no `service_role` en cliente;
+- no `SUPABASE_SERVICE_ROLE_KEY` en `lib/`;
+- no `SupabaseChatDataSource` en flujo `chat_sessions`/`chat_messages` nuevo;
+- no `Supabase.instance.client` en flujo nuevo;
+- no Flutter directo a tablas;
+- no `userId`, `ownerUserId`, `role` ni ownership enviados desde UI en el flujo
+  seguro.
+
+### Fixture
+
+Fixture sintetico retenido y etiquetado como dev-only:
+
+- `DEV ONLY`;
+- `REMOTE DEVELOPMENT`;
+- `SYNTHETIC DATA`;
+- `NOT PRODUCT`.
+
+Conteos esperados:
+
+- `chat_sessions=2`;
+- `messages=2`;
+- `specialist_catalog=1`;
+- `users=1`.
+
+Cleanup sigue diferido a paquete separado con SQL exacto y revision manual.
+
+### Validacion
+
+- Focales AG64: `test/core/config`, `test/core/auth/session`,
+  `test/features/chat_sessions`, `test/features/chat_messages`,
+  `test/architecture`: OK.
+- `dart format .`: ejecutado; formateos accidentales fuera de alcance revertidos.
+- `flutter analyze --no-fatal-infos`: OK con infos no fatales.
+- `flutter test`: OK, 395 tests y 5 skips.
+- `git diff --check`: OK.
+- `supabase migration list`: `00001`-`00007` alineadas.
+- `supabase functions list`: seis funciones ACTIVE.
+
+### Fuera de alcance respetado
+
+No hubo SQL modificador, deploy, migracion remota, `secrets set`, `db push`,
+cleanup, creacion de datos, envio de mensajes, archivado, datos reales, staging,
+production ni secretos impresos.
+
+### Siguiente paquete
+
+```text
+2B-AG65 — decision cierre fase dev-only y criterios ruta producto /conversations
+```
+
+## Registro 2B-AG65 — cierre fase dev-only y criterios futura ruta producto /conversations
+
+Estado: completado. Readiness:
+
+```text
+DEV-ONLY PHASE FORMALLY CLOSED
+```
+
+### Cierre formal
+
+`2B-AG64` queda aprobado y cerrado formalmente como
+`FLUTTER DEV HARDENING COMPLETE`. La frontera de catalogo, sesiones y mensajes
+queda cerrada en modo dev-only: util para desarrollo y pruebas controladas, pero
+no productiva ni remota de usuario real.
+
+### Alcance cerrado
+
+Quedan cerrados como fase tecnica dev-only:
+
+- backend remoto development E2E;
+- lectura Flutter dev-only;
+- escritura Flutter dev-only;
+- UX dev-only;
+- validacion UX remota;
+- hardening final dev-only;
+- frontera de catalogo sanitizado;
+- frontera de `sessionId` explicito para mensajes;
+- bloqueo de rutas heredadas.
+
+### Limites vigentes
+
+Este cierre no autoriza:
+
+- producto listo;
+- registro de `/conversations`;
+- interpretar `/chat/:id` como `sessionId`;
+- conectar `/orchestrator/chat`;
+- migrar chat heredado;
+- usar datos reales;
+- activar staging o production;
+- conectar IA real, Stasis Engine, MCP, streaming o adjuntos;
+- limpiar fixture sin paquete separado.
+
+### Criterios antes de abrir /conversations
+
+Antes de registrar `/conversations` debe existir decision formal de producto,
+ADR o seccion especifica, auth producto definida, staging previo a production,
+politica de datos reales, cleanup/retention decidido, eliminacion de
+`SYNTHETIC_ACCESS_TOKEN`, tests de guards, tests de ruta, rollback producto y
+confirmacion de que el flujo no usa chat heredado, `SupabaseChatDataSource`,
+`/chat/:id`, `/orchestrator/chat`, `service_role` cliente ni Flutter directo a
+tablas.
+
+### Fixture y token sintetico
+
+El fixture `stasisly-development-synthetic-e2e-fixture` queda retenido
+temporalmente con conteos esperados `chat_sessions=2`, `messages=2`,
+`specialist_catalog=1` y `users=1`. El cleanup queda para paquete separado.
+
+`SYNTHETIC_ACCESS_TOKEN` queda limitado a development local temporal: puede
+caducar, debe fallar cerrado, no puede producir fallback demo, no debe
+imprimirse y no debe versionarse.
+
+### Riesgos
+
+Bloqueantes:
+
+- abrir producto prematuramente;
+- mezclar dev-shell con producto;
+- exponer tokens o `.env`;
+- usar `service_role` en cliente.
+
+Altos:
+
+- fixture confundido con datos reales;
+- dependencia de token sintetico;
+- staging/production prematuros;
+- cleanup accidental.
+
+Medios:
+
+- worktree 2B acumulado sin baseline;
+- duplicidad documental.
+
+### Siguiente paquete recomendado
+
+```text
+2B-AG66 — baseline/cierre worktree fase dev-only
+```
+
+AG66 debe consolidar trazabilidad antes de abrir producto, cleanup o staging.
