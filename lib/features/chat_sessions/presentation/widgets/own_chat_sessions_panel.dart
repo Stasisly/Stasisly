@@ -7,9 +7,16 @@ import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session
 import 'package:stasisly/features/chat_sessions/presentation/providers/own_chat_sessions_providers.dart';
 
 class OwnChatSessionsPanel extends ConsumerStatefulWidget {
-  const OwnChatSessionsPanel({super.key, this.autoLoad = true});
+  const OwnChatSessionsPanel({
+    super.key,
+    this.autoLoad = true,
+    this.statusFilter = ChatSessionStatusFilter.active,
+    this.onOpenSession,
+  });
 
   final bool autoLoad;
+  final ChatSessionStatusFilter statusFilter;
+  final ValueChanged<String>? onOpenSession;
 
   @override
   ConsumerState<OwnChatSessionsPanel> createState() =>
@@ -26,7 +33,9 @@ class _OwnChatSessionsPanelState extends ConsumerState<OwnChatSessionsPanel> {
     if (!widget.autoLoad) return;
     Future.microtask(() {
       if (!mounted) return;
-      ref.read(ownChatSessionsControllerProvider.notifier).loadInitial();
+      ref
+          .read(ownChatSessionsControllerProvider.notifier)
+          .loadInitial(status: widget.statusFilter);
     });
   }
 
@@ -60,6 +69,7 @@ class _OwnChatSessionsPanelState extends ConsumerState<OwnChatSessionsPanel> {
       children: [
         if (state.isDemo) const _DemoLabel(),
         if (state.isBackendBlocked) const _BackendBlockedState(),
+        const Text('Acciones de escritura dev-only: no automáticas'),
         _CreateSessionInput(
           controller: _selectableSpecialistIdController,
           isCreating: state.isCreating,
@@ -68,7 +78,12 @@ class _OwnChatSessionsPanelState extends ConsumerState<OwnChatSessionsPanel> {
         const SizedBox(height: 12),
         _StatusStrip(state: state),
         const SizedBox(height: 12),
-        Expanded(child: _SessionsBody(state: state)),
+        Expanded(
+          child: _SessionsBody(
+            state: state,
+            onOpenSession: widget.onOpenSession,
+          ),
+        ),
         if (state.lastCreateError != null)
           _SessionsErrorState(
             title: 'Error al crear sesión',
@@ -85,7 +100,7 @@ class _OwnChatSessionsPanelState extends ConsumerState<OwnChatSessionsPanel> {
               ? null
               : () => ref
                     .read(ownChatSessionsControllerProvider.notifier)
-                    .refresh(),
+                    .refresh(status: widget.statusFilter),
           child: Text(state.isRefreshing ? 'Refrescando...' : 'Refrescar'),
         ),
       ],
@@ -114,7 +129,7 @@ class _CreateSessionInput extends StatelessWidget {
             enabled: !isCreating,
             decoration: const InputDecoration(
               labelText: 'selectableSpecialistId',
-              hintText: 'ID público seleccionable del catálogo',
+              hintText: 'DEV ONLY · acción explícita · catálogo sanitizado',
             ),
             onSubmitted: isCreating ? null : (_) => onCreate(),
           ),
@@ -145,6 +160,10 @@ class _StatusStrip extends StatelessWidget {
               ? 'selectedSessionId: sin selección'
               : 'selectedSessionId: $selected',
         ),
+        Text('active sessions count: ${state.activeCount}'),
+        Text('all sessions count: ${state.sessions.length}'),
+        Text('archived sessions count: ${state.archivedCount}'),
+        const Text('Fixture sintético retenido: development remoto'),
         const Text(
           'selectedSessionId disponible para futuro flujo de mensajes',
         ),
@@ -155,9 +174,10 @@ class _StatusStrip extends StatelessWidget {
 }
 
 class _SessionsBody extends StatelessWidget {
-  const _SessionsBody({required this.state});
+  const _SessionsBody({required this.state, required this.onOpenSession});
 
   final OwnChatSessionsState state;
+  final ValueChanged<String>? onOpenSession;
 
   @override
   Widget build(BuildContext context) {
@@ -179,6 +199,7 @@ class _SessionsBody extends StatelessWidget {
     return _SessionsList(
       sessions: state.sessions,
       selectedSessionId: state.selectedSessionId,
+      onOpenSession: onOpenSession,
     );
   }
 }
@@ -187,10 +208,12 @@ class _SessionsList extends StatelessWidget {
   const _SessionsList({
     required this.sessions,
     required this.selectedSessionId,
+    required this.onOpenSession,
   });
 
   final List<OwnChatSession> sessions;
   final String? selectedSessionId;
+  final ValueChanged<String>? onOpenSession;
 
   @override
   Widget build(BuildContext context) {
@@ -201,6 +224,7 @@ class _SessionsList extends StatelessWidget {
         return _SessionTile(
           session: session,
           isSelected: session.sessionId == selectedSessionId,
+          onOpenSession: onOpenSession,
         );
       },
       separatorBuilder: (context, index) => const SizedBox(height: 8),
@@ -209,10 +233,15 @@ class _SessionsList extends StatelessWidget {
 }
 
 class _SessionTile extends ConsumerWidget {
-  const _SessionTile({required this.session, required this.isSelected});
+  const _SessionTile({
+    required this.session,
+    required this.isSelected,
+    required this.onOpenSession,
+  });
 
   final OwnChatSession session;
   final bool isSelected;
+  final ValueChanged<String>? onOpenSession;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -240,6 +269,11 @@ class _SessionTile extends ConsumerWidget {
                       .selectSession(session.sessionId),
                   child: const Text('Seleccionar sessionId'),
                 ),
+                if (onOpenSession != null)
+                  OutlinedButton(
+                    onPressed: () => onOpenSession!(session.sessionId),
+                    child: const Text('Abrir mensajes dev-only'),
+                  ),
                 OutlinedButton(
                   onPressed: () => ref
                       .read(ownChatSessionsControllerProvider.notifier)

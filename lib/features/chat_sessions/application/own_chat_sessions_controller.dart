@@ -14,13 +14,18 @@ class OwnChatSessionsController {
 
   OwnChatSessionsState state = const OwnChatSessionsState();
 
-  Future<void> loadInitial() async {
+  Future<void> loadInitial({
+    ChatSessionStatusFilter status = ChatSessionStatusFilter.active,
+  }) async {
     state = state.copyWith(
       isInitialLoading: true,
       lastListError: null,
       isBackendBlocked: false,
     );
-    final result = await _repository.listOwnChatSessions(limit: pageSize);
+    final result = await _repository.listOwnChatSessions(
+      status: status,
+      limit: pageSize,
+    );
     state = _stateFromListResult(
       previous: state,
       result: result,
@@ -28,13 +33,18 @@ class OwnChatSessionsController {
     );
   }
 
-  Future<void> refresh() async {
+  Future<void> refresh({
+    ChatSessionStatusFilter status = ChatSessionStatusFilter.active,
+  }) async {
     state = state.copyWith(
       isRefreshing: true,
       lastListError: null,
       isBackendBlocked: false,
     );
-    final result = await _repository.listOwnChatSessions(limit: pageSize);
+    final result = await _repository.listOwnChatSessions(
+      status: status,
+      limit: pageSize,
+    );
     state = _stateFromListResult(
       previous: state,
       result: result,

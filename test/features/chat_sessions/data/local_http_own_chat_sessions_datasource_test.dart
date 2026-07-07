@@ -229,6 +229,25 @@ void main() {
         expect(response.errorCode, 'backendBlocked');
       },
     );
+
+    test('remote invalid or expired token remains unauthenticated', () async {
+      final response = await _source(
+        transport: _FakeTransport(
+          response: const OwnChatSessionsHttpResponse(
+            statusCode: 401,
+            body: {
+              'error': {
+                'code': 'unauthenticated',
+                'requestId': 'local-request',
+              },
+            },
+          ),
+        ),
+      ).listOwnChatSessions(status: ChatSessionStatusFilter.active, limit: 20);
+
+      expect(response.statusCode, 401);
+      expect(response.errorCode, 'unauthenticated');
+    });
   });
 }
 

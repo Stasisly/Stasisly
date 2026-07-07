@@ -124,9 +124,11 @@ void main() {
     await tester.tap(find.text('Crear sesión'));
     await tester.pump();
 
+    await tester.ensureVisible(find.text('Seleccionar sessionId').first);
     await tester.tap(find.text('Seleccionar sessionId').first);
     await tester.pump();
 
+    await tester.ensureVisible(find.text('Archivar sessionId').first);
     await tester.tap(find.text('Archivar sessionId').first);
     await tester.pump();
 
@@ -141,6 +143,11 @@ Future<void> _pumpShell(
   required _FakeNotifier notifier,
   OwnChatSessionsShellInput input = const OwnChatSessionsShellInput(),
 }) async {
+  tester.view.physicalSize = const Size(900, 1100);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+
   await tester.pumpWidget(
     ProviderScope(
       key: UniqueKey(),

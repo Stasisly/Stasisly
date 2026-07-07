@@ -168,7 +168,9 @@ class _DevOwnChatSessionsNotifier extends OwnChatSessionsControllerNotifier {
   }
 
   @override
-  Future<void> refresh() async {
+  Future<void> refresh({
+    ChatSessionStatusFilter status = ChatSessionStatusFilter.active,
+  }) async {
     state = state.copyWith(
       sessions: _fakeSessions,
       selectedSessionId: null,

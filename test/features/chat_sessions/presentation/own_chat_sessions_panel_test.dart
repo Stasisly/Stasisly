@@ -34,7 +34,10 @@ void main() {
       tester,
       _FakeNotifier(
         OwnChatSessionsState(
-          sessions: [_session(_sessionA), _session(_sessionB, minute: 2)],
+          sessions: [
+            _session(_sessionA),
+            _session(_sessionB, minute: 2, status: ChatSessionStatus.archived),
+          ],
           selectedSessionId: _sessionB,
         ),
       ),
@@ -44,6 +47,17 @@ void main() {
     expect(find.text('sessionId: $_sessionA'), findsOneWidget);
     expect(find.text('sessionId: $_sessionB'), findsOneWidget);
     expect(find.text('selectedSessionId: $_sessionB'), findsOneWidget);
+    expect(find.text('active sessions count: 1'), findsOneWidget);
+    expect(find.text('all sessions count: 2'), findsOneWidget);
+    expect(find.text('archived sessions count: 1'), findsOneWidget);
+    expect(
+      find.text('Fixture sintético retenido: development remoto'),
+      findsOneWidget,
+    );
+    expect(
+      find.text('Acciones de escritura dev-only: no automáticas'),
+      findsOneWidget,
+    );
     expect(find.text('Sesión seleccionada'), findsOneWidget);
   });
 
@@ -201,6 +215,11 @@ void main() {
 }
 
 Future<void> _pumpPanel(WidgetTester tester, _FakeNotifier notifier) async {
+  tester.view.physicalSize = const Size(900, 1100);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+
   await tester.pumpWidget(
     ProviderScope(
       key: UniqueKey(),
@@ -210,7 +229,7 @@ Future<void> _pumpPanel(WidgetTester tester, _FakeNotifier notifier) async {
       child: const MaterialApp(
         home: Scaffold(
           body: SizedBox(
-            height: 650,
+            height: 900,
             width: 500,
             child: OwnChatSessionsPanel(autoLoad: false),
           ),
@@ -220,7 +239,11 @@ Future<void> _pumpPanel(WidgetTester tester, _FakeNotifier notifier) async {
   );
 }
 
-OwnChatSession _session(String sessionId, {int minute = 1}) {
+OwnChatSession _session(
+  String sessionId, {
+  int minute = 1,
+  ChatSessionStatus status = ChatSessionStatus.active,
+}) {
   final timestamp = DateTime.utc(2026, 6, 26, 10, minute);
   return OwnChatSession(
     sessionId: sessionId,
@@ -231,7 +254,7 @@ OwnChatSession _session(String sessionId, {int minute = 1}) {
     ),
     startedAt: timestamp,
     lastMessageAt: timestamp,
-    status: ChatSessionStatus.active,
+    status: status,
     messageCount: 0,
   );
 }
@@ -296,7 +319,9 @@ class _FakeNotifier extends OwnChatSessionsControllerNotifier {
   }
 
   @override
-  Future<void> refresh() async {
+  Future<void> refresh({
+    ChatSessionStatusFilter status = ChatSessionStatusFilter.active,
+  }) async {
     refreshCalls++;
   }
 }

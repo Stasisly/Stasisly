@@ -8,6 +8,7 @@ import 'package:stasisly/core/config/app_environment.dart';
 import 'package:stasisly/features/chat_sessions/application/own_chat_sessions_state.dart';
 import 'package:stasisly/features/chat_sessions/data/repositories/backend_blocked_own_chat_sessions_repository.dart';
 import 'package:stasisly/features/chat_sessions/data/repositories/demo_own_chat_sessions_repository.dart';
+import 'package:stasisly/features/chat_sessions/data/repositories/validating_own_chat_sessions_repository.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session_results.dart';
 import 'package:stasisly/features/chat_sessions/domain/repositories/own_chat_sessions_repository.dart';
@@ -54,6 +55,57 @@ void main() {
         isA<ListOwnChatSessionsFailure>(),
       );
     }
+  });
+
+  test(
+    'repository provider selects remote HTTP repository only in gated development',
+    () {
+      final container = ProviderContainer(
+        overrides: [
+          appEnvironmentProvider.overrideWithValue(
+            const AppEnvironment(
+              mode: AppRuntimeMode.development,
+              supabaseUrl: 'https://project.supabase.co',
+              supabaseAnonKey: 'public-test-key',
+              remoteBackendEnabled: true,
+              realAuthEnabled: true,
+            ),
+          ),
+          secureSessionTokenProvider.overrideWithValue(
+            _FakeSecureSessionTokenProvider(
+              SecureSessionTokenResult.success('fake-development-token'),
+            ),
+          ),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      expect(
+        container.read(ownChatSessionsRepositoryProvider),
+        isA<ValidatingOwnChatSessionsRepository>(),
+      );
+    },
+  );
+
+  test('development without auth gate remains backendBlocked', () {
+    final container = ProviderContainer(
+      overrides: [
+        appEnvironmentProvider.overrideWithValue(
+          const AppEnvironment(
+            mode: AppRuntimeMode.development,
+            supabaseUrl: 'https://project.supabase.co',
+            supabaseAnonKey: 'public-test-key',
+            remoteBackendEnabled: true,
+          ),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    expect(
+      container.read(ownChatSessionsRepositoryProvider),
+      isA<BackendBlockedOwnChatSessionsRepository>(),
+    );
   });
 
   test('explicit demo and backendBlocked providers are available', () {

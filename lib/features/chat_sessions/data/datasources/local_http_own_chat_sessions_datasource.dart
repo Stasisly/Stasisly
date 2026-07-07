@@ -18,7 +18,7 @@ class LocalHttpOwnChatSessionsDataSource
   static const _archivePath = '/functions/v1/archive-own-chat-session';
 
   final Uri baseUri;
-  final LocalOnlyHostPolicy hostPolicy;
+  final OwnChatSessionsHostPolicy hostPolicy;
   final LocalSessionTokenProvider tokenProvider;
   final OwnChatSessionsHttpTransport transport;
 

@@ -34,6 +34,10 @@ abstract interface class OwnChatSessionsHttpTransport {
   Future<OwnChatSessionsHttpResponse> send(OwnChatSessionsHttpRequest request);
 }
 
+OwnChatSessionsHttpTransport createDioOwnChatSessionsHttpTransport() {
+  return DioOwnChatSessionsHttpTransport(dio: Dio());
+}
+
 class DioOwnChatSessionsHttpTransport implements OwnChatSessionsHttpTransport {
   DioOwnChatSessionsHttpTransport({required Dio dio}) : _dio = dio;
 

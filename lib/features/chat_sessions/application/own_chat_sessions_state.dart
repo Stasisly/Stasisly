@@ -47,6 +47,18 @@ class OwnChatSessionsState extends Equatable {
 
   bool get hasSessions => sessions.isNotEmpty;
 
+  int get activeCount {
+    return sessions
+        .where((session) => session.status == ChatSessionStatus.active)
+        .length;
+  }
+
+  int get archivedCount {
+    return sessions
+        .where((session) => session.status == ChatSessionStatus.archived)
+        .length;
+  }
+
   bool get isEmpty => sessions.isEmpty && !hasActiveWork;
 
   bool get hasActiveWork {
