@@ -59,7 +59,10 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.byType(OwnChatComposedSafeShell), findsOneWidget);
-    expect(find.textContaining('Shell local-safe'), findsOneWidget);
+    expect(find.text('DEV ONLY'), findsOneWidget);
+    expect(find.text('REMOTE DEVELOPMENT'), findsOneWidget);
+    expect(find.text('SYNTHETIC DATA'), findsOneWidget);
+    expect(find.text('NOT PRODUCT'), findsOneWidget);
     expect(
       find.text('Selecciona una sesión para abrir mensajes'),
       findsOneWidget,
@@ -67,17 +70,55 @@ void main() {
     expect(find.byType(Scaffold), findsOneWidget);
   });
 
-  test('dev-only route is guarded out of non-demo runtime modes', () {
+  testWidgets('development dev-only composed route is available behind gate', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(1200, 1600);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+
+    final container = ProviderContainer(
+      overrides: [
+        appEnvironmentProvider.overrideWithValue(
+          const AppEnvironment(
+            mode: AppRuntimeMode.development,
+            supabaseUrl: 'https://project.supabase.co',
+            supabaseAnonKey: 'public-test-key',
+            remoteBackendEnabled: true,
+            realAuthEnabled: true,
+          ),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    await tester.pumpWidget(
+      UncontrolledProviderScope(container: container, child: const App()),
+    );
+    await tester.pump();
+
+    container.read(routerProvider).go('/dev/chat/composed');
+    await tester.pumpAndSettle();
+
+    expect(find.byType(OwnChatComposedSafeShell), findsOneWidget);
+  });
+
+  test('dev-only route is guarded by allowsDevRoutes and release mode', () {
     final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
 
     expect(routesSource, contains("path: '/dev/chat/session/:sessionId'"));
     expect(routesSource, contains("path: '/dev/chat/composed'"));
-    expect(routesSource, contains('kReleaseMode || !environment.isDemo'));
+    expect(
+      routesSource,
+      contains('kReleaseMode || !environment.allowsDevRoutes'),
+    );
     expect(routesSource, contains('OwnChatMessagesRouteParamsAdapter'));
     expect(routesSource, contains('OwnChatMessagesSafeShell'));
     expect(routesSource, contains('OwnChatComposedSafeShell'));
     expect(routesSource, contains('state.pathParameters'));
     expect(routesSource, contains('sessionIdFrom(state.pathParameters)'));
+    expect(routesSource, contains("context.go('/dev/chat/session/"));
     expect(routesSource, isNot(contains("path: '/dev/chat/session/:id'")));
     expect(routesSource, isNot(contains("path: '/dev/chat/session/:agentId'")));
     expect(routesSource, isNot(contains("path: '/dev/chat/composed/:id'")));
@@ -89,6 +130,13 @@ void main() {
       routesSource,
       isNot(contains("path: '/dev/chat/composed/:sessionId'")),
     );
+  });
+
+  test('product conversations route remains unregistered', () {
+    final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
+
+    expect(routesSource, isNot(contains("path: '/conversations'")));
+    expect(routesSource, isNot(contains("path: '/conversations/:sessionId'")));
   });
 
   test('dev-only route keeps inherited chat and runtime services out', () {

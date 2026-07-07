@@ -8,7 +8,11 @@ void main() {
 
     expect(routesSource, contains("path: '/dev/chat/session/:sessionId'"));
     expect(routesSource, contains("path: '/dev/chat/composed'"));
-    expect(routesSource, contains('kReleaseMode || !environment.isDemo'));
+    expect(
+      routesSource,
+      contains('kReleaseMode || !environment.allowsDevRoutes'),
+    );
+    expect(routesSource, contains("state.uri.path.startsWith('/dev/')"));
     expect(routesSource, contains('OwnChatMessagesRouteParamsAdapter'));
     expect(routesSource, contains('OwnChatMessagesSafeShell'));
     expect(routesSource, contains('OwnChatComposedSafeShell'));
@@ -25,6 +29,35 @@ void main() {
       isNot(contains("path: '/dev/chat/composed/:sessionId'")),
     );
     expect(routesSource, isNot(contains("path: '/chat/:sessionId'")));
+  });
+
+  test('inherited routes are not wired to safe session messages', () {
+    final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
+
+    expect(routesSource, contains("path: '/chat/:id'"));
+    expect(routesSource, contains("final id = state.pathParameters['id']"));
+    expect(routesSource, contains('AgentChatWrapper(agentId: id)'));
+    expect(routesSource, contains("path: '/orchestrator/chat'"));
+
+    final inheritedChatSource = routesSource.substring(
+      routesSource.indexOf("path: '/chat/:id'"),
+      routesSource.indexOf('..._devOnlyChatMessageRoutes'),
+    );
+
+    for (final forbidden in [
+      'OwnChatMessagesSafeShell',
+      'OwnChatComposedSafeShell',
+      'sessionId',
+      'selectableSpecialistId',
+      '/functions/v1/',
+      'SupabaseChatDataSource',
+    ]) {
+      expect(
+        inheritedChatSource,
+        isNot(contains(forbidden)),
+        reason: forbidden,
+      );
+    }
   });
 
   test(

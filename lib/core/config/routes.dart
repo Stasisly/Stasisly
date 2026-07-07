@@ -34,6 +34,10 @@ final routerProvider = Provider<GoRouter>((ref) {
       // Demo is intentionally local and does not pretend to authenticate.
       if (environment.isDemo) return null;
 
+      if (environment.allowsDevRoutes && state.uri.path.startsWith('/dev/')) {
+        return null;
+      }
+
       if (authState == null || authState.isLoading) return null;
 
       final isAuth = authState.valueOrNull != null;
@@ -114,7 +118,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 });
 
 List<RouteBase> _devOnlyChatMessageRoutes(AppEnvironment environment) {
-  if (kReleaseMode || !environment.isDemo) return const [];
+  if (kReleaseMode || !environment.allowsDevRoutes) return const [];
 
   return [
     GoRoute(
@@ -139,5 +143,9 @@ Widget _buildDevOnlyComposedChatRoute(
   BuildContext context,
   GoRouterState state,
 ) {
-  return const Scaffold(body: OwnChatComposedSafeShell());
+  return Scaffold(
+    body: OwnChatComposedSafeShell(
+      onOpenSession: (sessionId) => context.go('/dev/chat/session/$sessionId'),
+    ),
+  );
 }

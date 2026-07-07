@@ -18,8 +18,8 @@ void main() {
     expect(source, contains('development'));
     expect(source, contains('staging'));
     expect(source, contains('backendReal'));
-    expect(source, contains('allowsRemoteSupabase => false'));
-    expect(source, contains('allowsRealAuth => false'));
+    expect(source, contains('isDevelopment && remoteBackendEnabled'));
+    expect(source, contains('allowsRemoteSupabase && realAuthEnabled'));
     expect(source, contains('allowsRealData => false'));
     expect(source, contains('allowsConversationsRoute => false'));
     expect(source, contains('validateForStartup'));

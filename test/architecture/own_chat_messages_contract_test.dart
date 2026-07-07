@@ -12,12 +12,15 @@ void main() {
   test('messages feature has no Supabase, HTTP or runtime coupling', () {
     for (final file in featureFiles) {
       final source = file.readAsStringSync();
+      final isHttpTransport = file.path.endsWith(
+        'data/local/own_chat_messages_http_transport.dart',
+      );
       for (final forbidden in [
         'supabase_flutter',
         'Supabase.instance',
         'functions.invoke',
         'package:http/',
-        'package:dio/',
+        if (!isHttpTransport) 'package:dio/',
         'dart:io',
         'dart:html',
         'firebase',
