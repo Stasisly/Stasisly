@@ -29,6 +29,14 @@ void main() {
     );
 
     expect(find.byType(OwnChatMessagesSafeShell), findsOneWidget);
+    expect(find.text('DEV ONLY'), findsOneWidget);
+    expect(find.text('REMOTE DEVELOPMENT'), findsOneWidget);
+    expect(find.text('SYNTHETIC DATA'), findsOneWidget);
+    expect(find.text('NOT PRODUCT'), findsOneWidget);
+    expect(
+      find.text('Detalle dev-only por sessionId explícito.'),
+      findsOneWidget,
+    );
     expect(find.text('No hay mensajes todavía'), findsOneWidget);
   });
 

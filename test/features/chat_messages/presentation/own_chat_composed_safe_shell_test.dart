@@ -37,6 +37,10 @@ void main() {
     expect(find.byType(OwnChatComposedSafeShell), findsOneWidget);
     expect(find.byType(OwnChatSessionsPanel), findsOneWidget);
     expect(find.byType(OwnChatMessagesSafeShell), findsNothing);
+    expect(find.text('DEV ONLY'), findsOneWidget);
+    expect(find.text('REMOTE DEVELOPMENT'), findsOneWidget);
+    expect(find.text('SYNTHETIC DATA'), findsOneWidget);
+    expect(find.text('NOT PRODUCT'), findsOneWidget);
     expect(
       find.text('Selecciona una sesión para abrir mensajes'),
       findsOneWidget,
@@ -64,6 +68,7 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('selectedSessionId: $_sessionA'), findsOneWidget);
+    expect(find.text('Abrir mensajes dev-only'), findsNWidgets(2));
     expect(messages.loadedSessionIds, isEmpty);
   });
 
@@ -224,6 +229,11 @@ Future<void> _pumpShell(
   required _FakeMessagesNotifier messages,
   bool messagesAutoLoad = false,
 }) async {
+  tester.view.physicalSize = const Size(1200, 1200);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
+
   await tester.pumpWidget(
     ProviderScope(
       key: UniqueKey(),
@@ -234,11 +244,12 @@ Future<void> _pumpShell(
       child: MaterialApp(
         home: Scaffold(
           body: SizedBox(
-            height: 720,
+            height: 1100,
             width: 900,
             child: OwnChatComposedSafeShell(
               sessionsAutoLoad: false,
               messagesAutoLoad: messagesAutoLoad,
+              onOpenSession: (_) {},
             ),
           ),
         ),

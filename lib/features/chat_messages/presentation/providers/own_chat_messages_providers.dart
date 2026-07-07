@@ -4,7 +4,10 @@ import 'package:stasisly/core/auth/session/secure_session.dart';
 import 'package:stasisly/core/config/app_environment.dart';
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_controller.dart';
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_state.dart';
+import 'package:stasisly/features/chat_messages/data/datasources/local_http_own_chat_messages_datasource.dart';
+import 'package:stasisly/features/chat_messages/data/local/local_only_host_policy.dart';
 import 'package:stasisly/features/chat_messages/data/local/local_session_token_provider.dart';
+import 'package:stasisly/features/chat_messages/data/local/own_chat_messages_http_transport.dart';
 import 'package:stasisly/features/chat_messages/data/local/secure_session_chat_messages_token_provider.dart';
 import 'package:stasisly/features/chat_messages/data/repositories/backend_blocked_own_chat_messages_repository.dart';
 import 'package:stasisly/features/chat_messages/data/repositories/demo_own_chat_messages_repository.dart';
@@ -28,10 +31,29 @@ final ownChatMessagesRepositoryProvider = Provider<OwnChatMessagesRepository>((
     return DemoOwnChatMessagesRepository();
   }
 
+  if (environment.allowsRealAuth) {
+    return ref.watch(remoteOwnChatMessagesRepositoryProvider);
+  }
+
   // ADR-006/ADR-007: backend wiring for messages remains blocked until a
   // separate package approves provider-to-datasource activation.
   return const BackendBlockedOwnChatMessagesRepository();
 });
+
+final remoteOwnChatMessagesRepositoryProvider =
+    Provider<OwnChatMessagesRepository>((ref) {
+      final environment = ref.watch(appEnvironmentProvider);
+      final baseUri = Uri.parse(environment.supabaseUrl);
+      return LocalHttpOwnChatMessagesDataSource(
+        baseUri: baseUri,
+        hostPolicy: DevelopmentRemoteHostPolicy(
+          enabled: environment.allowsRealAuth,
+          approvedHost: baseUri.host,
+        ),
+        tokenProvider: ref.watch(ownChatMessagesLocalSessionTokenProvider),
+        transport: createDioOwnChatMessagesHttpTransport(),
+      );
+    });
 
 final demoOwnChatMessagesRepositoryProvider =
     Provider<OwnChatMessagesRepository>((ref) {

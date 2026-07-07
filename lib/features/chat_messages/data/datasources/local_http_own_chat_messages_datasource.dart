@@ -20,7 +20,7 @@ class LocalHttpOwnChatMessagesDataSource implements OwnChatMessagesRepository {
   static const listPath = '/functions/v1/list-session-messages';
 
   final Uri baseUri;
-  final LocalOnlyHostPolicy hostPolicy;
+  final OwnChatMessagesHostPolicy hostPolicy;
   final LocalSessionTokenProvider tokenProvider;
   final OwnChatMessagesHttpTransport transport;
   final OwnChatMessagesPayloadValidator payloadValidator;

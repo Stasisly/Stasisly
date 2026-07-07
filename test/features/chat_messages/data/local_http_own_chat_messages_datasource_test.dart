@@ -289,6 +289,7 @@ void main() {
 
     test('list errors are mapped without demo fallback', () async {
       final cases = {
+        'unauthenticated': ListOwnChatMessagesFailureType.unauthenticated,
         'invalidCursor': ListOwnChatMessagesFailureType.invalidCursor,
         'sessionNotFound': ListOwnChatMessagesFailureType.sessionNotFound,
         'permissionDenied': ListOwnChatMessagesFailureType.permissionDenied,
@@ -309,6 +310,40 @@ void main() {
         expect(result, ListSessionMessagesFailure(entry.value));
         expect(result, isNot(isA<ListSessionMessagesDemo>()));
       }
+    });
+
+    test('expired or invalid remote token maps to unauthenticated', () async {
+      final sendResult = await _source(
+        transport: _FakeTransport(
+          response: OwnChatMessagesHttpResponse(
+            statusCode: 401,
+            body: _error('unauthenticated'),
+          ),
+        ),
+      ).sendUserMessage(sessionId: 'session-1', content: 'hola');
+      final listResult = await _source(
+        transport: _FakeTransport(
+          response: OwnChatMessagesHttpResponse(
+            statusCode: 401,
+            body: _error('invalidSession'),
+          ),
+        ),
+      ).listSessionMessages(sessionId: 'session-1');
+
+      expect(
+        sendResult,
+        const SendUserMessageFailure(
+          SendOwnChatMessageFailureType.unauthenticated,
+        ),
+      );
+      expect(
+        listResult,
+        const ListSessionMessagesFailure(
+          ListOwnChatMessagesFailureType.unauthenticated,
+        ),
+      );
+      expect(sendResult, isNot(isA<SendUserMessageDemo>()));
+      expect(listResult, isNot(isA<ListSessionMessagesDemo>()));
     });
 
     test('transport exception maps to networkError without demo', () async {

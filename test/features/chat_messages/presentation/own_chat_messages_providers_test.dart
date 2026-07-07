@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:stasisly/core/auth/session/secure_session.dart';
 import 'package:stasisly/core/config/app_environment.dart';
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_state.dart';
+import 'package:stasisly/features/chat_messages/data/datasources/local_http_own_chat_messages_datasource.dart';
 import 'package:stasisly/features/chat_messages/data/repositories/backend_blocked_own_chat_messages_repository.dart';
 import 'package:stasisly/features/chat_messages/data/repositories/demo_own_chat_messages_repository.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message.dart';
@@ -53,6 +54,57 @@ void main() {
         isA<ListSessionMessagesFailure>(),
       );
     }
+  });
+
+  test(
+    'repository provider selects remote HTTP repository only in gated development',
+    () {
+      final container = ProviderContainer(
+        overrides: [
+          appEnvironmentProvider.overrideWithValue(
+            const AppEnvironment(
+              mode: AppRuntimeMode.development,
+              supabaseUrl: 'https://project.supabase.co',
+              supabaseAnonKey: 'public-test-key',
+              remoteBackendEnabled: true,
+              realAuthEnabled: true,
+            ),
+          ),
+          secureSessionTokenProvider.overrideWithValue(
+            _FakeSecureSessionTokenProvider(
+              SecureSessionTokenResult.success('fake-development-token'),
+            ),
+          ),
+        ],
+      );
+      addTearDown(container.dispose);
+
+      expect(
+        container.read(ownChatMessagesRepositoryProvider),
+        isA<LocalHttpOwnChatMessagesDataSource>(),
+      );
+    },
+  );
+
+  test('development without auth gate remains backendBlocked', () {
+    final container = ProviderContainer(
+      overrides: [
+        appEnvironmentProvider.overrideWithValue(
+          const AppEnvironment(
+            mode: AppRuntimeMode.development,
+            supabaseUrl: 'https://project.supabase.co',
+            supabaseAnonKey: 'public-test-key',
+            remoteBackendEnabled: true,
+          ),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    expect(
+      container.read(ownChatMessagesRepositoryProvider),
+      isA<BackendBlockedOwnChatMessagesRepository>(),
+    );
   });
 
   test('local session token provider maps secure success token', () async {
