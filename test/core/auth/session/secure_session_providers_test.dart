@@ -8,6 +8,8 @@ import 'package:stasisly/core/auth/session/secure_session_token_provider.dart';
 import 'package:stasisly/core/auth/session/secure_session_token_result.dart';
 import 'package:stasisly/core/config/app_environment.dart';
 
+const _syntheticJwtLikeToken = 'header.payload.signature';
+
 void main() {
   test(
     'secureSessionTokenProvider selects explicit demo in demo mode',
@@ -52,6 +54,107 @@ void main() {
       );
     }
   });
+
+  test('development real auth gate selects synthetic token provider', () async {
+    final container = ProviderContainer(
+      overrides: [
+        appEnvironmentProvider.overrideWithValue(
+          const AppEnvironment(
+            mode: AppRuntimeMode.development,
+            supabaseUrl: 'https://project.supabase.co',
+            supabaseAnonKey: 'public-test-key',
+            remoteBackendEnabled: true,
+            realAuthEnabled: true,
+          ),
+        ),
+        developmentSyntheticAccessTokenProvider.overrideWithValue(
+          _syntheticJwtLikeToken,
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    final provider = container.read(secureSessionTokenProvider);
+
+    expect(provider, isA<DevelopmentSyntheticSecureSessionTokenProvider>());
+    expect(
+      await provider.getAccessToken(),
+      SecureSessionTokenResult.success(_syntheticJwtLikeToken),
+    );
+  });
+
+  test(
+    'development synthetic token provider fails closed without usable token',
+    () async {
+      for (final token in ['', '   ', 'not-a-jwt', 'a.b', 'a.b.', 'a b.c.d']) {
+        final provider = DevelopmentSyntheticSecureSessionTokenProvider(
+          accessToken: token,
+        );
+
+        expect(
+          await provider.getAccessToken(),
+          const SecureSessionTokenResult.misconfigured(),
+          reason: token,
+        );
+        expect(
+          (await provider.currentAuthState()).status,
+          SecureSessionAuthStatus.misconfigured,
+          reason: token,
+        );
+      }
+    },
+  );
+
+  test(
+    'synthetic token provider trims but never exposes malformed tokens',
+    () async {
+      const provider = DevelopmentSyntheticSecureSessionTokenProvider(
+        accessToken: '  header.payload.signature  ',
+      );
+
+      expect(
+        await provider.getAccessToken(),
+        SecureSessionTokenResult.success(_syntheticJwtLikeToken),
+      );
+      expect(
+        (await provider.currentAuthState()).status,
+        SecureSessionAuthStatus.authenticated,
+      );
+    },
+  );
+
+  test(
+    'staging and production never select synthetic token provider',
+    () async {
+      for (final mode in [AppRuntimeMode.staging, AppRuntimeMode.production]) {
+        final container = ProviderContainer(
+          overrides: [
+            appEnvironmentProvider.overrideWithValue(
+              AppEnvironment(
+                mode: mode,
+                supabaseUrl: 'https://project.supabase.co',
+                supabaseAnonKey: 'public-test-key',
+                remoteBackendEnabled: true,
+                realAuthEnabled: true,
+              ),
+            ),
+            developmentSyntheticAccessTokenProvider.overrideWithValue(
+              _syntheticJwtLikeToken,
+            ),
+          ],
+        );
+        addTearDown(container.dispose);
+
+        final provider = container.read(secureSessionTokenProvider);
+
+        expect(provider, isA<BackendBlockedSecureSessionTokenProvider>());
+        expect(
+          await provider.getAccessToken(),
+          const SecureSessionTokenResult.backendBlocked(),
+        );
+      }
+    },
+  );
 
   test('explicit safe providers are available', () {
     final container = ProviderContainer();

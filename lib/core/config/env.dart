@@ -21,6 +21,33 @@ abstract final class Env {
     'SUPABASE_ANON_KEY',
   );
 
+  /// Explicit gate for remote backend usage in development.
+  static const bool enableRemoteBackend = bool.fromEnvironment(
+    'ENABLE_REMOTE_BACKEND',
+  );
+
+  /// Explicit gate for real/synthetic auth token usage in development.
+  static const bool enableRealAuth = bool.fromEnvironment('ENABLE_REAL_AUTH');
+
+  /// Real user data stays disabled until a separate package approves it.
+  static const bool enableRealData = bool.fromEnvironment('ENABLE_REAL_DATA');
+
+  /// Development-only diagnostic routes are enabled by default outside release.
+  static const bool allowDevRoutes = bool.fromEnvironment(
+    'ALLOW_DEV_ROUTES',
+    defaultValue: true,
+  );
+
+  /// Product conversations route remains disabled until explicitly approved.
+  static const bool enableConversationsRoute = bool.fromEnvironment(
+    'ENABLE_CONVERSATIONS_ROUTE',
+  );
+
+  /// Temporary development-only synthetic JWT. Never commit real values.
+  static const String syntheticAccessToken = String.fromEnvironment(
+    'SYNTHETIC_ACCESS_TOKEN',
+  );
+
   /// Sentry DSN for error tracking.
   static const String sentryDsn = String.fromEnvironment('SENTRY_DSN');
 

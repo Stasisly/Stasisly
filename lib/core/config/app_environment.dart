@@ -28,6 +28,11 @@ class AppEnvironment {
     required this.mode,
     this.supabaseUrl = '',
     this.supabaseAnonKey = '',
+    this.remoteBackendEnabled = false,
+    this.realAuthEnabled = false,
+    this.realDataEnabled = false,
+    this.devRoutesEnabled = true,
+    this.conversationsRouteEnabled = false,
   });
 
   factory AppEnvironment.fromEnvironment() {
@@ -35,12 +40,22 @@ class AppEnvironment {
       mode: parseMode(Env.appMode),
       supabaseUrl: Env.supabaseUrl,
       supabaseAnonKey: Env.supabaseAnonKey,
+      remoteBackendEnabled: Env.enableRemoteBackend,
+      realAuthEnabled: Env.enableRealAuth,
+      realDataEnabled: Env.enableRealData,
+      devRoutesEnabled: Env.allowDevRoutes,
+      conversationsRouteEnabled: Env.enableConversationsRoute,
     );
   }
 
   final AppRuntimeMode mode;
   final String supabaseUrl;
   final String supabaseAnonKey;
+  final bool remoteBackendEnabled;
+  final bool realAuthEnabled;
+  final bool realDataEnabled;
+  final bool devRoutesEnabled;
+  final bool conversationsRouteEnabled;
 
   bool get isLocal => mode == AppRuntimeMode.local;
   bool get isDemo => mode == AppRuntimeMode.demo;
@@ -49,11 +64,13 @@ class AppEnvironment {
   bool get isBackendRealLegacy => mode == AppRuntimeMode.backendReal;
   bool get isProduction => mode == AppRuntimeMode.production;
   bool get usesBackend => !(isLocal || isDemo);
-  bool get allowsRemoteSupabase => false;
-  bool get allowsRealAuth => false;
+  bool get allowsRemoteSupabase =>
+      isDevelopment && remoteBackendEnabled && !realDataEnabled;
+  bool get allowsRealAuth => allowsRemoteSupabase && realAuthEnabled;
   bool get allowsRealData => false;
   bool get allowsSyntheticData => !isProduction;
-  bool get allowsDevRoutes => isLocal || isDemo || isDevelopment;
+  bool get allowsDevRoutes =>
+      devRoutesEnabled && (isLocal || isDemo || isDevelopment);
   bool get allowsConversationsRoute => false;
   bool get requiresSecrets => usesBackend;
 
@@ -79,7 +96,7 @@ class AppEnvironment {
       );
     }
 
-    if (!backendActivationApproved) {
+    if (!backendActivationApproved && !allowsRemoteSupabase) {
       throw AppConfigurationException(
         '${_modeLabel()} bloqueado por ADR-006 hasta aprobar auth, RLS y pruebas.',
       );

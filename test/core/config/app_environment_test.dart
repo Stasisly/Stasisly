@@ -57,7 +57,7 @@ void main() {
       expect(demo.validateForStartup, returnsNormally);
     });
 
-    test('derived flags keep real capabilities blocked', () {
+    test('derived flags keep real capabilities blocked by default', () {
       const environments = [
         AppEnvironment(mode: AppRuntimeMode.local),
         AppEnvironment(mode: AppRuntimeMode.demo),
@@ -109,6 +109,171 @@ void main() {
 
       expect(environment.usesBackend, isTrue);
       expect(environment.allowsRemoteSupabase, isFalse);
+    });
+
+    test(
+      'development remote backend requires explicit gate and real data off',
+      () {
+        const blockedWithoutGate = AppEnvironment(
+          mode: AppRuntimeMode.development,
+          supabaseUrl: 'https://project.supabase.co',
+          supabaseAnonKey: 'public-test-key',
+        );
+        const allowed = AppEnvironment(
+          mode: AppRuntimeMode.development,
+          supabaseUrl: 'https://project.supabase.co',
+          supabaseAnonKey: 'public-test-key',
+          remoteBackendEnabled: true,
+          realAuthEnabled: true,
+        );
+        const blockedWithRealData = AppEnvironment(
+          mode: AppRuntimeMode.development,
+          supabaseUrl: 'https://project.supabase.co',
+          supabaseAnonKey: 'public-test-key',
+          remoteBackendEnabled: true,
+          realAuthEnabled: true,
+          realDataEnabled: true,
+        );
+
+        expect(blockedWithoutGate.allowsRemoteSupabase, isFalse);
+        expect(allowed.allowsRemoteSupabase, isTrue);
+        expect(allowed.allowsRealAuth, isTrue);
+        expect(allowed.allowsRealData, isFalse);
+        expect(blockedWithRealData.allowsRemoteSupabase, isFalse);
+        expect(blockedWithRealData.allowsRealAuth, isFalse);
+      },
+    );
+
+    test(
+      'remote backend gate does not open staging, backendReal or production',
+      () {
+        for (final mode in [
+          AppRuntimeMode.staging,
+          AppRuntimeMode.backendReal,
+          AppRuntimeMode.production,
+        ]) {
+          final environment = AppEnvironment(
+            mode: mode,
+            supabaseUrl: 'https://project.supabase.co',
+            supabaseAnonKey: 'public-test-key',
+            remoteBackendEnabled: true,
+            realAuthEnabled: true,
+          );
+
+          expect(environment.allowsRemoteSupabase, isFalse);
+          expect(environment.allowsRealAuth, isFalse);
+        }
+      },
+    );
+
+    test(
+      'incomplete development backend gates fail closed without demo fallback',
+      () {
+        const cases = [
+          AppEnvironment(
+            mode: AppRuntimeMode.development,
+            supabaseUrl: 'https://project.supabase.co',
+            supabaseAnonKey: 'public-test-key',
+            remoteBackendEnabled: false,
+            realAuthEnabled: true,
+          ),
+          AppEnvironment(
+            mode: AppRuntimeMode.development,
+            supabaseUrl: 'https://project.supabase.co',
+            supabaseAnonKey: 'public-test-key',
+            remoteBackendEnabled: true,
+            realAuthEnabled: true,
+            realDataEnabled: true,
+          ),
+        ];
+
+        for (final environment in cases) {
+          expect(environment.isDemo, isFalse);
+          expect(environment.allowsRemoteSupabase, isFalse);
+          expect(environment.allowsRealAuth, isFalse);
+        }
+      },
+    );
+
+    test('missing real auth gate blocks auth without falling back to demo', () {
+      const environment = AppEnvironment(
+        mode: AppRuntimeMode.development,
+        supabaseUrl: 'https://project.supabase.co',
+        supabaseAnonKey: 'public-test-key',
+        remoteBackendEnabled: true,
+        realAuthEnabled: false,
+      );
+
+      expect(environment.isDemo, isFalse);
+      expect(environment.allowsRemoteSupabase, isTrue);
+      expect(environment.allowsRealAuth, isFalse);
+    });
+
+    test('development can disable dev routes without falling back to demo', () {
+      const environment = AppEnvironment(
+        mode: AppRuntimeMode.development,
+        supabaseUrl: 'https://project.supabase.co',
+        supabaseAnonKey: 'public-test-key',
+        remoteBackendEnabled: true,
+        realAuthEnabled: true,
+        devRoutesEnabled: false,
+      );
+
+      expect(environment.isDemo, isFalse);
+      expect(environment.allowsRemoteSupabase, isTrue);
+      expect(environment.allowsRealAuth, isTrue);
+      expect(environment.allowsDevRoutes, isFalse);
+    });
+
+    test('conversations route flag is ignored until a future package', () {
+      const environments = [
+        AppEnvironment(
+          mode: AppRuntimeMode.local,
+          conversationsRouteEnabled: true,
+        ),
+        AppEnvironment(
+          mode: AppRuntimeMode.demo,
+          conversationsRouteEnabled: true,
+        ),
+        AppEnvironment(
+          mode: AppRuntimeMode.development,
+          conversationsRouteEnabled: true,
+        ),
+        AppEnvironment(
+          mode: AppRuntimeMode.staging,
+          conversationsRouteEnabled: true,
+        ),
+        AppEnvironment(
+          mode: AppRuntimeMode.production,
+          conversationsRouteEnabled: true,
+        ),
+      ];
+
+      for (final environment in environments) {
+        expect(environment.allowsConversationsRoute, isFalse);
+      }
+    });
+
+    test('staging and production never expose dev routes', () {
+      const environments = [
+        AppEnvironment(mode: AppRuntimeMode.staging, devRoutesEnabled: true),
+        AppEnvironment(mode: AppRuntimeMode.production, devRoutesEnabled: true),
+      ];
+
+      for (final environment in environments) {
+        expect(environment.allowsDevRoutes, isFalse);
+      }
+    });
+
+    test('development remote gate can pass startup validation', () {
+      const environment = AppEnvironment(
+        mode: AppRuntimeMode.development,
+        supabaseUrl: 'https://project.supabase.co',
+        supabaseAnonKey: 'public-test-key',
+        remoteBackendEnabled: true,
+      );
+
+      expect(environment.validateForStartup, returnsNormally);
     });
 
     test('backend-like modes without configuration are blocked explicitly', () {
@@ -187,6 +352,19 @@ void main() {
             contains('Production bloqueado'),
           ),
         ),
+      );
+    });
+
+    test('dev routes can be disabled explicitly', () {
+      const environment = AppEnvironment(
+        mode: AppRuntimeMode.development,
+        devRoutesEnabled: false,
+      );
+
+      expect(environment.allowsDevRoutes, isFalse);
+      expect(
+        const AppEnvironment(mode: AppRuntimeMode.development).allowsDevRoutes,
+        isTrue,
       );
     });
   });

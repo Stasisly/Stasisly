@@ -4,6 +4,7 @@ import 'package:stasisly/core/auth/session/application/secure_session_controller
 import 'package:stasisly/core/auth/session/application/secure_session_state.dart';
 import 'package:stasisly/core/auth/session/secure_session_token_provider.dart';
 import 'package:stasisly/core/config/app_environment.dart';
+import 'package:stasisly/core/config/env.dart';
 
 final demoSecureSessionTokenProvider = Provider<SecureSessionTokenProvider>((
   ref,
@@ -21,10 +22,25 @@ final unauthenticatedSecureSessionTokenProvider =
       return const UnauthenticatedSecureSessionTokenProvider();
     });
 
+final developmentSyntheticAccessTokenProvider = Provider<String>((ref) {
+  return Env.syntheticAccessToken;
+});
+
+final developmentSyntheticSecureSessionTokenProvider =
+    Provider<SecureSessionTokenProvider>((ref) {
+      return DevelopmentSyntheticSecureSessionTokenProvider(
+        accessToken: ref.watch(developmentSyntheticAccessTokenProvider),
+      );
+    });
+
 final secureSessionTokenProvider = Provider<SecureSessionTokenProvider>((ref) {
   final environment = ref.watch(appEnvironmentProvider);
   if (environment.isDemo) {
     return ref.watch(demoSecureSessionTokenProvider);
+  }
+
+  if (environment.allowsRealAuth) {
+    return ref.watch(developmentSyntheticSecureSessionTokenProvider);
   }
 
   // ADR-006/ADR-007: backend and production auth remain blocked until a

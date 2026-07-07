@@ -56,6 +56,48 @@ class BackendBlockedSecureSessionTokenProvider
   Future<void> clearSession() async {}
 }
 
+class DevelopmentSyntheticSecureSessionTokenProvider
+    implements SecureSessionTokenProvider {
+  const DevelopmentSyntheticSecureSessionTokenProvider({
+    required this.accessToken,
+  });
+
+  final String accessToken;
+
+  @override
+  Future<SecureSessionAuthState> currentAuthState() async {
+    if (!_isJwtLike(accessToken)) {
+      return const SecureSessionAuthState.misconfigured();
+    }
+    return const SecureSessionAuthState.authenticated(
+      subjectId: 'development-synthetic-user',
+    );
+  }
+
+  @override
+  Future<SecureSessionTokenResult> getAccessToken() async {
+    if (!_isJwtLike(accessToken)) {
+      return const SecureSessionTokenResult.misconfigured();
+    }
+    return SecureSessionTokenResult.success(accessToken.trim());
+  }
+
+  @override
+  Future<SecureSessionTokenResult> refreshIfNeeded() async {
+    return getAccessToken();
+  }
+
+  @override
+  Future<void> clearSession() async {}
+}
+
+bool _isJwtLike(String value) {
+  final token = value.trim();
+  if (token.isEmpty || token.contains(RegExp(r'\s'))) return false;
+  final parts = token.split('.');
+  return parts.length == 3 && parts.every((part) => part.isNotEmpty);
+}
+
 class UnauthenticatedSecureSessionTokenProvider
     implements SecureSessionTokenProvider {
   const UnauthenticatedSecureSessionTokenProvider();
