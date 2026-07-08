@@ -711,6 +711,16 @@ Hasta aprobar e implementar un alcance específico posterior, el estado se
 mantiene como prototipo/demo. ADR-006 propuesto no autoriza auth, Supabase,
 migraciones, RLS, backend real, producción ni datos reales.
 
+La futura ruta producto `/conversations` queda regulada por:
+
+```text
+docs/stasisly_definition/adr/ADR-008-conversations-product-route.md
+```
+
+ADR-008 no registra `/conversations` ni autoriza implementación. Define los
+criterios previos de auth producto, datos reales, staging, rollback,
+observabilidad, fixture sintético y separación dev-shell/producto.
+
 ## 25. Relación con documentos
 
 Documentos relacionados:
@@ -744,4 +754,5 @@ Este documento debe mantenerse alineado con:
 - comités;
 - ADR-001, ADR-002, ADR-003, ADR-004 y ADR-005 aceptados;
 - ADR-006 propuesto, pendiente de aprobación;
+- ADR-008 propuesta para futura ruta producto `/conversations`;
 - auditoría real del código.

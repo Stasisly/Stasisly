@@ -637,3 +637,15 @@ ADR-006 propone el **Paquete 2 — Identidad, autorización y RLS base**, dividi
 en subpaquetes 2A–2E. Su existencia no autoriza implementación. Hasta aprobar un
 alcance posterior no deben conectarse datos reales, restaurarse auth,
 implementarse RLS, activarse backend real ni ampliarse funcionalidades.
+
+La futura ruta producto `/conversations` se regula conceptualmente en:
+
+```text
+docs/stasisly_definition/adr/ADR-008-conversations-product-route.md
+```
+
+ADR-008 no registra la ruta ni autoriza implementación. Define que
+`/conversations` debe separarse de la dev-shell, no usar fixture development,
+no depender de token sintético, no caer a demo ante errores reales y no abrirse
+antes de decidir auth producto, datos reales, staging, rollback y
+cleanup/retention del fixture.
