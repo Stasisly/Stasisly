@@ -265,6 +265,61 @@ de Product Surface no debe contener dev-shell. Un entorno development no debe
 usar datos reales sin política explícita. Un admin production no debe actuar
 como bypass informal de RLS, auditoría o API segura.
 
+## Extensión futura — Wearables / Smartwatch Companion Apps
+
+Stasisly contempla a futuro una extensión companion para relojes inteligentes,
+incluyendo Apple Watch, Android/Wear OS y Garmin.
+
+Esta extensión no sustituye Product Surface, Wizard/Development Surface ni
+Admin/Engine Surface. No se considera una cuarta superficie operativa principal
+en esta fase. Debe entenderse como una extensión futura y limitada de Product
+Surface orientada al usuario final.
+
+Capacidades futuras posibles, sin cerrar alcance final:
+
+- consultar métricas personales permitidas;
+- recibir alertas o recordatorios;
+- registrar hábitos simples;
+- acompañar entrenamientos;
+- acompañar wellness;
+- acompañar descanso o sueño;
+- mostrar estados resumidos;
+- sincronizar señales permitidas con la app principal.
+
+La extensión wearable no debe:
+
+- contener lógica sensible crítica;
+- acceder directamente a Supabase;
+- usar `service_role`;
+- exponer Admin/Engine;
+- exponer Wizard/Development;
+- exponer agentes internos de desarrollo;
+- exponer agentes Admin/Engine;
+- mostrar datos de otros usuarios;
+- saltarse permisos de Product Surface;
+- sustituir la app principal;
+- convertirse en superficie admin;
+- convertirse en superficie de desarrollo;
+- usar datos reales sin política específica;
+- activar sensores o permisos de salud sin ADR específica.
+
+Las futuras apps de reloj deberán depender de contratos backend seguros,
+permisos de Product Surface, sincronización controlada y políticas específicas
+de privacidad, especialmente si se usan datos de salud, entrenamiento, sueño o
+wellness.
+
+La extensión wearable no puede acceder a Wizard/Development Surface ni a
+Admin/Engine Surface.
+
+Solo podría interactuar con especialistas producto autorizados si una ADR
+futura lo aprueba. No puede exponer agentes internos de desarrollo, no puede
+exponer agentes Admin/Engine y no puede usar `specialist_catalog` fuera de las
+reglas de Product Surface.
+
+Wearables no autorizan una implementación de `/conversations` en reloj.
+Cualquier conversación, notificación o interacción conversacional desde reloj
+requerirá ADR o paquete específico posterior.
+
 ## Relación con agentes internos, especialistas producto y agentes Admin/Engine
 
 Agentes internos de desarrollo:

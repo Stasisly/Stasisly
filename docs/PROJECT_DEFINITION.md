@@ -676,3 +676,9 @@ ADR-009 distingue tres superficies: Product Surface, Wizard/Development Surface
 y Admin/Engine Surface. Esta frontera impide mezclar app cliente, dev-shell,
 admin, agentes internos de desarrollo, especialistas producto y agentes
 Admin/Engine.
+
+ADR-009 contempla también una futura extensión companion para wearables como
+Apple Watch, Android/Wear OS y Garmin. Dicha extensión queda clasificada como
+extensión limitada de Product Surface, no como cuarta superficie operativa, y
+requiere ADR o paquete específico antes de cualquier implementación, permisos
+de salud, sensores o conversación desde reloj.

@@ -739,6 +739,12 @@ admin o dev-shell para evitar contaminación entre app cliente, herramientas de
 desarrollo, panel operativo, agentes internos, especialistas producto y agentes
 Admin/Engine.
 
+ADR-009 añade además una extensión futura de Product Surface para wearables
+companion, incluyendo Apple Watch, Android/Wear OS y Garmin. Esta extensión no
+es una cuarta superficie principal, no autoriza integración técnica y requerirá
+ADR o paquete específico antes de cualquier implementación, permisos de salud,
+sensores o interacción conversacional desde reloj.
+
 ## 25. Relación con documentos
 
 Documentos relacionados:
