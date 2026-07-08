@@ -941,6 +941,419 @@ garantizado sin backup. No tocar `auth.users` redujo el riesgo. Si se necesita
 fixture de sesiones/mensajes de nuevo, debe recrearse explicitamente en un
 paquete posterior.
 
+## Decision 2B-AG82 — siguiente frontera tras cleanup fixture
+
+Estado: `CONVERSATIONS IMPLEMENTATION PLAN DECISION READY`.
+
+AG82 no implementa codigo, no registra `/conversations`, no toca Supabase, no
+ejecuta SQL, no recrea fixture, no activa staging/production y no usa datos
+reales. Su objetivo es decidir la siguiente frontera tras cerrar y publicar:
+
+- baseline dev-only;
+- ADR-008 `/conversations`;
+- cleanup parcial de sesiones/mensajes sinteticos;
+- documentacion del cleanup.
+
+### Opciones evaluadas
+
+#### Opcion A — preparar implementacion futura de `/conversations`
+
+Recomendada como siguiente frontera, pero solo como plan tecnico. La razon es
+que ADR-008 ya fija la frontera normativa, el fixture de conversaciones
+sinteticas fue eliminado y el siguiente riesgo es abrir producto sin paquete de
+implementacion descompuesto.
+
+El siguiente paquete debe preparar alcance exacto, rutas, archivos, providers,
+contratos backend, gates de entorno, pruebas, rollback y criterios de stop
+antes de escribir codigo.
+
+#### Opcion B — estrategia staging
+
+Staging sigue no autorizado. Requiere secrets separados, auth separada,
+politica de datos, plan de promocion, rollback y separacion de development.
+
+Decision: diferir staging hasta que exista plan de implementacion producto o un
+paquete especifico de staging. Staging sera obligatorio antes de production,
+pero no bloquea preparar el plan tecnico de `/conversations`.
+
+#### Opcion C — recrear fixture controlado
+
+Recrear fixture puede ser util para pruebas dev-only futuras, pero ahora
+reintroduciria conversaciones sinteticas justo despues de limpiarlas.
+
+Decision: no recomendado ahora. Solo debe hacerse si una prueba concreta lo
+exige y con paquete separado, datos claramente sinteticos y rollback definido.
+
+#### Opcion D — hardening adicional
+
+El hardening dev-only ya quedo cerrado. Si aparecen gaps, deben integrarse como
+tests obligatorios del paquete `/conversations`.
+
+Decision: no abrir como frente separado salvo hallazgo concreto.
+
+#### Opcion E — otro frente tecnico
+
+No se detecta una frontera mas prudente que preparar el plan de implementacion
+de `/conversations`. Cualquier alternativa debe justificar por que reduce mas
+riesgo que el plan producto.
+
+### Recomendacion final
+
+```text
+Recomendacion: A — preparar implementacion futura de /conversations bajo ADR-008,
+sin codigo todavia.
+Motivo: baseline dev-only, ADR-008 y cleanup fixture ya estan cerrados; antes de
+codigo hace falta un paquete tecnico exacto que evite mezclar dev-shell,
+fixture, auth incompleta, rutas heredadas o datos reales.
+Riesgo: abrir producto sin descomponer rutas, gates, auth, errores, rollback y
+tests.
+Siguiente paquete: 2B-AG83 — preparar plan de implementacion /conversations
+producto.
+```
+
+### Criterios para 2B-AG83
+
+AG83 debe ser plan tecnico, no implementacion. Debe definir como minimo:
+
+- alcance exacto de `/conversations`;
+- rutas permitidas y rutas bloqueadas;
+- archivos Flutter permitidos y prohibidos;
+- providers, controllers, repositories y datasources permitidos;
+- contratos backend permitidos;
+- estado de auth requerido;
+- flags y gates de entorno;
+- UI minima y estados de error;
+- no fallback demo;
+- no token sintetico;
+- no fixture como producto;
+- no `service_role` cliente;
+- no Flutter directo a tablas;
+- no `userId` ni `ownerUserId` desde UI;
+- tests obligatorios de rutas, guards, arquitectura, errores y ausencia de
+  rutas heredadas;
+- rollback;
+- criterios de stop;
+- orden de implementacion;
+- criterios de aprobacion para pasar a codigo.
+
+### Rollback AG82
+
+AG82 no tiene rollback tecnico si solo decide. Si se modifica documentacion,
+rollback documental mediante revert aprobado. No tocar DB. Producto sigue
+cerrado.
+
+## Plan 2B-AG83 — implementacion futura de `/conversations` producto
+
+Estado: `CONVERSATIONS IMPLEMENTATION PLAN READY`.
+
+AG83 es un plan tecnico. No implementa codigo, no registra `/conversations`,
+no modifica rutas Flutter, no toca Supabase, no ejecuta SQL, no crea datos, no
+usa datos reales, no activa staging/production, no despliega, no ejecuta
+migraciones y no hace push.
+
+### Cierre AG82
+
+AG82 queda aprobado y cerrado formalmente como
+`CONVERSATIONS IMPLEMENTATION PLAN DECISION READY`. AG83 queda autorizado solo
+para preparar el plan tecnico exacto de implementacion futura de
+`/conversations` producto.
+
+### Separacion agentes de desarrollo vs especialistas producto
+
+#### Agentes internos de desarrollo
+
+Los 43 agentes del equipo AAA de Stasisly son agentes internos de construccion,
+auditoria, arquitectura, seguridad, QA, producto, documentacion, gobierno y
+Customer Success. Viven en la documentacion del equipo, prompts internos,
+comites, ADRs y flujo de trabajo de Codex/Antigravity.
+
+No son especialistas producto.
+
+No pueden:
+
+- aparecer en la app como especialistas conversables;
+- aparecer en `public.specialist_catalog` producto;
+- ser seleccionables por usuarios finales;
+- abrir conversaciones producto;
+- formar parte del onboarding de usuario final;
+- mostrarse como participantes de una investigacion de usuario final;
+- filtrarse como prompts internos, nombres de archivos, roles de auditoria,
+  roles Codex, comites tecnicos o identidades de arquitectura/seguridad/QA.
+
+Ejemplos internos no producto:
+
+- Director de Proyecto;
+- Product Owner;
+- Arquitecto Backend;
+- Arquitecto Flutter;
+- Experto Seguridad;
+- Experto RLS;
+- QA Lead;
+- DevOps;
+- Legal/Compliance;
+- UX Research;
+- comites tecnicos;
+- Equipo AAA de desarrollo.
+
+#### Especialistas producto
+
+Los especialistas producto son agentes visibles o utilizables por el usuario
+final dentro de Stasisly. Pueden pertenecer a areas como Stasis, Salud,
+Nutricion, Entrenamiento y Wellness.
+
+Solo pueden aparecer en catalogo producto si cumplen un contrato sanitizado y
+si el backend los valida como publicados, accesibles por tier y seguros para
+usuario final.
+
+Pueden ser candidatos futuros:
+
+- Stasis;
+- Jefe de Salud;
+- Jefe de Nutricion;
+- Jefe de Entrenamiento;
+- Jefe de Wellness;
+- Especialista Sueno;
+- Especialista Mindfulness;
+- Especialista Fuerza;
+- Especialista Habitos;
+- Especialista Alimentacion.
+
+AG83 no define el catalogo final completo. Solo fija la frontera y el criterio.
+
+### Reglas de catalogo producto
+
+`public.specialist_catalog` producto solo puede contener especialistas producto
+sanitizados.
+
+No puede contener:
+
+- agentes del equipo de desarrollo;
+- comites internos;
+- roles de arquitectura;
+- roles de seguridad;
+- roles de QA;
+- roles DevOps;
+- roles legales internos;
+- prompts internos;
+- nombres de archivos internos;
+- roles Codex;
+- roles de auditoria documental;
+- identificadores sensibles.
+
+### Reglas de `/conversations`
+
+`/conversations` producto solo puede abrir conversaciones con:
+
+- sesiones propias del usuario autenticado;
+- especialistas producto autorizados;
+- especialistas publicados;
+- especialistas sanitizados;
+- especialistas accesibles por tier;
+- especialistas validados por backend.
+
+No puede abrir conversaciones con:
+
+- agentes del equipo de desarrollo;
+- especialistas no publicados;
+- roles internos;
+- fixtures sinteticos;
+- datos development;
+- usuarios de prueba;
+- rutas heredadas;
+- IDs internos enviados desde UI;
+- `userId` u `ownerUserId` enviados desde UI.
+
+### Plan de rutas
+
+Rutas futuras propuestas:
+
+- `/conversations`: lista producto de conversaciones propias;
+- `/conversations/:sessionId`: detalle futuro por `sessionId` propio, solo si
+  se autoriza expresamente en el paquete de implementacion.
+
+Rutas dev-shell separadas:
+
+- `/dev/chat/composed`;
+- `/dev/chat/session/:sessionId`.
+
+Rutas bloqueadas:
+
+- `/chat/:id` como `sessionId`, porque `:id` es `agentId` heredado;
+- `/orchestrator/chat`;
+- cualquier ruta que use chat heredado;
+- cualquier ruta que acepte `id` ambiguo, `agentId`, `userId` u `ownerUserId`
+  como entrada producto.
+
+AG83 no registra ninguna ruta. El registro real requiere paquete posterior.
+
+### Archivos permitidos y prohibidos futuros
+
+Archivos o zonas candidatas para una implementacion futura, a confirmar en el
+paquete de codigo:
+
+- routing producto;
+- pantalla `Conversations`;
+- pantalla `ConversationDetail`;
+- providers producto de conversaciones;
+- controllers o state producto;
+- repositories/datasources producto que llamen solo a backend seguro;
+- modelos sanitizados;
+- tests de route guards;
+- tests de auth gates;
+- tests de arquitectura.
+
+Archivos o zonas bloqueadas salvo autorizacion separada:
+
+- dev-shell como producto;
+- fixtures;
+- cliente directo de Supabase desde Flutter;
+- `SupabaseChatDataSource`;
+- chat heredado;
+- `service_role`;
+- migraciones;
+- Edge Functions;
+- staging/production config;
+- cualquier archivo de plataforma o CI si no esta justificado en el paquete.
+
+### Contratos backend permitidos
+
+`/conversations` producto solo puede consumir backend seguro existente o futuro:
+
+- `list-own-chat-sessions`;
+- `list-session-messages`;
+- `send-user-message`, si se autoriza composer;
+- `archive-own-chat-session`, solo si se autoriza archivar/restaurar;
+- `list-selectable-specialists`, si se necesita crear una sesion;
+- `create-own-chat-session`, solo si se autoriza crear sesiones producto.
+
+Condiciones obligatorias:
+
+- backend valida ownership;
+- UI no envia `userId`;
+- UI no envia `ownerUserId`;
+- UI no decide roles ni permisos;
+- UI no accede directo a tablas;
+- sin `service_role` cliente;
+- sin fallback demo ante error real;
+- errores de sesion ajena son opacos;
+- contadores y timestamps siguen siendo server-managed.
+
+### Auth y gates de entorno
+
+Gates minimos para implementacion futura:
+
+- producto requiere auth real definida y aprobada;
+- no `SYNTHETIC_ACCESS_TOKEN`;
+- no fixture development;
+- no fallback demo;
+- `backendReal` sigue siendo legacy/transitional y no base de producto;
+- `ENABLE_CONVERSATIONS_ROUTE` no basta por si solo: requiere auth, backend,
+  tests, rollback y aprobacion;
+- datos reales siguen bloqueados hasta politica separada;
+- staging y production no quedan autorizados por AG83.
+
+Estados que la UI debe tratar sin degradar a demo:
+
+- unauthenticated;
+- expired;
+- backendBlocked;
+- misconfigured;
+- contractViolation;
+- backendUnavailable;
+- forbidden/notFound opaco.
+
+### UI minima futura
+
+La futura UI minima debe cubrir:
+
+- lista de conversaciones propias;
+- estado vacio si no hay sesiones;
+- detalle por `sessionId` propio;
+- composer solo si `send-user-message` queda autorizado;
+- errores auth/backend visibles;
+- no mostrar agentes de desarrollo;
+- no mostrar IDs internos completos;
+- no exponer permisos internos;
+- no mostrar fixture como producto;
+- no mezclar dev-shell con producto.
+
+### Tests obligatorios futuros
+
+Tests minimos para pasar a codigo:
+
+- route guard de `/conversations`;
+- producto no registra ni reutiliza dev-shell;
+- dev-shell no contamina producto;
+- agentes de desarrollo no aparecen en `specialist_catalog` producto;
+- `/chat/:id` no se usa como `sessionId`;
+- `/orchestrator/chat` no se conecta al flujo seguro;
+- no `SupabaseChatDataSource`;
+- no Flutter directo a tablas;
+- no `service_role` cliente;
+- no `userId` ni `ownerUserId` enviados desde UI;
+- error auth no cae a demo;
+- fixture no aparece en producto;
+- ownership backend queda asumido por contrato y probado por respuestas
+  controladas;
+- staging/production no activan rutas incompletas;
+- la ruta puede desactivarse por gate/kill-switch si aplica.
+
+### Rollback futuro
+
+Rollback de implementacion futura:
+
+- desregistrar `/conversations`;
+- mantener dev-shell intacto;
+- no tocar datos como rollback primario;
+- no tocar Supabase si el cambio fue solo Flutter;
+- usar feature flag o kill-switch si aplica;
+- revertir commit si falla;
+- no usar force push sin autorizacion explicita.
+
+### Orden de implementacion futuro
+
+Orden recomendado:
+
+1. Commit/push del plan AG83.
+2. Paquete de skeleton route guards sin UI completa.
+3. Paquete de UI lista read-only.
+4. Paquete de detalle read-only.
+5. Paquete de `send-user-message` si se autoriza composer.
+6. Paquete de archive/restore si se autoriza.
+7. Hardening/tests.
+8. Estrategia staging antes de production.
+
+### Criterios para pasar a codigo
+
+No se puede pasar a implementacion hasta cumplir:
+
+- AG83 aprobado;
+- separacion agentes desarrollo/producto aprobada;
+- archivos permitidos/prohibidos definidos;
+- tests minimos definidos;
+- rollback definido;
+- criterios de stop definidos;
+- producto sigue sin datos reales;
+- staging/production siguen no autorizados;
+- no hay decision pendiente sobre auth/gates que haga inseguro registrar ruta.
+
+### Criterios de stop
+
+Detener cualquier paquete que derive de AG83 si:
+
+- se modifica codigo sin aprobacion;
+- se modifica `test/` sin aprobacion;
+- se modifica `supabase/` sin aprobacion;
+- se registra `/conversations` antes del paquete autorizado;
+- se toca producto real sin gates;
+- se ejecuta SQL, deploy o migracion;
+- se hace cleanup adicional;
+- se usan datos reales;
+- se toca staging/production;
+- se imprime secreto;
+- se mezclan agentes de desarrollo con especialistas producto;
+- se autoriza catalogo producto sin frontera sanitizada.
+
 ## Consecuencias
 
 Consecuencias positivas:

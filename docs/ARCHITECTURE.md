@@ -721,6 +721,24 @@ ADR-008 no registra `/conversations` ni autoriza implementación. Define los
 criterios previos de auth producto, datos reales, staging, rollback,
 observabilidad, fixture sintético y separación dev-shell/producto.
 
+ADR-008/AG83 fija además una separación normativa: los 43 agentes AAA de
+desarrollo son internos y no pueden aparecer en `specialist_catalog`,
+onboarding, UI ni `/conversations`. La ruta producto solo puede usar
+especialistas producto sanitizados, publicados, accesibles por tier y validados
+por backend.
+
+La frontera superior de superficies operativas queda propuesta en:
+
+```text
+docs/stasisly_definition/adr/ADR-009-operational-surfaces-product-wizard-admin-engine.md
+```
+
+ADR-009 separa Product Surface, Wizard/Development Surface y Admin/Engine
+Surface. Esta separación debe revisarse antes de registrar rutas producto,
+admin o dev-shell para evitar contaminación entre app cliente, herramientas de
+desarrollo, panel operativo, agentes internos, especialistas producto y agentes
+Admin/Engine.
+
 ## 25. Relación con documentos
 
 Documentos relacionados:

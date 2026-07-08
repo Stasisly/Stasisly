@@ -181,6 +181,21 @@ Reglas:
 - Los participantes relevantes de una investigación deben quedar visibles para
   el usuario.
 
+### Separación entre producto y equipo interno
+
+La jerarquía anterior describe agentes y especialistas de producto visibles o
+utilizables por usuarios finales. No describe el equipo interno de desarrollo.
+
+Los 43 agentes del equipo AAA definidos en `docs/stasisly_definition/` son
+agentes internos de construcción, auditoría, gobierno, arquitectura, seguridad,
+QA, producto y documentación. No son especialistas producto, no pueden aparecer
+en la app, no pueden ser seleccionables por usuarios finales y no pueden formar
+parte de `specialist_catalog` ni de `/conversations`.
+
+Un especialista producto solo puede entrar en catálogo o conversaciones si está
+sanitizado, publicado, autorizado por tier y validado por backend conforme a
+ADR-007 y ADR-008.
+
 ## 6. Equipo de desarrollo AAA
 
 El desarrollo se gobierna mediante 43 agentes IA organizados en 6 comités.
@@ -649,3 +664,15 @@ ADR-008 no registra la ruta ni autoriza implementación. Define que
 no depender de token sintético, no caer a demo ante errores reales y no abrirse
 antes de decidir auth producto, datos reales, staging, rollback y
 cleanup/retention del fixture.
+
+Antes de consolidar o implementar `/conversations`, la organización operativa
+del proyecto queda propuesta en:
+
+```text
+docs/stasisly_definition/adr/ADR-009-operational-surfaces-product-wizard-admin-engine.md
+```
+
+ADR-009 distingue tres superficies: Product Surface, Wizard/Development Surface
+y Admin/Engine Surface. Esta frontera impide mezclar app cliente, dev-shell,
+admin, agentes internos de desarrollo, especialistas producto y agentes
+Admin/Engine.
