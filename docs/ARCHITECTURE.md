@@ -745,6 +745,17 @@ es una cuarta superficie principal, no autoriza integración técnica y requerir
 ADR o paquete específico antes de cualquier implementación, permisos de salud,
 sensores o interacción conversacional desde reloj.
 
+Antes de implementar `/conversations`, el catálogo producto de especialistas
+conversables queda regulado conceptualmente por:
+
+```text
+docs/stasisly_definition/adr/ADR-010-product-specialists-catalog.md
+```
+
+ADR-010 no puebla `specialist_catalog` ni autoriza datos reales. Define qué es
+un especialista producto, qué familias quedan prohibidas, qué campos pueden
+exponerse y qué validaciones backend serán obligatorias.
+
 ## 25. Relación con documentos
 
 Documentos relacionados:

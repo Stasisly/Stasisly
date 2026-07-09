@@ -682,3 +682,15 @@ Apple Watch, Android/Wear OS y Garmin. Dicha extensión queda clasificada como
 extensión limitada de Product Surface, no como cuarta superficie operativa, y
 requiere ADR o paquete específico antes de cualquier implementación, permisos
 de salud, sensores o conversación desde reloj.
+
+Antes de implementar `/conversations`, el catálogo producto de especialistas
+conversables se define conceptualmente en:
+
+```text
+docs/stasisly_definition/adr/ADR-010-product-specialists-catalog.md
+```
+
+ADR-010 no crea especialistas reales ni puebla `specialist_catalog`. Define la
+frontera entre especialistas producto, agentes internos de desarrollo y agentes
+Admin/Engine, así como campos permitidos, campos prohibidos, publicación,
+tiers, validación backend y tests futuros.

@@ -1354,6 +1354,143 @@ Detener cualquier paquete que derive de AG83 si:
 - se mezclan agentes de desarrollo con especialistas producto;
 - se autoriza catalogo producto sin frontera sanitizada.
 
+## Decision 2B-AG89 — siguiente frontera tras superficies, conversations y wearables
+
+Estado: `PRODUCT SPECIALISTS CATALOG DECISION READY`.
+
+AG89 es una decision documental. No implementa codigo, no modifica tests, no
+toca `supabase/`, no registra `/conversations`, no crea rutas, no crea datos,
+no puebla `specialist_catalog`, no ejecuta SQL, no activa staging/production y
+no hace push.
+
+### Cierre AG88
+
+AG88 queda aprobado y cerrado formalmente como
+`SURFACES CONVERSATIONS WEARABLES PUSH COMPLETED`.
+
+Quedan publicados:
+
+- ADR-008 `/conversations`;
+- ADR-009 superficies operativas Product/Wizard/Admin;
+- extension futura wearables de Product Surface;
+- cleanup parcial de sesiones/mensajes sinteticos;
+- separacion de familias de agentes.
+
+### Evaluacion de opciones
+
+#### Opcion A — iniciar implementacion controlada de `/conversations`
+
+ADR-008 y ADR-009 ya fijan la frontera normativa, y el fixture de
+sesiones/mensajes sinteticos ya fue limpiado. Sin embargo, aun falta definir el
+catalogo producto real de especialistas conversables: que especialistas pueden
+aparecer, ser seleccionables, abrir sesiones, estar publicados, requerir tier y
+ser validados por backend.
+
+Decision: diferir implementacion de `/conversations` hasta definir catalogo
+producto conversable o gates minimos equivalentes.
+
+#### Opcion B — preparar estrategia staging
+
+Staging sigue siendo obligatorio antes de production. Requiere secrets, auth,
+politica de datos, rollback y separacion de entornos. Puede prepararse como
+frente separado, pero no resuelve por si solo que especialistas producto son
+conversables.
+
+Decision: diferir staging hasta que el catalogo producto y `/conversations`
+tengan un plan claro, salvo que se abra un paquete especifico de seguridad de
+entorno.
+
+#### Opcion C — preparar catalogo producto real de especialistas conversables
+
+Esta opcion define la frontera exacta entre:
+
+- especialistas producto;
+- agentes internos de desarrollo;
+- agentes Admin/Engine;
+- fixtures development;
+- catalogo sanitizado;
+- conversaciones producto.
+
+Debe decidir:
+
+- que es un especialista producto;
+- que especialistas iniciales son candidatos;
+- que campos sanitizados puede tener `specialist_catalog`;
+- que campos quedan prohibidos;
+- que roles internos quedan prohibidos;
+- que agentes Admin/Engine quedan prohibidos;
+- que especialistas pueden abrir conversacion;
+- que especialistas requieren tier;
+- como se relacionan Stasis, Salud, Nutricion, Entrenamiento y Wellness;
+- como se publica o despublica un especialista;
+- como valida backend;
+- como evitar contaminacion desde desarrollo/admin.
+
+Decision: recomendada como siguiente frontera.
+
+#### Opcion D — guards/tests adicionales
+
+Guards y tests son necesarios, pero pueden integrarse en el paquete del catalogo
+producto. No se recomienda abrirlos como frente separado salvo hallazgo urgente.
+
+Decision: integrar en AG90 salvo gap critico.
+
+#### Opcion E — otro frente tecnico
+
+No se identifica otro frente mas prudente que catalogo producto conversable
+antes de `/conversations`. Cualquier alternativa debe justificar por que reduce
+mas riesgo que definir primero que especialistas pueden conversar.
+
+### Recomendacion final
+
+Recomendacion: C — preparar catalogo producto real de especialistas
+conversables.
+
+Motivo: ya se separaron agentes internos de desarrollo, agentes Admin/Engine y
+especialistas producto. Antes de abrir `/conversations` hay que definir que
+especialistas producto pueden aparecer, ser seleccionables y abrir sesiones.
+Sin ese catalogo, `/conversations` podria implementarse sobre una frontera
+incompleta.
+
+Riesgo: medio-alto si se implementa `/conversations` antes de definir catalogo;
+bajo si AG90 permanece documental y no puebla datos reales.
+
+Siguiente paquete: `2B-AG90 — preparar ADR/plan catalogo producto especialistas
+conversables`.
+
+AG90 materializa esta decision en ADR-010:
+
+```text
+docs/stasisly_definition/adr/ADR-010-product-specialists-catalog.md
+```
+
+ADR-010 no implementa catalogo ni puebla datos. Define la frontera documental
+de especialistas producto conversables antes de cualquier implementacion de
+`/conversations`.
+
+### Criterios para AG90
+
+AG90 debe preparar una ADR o plan, sin implementar, que defina:
+
+1. frontera de especialista producto;
+2. especialistas iniciales candidatos;
+3. campos permitidos en `specialist_catalog`;
+4. campos prohibidos;
+5. relacion con areas Stasis, Salud, Nutricion, Entrenamiento y Wellness;
+6. relacion con `/conversations`;
+7. relacion con tiers/suscripcion;
+8. publicacion y despublicacion;
+9. validacion backend;
+10. tests obligatorios;
+11. criterios de stop;
+12. rollback;
+13. prohibicion de poblar datos reales en esa fase.
+
+### Rollback
+
+AG89 no tiene rollback tecnico. Si se modifica documentacion, revertir
+documentacion. No tocar DB. Producto sigue cerrado.
+
 ## Consecuencias
 
 Consecuencias positivas:

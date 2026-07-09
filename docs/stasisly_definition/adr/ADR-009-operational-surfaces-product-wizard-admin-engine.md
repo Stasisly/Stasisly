@@ -375,6 +375,16 @@ desarrollo ni agentes Admin/Engine.
 
 Solo debe contener especialistas producto sanitizados.
 
+La frontera documental del catálogo producto de especialistas conversables se
+define en:
+
+```text
+docs/stasisly_definition/adr/ADR-010-product-specialists-catalog.md
+```
+
+ADR-010 no puebla catálogo ni autoriza implementación; concreta qué puede y no
+puede entrar en `specialist_catalog` producto antes de `/conversations`.
+
 No debe contener:
 
 - agentes internos del equipo de desarrollo;
