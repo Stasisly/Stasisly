@@ -385,6 +385,16 @@ docs/stasisly_definition/adr/ADR-010-product-specialists-catalog.md
 ADR-010 no puebla catálogo ni autoriza implementación; concreta qué puede y no
 puede entrar en `specialist_catalog` producto antes de `/conversations`.
 
+Los guards y contratos que protegen esa frontera antes de schema, seeds o
+implementación se documentan en:
+
+```text
+docs/stasisly_definition/adr/ADR-011-product-specialists-catalog-guards-contracts.md
+```
+
+ADR-011 no implementa catálogo; traduce la separación Product/Wizard/Admin a
+reglas verificables para `specialist_catalog`.
+
 No debe contener:
 
 - agentes internos del equipo de desarrollo;

@@ -438,3 +438,54 @@ Resultado de revisión:
 - no se registra `/conversations`;
 - no se toca Supabase;
 - no se usan datos reales, staging ni production.
+
+## Decisión 2B-AG94 — siguiente frontera
+
+AG94 decide la siguiente frontera tras publicar ADR-010 en Git. La decisión es
+no implementar catálogo producto directamente todavía.
+
+Opciones evaluadas:
+
+1. Implementar catálogo producto directamente: no recomendado todavía, porque
+   faltan guards, contratos y tests que impidan contaminar Product Surface.
+2. Preparar guards/tests/contracts previos: recomendado como siguiente
+   frontera.
+3. Preparar schema/migración: necesario más adelante, pero debe venir después
+   de contratos y guards.
+4. Preparar seeds sintéticos: útil para development, pero debe venir después de
+   contratos y guards.
+5. Implementar `/conversations`: sigue diferido hasta que exista catálogo
+   producto seguro y validación backend suficiente.
+
+Recomendación:
+
+`2B-AG95 — preparar plan guards/contracts catálogo producto especialistas`.
+
+AG95 materializa esta recomendación en:
+
+```text
+docs/stasisly_definition/adr/ADR-011-product-specialists-catalog-guards-contracts.md
+```
+
+ADR-011 no implementa guards ni tests. Define el contrato público permitido, el
+contrato interno prohibido, los guards mínimos y el orden recomendado antes de
+schema, seeds, catálogo real o `/conversations`.
+
+AG95 debe definir, sin implementar todavía:
+
+- contrato público permitido para especialistas producto;
+- campos permitidos y campos prohibidos;
+- reglas anti `SELECT *`;
+- reglas anti agentes internos de desarrollo;
+- reglas anti agentes Admin/Engine;
+- reglas anti prompts internos;
+- reglas anti fixtures;
+- reglas anti datos reales;
+- validación backend esperada;
+- validación frontend esperada;
+- tests futuros obligatorios;
+- stops y rollback.
+
+AG94 no autoriza código, tests, SQL, migraciones, seeds, especialistas reales,
+poblado de `specialist_catalog`, registro de `/conversations`, conexión de
+producto, datos reales, staging ni production.

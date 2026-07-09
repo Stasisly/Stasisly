@@ -1468,6 +1468,17 @@ ADR-010 no implementa catalogo ni puebla datos. Define la frontera documental
 de especialistas producto conversables antes de cualquier implementacion de
 `/conversations`.
 
+La frontera de guards y contratos previa a cualquier catálogo real o ruta
+producto se desarrolla en:
+
+```text
+docs/stasisly_definition/adr/ADR-011-product-specialists-catalog-guards-contracts.md
+```
+
+ADR-011 no implementa `/conversations`; define reglas anti `SELECT *`, anti
+agentes internos/Admin, anti prompts, anti fixtures y anti catálogo roto antes
+de avanzar.
+
 ### Criterios para AG90
 
 AG90 debe preparar una ADR o plan, sin implementar, que defina:

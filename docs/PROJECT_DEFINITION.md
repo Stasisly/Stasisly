@@ -694,3 +694,14 @@ ADR-010 no crea especialistas reales ni puebla `specialist_catalog`. Define la
 frontera entre especialistas producto, agentes internos de desarrollo y agentes
 Admin/Engine, así como campos permitidos, campos prohibidos, publicación,
 tiers, validación backend y tests futuros.
+
+Antes de schema, seeds, catálogo real o `/conversations`, los guards y
+contratos mínimos quedan definidos conceptualmente en:
+
+```text
+docs/stasisly_definition/adr/ADR-011-product-specialists-catalog-guards-contracts.md
+```
+
+ADR-011 no implementa código, tests ni datos. Define allowlists, campos
+prohibidos, anti `SELECT *`, separación de superficies y fallo cerrado ante
+catálogo roto.

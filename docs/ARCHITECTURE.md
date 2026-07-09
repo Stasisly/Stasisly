@@ -756,6 +756,16 @@ ADR-010 no puebla `specialist_catalog` ni autoriza datos reales. Define qué es
 un especialista producto, qué familias quedan prohibidas, qué campos pueden
 exponerse y qué validaciones backend serán obligatorias.
 
+Los guards y contratos previos a schema, seeds, catálogo real o
+`/conversations` se definen conceptualmente en:
+
+```text
+docs/stasisly_definition/adr/ADR-011-product-specialists-catalog-guards-contracts.md
+```
+
+ADR-011 no implementa código ni tests; documenta allowlists, campos prohibidos,
+anti `SELECT *`, separación de superficies y fallo cerrado ante catálogo roto.
+
 ## 25. Relación con documentos
 
 Documentos relacionados:
