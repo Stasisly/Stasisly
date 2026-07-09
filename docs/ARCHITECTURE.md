@@ -766,6 +766,17 @@ docs/stasisly_definition/adr/ADR-011-product-specialists-catalog-guards-contract
 ADR-011 no implementa código ni tests; documenta allowlists, campos prohibidos,
 anti `SELECT *`, separación de superficies y fallo cerrado ante catálogo roto.
 
+La jerarquía transversal de agentes Product y Admin/Engine queda propuesta en:
+
+```text
+docs/stasisly_definition/adr/ADR-012-agent-hierarchy-product-admin-engine.md
+```
+
+ADR-012 no crea agentes reales ni datos. Define que Product Surface y
+Admin/Engine Surface deben evitar listas planas y organizarse con coordinador,
+jefes de departamento/rama, especialistas, permisos por nivel, escalado,
+bloqueo y trazabilidad.
+
 ## 25. Relación con documentos
 
 Documentos relacionados:
@@ -800,4 +811,5 @@ Este documento debe mantenerse alineado con:
 - ADR-001, ADR-002, ADR-003, ADR-004 y ADR-005 aceptados;
 - ADR-006 propuesto, pendiente de aprobación;
 - ADR-008 propuesta para futura ruta producto `/conversations`;
+- ADR-012 propuesta para jerarquía de agentes Product/Admin-Engine;
 - auditoría real del código.

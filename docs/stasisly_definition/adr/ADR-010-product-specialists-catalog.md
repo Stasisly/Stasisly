@@ -405,6 +405,14 @@ ADR-009 separa Product Surface, Wizard/Development Surface y Admin/Engine
 Surface. ADR-010 aplica esa separación al catálogo producto y evita mezclar las
 tres familias de agentes.
 
+## Relación con ADR-012
+
+ADR-012 propone que Product Surface y Admin/Engine Surface usen jerarquías de
+agentes, no listas planas. Para ADR-010, esto significa que
+`specialist_catalog` producto podrá representar una jerarquía producto solo si
+un paquete posterior lo aprueba, y nunca podrá mezclar agentes internos de
+desarrollo ni agentes Admin/Engine.
+
 ## Estado de implementación
 
 No implementado.

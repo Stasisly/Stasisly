@@ -395,6 +395,17 @@ docs/stasisly_definition/adr/ADR-011-product-specialists-catalog-guards-contract
 ADR-011 no implementa catálogo; traduce la separación Product/Wizard/Admin a
 reglas verificables para `specialist_catalog`.
 
+La jerarquía normativa de agentes Product y Admin/Engine queda propuesta en:
+
+```text
+docs/stasisly_definition/adr/ADR-012-agent-hierarchy-product-admin-engine.md
+```
+
+ADR-012 no implementa agentes, catálogo ni rutas. Define que Product Surface y
+Admin/Engine Surface deben organizar sus agentes mediante coordinador, jefes de
+departamento/rama y especialistas, evitando listas planas y manteniendo la
+separación entre superficies.
+
 No debe contener:
 
 - agentes internos del equipo de desarrollo;

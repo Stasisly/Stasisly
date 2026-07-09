@@ -705,3 +705,15 @@ docs/stasisly_definition/adr/ADR-011-product-specialists-catalog-guards-contract
 ADR-011 no implementa código, tests ni datos. Define allowlists, campos
 prohibidos, anti `SELECT *`, separación de superficies y fallo cerrado ante
 catálogo roto.
+
+La jerarquía normativa de agentes Product Surface y Admin/Engine Surface queda
+propuesta en:
+
+```text
+docs/stasisly_definition/adr/ADR-012-agent-hierarchy-product-admin-engine.md
+```
+
+ADR-012 no crea agentes reales ni puebla `specialist_catalog`. Define que las
+familias de agentes de Product y Admin/Engine deben organizarse con
+coordinador, jefes de departamento/rama y especialistas, evitando listas planas
+y manteniendo separadas las superficies.

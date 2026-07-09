@@ -422,6 +422,13 @@ ADR-010 define qué es el catálogo producto de especialistas conversables.
 ADR-011 define cómo protegerlo antes de schema, seeds, datos reales o rutas
 producto.
 
+## Relación con ADR-012
+
+ADR-012 propone la jerarquía conceptual de agentes Product y Admin/Engine. Para
+ADR-011, los guards y contratos futuros deben proteger tambien esa jerarquía:
+coordinadores, jefes de departamento y especialistas no pueden saltarse
+allowlists, permisos, superficies, fallo cerrado ni contratos públicos.
+
 ## Estado de implementación
 
 No implementado.
