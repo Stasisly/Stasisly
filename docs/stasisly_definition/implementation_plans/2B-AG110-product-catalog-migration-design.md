@@ -464,3 +464,52 @@ AG110 no autoriza:
 ```text
 PRODUCT CATALOG MIGRATION DESIGN COMPLETED_AND_PUSHED
 ```
+
+## Implementacion local preparada en 2B-AG111
+
+AG111 materializa este diseño como migracion local:
+
+```text
+supabase/migrations/00008_prepare_product_catalog_schema.sql
+```
+
+La migracion queda preparada para ejecucion y validacion local futura, pero AG111
+no la aplica contra remoto, no ejecuta `db push`, no ejecuta
+`migration up --linked`, no crea seeds, no puebla `specialist_catalog` y no
+registra `/conversations`.
+
+Decisiones concretas de AG111:
+
+- mantiene `specialist_catalog` como tabla backend-only y deny-by-default;
+- mantiene `public.specialists` y `public.specialist_catalog` con RLS activo;
+- no crea policies permisivas para `anon` ni `authenticated`;
+- revoca privilegios directos cliente sobre `specialist_catalog`;
+- usa `display_name` existente como nombre publico de producto;
+- introduce `slug`, `subcategory`, `public_capabilities`,
+  `publication_status`, `supported_surfaces`, `locale`, `public_metadata`,
+  `hierarchy_role`, `parent_catalog_id`, `is_conversable`, `published_at` y
+  `unpublished_at`;
+- conserva `specialist_id` como relacion interna backend-only;
+- mantiene `short_description`, `product_area`, `availability_status`,
+  `access_tier`, `sort_order`, `created_at` y `updated_at`;
+- restringe `supported_surfaces` a `ARRAY['product']` para impedir mezcla con
+  Admin/Engine o Wizard/Development en esta primera superficie;
+- normaliza `access_tier = 'premium'` a `pro` para alinear el schema futuro;
+- anade constraints e indices para listado backend futuro;
+- anade trigger local para mantener `updated_at` sin `SECURITY DEFINER`.
+
+Validacion pendiente para paquete futuro:
+
+- aplicar la migracion en Supabase local;
+- ejecutar pruebas SQL/pgTAP especificas de constraints, grants, policies, RLS,
+  indices y trigger;
+- probar rollback local/documentado;
+- confirmar que no quedan policies cliente ni grants directos;
+- confirmar que el contrato Flutter publico sigue limitado a la allowlist
+  aprobada.
+
+Readiness de AG111:
+
+```text
+PRODUCT CATALOG LOCAL MIGRATION PREPARED
+```
