@@ -464,3 +464,75 @@ Resultado de revisión:
 - no se registra `/conversations`;
 - no se toca Supabase;
 - no se usan datos reales, staging ni production.
+
+## Decisión 2B-AG103 — siguiente frontera tras jerarquía Product/Admin-Engine
+
+AG103 se ejecuta después de publicar ADR-012. La decisión es no implementar
+tests/guards directamente todavía.
+
+Opciones evaluadas:
+
+1. Implementar tests/guards directamente: no recomendado todavía. ADR-010,
+   ADR-011 y ADR-012 ya fijan la dirección, pero aún falta un plan técnico que
+   separe capas, archivos, assertions, comandos, stops y rollback.
+2. Preparar plan técnico detallado de tests/guards: recomendado. Es la frontera
+   más segura antes de tocar `test/`, `lib/`, `supabase/`, schema, seeds,
+   catálogo real o `/conversations`.
+3. Preparar schema/migración: necesario más adelante si el esquema actual no
+   cubre el contrato, pero debe venir después del plan de tests/guards.
+4. Preparar seeds sintéticos: útil para development, pero debe venir después de
+   cerrar tests/guards y contrato técnico.
+5. Avanzar a `/conversations`: diferido. Depende de catálogo seguro, guards
+   implementados, validación backend y especialistas sintéticos/controlados.
+
+Recomendación:
+
+```text
+2B-AG104 — preparar plan técnico implementación tests/guards catálogo producto
+```
+
+AG104 debe definir, sin implementar todavía:
+
+- capas de guards;
+- tests de arquitectura;
+- tests de contrato backend;
+- tests de frontera frontend/Product;
+- tests de route guards;
+- tests de ausencia de Supabase directo;
+- tests de ausencia de `service_role` en cliente;
+- tests anti `SELECT *`;
+- tests anti agentes internos de desarrollo;
+- tests anti agentes Admin/Engine;
+- tests anti prompts y campos prohibidos;
+- tests de catálogo roto y fallo cerrado;
+- tests de compatibilidad con jerarquía Product/Admin de ADR-012;
+- archivos permitidos;
+- comandos permitidos;
+- stops;
+- rollback;
+- prohibición de poblar `specialist_catalog`;
+- prohibición de Supabase remoto y datos reales.
+
+AG103 no implementa código, no crea tests, no toca Supabase, no ejecuta SQL, no
+puebla `specialist_catalog`, no crea agentes reales ni especialistas reales, no
+registra `/conversations`, no usa datos reales, no toca staging/production y no
+hace push.
+
+## Plan 2B-AG104 — implementación futura de tests/guards
+
+El plan técnico documental de implementación futura queda definido en:
+
+```text
+docs/stasisly_definition/implementation_plans/2B-AG104-product-catalog-tests-guards-plan.md
+```
+
+AG104 no implementa tests ni código. Su función es separar capas, assertions,
+archivos permitidos, comandos permitidos, criterios de stop y rollback antes de
+autorizar cualquier cambio en `test/`, `lib/`, `supabase/`, schema, seeds,
+catálogo real o `/conversations`.
+
+Readiness documental:
+
+```text
+PRODUCT CATALOG TESTS GUARDS TECHNICAL PLAN READY
+```
