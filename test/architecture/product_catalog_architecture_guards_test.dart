@@ -1,0 +1,155 @@
+import 'dart:io';
+
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
+  final productCatalogDirectory = Directory('lib/features/specialists');
+
+  Iterable<File> dartFilesUnder(Directory directory) {
+    return directory
+        .listSync(recursive: true)
+        .whereType<File>()
+        .where((file) => file.path.endsWith('.dart'));
+  }
+
+  String routeSlice(String routesSource, String path) {
+    final start = routesSource.indexOf("path: '$path'");
+    expect(start, isNonNegative, reason: 'Missing route $path');
+
+    final remaining = routesSource.substring(start + 1);
+    final nextRoute = remaining.indexOf('GoRoute(');
+    final nextSpread = remaining.indexOf('..._devOnlyChatMessageRoutes');
+    final candidates = [
+      if (nextRoute != -1) nextRoute,
+      if (nextSpread != -1) nextSpread,
+    ]..sort();
+    if (candidates.isEmpty) return routesSource.substring(start);
+    return routesSource.substring(start, start + 1 + candidates.first);
+  }
+
+  test('product catalog has no direct Supabase, secrets or SQL coupling', () {
+    final files = dartFilesUnder(productCatalogDirectory).toList();
+
+    expect(files, isNotEmpty);
+    for (final file in files) {
+      final source = file.readAsStringSync();
+      for (final forbidden in [
+        'supabase_flutter',
+        'Supabase.instance',
+        'functions.invoke',
+        'from(',
+        'rpc(',
+        'select=*',
+        'SELECT *',
+        'service_role',
+        'SUPABASE_SERVICE_ROLE_KEY',
+        'Authorization:',
+        'Bearer ',
+        'access_token',
+        'refresh_token',
+      ]) {
+        expect(source, isNot(contains(forbidden)), reason: file.path);
+      }
+    }
+  });
+
+  test('product catalog cannot fall back to demo for real backend failures', () {
+    final repository = File(
+      'lib/features/specialists/data/repositories/'
+      'selectable_specialists_repository_impl.dart',
+    ).readAsStringSync();
+    final provider = File(
+      'lib/features/specialists/presentation/providers/'
+      'selectable_specialists_providers.dart',
+    ).readAsStringSync();
+
+    expect(repository, isNot(contains('DemoSelectableSpecialistsRepository')));
+    expect(repository, isNot(contains('SelectableSpecialistsDemo')));
+    expect(repository, contains('SelectableSpecialistsNetworkError'));
+    expect(repository, contains('SelectableSpecialistsContractViolation'));
+    expect(repository, contains('SelectableSpecialistsUnexpectedError'));
+
+    expect(provider, contains('if (environment.isDemo)'));
+    expect(provider, contains('DemoSelectableSpecialistsRepository'));
+    expect(provider, contains('BackendBlockedSelectableSpecialistsRepository'));
+    expect(provider, isNot(contains('SelectableSpecialistsRepositoryImpl')));
+  });
+
+  test('product catalog does not use fixtures or synthetic auth material', () {
+    final files = dartFilesUnder(productCatalogDirectory).toList();
+
+    expect(files, isNotEmpty);
+    for (final file in files) {
+      final source = file.readAsStringSync();
+      for (final forbidden in [
+        'SYNTHETIC_ACCESS_TOKEN',
+        'SYNTHETIC_REFRESH_TOKEN',
+        'SYNTHETIC_USER_PASSWORD',
+        'DevelopmentSyntheticSecureSessionTokenProvider',
+        'secure_real_session_fixtures',
+        'fake-local-session-token',
+        'fixture',
+        'Fixture',
+      ]) {
+        expect(source, isNot(contains(forbidden)), reason: file.path);
+      }
+    }
+  });
+
+  test('legacy chat routes are not product catalog or session routes', () {
+    final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
+
+    expect(routesSource, isNot(contains("path: '/conversations'")));
+    expect(routesSource, isNot(contains("path: '/conversations/:sessionId'")));
+    expect(routesSource, contains("path: '/chat/:id'"));
+    expect(routesSource, contains("path: '/orchestrator/chat'"));
+
+    final inheritedChatRoute = routeSlice(routesSource, '/chat/:id');
+    final orchestratorChatRoute = routeSlice(routesSource, '/orchestrator/chat');
+
+    for (final routeSource in [inheritedChatRoute, orchestratorChatRoute]) {
+      for (final forbidden in [
+        'sessionId',
+        'selectableSpecialistId',
+        'SelectableSpecialist',
+        'selectableSpecialists',
+        'OwnChatMessagesSafeShell',
+        'OwnChatComposedSafeShell',
+        '/functions/v1/',
+        'Supabase.instance.client',
+        'service_role',
+      ]) {
+        expect(routeSource, isNot(contains(forbidden)), reason: forbidden);
+      }
+    }
+  });
+
+  test('product catalog cannot import Wizard, development or Admin surfaces', () {
+    final files = dartFilesUnder(productCatalogDirectory).toList();
+
+    expect(files, isNotEmpty);
+    for (final file in files) {
+      final source = file.readAsStringSync();
+      for (final forbidden in [
+        'features/admin',
+        'features/orchestrator',
+        'orchestrator_chat',
+        'OrchestratorPage',
+        'AdminDecision',
+        'AdminEngine',
+        'Admin/Engine',
+        'Wizard',
+        'Development Surface',
+        'Director de Proyecto',
+        'Product Owner',
+        'Revisor de Coherencia',
+        'Arquitecto Principal',
+        'AppSec',
+        'QA',
+        'DevOps',
+      ]) {
+        expect(source, isNot(contains(forbidden)), reason: file.path);
+      }
+    }
+  });
+}
