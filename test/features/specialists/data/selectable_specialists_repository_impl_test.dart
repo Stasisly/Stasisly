@@ -31,8 +31,14 @@ void main() {
         'specialist_id',
         'specialistId',
         'internalSpecialistId',
+        'userId',
+        'ownerUserId',
+        'owner',
         'prompt_template',
         'promptTemplate',
+        'prompt',
+        'systemPrompt',
+        'developerPrompt',
         'branch_id',
         'chief_id',
         'access_tier',
@@ -40,8 +46,26 @@ void main() {
         'is_published',
         'created_at',
         'updated_at',
+        'slug',
+        'product_area',
+        'subcategory',
+        'capabilities',
+        'sort_order',
+        'locale',
+        'supported_surfaces',
+        'metadata',
         'roles',
+        'role',
         'permissions',
+        'service_role',
+        'token',
+        'accessToken',
+        'refreshToken',
+        'logs',
+        'rawError',
+        'adminSurface',
+        'wizardSurface',
+        'developmentSurface',
       ]) {
         final extra = _validItem()..[forbidden] = 'forbidden';
         expect(
@@ -80,6 +104,21 @@ void main() {
         for (final item in [invalidArea, invalidState, demo]) {
           expect(
             await _read(_response(items: [item])),
+            isA<SelectableSpecialistsContractViolation>(),
+          );
+        }
+        for (final invalidProductSurfaceValue in [
+          _validItem()..['area'] = 'admin',
+          _validItem()..['area'] = 'wizard',
+          _validItem()..['area'] = 'development',
+          _validItem()..['area'] = 'engine',
+          _validItem()..['accessState'] = 'published',
+          _validItem()..['accessState'] = 'maintenance',
+          _validItem()..['accessState'] = 'coming_soon',
+          _validItem()..['accessState'] = 'internalOnly',
+        ]) {
+          expect(
+            await _read(_response(items: [invalidProductSurfaceValue])),
             isA<SelectableSpecialistsContractViolation>(),
           );
         }
@@ -127,6 +166,15 @@ void main() {
           ),
         ),
         isA<SelectableSpecialistsBackendBlocked>(),
+      );
+      expect(
+        await _read(
+          const SelectableSpecialistsRemoteResponse(
+            statusCode: 502,
+            errorCode: 'contractViolation',
+          ),
+        ),
+        isA<SelectableSpecialistsUnexpectedError>(),
       );
     });
 

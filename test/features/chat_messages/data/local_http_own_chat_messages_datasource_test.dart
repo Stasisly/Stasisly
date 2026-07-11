@@ -127,12 +127,16 @@ void main() {
       for (final forbidden in [
         'role',
         'userId',
+        'ownerUserId',
         'specialistId',
+        'agentId',
         'createdAt',
         'messageCount',
         'lastMessageAt',
         'attachments',
         'metadata',
+        'permissions',
+        'service_role',
       ]) {
         expect(request.body, isNot(containsPair(forbidden, anything)));
       }
@@ -159,9 +163,12 @@ void main() {
         for (final forbidden in [
           'role',
           'userId',
+          'ownerUserId',
           'specialistId',
+          'agentId',
           'attachments',
           'metadata',
+          'permissions',
         ]) {
           expect(request.body, isNot(containsPair(forbidden, anything)));
         }
@@ -186,10 +193,35 @@ void main() {
         'cursor': 'opaque-cursor',
       });
       expect(request.body, isNull);
-      for (final forbidden in ['userId', 'specialistId', 'role', 'owner']) {
+      for (final forbidden in [
+        'userId',
+        'ownerUserId',
+        'specialistId',
+        'agentId',
+        'role',
+        'owner',
+        'permissions',
+      ]) {
         expect(request.uri.queryParameters, isNot(contains(forbidden)));
       }
     });
+
+    test(
+      'send uses explicit sessionId and never accepts legacy route ids',
+      () async {
+        final transport = _FakeTransport(response: _sendSuccess());
+
+        await _source(
+          transport: transport,
+        ).sendUserMessage(sessionId: '/chat/:id', content: 'hola');
+
+        final request = transport.requests.single;
+        expect(request.uri.path, '/functions/v1/send-user-message');
+        expect(request.body, {'sessionId': '/chat/:id', 'content': 'hola'});
+        expect(request.body, isNot(containsPair('id', anything)));
+        expect(request.body, isNot(containsPair('agentId', anything)));
+      },
+    );
   });
 
   group('untrusted responses', () {
@@ -223,9 +255,16 @@ void main() {
       () async {
         for (final body in [
           _listBodyWithItem({'user_id': 'blocked'}),
+          _listBodyWithItem({'userId': 'blocked'}),
+          _listBodyWithItem({'ownerUserId': 'blocked'}),
           _listBodyWithItem({'specialist_id': 'blocked'}),
+          _listBodyWithItem({'specialistId': 'blocked'}),
+          _listBodyWithItem({'agentId': 'blocked'}),
           _listBodyWithItem({'attachments': <Object?>[]}),
           _listBodyWithItem({'metadata': <String, Object?>{}}),
+          _listBodyWithItem({'prompt': 'blocked'}),
+          _listBodyWithItem({'permissions': <Object?>[]}),
+          _listBodyWithItem({'rawError': 'blocked'}),
           _listBodyWithItem({'extra': true}),
           _listBodyWithItem({'role': 'chief_intervention'}),
           _listBodyWithItem({'createdAt': 'bad-date'}),

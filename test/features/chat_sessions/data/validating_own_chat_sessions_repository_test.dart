@@ -50,13 +50,26 @@ void main() {
         'specialistId',
         'internalSpecialistId',
         'prompt_template',
+        'prompt',
+        'systemPrompt',
         'access_tier',
         'availability_status',
+        'supported_surfaces',
         'roles',
+        'role',
         'permissions',
+        'service_role',
+        'token',
+        'accessToken',
+        'refreshToken',
+        'rawError',
         'ownerId',
+        'ownerUserId',
         'authUserId',
         'backendUserId',
+        'adminSurface',
+        'wizardSurface',
+        'developmentSurface',
         'unexpected',
       ]) {
         final payload = _session()..[field] = 'forbidden';
@@ -181,6 +194,44 @@ void main() {
 
       expect(result, isA<CreateOwnChatSessionSuccess>());
     });
+
+    test(
+      'create forwards only selectableSpecialistId to contract source',
+      () async {
+        final source = _FakeSource(
+          createResponse: OwnChatSessionsContractResponse(
+            statusCode: 201,
+            body: {'session': _session()},
+          ),
+        );
+
+        final result = await ValidatingOwnChatSessionsRepository(
+          source: source,
+        ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+
+        expect(result, isA<CreateOwnChatSessionSuccess>());
+        expect(source.receivedSelectableSpecialistId, 'catalog-public');
+      },
+    );
+
+    test(
+      'create rejects empty selectableSpecialistId before source access',
+      () async {
+        final source = _FakeSource();
+
+        final result = await ValidatingOwnChatSessionsRepository(
+          source: source,
+        ).createOwnChatSession(selectableSpecialistId: '   ');
+
+        expect(
+          result,
+          const CreateOwnChatSessionFailure(
+            OwnChatSessionsFailureType.invalidSelectableSpecialist,
+          ),
+        );
+        expect(source.receivedSelectableSpecialistId, isNull);
+      },
+    );
 
     test(
       'normalizes local PostgREST timestamps without timezone as UTC',
@@ -314,6 +365,7 @@ class _FakeSource implements OwnChatSessionsContractSource {
   final OwnChatSessionsContractResponse archiveResponse;
   final Exception? error;
   String? receivedCursor;
+  String? receivedSelectableSpecialistId;
 
   @override
   Future<OwnChatSessionsContractResponse> archiveOwnChatSession({
@@ -328,6 +380,7 @@ class _FakeSource implements OwnChatSessionsContractSource {
     required String selectableSpecialistId,
   }) async {
     if (error case final error?) throw error;
+    receivedSelectableSpecialistId = selectableSpecialistId;
     return createResponse;
   }
 

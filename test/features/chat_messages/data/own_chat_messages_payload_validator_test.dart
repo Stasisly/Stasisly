@@ -55,13 +55,17 @@ void main() {
     for (final forbidden in [
       'user_id',
       'userId',
+      'ownerUserId',
       'owner',
       'ownerId',
       'specialist_id',
       'specialistId',
+      'agentId',
       'internalSpecialistId',
       'prompt_template',
       'promptTemplate',
+      'systemPrompt',
+      'developerPrompt',
       'service_role',
       'serviceRole',
       'JWT',
@@ -69,6 +73,8 @@ void main() {
       'refreshToken',
       'attachments',
       'metadata',
+      'permissions',
+      'rawError',
       'extra',
     ]) {
       final payload = sentPayload();
@@ -88,9 +94,16 @@ void main() {
   test('list payload rejects internal item keys and extra top-level keys', () {
     for (final forbidden in [
       'user_id',
+      'userId',
+      'ownerUserId',
       'specialist_id',
+      'specialistId',
       'attachments',
       'metadata',
+      'prompt',
+      'permissions',
+      'service_role',
+      'rawError',
     ]) {
       final payload = pagePayload();
       ((payload['items']! as List<Object?>).single!

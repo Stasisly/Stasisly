@@ -86,6 +86,8 @@ void main() {
         expect(request.body, isNot(containsPair('userId', anything)));
         expect(request.body, isNot(containsPair('ownerUserId', anything)));
         expect(request.body, isNot(containsPair('specialistId', anything)));
+        expect(request.body, isNot(containsPair('role', anything)));
+        expect(request.body, isNot(containsPair('permissions', anything)));
       },
     );
 
@@ -141,6 +143,17 @@ void main() {
           'Content-Type',
         });
         expect(request.headers['Authorization'], 'Bearer local-jwt');
+        for (final forbidden in [
+          'userId',
+          'ownerUserId',
+          'role',
+          'permissions',
+          'specialistId',
+          'agentId',
+          'service_role',
+        ]) {
+          expect(request.body, isNot(containsPair(forbidden, anything)));
+        }
       },
     );
 

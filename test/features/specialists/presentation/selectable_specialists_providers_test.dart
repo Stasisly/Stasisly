@@ -24,8 +24,11 @@ void main() {
     );
   });
 
-  test('backend real and production remain explicitly blocked', () async {
+  test('every non-demo runtime remains explicitly backend blocked', () async {
     for (final mode in [
+      AppRuntimeMode.local,
+      AppRuntimeMode.development,
+      AppRuntimeMode.staging,
       AppRuntimeMode.backendReal,
       AppRuntimeMode.production,
     ]) {
@@ -45,5 +48,21 @@ void main() {
         isA<SelectableSpecialistsBackendBlocked>(),
       );
     }
+  });
+
+  test('provider boundary exposes no final authorization decision', () {
+    final container = ProviderContainer(
+      overrides: [
+        appEnvironmentProvider.overrideWithValue(
+          const AppEnvironment(mode: AppRuntimeMode.production),
+        ),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    final repository = container.read(selectableSpecialistsRepositoryProvider);
+
+    expect(repository, isA<BackendBlockedSelectableSpecialistsRepository>());
+    expect(repository, isNot(isA<DemoSelectableSpecialistsRepository>()));
   });
 }
