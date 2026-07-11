@@ -523,3 +523,20 @@ docs/stasisly_definition/implementation_plans/2B-AG109-product-catalog-schema-de
 AG109 no autoriza poblar `specialist_catalog`, crear especialistas reales,
 crear fixtures persistentes, registrar `/conversations`, ejecutar SQL ni crear
 migraciones.
+
+## Diseño 2B-AG110 — migración futura del catálogo producto
+
+AG110 prepara el diseño documental de la futura migración del catálogo producto:
+
+```text
+docs/stasisly_definition/implementation_plans/2B-AG110-product-catalog-migration-design.md
+```
+
+La decisión principal es mantener `specialist_catalog` como frontera
+backend-only, ampliar su schema futuro con campos producto sanitizados,
+superficie Product explícita, jerarquía compatible con ADR-012, constraints,
+índices y RLS/grants cerrados para cliente.
+
+AG110 no crea migración, no toca Supabase, no ejecuta SQL, no puebla
+`specialist_catalog`, no crea seeds, no registra `/conversations`, no conecta
+producto y no usa datos reales.

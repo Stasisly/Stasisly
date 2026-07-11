@@ -566,3 +566,25 @@ especialistas reales o `/conversations`.
 AG109 no toca Supabase, no ejecuta SQL, no crea migraciones, no puebla
 `specialist_catalog`, no registra `/conversations`, no usa datos reales y no
 toca staging/production.
+
+## Diseño 2B-AG110 — migración futura del catálogo producto
+
+AG110 define el diseño documental de la migración futura en:
+
+```text
+docs/stasisly_definition/implementation_plans/2B-AG110-product-catalog-migration-design.md
+```
+
+El diseño mantiene los guards de ADR-011:
+
+- contrato Product allowlisted;
+- cero `SELECT *`;
+- cero campos internos;
+- cero prompts;
+- cero fixtures/synthetic identifiers en Product;
+- cero mezcla Admin/Engine o Wizard/Development;
+- deny-by-default para clientes;
+- Edge Functions como única frontera de lectura producto.
+
+AG110 no implementa migración, no modifica Edge Functions, no cambia Flutter,
+no crea seeds y no habilita `/conversations`.

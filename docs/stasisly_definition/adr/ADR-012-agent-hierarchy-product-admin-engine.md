@@ -297,6 +297,22 @@ combinacion controlada. Esta ADR no decide esa implementacion.
 No se debe poblar `specialist_catalog` hasta aprobar schema, guards, datos y
 paquete especifico.
 
+## Relacion con diseño de migracion 2B-AG110
+
+AG110 prepara el diseño documental de la futura migracion del catalogo producto:
+
+```text
+docs/stasisly_definition/implementation_plans/2B-AG110-product-catalog-migration-design.md
+```
+
+Ese diseño propone que `specialist_catalog` pueda representar jerarquia Product
+mediante campos como `hierarchy_level` y `parent_catalog_id`, sin mezclar
+agentes internos de desarrollo ni agentes Admin/Engine.
+
+AG110 no decide todavia que jefes de rama sean conversables, no crea agentes
+reales, no puebla `specialist_catalog`, no registra `/conversations`, no toca
+Supabase y no ejecuta SQL.
+
 ## Relacion con /conversations
 
 Product `/conversations` podra usar especialistas producto autorizados por
