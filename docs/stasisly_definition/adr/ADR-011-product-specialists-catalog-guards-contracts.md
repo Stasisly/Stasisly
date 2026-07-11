@@ -536,3 +536,33 @@ Readiness documental:
 ```text
 PRODUCT CATALOG TESTS GUARDS TECHNICAL PLAN READY
 ```
+
+## Decisión 2B-AG109 — route/fail-closed guards y schema futuro
+
+AG109 ejecuta el siguiente bloque local-safe de guards del catálogo producto:
+
+- route guards: `/conversations` y variantes siguen sin registrarse;
+- fail-closed guards: payloads inseguros, superficies inválidas, campos
+  prohibidos y errores backend reales no producen fallback demo;
+- decisión schema: el schema local actual no debe usarse todavía para poblar
+  catálogo sintético development.
+
+Decisión de schema:
+
+```text
+SCHEMA NEEDS FUTURE MIGRATION BEFORE SYNTHETIC CATALOG
+```
+
+La decisión se documenta en:
+
+```text
+docs/stasisly_definition/implementation_plans/2B-AG109-product-catalog-schema-decision.md
+```
+
+Consecuencia: el siguiente paquete prudente es diseñar la migración futura del
+catálogo producto antes de preparar catálogo sintético, seeds, fixtures,
+especialistas reales o `/conversations`.
+
+AG109 no toca Supabase, no ejecuta SQL, no crea migraciones, no puebla
+`specialist_catalog`, no registra `/conversations`, no usa datos reales y no
+toca staging/production.

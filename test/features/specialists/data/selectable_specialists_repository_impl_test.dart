@@ -42,8 +42,12 @@ void main() {
         'branch_id',
         'chief_id',
         'access_tier',
+        'accessTier',
         'availability_status',
+        'availability',
+        'supportedSurfaces',
         'is_published',
+        'isPublished',
         'created_at',
         'updated_at',
         'slug',
@@ -78,6 +82,21 @@ void main() {
         await _read(_response(items: [missing])),
         isA<SelectableSpecialistsContractViolation>(),
       );
+      for (final requiredField in [
+        'id',
+        'displayName',
+        'area',
+        'shortDescription',
+        'accessState',
+        'isDemo',
+      ]) {
+        final item = _validItem()..remove(requiredField);
+        expect(
+          await _read(_response(items: [item])),
+          isA<SelectableSpecialistsContractViolation>(),
+          reason: requiredField,
+        );
+      }
       expect(
         await _read(
           SelectableSpecialistsRemoteResponse(
@@ -104,6 +123,19 @@ void main() {
         for (final item in [invalidArea, invalidState, demo]) {
           expect(
             await _read(_response(items: [item])),
+            isA<SelectableSpecialistsContractViolation>(),
+          );
+        }
+        for (final invalidCatalogState in [
+          _validItem()..['availability_status'] = 'available',
+          _validItem()..['availability'] = 'available',
+          _validItem()..['access_tier'] = 'free',
+          _validItem()..['accessTier'] = 'free',
+          _validItem()..['supported_surfaces'] = ['product'],
+          _validItem()..['supportedSurfaces'] = ['product'],
+        ]) {
+          expect(
+            await _read(_response(items: [invalidCatalogState])),
             isA<SelectableSpecialistsContractViolation>(),
           );
         }
@@ -172,6 +204,18 @@ void main() {
           const SelectableSpecialistsRemoteResponse(
             statusCode: 502,
             errorCode: 'contractViolation',
+          ),
+        ),
+        isA<SelectableSpecialistsUnexpectedError>(),
+      );
+      expect(
+        await _read(
+          const SelectableSpecialistsRemoteResponse(
+            statusCode: 503,
+            body: {
+              'items': <Map<String, dynamic>>[],
+              'error': 'database stack trace',
+            },
           ),
         ),
         isA<SelectableSpecialistsUnexpectedError>(),

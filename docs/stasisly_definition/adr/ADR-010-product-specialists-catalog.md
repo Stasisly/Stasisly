@@ -497,3 +497,29 @@ AG95 debe definir, sin implementar todavía:
 AG94 no autoriza código, tests, SQL, migraciones, seeds, especialistas reales,
 poblado de `specialist_catalog`, registro de `/conversations`, conexión de
 producto, datos reales, staging ni production.
+
+## Decisión 2B-AG109 — schema futuro antes de catálogo sintético
+
+AG109 implementa guards locales adicionales de rutas/fail-closed y revisa el
+schema local visible frente a ADR-010, ADR-011 y ADR-012.
+
+Decisión:
+
+```text
+SCHEMA NEEDS FUTURE MIGRATION BEFORE SYNTHETIC CATALOG
+```
+
+Motivo resumido: `public.specialist_catalog` existe como tabla cerrada y
+deny-all, pero todavía no representa todo el contrato conceptual de catálogo
+producto: superficie Product explícita, jerarquía producto, `supported_surfaces`,
+campos sanitizados auxiliares y compatibilidad completa con tiers/publicación.
+
+La decisión completa queda registrada en:
+
+```text
+docs/stasisly_definition/implementation_plans/2B-AG109-product-catalog-schema-decision.md
+```
+
+AG109 no autoriza poblar `specialist_catalog`, crear especialistas reales,
+crear fixtures persistentes, registrar `/conversations`, ejecutar SQL ni crear
+migraciones.

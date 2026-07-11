@@ -53,27 +53,36 @@ void main() {
     }
   });
 
-  test('product catalog cannot fall back to demo for real backend failures', () {
-    final repository = File(
-      'lib/features/specialists/data/repositories/'
-      'selectable_specialists_repository_impl.dart',
-    ).readAsStringSync();
-    final provider = File(
-      'lib/features/specialists/presentation/providers/'
-      'selectable_specialists_providers.dart',
-    ).readAsStringSync();
+  test(
+    'product catalog cannot fall back to demo for real backend failures',
+    () {
+      final repository = File(
+        'lib/features/specialists/data/repositories/'
+        'selectable_specialists_repository_impl.dart',
+      ).readAsStringSync();
+      final provider = File(
+        'lib/features/specialists/presentation/providers/'
+        'selectable_specialists_providers.dart',
+      ).readAsStringSync();
 
-    expect(repository, isNot(contains('DemoSelectableSpecialistsRepository')));
-    expect(repository, isNot(contains('SelectableSpecialistsDemo')));
-    expect(repository, contains('SelectableSpecialistsNetworkError'));
-    expect(repository, contains('SelectableSpecialistsContractViolation'));
-    expect(repository, contains('SelectableSpecialistsUnexpectedError'));
+      expect(
+        repository,
+        isNot(contains('DemoSelectableSpecialistsRepository')),
+      );
+      expect(repository, isNot(contains('SelectableSpecialistsDemo')));
+      expect(repository, contains('SelectableSpecialistsNetworkError'));
+      expect(repository, contains('SelectableSpecialistsContractViolation'));
+      expect(repository, contains('SelectableSpecialistsUnexpectedError'));
 
-    expect(provider, contains('if (environment.isDemo)'));
-    expect(provider, contains('DemoSelectableSpecialistsRepository'));
-    expect(provider, contains('BackendBlockedSelectableSpecialistsRepository'));
-    expect(provider, isNot(contains('SelectableSpecialistsRepositoryImpl')));
-  });
+      expect(provider, contains('if (environment.isDemo)'));
+      expect(provider, contains('DemoSelectableSpecialistsRepository'));
+      expect(
+        provider,
+        contains('BackendBlockedSelectableSpecialistsRepository'),
+      );
+      expect(provider, isNot(contains('SelectableSpecialistsRepositoryImpl')));
+    },
+  );
 
   test('product catalog does not use fixtures or synthetic auth material', () {
     final files = dartFilesUnder(productCatalogDirectory).toList();
@@ -101,11 +110,17 @@ void main() {
 
     expect(routesSource, isNot(contains("path: '/conversations'")));
     expect(routesSource, isNot(contains("path: '/conversations/:sessionId'")));
+    expect(routesSource, isNot(contains("path: '/conversations/:id'")));
+    expect(routesSource, isNot(contains("path: '/conversations/:agentId'")));
+    expect(routesSource, isNot(contains("path: '/conversation'")));
     expect(routesSource, contains("path: '/chat/:id'"));
     expect(routesSource, contains("path: '/orchestrator/chat'"));
 
     final inheritedChatRoute = routeSlice(routesSource, '/chat/:id');
-    final orchestratorChatRoute = routeSlice(routesSource, '/orchestrator/chat');
+    final orchestratorChatRoute = routeSlice(
+      routesSource,
+      '/orchestrator/chat',
+    );
 
     for (final routeSource in [inheritedChatRoute, orchestratorChatRoute]) {
       for (final forbidden in [
@@ -118,38 +133,69 @@ void main() {
         '/functions/v1/',
         'Supabase.instance.client',
         'service_role',
+        'SYNTHETIC_ACCESS_TOKEN',
+        'fixture',
+        'Fixture',
+        'Wizard',
+        'Admin',
       ]) {
         expect(routeSource, isNot(contains(forbidden)), reason: forbidden);
       }
     }
   });
 
-  test('product catalog cannot import Wizard, development or Admin surfaces', () {
-    final files = dartFilesUnder(productCatalogDirectory).toList();
+  test('dev-only routes are not product routes or catalog entry points', () {
+    final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
+    final devRouteSource = routesSource.substring(
+      routesSource.indexOf('List<RouteBase> _devOnlyChatMessageRoutes'),
+    );
 
-    expect(files, isNotEmpty);
-    for (final file in files) {
-      final source = file.readAsStringSync();
-      for (final forbidden in [
-        'features/admin',
-        'features/orchestrator',
-        'orchestrator_chat',
-        'OrchestratorPage',
-        'AdminDecision',
-        'AdminEngine',
-        'Admin/Engine',
-        'Wizard',
-        'Development Surface',
-        'Director de Proyecto',
-        'Product Owner',
-        'Revisor de Coherencia',
-        'Arquitecto Principal',
-        'AppSec',
-        'QA',
-        'DevOps',
-      ]) {
-        expect(source, isNot(contains(forbidden)), reason: file.path);
-      }
-    }
+    expect(devRouteSource, contains("path: '/dev/chat/composed'"));
+    expect(devRouteSource, contains("path: '/dev/chat/session/:sessionId'"));
+    expect(
+      devRouteSource,
+      contains('kReleaseMode || !environment.allowsDevRoutes'),
+    );
+    expect(devRouteSource, isNot(contains('/conversations')));
+    expect(devRouteSource, isNot(contains('SelectableSpecialistsRepository')));
+    expect(devRouteSource, isNot(contains('SelectableSpecialistModel')));
+    expect(devRouteSource, isNot(contains('specialist_catalog')));
+    expect(devRouteSource, isNot(contains('SYNTHETIC_ACCESS_TOKEN')));
+    expect(devRouteSource, isNot(contains('fixture')));
+    expect(devRouteSource, isNot(contains('Fixture')));
+    expect(devRouteSource, isNot(contains('Admin/Engine')));
+    expect(devRouteSource, isNot(contains('Wizard')));
   });
+
+  test(
+    'product catalog cannot import Wizard, development or Admin surfaces',
+    () {
+      final files = dartFilesUnder(productCatalogDirectory).toList();
+
+      expect(files, isNotEmpty);
+      for (final file in files) {
+        final source = file.readAsStringSync();
+        for (final forbidden in [
+          'features/admin',
+          'features/orchestrator',
+          'orchestrator_chat',
+          'OrchestratorPage',
+          'AdminDecision',
+          'AdminEngine',
+          'Admin/Engine',
+          'Wizard',
+          'Development Surface',
+          'Director de Proyecto',
+          'Product Owner',
+          'Revisor de Coherencia',
+          'Arquitecto Principal',
+          'AppSec',
+          'QA',
+          'DevOps',
+        ]) {
+          expect(source, isNot(contains(forbidden)), reason: file.path);
+        }
+      }
+    },
+  );
 }

@@ -58,5 +58,9 @@ void main() {
 
     expect(routesSource, isNot(contains("path: '/conversations'")));
     expect(routesSource, isNot(contains("path: '/conversations/:sessionId'")));
+    expect(routesSource, isNot(contains("path: '/conversations/:id'")));
+    expect(routesSource, isNot(contains("path: '/conversations/:agentId'")));
+    expect(routesSource, isNot(contains("path: '/conversation'")));
+    expect(routesSource, isNot(contains("path: '/conversation/:sessionId'")));
   });
 }
