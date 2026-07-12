@@ -513,3 +513,30 @@ Readiness de AG111:
 ```text
 PRODUCT CATALOG LOCAL MIGRATION PREPARED
 ```
+
+## Validacion local completada en 2B-AG112
+
+AG112 valida localmente la migracion AG111 con Supabase local:
+
+```text
+supabase db reset --local --no-seed
+supabase test db supabase/tests/2b_ag112_product_catalog_migration_test.sql supabase/tests/2b_ag112_product_catalog_migration_zz_postconditions_test.sql --local
+```
+
+Resultado:
+
+```text
+67/67 PASS
+PRODUCT CATALOG LOCAL MIGRATION VALIDATED_AND_PUSHED
+```
+
+La validacion confirma aplicacion local de `00008`, columnas, constraints,
+indices, RLS, cero policies, cero grants cliente peligrosos, fixtures
+transaccionales y limpieza final.
+
+Pendiente antes de seeds sinteticos:
+
+- decidir y alinear la frontera `access_tier`: la migracion usa `pro`, mientras
+  algunos harness/Edge Functions historicos aun usan `premium`;
+- no poblar `specialist_catalog` hasta resolver esa compatibilidad o aprobar
+  explicitamente el mapeo `pro` -> estado visible de pago.
