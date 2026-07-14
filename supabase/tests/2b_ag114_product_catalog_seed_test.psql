@@ -1,0 +1,66 @@
+begin;
+
+create extension if not exists pgtap with schema extensions;
+
+select plan(45);
+
+select is((select count(*)::bigint from public.specialists where id::text like '11000000-0000-4000-8000-%'), 19::bigint, 'seed creates exactly 19 synthetic internal specialists');
+select is((select count(*)::bigint from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%'), 19::bigint, 'seed creates exactly 19 synthetic Product catalog rows');
+select is((select count(distinct slug)::bigint from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%'), 19::bigint, 'seed slugs are unique');
+select is((select count(*)::bigint from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%' and btrim(slug) = ''), 0::bigint, 'seed has no empty slugs');
+select is((select count(*)::bigint from public.specialist_catalog c join public.specialists s on s.id = c.specialist_id where c.id::text like '21000000-0000-4000-8000-%'), 19::bigint, 'every catalog row references a synthetic internal specialist');
+
+select is((select count(*)::bigint from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%' and supported_surfaces <> array['product']::text[]), 0::bigint, 'all seeded rows belong exclusively to Product');
+select is((select count(*)::bigint from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%' and 'admin' = any(supported_surfaces)), 0::bigint, 'seed contains no Admin surface');
+select is((select count(*)::bigint from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%' and 'engine' = any(supported_surfaces)), 0::bigint, 'seed contains no Engine surface');
+select is((select count(*)::bigint from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%' and 'wizard' = any(supported_surfaces)), 0::bigint, 'seed contains no Wizard surface');
+select is((select count(*)::bigint from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%' and 'development' = any(supported_surfaces)), 0::bigint, 'seed contains no Development surface');
+
+select is((select count(*)::bigint from public.specialist_catalog where slug = 'stasis' and hierarchy_role = 'coordinator' and parent_catalog_id is null), 1::bigint, 'Stasis is the sole root Product coordinator');
+select is((select count(*)::bigint from public.specialist_catalog where slug in ('salus', 'nutria', 'atlas', 'sofia') and hierarchy_role = 'branch_chief'), 4::bigint, 'four Product area heads exist');
+select is((select count(*)::bigint from public.specialist_catalog where slug in ('salus', 'nutria', 'atlas', 'sofia') and parent_catalog_id = '21000000-0000-4000-8000-000000000001'), 4::bigint, 'all area heads depend on Stasis');
+select is((select count(*)::bigint from public.specialist_catalog where hierarchy_role = 'specialist' and parent_catalog_id not in ('21000000-0000-4000-8000-000000000002', '21000000-0000-4000-8000-000000000006', '21000000-0000-4000-8000-000000000010', '21000000-0000-4000-8000-000000000016')), 0::bigint, 'every specialist has an approved Product area head');
+select is((select count(*)::bigint from public.specialist_catalog where parent_catalog_id = id), 0::bigint, 'seed has no self-parent');
+select is((select count(*)::bigint from public.specialist_catalog child left join public.specialist_catalog parent on parent.id = child.parent_catalog_id where child.parent_catalog_id is not null and parent.id is null), 0::bigint, 'seed has no orphan parents');
+
+select ok(exists(select 1 from public.specialist_catalog where publication_status = 'published' and is_published and availability_status = 'available' and is_conversable), 'seed has selectable Product rows');
+select ok(exists(select 1 from public.specialist_catalog where publication_status <> 'published' and not is_published), 'seed has unpublished or draft rows');
+select ok(exists(select 1 from public.specialist_catalog where availability_status = 'unavailable'), 'seed has unavailable rows');
+select ok(exists(select 1 from public.specialist_catalog where not is_conversable), 'seed has non-conversable rows');
+select is((select count(*)::bigint from public.specialist_catalog where publication_status = 'published' and is_published and availability_status = 'available' and is_conversable and supported_surfaces = array['product']::text[] and access_tier in ('free', 'pro', 'vip')), 9::bigint, 'exactly nine seeded rows satisfy the public selection predicate');
+
+select ok(exists(select 1 from public.specialist_catalog where access_tier = 'free'), 'seed represents free tier');
+select ok(exists(select 1 from public.specialist_catalog where access_tier = 'pro'), 'seed represents pro tier');
+select ok(exists(select 1 from public.specialist_catalog where access_tier = 'vip'), 'seed represents vip tier');
+select is((select count(*)::bigint from public.specialist_catalog where access_tier = 'premium'), 0::bigint, 'seed contains no active premium tier');
+select is((select count(*)::bigint from public.specialist_catalog where access_tier = 'enterprise'), 0::bigint, 'seed contains no enterprise tier');
+select is((select count(*)::bigint from public.specialist_catalog where access_tier not in ('free', 'pro', 'vip')), 0::bigint, 'seed contains only canonical tiers');
+
+select is((select count(*)::bigint from public.specialist_catalog where lower(public_metadata::text) ~ '"(prompt|systemprompt|developerprompt|chainofthought|internalrole|permissions|servicerole|owneruserid|userid|tokens|credentials|secrets|internalnotes|admindata|developmentdata)"[[:space:]]*:'), 0::bigint, 'public metadata contains no forbidden internal keys');
+select is((select count(*)::bigint from public.specialist_catalog where jsonb_typeof(public_capabilities) <> 'array'), 0::bigint, 'all public capabilities are arrays');
+select is((select count(*)::bigint from public.specialist_catalog where locale !~ '^[a-z]{2}(-[A-Z]{2})?$'), 0::bigint, 'all locales satisfy the approved contract');
+select is((select count(*)::bigint from public.specialist_catalog where short_description <> btrim(short_description) or char_length(short_description) not between 1 and 240), 0::bigint, 'all public descriptions satisfy the minimum contract');
+select is((select count(*)::bigint from public.specialist_catalog where lower(row_to_json(specialist_catalog)::text) ~ '(systemprompt|developerprompt|chainofthought|servicerole|credential|secret|token)'), 0::bigint, 'catalog rows expose no prompts, credentials or secrets');
+select is((select count(*)::bigint from public.specialists where id::text like '11000000-0000-4000-8000-%' and prompt_template <> '{}'::jsonb), 0::bigint, 'synthetic backend identities contain no prompt content');
+
+select ok((select bool_and(c.relrowsecurity and not c.relforcerowsecurity) from pg_catalog.pg_class c join pg_catalog.pg_namespace n on n.oid = c.relnamespace where n.nspname = 'public' and c.relname in ('specialists', 'specialist_catalog')), 'RLS remains enabled without FORCE RLS');
+select is((select count(*)::bigint from pg_catalog.pg_policies where schemaname = 'public' and tablename in ('specialists', 'specialist_catalog')), 0::bigint, 'specialist tables retain zero policies');
+select ok(not has_table_privilege('anon', 'public.specialists', 'SELECT,INSERT,UPDATE,DELETE') and not has_table_privilege('authenticated', 'public.specialists', 'SELECT,INSERT,UPDATE,DELETE') and not has_table_privilege('anon', 'public.specialist_catalog', 'SELECT,INSERT,UPDATE,DELETE') and not has_table_privilege('authenticated', 'public.specialist_catalog', 'SELECT,INSERT,UPDATE,DELETE'), 'client roles retain zero dangerous table grants');
+select ok(not has_any_column_privilege('anon', 'public.specialist_catalog', 'SELECT') and not has_any_column_privilege('authenticated', 'public.specialist_catalog', 'SELECT'), 'client roles retain zero catalog column grants');
+set local role anon;
+select throws_ok('select * from public.specialist_catalog', '42501', null, 'anon cannot read the seeded catalog');
+reset role;
+set local role authenticated;
+select throws_ok('select * from public.specialist_catalog', '42501', null, 'authenticated cannot read the seeded catalog');
+reset role;
+
+select is((select display_name from public.specialist_catalog where slug = 'stasis'), 'Stasis', 'Stasis is represented explicitly');
+select is((select display_name from public.specialist_catalog where slug = 'kitesurf'), 'Kitesurf', 'Kitesurf is represented explicitly');
+select is((select count(*)::bigint from public.specialist_catalog where slug in ('yoga', 'pilates')), 2::bigint, 'Yoga and Pilates are represented');
+select is((select count(*)::bigint from public.specialist_catalog where slug in ('crossfit', 'hyrox')), 2::bigint, 'CrossFit and HYROX are represented');
+select is((select count(*)::bigint from public.specialist_catalog where lower(display_name) = 'nexus'), 0::bigint, 'Nexus is not part of the Product catalog');
+select is((select count(*)::bigint from public.specialists where id::text like '11000000-0000-4000-8000-%' and lower(name) in ('nexus', 'rector', 'gerendi')), 0::bigint, 'seed contains no Development, Wizard or Admin agents');
+
+select * from finish();
+
+rollback;

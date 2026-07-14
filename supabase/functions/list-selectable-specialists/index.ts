@@ -105,6 +105,10 @@ async function fetchCatalog(
   const query = new URL("/rest/v1/specialist_catalog", baseUrl);
   query.searchParams.set("select", INTERNAL_COLUMNS);
   query.searchParams.set("is_published", "eq.true");
+  query.searchParams.set("publication_status", "eq.published");
+  query.searchParams.set("availability_status", "eq.available");
+  query.searchParams.set("supported_surfaces", "eq.{product}");
+  query.searchParams.set("is_conversable", "eq.true");
   if (area) query.searchParams.set("product_area", `eq.${area}`);
   query.searchParams.set("order", "sort_order.asc,display_name.asc,id.asc");
   query.searchParams.set("limit", "20");

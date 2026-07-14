@@ -188,7 +188,7 @@ Deno.test("handler rejects client-provided authority", async () => {
   assertEquals(paths, []);
 });
 
-Deno.test("handler applies area, stable order and limit 20", async () => {
+Deno.test("handler applies Product selection guards, area and stable order", async () => {
   let catalogUrl = "";
   const handler = createHandler(LOCAL_CONFIG, {
     fetcher: (async (input: string | URL | Request) => {
@@ -203,6 +203,11 @@ Deno.test("handler applies area, stable order and limit 20", async () => {
   });
   assertEquals((await handler(request("?area=wellness"))).status, 200);
   const url = new URL(catalogUrl);
+  assertEquals(url.searchParams.get("is_published"), "eq.true");
+  assertEquals(url.searchParams.get("publication_status"), "eq.published");
+  assertEquals(url.searchParams.get("availability_status"), "eq.available");
+  assertEquals(url.searchParams.get("supported_surfaces"), "eq.{product}");
+  assertEquals(url.searchParams.get("is_conversable"), "eq.true");
   assertEquals(url.searchParams.get("product_area"), "eq.wellness");
   assertEquals(
     url.searchParams.get("order"),
