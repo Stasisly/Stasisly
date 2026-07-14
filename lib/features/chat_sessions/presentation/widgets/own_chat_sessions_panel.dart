@@ -356,7 +356,7 @@ String _failureLabel(OwnChatSessionsFailureType type) {
       'El especialista seleccionable no es válido.',
     OwnChatSessionsFailureType.specialistUnavailable =>
       'El especialista no está disponible.',
-    OwnChatSessionsFailureType.premiumLocked =>
+    OwnChatSessionsFailureType.proLocked =>
       'La sesión requiere una membresía no disponible.',
     OwnChatSessionsFailureType.sessionNotFound =>
       'La sesión no existe o no está disponible.',

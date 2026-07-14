@@ -5,7 +5,7 @@ export type CreateSessionErrorCode =
   | "invalidRequest"
   | "invalidSelectableSpecialist"
   | "specialistUnavailable"
-  | "premiumLocked"
+  | "proLocked"
   | "permissionDenied"
   | "contractViolation"
   | "backendMisconfigured"
@@ -18,7 +18,7 @@ const ERROR_STATUS: Record<CreateSessionErrorCode, number> = {
   invalidRequest: 400,
   invalidSelectableSpecialist: 404,
   specialistUnavailable: 409,
-  premiumLocked: 403,
+  proLocked: 403,
   permissionDenied: 403,
   contractViolation: 502,
   backendMisconfigured: 500,

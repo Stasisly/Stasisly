@@ -150,7 +150,7 @@ Valores recomendados:
 - `publication_status`: `draft`, `review`, `published`, `unpublished`,
   `disabled`, `maintenance`
 - `availability_status`: `available`, `limited`, `unavailable`, `coming_soon`
-- `access_tier`: `free`, `pro`, `vip`, `enterprise`
+- `access_tier`: `free`, `pro`, `vip`
 - `supported_surfaces`: debe incluir `product` para registros producto
 
 Reglas:
@@ -534,9 +534,11 @@ La validacion confirma aplicacion local de `00008`, columnas, constraints,
 indices, RLS, cero policies, cero grants cliente peligrosos, fixtures
 transaccionales y limpieza final.
 
-Pendiente antes de seeds sinteticos:
+Resuelto en AG113 antes de seeds sinteticos:
 
-- decidir y alinear la frontera `access_tier`: la migracion usa `pro`, mientras
-  algunos harness/Edge Functions historicos aun usan `premium`;
-- no poblar `specialist_catalog` hasta resolver esa compatibilidad o aprobar
-  explicitamente el mapeo `pro` -> estado visible de pago.
+- `access_tier` queda canonico como `free`, `pro`, `vip`;
+- `premium` queda solo como entrada legacy rechazada o normalizada en migracion
+  historica controlada;
+- el estado publico derivado usa `lockedPro`, no `lockedPremium`;
+- `specialist_catalog` no debe poblarse hasta que los seeds sinteticos usen
+  exclusivamente `free`, `pro` o `vip`.

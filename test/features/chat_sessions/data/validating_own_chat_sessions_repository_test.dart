@@ -275,7 +275,7 @@ void main() {
             'specialistUnavailable',
             OwnChatSessionsFailureType.specialistUnavailable,
           ),
-          (402, 'premiumLocked', OwnChatSessionsFailureType.premiumLocked),
+          (402, 'proLocked', OwnChatSessionsFailureType.proLocked),
           (404, 'sessionNotFound', OwnChatSessionsFailureType.sessionNotFound),
           (
             403,

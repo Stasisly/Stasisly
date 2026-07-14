@@ -8,7 +8,7 @@ enum OwnChatSessionsFailureType {
   invalidRequest,
   invalidSelectableSpecialist,
   specialistUnavailable,
-  premiumLocked,
+  proLocked,
   sessionNotFound,
   permissionDenied,
   contractViolation,

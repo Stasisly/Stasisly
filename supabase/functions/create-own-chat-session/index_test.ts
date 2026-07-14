@@ -152,9 +152,19 @@ Deno.test("specialist resolution fails closed", async () => {
     "specialistUnavailable",
   );
   await assertRejects(
+    async () => resolveSpecialist([{ ...CATALOG_ROW, access_tier: "pro" }]),
+    Error,
+    "proLocked",
+  );
+  await assertRejects(
+    async () => resolveSpecialist([{ ...CATALOG_ROW, access_tier: "vip" }]),
+    Error,
+    "proLocked",
+  );
+  await assertRejects(
     async () => resolveSpecialist([{ ...CATALOG_ROW, access_tier: "premium" }]),
     Error,
-    "premiumLocked",
+    "contractViolation",
   );
 });
 

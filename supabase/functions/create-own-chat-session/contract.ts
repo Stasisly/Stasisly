@@ -98,7 +98,9 @@ export function resolveSpecialist(rows: unknown): ResolvedSpecialist {
   if (row.availability_status !== "available") {
     throw new Error("specialistUnavailable");
   }
-  if (row.access_tier === "premium") throw new Error("premiumLocked");
+  if (row.access_tier === "pro" || row.access_tier === "vip") {
+    throw new Error("proLocked");
+  }
   if (row.access_tier !== "free") throw new Error("contractViolation");
   return {
     selectableId: row.id as string,

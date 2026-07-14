@@ -18,7 +18,7 @@ insert into public.specialists (
 ) values
   ('4c200000-0000-4000-8000-000000000001', 'test_only_2b_iv_c_free',
    'mental', '{"marker":"test_only_2b_iv_c"}', false, true),
-  ('4c200000-0000-4000-8000-000000000002', 'test_only_2b_iv_c_premium',
+  ('4c200000-0000-4000-8000-000000000002', 'test_only_2b_iv_c_pro',
    'mental', '{"marker":"test_only_2b_iv_c"}', true, true),
   ('4c200000-0000-4000-8000-000000000003', 'test_only_2b_iv_c_unavailable',
    'mental', '{"marker":"test_only_2b_iv_c"}', false, true);
@@ -33,8 +33,8 @@ insert into public.specialist_catalog (
    true, 'available', 'free', 1),
   ('4c300000-0000-4000-8000-000000000002',
    '4c200000-0000-4000-8000-000000000002',
-   'test_only_2b_iv_c premium', 'wellness', 'Fixture local no productivo.',
-   true, 'available', 'premium', 2),
+   'test_only_2b_iv_c pro', 'wellness', 'Fixture local no productivo.',
+   true, 'available', 'pro', 2),
   ('4c300000-0000-4000-8000-000000000003',
    '4c200000-0000-4000-8000-000000000003',
    'test_only_2b_iv_c unavailable', 'wellness', 'Fixture local no productivo.',

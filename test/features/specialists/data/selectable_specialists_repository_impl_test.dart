@@ -116,11 +116,18 @@ void main() {
       () async {
         final invalidArea = _validItem()..['area'] = 'mental';
         final invalidState = _validItem()..['accessState'] = 'adminOnly';
+        final legacyPremiumState = _validItem()
+          ..['accessState'] = 'lockedPremium';
         final demo = _validItem()
           ..['isDemo'] = true
           ..['accessState'] = 'demoOnly';
 
-        for (final item in [invalidArea, invalidState, demo]) {
+        for (final item in [
+          invalidArea,
+          invalidState,
+          legacyPremiumState,
+          demo,
+        ]) {
           expect(
             await _read(_response(items: [item])),
             isA<SelectableSpecialistsContractViolation>(),
@@ -160,6 +167,16 @@ void main() {
         );
       },
     );
+
+    test('accepts lockedPro as the canonical paid access state', () async {
+      final result = await _read(
+        _response(items: [_validItem()..['accessState'] = 'lockedPro']),
+      );
+
+      expect(result, isA<SelectableSpecialistsSuccess>());
+      final item = (result as SelectableSpecialistsSuccess).specialists.single;
+      expect(item.accessState, SelectableSpecialistAccessState.lockedPro);
+    });
   });
 
   group('visible error mapping', () {

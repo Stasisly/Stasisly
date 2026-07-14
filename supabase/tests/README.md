@@ -223,7 +223,7 @@ Los tests Deno validan:
 
 - contrato exacto de seis campos;
 - ausencia de columnas internas;
-- reglas `available`, `lockedPremium` y `unavailable`;
+- reglas `available`, `lockedPro` y `unavailable`;
 - fallo cerrado ante estados contradictorios, secreto ausente y host remoto;
 - JWT obligatorio y validado antes de consultar catálogo;
 - rechazo de autoridad enviada por cliente;

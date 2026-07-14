@@ -254,14 +254,11 @@ select throws_ok(
   '23514', null, 'text constraint still rejects empty descriptions'
 );
 
-select lives_ok(
+select throws_ok(
   $$update public.specialist_catalog set access_tier = 'premium'
     where display_name = 'Wellness'$$,
-  'premium is allowed only as a reverted test mutation'
+  '23514', null, 'legacy premium access_tier is rejected'
 );
-
-update public.specialist_catalog set access_tier = 'free'
-where display_name = 'Wellness';
 
 set local role anon;
 select throws_ok(

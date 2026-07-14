@@ -66,7 +66,7 @@ invalid_area_status="$(curl -sS -o "$tmp_dir/invalid-area.json" -w '%{http_code}
 client_authority_status="$(
   curl -sS -o "$tmp_dir/client-authority.json" -w '%{http_code}' \
     -H "Authorization: Bearer $token" \
-    "$FUNCTIONS_URL/list-selectable-specialists?user_id=attacker&role=admin&entitlement=premium&accessState=available"
+    "$FUNCTIONS_URL/list-selectable-specialists?user_id=attacker&role=admin&entitlement=pro&accessState=available"
 )"
 
 test "$no_jwt_status" = "401"

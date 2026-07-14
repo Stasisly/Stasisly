@@ -1,11 +1,11 @@
-export type AccessState = "available" | "lockedPremium" | "unavailable";
+export type AccessState = "available" | "lockedPro" | "unavailable";
 
 export function calculateAccessState(
   availabilityStatus: unknown,
   accessTier: unknown,
 ): AccessState {
   if (availabilityStatus === "unavailable") {
-    if (accessTier !== "free" && accessTier !== "premium") {
+    if (accessTier !== "free" && accessTier !== "pro" && accessTier !== "vip") {
       throw new Error("catalogContractViolation");
     }
     return "unavailable";
@@ -18,8 +18,8 @@ export function calculateAccessState(
   if (accessTier === "free") {
     return "available";
   }
-  if (accessTier === "premium") {
-    return "lockedPremium";
+  if (accessTier === "pro" || accessTier === "vip") {
+    return "lockedPro";
   }
 
   throw new Error("catalogContractViolation");

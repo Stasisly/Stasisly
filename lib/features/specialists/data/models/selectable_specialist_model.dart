@@ -97,7 +97,7 @@ class SelectableSpecialistModel {
     }
     return switch (value) {
       'available' => SelectableSpecialistAccessState.available,
-      'lockedPremium' => SelectableSpecialistAccessState.lockedPremium,
+      'lockedPro' => SelectableSpecialistAccessState.lockedPro,
       'unavailable' => SelectableSpecialistAccessState.unavailable,
       'demoOnly' => SelectableSpecialistAccessState.demoOnly,
       _ => throw const FormatException('Unknown specialist accessState.'),

@@ -4,7 +4,7 @@ enum SelectableSpecialistArea { stasis, health, nutrition, training, wellness }
 
 enum SelectableSpecialistAccessState {
   available,
-  lockedPremium,
+  lockedPro,
   unavailable,
   demoOnly,
 }

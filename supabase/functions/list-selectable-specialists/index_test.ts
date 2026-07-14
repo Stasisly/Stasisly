@@ -52,9 +52,11 @@ function request(path = "", token = "valid-local-jwt"): Request {
 
 Deno.test("accessState implements the approved local rules", () => {
   assertEquals(calculateAccessState("available", "free"), "available");
-  assertEquals(calculateAccessState("available", "premium"), "lockedPremium");
+  assertEquals(calculateAccessState("available", "pro"), "lockedPro");
+  assertEquals(calculateAccessState("available", "vip"), "lockedPro");
   assertEquals(calculateAccessState("unavailable", "free"), "unavailable");
-  assertEquals(calculateAccessState("unavailable", "premium"), "unavailable");
+  assertEquals(calculateAccessState("unavailable", "pro"), "unavailable");
+  assertEquals(calculateAccessState("unavailable", "vip"), "unavailable");
 });
 
 Deno.test("accessState fails closed on contradictory values", async () => {
@@ -65,6 +67,11 @@ Deno.test("accessState fails closed on contradictory values", async () => {
   );
   await assertRejects(
     async () => calculateAccessState("available", "unknown"),
+    Error,
+    "catalogContractViolation",
+  );
+  await assertRejects(
+    async () => calculateAccessState("available", "premium"),
     Error,
     "catalogContractViolation",
   );

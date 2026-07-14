@@ -121,7 +121,7 @@ OwnChatSessionsFailureType? _failureFor(
     'invalidSelectableSpecialist' =>
       OwnChatSessionsFailureType.invalidSelectableSpecialist,
     'specialistUnavailable' => OwnChatSessionsFailureType.specialistUnavailable,
-    'premiumLocked' => OwnChatSessionsFailureType.premiumLocked,
+    'proLocked' => OwnChatSessionsFailureType.proLocked,
     'sessionNotFound' => OwnChatSessionsFailureType.sessionNotFound,
     'permissionDenied' => OwnChatSessionsFailureType.permissionDenied,
     'contractViolation' ||

@@ -89,7 +89,7 @@ invalid_area_status="$(curl -sS -o "$tmp_dir/invalid-area.json" -w '%{http_code}
   "$FUNCTIONS_URL/list-selectable-specialists?area=mental")"
 authority_status="$(curl -sS -o "$tmp_dir/authority.json" -w '%{http_code}' \
   -H "Authorization: Bearer $token" \
-  "$FUNCTIONS_URL/list-selectable-specialists?user_id=attacker&role=admin&entitlement=premium&accessState=available")"
+  "$FUNCTIONS_URL/list-selectable-specialists?user_id=attacker&role=admin&entitlement=pro&accessState=available")"
 
 test "$no_jwt_status" = "401"
 test "$invalid_jwt_status" = "401"
@@ -105,15 +105,15 @@ test "$(jq -r 'keys == ["items"]' "$tmp_dir/all.json")" = "true"
 test "$(jq -r '.items | length' "$tmp_dir/all.json")" = "20"
 test "$(jq -r '[.items[] | keys == ["accessState","area","displayName","id","isDemo","shortDescription"]] | all' "$tmp_dir/all.json")" = "true"
 test "$(jq -r '[.items[].isDemo] | all(. == false)' "$tmp_dir/all.json")" = "true"
-test "$(jq -r '[.items[0:4][].displayName] == ["Stasis","Nutrición","Wellness premium","Sueño y estrés"]' "$tmp_dir/all.json")" = "true"
+test "$(jq -r '[.items[0:4][].displayName] == ["Stasis","Nutrición","Wellness pro","Sueño y estrés"]' "$tmp_dir/all.json")" = "true"
 test "$(jq -r '[.items[] | select(.displayName == "Stasis")][0].accessState' "$tmp_dir/all.json")" = "available"
 test "$(jq -r '[.items[] | select(.displayName == "Nutrición")][0].accessState' "$tmp_dir/all.json")" = "available"
-test "$(jq -r '[.items[] | select(.displayName == "Wellness premium")][0].accessState' "$tmp_dir/all.json")" = "lockedPremium"
+test "$(jq -r '[.items[] | select(.displayName == "Wellness pro")][0].accessState' "$tmp_dir/all.json")" = "lockedPro"
 test "$(jq -r '[.items[] | select(.displayName == "Sueño y estrés")][0].accessState' "$tmp_dir/all.json")" = "unavailable"
 test "$(jq -r '[.items[].displayName] | index("test_only_c2 auxiliary 17") == null' "$tmp_dir/all.json")" = "true"
 
 test "$(jq -r '.items | length' "$tmp_dir/wellness.json")" = "2"
-test "$(jq -r '[.items[].displayName] == ["Wellness premium","Sueño y estrés"]' "$tmp_dir/wellness.json")" = "true"
+test "$(jq -r '[.items[].displayName] == ["Wellness pro","Sueño y estrés"]' "$tmp_dir/wellness.json")" = "true"
 
 if rg -n '"(specialist_id|prompt_template|access_tier|availability_status|is_published|created_at|updated_at|branch_id|chief_id)"' \
   "$tmp_dir/all.json" "$tmp_dir/wellness.json"; then

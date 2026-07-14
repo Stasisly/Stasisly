@@ -145,7 +145,7 @@ BEGIN
   ) THEN
     ALTER TABLE public.specialist_catalog
       ADD CONSTRAINT specialist_catalog_access_tier_valid
-      CHECK (access_tier IN ('free', 'pro', 'vip', 'enterprise'));
+      CHECK (access_tier IN ('free', 'pro', 'vip'));
   END IF;
 
   IF NOT EXISTS (

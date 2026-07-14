@@ -141,22 +141,20 @@ AG112 no prueba rollback estructural de la migracion `00008` porque el paquete
 solo autoriza validacion local de aplicacion y tests. Un rollback estructural
 requeriria un paquete explicito con base efimera o script reversible separado.
 
-## Compatibilidad detectada
+## Compatibilidad detectada y resuelta en AG113
 
 La migracion AG111 normaliza `access_tier = 'premium'` a `pro` y despues rechaza
 `premium` como valor nuevo.
 
-Esto valida la decision de schema, pero deja una compatibilidad pendiente:
-algunos harness historicos y Edge Functions locales todavia usan o interpretan
-`premium` como tier. AG112 no modifica Edge Functions ni Flutter por alcance.
+Esto valido la decision de schema y dejo una compatibilidad pendiente que AG113
+resuelve:
 
-Antes de preparar seeds sinteticos o validar flows HTTP completos, un paquete
-futuro debe decidir y alinear:
-
-- si Product usa definitivamente `pro` como tier de pago;
-- como se mapea `pro` a `lockedPremium` o a un nuevo `accessState`;
-- que fixtures HTTP dejan de insertar `premium`;
-- que funciones dejan de tratar `premium` como contrato interno.
+- Product usa definitivamente `free`, `pro` y `vip`;
+- `premium` queda como legacy rechazado en contratos nuevos y normalizado solo en
+  migracion historica controlada;
+- `pro` y `vip` se derivan como `lockedPro` en respuestas publicas;
+- los harness HTTP dejan de insertar `premium`;
+- las Edge Functions dejan de tratar `premium` como contrato interno activo.
 
 ## Fuera de alcance respetado
 
@@ -200,14 +198,8 @@ PRODUCT CATALOG LOCAL MIGRATION VALIDATED_AND_PUSHED
 No preparar seeds sinteticos todavia si se quiere conservar coherencia total de
 contratos.
 
-Siguiente paquete recomendado:
+AG113 recomendado y ejecutado:
 
 ```text
-2B-AG113 — alinear access_tier pro/premium en contratos locales antes de seeds
-```
-
-Alternativa si se aprueba asumir `pro` como definitivo:
-
-```text
-2B-AG113 — preparar seeds sinteticos development catalogo producto
+2B-AG113 — canonicalizar access_tier antes de seeds sinteticos Product
 ```

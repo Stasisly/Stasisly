@@ -20,8 +20,8 @@ select is(
       and a.attnum > 0
       and not a.attisdropped
   ),
-  '{id,specialist_id,display_name,product_area,short_description,is_published,availability_status,access_tier,sort_order,created_at,updated_at}',
-  'specialist_catalog has exactly the approved columns'
+  '{id,specialist_id,display_name,product_area,short_description,is_published,availability_status,access_tier,sort_order,created_at,updated_at,slug,subcategory,public_capabilities,publication_status,supported_surfaces,locale,public_metadata,hierarchy_role,parent_catalog_id,is_conversable,published_at,unpublished_at}',
+  'specialist_catalog has the approved AG111 columns'
 );
 
 select is(
@@ -36,8 +36,8 @@ select is(
       and not a.attisdropped
       and a.attnotnull
   ),
-  11::bigint,
-  'all specialist_catalog columns are NOT NULL'
+  19::bigint,
+  'required specialist_catalog columns are NOT NULL'
 );
 
 select is(
@@ -325,8 +325,8 @@ select is(
     where schemaname = 'public'
       and tablename = 'specialist_catalog'
   ),
-  3::bigint,
-  'specialist_catalog has PK, UNIQUE, and one listing index'
+  8::bigint,
+  'specialist_catalog has approved historical and AG111 indexes'
 );
 
 select ok(
@@ -409,7 +409,7 @@ insert into public.specialists (
 
 insert into public.specialist_catalog (
   id, specialist_id, display_name, product_area, short_description,
-  is_published, availability_status, access_tier, sort_order
+  is_published, publication_status, availability_status, access_tier, sort_order
 ) values (
   'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb',
   'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
@@ -417,6 +417,7 @@ insert into public.specialist_catalog (
   'health',
   'Fixture public description',
   true,
+  'published',
   'available',
   'free',
   1
