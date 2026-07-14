@@ -4,6 +4,7 @@ import {
   assertRejects,
 } from "jsr:@std/assert@1";
 import {
+  assertInternalSpecialistExists,
   parseRequestBody,
   resolveSpecialist,
   sanitizeCreatedSession,
@@ -33,8 +34,11 @@ const CATALOG_ROW = {
   display_name: "Fixture local",
   product_area: "wellness",
   is_published: true,
+  publication_status: "published",
   availability_status: "available",
   access_tier: "free",
+  supported_surfaces: ["product"],
+  is_conversable: true,
 };
 
 function request(
@@ -99,6 +103,12 @@ Deno.test("body accepts only selectableSpecialistId", async () => {
       "specialist_id",
       "specialistId",
       "internalSpecialistId",
+      "catalogId",
+      "agentId",
+      "ownerUserId",
+      "sessionId",
+      "role",
+      "surface",
       "status",
       "message_count",
       "messageCount",
@@ -109,6 +119,10 @@ Deno.test("body accepts only selectableSpecialistId", async () => {
       "accessState",
       "access_tier",
       "availability_status",
+      "publication_status",
+      "is_conversable",
+      "prompt",
+      "prompt_template",
       "roles",
       "permissions",
       "extra",
@@ -128,6 +142,33 @@ Deno.test("body accepts only selectableSpecialistId", async () => {
     Error,
     "invalidRequest",
   );
+  await assertRejects(
+    async () => await parseRequestBody(request([])),
+    Error,
+    "invalidRequest",
+  );
+  for (const invalidId of ["", 42, null]) {
+    await assertRejects(
+      async () =>
+        await parseRequestBody(
+          request({ selectableSpecialistId: invalidId }),
+        ),
+      Error,
+      "invalidRequest",
+    );
+  }
+  await assertRejects(
+    async () =>
+      await parseRequestBody(
+        new Request(request().url, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: "not-json",
+        }),
+      ),
+    Error,
+    "invalidRequest",
+  );
 });
 
 Deno.test("specialist resolution fails closed", async () => {
@@ -140,7 +181,7 @@ Deno.test("specialist resolution fails closed", async () => {
   await assertRejects(
     async () => resolveSpecialist([{ ...CATALOG_ROW, is_published: false }]),
     Error,
-    "contractViolation",
+    "invalidSelectableSpecialist",
   );
   await assertRejects(
     async () =>
@@ -149,7 +190,26 @@ Deno.test("specialist resolution fails closed", async () => {
         availability_status: "unavailable",
       }]),
     Error,
-    "specialistUnavailable",
+    "invalidSelectableSpecialist",
+  );
+  for (
+    const invalid of [
+      { publication_status: "draft" },
+      { is_conversable: false },
+      { supported_surfaces: ["admin"] },
+      { supported_surfaces: ["development"] },
+    ]
+  ) {
+    await assertRejects(
+      async () => resolveSpecialist([{ ...CATALOG_ROW, ...invalid }]),
+      Error,
+      "invalidSelectableSpecialist",
+    );
+  }
+  await assertRejects(
+    async () => resolveSpecialist([{ ...CATALOG_ROW, product_area: "admin" }]),
+    Error,
+    "contractViolation",
   );
   await assertRejects(
     async () => resolveSpecialist([{ ...CATALOG_ROW, access_tier: "pro" }]),
@@ -166,6 +226,41 @@ Deno.test("specialist resolution fails closed", async () => {
     Error,
     "contractViolation",
   );
+  await assertRejects(
+    async () => assertInternalSpecialistExists([]),
+    Error,
+    "backendMisconfigured",
+  );
+});
+
+Deno.test("catalog lookup applies the exact Product selection predicate", async () => {
+  let catalogUrl: URL | undefined;
+  const { fetcher } = statefulFetcher();
+  const handler = createHandler(LOCAL_CONFIG, {
+    fetcher: (async (input, init) => {
+      const url = new URL(input instanceof Request ? input.url : input);
+      if (url.pathname === "/rest/v1/specialist_catalog") catalogUrl = url;
+      return await fetcher(input, init);
+    }) as typeof fetch,
+    logWriter: () => {},
+  });
+  assertEquals((await handler(request())).status, 201);
+  assertEquals(catalogUrl?.searchParams.get("id"), `eq.${SELECTABLE_ID}`);
+  assertEquals(catalogUrl?.searchParams.get("is_published"), "eq.true");
+  assertEquals(
+    catalogUrl?.searchParams.get("publication_status"),
+    "eq.published",
+  );
+  assertEquals(
+    catalogUrl?.searchParams.get("availability_status"),
+    "eq.available",
+  );
+  assertEquals(
+    catalogUrl?.searchParams.get("supported_surfaces"),
+    "eq.{product}",
+  );
+  assertEquals(catalogUrl?.searchParams.get("is_conversable"), "eq.true");
+  assertEquals(catalogUrl?.searchParams.get("select")?.includes("*"), false);
 });
 
 Deno.test("public response excludes user_id and specialist_id", () => {

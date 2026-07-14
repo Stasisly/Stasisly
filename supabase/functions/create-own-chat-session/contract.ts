@@ -6,10 +6,21 @@ const CATALOG_KEYS = [
   "availability_status",
   "display_name",
   "id",
+  "is_conversable",
   "is_published",
   "product_area",
+  "publication_status",
   "specialist_id",
+  "supported_surfaces",
 ].sort();
+
+const PRODUCT_AREAS = [
+  "stasis",
+  "health",
+  "nutrition",
+  "training",
+  "wellness",
+];
 
 const SESSION_KEYS = [
   "id",
@@ -87,16 +98,23 @@ export function resolveSpecialist(rows: unknown): ResolvedSpecialist {
   if (
     !UUID_PATTERN.test(String(row.id)) ||
     !UUID_PATTERN.test(String(row.specialist_id)) ||
-    row.is_published !== true ||
     typeof row.display_name !== "string" ||
     row.display_name.length === 0 ||
     typeof row.product_area !== "string" ||
-    row.product_area.length === 0
+    !PRODUCT_AREAS.includes(row.product_area)
   ) {
     throw new Error("contractViolation");
   }
-  if (row.availability_status !== "available") {
-    throw new Error("specialistUnavailable");
+  if (
+    row.is_published !== true ||
+    row.publication_status !== "published" ||
+    row.availability_status !== "available" ||
+    row.is_conversable !== true ||
+    !Array.isArray(row.supported_surfaces) ||
+    row.supported_surfaces.length !== 1 ||
+    row.supported_surfaces[0] !== "product"
+  ) {
+    throw new Error("invalidSelectableSpecialist");
   }
   if (row.access_tier === "pro" || row.access_tier === "vip") {
     throw new Error("proLocked");
@@ -117,7 +135,7 @@ export function assertInternalSpecialistExists(rows: unknown): void {
     Object.keys(rows[0] as Record<string, unknown>).length !== 1 ||
     typeof (rows[0] as Record<string, unknown>).id !== "string"
   ) {
-    throw new Error("specialistUnavailable");
+    throw new Error("backendMisconfigured");
   }
 }
 

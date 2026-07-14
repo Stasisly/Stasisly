@@ -133,9 +133,14 @@ async function fetchResolvedSpecialist(
   const url = new URL("/rest/v1/specialist_catalog", baseUrl);
   url.searchParams.set(
     "select",
-    "id,specialist_id,display_name,product_area,is_published,availability_status,access_tier",
+    "id,specialist_id,display_name,product_area,is_published,publication_status,availability_status,access_tier,supported_surfaces,is_conversable",
   );
   url.searchParams.set("id", `eq.${selectableId}`);
+  url.searchParams.set("is_published", "eq.true");
+  url.searchParams.set("publication_status", "eq.published");
+  url.searchParams.set("availability_status", "eq.available");
+  url.searchParams.set("supported_surfaces", "eq.{product}");
+  url.searchParams.set("is_conversable", "eq.true");
   const rows = await requestJson(
     fetcher,
     url,

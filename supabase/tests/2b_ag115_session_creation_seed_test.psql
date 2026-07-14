@@ -1,0 +1,41 @@
+begin;
+
+create extension if not exists pgtap with schema extensions;
+
+select plan(23);
+
+select is((select count(*)::bigint from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%'), 19::bigint, 'AG114 catalog is loaded for AG115');
+select is((select id from public.specialist_catalog where slug = 'stasis'), '21000000-0000-4000-8000-000000000001'::uuid, 'Stasis public ID is specialist_catalog.id');
+select is((select id from public.specialist_catalog where slug = 'kitesurf'), '21000000-0000-4000-8000-000000000011'::uuid, 'Kitesurf public ID is specialist_catalog.id');
+select is((select count(*)::bigint from public.specialist_catalog c join public.specialists s on s.id = c.specialist_id where c.id::text like '21000000-0000-4000-8000-%'), 19::bigint, 'all public IDs resolve to internal specialists');
+select is((select count(*)::bigint from public.specialist_catalog where publication_status = 'published' and is_published and availability_status = 'available' and supported_surfaces = array['product']::text[] and is_conversable and access_tier in ('free', 'pro', 'vip')), 9::bigint, 'exact Product selection predicate resolves nine rows');
+select is((select count(*)::bigint from public.specialist_catalog where not (publication_status = 'published' and is_published and availability_status = 'available' and supported_surfaces = array['product']::text[] and is_conversable and access_tier in ('free', 'pro', 'vip'))), 10::bigint, 'ten rows are excluded by the Product selection predicate');
+select is((select count(*)::bigint from public.specialist_catalog where supported_surfaces <> array['product']::text[]), 0::bigint, 'no seeded agent belongs outside Product');
+select ok(exists(select 1 from public.specialist_catalog where slug = 'stasis' and publication_status = 'published' and availability_status = 'available' and is_conversable and access_tier = 'free'), 'Stasis is technically selectable');
+select ok(exists(select 1 from public.specialist_catalog where slug = 'kitesurf' and publication_status = 'published' and availability_status = 'available' and is_conversable and access_tier = 'free'), 'Kitesurf is technically selectable');
+select ok(exists(select 1 from public.specialist_catalog where slug = 'crossfit' and access_tier = 'pro'), 'CrossFit represents recognized pro tier');
+select ok(exists(select 1 from public.specialist_catalog where slug = 'motus' and access_tier = 'vip'), 'Motus represents recognized vip tier');
+select is((select count(*)::bigint from public.specialist_catalog where slug in ('sintoma', 'cardia', 'loto') and not (publication_status = 'published' and availability_status = 'available' and is_conversable)), 3::bigint, 'draft, unavailable and non-conversable examples fail selection');
+
+insert into auth.users (id, instance_id, aud, role, email, encrypted_password, created_at, updated_at) values
+  ('51000000-0000-4000-8000-000000000001', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'test_only_2b_ag115_a@example.invalid', '', now(), now()),
+  ('51000000-0000-4000-8000-000000000002', '00000000-0000-0000-0000-000000000000', 'authenticated', 'authenticated', 'test_only_2b_ag115_b@example.invalid', '', now(), now());
+insert into public.users (id, display_name) values
+  ('51000000-0000-4000-8000-000000000001', 'test_only_2b_ag115 A'),
+  ('51000000-0000-4000-8000-000000000002', 'test_only_2b_ag115 B');
+
+select lives_ok($$insert into public.chat_sessions (id, user_id, specialist_id) values ('53000000-0000-4000-8000-000000000001', '51000000-0000-4000-8000-000000000001', '11000000-0000-4000-8000-000000000001')$$, 'server can create owner A session for resolved Stasis specialist');
+select is((select user_id from public.chat_sessions where id = '53000000-0000-4000-8000-000000000001'), '51000000-0000-4000-8000-000000000001'::uuid, 'session owner is the authenticated identity selected by backend');
+select is((select specialist_id from public.chat_sessions where id = '53000000-0000-4000-8000-000000000001'), '11000000-0000-4000-8000-000000000001'::uuid, 'session stores resolved internal Stasis ID');
+select lives_ok($$insert into public.chat_sessions (id, user_id, specialist_id) values ('53000000-0000-4000-8000-000000000002', '51000000-0000-4000-8000-000000000001', '11000000-0000-4000-8000-000000000011')$$, 'owner A can create a session for resolved Kitesurf specialist');
+select lives_ok($$insert into public.chat_sessions (id, user_id, specialist_id) values ('53000000-0000-4000-8000-000000000003', '51000000-0000-4000-8000-000000000002', '11000000-0000-4000-8000-000000000011')$$, 'owner B receives an independent Kitesurf session');
+select is((select count(*)::bigint from public.chat_sessions where id::text like '53000000-0000-4000-8000-%'), 3::bigint, 'positive SQL fixtures create exactly three independent sessions');
+select is((select count(*)::bigint from public.messages where session_id::text like '53000000-0000-4000-8000-%'), 0::bigint, 'session creation creates no messages and executes no prompt');
+select ok((select c.relrowsecurity and not c.relforcerowsecurity from pg_catalog.pg_class c where c.oid = 'public.chat_sessions'::regclass), 'chat_sessions RLS remains enabled without FORCE RLS');
+select is((select count(*)::bigint from pg_catalog.pg_policies where schemaname = 'public' and tablename in ('specialists', 'specialist_catalog', 'chat_sessions')), 0::bigint, 'specialist and session tables retain zero policies');
+select ok(not has_table_privilege('anon', 'public.chat_sessions', 'SELECT,INSERT,UPDATE,DELETE') and not has_table_privilege('authenticated', 'public.chat_sessions', 'SELECT,INSERT,UPDATE,DELETE'), 'client roles retain zero chat_sessions CRUD grants');
+select is((select count(*)::bigint from public.chat_sessions cs left join public.users u on u.id = cs.user_id left join public.specialists s on s.id = cs.specialist_id where cs.id::text like '53000000-0000-4000-8000-%' and (u.id is null or s.id is null)), 0::bigint, 'all positive sessions retain valid owner and specialist foreign keys');
+
+select * from finish();
+
+rollback;

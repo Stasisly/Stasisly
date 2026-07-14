@@ -1,0 +1,27 @@
+\set ON_ERROR_STOP on
+
+delete from public.messages
+where session_id in (
+  select cs.id
+  from public.chat_sessions cs
+  join public.users u on u.id = cs.user_id
+  where u.display_name like 'test_only_2b_ag115%'
+);
+
+delete from public.chat_sessions
+where user_id in (
+  select id from public.users where display_name like 'test_only_2b_ag115%'
+);
+
+delete from public.users where display_name like 'test_only_2b_ag115%';
+delete from auth.users where email like 'test_only_2b_ag115_%@stasisly.local';
+
+do $$
+begin
+  if exists (select 1 from public.users where display_name like 'test_only_2b_ag115%')
+    or exists (select 1 from auth.users where email like 'test_only_2b_ag115_%@stasisly.local')
+  then
+    raise exception '2B-AG115 cleanup left identity fixtures behind';
+  end if;
+end
+$$;

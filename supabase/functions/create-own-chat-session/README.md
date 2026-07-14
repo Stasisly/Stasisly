@@ -16,6 +16,11 @@ Content-Type: application/json
 No acepta campos adicionales. La respuesta pública nunca contiene `user_id`,
 `specialist_id`, prompts o configuración interna. No crea mensajes.
 
+`selectableSpecialistId` representa exclusivamente `specialist_catalog.id`. El
+backend resuelve `specialist_id` y exige que la entrada esté publicada,
+disponible, sea conversable y pertenezca únicamente a Product. Los tiers
+`pro`/`vip` permanecen bloqueados hasta que exista entitlement aprobado.
+
 ## Límites
 
 - No desplegar, enlazar ni ejecutar contra remoto.
