@@ -9,8 +9,8 @@
 | Authority level | 6 — Evidence, audits and trackers |
 | Owner | Dirección de Documentación y Conocimiento under Rector (conceptual) |
 | Approver | Founder for authority assignments |
-| Version | 1.3 |
-| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-005 |
+| Version | 1.4 |
+| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-005-R1 |
 | Supersedes | No Foundation register |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -45,6 +45,7 @@
 | `audits/FOUNDATION-005_CONFORMANCE_SCORECARD.md` | ACTIVE | 6 | Architecture + Security + QA | Evidence owner | No, evidence | No Foundation conformance scorecard | FOUNDATION-005 audit and tests | Remediation changes a rating |
 | `audits/FOUNDATION-005_REMEDIATION_BACKLOG.md` | PROPOSED | 5 | Program Management + Architecture | Founder for execution approval | No, proposed plan | No Foundation remediation backlog | FOUNDATION-005 audit | Founder approves, rejects or reprioritizes packages |
 | `audits/FOUNDATION-005_TEST_EVIDENCE.md` | ACTIVE | 6 | QA + Documentation | Evidence owner | No, evidence | No consolidated Foundation test evidence | Baseline `e053684`; local toolchain | Relevant suites or baseline change |
+| `implementation/FOUNDATION-005-R1_LEGACY_PUBLIC_TABLES_DENY_ALL.md` | ACTIVE | 6 | Security + Database + QA + Documentation | Evidence owner | No, local implementation evidence | FOUNDATION-005 P0 evidence | Migration `00009`; local reset and test suites | Remote deployment or material access-model change |
 | `DOCUMENT_AUTHORITY_REGISTER.md` | ACTIVE | 6 | Documentation under Rector (conceptual) | Founder for authority changes | Operational register | No prior register | Documentation governance | Any authority/status/supersession change |
 | `archive_index/DISCOVERY_ARCHIVE_INDEX.md` | ACTIVE | 6 | Documentation | Evidence owner | No, evidence/index | Informal Discovery locations | Discovery archive | Archive path or successor changes |
 | `implementation/FOUNDATION_SESSION_TRACKER.md` | ACTIVE | 6 | Program Management | Evidence owner | No, tracker | Historical Discovery tracker for Foundation work | Foundation packages | Every completed Foundation package |

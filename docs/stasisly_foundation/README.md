@@ -5,9 +5,9 @@
 Índice Foundation activo. `FOUNDATION-001` congeló e inventarió el baseline;
 `FOUNDATION-002` estableció la autoridad documental inicial y archivó
 Descubrimiento; `FOUNDATION-003` estableció la Constitución y el gobierno
-global; `FOUNDATION-004` definió la arquitectura técnica objetivo; y
-`FOUNDATION-005` auditó la implementación heredada frente a esa arquitectura
-sin modificarla.
+global; `FOUNDATION-004` definió la arquitectura técnica objetivo;
+`FOUNDATION-005` auditó la implementación heredada frente a esa arquitectura;
+y `FOUNDATION-005-R1` cerró localmente su P0 de tablas públicas legacy.
 
 La documentación Foundation registra decisiones y evidencia según su nivel de
 autoridad. No demuestra por sí sola que una capacidad esté implementada.
@@ -71,11 +71,13 @@ sin implementación Foundation.
 - [Scorecard de conformidad](audits/FOUNDATION-005_CONFORMANCE_SCORECARD.md)
 - [Backlog de remediación](audits/FOUNDATION-005_REMEDIATION_BACKLOG.md)
 - [Evidencia de tests](audits/FOUNDATION-005_TEST_EVIDENCE.md)
+- [Cierre local FOUNDATION-005-R1](implementation/FOUNDATION-005-R1_LEGACY_PUBLIC_TABLES_DENY_ALL.md)
 
-La auditoría identifica componentes modernos reutilizables, deuda legacy y un
-P0 en el estado PostgreSQL definido por el repositorio: diez tablas públicas
-legacy carecen de RLS y conservan grants de cliente amplios. No afirma el estado
-de ningún entorno remoto ni autoriza remediaciones.
+La auditoría identificó componentes modernos reutilizables, deuda legacy y un
+P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
+por el repositorio: RLS activo, cero policies y cero grants cliente en las diez
+tablas. El P0 queda `CLOSED_LOCALLY`; esto no afirma el estado remoto ni resuelve
+la deuda P1-P4.
 
 ## Autoridad
 
@@ -120,6 +122,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Antes de abrir el plan general FOUNDATION-006, el siguiente gate recomendado es
-`FOUNDATION-005-R1 — Harden legacy public tables deny-all`: una remediación
-mínima, versionada y localmente probada del P0 identificado por la auditoría.
+Con `FOUNDATION-005-R1` validado localmente, el siguiente gate recomendado es
+`FOUNDATION-006`: plan maestro de remediación y reconstrucción técnica. R1 no
+autoriza despliegues remotos ni ejecución automática del plan.

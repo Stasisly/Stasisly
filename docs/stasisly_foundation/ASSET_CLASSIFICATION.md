@@ -93,3 +93,14 @@ siguen sin estar autorizadas por esta clasificación.
   definido por el repositorio.
 - Las conclusiones se basan en baseline `e053684`, inspección estática y pruebas
   locales; no describen el estado de ningún entorno remoto.
+
+## Evidencia añadida por FOUNDATION-005-R1
+
+- La migración `00009_harden_legacy_public_tables_deny_all.sql` mantiene la
+  clasificación `ADAPT_CANDIDATE` de las migraciones y cierra localmente el P0.
+- Las diez tablas legacy tienen RLS activo, cero policies y cero grants CRUD de
+  `anon` y `authenticated`; `service_role` conserva CRUD.
+- Dos resets locales completos, 649 tests SQL, 52 tests Deno y 406 tests Flutter
+  validan la remediación sin datos reales ni cambios remotos.
+- El estado es `CLOSED_LOCALLY`; la clasificación no afirma conformidad remota
+  ni resuelve los riesgos P1-P4.

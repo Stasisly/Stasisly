@@ -1,12 +1,13 @@
 # FOUNDATION-005 Remediation Backlog
 
-Status: **PROPOSED**. Nothing in this backlog is authorized for execution.
+Status: **ACTIVE tracking**. P0 was separately authorized and is
+`CLOSED_LOCALLY`; P1-P4 remain proposed and unauthorized.
 
 ## P0 — Foundation blocker or critical security risk
 
 | Issue | Evidence | Risk | Assets | Foundation decision | Recommended package | Acceptance criteria | Dependencies |
 |---|---|---|---|---|---|---|---|
-| Legacy public tables are not deny-all | Local catalog inspection: 10 tables have RLS off and full `anon`/`authenticated` table privileges | Unauthorized read/write/destructive access if this repository state is deployed | Migration 00001 and missing later hardening/tests | Deny by default; explicit ownership; no inherited total access | `FOUNDATION-005-R1 — Harden legacy public tables deny-all` | Versioned migration enables RLS, revokes client table privileges, creates no permissive policies; clean local reset and tests prove all ten tables protected | DB, Security, AppSec and QA review |
+| Legacy public tables are not deny-all — `CLOSED_LOCALLY` | R1 local evidence: 10 tables have RLS active, zero policies, zero client CRUD grants and retained `service_role` CRUD | Remote state remains unverified; regression risk remains without backend CI | Migration 00009 and R1 pgTAP suites | Deny by default; explicit ownership; no inherited total access | `FOUNDATION-005-R1 — Harden legacy public tables deny-all` completed locally | Two clean local resets; 649 SQL, 52 Deno and 406 Flutter tests pass; no remote action | Remote rollout requires separate approval; CI remains P2 |
 
 The package must not redesign schemas, rename `orchestator_summaries`, add
 Product behavior or touch a remote project.
@@ -52,6 +53,6 @@ Product behavior or touch a remote project.
 
 ## Gate
 
-`FOUNDATION-005-R1` is the only permitted recommendation immediately following
-this audit. FOUNDATION-006 should begin only after the P0 is remediated and
-locally verified in a separately approved package.
+`FOUNDATION-005-R1` is complete and the P0 is `CLOSED_LOCALLY`. FOUNDATION-006
+may now be proposed as the plan maestro de remediación y reconstrucción técnica.
+No P1-P4 implementation or remote rollout is authorized by this gate change.

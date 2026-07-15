@@ -34,8 +34,8 @@ select is(
       and c.relname <> 'users'
       and c.relrowsecurity
   ),
-  '{chat_sessions,messages,specialist_catalog,specialists}',
-  'only the approved later deny-all tables additionally have RLS'
+  '{branch_chiefs,calendar_events,chat_sessions,chief_write_permissions,memberships,messages,orchestator_summaries,reminders,specialist_catalog,specialist_temporary_disables,specialists,subcategory_chiefs,user_health_data,user_memberships}',
+  'only the approved later deny-all tables, including R1, additionally have RLS'
 );
 
 select ok(
