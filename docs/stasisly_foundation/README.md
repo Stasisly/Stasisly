@@ -9,7 +9,9 @@ global; `FOUNDATION-004` definió la arquitectura técnica objetivo;
 `FOUNDATION-005` auditó la implementación heredada frente a esa arquitectura;
 y `FOUNDATION-005-R1` cerró localmente su P0 de tablas públicas legacy.
 `FOUNDATION-006` establece la estrategia y secuencia maestra de reconstrucción;
-no ejecuta las remediaciones planificadas.
+`FOUNDATION-007` define el modelo conceptual de autorización; y
+`FOUNDATION-008` implementa localmente los contratos propios de identidad,
+sesión y contexto API con Supabase Auth confinado como adapter actual.
 
 La documentación Foundation registra decisiones y evidencia según su nivel de
 autoridad. No demuestra por sí sola que una capacidad esté implementada.
@@ -100,6 +102,17 @@ FOUNDATION-007 aprueba conceptualmente deny-by-default, RBAC+ABAC, contextos de
 surface/entorno, ownership backend, JIT, niveles Founder, identidades técnicas,
 PDP/PEP, auditoría y revocación. No implementa ninguno de esos controles.
 
+## Identidad, sesión y contexto API
+
+- [Implementación FOUNDATION-008](implementation/FOUNDATION-008_OWNED_IDENTITY_SESSION_API_CONTRACTS.md)
+- [ADR-F005 — Contratos propios de identidad, sesión y API](adr/ADR-F005-owned-identity-session-and-api-contracts.md)
+
+FOUNDATION-008 adopta localmente `StasislyIdentity`, `StasislySession`, estados
+y errores neutrales, `IdentityProvider` y `ApiIdentityContext`. Supabase Auth es
+`ADAPT / CURRENT_PROVIDER_ADAPTER`; la feature auth completa queda parcialmente
+adaptada. Autorización, Founder access, surface permissions y remoto siguen sin
+implementar o ejecutar.
+
 La auditoría identificó componentes modernos reutilizables, deuda legacy y un
 P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
 por el repositorio: RLS activo, cero policies y cero grants cliente en las diez
@@ -149,7 +162,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Con FOUNDATION-007 establecido, el siguiente gate recomendado es
-`FOUNDATION-008 — Owned identity, session and API contracts`. Ningún control
-técnico queda implementado por el modelo y ninguna operación remota queda
-autorizada.
+Con FOUNDATION-008 implementado localmente, el siguiente gate recomendado es
+`FOUNDATION-009 — Legacy route containment and surface guards`, sujeto a
+aprobación separada. Ninguna operación remota queda autorizada.

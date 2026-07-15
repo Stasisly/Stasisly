@@ -84,24 +84,23 @@ void main() {
     }
   });
 
-  test(
-    'legacy auth remains isolated and is not treated as approved safe auth',
-    () {
-      final legacyAuthProvider = File(
-        'lib/features/auth/presentation/viewmodels/auth_providers.dart',
-      ).readAsStringSync();
-      final routes = File('lib/core/config/routes.dart').readAsStringSync();
+  test('legacy auth consumers now depend on the owned identity port', () {
+    final legacyAuthProvider = File(
+      'lib/features/auth/presentation/viewmodels/auth_providers.dart',
+    ).readAsStringSync();
+    final routes = File('lib/core/config/routes.dart').readAsStringSync();
 
-      expect(legacyAuthProvider, contains('Supabase.instance.client'));
-      expect(legacyAuthProvider, contains('class AuthController'));
-      expect(routes, contains('authControllerProvider'));
+    expect(legacyAuthProvider, contains('identityProviderProvider'));
+    expect(legacyAuthProvider, isNot(contains('Supabase.instance.client')));
+    expect(legacyAuthProvider, isNot(contains('supabase_flutter')));
+    expect(legacyAuthProvider, contains('class AuthController'));
+    expect(routes, contains('authControllerProvider'));
 
-      final safeExports = File(
-        'lib/core/auth/session/secure_session.dart',
-      ).readAsStringSync();
-      expect(safeExports, isNot(contains('features/auth')));
-      expect(safeExports, isNot(contains('auth_providers')));
-      expect(safeExports, isNot(contains('AuthController')));
-    },
-  );
+    final safeExports = File(
+      'lib/core/auth/session/secure_session.dart',
+    ).readAsStringSync();
+    expect(safeExports, isNot(contains('features/auth')));
+    expect(safeExports, isNot(contains('auth_providers')));
+    expect(safeExports, isNot(contains('AuthController')));
+  });
 }

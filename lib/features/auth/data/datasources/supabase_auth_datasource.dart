@@ -1,90 +1,43 @@
-import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
+import 'package:stasisly/core/identity/domain/authentication_result.dart';
+import 'package:stasisly/core/identity/domain/authentication_token_result.dart';
+import 'package:stasisly/core/identity/domain/stasisly_session.dart';
+import 'package:stasisly/core/identity/ports/identity_provider.dart';
 
-import 'package:stasisly/core/error/exceptions.dart';
-import 'package:stasisly/features/auth/data/models/user_model.dart';
-
-/// DataSource for authentication using Supabase.
+/// Compatibility wrapper. Provider SDK access lives in the core adapter.
+@Deprecated('Inject IdentityProvider directly in new code.')
 class SupabaseAuthDataSource {
-  const SupabaseAuthDataSource(this._supabase);
+  const SupabaseAuthDataSource(this._identityProvider);
 
-  final supabase.SupabaseClient _supabase;
+  final IdentityProvider _identityProvider;
 
-  /// Stream of user state changes.
-  Stream<UserModel?> get authStateChanges {
-    return _supabase.auth.onAuthStateChange.map((event) {
-      final user = event.session?.user;
-      if (user == null) return null;
-      return UserModel.fromSupabase(user);
-    });
-  }
+  Stream<StasislySession> get authStateChanges =>
+      _identityProvider.observeAuthentication();
 
-  /// Synchronously gets the current user.
-  UserModel? get currentUser {
-    final user = _supabase.auth.currentUser;
-    if (user == null) return null;
-    return UserModel.fromSupabase(user);
-  }
+  Future<StasislySession> readCurrentSession() =>
+      _identityProvider.readCurrentSession();
 
   /// Signs in a user with email and password.
-  Future<UserModel> signInWithEmail({
+  Future<AuthenticationResult> signInWithEmail({
     required String email,
     required String password,
-  }) async {
-    try {
-      final response = await _supabase.auth.signInWithPassword(
-        email: email,
-        password: password,
-      );
-
-      final user = response.user;
-      if (user == null) {
-        throw const AuthException(
-          message: 'Error al iniciar sesión. Usuario no encontrado.',
-        );
-      }
-
-      return UserModel.fromSupabase(user);
-    } on supabase.AuthException catch (e) {
-      throw AuthException(message: e.message); // My Custom Exception
-    } catch (e) {
-      throw ServerException(message: e.toString());
-    }
+  }) {
+    return _identityProvider.signIn(email: email, password: password);
   }
 
   /// Registers a new user.
-  Future<UserModel> signUpWithEmail({
+  Future<AuthenticationResult> signUpWithEmail({
     required String email,
     required String password,
-  }) async {
-    try {
-      final response = await _supabase.auth.signUp(
-        email: email,
-        password: password,
-      );
-
-      final user = response.user;
-      if (user == null) {
-        throw const AuthException(
-          message: 'Error al registrar. Usuario no creado.',
-        );
-      }
-
-      return UserModel.fromSupabase(user);
-    } on supabase.AuthException catch (e) {
-      throw AuthException(message: e.message);
-    } catch (e) {
-      throw ServerException(message: e.toString());
-    }
+  }) {
+    return _identityProvider.signUp(email: email, password: password);
   }
 
   /// Signs out the current user.
-  Future<void> signOut() async {
-    try {
-      await _supabase.auth.signOut();
-    } on supabase.AuthException catch (e) {
-      throw AuthException(message: e.message);
-    } catch (e) {
-      throw ServerException(message: e.toString());
-    }
-  }
+  Future<AuthenticationResult> signOut() => _identityProvider.signOut();
+
+  Future<AuthenticationResult> refreshSession() =>
+      _identityProvider.refreshSession();
+
+  Future<AuthenticationTokenResult> acquireAccessToken() =>
+      _identityProvider.acquireAccessToken();
 }

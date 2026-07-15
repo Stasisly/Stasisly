@@ -90,5 +90,5 @@ class SecureSessionTokenResult extends Equatable {
   bool get hasToken => token != null && token!.trim().isNotEmpty;
 
   @override
-  List<Object?> get props => [status, token, error];
+  List<Object?> get props => [status, error];
 }

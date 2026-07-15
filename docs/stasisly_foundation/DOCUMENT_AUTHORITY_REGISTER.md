@@ -9,8 +9,8 @@
 | Authority level | 6 — Evidence, audits and trackers |
 | Owner | Dirección de Documentación y Conocimiento under Rector (conceptual) |
 | Approver | Founder for authority assignments |
-| Version | 1.6 |
-| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-007 |
+| Version | 1.7 |
+| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-008 |
 | Supersedes | No Foundation register |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -61,6 +61,8 @@
 | `security/THREAT_CONTROL_MATRIX.md` | ACTIVE | 6 | Security + risk owners | Evidence owner; Founder for risk acceptance | No, security evidence/planning | No consolidated control matrix | Threat Model | Control evidence, risk or package change |
 | `security/SECURITY_ABUSE_CASES.md` | ACTIVE | 6 | AppSec + QA + Security | Evidence owner | No, security evidence | No consolidated abuse-case set | Threat/Authorization Models | Test implementation or threat change |
 | `adr/ADR-F004-technical-authorization-and-threat-model.md` | APPROVED | 2 | Security + Architecture under Rector | Founder | Yes | No technical authorization ADR | ADR-F001-F003; Threat Model | Decision superseded or implementation semantics change |
+| `implementation/FOUNDATION-008_OWNED_IDENTITY_SESSION_API_CONTRACTS.md` | ACTIVE | 6 | Architecture + Security + QA + Documentation | Evidence owner | No, local implementation evidence | Provider-owned identity/session ambiguity | ADR-F005; FOUNDATION-007 | Adapter, contract, authorization or remote activation change |
+| `adr/ADR-F005-owned-identity-session-and-api-contracts.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture under Rector + Security | Founder | Yes | Provider Auth DTOs as implicit domain boundary | ADR-F002; ADR-F004 | Identity/session/API contract or provider strategy change |
 | `DOCUMENT_AUTHORITY_REGISTER.md` | ACTIVE | 6 | Documentation under Rector (conceptual) | Founder for authority changes | Operational register | No prior register | Documentation governance | Any authority/status/supersession change |
 | `archive_index/DISCOVERY_ARCHIVE_INDEX.md` | ACTIVE | 6 | Documentation | Evidence owner | No, evidence/index | Informal Discovery locations | Discovery archive | Archive path or successor changes |
 | `implementation/FOUNDATION_SESSION_TRACKER.md` | ACTIVE | 6 | Program Management | Evidence owner | No, tracker | Historical Discovery tracker for Foundation work | Foundation packages | Every completed Foundation package |

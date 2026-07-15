@@ -1,3 +1,4 @@
+export 'adapters/identity_provider_secure_session_token_adapter.dart';
 export 'adapters/secure_session_to_local_session_token_adapter.dart';
 export 'application/secure_session_controller.dart';
 export 'application/secure_session_state.dart';

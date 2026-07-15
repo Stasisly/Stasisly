@@ -1,10 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:stasisly/core/auth/session/adapters/identity_provider_secure_session_token_adapter.dart';
 import 'package:stasisly/core/auth/session/application/secure_session_controller.dart';
 import 'package:stasisly/core/auth/session/application/secure_session_state.dart';
 import 'package:stasisly/core/auth/session/secure_session_token_provider.dart';
 import 'package:stasisly/core/config/app_environment.dart';
 import 'package:stasisly/core/config/env.dart';
+import 'package:stasisly/core/identity/providers/identity_providers.dart';
 
 final demoSecureSessionTokenProvider = Provider<SecureSessionTokenProvider>((
   ref,
@@ -40,7 +41,9 @@ final secureSessionTokenProvider = Provider<SecureSessionTokenProvider>((ref) {
   }
 
   if (environment.allowsRealAuth) {
-    return ref.watch(developmentSyntheticSecureSessionTokenProvider);
+    return IdentityProviderSecureSessionTokenAdapter(
+      ref.watch(identityProviderProvider),
+    );
   }
 
   // ADR-006/ADR-007: backend and production auth remain blocked until a

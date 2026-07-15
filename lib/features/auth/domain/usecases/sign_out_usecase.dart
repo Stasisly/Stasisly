@@ -1,6 +1,4 @@
-import 'package:dartz/dartz.dart';
-
-import 'package:stasisly/core/error/failures.dart';
+import 'package:stasisly/core/identity/domain/authentication_result.dart';
 import 'package:stasisly/features/auth/domain/repositories/auth_repository.dart';
 
 class SignOutUseCase {
@@ -8,7 +6,7 @@ class SignOutUseCase {
 
   final AuthRepository _repository;
 
-  Future<Either<Failure, void>> call() {
+  Future<AuthenticationResult> call() {
     return _repository.signOut();
   }
 }

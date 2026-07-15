@@ -55,7 +55,7 @@ class ActiveChatSession extends _$ActiveChatSession {
     final identity = ref.watch(currentIdentityProvider);
     final useCase = ref.watch(getOrCreateSessionUseCaseProvider);
     final result = await useCase(
-      userId: identity.id,
+      userId: identity.subjectId,
       specialistId: specialistId,
     );
 

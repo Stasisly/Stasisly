@@ -5,19 +5,22 @@
 Status: **APPROVED working execution structure**. Package status is recorded
 below; every future package requires its own approval and exact scope.
 
-Package status after FOUNDATION-007:
+Package status after FOUNDATION-008:
 
 ```text
 FOUNDATION-007: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
-FOUNDATION-008..020: NOT EXECUTED
+FOUNDATION-008: IMPLEMENTED LOCALLY / PROVIDER ADAPTER CURRENT
+FOUNDATION-009: NOT EXECUTED / NEXT GATE
+FOUNDATION-010: NOT EXECUTED / REQUIRES RESCOPE
+FOUNDATION-011..020: NOT EXECUTED
 ```
 
 | Package | Title | Type | Objective | Dependencies | Gate | Expected result |
 |---|---|---|---|---|---|---|
 | FOUNDATION-007 | Technical authorization and threat model | DOCUMENTATION / SECURITY | Define identity/action/resource/context, RBAC/ABAC/JIT, ownership, service identities, Founder elevation and audit events | R1, ADR-F003 | G0-G2 satisfied conceptually; no implementation | ADR-F004, approved conceptual models and active security matrices |
-| FOUNDATION-008 | Owned identity, session and API contracts | DOCUMENTATION / ARCHITECTURE | Separate identity, authentication, authorization, ownership and session; version public DTO/error contracts | FOUNDATION-007 | G0-G2 | Stable provider-neutral ports ready for local implementation |
+| FOUNDATION-008 | Owned identity, session and API contracts | IMPLEMENTATION / ARCHITECTURE | Separate identity, authentication, authorization, ownership and session; own DTO/error contracts and confine provider SDK | FOUNDATION-007 | G0-G7 completed after publication | Provider-neutral ports and local adapters implemented; no authorization or remote activation |
 | FOUNDATION-009 | Legacy route containment and surface guards | IMPLEMENTATION / SECURITY | Remove Product reachability to legacy writes and enforce explicit Product/Development route contexts | FOUNDATION-007, FOUNDATION-008 | G0-G7 | Local guards/tests prove no legacy or cross-surface Product path |
-| FOUNDATION-010 | Local identity/auth adapter boundary | IMPLEMENTATION | Place current provider behavior behind mockable owned ports without remote activation | FOUNDATION-008 | G0-G7 | Local adapter contract tests; no public token state or demo fallback |
+| FOUNDATION-010 | Identity compatibility cleanup and adapter completion | REPLAN REQUIRED | Re-evaluate remaining legacy auth facades and provider assembly after FOUNDATION-008; do not duplicate its adapter | FOUNDATION-008, FOUNDATION-009 findings | New G0-G2 before execution | Approved narrow rescope or retirement; no remote activation |
 | FOUNDATION-011 | Sessions/messages owned API adoption | IMPLEMENTATION | Adapt modern contracts behind owned API, preserving explicit IDs, ownership and atomic messaging | FOUNDATION-009, FOUNDATION-010 | G0-G7 | Local end-to-end safe flow with no legacy chat or direct Product Supabase |
 | FOUNDATION-012 | Product taxonomy and conversation decisions | DOCUMENTATION / PRODUCT | Decide Wellness/Training naming, catalog, profile, conversation route, entitlements and view boundaries | FOUNDATION-007-009 | Founder Product gate; G0-G2 | Approved Product ADRs and bounded first vertical slice |
 | FOUNDATION-013 | First controlled Product conversation slice | IMPLEMENTATION | Implement the approved catalog-to-session-to-message flow with privacy and accessibility states | FOUNDATION-011, FOUNDATION-012 | G0-G7; no remote | Tested local Product increment, rollback route and accepted residual debt |
@@ -38,5 +41,5 @@ FOUNDATION-008..020: NOT EXECUTED
    destructive migrations receive independent packages and G8-G10 gates.
 4. A package stops when an unapproved file, authority decision or remote
    dependency becomes necessary.
-5. FOUNDATION-007 is next because authorization vocabulary blocks identity,
-   surface isolation, Product promotion, Administration and Engine safety.
+5. FOUNDATION-009 is next because legacy route containment and explicit surface
+   guards block Product promotion; it requires separate approval.

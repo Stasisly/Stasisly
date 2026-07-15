@@ -10,7 +10,7 @@ final ownProfileRepositoryProvider = Provider<OwnProfileRepository>((ref) {
   final environment = ref.watch(appEnvironmentProvider);
   if (environment.isDemo) {
     final identity = ref.watch(currentIdentityProvider);
-    return DemoOwnProfileRepository(demoId: identity.id);
+    return DemoOwnProfileRepository(demoId: identity.subjectId);
   }
 
   // ADR-006: no real adapter may be selected until backend activation is

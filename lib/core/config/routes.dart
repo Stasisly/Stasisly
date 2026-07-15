@@ -40,7 +40,7 @@ final routerProvider = Provider<GoRouter>((ref) {
 
       if (authState == null || authState.isLoading) return null;
 
-      final isAuth = authState.valueOrNull != null;
+      final isAuth = authState.valueOrNull?.isAuthenticated ?? false;
       final isLoggingIn =
           state.uri.path == '/login' ||
           state.uri.path == '/register' ||

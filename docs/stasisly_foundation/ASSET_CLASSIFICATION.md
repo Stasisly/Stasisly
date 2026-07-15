@@ -30,8 +30,8 @@ siguen sin estar autorizadas por esta clasificación.
 | 43 agentes AAA | `docs/archive/discovery/stasisly_definition/agents/` | ADAPT | Base experta de Development | COST_CRITICAL | Extraer plantilla y roster | Gobierno de agentes |
 | 6 comités | `docs/archive/discovery/stasisly_definition/committees/` | ADAPT | Gobierno útil, posible sobredimensión | Coste de coordinación | Revisar mandato/gates | Nexus/Rector futuros |
 | Orquestador Codex | `docs/archive/discovery/stasisly_definition/orchestrator/` | ADAPT | Controles operativos valiosos | Puede frenar o sobreactuar | Convertir a estándar Foundation | Program Management |
-| Flutter core/config | `lib/core/` | ADAPT | Gates y contratos útiles | SECURITY_CRITICAL | Auditar acoplamientos | Riverpod, GoRouter |
-| Auth legacy | `lib/features/auth/` | REWRITE | Supabase directo y frontera heredada | SECURITY_CRITICAL, VENDOR_COUPLED | Diseñar puerto de identidad | Auth, RBAC/ABAC |
+| Flutter core/config | `lib/core/` | ADAPT | Gates y contratos útiles; identidad/sesión canónicas adoptadas en FOUNDATION-008 | SECURITY_CRITICAL | Continuar aislamiento de surfaces | Riverpod, GoRouter |
+| Auth legacy | `lib/features/auth/` | ADAPT / PARTIALLY_ADAPTED | Consume puerto propio, pero conserva fachadas legacy y bootstrap proveedor | SECURITY_CRITICAL, VENDOR_COUPLED | Migración gradual; no declarar feature completa adoptada | Auth, RBAC/ABAC |
 | Chat legacy | `lib/features/chat/` | REWRITE | Contratos y rutas antiguas | SECURITY_CRITICAL | No conectar; reemplazar gradualmente | Sessions/messages |
 | Chat local-safe | `lib/features/chat_sessions/`, `chat_messages/` | ADAPT | Fronteras y tests valiosos | Local/dev-only | Adoptar tras arquitectura F3/F7 | Auth, API |
 | Perfil y especialistas | `lib/features/profile/`, `specialists/` | ADAPT | Contratos mínimos sanitizados | VENDOR_COUPLED parcial | Introducir puertos backend | Identidad/catálogo |
@@ -123,3 +123,14 @@ Ningún activo queda `FOUNDATION_ADOPTED` por esta consolidación. Debe superar
 contrato aprobado, asignación de surface, revisión de seguridad, frontera de
 proveedor, tests, documentación, ausencia de autoridad legacy y aceptación de
 deuda residual.
+
+## Adopción de FOUNDATION-008
+
+- Contratos canónicos de identidad y sesión en `lib/core/identity/`:
+  `FOUNDATION_ADOPTED` localmente.
+- Supabase Auth: `ADAPT / CURRENT_PROVIDER_ADAPTER`, confinado a infraestructura.
+- `lib/features/auth/`: `CANDIDATE / PARTIALLY_ADAPTED`; conserva compatibilidad
+  heredada y no representa autorización Foundation.
+- Autorización, Founder access y permisos por surface: `NOT_IMPLEMENTED`.
+- Chat, profile y specialists conservan sus clasificaciones previas; solo se
+  adaptaron consumidores directos al identificador canónico.

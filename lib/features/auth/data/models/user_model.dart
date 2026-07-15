@@ -1,13 +1,11 @@
-import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
-
+import 'package:stasisly/core/identity/domain/stasisly_identity.dart';
 import 'package:stasisly/features/auth/domain/entities/user_entity.dart';
 
-/// Data model representing the user, mapping Supabase User to UserEntity.
+/// Compatibility model for legacy auth consumers.
 class UserModel extends UserEntity {
   const UserModel({required super.id, required super.email});
 
-  /// Creates a [UserModel] from a Supabase [User].
-  factory UserModel.fromSupabase(supabase.User user) {
-    return UserModel(id: user.id, email: user.email ?? '');
+  factory UserModel.fromIdentity(StasislyIdentity identity) {
+    return UserModel(id: identity.subjectId, email: identity.email ?? '');
   }
 }

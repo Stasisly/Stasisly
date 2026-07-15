@@ -85,8 +85,9 @@ model, not G3-G5 for runtime controls.
 
 ## Track B — API and identity boundaries
 
-**Next gate:** FOUNDATION-008 defines owned identity, session and API contracts
-using the approved policy inputs; it does not inherit remote authorization.
+**Status:** FOUNDATION-008 completed locally. Canonical identity/session
+contracts are adopted; Supabase Auth remains the current adapter. The next gate
+is FOUNDATION-009, and no remote authorization is inherited.
 
 - **ID / title:** B — Owned API, identity, authentication and session boundary.
 - **Objective:** separate identity, authentication, authorization, ownership
@@ -103,11 +104,11 @@ using the approved policy inputs; it does not inherit remote authorization.
 - **Permitted/prohibited:** preserve strict DTOs and fail-closed errors; no
   service role in clients, implicit demo fallback, remote auth or provider DTOs
   as public contracts.
-- **Tests/acceptance/rollback:** token validation boundaries, session lifecycle,
-  adapter contract and provider-independent error tests; old adapters remain
-  isolated until replacement passes.
-- **Entry/exit/founder gate:** approved A vocabulary; exit owned ports plus
-  mockable local adapter evidence; Founder approves provider strategy changes.
+- **Tests/acceptance/rollback:** completed locally with token/session mapping,
+  provider-neutral errors, architecture guards and full regression suites;
+  compatibility adapters remain isolated pending consumer evidence.
+- **Entry/exit/founder gate:** FOUNDATION-008 exit satisfied through G7 after
+  publication; provider strategy changes and all remote work remain gated.
 
 ## Track C — Surface isolation
 

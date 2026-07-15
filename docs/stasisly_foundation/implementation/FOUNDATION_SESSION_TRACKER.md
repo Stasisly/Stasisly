@@ -27,6 +27,9 @@ completed
 FOUNDATION-007:
 completed
 
+FOUNDATION-008:
+completed locally
+
 Discovery baseline:
 7f747e0
 
@@ -56,6 +59,9 @@ completed by the package commit and push; future packages remain unexecuted
 
 FOUNDATION-007 closure:
 conceptual security model completed by package commit and push; implementation not started
+
+FOUNDATION-008 closure:
+owned identity, session and API contracts implemented locally; authorization and remote activation not implemented
 ```
 
 ## Rules
@@ -79,3 +85,4 @@ conceptual security model completed by package commit and push; implementation n
 | FOUNDATION-005-R1 | Completed | Harden exactly ten legacy public tables as deny-all without schema redesign, data changes or remote action | Migration 00009; R1 pgTAP 170/170; full SQL 649/649 after two resets; Deno 52/52 and format 41 files; Flutter 406 pass/5 skip; final RLS/policies/grants evidence | `LEGACY PUBLIC TABLES DENY_ALL HARDENED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-006 may be proposed after package publication; remote rollout separately gated |
 | FOUNDATION-006 | Completed | Establish controlled remediation, adoption and reconstruction strategy without implementation | Six planning documents, ADR-F003, eight tracks, 14 future packages, G0-G10, asset adoption gate, risk/debt register and synchronized roadmap/authority; no code or remote action | `FOUNDATION RECONSTRUCTION PLAN ESTABLISHED_AND_PUSHED` upon successful push | FOUNDATION-007 authorization and threat model after separate approval |
 | FOUNDATION-007 | Completed conceptually | Define global threats and authorization across identities, surfaces, environments, Founder, services and agents without implementation | Seven security documents, ADR-F004, 22 threats, 20 abuse cases, 32 representative decisions, trust boundaries, RBAC+ABAC/JIT/PDP/PEP, audit/revocation and synchronized plans; no code or remote action | `TECHNICAL AUTHORIZATION_AND_THREAT_MODEL ESTABLISHED_AND_PUSHED` upon successful push | FOUNDATION-008 owned identity, session and API contracts after separate approval |
+| FOUNDATION-008 | Completed locally | Implement provider-neutral identity, authentication state, session, token, request-context and error contracts; confine Supabase Auth to an adapter | Canonical contracts/port/adapters/bridge; analyzer 0 errors; Flutter 425 pass/5 approved remote skips; Deno 52/52 and format 41 files; local reset plus SQL 649/649; architecture/security review; ADR-F005; no remote | `OWNED IDENTITY_SESSION_API CONTRACTS IMPLEMENTED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-009 route containment and surface guards after separate approval; FOUNDATION-010 requires rescope |

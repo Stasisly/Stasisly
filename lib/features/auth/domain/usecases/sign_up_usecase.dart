@@ -1,7 +1,4 @@
-import 'package:dartz/dartz.dart';
-
-import 'package:stasisly/core/error/failures.dart';
-import 'package:stasisly/features/auth/domain/entities/user_entity.dart';
+import 'package:stasisly/core/identity/domain/authentication_result.dart';
 import 'package:stasisly/features/auth/domain/repositories/auth_repository.dart';
 
 class SignUpUseCase {
@@ -9,10 +6,10 @@ class SignUpUseCase {
 
   final AuthRepository _repository;
 
-  Future<Either<Failure, UserEntity>> call({
+  Future<AuthenticationResult> call({
     required String email,
     required String password,
   }) {
-    return _repository.signUpWithEmail(email: email, password: password);
+    return _repository.signUp(email: email, password: password);
   }
 }

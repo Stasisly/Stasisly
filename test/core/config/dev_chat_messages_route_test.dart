@@ -7,6 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:stasisly/app.dart';
 import 'package:stasisly/core/config/app_environment.dart';
 import 'package:stasisly/core/config/routes.dart';
+import 'package:stasisly/core/identity/infrastructure/environment_blocked_identity_provider.dart';
+import 'package:stasisly/core/identity/providers/identity_providers.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_composed_safe_shell.dart';
 
 void main() {
@@ -88,6 +90,9 @@ void main() {
             remoteBackendEnabled: true,
             realAuthEnabled: true,
           ),
+        ),
+        identityProviderProvider.overrideWithValue(
+          const EnvironmentBlockedIdentityProvider(),
         ),
       ],
     );

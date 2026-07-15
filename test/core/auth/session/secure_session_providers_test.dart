@@ -1,12 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:stasisly/core/auth/session/adapters/identity_provider_secure_session_token_adapter.dart';
 import 'package:stasisly/core/auth/session/application/secure_session_state.dart';
 import 'package:stasisly/core/auth/session/providers/secure_session_providers.dart';
 import 'package:stasisly/core/auth/session/secure_session_auth_state.dart';
 import 'package:stasisly/core/auth/session/secure_session_token_provider.dart';
 import 'package:stasisly/core/auth/session/secure_session_token_result.dart';
 import 'package:stasisly/core/config/app_environment.dart';
+import 'package:stasisly/core/identity/identity.dart';
 
 const _syntheticJwtLikeToken = 'header.payload.signature';
 
@@ -55,33 +56,36 @@ void main() {
     }
   });
 
-  test('development real auth gate selects synthetic token provider', () async {
-    final container = ProviderContainer(
-      overrides: [
-        appEnvironmentProvider.overrideWithValue(
-          const AppEnvironment(
-            mode: AppRuntimeMode.development,
-            supabaseUrl: 'https://project.supabase.co',
-            supabaseAnonKey: 'public-test-key',
-            remoteBackendEnabled: true,
-            realAuthEnabled: true,
+  test(
+    'development real auth gate selects the owned identity adapter',
+    () async {
+      final container = ProviderContainer(
+        overrides: [
+          appEnvironmentProvider.overrideWithValue(
+            const AppEnvironment(
+              mode: AppRuntimeMode.development,
+              supabaseUrl: 'https://project.supabase.co',
+              supabaseAnonKey: 'public-test-key',
+              remoteBackendEnabled: true,
+              realAuthEnabled: true,
+            ),
           ),
-        ),
-        developmentSyntheticAccessTokenProvider.overrideWithValue(
-          _syntheticJwtLikeToken,
-        ),
-      ],
-    );
-    addTearDown(container.dispose);
+          identityProviderProvider.overrideWithValue(
+            _FakeIdentityProvider.authenticated(),
+          ),
+        ],
+      );
+      addTearDown(container.dispose);
 
-    final provider = container.read(secureSessionTokenProvider);
+      final provider = container.read(secureSessionTokenProvider);
 
-    expect(provider, isA<DevelopmentSyntheticSecureSessionTokenProvider>());
-    expect(
-      await provider.getAccessToken(),
-      SecureSessionTokenResult.success(_syntheticJwtLikeToken),
-    );
-  });
+      expect(provider, isA<IdentityProviderSecureSessionTokenAdapter>());
+      expect(
+        await provider.getAccessToken(),
+        SecureSessionTokenResult.success(_syntheticJwtLikeToken),
+      );
+    },
+  );
 
   test(
     'development synthetic token provider fails closed without usable token',
@@ -332,4 +336,52 @@ class _ThrowingTokenProvider implements SecureSessionTokenProvider {
   Future<void> clearSession() async {
     throw StateError('broken session');
   }
+}
+
+class _FakeIdentityProvider implements IdentityProvider {
+  _FakeIdentityProvider.authenticated()
+    : session = StasislySession.authenticated(
+        identity: const StasislyIdentity(
+          subjectId: 'subject-1',
+          identityType: IdentityType.humanUser,
+          authenticationState: AuthenticationState.authenticated,
+        ),
+      );
+
+  final StasislySession session;
+
+  @override
+  Future<AuthenticationTokenResult> acquireAccessToken() async {
+    return AuthenticationTokenResult.available(_syntheticJwtLikeToken);
+  }
+
+  @override
+  Stream<StasislySession> observeAuthentication() => Stream.value(session);
+
+  @override
+  Future<StasislySession> readCurrentSession() async => session;
+
+  @override
+  Future<AuthenticationResult> refreshSession() async {
+    return AuthenticationResult.success(session);
+  }
+
+  @override
+  Future<AuthenticationResult> signIn({
+    required String email,
+    required String password,
+  }) async => AuthenticationResult.success(session);
+
+  @override
+  Future<AuthenticationResult> signOut() async {
+    return const AuthenticationResult.success(
+      StasislySession.unauthenticated(),
+    );
+  }
+
+  @override
+  Future<AuthenticationResult> signUp({
+    required String email,
+    required String password,
+  }) async => AuthenticationResult.success(session);
 }
