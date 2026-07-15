@@ -1,15 +1,25 @@
 # Borrador de roadmap Stasisly Foundation
 
 ```text
-PROPUESTA PENDIENTE DE APROBACIÓN DEL FUNDADOR
+F0–F12 INITIAL FRAMEWORK: APPROVED
+DATES / DURATIONS / CAPACITY / ASSIGNMENTS / COSTS / INTERNAL ORDER: PROPOSED
 ```
+
+## Estado de autoridad
+
+Founder ha aprobado la estructura F0–F12 como marco inicial de trabajo. Esta
+aprobación no fija calendario, capacidad, asignaciones, costes ni orden interno
+detallado, y no autoriza automáticamente la ejecución de ninguna fase. Esos
+elementos permanecen `PROPOSED` hasta que los responsables los elaboren y se
+obtenga la decisión correspondiente.
 
 ## Principio de gobierno
 
-El roadmap será propuesto y consolidado por Stasis, Rector, Gerendi, Nexus,
-Product Owner y Program Management cuando esos roles tengan definición
-operativa aprobada. El Fundador aprueba, rechaza, devuelve con cambios, cambia
-prioridades o ejerce veto. Este documento no activa agentes ni surfaces.
+Stasis, Rector y Gerendi proponen los roadmaps Product, Development y
+Administration. Product Owner y Program Management estructuran fases, hitos,
+dependencias y gates. Nexus consolida el roadmap global. Founder aprueba,
+rechaza, devuelve con cambios, cambia prioridades, detiene fases o ejerce veto.
+Este documento no activa agentes ni surfaces.
 
 ## F0 — Congelación y baseline
 

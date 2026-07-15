@@ -3,8 +3,9 @@
 ## Estado
 
 Índice Foundation activo. `FOUNDATION-001` congeló e inventarió el baseline;
-`FOUNDATION-002` establece la autoridad documental inicial y archiva
-Descubrimiento sin alterar código.
+`FOUNDATION-002` estableció la autoridad documental inicial y archivó
+Descubrimiento; `FOUNDATION-003` establece la Constitución y el gobierno global
+sin crear agentes, permisos ni capacidades técnicas.
 
 La documentación Foundation registra decisiones y evidencia según su nivel de
 autoridad. No demuestra por sí sola que una capacidad esté implementada.
@@ -30,6 +31,20 @@ autoridad. No demuestra por sí sola que una capacidad esté implementada.
 - [Registro de autoridad](DOCUMENT_AUTHORITY_REGISTER.md)
 - [Índice del archivo Discovery](archive_index/DISCOVERY_ARCHIVE_INDEX.md)
 - [Tracker de sesiones Foundation](implementation/FOUNDATION_SESSION_TRACKER.md)
+
+## Constitución y gobierno global
+
+- [Constitución Global](00_GLOBAL_CONSTITUTION.md)
+- [Gobierno y Autoridad](01_GOVERNANCE_AND_AUTHORITY.md)
+- [Surfaces y Acceso](02_SURFACES_AND_ACCESS.md)
+- [Frontera de Stasis Engine](03_STASIS_ENGINE_BOUNDARY.md)
+- [Gobierno del Roadmap](04_ROADMAP_GOVERNANCE.md)
+- [ADR-F001 — Gobierno global, Founder, Nexus y surfaces](adr/ADR-F001-global-governance-founder-nexus-surfaces.md)
+
+La estructura vigente es Founder sobre Nexus, con Stasis, Rector y Gerendi como
+coordinadores exclusivos de Product Surface, Development Surface y
+Administration Surface. Authority no concede Access; ninguna identidad hereda
+Founder Authority ni acceso total.
 
 ## Autoridad
 
@@ -74,5 +89,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras validar y aprobar FOUNDATION-002, el siguiente gate propuesto es
-`FOUNDATION-003`: constitución, gobernanza global y modelo de decisión.
+Tras completar FOUNDATION-003, el siguiente gate recomendado es
+`FOUNDATION-004`: arquitectura global técnica, límites entre surfaces, API
+propia, Supabase/PostgreSQL, portabilidad y Stasis Engine conceptual.

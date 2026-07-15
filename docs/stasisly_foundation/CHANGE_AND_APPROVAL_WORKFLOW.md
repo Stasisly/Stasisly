@@ -9,8 +9,8 @@
 | Authority level | 1 — Founder-approved Constitution and Governance |
 | Owner | Program Management with Documentation coordination (conceptual) |
 | Approver | Founder |
-| Version | 1.0 |
-| Effective condition/date | Effective upon approval and merge of FOUNDATION-002 |
+| Version | 1.1 |
+| Effective condition/date | Effective upon approval and merge of FOUNDATION-002; decision categories added by FOUNDATION-003 |
 | Supersedes | Discovery operational prompt workflows |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -58,6 +58,21 @@ marked rather than inferred.
 - Structural, cross-surface, security-risk or roadmap decisions require the
   authority defined by governance and may require Founder approval.
 - Agents advise and review; they do not self-approve.
+
+## Decision categories
+
+| Category | Route |
+|---|---|
+| `FOUNDER_RESERVED` | Complete proposal and required reviews to Founder for final decision |
+| `NEXUS_COORDINATED` | Nexus consolidates cross-surface conflict, dependency or trade-off and escalates reserved matters |
+| `SURFACE_COORDINATOR` | Stasis, Rector or Gerendi decides or proposes within delegated surface limits |
+| `SPECIALIST_REVIEW` | Specialist supplies evidence and recommendation without final approval authority |
+| `OPERATIONAL` | Authorized owner executes within approved scope, controls and rollback |
+| `EMERGENCY` | Authorized containment or recovery with reinforced traceability and mandatory retrospective review |
+
+Category does not grant technical access. Authority and access are evaluated
+separately, and any elevation must remain explicit, minimal, auditable and
+revocable.
 
 ## Review requirements
 
