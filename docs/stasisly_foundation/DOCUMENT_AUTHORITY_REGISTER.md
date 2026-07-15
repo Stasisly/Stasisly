@@ -9,8 +9,8 @@
 | Authority level | 6 — Evidence, audits and trackers |
 | Owner | Dirección de Documentación y Conocimiento under Rector (conceptual) |
 | Approver | Founder for authority assignments |
-| Version | 1.5 |
-| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-006 |
+| Version | 1.6 |
+| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-007 |
 | Supersedes | No Foundation register |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -53,6 +53,14 @@
 | `planning/FOUNDATION_RISK_AND_DEBT_REGISTER.md` | ACTIVE | 6 | Director de Proyecto + risk owners | Evidence owner; Founder for risk acceptance | No, evidence/tracking | Dispersed audit debt | FOUNDATION-005 backlog; Master Plan | New evidence, closure or priority change |
 | `planning/FOUNDATION_FOUNDER_DECISION_GATES.md` | APPROVED | 1 | Founder + Program Management | Founder | Yes | Informal decision escalation | Governance; Master Plan | Founder authority or gate change |
 | `adr/ADR-F003-foundation-reconstruction-strategy.md` | APPROVED | 2 | Architecture under Rector + Nexus | Founder | Yes | No Foundation reconstruction ADR | ADR-F001/F002; FOUNDATION-005/R1 | Strategy superseded or amended |
+| `security/FOUNDATION_THREAT_MODEL.md` | APPROVED conceptually | 3 | Security under Rector + Nexus | Founder | Yes conceptually | No global Foundation threat model | Constitution; Architecture; ADR-F004 | Material actor, asset, boundary or topology change |
+| `security/TECHNICAL_AUTHORIZATION_MODEL.md` | APPROVED conceptually | 3 | Security + Architecture under Rector | Founder | Yes conceptually | No technical authorization model | Threat Model; ADR-F004 | Authorization semantics or implementation design |
+| `security/FOUNDER_ACCESS_AND_ELEVATION_MODEL.md` | APPROVED conceptually | 1 | Founder + Security | Founder | Yes conceptually | Founder tiers without detailed model | Governance; ADR-F004 | Claims, elevation, break-glass or root control design |
+| `security/SERVICE_AND_AGENT_IDENTITY_MODEL.md` | APPROVED conceptually | 3 | Security + Engine Architecture | Founder | Yes conceptually | Shared/provider identity assumptions | Authorization Model; ADR-F004 | Service/agent identity implementation |
+| `security/AUTHORIZATION_DECISION_MATRIX.md` | APPROVED | 4 | Security + Architecture | Founder | Yes, examples and rules | No Foundation decision examples | Authorization Model | Policy contract or matrix change |
+| `security/THREAT_CONTROL_MATRIX.md` | ACTIVE | 6 | Security + risk owners | Evidence owner; Founder for risk acceptance | No, security evidence/planning | No consolidated control matrix | Threat Model | Control evidence, risk or package change |
+| `security/SECURITY_ABUSE_CASES.md` | ACTIVE | 6 | AppSec + QA + Security | Evidence owner | No, security evidence | No consolidated abuse-case set | Threat/Authorization Models | Test implementation or threat change |
+| `adr/ADR-F004-technical-authorization-and-threat-model.md` | APPROVED | 2 | Security + Architecture under Rector | Founder | Yes | No technical authorization ADR | ADR-F001-F003; Threat Model | Decision superseded or implementation semantics change |
 | `DOCUMENT_AUTHORITY_REGISTER.md` | ACTIVE | 6 | Documentation under Rector (conceptual) | Founder for authority changes | Operational register | No prior register | Documentation governance | Any authority/status/supersession change |
 | `archive_index/DISCOVERY_ARCHIVE_INDEX.md` | ACTIVE | 6 | Documentation | Evidence owner | No, evidence/index | Informal Discovery locations | Discovery archive | Archive path or successor changes |
 | `implementation/FOUNDATION_SESSION_TRACKER.md` | ACTIVE | 6 | Program Management | Evidence owner | No, tracker | Historical Discovery tracker for Foundation work | Foundation packages | Every completed Foundation package |

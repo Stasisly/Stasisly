@@ -43,7 +43,7 @@ schedules it. Adoption requires the gate in the asset adoption plan.
 
 | Order | Track | Dependency rule | Outcome |
 |---:|---|---|---|
-| 1 | A — Security and authorization | Starts after R1; blocks B, C, D, E and F authority work | Approved authorization and threat model |
+| 1 | A — Security and authorization | FOUNDATION-007 completed conceptually; implementation remains | Approved authorization and threat model |
 | 2 | B — API and identity boundaries | Uses A policy vocabulary | Stasisly-owned identity, session and API contracts |
 | 3 | C — Surface isolation | Uses A context and B boundaries | Product, Development, Administration and Engine isolation |
 | 4 | G — CI security baseline | Can begin after A contracts stabilize; precedes staging | Automated Flutter, Deno, pgTAP and migration gates |
@@ -56,6 +56,10 @@ Tracks may overlap only when their structural decisions are stable and their
 files, owners and acceptance evidence do not conflict.
 
 ## Track A — Security and authorization foundation
+
+**FOUNDATION-007 status:** conceptual model `APPROVED`; technical implementation
+`NOT IMPLEMENTED`. ADR-F004 and the security matrices satisfy G0-G2 for the
+model, not G3-G5 for runtime controls.
 
 - **ID / title:** A — Technical authorization and trust foundation.
 - **Objective:** define RBAC, ABAC, JIT, ownership and policy evaluation without
@@ -80,6 +84,9 @@ files, owners and acceptance evidence do not conflict.
   model and authorization ADR; Founder approves powers and elevation semantics.
 
 ## Track B — API and identity boundaries
+
+**Next gate:** FOUNDATION-008 defines owned identity, session and API contracts
+using the approved policy inputs; it does not inherit remote authorization.
 
 - **ID / title:** B — Owned API, identity, authentication and session boundary.
 - **Objective:** separate identity, authentication, authorization, ownership

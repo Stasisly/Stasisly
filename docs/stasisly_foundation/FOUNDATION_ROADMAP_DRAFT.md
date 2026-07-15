@@ -24,7 +24,7 @@ obtenga la decisión correspondiente.
 | F4 | COMPLETED | Auditoría, P0 cerrado localmente y plan maestro FOUNDATION-006 |
 | F5 | PROPOSED / PARTIALLY_DEFINED | Agent Constitution y organización tras autorización/surfaces |
 | F6 | PROPOSED / PARTIALLY_DEFINED | Engine modular después de FOUNDATION-014 |
-| F7 | APPROVED NEXT STRUCTURE / NOT EXECUTED | FOUNDATION-007 inicia autorización; paquetes 008-019 siguen gated |
+| F7 | ACTIVE / PARTIALLY_DEFINED | FOUNDATION-007 modelo conceptual completado; FOUNDATION-008 es el siguiente gate; implementación sigue pendiente |
 | F8 | PROPOSED / BLOCKED | Requiere P1, taxonomía y primer slice aprobado |
 | F9 | PROPOSED / BLOCKED | Requiere autorización y surface Administration |
 | F10 | PROPOSED / BLOCKED | Requiere autorización y surface Development |
@@ -128,6 +128,13 @@ plan no modifican el marco F0-F12.
 - **Gates:** tests, rollback, RLS/autorización, no secretos y costes acotados.
 - **Salida:** baseline técnico reproducible local/development.
 - **Fundador:** aprobar alcance y proveedor inicial sin lock-in irreversible.
+
+FOUNDATION-007 aprueba conceptualmente el threat model y la autorización técnica
+deny-by-default con RBAC+ABAC, surfaces, entornos, JIT, niveles Founder,
+identidades técnicas, PDP/PEP, auditoría y revocación. No crea claims, roles,
+policies, credenciales ni controles ejecutables. FOUNDATION-008 debe convertir
+estos inputs en contratos propios de identidad, sesión y API antes de ampliar
+Product.
 
 ## F8 — Product inicial
 

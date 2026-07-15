@@ -27,7 +27,7 @@ G8-G10 are never inherited from G0-G7.
 ```text
 FOUNDATION-005-R1
   -> FOUNDATION-006
-    -> FOUNDATION-007 authorization/threat model
+    -> FOUNDATION-007 authorization/threat model [COMPLETED CONCEPTUALLY]
       -> FOUNDATION-008 owned identity/API contracts
         -> FOUNDATION-009 surface and legacy-route containment
         -> FOUNDATION-010 local identity adapter
@@ -45,6 +45,11 @@ FOUNDATION-005-R1
 
 FOUNDATION-013 requires both 011 and 012. FOUNDATION-020 evaluates all P2
 dependencies relevant to the proposed staging scope; it does not execute G8.
+
+FOUNDATION-007 satisfies G0-G2 for the conceptual authorization/threat model.
+It does not satisfy G3-G5 for any runtime control. FOUNDATION-008 is now the
+next dependency and must define owned policy inputs at identity/session/API
+boundaries before surface enforcement.
 
 ## Surface dependency matrix
 

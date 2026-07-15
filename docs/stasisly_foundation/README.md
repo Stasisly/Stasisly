@@ -85,6 +85,21 @@ sin implementación Foundation.
 - [Gates de decisión del Founder](planning/FOUNDATION_FOUNDER_DECISION_GATES.md)
 - [ADR-F003 — Estrategia de reconstrucción](adr/ADR-F003-foundation-reconstruction-strategy.md)
 
+## Seguridad y autorización técnica
+
+- [Threat model Foundation](security/FOUNDATION_THREAT_MODEL.md)
+- [Modelo técnico de autorización](security/TECHNICAL_AUTHORIZATION_MODEL.md)
+- [Acceso y elevación Founder](security/FOUNDER_ACCESS_AND_ELEVATION_MODEL.md)
+- [Identidades de servicios y agentes](security/SERVICE_AND_AGENT_IDENTITY_MODEL.md)
+- [Matriz conceptual de decisiones](security/AUTHORIZATION_DECISION_MATRIX.md)
+- [Matriz de amenazas y controles](security/THREAT_CONTROL_MATRIX.md)
+- [Abuse cases de seguridad](security/SECURITY_ABUSE_CASES.md)
+- [ADR-F004 — Autorización y threat model](adr/ADR-F004-technical-authorization-and-threat-model.md)
+
+FOUNDATION-007 aprueba conceptualmente deny-by-default, RBAC+ABAC, contextos de
+surface/entorno, ownership backend, JIT, niveles Founder, identidades técnicas,
+PDP/PEP, auditoría y revocación. No implementa ninguno de esos controles.
+
 La auditoría identificó componentes modernos reutilizables, deuda legacy y un
 P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
 por el repositorio: RLS activo, cero policies y cero grants cliente en las diez
@@ -134,7 +149,7 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Con FOUNDATION-006 establecido, el siguiente gate recomendado es
-`FOUNDATION-007 — Technical authorization and threat model`. Ningún paquete del
-mapa se considera ejecutado o autorizado por aparecer en el plan. R1 y
-FOUNDATION-006 no autorizan despliegues remotos.
+Con FOUNDATION-007 establecido, el siguiente gate recomendado es
+`FOUNDATION-008 — Owned identity, session and API contracts`. Ningún control
+técnico queda implementado por el modelo y ninguna operación remota queda
+autorizada.

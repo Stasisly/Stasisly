@@ -2,12 +2,19 @@
 
 ## Authority and sequencing
 
-Status: **APPROVED working execution structure**. Packages are defined, not
-executed. Each requires its own approval and exact scope.
+Status: **APPROVED working execution structure**. Package status is recorded
+below; every future package requires its own approval and exact scope.
+
+Package status after FOUNDATION-007:
+
+```text
+FOUNDATION-007: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
+FOUNDATION-008..020: NOT EXECUTED
+```
 
 | Package | Title | Type | Objective | Dependencies | Gate | Expected result |
 |---|---|---|---|---|---|---|
-| FOUNDATION-007 | Technical authorization and threat model | DOCUMENTATION / SECURITY | Define identity/action/resource/context, RBAC/ABAC/JIT, ownership, service identities, Founder elevation and audit events | R1, ADR-F003 | Founder approves access semantics; G0-G2 | Approved authorization ADR, threat model and negative decision matrix |
+| FOUNDATION-007 | Technical authorization and threat model | DOCUMENTATION / SECURITY | Define identity/action/resource/context, RBAC/ABAC/JIT, ownership, service identities, Founder elevation and audit events | R1, ADR-F003 | G0-G2 satisfied conceptually; no implementation | ADR-F004, approved conceptual models and active security matrices |
 | FOUNDATION-008 | Owned identity, session and API contracts | DOCUMENTATION / ARCHITECTURE | Separate identity, authentication, authorization, ownership and session; version public DTO/error contracts | FOUNDATION-007 | G0-G2 | Stable provider-neutral ports ready for local implementation |
 | FOUNDATION-009 | Legacy route containment and surface guards | IMPLEMENTATION / SECURITY | Remove Product reachability to legacy writes and enforce explicit Product/Development route contexts | FOUNDATION-007, FOUNDATION-008 | G0-G7 | Local guards/tests prove no legacy or cross-surface Product path |
 | FOUNDATION-010 | Local identity/auth adapter boundary | IMPLEMENTATION | Place current provider behavior behind mockable owned ports without remote activation | FOUNDATION-008 | G0-G7 | Local adapter contract tests; no public token state or demo fallback |

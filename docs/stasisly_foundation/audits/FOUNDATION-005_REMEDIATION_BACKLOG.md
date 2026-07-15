@@ -18,7 +18,7 @@ Product behavior or touch a remote project.
 |---|---|---|---|
 | No Stasisly-owned identity/API boundary | Supabase initialized in bootstrap and legacy auth | Provider lock-in and confused authority | Identity/API boundary plan; client depends on owned interfaces and fails closed. |
 | Legacy chat is reachable | `/chat/:id`, `/orchestrator/chat`, direct Supabase and client `role` | Authority bypass and unsafe route semantics | Legacy containment/deprecation package; no Product entry reaches legacy writes. |
-| Surface authorization model absent | No RBAC/ABAC/JIT/Founder/surface context | Cross-surface privilege ambiguity | Authorization design ADR before implementation. |
+| Surface authorization implementation absent | FOUNDATION-007 approves ADR-F004, RBAC+ABAC/JIT and surface/environment model conceptually; no runtime controls | Cross-surface privilege ambiguity until enforced | FOUNDATION-008 policy inputs, FOUNDATION-009 surface PEPs and later policy implementation with negative tests. |
 | Modern chat not Product-ready | Dev-only adapters/routes and incomplete auth | Premature promotion of local-safe code | Controlled adoption plan preserving explicit `sessionId` and DTO allowlists. |
 | Create/archive lack transaction/idempotency contracts | Multi-request create; direct conditional archive | TOCTOU and duplicate-request behavior | Domain/API decision package with explicit semantics and concurrency tests. |
 | Orchestrator could be mistaken for Engine | Static Product UI at orchestrator routes | Architectural misrepresentation | Deprecation/rewrite decision; prohibit Engine naming/reuse. |
@@ -54,8 +54,9 @@ Product behavior or touch a remote project.
 ## Gate
 
 `FOUNDATION-005-R1` is complete and the P0 is `CLOSED_LOCALLY`. FOUNDATION-006
-establishes the approved master strategy, package map and gates. P1 must begin
-with a separately authorized `FOUNDATION-007` authorization/threat-model package;
+establishes the approved master strategy, package map and gates. FOUNDATION-007
+has completed the conceptual authorization/threat model; P1 continues with a
+separately authorized FOUNDATION-008 identity/session/API contract package;
 P2 maps primarily to FOUNDATION-015, 018 and 020; P3 to FOUNDATION-016, 017 and
 later release work; P4 remains deferred. No P1-P4 implementation or remote
 rollout is authorized by this mapping.

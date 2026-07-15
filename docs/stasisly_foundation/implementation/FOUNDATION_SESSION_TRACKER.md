@@ -24,6 +24,9 @@ completed
 FOUNDATION-006:
 completed
 
+FOUNDATION-007:
+completed
+
 Discovery baseline:
 7f747e0
 
@@ -50,6 +53,9 @@ completed by the package commit and push; remote state not asserted
 
 FOUNDATION-006 closure:
 completed by the package commit and push; future packages remain unexecuted
+
+FOUNDATION-007 closure:
+conceptual security model completed by package commit and push; implementation not started
 ```
 
 ## Rules
@@ -72,3 +78,4 @@ completed by the package commit and push; future packages remain unexecuted
 | FOUNDATION-005 | Completed | Audit inherited executable assets against Foundation architecture without changing implementation | Technical audit, classification matrix, scorecard, P0-P4 backlog and local evidence: analyzer pass, Flutter 406 pass/5 skip, Deno 52 pass, local reset, pgTAP 479 pass; repository-defined P0 on ten public legacy tables | `EXISTING CODEBASE FOUNDATION CONFORMANCE AUDITED_AND_PUSHED` upon successful push | `FOUNDATION-005-R1` deny-all hardening after approval; FOUNDATION-006 remains gated |
 | FOUNDATION-005-R1 | Completed | Harden exactly ten legacy public tables as deny-all without schema redesign, data changes or remote action | Migration 00009; R1 pgTAP 170/170; full SQL 649/649 after two resets; Deno 52/52 and format 41 files; Flutter 406 pass/5 skip; final RLS/policies/grants evidence | `LEGACY PUBLIC TABLES DENY_ALL HARDENED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-006 may be proposed after package publication; remote rollout separately gated |
 | FOUNDATION-006 | Completed | Establish controlled remediation, adoption and reconstruction strategy without implementation | Six planning documents, ADR-F003, eight tracks, 14 future packages, G0-G10, asset adoption gate, risk/debt register and synchronized roadmap/authority; no code or remote action | `FOUNDATION RECONSTRUCTION PLAN ESTABLISHED_AND_PUSHED` upon successful push | FOUNDATION-007 authorization and threat model after separate approval |
+| FOUNDATION-007 | Completed conceptually | Define global threats and authorization across identities, surfaces, environments, Founder, services and agents without implementation | Seven security documents, ADR-F004, 22 threats, 20 abuse cases, 32 representative decisions, trust boundaries, RBAC+ABAC/JIT/PDP/PEP, audit/revocation and synchronized plans; no code or remote action | `TECHNICAL AUTHORIZATION_AND_THREAT_MODEL ESTABLISHED_AND_PUSHED` upon successful push | FOUNDATION-008 owned identity, session and API contracts after separate approval |

@@ -7,7 +7,7 @@ not schedules.
 
 | ID | Debt / risk | Evidence | Owner | Priority | Dependency | Acceptance condition | Target phase |
 |---|---|---|---|---|---|---|---|
-| SEC-01 | Authorization model absent | No RBAC/ABAC/JIT/Founder/surface context | Security under Rector | P1 | 007 | Approved model, threat review and negative matrix | F7 before Product expansion |
+| SEC-01 | Authorization implementation absent | ADR-F004 and models approved conceptually; no RBAC/ABAC/JIT/PDP/PEP runtime | Security under Rector | P1 | 008, 009 and later policy implementation | Owned policy inputs, local enforcement and negative tests | F7 before Product expansion |
 | SEC-02 | Legacy chat/client authority reachable | Direct Supabase, client role/IDs, legacy routes | Flutter + Backend Architecture | P1 | 008-011 | No Product path reaches legacy writes | F7 |
 | ARC-01 | Provider-owned identity/API boundary | Bootstrap/auth/Edge runtime coupling | Architecture under Rector | P1 | 008-010 | Owned ports and provider-independent errors | F7 |
 | ARC-02 | Surface isolation incomplete | Mixed routes/data domains | Architecture + Nexus | P1 | 007-009 | Explicit access matrix and enforced local guards | F7 |
@@ -38,3 +38,6 @@ not schedules.
 
 New evidence may change priority through an approved package; debt is never
 silently accepted by implementation.
+
+FOUNDATION-007 found no new P0. T01-T22 remain owned qualitative risks; P1
+authorization, identity/API and surface controls block Product expansion.
