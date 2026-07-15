@@ -29,11 +29,15 @@ los harnesses documentados en `supabase/tests/`.
 
 ## Documentación principal
 
-- `docs/PROJECT_DEFINITION.md`
-- `docs/ARCHITECTURE.md`
-- `docs/SESSION_TRACKER.md`
-- `docs/stasisly_definition/`
-- `docs/stasisly_definition/adr/`
+- `docs/stasisly_foundation/README.md`
+- `docs/stasisly_foundation/DOCUMENTATION_GOVERNANCE.md`
+- `docs/stasisly_foundation/DOCUMENT_AUTHORITY_REGISTER.md`
+- `docs/stasisly_foundation/implementation/FOUNDATION_SESSION_TRACKER.md`
+- `docs/archive/discovery/` — material histórico sin autoridad normativa.
+
+La documentación demuestra decisiones. El código y las pruebas demuestran
+implementación. Los prompts y planes bajo el archivo de Descubrimiento no deben
+ejecutarse.
 
 ## Reglas de seguridad
 

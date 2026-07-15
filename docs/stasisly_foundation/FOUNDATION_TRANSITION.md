@@ -53,8 +53,9 @@ Conservar no equivale a adoptar. Cada activo requiere clasificación y gate.
   implementados.
 - Dependencias de proveedor sin evaluación de portabilidad y salida.
 
-Hasta FOUNDATION-002/003, la documentación existente permanece físicamente en
-su ubicación y conserva la jerarquía operativa previa. Sin embargo, sus
+Desde FOUNDATION-002, la documentación de Descubrimiento se conserva físicamente
+bajo `docs/archive/discovery/`, sin autoridad normativa. Su antigua jerarquía
+operativa queda reemplazada por el gobierno documental Foundation, y sus
 propuestas no se promueven por defecto a norma Foundation.
 
 ## Qué es Stasisly Foundation
@@ -126,7 +127,7 @@ commits posteriores y nunca alteran el tag.
 
 ## Siguiente fase
 
-`FOUNDATION-002` debe ejecutar el archivo documental controlado de
-Descubrimiento y establecer la autoridad documental inicial de Foundation. Toda
-acción de mover o reclasificar archivos requerirá inventario de origen/destino,
-enlaces, rollback y aprobación explícita.
+`FOUNDATION-002` ejecuta el archivo documental controlado de Descubrimiento y
+establece la autoridad documental inicial de Foundation. El siguiente gate
+propuesto es `FOUNDATION-003`, que debe definir constitución, gobernanza global y
+modelo de decisión sin convertir roles conceptuales en agentes activos.

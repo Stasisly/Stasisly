@@ -48,12 +48,15 @@ implementación wearable específica.
 
 ### Fuente existente
 
-- `docs/PROJECT_DEFINITION.md`: visión y producto de Descubrimiento.
-- `docs/ARCHITECTURE.md`: arquitectura conceptual y gates acumulados.
-- `docs/SESSION_TRACKER.md`: histórico operativo, no evidencia técnica por sí
-  solo.
-- `docs/stasisly_definition/`: equipo, ADR, orquestador y planes 2B.
-- `docs/archive/`: material histórico ya identificado.
+- `docs/archive/discovery/root/PROJECT_DEFINITION.md`: visión y producto de
+  Descubrimiento.
+- `docs/archive/discovery/root/ARCHITECTURE.md`: arquitectura conceptual y gates
+  acumulados.
+- `docs/archive/discovery/trackers/SESSION_TRACKER.md`: histórico operativo, no
+  evidencia técnica por sí solo.
+- `docs/archive/discovery/stasisly_definition/`: equipo, ADR, orquestador y
+  planes 2B archivados.
+- `docs/archive/discovery/README.md`: reglas de uso del archivo histórico.
 
 ### Riesgos documentales
 

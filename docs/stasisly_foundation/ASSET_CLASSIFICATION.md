@@ -9,16 +9,16 @@ bloqueo Foundation.
 | Activo | Ruta | Clasificación | Motivo | Riesgo / etiquetas | Acción futura | Dependencias |
 |---|---|---|---|---|---|---|
 | Historial y baseline | Git + tag `discovery-final-baseline` | KEEP | Evidencia inmutable de Descubrimiento | SECURITY_CRITICAL | Proteger tag y trazabilidad | GitHub |
-| Definición de proyecto | `docs/PROJECT_DEFINITION.md` | ADAPT | Visión valiosa con vocabulario previo | FOUNDATION_BLOCKER | Extraer visión Foundation | ADR nuevos |
-| Arquitectura | `docs/ARCHITECTURE.md` | ADAPT | Buenas fronteras, mezcla conceptual/histórica | FOUNDATION_BLOCKER | Consolidar arquitectura global | F2/F3 |
-| Session tracker | `docs/SESSION_TRACKER.md` | ARCHIVE | Histórico operativo extenso | Ruido normativo | Preservar como evidencia | Archivo Discovery |
-| ADR-001 a ADR-005 | `docs/stasisly_definition/adr/` | ADAPT | Principios reutilizables | Revalidación necesaria | Crear ADR Foundation equivalentes | Gobierno |
+| Definición de proyecto | `docs/archive/discovery/root/PROJECT_DEFINITION.md` | ADAPT | Visión valiosa con vocabulario previo | FOUNDATION_BLOCKER | Extraer visión Foundation | ADR nuevos |
+| Arquitectura | `docs/archive/discovery/root/ARCHITECTURE.md` | ADAPT | Buenas fronteras, mezcla conceptual/histórica | FOUNDATION_BLOCKER | Consolidar arquitectura global | F2/F3 |
+| Session tracker | `docs/archive/discovery/trackers/SESSION_TRACKER.md` | ARCHIVE | Histórico operativo extenso | Ruido normativo | Preservado como evidencia | Archivo Discovery |
+| ADR-001 a ADR-005 | `docs/archive/discovery/stasisly_definition/adr/` | ADAPT | Principios reutilizables | Revalidación necesaria | Crear ADR Foundation equivalentes | Gobierno |
 | ADR-006 y ADR-007 | mismas rutas | ARCHIVE | Más de 48.000 líneas acumuladas | FOUNDATION_BLOCKER | Extraer decisiones y evidencias | Archivo Discovery |
 | ADR-008 a ADR-012 | mismas rutas | ADAPT | Decisiones recientes de surfaces/catálogo | Nombres antiguos | Revalidar y dividir | Vocabulario Foundation |
-| Planes 2B | `docs/stasisly_definition/implementation_plans/` | ARCHIVE | Evidencia de ejecución cerrada | Ninguno inmediato | Mover en FOUNDATION-002 | Tag baseline |
-| 43 agentes AAA | `docs/stasisly_definition/agents/` | ADAPT | Base experta de Development | COST_CRITICAL | Extraer plantilla y roster | Gobierno de agentes |
-| 6 comités | `docs/stasisly_definition/committees/` | ADAPT | Gobierno útil, posible sobredimensión | Coste de coordinación | Revisar mandato/gates | Nexus/Rector futuros |
-| Orquestador Codex | `docs/stasisly_definition/orchestrator/` | ADAPT | Controles operativos valiosos | Puede frenar o sobreactuar | Convertir a estándar Foundation | Program Management |
+| Planes 2B | `docs/archive/discovery/stasisly_definition/implementation_plans/` | ARCHIVE | Evidencia de ejecución cerrada | Ninguno inmediato | Preservados, no ejecutar | Tag baseline |
+| 43 agentes AAA | `docs/archive/discovery/stasisly_definition/agents/` | ADAPT | Base experta de Development | COST_CRITICAL | Extraer plantilla y roster | Gobierno de agentes |
+| 6 comités | `docs/archive/discovery/stasisly_definition/committees/` | ADAPT | Gobierno útil, posible sobredimensión | Coste de coordinación | Revisar mandato/gates | Nexus/Rector futuros |
+| Orquestador Codex | `docs/archive/discovery/stasisly_definition/orchestrator/` | ADAPT | Controles operativos valiosos | Puede frenar o sobreactuar | Convertir a estándar Foundation | Program Management |
 | Flutter core/config | `lib/core/` | ADAPT | Gates y contratos útiles | SECURITY_CRITICAL | Auditar acoplamientos | Riverpod, GoRouter |
 | Auth legacy | `lib/features/auth/` | REWRITE | Supabase directo y frontera heredada | SECURITY_CRITICAL, VENDOR_COUPLED | Diseñar puerto de identidad | Auth, RBAC/ABAC |
 | Chat legacy | `lib/features/chat/` | REWRITE | Contratos y rutas antiguas | SECURITY_CRITICAL | No conectar; reemplazar gradualmente | Sessions/messages |
