@@ -8,6 +8,8 @@ Descubrimiento; `FOUNDATION-003` estableció la Constitución y el gobierno
 global; `FOUNDATION-004` definió la arquitectura técnica objetivo;
 `FOUNDATION-005` auditó la implementación heredada frente a esa arquitectura;
 y `FOUNDATION-005-R1` cerró localmente su P0 de tablas públicas legacy.
+`FOUNDATION-006` establece la estrategia y secuencia maestra de reconstrucción;
+no ejecuta las remediaciones planificadas.
 
 La documentación Foundation registra decisiones y evidencia según su nivel de
 autoridad. No demuestra por sí sola que una capacidad esté implementada.
@@ -73,6 +75,16 @@ sin implementación Foundation.
 - [Evidencia de tests](audits/FOUNDATION-005_TEST_EVIDENCE.md)
 - [Cierre local FOUNDATION-005-R1](implementation/FOUNDATION-005-R1_LEGACY_PUBLIC_TABLES_DENY_ALL.md)
 
+## Plan maestro de reconstrucción
+
+- [Plan maestro de remediación](planning/FOUNDATION_MASTER_REMEDIATION_PLAN.md)
+- [Mapa de paquetes ejecutables](planning/FOUNDATION_EXECUTION_PACKAGE_MAP.md)
+- [Mapa de dependencias y gates](planning/FOUNDATION_DEPENDENCY_AND_GATE_MAP.md)
+- [Plan de adopción de activos](planning/FOUNDATION_ASSET_ADOPTION_PLAN.md)
+- [Registro de riesgos y deuda](planning/FOUNDATION_RISK_AND_DEBT_REGISTER.md)
+- [Gates de decisión del Founder](planning/FOUNDATION_FOUNDER_DECISION_GATES.md)
+- [ADR-F003 — Estrategia de reconstrucción](adr/ADR-F003-foundation-reconstruction-strategy.md)
+
 La auditoría identificó componentes modernos reutilizables, deuda legacy y un
 P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
 por el repositorio: RLS activo, cero policies y cero grants cliente en las diez
@@ -122,6 +134,7 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Con `FOUNDATION-005-R1` validado localmente, el siguiente gate recomendado es
-`FOUNDATION-006`: plan maestro de remediación y reconstrucción técnica. R1 no
-autoriza despliegues remotos ni ejecución automática del plan.
+Con FOUNDATION-006 establecido, el siguiente gate recomendado es
+`FOUNDATION-007 — Technical authorization and threat model`. Ningún paquete del
+mapa se considera ejecutado o autorizado por aparecer en el plan. R1 y
+FOUNDATION-006 no autorizan despliegues remotos.

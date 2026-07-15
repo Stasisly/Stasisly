@@ -104,3 +104,22 @@ siguen sin estar autorizadas por esta clasificación.
   validan la remediación sin datos reales ni cambios remotos.
 - El estado es `CLOSED_LOCALLY`; la clasificación no afirma conformidad remota
   ni resuelve los riesgos P1-P4.
+
+## Consolidación de FOUNDATION-006
+
+El [plan de adopción](planning/FOUNDATION_ASSET_ADOPTION_PLAN.md) consolida los
+activos ejecutables auditados usando solo `KEEP`, `ADAPT`, `REWRITE`,
+`DEPRECATE`, `REMOVE`, `DEFER` y `UNKNOWN`. La clasificación ya no expresa
+prioridad: por ejemplo, un activo `ADAPT` puede permanecer diferido hasta que
+se apruebe la taxonomía o la frontera que necesita.
+
+Los contratos modernos de sessions/messages, DTOs sanitizados, guards
+fail-closed, IDs explícitos, migraciones deny-all, RPC transaccional y harnesses
+de limpieza se preservan como candidatos. Auth y routing se reconstruyen;
+legacy chat se depreca; orchestrator se reescribe y no representa Stasis Engine.
+No se propone `REMOVE` sin una auditoría de uso específica.
+
+Ningún activo queda `FOUNDATION_ADOPTED` por esta consolidación. Debe superar
+contrato aprobado, asignación de surface, revisión de seguridad, frontera de
+proveedor, tests, documentación, ausencia de autoridad legacy y aceptación de
+deuda residual.

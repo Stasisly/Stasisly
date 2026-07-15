@@ -9,8 +9,8 @@
 | Authority level | 6 — Evidence, audits and trackers |
 | Owner | Dirección de Documentación y Conocimiento under Rector (conceptual) |
 | Approver | Founder for authority assignments |
-| Version | 1.4 |
-| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-005-R1 |
+| Version | 1.5 |
+| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-006 |
 | Supersedes | No Foundation register |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -43,9 +43,16 @@
 | `audits/FOUNDATION-005_TECHNICAL_CONFORMANCE_AUDIT.md` | ACTIVE | 6 | Architecture + Security + Documentation | Evidence owner | No, evidence | FOUNDATION-004 preclassification hypotheses | Baseline `e053684`; ADR-F002 | Material implementation or architecture change |
 | `audits/FOUNDATION-005_ASSET_CLASSIFICATION_MATRIX.md` | ACTIVE | 6 | Architecture + Documentation | Evidence owner | No, evidence/recommendation | Initial technical asset preclassification | FOUNDATION-005 audit | Asset remediation or new evidence |
 | `audits/FOUNDATION-005_CONFORMANCE_SCORECARD.md` | ACTIVE | 6 | Architecture + Security + QA | Evidence owner | No, evidence | No Foundation conformance scorecard | FOUNDATION-005 audit and tests | Remediation changes a rating |
-| `audits/FOUNDATION-005_REMEDIATION_BACKLOG.md` | PROPOSED | 5 | Program Management + Architecture | Founder for execution approval | No, proposed plan | No Foundation remediation backlog | FOUNDATION-005 audit | Founder approves, rejects or reprioritizes packages |
+| `audits/FOUNDATION-005_REMEDIATION_BACKLOG.md` | ACTIVE | 5 | Program Management + Architecture | Founder for execution approval | No, tracking with P1-P4 proposed | No Foundation remediation backlog | FOUNDATION-005 audit; FOUNDATION-006 package map | New evidence, closure or reprioritization |
 | `audits/FOUNDATION-005_TEST_EVIDENCE.md` | ACTIVE | 6 | QA + Documentation | Evidence owner | No, evidence | No consolidated Foundation test evidence | Baseline `e053684`; local toolchain | Relevant suites or baseline change |
 | `implementation/FOUNDATION-005-R1_LEGACY_PUBLIC_TABLES_DENY_ALL.md` | ACTIVE | 6 | Security + Database + QA + Documentation | Evidence owner | No, local implementation evidence | FOUNDATION-005 P0 evidence | Migration `00009`; local reset and test suites | Remote deployment or material access-model change |
+| `planning/FOUNDATION_MASTER_REMEDIATION_PLAN.md` | APPROVED | 4 | Director de Proyecto + Rector + Nexus | Founder | Yes, reconstruction strategy | No executable Foundation remediation plan | ADR-F001-F003; FOUNDATION-005/R1 | Material sequencing, scope or risk change |
+| `planning/FOUNDATION_EXECUTION_PACKAGE_MAP.md` | APPROVED | 4 | Program Management under Nexus | Founder | Yes, working execution structure | Ad hoc package sequencing | Master Remediation Plan | Package map or priority change |
+| `planning/FOUNDATION_DEPENDENCY_AND_GATE_MAP.md` | APPROVED | 4 | Architecture + Program Management | Founder | Yes | Dispersed technical gates | Master Remediation Plan | Dependency or quality-gate change |
+| `planning/FOUNDATION_ASSET_ADOPTION_PLAN.md` | PROPOSED | 5 | Architecture under Rector | Founder per adoption decision | No, per-asset proposal | Audit candidate classifications | FOUNDATION-005 matrix; ADR-F003 | Asset passes or fails adoption gate |
+| `planning/FOUNDATION_RISK_AND_DEBT_REGISTER.md` | ACTIVE | 6 | Director de Proyecto + risk owners | Evidence owner; Founder for risk acceptance | No, evidence/tracking | Dispersed audit debt | FOUNDATION-005 backlog; Master Plan | New evidence, closure or priority change |
+| `planning/FOUNDATION_FOUNDER_DECISION_GATES.md` | APPROVED | 1 | Founder + Program Management | Founder | Yes | Informal decision escalation | Governance; Master Plan | Founder authority or gate change |
+| `adr/ADR-F003-foundation-reconstruction-strategy.md` | APPROVED | 2 | Architecture under Rector + Nexus | Founder | Yes | No Foundation reconstruction ADR | ADR-F001/F002; FOUNDATION-005/R1 | Strategy superseded or amended |
 | `DOCUMENT_AUTHORITY_REGISTER.md` | ACTIVE | 6 | Documentation under Rector (conceptual) | Founder for authority changes | Operational register | No prior register | Documentation governance | Any authority/status/supersession change |
 | `archive_index/DISCOVERY_ARCHIVE_INDEX.md` | ACTIVE | 6 | Documentation | Evidence owner | No, evidence/index | Informal Discovery locations | Discovery archive | Archive path or successor changes |
 | `implementation/FOUNDATION_SESSION_TRACKER.md` | ACTIVE | 6 | Program Management | Evidence owner | No, tracker | Historical Discovery tracker for Foundation work | Foundation packages | Every completed Foundation package |

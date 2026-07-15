@@ -13,6 +13,24 @@ detallado, y no autoriza automáticamente la ejecución de ninguna fase. Esos
 elementos permanecen `PROPOSED` hasta que los responsables los elaboren y se
 obtenga la decisión correspondiente.
 
+## Vista operativa tras FOUNDATION-006
+
+| Fase | Estado operativo | Evidencia / siguiente gate |
+|---|---|---|
+| F0 | COMPLETED | Baseline y tag de Descubrimiento |
+| F1 | COMPLETED | Archivo documental controlado |
+| F2 | COMPLETED | Constitución y gobierno global |
+| F3 | COMPLETED conceptually | Arquitectura Foundation y ADR-F002 |
+| F4 | COMPLETED | Auditoría, P0 cerrado localmente y plan maestro FOUNDATION-006 |
+| F5 | PROPOSED / PARTIALLY_DEFINED | Agent Constitution y organización tras autorización/surfaces |
+| F6 | PROPOSED / PARTIALLY_DEFINED | Engine modular después de FOUNDATION-014 |
+| F7 | APPROVED NEXT STRUCTURE / NOT EXECUTED | FOUNDATION-007 inicia autorización; paquetes 008-019 siguen gated |
+| F8 | PROPOSED / BLOCKED | Requiere P1, taxonomía y primer slice aprobado |
+| F9 | PROPOSED / BLOCKED | Requiere autorización y surface Administration |
+| F10 | PROPOSED / BLOCKED | Requiere autorización y surface Development |
+| F11 | PROPOSED / BLOCKED | Requiere P2 y aprobación G8/G9 |
+| F12 | DEFERRED / BLOCKED | Requiere producción G10 |
+
 ## Principio de gobierno
 
 Stasis, Rector y Gerendi proponen los roadmaps Product, Development y
@@ -79,8 +97,10 @@ FOUNDATION-005 aporta auditoría, matriz, scorecard, evidencia local y backlog
 P0-P4. Detectó un P0 de deny-by-default en diez tablas públicas legacy.
 FOUNDATION-005-R1 lo cerró localmente mediante una migración versionada y dos
 reconstrucciones completas con pruebas. El siguiente gate puede ser
-FOUNDATION-006; el cierre local no demuestra estado remoto ni autoriza otras
-remediaciones. La auditoría no modifica el marco F0-F12.
+FOUNDATION-006, que ya establece el plan, ADR-F003, paquetes y gates. El
+siguiente paquete recomendado es FOUNDATION-007; el cierre local y el plan no
+demuestran estado remoto ni autorizan otras remediaciones. La auditoría y el
+plan no modifican el marco F0-F12.
 
 ## F5 — Organizaciones de agentes
 

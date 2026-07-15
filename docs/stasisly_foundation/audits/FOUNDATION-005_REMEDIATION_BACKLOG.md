@@ -54,5 +54,8 @@ Product behavior or touch a remote project.
 ## Gate
 
 `FOUNDATION-005-R1` is complete and the P0 is `CLOSED_LOCALLY`. FOUNDATION-006
-may now be proposed as the plan maestro de remediación y reconstrucción técnica.
-No P1-P4 implementation or remote rollout is authorized by this gate change.
+establishes the approved master strategy, package map and gates. P1 must begin
+with a separately authorized `FOUNDATION-007` authorization/threat-model package;
+P2 maps primarily to FOUNDATION-015, 018 and 020; P3 to FOUNDATION-016, 017 and
+later release work; P4 remains deferred. No P1-P4 implementation or remote
+rollout is authorized by this mapping.
