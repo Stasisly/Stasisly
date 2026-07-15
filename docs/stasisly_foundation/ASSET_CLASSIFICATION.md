@@ -6,6 +6,11 @@ Esta clasificación orienta decisiones futuras y no ejecuta acciones
 destructivas. Las etiquetas adicionales identifican seguridad, coste, lock-in o
 bloqueo Foundation.
 
+FOUNDATION-004 añade una preclasificación técnica focalizada, no normativa, en
+[`audits/DISCOVERY_TECHNICAL_ASSET_PRECLASSIFICATION.md`](audits/DISCOVERY_TECHNICAL_ASSET_PRECLASSIFICATION.md).
+Las etiquetas `*_CANDIDATE` expresan una hipótesis para FOUNDATION-005 y no
+autorizan conservar, adaptar, reescribir, deprecar o retirar código.
+
 | Activo | Ruta | Clasificación | Motivo | Riesgo / etiquetas | Acción futura | Dependencias |
 |---|---|---|---|---|---|---|
 | Historial y baseline | Git + tag `discovery-final-baseline` | KEEP | Evidencia inmutable de Descubrimiento | SECURITY_CRITICAL | Proteger tag y trazabilidad | GitHub |
@@ -52,3 +57,18 @@ bloqueo Foundation.
 - Todo `FOUNDATION_BLOCKER` necesita dueño, ADR o gate explícito.
 - Todo `SECURITY_CRITICAL` requiere Seguridad, Privacidad y AppSec.
 - Todo `COST_CRITICAL` requiere modelo de coste antes de escalar.
+
+## Reglas añadidas por FOUNDATION-004
+
+- La preclasificación está basada en inspección estática y no demuestra
+  conformidad con la arquitectura Foundation.
+- `chat_sessions`, `chat_messages`, `specialists`, migraciones y Edge Functions
+  son candidatos a adaptación, no componentes adoptados.
+- El chat heredado y el prototipo `orchestrator` son candidatos a reescritura;
+  `orchestrator` no se denomina Stasis Engine.
+- Tests SQL y guards de arquitectura son candidatos a conservación como
+  evidencia, pendientes de rebaseline.
+- `mental_training` y `physical_training` permanecen `UNKNOWN` hasta auditar
+  taxonomía, rutas y dependencias.
+- FOUNDATION-005 decidirá conformidad y backlog; este paquete no modifica los
+  activos.

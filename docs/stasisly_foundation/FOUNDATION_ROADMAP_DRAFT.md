@@ -50,12 +50,19 @@ Este documento no activa agentes ni surfaces.
 
 ## F3 — Arquitectura global
 
+- **Estado del marco:** decisión conceptual cubierta por FOUNDATION-004;
+  implementación y conformidad técnica pendientes.
 - **Objetivo:** definir arquitectura portable y preparada para escala.
 - **Entregables:** arquitectura global, surfaces, Stasis Engine, datos y ADR.
 - **Dependencias:** F2.
 - **Gates:** threat model, portabilidad, costes, SLO y límites de fase.
 - **Salida:** arquitectura aprobada sin contradicciones estructurales.
 - **Fundador:** elegir trade-offs de coste, soberanía y velocidad.
+
+FOUNDATION-004 aprueba conceptualmente la arquitectura, API propia, papel de
+PostgreSQL/Supabase, portabilidad, Stasis Engine, datos, entornos y trust
+boundaries. No completa threat model, SLO, autorización técnica ni cambios de
+implementación; esos gates permanecen pendientes.
 
 ## F4 — Auditoría técnica
 

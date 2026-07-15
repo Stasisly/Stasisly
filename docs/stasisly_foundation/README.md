@@ -4,8 +4,9 @@
 
 Índice Foundation activo. `FOUNDATION-001` congeló e inventarió el baseline;
 `FOUNDATION-002` estableció la autoridad documental inicial y archivó
-Descubrimiento; `FOUNDATION-003` establece la Constitución y el gobierno global
-sin crear agentes, permisos ni capacidades técnicas.
+Descubrimiento; `FOUNDATION-003` estableció la Constitución y el gobierno
+global; `FOUNDATION-004` define la arquitectura técnica objetivo sin modificar
+la implementación.
 
 La documentación Foundation registra decisiones y evidencia según su nivel de
 autoridad. No demuestra por sí sola que una capacidad esté implementada.
@@ -45,6 +46,22 @@ La estructura vigente es Founder sobre Nexus, con Stasis, Rector y Gerendi como
 coordinadores exclusivos de Product Surface, Development Surface y
 Administration Surface. Authority no concede Access; ninguna identidad hereda
 Founder Authority ni acceso total.
+
+## Arquitectura técnica global
+
+- [Arquitectura Técnica Global](05_GLOBAL_TECHNICAL_ARCHITECTURE.md)
+- [Fronteras de API y Servicios](06_API_AND_SERVICE_BOUNDARIES.md)
+- [Portabilidad de Infraestructura](07_INFRASTRUCTURE_PORTABILITY.md)
+- [Arquitectura Conceptual de Stasis Engine](08_STASIS_ENGINE_ARCHITECTURE.md)
+- [Datos, Memoria y Eventos](09_DATA_MEMORY_AND_EVENTS.md)
+- [Entornos y Trust Boundaries](10_ENVIRONMENTS_AND_TRUST_BOUNDARIES.md)
+- [Preclasificación técnica de Descubrimiento](audits/DISCOVERY_TECHNICAL_ASSET_PRECLASSIFICATION.md)
+- [ADR-F002 — Arquitectura técnica global y portabilidad](adr/ADR-F002-global-technical-architecture-and-portability.md)
+
+PostgreSQL es la plataforma relacional canónica donde corresponda. Supabase es
+un proveedor managed inicial, no la identidad del backend. Los clientes deben
+preferir contratos propiedad de Stasisly y toda capacidad aquí descrita sigue
+sin implementación Foundation.
 
 ## Autoridad
 
@@ -89,6 +106,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras completar FOUNDATION-003, el siguiente gate recomendado es
-`FOUNDATION-004`: arquitectura global técnica, límites entre surfaces, API
-propia, Supabase/PostgreSQL, portabilidad y Stasis Engine conceptual.
+Tras completar FOUNDATION-004, el siguiente gate recomendado es
+`FOUNDATION-005`: auditoría técnica de conformidad del código existente contra
+la arquitectura Foundation aprobada.

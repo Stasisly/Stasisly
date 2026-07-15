@@ -6,6 +6,18 @@ Inventario basado únicamente en código, lockfile y documentación segura. No s
 consultaron dashboards, contratos, facturación, secretos ni entornos remotos.
 Por ello, los costes monetarios reales se clasifican como desconocidos.
 
+## Política arquitectónica FOUNDATION-004
+
+- PostgreSQL es la plataforma relacional canónica donde corresponda.
+- Supabase es un proveedor managed inicial, no la identidad del backend.
+- Auth, Storage, Edge Functions, Realtime y gestión Supabase se evalúan y pueden
+  sustituirse por separado.
+- Los clientes nuevos prefieren contratos propiedad de Stasisly.
+- Model Gateway y Cost Controller son componentes conceptuales obligatorios
+  antes de escalar uso de IA; no se ha elegido proveedor ni modelo.
+- Managed services están permitidos con portabilidad; self-hosting es capacidad
+  futura y cualquier comparación usa coste total de propiedad.
+
 ## Proveedores y dependencias
 
 | Capacidad | Proveedor / tecnología | Datos | Uso observado | Coste | Portabilidad | Alternativa / salida preliminar | Riesgo |
@@ -32,6 +44,9 @@ Por ello, los costes monetarios reales se clasifican como desconocidos.
 | Proveedores IA | No seleccionados | Prompts, contexto y resultados futuros | No implementados | UNBOUNDED_RISK | UNKNOWN | Model Gateway multi-provider/modelos propios | Crítico |
 | MCP | No seleccionado | Tools/contexto futuro | Conceptual | UNKNOWN / USAGE_BASED | UNKNOWN | APIs internas tipadas | Superficie de ataque |
 
+Los valores de proveedor y coste de esta tabla son evidencia, no selección
+arquitectónica nueva. `UNKNOWN` permanece hasta obtener evidencia autorizada.
+
 ## Soberanía y plan de salida
 
 1. Mantener contratos de dominio independientes del SDK de proveedor.
@@ -40,6 +55,10 @@ Por ello, los costes monetarios reales se clasifican como desconocidos.
 4. Definir exportación periódica, restauración y prueba de salida.
 5. Evitar datos o permisos críticos en metadata controlable por cliente.
 6. No desplegar Model Gateway sin routing, presupuesto y telemetría por uso.
+7. Mantener contrato propio, export path, migration strategy, cost observability
+   y exit trigger para cada dependencia crítica.
+8. Atribuir uso y presupuesto por surface, plan, entorno y región cuando
+   corresponda.
 
 ## Inventario de costes técnicos
 
