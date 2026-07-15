@@ -11,6 +11,12 @@ FOUNDATION-004 añade una preclasificación técnica focalizada, no normativa, e
 Las etiquetas `*_CANDIDATE` expresan una hipótesis para FOUNDATION-005 y no
 autorizan conservar, adaptar, reescribir, deprecar o retirar código.
 
+FOUNDATION-005 reemplaza esas hipótesis como evidencia técnica vigente mediante
+la [matriz de clasificación final](audits/FOUNDATION-005_ASSET_CLASSIFICATION_MATRIX.md),
+la [scorecard](audits/FOUNDATION-005_CONFORMANCE_SCORECARD.md) y el
+[backlog propuesto](audits/FOUNDATION-005_REMEDIATION_BACKLOG.md). Las acciones
+siguen sin estar autorizadas por esta clasificación.
+
 | Activo | Ruta | Clasificación | Motivo | Riesgo / etiquetas | Acción futura | Dependencias |
 |---|---|---|---|---|---|---|
 | Historial y baseline | Git + tag `discovery-final-baseline` | KEEP | Evidencia inmutable de Descubrimiento | SECURITY_CRITICAL | Proteger tag y trazabilidad | GitHub |
@@ -72,3 +78,18 @@ autorizan conservar, adaptar, reescribir, deprecar o retirar código.
   taxonomía, rutas y dependencias.
 - FOUNDATION-005 decidirá conformidad y backlog; este paquete no modifica los
   activos.
+
+## Evidencia añadida por FOUNDATION-005
+
+- `chat` heredado queda `DEPRECATE_CANDIDATE`; su acceso directo a Supabase,
+  campos de autoridad cliente y rutas legacy no son conformes.
+- `chat_sessions`, `chat_messages`, `specialists`, `profile`, las Edge
+  Functions y sus contratos quedan `ADAPT_CANDIDATE`.
+- El prototipo `orchestrator` queda `REWRITE_CANDIDATE` y no es Stasis Engine.
+- Los guards modernos, controles CORS/runtime y la RPC transaccional son
+  candidatos a conservación dentro de futuras adaptaciones.
+- Las migraciones quedan `ADAPT_CANDIDATE` con un P0: diez tablas públicas
+  legacy no tienen RLS y conservan grants amplios de cliente en el estado local
+  definido por el repositorio.
+- Las conclusiones se basan en baseline `e053684`, inspección estática y pruebas
+  locales; no describen el estado de ningún entorno remoto.

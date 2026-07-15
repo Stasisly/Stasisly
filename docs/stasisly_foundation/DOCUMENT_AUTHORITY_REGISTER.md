@@ -9,8 +9,8 @@
 | Authority level | 6 — Evidence, audits and trackers |
 | Owner | Dirección de Documentación y Conocimiento under Rector (conceptual) |
 | Approver | Founder for authority assignments |
-| Version | 1.2 |
-| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-004 |
+| Version | 1.3 |
+| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-005 |
 | Supersedes | No Foundation register |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -40,6 +40,11 @@
 | `10_ENVIRONMENTS_AND_TRUST_BOUNDARIES.md` | APPROVED conceptually | 3 | Security + DevOps under Rector | Founder | Yes conceptually | Dispersed Discovery environment controls | Global Technical Architecture; ADR-F002 | Threat model or environment change |
 | `audits/DISCOVERY_TECHNICAL_ASSET_PRECLASSIFICATION.md` | ACTIVE | 6 | Architecture + Documentation | Evidence owner | No, evidence | No focused Foundation technical preclassification | Git baseline `abce443`; Global Technical Architecture | FOUNDATION-005 conformance audit |
 | `adr/ADR-F002-global-technical-architecture-and-portability.md` | APPROVED | 2 | Architecture under Rector | Founder | Yes | No Foundation technical architecture ADR | ADR-F001; Global Technical Architecture | Decision superseded or amended |
+| `audits/FOUNDATION-005_TECHNICAL_CONFORMANCE_AUDIT.md` | ACTIVE | 6 | Architecture + Security + Documentation | Evidence owner | No, evidence | FOUNDATION-004 preclassification hypotheses | Baseline `e053684`; ADR-F002 | Material implementation or architecture change |
+| `audits/FOUNDATION-005_ASSET_CLASSIFICATION_MATRIX.md` | ACTIVE | 6 | Architecture + Documentation | Evidence owner | No, evidence/recommendation | Initial technical asset preclassification | FOUNDATION-005 audit | Asset remediation or new evidence |
+| `audits/FOUNDATION-005_CONFORMANCE_SCORECARD.md` | ACTIVE | 6 | Architecture + Security + QA | Evidence owner | No, evidence | No Foundation conformance scorecard | FOUNDATION-005 audit and tests | Remediation changes a rating |
+| `audits/FOUNDATION-005_REMEDIATION_BACKLOG.md` | PROPOSED | 5 | Program Management + Architecture | Founder for execution approval | No, proposed plan | No Foundation remediation backlog | FOUNDATION-005 audit | Founder approves, rejects or reprioritizes packages |
+| `audits/FOUNDATION-005_TEST_EVIDENCE.md` | ACTIVE | 6 | QA + Documentation | Evidence owner | No, evidence | No consolidated Foundation test evidence | Baseline `e053684`; local toolchain | Relevant suites or baseline change |
 | `DOCUMENT_AUTHORITY_REGISTER.md` | ACTIVE | 6 | Documentation under Rector (conceptual) | Founder for authority changes | Operational register | No prior register | Documentation governance | Any authority/status/supersession change |
 | `archive_index/DISCOVERY_ARCHIVE_INDEX.md` | ACTIVE | 6 | Documentation | Evidence owner | No, evidence/index | Informal Discovery locations | Discovery archive | Archive path or successor changes |
 | `implementation/FOUNDATION_SESSION_TRACKER.md` | ACTIVE | 6 | Program Management | Evidence owner | No, tracker | Historical Discovery tracker for Foundation work | Foundation packages | Every completed Foundation package |

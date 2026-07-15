@@ -5,8 +5,9 @@
 Índice Foundation activo. `FOUNDATION-001` congeló e inventarió el baseline;
 `FOUNDATION-002` estableció la autoridad documental inicial y archivó
 Descubrimiento; `FOUNDATION-003` estableció la Constitución y el gobierno
-global; `FOUNDATION-004` define la arquitectura técnica objetivo sin modificar
-la implementación.
+global; `FOUNDATION-004` definió la arquitectura técnica objetivo; y
+`FOUNDATION-005` auditó la implementación heredada frente a esa arquitectura
+sin modificarla.
 
 La documentación Foundation registra decisiones y evidencia según su nivel de
 autoridad. No demuestra por sí sola que una capacidad esté implementada.
@@ -63,6 +64,19 @@ un proveedor managed inicial, no la identidad del backend. Los clientes deben
 preferir contratos propiedad de Stasisly y toda capacidad aquí descrita sigue
 sin implementación Foundation.
 
+## Auditoría de conformidad técnica
+
+- [Auditoría técnica FOUNDATION-005](audits/FOUNDATION-005_TECHNICAL_CONFORMANCE_AUDIT.md)
+- [Matriz de clasificación](audits/FOUNDATION-005_ASSET_CLASSIFICATION_MATRIX.md)
+- [Scorecard de conformidad](audits/FOUNDATION-005_CONFORMANCE_SCORECARD.md)
+- [Backlog de remediación](audits/FOUNDATION-005_REMEDIATION_BACKLOG.md)
+- [Evidencia de tests](audits/FOUNDATION-005_TEST_EVIDENCE.md)
+
+La auditoría identifica componentes modernos reutilizables, deuda legacy y un
+P0 en el estado PostgreSQL definido por el repositorio: diez tablas públicas
+legacy carecen de RLS y conservan grants de cliente amplios. No afirma el estado
+de ningún entorno remoto ni autoriza remediaciones.
+
 ## Autoridad
 
 La jerarquía vigente se define en `DOCUMENTATION_GOVERNANCE.md`: constitución y
@@ -106,6 +120,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras completar FOUNDATION-004, el siguiente gate recomendado es
-`FOUNDATION-005`: auditoría técnica de conformidad del código existente contra
-la arquitectura Foundation aprobada.
+Antes de abrir el plan general FOUNDATION-006, el siguiente gate recomendado es
+`FOUNDATION-005-R1 — Harden legacy public tables deny-all`: una remediación
+mínima, versionada y localmente probada del P0 identificado por la auditoría.

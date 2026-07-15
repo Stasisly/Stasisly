@@ -66,12 +66,19 @@ implementación; esos gates permanecen pendientes.
 
 ## F4 — Auditoría técnica
 
+- **Estado:** FOUNDATION-005 completó la auditoría; remediación pendiente.
 - **Objetivo:** comparar cada activo real contra la arquitectura Foundation.
 - **Entregables:** auditoría de código, dependencias, seguridad y deuda.
 - **Dependencias:** F3.
 - **Gates:** evidencia reproducible y clasificación KEEP/ADAPT/REWRITE.
 - **Salida:** backlog técnico priorizado y sin estado inventado.
 - **Fundador:** aprobar presupuesto de remediación y riesgos aceptados.
+
+FOUNDATION-005 aporta auditoría, matriz, scorecard, evidencia local y backlog
+P0-P4. Detectó un P0 de deny-by-default en diez tablas públicas legacy. Por
+tanto, el gate inmediato es el paquete mínimo `FOUNDATION-005-R1`; el plan
+general FOUNDATION-006 no debe abrirse antes de cerrar y verificar localmente
+ese bloqueo. La auditoría no modifica el marco F0-F12 ni autoriza remediaciones.
 
 ## F5 — Organizaciones de agentes
 
