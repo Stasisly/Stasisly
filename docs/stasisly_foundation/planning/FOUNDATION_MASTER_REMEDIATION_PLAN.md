@@ -57,9 +57,10 @@ files, owners and acceptance evidence do not conflict.
 
 ## Track A — Security and authorization foundation
 
-**FOUNDATION-007 status:** conceptual model `APPROVED`; technical implementation
-`NOT IMPLEMENTED`. ADR-F004 and the security matrices satisfy G0-G2 for the
-model, not G3-G5 for runtime controls.
+**FOUNDATION-009 status:** typed authorization contracts and local policy
+validation `IMPLEMENTED LOCALLY`; full enforcement remains
+`PARTIALLY_IMPLEMENTED`. Persistent RBAC/ABAC/JIT, Founder elevation and remote
+enforcement remain `NOT_IMPLEMENTED`.
 
 - **ID / title:** A — Technical authorization and trust foundation.
 - **Objective:** define RBAC, ABAC, JIT, ownership and policy evaluation without
@@ -86,8 +87,9 @@ model, not G3-G5 for runtime controls.
 ## Track B — API and identity boundaries
 
 **Status:** FOUNDATION-008 completed locally. Canonical identity/session
-contracts are adopted; Supabase Auth remains the current adapter. The next gate
-is FOUNDATION-009, and no remote authorization is inherited.
+contracts are adopted; Supabase Auth remains the current adapter.
+FOUNDATION-009 adds a separate authorization boundary without changing that
+provider strategy or inheriting remote authorization.
 
 - **ID / title:** B — Owned API, identity, authentication and session boundary.
 - **Objective:** separate identity, authentication, authorization, ownership
@@ -111,6 +113,10 @@ is FOUNDATION-009, and no remote authorization is inherited.
   publication; provider strategy changes and all remote work remain gated.
 
 ## Track C — Surface isolation
+
+**Status:** FOUNDATION-009 supplies canonical surface/environment inputs and a
+local PDP, but route/API isolation remains incomplete. FOUNDATION-010 is the
+next separately approved enforcement package.
 
 - **ID / title:** C — Product, Development, Administration and Engine isolation.
 - **Objective:** make route, API, data, agent and environment access explicit by

@@ -124,15 +124,16 @@ claim, migration or Edge Function change is included.
 
 ## 16. Residual debt
 
-- Full RBAC, ABAC, JIT, PDP/PEP and Founder access remain `NOT_IMPLEMENTED`.
+- FOUNDATION-009 later implemented PDP/PEP contracts and one focal local PEP;
+  full RBAC, ABAC, JIT and Founder access remain incomplete/not implemented.
 - The full inherited auth feature is `CANDIDATE / PARTIALLY_ADAPTED`.
 - `backendReal` remains transitional vocabulary and is not Foundation authority.
 - Bootstrap still initializes the current provider SDK as infrastructure.
-- Legacy chat containment and surface guards remain FOUNDATION-009 work.
+- Legacy chat containment and broad surface guards remain FOUNDATION-010 work.
 - Removal of compatibility contracts requires consumer evidence in a later
   package.
-- FOUNDATION-010 requires rescoping because its original adapter objective was
-  completed early by this explicitly authorized package.
+- FOUNDATION-010 was subsequently respecified as surface/environment
+  enforcement boundaries after FOUNDATION-009.
 
 ## 17. Rollback
 
@@ -144,5 +145,5 @@ routes, expose provider DTOs, restore token logging or weaken deny-all controls.
 
 Canonical identity and session contracts are `FOUNDATION_ADOPTED` locally.
 Supabase Auth is `ADAPT / CURRENT_PROVIDER_ADAPTER`. G0-G7 are satisfied only
-after package commit and push. G8-G10 were not executed. The next separately
-approved package is FOUNDATION-009.
+after package commit and push. G8-G10 were not executed. FOUNDATION-009 was
+subsequently completed locally under ADR-F006.

@@ -30,7 +30,7 @@ siguen sin estar autorizadas por esta clasificación.
 | 43 agentes AAA | `docs/archive/discovery/stasisly_definition/agents/` | ADAPT | Base experta de Development | COST_CRITICAL | Extraer plantilla y roster | Gobierno de agentes |
 | 6 comités | `docs/archive/discovery/stasisly_definition/committees/` | ADAPT | Gobierno útil, posible sobredimensión | Coste de coordinación | Revisar mandato/gates | Nexus/Rector futuros |
 | Orquestador Codex | `docs/archive/discovery/stasisly_definition/orchestrator/` | ADAPT | Controles operativos valiosos | Puede frenar o sobreactuar | Convertir a estándar Foundation | Program Management |
-| Flutter core/config | `lib/core/` | ADAPT | Gates y contratos útiles; identidad/sesión canónicas adoptadas en FOUNDATION-008 | SECURITY_CRITICAL | Continuar aislamiento de surfaces | Riverpod, GoRouter |
+| Flutter core/config | `lib/core/` | ADAPT / PARTIALLY_ADOPTED | Identidad/sesión y contratos de autorización canónicos; enforcement global parcial | SECURITY_CRITICAL | Continuar aislamiento de surfaces | Riverpod, GoRouter |
 | Auth legacy | `lib/features/auth/` | ADAPT / PARTIALLY_ADAPTED | Consume puerto propio, pero conserva fachadas legacy y bootstrap proveedor | SECURITY_CRITICAL, VENDOR_COUPLED | Migración gradual; no declarar feature completa adoptada | Auth, RBAC/ABAC |
 | Chat legacy | `lib/features/chat/` | REWRITE | Contratos y rutas antiguas | SECURITY_CRITICAL | No conectar; reemplazar gradualmente | Sessions/messages |
 | Chat local-safe | `lib/features/chat_sessions/`, `chat_messages/` | ADAPT | Fronteras y tests valiosos | Local/dev-only | Adoptar tras arquitectura F3/F7 | Auth, API |
@@ -134,3 +134,15 @@ deuda residual.
 - Autorización, Founder access y permisos por surface: `NOT_IMPLEMENTED`.
 - Chat, profile y specialists conservan sus clasificaciones previas; solo se
   adaptaron consumidores directos al identificador canónico.
+
+## Adopción de FOUNDATION-009
+
+- `lib/core/authorization/domain/` y sus puertos PDP/PEP/audit:
+  `FOUNDATION_ADOPTED` localmente.
+- PDP deny-by-default local:
+  `FOUNDATION_ADOPTED_FOR_LOCAL_CONTRACT_VALIDATION`.
+- Enforcement de autorización completo: `PARTIALLY_IMPLEMENTED`; solo lectura
+  de perfil propio usa la defensa adicional y backend sigue siendo autoridad.
+- RBAC/ABAC persistente, Founder elevation y enforcement remoto:
+  `NOT_IMPLEMENTED`.
+- Profile permanece `ADAPT`; chat, rutas, DTOs y backend no cambiaron.

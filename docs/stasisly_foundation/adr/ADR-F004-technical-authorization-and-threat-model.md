@@ -67,7 +67,9 @@ these decisions ad hoc in claims, clients or provider-specific boundaries.
 
 - FOUNDATION-008 can define provider-neutral identity/session/API contracts
   using approved policy inputs.
-- FOUNDATION-009 must enforce surface/route boundaries and legacy containment.
+- FOUNDATION-009 implements typed authorization/PDP/PEP contracts and local
+  deny-default validation; FOUNDATION-010 must extend enforcement to
+  surface/route boundaries and legacy containment.
 - Founder elevation, policy technology/data, service identities, audit storage,
   agent authorization and cost controls need separate packages and Founder
   gates where specified.

@@ -1,4 +1,7 @@
+import 'package:stasisly/core/authorization/domain/authorization_environment.dart';
 import 'package:stasisly/core/error/exceptions.dart';
+import 'package:stasisly/core/identity/domain/stasisly_identity.dart';
+import 'package:stasisly/features/profile/application/own_profile_read_authorization_gate.dart';
 import 'package:stasisly/features/profile/data/datasources/own_profile_remote_datasource.dart';
 import 'package:stasisly/features/profile/data/models/own_profile_model.dart';
 import 'package:stasisly/features/profile/domain/entities/own_profile_results.dart';
@@ -8,12 +11,18 @@ import 'package:stasisly/features/profile/domain/validation/display_name_validat
 class OwnProfileRepositoryImpl implements OwnProfileRepository {
   const OwnProfileRepositoryImpl({
     required OwnProfileRemoteDataSource dataSource,
-    required String currentIdentityId,
+    required StasislyIdentity currentIdentity,
+    required AuthorizationEnvironment authorizationEnvironment,
+    required OwnProfileReadAuthorizationGate readAuthorizationGate,
   }) : _dataSource = dataSource,
-       _currentIdentityId = currentIdentityId;
+       _currentIdentity = currentIdentity,
+       _authorizationEnvironment = authorizationEnvironment,
+       _readAuthorizationGate = readAuthorizationGate;
 
   final OwnProfileRemoteDataSource _dataSource;
-  final String _currentIdentityId;
+  final StasislyIdentity _currentIdentity;
+  final AuthorizationEnvironment _authorizationEnvironment;
+  final OwnProfileReadAuthorizationGate _readAuthorizationGate;
 
   @override
   Future<OwnProfileResult> readOwnProfile() async {
@@ -28,9 +37,16 @@ class OwnProfileRepositoryImpl implements OwnProfileRepository {
       }
 
       final profile = OwnProfileModel.fromJson(response.rows.single);
-      if (profile.id != _currentIdentityId) {
+      if (profile.id != _currentIdentity.subjectId) {
         return const OwnProfileContractViolation();
       }
+      final decision = await _readAuthorizationGate.authorize(
+        identity: _currentIdentity,
+        trustedProfileSubjectId: profile.id,
+        environment: _authorizationEnvironment,
+        correlationId: 'profile-read:${profile.id}',
+      );
+      if (!decision.isAllowed) return const OwnProfilePermissionDenied();
       return OwnProfileSuccess(profile.toEntity(isDemo: false));
     } on NetworkException {
       return const OwnProfileNetworkError();
@@ -65,7 +81,7 @@ class OwnProfileRepositoryImpl implements OwnProfileRepository {
       }
 
       final profile = OwnProfileModel.fromJson(response.rows.single);
-      if (profile.id != _currentIdentityId ||
+      if (profile.id != _currentIdentity.subjectId ||
           profile.displayName != validation.value) {
         return const UpdateOwnDisplayNameContractViolation();
       }

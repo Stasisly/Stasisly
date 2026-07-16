@@ -1,12 +1,22 @@
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:stasisly/core/authorization/authorization.dart';
 import 'package:stasisly/core/error/exceptions.dart';
+import 'package:stasisly/core/identity/domain/authentication_state.dart';
+import 'package:stasisly/core/identity/domain/identity_type.dart';
+import 'package:stasisly/core/identity/domain/stasisly_identity.dart';
+import 'package:stasisly/features/profile/application/own_profile_read_authorization_gate.dart';
 import 'package:stasisly/features/profile/data/datasources/own_profile_remote_datasource.dart';
 import 'package:stasisly/features/profile/data/repositories/own_profile_repository_impl.dart';
 import 'package:stasisly/features/profile/domain/entities/own_profile_results.dart';
 
 void main() {
   const identityId = 'owner-id';
+  const identity = StasislyIdentity(
+    subjectId: identityId,
+    identityType: IdentityType.humanUser,
+    authenticationState: AuthenticationState.authenticated,
+  );
 
   group('OwnProfileRepositoryImpl read', () {
     test('accepts exactly one owner row with approved columns', () async {
@@ -19,7 +29,9 @@ void main() {
             ],
           ),
         ),
-        currentIdentityId: identityId,
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.local,
+        readAuthorizationGate: _readAuthorizationGate(),
       );
 
       final result = await repository.readOwnProfile();
@@ -34,7 +46,9 @@ void main() {
         dataSource: _FakeDataSource(
           readResponse: const OwnProfileRemoteResponse(statusCode: 200),
         ),
-        currentIdentityId: identityId,
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.local,
+        readAuthorizationGate: _readAuthorizationGate(),
       );
       final multiple = OwnProfileRepositoryImpl(
         dataSource: _FakeDataSource(
@@ -46,7 +60,9 @@ void main() {
             ],
           ),
         ),
-        currentIdentityId: identityId,
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.local,
+        readAuthorizationGate: _readAuthorizationGate(),
       );
 
       expect(await missing.readOwnProfile(), isA<OwnProfileMissing>());
@@ -66,7 +82,9 @@ void main() {
             ],
           ),
         ),
-        currentIdentityId: identityId,
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.local,
+        readAuthorizationGate: _readAuthorizationGate(),
       );
       final otherIdentity = OwnProfileRepositoryImpl(
         dataSource: _FakeDataSource(
@@ -77,7 +95,9 @@ void main() {
             ],
           ),
         ),
-        currentIdentityId: identityId,
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.local,
+        readAuthorizationGate: _readAuthorizationGate(),
       );
 
       expect(
@@ -94,7 +114,9 @@ void main() {
       Future<OwnProfileResult> read(OwnProfileRemoteDataSource source) {
         return OwnProfileRepositoryImpl(
           dataSource: source,
-          currentIdentityId: identityId,
+          currentIdentity: identity,
+          authorizationEnvironment: AuthorizationEnvironment.local,
+          readAuthorizationGate: _readAuthorizationGate(),
         ).readOwnProfile();
       }
 
@@ -130,6 +152,27 @@ void main() {
         isA<OwnProfileNetworkError>(),
       );
     });
+
+    test('fails closed when the local policy receives production', () async {
+      final repository = OwnProfileRepositoryImpl(
+        dataSource: _FakeDataSource(
+          readResponse: const OwnProfileRemoteResponse(
+            statusCode: 200,
+            rows: [
+              {'id': identityId, 'display_name': 'Owner'},
+            ],
+          ),
+        ),
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.production,
+        readAuthorizationGate: _readAuthorizationGate(),
+      );
+
+      expect(
+        await repository.readOwnProfile(),
+        isA<OwnProfilePermissionDenied>(),
+      );
+    });
   });
 
   group('OwnProfileRepositoryImpl update', () {
@@ -146,7 +189,9 @@ void main() {
         );
         final repository = OwnProfileRepositoryImpl(
           dataSource: dataSource,
-          currentIdentityId: identityId,
+          currentIdentity: identity,
+          authorizationEnvironment: AuthorizationEnvironment.local,
+          readAuthorizationGate: _readAuthorizationGate(),
         );
 
         final result = await repository.updateOwnDisplayName('  Raúl  ');
@@ -160,7 +205,9 @@ void main() {
       final dataSource = _FakeDataSource();
       final repository = OwnProfileRepositoryImpl(
         dataSource: dataSource,
-        currentIdentityId: identityId,
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.local,
+        readAuthorizationGate: _readAuthorizationGate(),
       );
 
       final result = await repository.updateOwnDisplayName('A');
@@ -174,13 +221,17 @@ void main() {
         dataSource: _FakeDataSource(
           updateResponse: const OwnProfileRemoteResponse(statusCode: 204),
         ),
-        currentIdentityId: identityId,
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.local,
+        readAuthorizationGate: _readAuthorizationGate(),
       );
       final missing = OwnProfileRepositoryImpl(
         dataSource: _FakeDataSource(
           updateResponse: const OwnProfileRemoteResponse(statusCode: 200),
         ),
-        currentIdentityId: identityId,
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.local,
+        readAuthorizationGate: _readAuthorizationGate(),
       );
 
       expect(
@@ -203,7 +254,9 @@ void main() {
             ],
           ),
         ),
-        currentIdentityId: identityId,
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.local,
+        readAuthorizationGate: _readAuthorizationGate(),
       );
       final mismatch = OwnProfileRepositoryImpl(
         dataSource: _FakeDataSource(
@@ -214,7 +267,9 @@ void main() {
             ],
           ),
         ),
-        currentIdentityId: identityId,
+        currentIdentity: identity,
+        authorizationEnvironment: AuthorizationEnvironment.local,
+        readAuthorizationGate: _readAuthorizationGate(),
       );
 
       expect(
@@ -234,7 +289,9 @@ void main() {
           dataSource: _FakeDataSource(
             updateResponse: const OwnProfileRemoteResponse(statusCode: 401),
           ),
-          currentIdentityId: identityId,
+          currentIdentity: identity,
+          authorizationEnvironment: AuthorizationEnvironment.local,
+          readAuthorizationGate: _readAuthorizationGate(),
         );
         final denied = OwnProfileRepositoryImpl(
           dataSource: _FakeDataSource(
@@ -243,11 +300,15 @@ void main() {
               errorCode: '42501',
             ),
           ),
-          currentIdentityId: identityId,
+          currentIdentity: identity,
+          authorizationEnvironment: AuthorizationEnvironment.local,
+          readAuthorizationGate: _readAuthorizationGate(),
         );
         final network = OwnProfileRepositoryImpl(
           dataSource: _FakeDataSource(updateError: const NetworkException()),
-          currentIdentityId: identityId,
+          currentIdentity: identity,
+          authorizationEnvironment: AuthorizationEnvironment.local,
+          readAuthorizationGate: _readAuthorizationGate(),
         );
 
         expect(
@@ -265,6 +326,15 @@ void main() {
       },
     );
   });
+}
+
+OwnProfileReadAuthorizationGate _readAuthorizationGate() {
+  return OwnProfileReadAuthorizationGate(
+    DefaultAuthorizationEnforcer(
+      decisionPoint: LocalFoundationPolicyDecisionPoint(),
+      auditSink: const LocalNoOpAuthorizationAuditSink(),
+    ),
+  );
 }
 
 class _FakeDataSource implements OwnProfileRemoteDataSource {

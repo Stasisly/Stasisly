@@ -168,8 +168,10 @@ exceptions require approved Emergency Authority, bounded scope and audit.
 ## Implementation packages
 
 - FOUNDATION-008: owned identity/session/API contracts and policy inputs.
-- FOUNDATION-009: surface/legacy-route PEPs and negative tests.
-- FOUNDATION-010: local identity/auth adapter boundary.
+- FOUNDATION-009: typed context/decision, PDP/PEP ports, local deny-default
+  validation and one focal profile PEP.
+- FOUNDATION-010: surface/environment enforcement boundaries and legacy-route
+  containment after separate approval.
 - Later separately approved packages: policy data model/evaluation, Founder
   elevation, service identities, audit events, privacy, agent authorization and
   cost enforcement.

@@ -18,7 +18,7 @@ Product behavior or touch a remote project.
 |---|---|---|---|
 | No Stasisly-owned identity/API boundary - `PARTIALLY_CLOSED_LOCALLY` | FOUNDATION-008 adds owned identity/session/API context and confines Auth SDK; bootstrap and wider provider coupling remain | Residual lock-in and incomplete consumer migration | Canonical boundary complete locally; continue containment/adoption without declaring full auth adopted. |
 | Legacy chat is reachable | `/chat/:id`, `/orchestrator/chat`, direct Supabase and client `role` | Authority bypass and unsafe route semantics | Legacy containment/deprecation package; no Product entry reaches legacy writes. |
-| Surface authorization implementation absent | FOUNDATION-007 approves ADR-F004, RBAC+ABAC/JIT and surface/environment model conceptually; no runtime controls | Cross-surface privilege ambiguity until enforced | FOUNDATION-008 policy inputs, FOUNDATION-009 surface PEPs and later policy implementation with negative tests. |
+| Surface authorization implementation partial | FOUNDATION-009 adopts typed contexts, PDP/PEP and one local profile guard; routes/APIs and persistent RBAC/ABAC/JIT remain unenforced | Cross-surface privilege ambiguity persists beyond the focal consumer | FOUNDATION-010 boundary enforcement and later persistent policy implementation with negative tests. |
 | Modern chat not Product-ready | Dev-only adapters/routes and incomplete auth | Premature promotion of local-safe code | Controlled adoption plan preserving explicit `sessionId` and DTO allowlists. |
 | Create/archive lack transaction/idempotency contracts | Multi-request create; direct conditional archive | TOCTOU and duplicate-request behavior | Domain/API decision package with explicit semantics and concurrency tests. |
 | Orchestrator could be mistaken for Engine | Static Product UI at orchestrator routes | Architectural misrepresentation | Deprecation/rewrite decision; prohibit Engine naming/reuse. |
@@ -56,8 +56,9 @@ Product behavior or touch a remote project.
 `FOUNDATION-005-R1` is complete and the P0 is `CLOSED_LOCALLY`. FOUNDATION-006
 establishes the approved master strategy, package map and gates. FOUNDATION-007
 has completed the conceptual authorization/threat model; P1 continues with a
-FOUNDATION-008 identity/session/API contract package completed locally;
-P1 continues with separately authorized FOUNDATION-009 containment work;
+FOUNDATION-008 identity/session/API and FOUNDATION-009 authorization-contract
+packages completed locally; P1 continues with separately authorized
+FOUNDATION-010 surface/environment boundary work;
 P2 maps primarily to FOUNDATION-015, 018 and 020; P3 to FOUNDATION-016, 017 and
 later release work; P4 remains deferred. No P1-P4 implementation or remote
 rollout is authorized by this mapping.

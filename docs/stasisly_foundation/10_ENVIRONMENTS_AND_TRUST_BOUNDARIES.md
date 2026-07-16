@@ -18,7 +18,9 @@
 
 ```text
 Conceptual decision: APPROVED
-Environment and authorization implementation: NOT IMPLEMENTED
+Environment vocabulary: IMPLEMENTED LOCALLY
+Cross-surface/environment enforcement: PARTIALLY IMPLEMENTED
+Remote enforcement: NOT IMPLEMENTED
 ```
 
 ## Entornos mínimos

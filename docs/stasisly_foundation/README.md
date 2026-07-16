@@ -12,6 +12,8 @@ y `FOUNDATION-005-R1` cerró localmente su P0 de tablas públicas legacy.
 `FOUNDATION-007` define el modelo conceptual de autorización; y
 `FOUNDATION-008` implementa localmente los contratos propios de identidad,
 sesión y contexto API con Supabase Auth confinado como adapter actual.
+`FOUNDATION-009` adopta contratos tipados de autorización, puertos PDP/PEP y
+una política local deny-by-default con integración focal de perfil propio.
 
 La documentación Foundation registra decisiones y evidencia según su nivel de
 autoridad. No demuestra por sí sola que una capacidad esté implementada.
@@ -110,8 +112,17 @@ PDP/PEP, auditoría y revocación. No implementa ninguno de esos controles.
 FOUNDATION-008 adopta localmente `StasislyIdentity`, `StasislySession`, estados
 y errores neutrales, `IdentityProvider` y `ApiIdentityContext`. Supabase Auth es
 `ADAPT / CURRENT_PROVIDER_ADAPTER`; la feature auth completa queda parcialmente
-adaptada. Autorización, Founder access, surface permissions y remoto siguen sin
-implementar o ejecutar.
+adaptada.
+
+## Contexto y política de autorización
+
+- [Implementación FOUNDATION-009](implementation/FOUNDATION-009_AUTHORIZATION_CONTEXT_AND_POLICY_CONTRACTS.md)
+- [ADR-F006 — Contexto y decisiones PDP/PEP](adr/ADR-F006-authorization-context-and-policy-contracts.md)
+
+FOUNDATION-009 adopta localmente `AuthorizationContext`, decisiones tipadas y
+puertos PDP/PEP/audit. El PDP local solo valida el caso existente de lectura de
+perfil propio en local/development. El enforcement global sigue parcial;
+RBAC/ABAC persistente, Founder elevation, remoto y producción no se implementan.
 
 La auditoría identificó componentes modernos reutilizables, deuda legacy y un
 P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
@@ -162,6 +173,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Con FOUNDATION-008 implementado localmente, el siguiente gate recomendado es
-`FOUNDATION-009 — Legacy route containment and surface guards`, sujeto a
+Con FOUNDATION-009 implementado localmente, el siguiente gate recomendado es
+`FOUNDATION-010 — Surface and environment enforcement boundaries`, sujeto a
 aprobación separada. Ninguna operación remota queda autorizada.

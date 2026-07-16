@@ -58,6 +58,6 @@ Rollback is a commit revert and must preserve legacy deny-all controls.
 
 ## Follow-up
 
-FOUNDATION-009 may implement legacy-route containment and explicit surface
-guards after separate approval. Authorization runtime and Founder elevation
-remain future gated work.
+FOUNDATION-009 subsequently implemented typed authorization/PDP/PEP contracts
+and one focal local guard under ADR-F006. Broad surface/route enforcement is
+FOUNDATION-010 work; Founder elevation remains separately gated.

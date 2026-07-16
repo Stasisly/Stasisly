@@ -29,8 +29,8 @@ FOUNDATION-005-R1
   -> FOUNDATION-006
     -> FOUNDATION-007 authorization/threat model [COMPLETED CONCEPTUALLY]
       -> FOUNDATION-008 owned identity/API contracts [COMPLETED LOCALLY]
-        -> FOUNDATION-009 surface and legacy-route containment
-        -> FOUNDATION-010 identity compatibility cleanup [REQUIRES RESCOPE]
+        -> FOUNDATION-009 authorization context/PDP/PEP [COMPLETED LOCALLY]
+          -> FOUNDATION-010 surface/environment enforcement boundaries
           -> FOUNDATION-011 sessions/messages adoption
       -> FOUNDATION-012 Product taxonomy decisions
         -> FOUNDATION-013 first Product slice
@@ -47,9 +47,10 @@ FOUNDATION-013 requires both 011 and 012. FOUNDATION-020 evaluates all P2
 dependencies relevant to the proposed staging scope; it does not execute G8.
 
 FOUNDATION-007 satisfies G0-G2 for the conceptual authorization/threat model.
-FOUNDATION-008 satisfies G0-G7 for its local owned identity/session/API scope
-after publication. It implements no authorization runtime control. FOUNDATION-009
-is the next dependency for legacy-route containment and surface enforcement.
+FOUNDATION-008 satisfies G0-G7 for its local owned identity/session/API scope.
+FOUNDATION-009 satisfies G0-G7 after publication for typed contracts, local PDP
+and one profile PEP, while full enforcement remains partial. FOUNDATION-010 is
+the next dependency for route/API surface and environment boundaries.
 
 ## Surface dependency matrix
 
