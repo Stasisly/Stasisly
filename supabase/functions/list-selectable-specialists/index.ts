@@ -3,6 +3,8 @@ import {
   preflightResponse,
   withCorsHeaders,
 } from "../_shared/cors.ts";
+import { BACKEND_OPERATIONS } from "../_shared/authorization/backend_operation_definition.ts";
+import { prepareBackendAuthorization } from "../_shared/authorization/backend_request_authorization.ts";
 import { assertAllowedRuntime } from "../_shared/runtime_guard.ts";
 import { parseAreaFilter, sanitizeCatalogRows } from "./contract.ts";
 import {
@@ -65,37 +67,6 @@ export function assertLocalRuntime(config: RuntimeConfig): URL {
   }
 }
 
-function bearerToken(request: Request): string {
-  const authorization = request.headers.get("authorization") ?? "";
-  const match = /^Bearer ([^\s]+)$/.exec(authorization);
-  if (!match) throw new Error("catalogUnauthenticated");
-  return match[1];
-}
-
-async function validateLocalUser(
-  fetcher: typeof fetch,
-  baseUrl: URL,
-  anonKey: string,
-  token: string,
-): Promise<string> {
-  const response = await fetcher(new URL("/auth/v1/user", baseUrl), {
-    headers: {
-      apikey: anonKey,
-      authorization: `Bearer ${token}`,
-    },
-  });
-  if (!response.ok) throw new Error("catalogUnauthenticated");
-
-  const body = await response.json();
-  if (
-    typeof body !== "object" || body === null || Array.isArray(body) ||
-    typeof (body as Record<string, unknown>).id !== "string"
-  ) {
-    throw new Error("catalogUnauthenticated");
-  }
-  return (body as Record<string, string>).id;
-}
-
 async function fetchCatalog(
   fetcher: typeof fetch,
   baseUrl: URL,
@@ -138,7 +109,7 @@ export function createHandler(
       return preflightResponse(request, config, METHODS);
     }
     const startedAt = now();
-    const id = requestId();
+    let id = requestId();
     let count = 0;
     let result: "success" | "error" = "error";
 
@@ -147,12 +118,17 @@ export function createHandler(
         throw new Error("catalogMethodNotAllowed");
       }
       const area = parseAreaFilter(new URL(request.url));
-      const baseUrl = assertLocalRuntime(config);
-      const token = bearerToken(request);
-      await validateLocalUser(fetcher, baseUrl, config.anonKey, token);
+      const authorization = await prepareBackendAuthorization({
+        request,
+        fetcher,
+        config,
+        operation: BACKEND_OPERATIONS.listSelectableSpecialists,
+        generateCorrelationId: () => id,
+      });
+      id = authorization.context.correlationId;
       const rows = await fetchCatalog(
         fetcher,
-        baseUrl,
+        authorization.baseUrl,
         config.serviceRoleKey,
         area,
       );

@@ -34,9 +34,17 @@ export function errorResponse(
 }
 
 export function errorCodeFrom(error: unknown): ListMessagesErrorCode {
+  const category = backendPublicErrorCategory(error);
+  if (category === "unauthenticated") return "unauthenticated";
+  if (category === "invalidAuthentication") return "invalidSession";
+  if (category === "invalidRequest") return "invalidRequest";
+  if (category === "permissionDenied") return "permissionDenied";
+  if (category === "backendBlocked") return "backendMisconfigured";
+  if (category === "unexpectedError") return "unexpectedError";
   if (error instanceof Error) {
     const candidate = error.message as ListMessagesErrorCode;
     if (candidate in ERROR_STATUS) return candidate;
   }
   return "unexpectedError";
 }
+import { backendPublicErrorCategory } from "../_shared/authorization/public_error_mapping.ts";

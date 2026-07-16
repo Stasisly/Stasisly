@@ -9,8 +9,8 @@
 | Authority level | 6 — Evidence, audits and trackers |
 | Owner | Dirección de Documentación y Conocimiento under Rector (conceptual) |
 | Approver | Founder for authority assignments |
-| Version | 1.8 |
-| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-010 |
+| Version | 1.9 |
+| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-011 |
 | Supersedes | No Foundation register |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -67,6 +67,8 @@
 | `adr/ADR-F006-authorization-context-and-policy-contracts.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Security + Architecture under Rector | Founder | Yes | Authorization inputs/outcomes without an owned runtime contract | ADR-F004; ADR-F005 | Authorization semantics, policy or enforcement boundary change |
 | `implementation/FOUNDATION-010_SURFACE_AND_ENVIRONMENT_ENFORCEMENT.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Architecture + Security + QA + Documentation | Evidence owner | No, local implementation evidence | Route and provider boundary enforcement absent | ADR-F007; FOUNDATION-009 | Enforcement, backend adoption or remote activation change |
 | `adr/ADR-F007-surface-and-environment-enforcement-boundaries.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Implicit route surface/environment authority | ADR-F004-F006 | Surface, environment, route or entry-point enforcement semantics change |
+| `implementation/FOUNDATION-011_BACKEND_AUTHORIZATION_CONTEXT_AND_OWNED_API_ENFORCEMENT.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Backend Architecture + Security + QA + Documentation | Evidence owner | No, local implementation evidence | Implicit backend operation context | ADR-F008; FOUNDATION-008-010 | Backend policy, operation, ownership or remote activation change |
+| `adr/ADR-F008-backend-authorization-context-and-owned-api-enforcement.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Backend Architecture + Security under Rector | Founder | Yes | Implicit backend surface/environment/action/resource authority | ADR-F004-F007 | Backend authorization, owned API or environment semantics change |
 | `DOCUMENT_AUTHORITY_REGISTER.md` | ACTIVE | 6 | Documentation under Rector (conceptual) | Founder for authority changes | Operational register | No prior register | Documentation governance | Any authority/status/supersession change |
 | `archive_index/DISCOVERY_ARCHIVE_INDEX.md` | ACTIVE | 6 | Documentation | Evidence owner | No, evidence/index | Informal Discovery locations | Discovery archive | Archive path or successor changes |
 | `implementation/FOUNDATION_SESSION_TRACKER.md` | ACTIVE | 6 | Program Management | Evidence owner | No, tracker | Historical Discovery tracker for Foundation work | Foundation packages | Every completed Foundation package |

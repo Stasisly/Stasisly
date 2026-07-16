@@ -3,6 +3,11 @@ import {
   preflightResponse,
   withCorsHeaders,
 } from "../_shared/cors.ts";
+import { BACKEND_OPERATIONS } from "../_shared/authorization/backend_operation_definition.ts";
+import {
+  finalizeBackendAuthorization,
+  prepareBackendAuthorization,
+} from "../_shared/authorization/backend_request_authorization.ts";
 import { assertAllowedRuntime } from "../_shared/runtime_guard.ts";
 import {
   assertOwnedSession,
@@ -55,14 +60,6 @@ export function assertLocalRuntime(config: RuntimeConfig): URL {
   return assertAllowedRuntime(config);
 }
 
-function bearerToken(request: Request): string {
-  const match = /^Bearer ([^\s]+)$/u.exec(
-    request.headers.get("authorization") ?? "",
-  );
-  if (!match) throw new Error("unauthenticated");
-  return match[1];
-}
-
 async function requestJson(
   fetcher: typeof fetch,
   url: URL,
@@ -80,27 +77,6 @@ function privilegedHeaders(serviceRoleKey: string): HeadersInit {
     authorization: `Bearer ${serviceRoleKey}`,
     accept: "application/json",
   };
-}
-
-async function validateLocalUser(
-  fetcher: typeof fetch,
-  baseUrl: URL,
-  anonKey: string,
-  token: string,
-): Promise<string> {
-  const body = await requestJson(
-    fetcher,
-    new URL("/auth/v1/user", baseUrl),
-    { headers: { apikey: anonKey, authorization: `Bearer ${token}` } },
-    "invalidSession",
-  );
-  if (
-    typeof body !== "object" || body === null || Array.isArray(body) ||
-    typeof (body as Record<string, unknown>).id !== "string"
-  ) {
-    throw new Error("invalidSession");
-  }
-  return (body as Record<string, string>).id;
 }
 
 function sessionUrl(baseUrl: URL, sessionId: string, ownerId: string): URL {
@@ -145,21 +121,24 @@ export function createHandler(
       return preflightResponse(request, config, METHODS);
     }
     const startedAt = now();
-    const id = requestId();
+    let id = requestId();
     let count = 0;
     let result: "success" | "error" = "error";
     let errorCode: ListMessagesErrorCode | undefined;
     try {
       if (request.method !== "GET") throw new Error("methodNotAllowed");
       const listRequest = parseListMessagesRequest(new URL(request.url));
-      const baseUrl = assertLocalRuntime(config);
-      const token = bearerToken(request);
-      const ownerId = await validateLocalUser(
+      const authorization = await prepareBackendAuthorization({
+        request,
         fetcher,
-        baseUrl,
-        config.anonKey,
-        token,
-      );
+        config,
+        operation: BACKEND_OPERATIONS.listSessionMessages,
+        generateCorrelationId: () => id,
+        resourceId: listRequest.sessionId,
+      });
+      id = authorization.context.correlationId;
+      const baseUrl = authorization.baseUrl;
+      const ownerId = authorization.identitySubjectId;
       const sessionRows = await requestJson(
         fetcher,
         sessionUrl(baseUrl, listRequest.sessionId, ownerId),
@@ -167,6 +146,11 @@ export function createHandler(
         "backendMisconfigured",
       );
       assertOwnedSession(sessionRows, ownerId, listRequest.sessionId);
+      finalizeBackendAuthorization(
+        authorization,
+        BACKEND_OPERATIONS.listSessionMessages,
+        "owned",
+      );
       const messageRows = await requestJson(
         fetcher,
         messagesUrl(

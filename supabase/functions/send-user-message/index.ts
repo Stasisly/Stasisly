@@ -3,6 +3,11 @@ import {
   preflightResponse,
   withCorsHeaders,
 } from "../_shared/cors.ts";
+import { BACKEND_OPERATIONS } from "../_shared/authorization/backend_operation_definition.ts";
+import {
+  finalizeBackendAuthorization,
+  prepareBackendAuthorization,
+} from "../_shared/authorization/backend_request_authorization.ts";
 import { assertAllowedRuntime } from "../_shared/runtime_guard.ts";
 import {
   parseSendMessageBody,
@@ -54,14 +59,6 @@ export function assertLocalRuntime(config: RuntimeConfig): URL {
   return assertAllowedRuntime(config);
 }
 
-function bearerToken(request: Request): string {
-  const match = /^Bearer ([^\s]+)$/u.exec(
-    request.headers.get("authorization") ?? "",
-  );
-  if (!match) throw new Error("unauthenticated");
-  return match[1];
-}
-
 async function requestJson(
   fetcher: typeof fetch,
   input: URL,
@@ -80,27 +77,6 @@ function privilegedHeaders(serviceRoleKey: string): HeadersInit {
     authorization: `Bearer ${serviceRoleKey}`,
     accept: "application/json",
   };
-}
-
-async function validateLocalUser(
-  fetcher: typeof fetch,
-  baseUrl: URL,
-  anonKey: string,
-  token: string,
-): Promise<string> {
-  const body = await requestJson(
-    fetcher,
-    new URL("/auth/v1/user", baseUrl),
-    { headers: { apikey: anonKey, authorization: `Bearer ${token}` } },
-    "invalidSession",
-  );
-  if (
-    typeof body !== "object" || body === null || Array.isArray(body) ||
-    typeof (body as Record<string, unknown>).id !== "string"
-  ) {
-    throw new Error("invalidSession");
-  }
-  return (body as Record<string, string>).id;
 }
 
 function mapRpcErrorBody(body: unknown): SendMessageErrorCode {
@@ -171,20 +147,23 @@ export function createHandler(
       return preflightResponse(request, config, METHODS);
     }
     const startedAt = now();
-    const id = requestId();
+    let id = requestId();
     let result: "success" | "error" = "error";
     let errorCode: SendMessageErrorCode | undefined;
     try {
       if (request.method !== "POST") throw new Error("methodNotAllowed");
-      const baseUrl = assertLocalRuntime(config);
       const command = await parseSendMessageBody(request);
-      const token = bearerToken(request);
-      const ownerId = await validateLocalUser(
+      const authorization = await prepareBackendAuthorization({
+        request,
         fetcher,
-        baseUrl,
-        config.anonKey,
-        token,
-      );
+        config,
+        operation: BACKEND_OPERATIONS.sendUserMessage,
+        generateCorrelationId: () => id,
+        resourceId: command.sessionId,
+      });
+      id = authorization.context.correlationId;
+      const baseUrl = authorization.baseUrl;
+      const ownerId = authorization.identitySubjectId;
       const rows = await invokeSendMessageRpc(
         fetcher,
         baseUrl,
@@ -193,6 +172,11 @@ export function createHandler(
         command,
       );
       const payload = sanitizeRpcResult(rows);
+      finalizeBackendAuthorization(
+        authorization,
+        BACKEND_OPERATIONS.sendUserMessage,
+        "owned",
+      );
       result = "success";
       return Response.json(payload, {
         status: 201,

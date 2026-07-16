@@ -31,7 +31,7 @@ FOUNDATION-005-R1
       -> FOUNDATION-008 owned identity/API contracts [COMPLETED LOCALLY]
         -> FOUNDATION-009 authorization context/PDP/PEP [COMPLETED LOCALLY]
           -> FOUNDATION-010 surface/environment enforcement boundaries [COMPLETED LOCALLY]
-            -> FOUNDATION-011 backend authorization/owned API enforcement
+            -> FOUNDATION-011 backend authorization/owned API enforcement [COMPLETED LOCALLY]
       -> FOUNDATION-012 Product taxonomy decisions
         -> FOUNDATION-013 first Product slice
       -> FOUNDATION-014 Agent Constitution/Engine design
@@ -51,7 +51,9 @@ FOUNDATION-008 satisfies G0-G7 for its local owned identity/session/API scope.
 FOUNDATION-009 satisfies G0-G7 after publication for typed contracts, local PDP
 and one profile PEP, while full enforcement remains partial. FOUNDATION-010
 satisfies G0-G6 with reproducible Flutter, Deno and two-cycle SQL evidence; its
-package commit and push complete G7. FOUNDATION-011 requires separate approval.
+package commit and push complete G7. FOUNDATION-011 satisfies G0-G6 with six
+registered Product operations, shared local PDP/PEP, HTTP/Deno/SQL/Flutter
+evidence and no remote action; its package commit and push complete G7.
 
 ## Surface dependency matrix
 

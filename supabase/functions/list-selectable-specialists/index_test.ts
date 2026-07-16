@@ -188,6 +188,32 @@ Deno.test("handler rejects client-provided authority", async () => {
   assertEquals(paths, []);
 });
 
+Deno.test("handler rejects authority-bearing headers before backend access", async () => {
+  let calls = 0;
+  const handler = createHandler(LOCAL_CONFIG, {
+    fetcher: (() => {
+      calls += 1;
+      return Promise.reject(new Error("must not call backend"));
+    }) as typeof fetch,
+  });
+  for (
+    const header of [
+      "x-owner-id",
+      "x-role",
+      "x-stasisly-surface",
+      "x-stasisly-environment",
+      "x-entitlement",
+    ]
+  ) {
+    const input = request();
+    input.headers.set(header, "attacker");
+    const response = await handler(input);
+    assertEquals(response.status, 400);
+    assertEquals((await response.json()).error.code, "catalogInvalidRequest");
+  }
+  assertEquals(calls, 0);
+});
+
 Deno.test("handler applies Product selection guards, area and stable order", async () => {
   let catalogUrl = "";
   const handler = createHandler(LOCAL_CONFIG, {

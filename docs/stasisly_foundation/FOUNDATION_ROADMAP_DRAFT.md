@@ -136,6 +136,9 @@ sus inputs mínimos en contratos propios de identidad, sesión y API.
 FOUNDATION-009 adopta contratos tipados de contexto/decisión, puertos PDP/PEP y
 una política local deny-by-default con un consumidor focal. FOUNDATION-010
 aplica boundaries locales de surface/entorno sin Founder elevation ni remoto.
+FOUNDATION-011 lleva el contexto y el PDP/PEP equivalente a las seis Edge
+Functions Product, con operaciones backend registradas, ownership confiable y
+solo local/development; no añade política persistente ni despliegue.
 
 ## F8 — Product inicial
 

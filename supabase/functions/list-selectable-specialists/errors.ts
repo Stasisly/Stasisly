@@ -31,9 +31,19 @@ export function errorResponse(
 }
 
 export function errorCodeFrom(error: unknown): CatalogErrorCode {
+  const category = backendPublicErrorCategory(error);
+  if (category === "unauthenticated" || category === "invalidAuthentication") {
+    return "catalogUnauthenticated";
+  }
+  if (category === "invalidRequest") return "catalogInvalidRequest";
+  if (category === "permissionDenied" || category === "backendBlocked") {
+    return "catalogBackendBlocked";
+  }
+  if (category === "unexpectedError") return "catalogUnexpectedFailure";
   if (error instanceof Error) {
     const candidate = error.message as CatalogErrorCode;
     if (candidate in ERROR_STATUS) return candidate;
   }
   return "catalogUnexpectedFailure";
 }
+import { backendPublicErrorCategory } from "../_shared/authorization/public_error_mapping.ts";

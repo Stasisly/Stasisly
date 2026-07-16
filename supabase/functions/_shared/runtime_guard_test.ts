@@ -17,9 +17,18 @@ Deno.test("runtime guard allows explicit local runtime only on local endpoints",
   assertEquals(assertAllowedRuntime(BASE_CONFIG).hostname, "127.0.0.1");
 });
 
-Deno.test("runtime guard keeps legacy local harnesses working", () => {
+Deno.test("runtime guard denies missing environment configuration", async () => {
+  await assertRejects(
+    async () => assertAllowedRuntime({ ...BASE_CONFIG, runtimeMode: "" }),
+    Error,
+    "backendMisconfigured",
+  );
+});
+
+Deno.test("runtime guard allows development against an explicit local endpoint", () => {
   assertEquals(
-    assertAllowedRuntime({ ...BASE_CONFIG, runtimeMode: "" }).hostname,
+    assertAllowedRuntime({ ...BASE_CONFIG, runtimeMode: "development" })
+      .hostname,
     "127.0.0.1",
   );
 });

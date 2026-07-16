@@ -14,6 +14,11 @@ export interface RuntimeGuardConfig {
   allowDevelopmentRemote: string;
 }
 
+export interface AllowedRuntime {
+  readonly baseUrl: URL;
+  readonly environment: "local" | "development";
+}
+
 const LOCAL_ENDPOINTS = new Set([
   "127.0.0.1:54321",
   "localhost:54321",
@@ -45,7 +50,9 @@ function hasRequiredSecrets(config: RuntimeGuardConfig): boolean {
   return config.anonKey.length > 0 && config.serviceRoleKey.length > 0;
 }
 
-export function assertAllowedRuntime(config: RuntimeGuardConfig): URL {
+export function resolveAllowedRuntime(
+  config: RuntimeGuardConfig,
+): AllowedRuntime {
   if (!hasRequiredSecrets(config)) {
     throw new Error("backendMisconfigured");
   }
@@ -56,14 +63,20 @@ export function assertAllowedRuntime(config: RuntimeGuardConfig): URL {
     url.host,
   );
 
-  // Backward-compatible local behavior for existing local harnesses that only
-  // set STASISLY_ALLOW_LOCAL_ONLY=true.
   if (
-    (mode === "local" || mode === "unknown") &&
+    mode === "local" &&
     config.allowLocalOnly === "true" &&
     localEndpoint
   ) {
-    return url;
+    return Object.freeze({ baseUrl: url, environment: "local" });
+  }
+
+  if (
+    mode === "development" &&
+    config.allowLocalOnly === "true" &&
+    localEndpoint
+  ) {
+    return Object.freeze({ baseUrl: url, environment: "development" });
   }
 
   if (
@@ -72,8 +85,12 @@ export function assertAllowedRuntime(config: RuntimeGuardConfig): URL {
     url.protocol === "https:" &&
     !LOCAL_ENDPOINTS.has(url.host)
   ) {
-    return url;
+    return Object.freeze({ baseUrl: url, environment: "development" });
   }
 
   throw new Error("backendMisconfigured");
+}
+
+export function assertAllowedRuntime(config: RuntimeGuardConfig): URL {
+  return resolveAllowedRuntime(config).baseUrl;
 }

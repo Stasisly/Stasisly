@@ -7,10 +7,10 @@ not schedules.
 
 | ID | Debt / risk | Evidence | Owner | Priority | Dependency | Acceptance condition | Target phase |
 |---|---|---|---|---|---|---|---|
-| SEC-01 | Authorization enforcement partial | FOUNDATION-009 adopts PDP/PEP; FOUNDATION-010 boundaries are implemented and validated locally; backend and persistent RBAC/ABAC/JIT remain absent | Security under Rector | P1 residual | Complete 011 and later policy implementation | Backend context enforcement and negative tests | F7 before Product expansion |
+| SEC-01 | Authorization enforcement partial | FOUNDATION-011 enforces registered local Product operations and trusted ownership in six Edge Functions; persistent RBAC/ABAC/JIT, remote and other backend domains remain absent | Security under Rector | P1 residual | Later persistent policy and domain packages | Persisted policy plus negative tests across approved domains | F7 before broader Product expansion |
 | SEC-02 | Legacy chat/client authority reachable | Direct Supabase, client role/IDs, legacy routes | Flutter + Backend Architecture | P1 | 008-011 | No Product path reaches legacy writes | F7 |
 | ARC-01 | Provider-owned identity/API boundary partially remediated | FOUNDATION-008 owns identity/session/errors and confines Auth SDK; bootstrap and backend adapters remain provider-coupled | Architecture under Rector | P2 residual | 009-010, 018 | Complete consumer migration and provider exit evidence | F7 |
-| ARC-02 | Surface isolation incomplete | Typed surface/environment policy exists, but mixed legacy routes/data domains are not yet comprehensively enforced | Architecture + Nexus | P1 | 010 | Explicit access matrix and enforced local route/API guards | F7 |
+| ARC-02 | Surface isolation incomplete | Product route boundaries and six Product Edge Functions enforce local/development context; mixed legacy and future domains remain | Architecture + Nexus | P1 residual | 012-013 and later surface packages | Approved Product boundary with no legacy bypass | F7/F8 |
 | PROD-01 | Product taxonomy and route semantics unresolved | Mental/physical naming; no `/conversations` | Product Owner under Stasis | P2, blocks Product slice | 012 | Founder-approved taxonomy and route contract | F8 |
 | DATA-01 | Privacy lifecycle incomplete | Health/conversation data without full retention/deletion/provenance | Data + Privacy | P3; before sensitive scope | 016 | Approved lifecycle, threat controls and test plan | F7/F8 before production |
 | TEST-01 | Backend security suites absent from CI | Local Deno/pgTAP/reset only | QA + DevOps | P2 | 015 | Protected reproducible CI jobs | F7 before staging |
@@ -51,3 +51,7 @@ profile PEP. FOUNDATION-010 implements and reproducibly validates local
 route/provider isolation while blocking legacy entry points. SEC-01 and ARC-02
 remain open for backend/global and persistent policy enforcement. No remote,
 production or Founder control exists.
+
+FOUNDATION-011 closes the six current Edge Function context gap locally. It
+does not close persistent policy, other backend domains, TOCTOU/idempotency,
+rate limits, productive audit, legacy retirement or remote uncertainty.

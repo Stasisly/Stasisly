@@ -269,6 +269,12 @@ next separately approved enforcement package.
 Priority can rise with new evidence. P0 remains closed locally unless a local
 regression is demonstrated; remote rollout remains separately gated.
 
+FOUNDATION-011 closes locally the six-function backend-context portion of P1:
+registered Product operations, explicit local/development environments,
+backend-derived identity/ownership and shared fail-closed PDP/PEP are adopted.
+Persistent RBAC/ABAC, legacy Product retirement, remote enforcement, rate limits
+and productive audit remain scheduled debt and are not implied closed.
+
 ## Common completion rule
 
 A local controlled package should close one coherent risk unit with

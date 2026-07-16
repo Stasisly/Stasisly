@@ -3,6 +3,11 @@ import {
   preflightResponse,
   withCorsHeaders,
 } from "../_shared/cors.ts";
+import { BACKEND_OPERATIONS } from "../_shared/authorization/backend_operation_definition.ts";
+import {
+  finalizeBackendAuthorization,
+  prepareBackendAuthorization,
+} from "../_shared/authorization/backend_request_authorization.ts";
 import { assertAllowedRuntime } from "../_shared/runtime_guard.ts";
 import { parseArchiveBody, sanitizeArchiveResult } from "./contract.ts";
 import {
@@ -50,14 +55,6 @@ export function assertLocalRuntime(config: RuntimeConfig): URL {
   return assertAllowedRuntime(config);
 }
 
-function bearerToken(request: Request): string {
-  const match = /^Bearer ([^\s]+)$/u.exec(
-    request.headers.get("authorization") ?? "",
-  );
-  if (!match) throw new Error("unauthenticated");
-  return match[1];
-}
-
 async function requestJson(
   fetcher: typeof fetch,
   url: URL,
@@ -68,25 +65,6 @@ async function requestJson(
   if (!response.ok) throw new Error(error);
   if (response.status === 204) throw new Error("archiveUnconfirmed");
   return await response.json();
-}
-
-async function validateLocalUser(
-  fetcher: typeof fetch,
-  baseUrl: URL,
-  anonKey: string,
-  token: string,
-): Promise<string> {
-  const body = await requestJson(
-    fetcher,
-    new URL("/auth/v1/user", baseUrl),
-    { headers: { apikey: anonKey, authorization: `Bearer ${token}` } },
-    "invalidSession",
-  );
-  if (
-    typeof body !== "object" || body === null || Array.isArray(body) ||
-    typeof (body as Record<string, unknown>).id !== "string"
-  ) throw new Error("invalidSession");
-  return (body as Record<string, string>).id;
 }
 
 async function archiveOwnSession(
@@ -133,19 +111,22 @@ export function createHandler(
       return preflightResponse(request, config, METHODS);
     }
     const startedAt = now();
-    const id = requestId();
+    let id = requestId();
     let result: "success" | "error" = "error";
     try {
       if (request.method !== "POST") throw new Error("methodNotAllowed");
-      const baseUrl = assertLocalRuntime(config);
       const sessionId = await parseArchiveBody(request);
-      const token = bearerToken(request);
-      const ownerId = await validateLocalUser(
+      const authorization = await prepareBackendAuthorization({
+        request,
         fetcher,
-        baseUrl,
-        config.anonKey,
-        token,
-      );
+        config,
+        operation: BACKEND_OPERATIONS.archiveOwnChatSession,
+        generateCorrelationId: () => id,
+        resourceId: sessionId,
+      });
+      id = authorization.context.correlationId;
+      const baseUrl = authorization.baseUrl;
+      const ownerId = authorization.identitySubjectId;
       const rows = await archiveOwnSession(
         fetcher,
         baseUrl,
@@ -154,6 +135,11 @@ export function createHandler(
         sessionId,
       );
       const session = sanitizeArchiveResult(rows, sessionId);
+      finalizeBackendAuthorization(
+        authorization,
+        BACKEND_OPERATIONS.archiveOwnChatSession,
+        "owned",
+      );
       result = "success";
       return Response.json({ session }, {
         status: 200,

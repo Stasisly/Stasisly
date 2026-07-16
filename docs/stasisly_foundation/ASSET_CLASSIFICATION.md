@@ -156,3 +156,14 @@ deuda residual.
 - Chat y orchestrator legacy: `LEGACY_BLOCKED`; código conservado sin fallback.
 - Administration, Platform UI, Stasis Engine y enforcement backend global:
   `NOT_IMPLEMENTED`.
+
+## Adopción de FOUNDATION-011
+
+- `supabase/functions/_shared/authorization/`, contexto, registro y PDP/PEP:
+  `FOUNDATION_ADOPTED` localmente.
+- Las seis fronteras Edge Function Product: `FOUNDATION_ADOPTED_LOCALLY` con
+  identidad/ownership backend, operaciones registradas y política fail-closed.
+- DTOs públicos, CORS, RPC y ownership previos: `KEEP` dentro de la adaptación.
+- Runtime con fallback local implícito: `SUPERSEDED` por configuración explícita.
+- Remoto, producción, RBAC/ABAC persistente, Founder access y audit sink:
+  `NOT_IMPLEMENTED`.

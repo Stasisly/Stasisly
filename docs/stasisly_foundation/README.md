@@ -137,6 +137,17 @@ metadata tipada por entry point y decisiones fail-closed. Product queda limitado
 local/development, Development solo a local/development, y las rutas heredadas
 de chat/orchestrator no construyen capacidad. Backend sigue siendo autoridad.
 
+## Autorización backend y API propia
+
+- [Implementación FOUNDATION-011](implementation/FOUNDATION-011_BACKEND_AUTHORIZATION_CONTEXT_AND_OWNED_API_ENFORCEMENT.md)
+- [ADR-F008 — Contexto backend y owned API](adr/ADR-F008-backend-authorization-context-and-owned-api-enforcement.md)
+
+FOUNDATION-011 adopta localmente `BackendRequestContext`, un registro inmutable
+de seis operaciones Product y contratos PDP/PEP fail-closed. Identidad y owner
+se derivan de JWT validado y datos confiables; el cliente no aporta autoridad.
+Solo local/development están permitidos. Remoto, producción, RBAC/ABAC
+persistente, Founder access y nuevas capacidades Product siguen cerrados.
+
 La auditoría identificó componentes modernos reutilizables, deuda legacy y un
 P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
 por el repositorio: RLS activo, cero policies y cero grants cliente en las diez
@@ -186,7 +197,7 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras publicar FOUNDATION-010, el siguiente gate recomendado es
-`FOUNDATION-011 — Backend authorization context and owned API enforcement`,
-sujeto a aprobación separada y sin despliegue remoto. Ninguna operación remota
-queda autorizada.
+Tras publicar FOUNDATION-011, el siguiente gate del mapa es FOUNDATION-012:
+decisiones Product sobre taxonomía, frontera de conversación y retiro del chat
+legacy. Debe empezar como decisión documental separada. Ninguna operación
+remota queda autorizada.
