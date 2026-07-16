@@ -160,6 +160,8 @@ persistente, Founder access y nuevas capacidades Product siguen cerrados.
 - [ADR-F009](adr/ADR-F009-product-conversation-architecture-and-legacy-chat-retirement.md)
 - [Implementación FOUNDATION-013A](implementation/FOUNDATION-013A_CANONICAL_CONVERSATION_CONTRACTS_AND_ADAPTERS.md)
 - [ADR-F010](adr/ADR-F010-canonical-conversation-contracts-and-transitional-adapters.md)
+- [Implementación FOUNDATION-013B](implementation/FOUNDATION-013B_TRANSACTIONAL_CONVERSATION_CREATION_AND_IDEMPOTENCY.md)
+- [ADR-F011](adr/ADR-F011-transactional-conversation-creation-and-idempotency.md)
 
 FOUNDATION-012 aprueba `Conversation` como agregado Product y reserva
 `ExecutionSession` al futuro runtime. Stasis coordina Product; historial,
@@ -173,6 +175,11 @@ FOUNDATION-013A adopta localmente `Conversation`, `ConversationId`,
 seguros actuales sin cambiar DTOs, backend, schema, rutas ni UI. El owner se
 deriva exclusivamente de identidad autenticada confiable y los autores
 ambiguos fallan cerrados.
+
+FOUNDATION-013B adopta localmente la creación transaccional y la idempotencia
+server-enforced de create/send. Elegibilidad e inserción comparten transacción;
+los reintentos producen un efecto y los conflictos fallan cerrados. El esquema
+físico sigue siendo transitorio y no se autoriza remoto, rutas ni producto.
 
 La auditoría identificó componentes modernos reutilizables, deuda legacy y un
 P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
@@ -223,6 +230,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras publicar FOUNDATION-013A, el siguiente gate es `FOUNDATION-013B`, creación
-transaccional de Conversation, cierre del TOCTOU e idempotencia. Requiere
-aprobación separada y no autoriza rutas, UI, retirada legacy ni remoto.
+Tras publicar FOUNDATION-013B, el siguiente gate propuesto es `FOUNDATION-013C`
+para lifecycle/list/read/archive/restore. Requiere aprobación separada y no
+autoriza rutas, UI, retirada legacy ni remoto.

@@ -12,8 +12,9 @@ not schedules.
 | ARC-01 | Provider-owned identity/API boundary partially remediated | FOUNDATION-008 owns identity/session/errors and confines Auth SDK; bootstrap and backend adapters remain provider-coupled | Architecture under Rector | P2 residual | 009-010, 018 | Complete consumer migration and provider exit evidence | F7 |
 | ARC-02 | Surface isolation incomplete | Product route boundaries and six Product Edge Functions enforce local/development context; mixed legacy and future domains remain | Architecture + Nexus | P1 residual | 012-013 and later surface packages | Approved Product boundary with no legacy bypass | F7/F8 |
 | PROD-01 | Product taxonomy partially unresolved | Conversation/Stasis routes are decided by FOUNDATION-012; mental/physical/Wellness naming remains separate | Product Owner under Stasis | P2 residual | Separate taxonomy decision before affected rename | Founder-approved area taxonomy | F8 |
-| CONV-01 | Canonical Conversation adoption partial | FOUNDATION-013A adopts local domain/port/adapters; backend still uses transitional sessions/messages and UI remains dev-only | Product + Flutter + Backend Architecture | P1 residual | 013B-013F | Canonical backend slice, parity, retirement and rollback evidence | F8 |
+| CONV-01 | Canonical Conversation adoption partial | FOUNDATION-013A adopts domain/port/adapters and 013B adopts local transactional create/send; physical APIs/tables remain transitional and UI dev-only | Product + Flutter + Backend Architecture | P1 residual | 013C-013F | Canonical backend slice, parity, retirement and rollback evidence | F8 |
 | CONV-02 | Conversation lifecycle/privacy incomplete | Archive exists; restore, deletion, retention, sharing, attachments, memory and research are target-only | Product + Data + Privacy | P1/P3 | 013C, 016 and later scoped packages | Approved implementation plus privacy controls | F8 before sensitive rollout |
+| CONV-03 | Idempotency retention/operations incomplete | Local server ledger has no automatic expiry, cleanup job, metrics or durable failed-state recovery | Privacy + Backend + Operations | P2/P3 | 016/017 or dedicated package | Approved retention, safe cleanup, monitoring and recovery tests | Before remote write rollout |
 | DATA-01 | Privacy lifecycle incomplete | Health/conversation data without full retention/deletion/provenance | Data + Privacy | P3; before sensitive scope | 016 | Approved lifecycle, threat controls and test plan | F7/F8 before production |
 | TEST-01 | Backend security suites absent from CI | Local Deno/pgTAP/reset only | QA + DevOps | P2 | 015 | Protected reproducible CI jobs | F7 before staging |
 | OPS-01 | Observability/SLO incomplete | Safe logs but no metrics/audit/SLO program | Observability + DevOps | P3 | 017 | Sanitized metrics, runbooks and SLO proposal | F7/F11 |
@@ -55,8 +56,8 @@ remain open for backend/global and persistent policy enforcement. No remote,
 production or Founder control exists.
 
 FOUNDATION-011 closes the six current Edge Function context gap locally. It
-does not close persistent policy, other backend domains, TOCTOU/idempotency,
-rate limits, productive audit, legacy retirement or remote uncertainty.
+does not close persistent policy, other backend domains, rate limits,
+productive audit, legacy retirement or remote uncertainty.
 
 FOUNDATION-012 closes the terminology, route target and formal retirement
 decision only. SEC-02 and CONV-01 remain open until 013A-013F implement a
@@ -64,4 +65,9 @@ replacement and prove no references; CONV-02 remains privacy-gated.
 
 FOUNDATION-013A partially remediates CONV-01 with canonical local contracts and
 fail-closed adapters. It does not close SEC-02, canonical backend API,
-TOCTOU/idempotency, lifecycle/provenance, UI retirement or routing.
+lifecycle/provenance, UI retirement or routing.
+
+FOUNDATION-013B closes the create TOCTOU and create/send duplicate-retry risk
+locally with transactional RPCs and a client-denied ledger. CONV-03 records the
+remaining retention, cleanup, failed-state operations and observability debt;
+remote state remains unknown and unauthorized.

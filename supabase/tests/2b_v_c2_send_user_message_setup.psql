@@ -24,13 +24,14 @@ insert into public.specialists (
 
 insert into public.specialist_catalog (
   id, specialist_id, display_name, product_area, short_description,
-  is_published, availability_status, access_tier, sort_order
+  publication_status, is_published, availability_status, access_tier, sort_order
 ) values (
   '5c300000-0000-4000-8000-000000000001',
   '5c200000-0000-4000-8000-000000000001',
   'test_only_2b_v_c2 public specialist',
   'wellness',
   'Fixture local no productivo.',
+  'published',
   true,
   'available',
   'free',

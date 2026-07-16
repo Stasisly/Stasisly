@@ -300,10 +300,17 @@ ConversationResultStatus _sessionFailure(OwnChatSessionsFailureType type) {
     OwnChatSessionsFailureType.sessionNotFound =>
       ConversationResultStatus.notFound,
     OwnChatSessionsFailureType.invalidRequest ||
+    OwnChatSessionsFailureType.invalidIdempotencyKey ||
     OwnChatSessionsFailureType.invalidSelectableSpecialist ||
     OwnChatSessionsFailureType.specialistUnavailable ||
     OwnChatSessionsFailureType.proLocked =>
       ConversationResultStatus.invalidInput,
+    OwnChatSessionsFailureType.idempotencyConflict =>
+      ConversationResultStatus.idempotencyConflict,
+    OwnChatSessionsFailureType.operationInProgress =>
+      ConversationResultStatus.operationInProgress,
+    OwnChatSessionsFailureType.transactionFailed =>
+      ConversationResultStatus.transactionFailed,
     OwnChatSessionsFailureType.contractViolation =>
       ConversationResultStatus.contractViolation,
     OwnChatSessionsFailureType.backendBlocked =>
@@ -355,9 +362,16 @@ ConversationResultStatus _sendMessageFailure(
     SendOwnChatMessageFailureType.sessionArchived =>
       ConversationResultStatus.archived,
     SendOwnChatMessageFailureType.invalidRequest ||
+    SendOwnChatMessageFailureType.invalidIdempotencyKey ||
     SendOwnChatMessageFailureType.contentInvalid ||
     SendOwnChatMessageFailureType.contentTooLong =>
       ConversationResultStatus.invalidInput,
+    SendOwnChatMessageFailureType.idempotencyConflict =>
+      ConversationResultStatus.idempotencyConflict,
+    SendOwnChatMessageFailureType.operationInProgress =>
+      ConversationResultStatus.operationInProgress,
+    SendOwnChatMessageFailureType.transactionFailed =>
+      ConversationResultStatus.transactionFailed,
     SendOwnChatMessageFailureType.backendBlocked =>
       ConversationResultStatus.environmentBlocked,
     SendOwnChatMessageFailureType.networkError ||

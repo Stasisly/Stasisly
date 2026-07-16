@@ -319,6 +319,14 @@ String _sendErrorLabel(SendOwnChatMessageFailureType error) {
     SendOwnChatMessageFailureType.unauthenticated => 'Sesión no autenticada.',
     SendOwnChatMessageFailureType.invalidSession => 'Sesión no válida.',
     SendOwnChatMessageFailureType.invalidRequest => 'Solicitud no válida.',
+    SendOwnChatMessageFailureType.invalidIdempotencyKey =>
+      'La operación no tiene una clave válida.',
+    SendOwnChatMessageFailureType.idempotencyConflict =>
+      'La operación entra en conflicto con un intento anterior.',
+    SendOwnChatMessageFailureType.operationInProgress =>
+      'La operación continúa en curso.',
+    SendOwnChatMessageFailureType.transactionFailed =>
+      'El backend no pudo completar la operación.',
     SendOwnChatMessageFailureType.contentInvalid => 'Mensaje no válido.',
     SendOwnChatMessageFailureType.contentTooLong => 'Mensaje demasiado largo.',
     SendOwnChatMessageFailureType.permissionDenied => 'Permiso denegado.',

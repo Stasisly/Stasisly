@@ -9,6 +9,7 @@ import {
   prepareBackendAuthorization,
 } from "../_shared/authorization/backend_request_authorization.ts";
 import { assertAllowedRuntime } from "../_shared/runtime_guard.ts";
+import { requireIdempotencyKey } from "../_shared/idempotency_key.ts";
 import {
   parseSendMessageBody,
   sanitizeRpcResult,
@@ -86,6 +87,12 @@ function mapRpcErrorBody(body: unknown): SendMessageErrorCode {
     ? String((body as Record<string, unknown>).message)
     : "";
   if (message.includes("content_too_long")) return "contentTooLong";
+  if (message.includes("idempotency_conflict")) return "idempotencyConflict";
+  if (message.includes("invalid_idempotency_key")) {
+    return "invalidIdempotencyKey";
+  }
+  if (message.includes("operation_in_progress")) return "operationInProgress";
+  if (message.includes("transaction_failed")) return "transactionFailed";
   if (message.includes("content_invalid")) return "contentInvalid";
   if (message.includes("session_archived")) return "sessionArchived";
   if (message.includes("session_not_found")) return "sessionNotFound";
@@ -104,6 +111,7 @@ async function invokeSendMessageRpc(
   serviceRoleKey: string,
   ownerId: string,
   command: SendMessageCommand,
+  idempotencyKey: string,
 ): Promise<unknown> {
   const url = new URL("/rest/v1/rpc/send_user_message_core", baseUrl);
   const response = await fetcher(url, {
@@ -116,6 +124,7 @@ async function invokeSendMessageRpc(
       p_session_id: command.sessionId,
       p_owner_user_id: ownerId,
       p_content: command.content,
+      p_idempotency_key: idempotencyKey,
     }),
   });
   if (!response.ok) {
@@ -153,6 +162,7 @@ export function createHandler(
     try {
       if (request.method !== "POST") throw new Error("methodNotAllowed");
       const command = await parseSendMessageBody(request);
+      const idempotencyKey = requireIdempotencyKey(request);
       const authorization = await prepareBackendAuthorization({
         request,
         fetcher,
@@ -170,16 +180,17 @@ export function createHandler(
         config.serviceRoleKey,
         ownerId,
         command,
+        idempotencyKey,
       );
-      const payload = sanitizeRpcResult(rows);
+      const sanitized = sanitizeRpcResult(rows);
       finalizeBackendAuthorization(
         authorization,
         BACKEND_OPERATIONS.sendUserMessage,
         "owned",
       );
       result = "success";
-      return Response.json(payload, {
-        status: 201,
+      return Response.json(sanitized.payload, {
+        status: sanitized.idempotentReplay ? 200 : 201,
         headers: {
           ...corsHeadersFor(request, config, METHODS),
           "cache-control": "no-store",

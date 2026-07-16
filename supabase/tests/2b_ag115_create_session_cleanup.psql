@@ -1,5 +1,10 @@
 \set ON_ERROR_STOP on
 
+delete from public.conversation_idempotency
+where subject_id in (
+  select id from public.users where display_name like 'test_only_2b_ag115%'
+);
+
 delete from public.messages
 where session_id in (
   select cs.id

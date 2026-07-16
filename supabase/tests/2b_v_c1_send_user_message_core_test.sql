@@ -7,7 +7,7 @@ select plan(48);
 select has_function(
   'public',
   'send_user_message_core',
-  ARRAY['uuid', 'uuid', 'text'],
+  ARRAY['uuid', 'uuid', 'text', 'text'],
   'send_user_message_core RPC exists'
 );
 
@@ -18,7 +18,7 @@ select ok(
     join pg_catalog.pg_namespace n on n.oid = p.pronamespace
     where n.nspname = 'public'
       and p.proname = 'send_user_message_core'
-      and p.pronargs = 3
+      and p.pronargs = 4
   ),
   'send_user_message_core is not SECURITY DEFINER'
 );
@@ -32,14 +32,14 @@ select is(
     where n.nspname = 'public'
       and p.proname = 'send_user_message_core'
   ),
-  '{uuid,uuid,text}',
+  '{uuid,uuid,text,text}',
   'send_user_message_core has the approved argument types'
 );
 
 select ok(
   not has_function_privilege(
     'anon',
-    'public.send_user_message_core(uuid, uuid, text)',
+    'public.send_user_message_core(uuid, uuid, text, text)',
     'EXECUTE'
   ),
   'anon cannot execute send_user_message_core'
@@ -47,7 +47,7 @@ select ok(
 select ok(
   not has_function_privilege(
     'authenticated',
-    'public.send_user_message_core(uuid, uuid, text)',
+    'public.send_user_message_core(uuid, uuid, text, text)',
     'EXECUTE'
   ),
   'authenticated cannot execute send_user_message_core'
@@ -71,7 +71,7 @@ select is(
 select ok(
   has_function_privilege(
     'service_role',
-    'public.send_user_message_core(uuid, uuid, text)',
+    'public.send_user_message_core(uuid, uuid, text, text)',
     'EXECUTE'
   ),
   'service_role can execute send_user_message_core for local backend use'
@@ -187,7 +187,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       '74000000-0000-4000-8000-000000000001',
       '71000000-0000-4000-8000-000000000001',
-      'anon attempt'
+      'anon attempt',
+      'legacy_c1_anon_0001'
     )$$,
   '42501', null, 'anon cannot invoke send_user_message_core'
 );
@@ -198,7 +199,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       '74000000-0000-4000-8000-000000000001',
       '71000000-0000-4000-8000-000000000001',
-      'authenticated attempt'
+      'authenticated attempt',
+      'legacy_c1_auth_0001'
     )$$,
   '42501', null, 'authenticated cannot invoke send_user_message_core'
 );
@@ -209,7 +211,8 @@ select lives_ok(
   $$select * from public.send_user_message_core(
       '74000000-0000-4000-8000-000000000001',
       '71000000-0000-4000-8000-000000000001',
-      '  Hello from C1  '
+      '  Hello from C1  ',
+      'legacy_c1_send_0001'
     )$$,
   'service_role can invoke send_user_message_core for owner active session'
 );
@@ -274,7 +277,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       null,
       '71000000-0000-4000-8000-000000000001',
-      'missing session'
+      'missing session',
+      'legacy_c1_invalid_0001'
     )$$,
   'P0001', 'invalid_request', 'NULL session_id is rejected'
 );
@@ -282,7 +286,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       '74000000-0000-4000-8000-000000000001',
       null,
-      'missing owner'
+      'missing owner',
+      'legacy_c1_invalid_0002'
     )$$,
   'P0001', 'invalid_request', 'NULL owner is rejected'
 );
@@ -290,7 +295,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       '79999999-0000-4000-8000-000000000001',
       '71000000-0000-4000-8000-000000000001',
-      'missing session'
+      'missing session',
+      'legacy_c1_invalid_0003'
     )$$,
   'P0001', 'session_not_found', 'missing session is rejected'
 );
@@ -298,7 +304,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       '74000000-0000-4000-8000-000000000003',
       '71000000-0000-4000-8000-000000000001',
-      'other session'
+      'other session',
+      'legacy_c1_invalid_0004'
     )$$,
   'P0001', 'session_not_found', 'other user session is rejected'
 );
@@ -306,7 +313,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       '74000000-0000-4000-8000-000000000002',
       '71000000-0000-4000-8000-000000000001',
-      'archived session'
+      'archived session',
+      'legacy_c1_invalid_0005'
     )$$,
   'P0001', 'session_archived', 'archived session is rejected'
 );
@@ -314,7 +322,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       '74000000-0000-4000-8000-000000000001',
       '71000000-0000-4000-8000-000000000001',
-      null
+      null,
+      'legacy_c1_invalid_0006'
     )$$,
   'P0001', 'content_invalid', 'NULL content is rejected'
 );
@@ -322,7 +331,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       '74000000-0000-4000-8000-000000000001',
       '71000000-0000-4000-8000-000000000001',
-      ''
+      '',
+      'legacy_c1_invalid_0007'
     )$$,
   'P0001', 'content_invalid', 'empty content is rejected'
 );
@@ -330,7 +340,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       '74000000-0000-4000-8000-000000000001',
       '71000000-0000-4000-8000-000000000001',
-      '     '
+      '     ',
+      'legacy_c1_invalid_0008'
     )$$,
   'P0001', 'content_invalid', 'whitespace content is rejected'
 );
@@ -338,7 +349,8 @@ select throws_ok(
   $$select * from public.send_user_message_core(
       '74000000-0000-4000-8000-000000000001',
       '71000000-0000-4000-8000-000000000001',
-      repeat('x', 4001)
+      repeat('x', 4001),
+      'legacy_c1_invalid_0009'
     )$$,
   'P0001', 'content_too_long', 'content longer than 4000 is rejected'
 );

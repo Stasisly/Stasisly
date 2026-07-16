@@ -34,7 +34,7 @@ FOUNDATION-005-R1
             -> FOUNDATION-011 backend authorization/owned API enforcement [COMPLETED LOCALLY]
       -> FOUNDATION-012 Product Conversation decisions [COMPLETED CONCEPTUALLY]
         -> FOUNDATION-013A contracts/adapters [COMPLETED LOCALLY]
-          -> FOUNDATION-013B transactional creation
+          -> FOUNDATION-013B transactional creation [COMPLETED LOCALLY]
           -> FOUNDATION-013C lifecycle/history
           -> FOUNDATION-013D author/provenance
           -> FOUNDATION-013E legacy retirement migration
@@ -64,8 +64,10 @@ FOUNDATION-012 satisfies G0-G2 for canonical terminology, lifecycle/ownership,
 Stasis/specialist/runtime separation, target API/routes and legacy retirement.
 It provides no G3 implementation evidence. FOUNDATION-013A now satisfies G0-G6
 for canonical local contracts/adapters with Flutter 514/5 skips, Deno 72/72 and
-SQL 649/649; publication completes G7. FOUNDATION-013B is the next technical
-gate; later 013 children depend on the exact predecessors their scope consumes.
+SQL 649/649; publication completes G7. FOUNDATION-013B satisfies G0-G6 with two
+SQL cycles at 684/684, Deno 76/76, Flutter 515/5 skips and two real local HTTP
+harnesses ending `0|0|0|0|0|0|0`; publication completes G7. FOUNDATION-013C is
+the next proposed gate and requires separate approval.
 
 ## Surface dependency matrix
 

@@ -7,6 +7,7 @@ import 'package:stasisly/features/chat_sessions/data/local/local_session_token_p
 import 'package:stasisly/features/chat_sessions/data/local/own_chat_sessions_http_transport.dart';
 import 'package:stasisly/features/chat_sessions/data/local/secure_session_chat_sessions_token_provider.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
+import 'package:stasisly/features/conversations/application/idempotency/operation_attempt_id_factory.dart';
 
 void main() {
   group('fail closed before transport', () {
@@ -141,8 +142,10 @@ void main() {
           'Accept',
           'Authorization',
           'Content-Type',
+          'Idempotency-Key',
         });
         expect(request.headers['Authorization'], 'Bearer local-jwt');
+        expect(request.headers['Idempotency-Key'], 'test_attempt_00000001');
         for (final forbidden in [
           'userId',
           'ownerUserId',
@@ -271,13 +274,23 @@ LocalHttpOwnChatSessionsDataSource _source({
   ),
   LocalSessionTokenProvider? tokenProvider,
   _FakeTransport? transport,
+  OperationAttemptIdFactory? operationAttemptIds,
 }) {
   return LocalHttpOwnChatSessionsDataSource(
     baseUri: baseUri ?? Uri.parse('http://127.0.0.1:54321'),
     hostPolicy: policy,
     tokenProvider: tokenProvider ?? _FakeTokenProvider('local-jwt'),
     transport: transport ?? _FakeTransport(),
+    operationAttemptIds:
+        operationAttemptIds ?? _FakeOperationAttemptIdFactory(),
   );
+}
+
+class _FakeOperationAttemptIdFactory implements OperationAttemptIdFactory {
+  int _next = 1;
+
+  @override
+  String create() => 'test_attempt_${(_next++).toString().padLeft(8, '0')}';
 }
 
 SecureSessionChatSessionsTokenProvider _secureSessionTokenProvider(

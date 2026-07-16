@@ -118,6 +118,11 @@ OwnChatSessionsFailureType? _failureFor(
     'invalidRequest' ||
     'invalidStatus' ||
     'invalidCursor' => OwnChatSessionsFailureType.invalidRequest,
+    'missingIdempotencyKey' ||
+    'invalidIdempotencyKey' => OwnChatSessionsFailureType.invalidIdempotencyKey,
+    'idempotencyConflict' => OwnChatSessionsFailureType.idempotencyConflict,
+    'operationInProgress' => OwnChatSessionsFailureType.operationInProgress,
+    'transactionFailed' => OwnChatSessionsFailureType.transactionFailed,
     'invalidSelectableSpecialist' =>
       OwnChatSessionsFailureType.invalidSelectableSpecialist,
     'specialistUnavailable' => OwnChatSessionsFailureType.specialistUnavailable,

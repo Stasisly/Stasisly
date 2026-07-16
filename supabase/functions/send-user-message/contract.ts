@@ -5,6 +5,7 @@ const REQUEST_KEYS = ["content", "sessionId"].sort();
 const RPC_KEYS = [
   "content",
   "created_at",
+  "idempotent_replay",
   "message_id",
   "role",
   "session_id",
@@ -30,6 +31,11 @@ export interface PublicSendMessageResponse {
     messageCount: number;
     lastMessageAt: string;
   };
+}
+
+export interface SanitizedSendMessage {
+  payload: PublicSendMessageResponse;
+  idempotentReplay: boolean;
 }
 
 function assertExactKeys(
@@ -78,7 +84,7 @@ export async function parseSendMessageBody(
   return { sessionId: record.sessionId, content };
 }
 
-export function sanitizeRpcResult(rows: unknown): PublicSendMessageResponse {
+export function sanitizeRpcResult(rows: unknown): SanitizedSendMessage {
   if (!Array.isArray(rows) || rows.length !== 1) {
     throw new Error("contractViolation");
   }
@@ -98,22 +104,26 @@ export function sanitizeRpcResult(rows: unknown): PublicSendMessageResponse {
     row.content.length === 0 ||
     typeof row.created_at !== "string" ||
     typeof row.session_last_message_at !== "string" ||
-    typeof row.session_message_count !== "number"
+    typeof row.session_message_count !== "number" ||
+    typeof row.idempotent_replay !== "boolean"
   ) {
     throw new Error("contractViolation");
   }
   return {
-    message: {
-      messageId: row.message_id,
-      sessionId: row.session_id,
-      role: "user",
-      content: row.content,
-      createdAt: row.created_at,
+    payload: {
+      message: {
+        messageId: row.message_id,
+        sessionId: row.session_id,
+        role: "user",
+        content: row.content,
+        createdAt: row.created_at,
+      },
+      session: {
+        sessionId: row.session_id,
+        messageCount: row.session_message_count,
+        lastMessageAt: row.session_last_message_at,
+      },
     },
-    session: {
-      sessionId: row.session_id,
-      messageCount: row.session_message_count,
-      lastMessageAt: row.session_last_message_at,
-    },
+    idempotentReplay: row.idempotent_replay,
   };
 }

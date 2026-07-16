@@ -3,6 +3,10 @@ export type SendMessageErrorCode =
   | "unauthenticated"
   | "invalidSession"
   | "invalidRequest"
+  | "missingIdempotencyKey"
+  | "invalidIdempotencyKey"
+  | "idempotencyConflict"
+  | "operationInProgress"
   | "contentInvalid"
   | "contentTooLong"
   | "sessionNotFound"
@@ -11,6 +15,7 @@ export type SendMessageErrorCode =
   | "writeUnconfirmed"
   | "contractViolation"
   | "backendMisconfigured"
+  | "transactionFailed"
   | "unexpectedError";
 
 const ERROR_STATUS: Record<SendMessageErrorCode, number> = {
@@ -18,6 +23,10 @@ const ERROR_STATUS: Record<SendMessageErrorCode, number> = {
   unauthenticated: 401,
   invalidSession: 401,
   invalidRequest: 400,
+  missingIdempotencyKey: 400,
+  invalidIdempotencyKey: 400,
+  idempotencyConflict: 409,
+  operationInProgress: 409,
   contentInvalid: 400,
   contentTooLong: 400,
   sessionNotFound: 404,
@@ -26,6 +35,7 @@ const ERROR_STATUS: Record<SendMessageErrorCode, number> = {
   writeUnconfirmed: 409,
   contractViolation: 502,
   backendMisconfigured: 503,
+  transactionFailed: 503,
   unexpectedError: 500,
 };
 

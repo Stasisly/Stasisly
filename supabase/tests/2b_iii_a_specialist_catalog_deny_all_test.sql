@@ -314,7 +314,7 @@ select is(
       and c.relkind in ('r', 'p')
       and c.relrowsecurity
   ),
-  '{branch_chiefs,calendar_events,chat_sessions,chief_write_permissions,memberships,messages,orchestator_summaries,reminders,specialist_catalog,specialist_temporary_disables,specialists,subcategory_chiefs,user_health_data,user_memberships,users}',
+  '{branch_chiefs,calendar_events,chat_sessions,chief_write_permissions,conversation_idempotency,memberships,messages,orchestator_summaries,reminders,specialist_catalog,specialist_temporary_disables,specialists,subcategory_chiefs,user_health_data,user_memberships,users}',
   'only the approved public deny-all/profile tables, including R1, have RLS enabled'
 );
 

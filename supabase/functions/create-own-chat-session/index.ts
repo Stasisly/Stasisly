@@ -9,12 +9,8 @@ import {
   prepareBackendAuthorization,
 } from "../_shared/authorization/backend_request_authorization.ts";
 import { assertAllowedRuntime } from "../_shared/runtime_guard.ts";
-import {
-  assertInternalSpecialistExists,
-  parseRequestBody,
-  resolveSpecialist,
-  sanitizeCreatedSession,
-} from "./contract.ts";
+import { requireIdempotencyKey } from "../_shared/idempotency_key.ts";
+import { parseRequestBody, sanitizeCreatedSession } from "./contract.ts";
 import {
   type CreateSessionErrorCode,
   errorCodeFrom,
@@ -60,18 +56,6 @@ export function assertLocalRuntime(config: RuntimeConfig): URL {
   return assertAllowedRuntime(config);
 }
 
-async function requestJson(
-  fetcher: typeof fetch,
-  input: URL,
-  init: RequestInit,
-  errorCode: CreateSessionErrorCode,
-): Promise<unknown> {
-  const response = await fetcher(input, init);
-  if (!response.ok) throw new Error(errorCode);
-  if (response.status === 204) throw new Error("contractViolation");
-  return await response.json();
-}
-
 function privilegedHeaders(serviceRoleKey: string): HeadersInit {
   return {
     apikey: serviceRoleKey,
@@ -80,101 +64,67 @@ function privilegedHeaders(serviceRoleKey: string): HeadersInit {
   };
 }
 
-async function assertOwnerProfile(
-  fetcher: typeof fetch,
-  baseUrl: URL,
-  serviceRoleKey: string,
-  ownerId: string,
-): Promise<void> {
-  const url = new URL("/rest/v1/users", baseUrl);
-  url.searchParams.set("select", "id");
-  url.searchParams.set("id", `eq.${ownerId}`);
-  const rows = await requestJson(
-    fetcher,
-    url,
-    { headers: privilegedHeaders(serviceRoleKey) },
-    "permissionDenied",
-  );
-  if (!Array.isArray(rows) || rows.length !== 1) {
-    throw new Error("permissionDenied");
+function mapRpcErrorBody(body: unknown): CreateSessionErrorCode {
+  const message = typeof body === "object" && body !== null &&
+      !Array.isArray(body) &&
+      typeof (body as Record<string, unknown>).message === "string"
+    ? String((body as Record<string, unknown>).message)
+    : "";
+  if (message.includes("idempotency_conflict")) return "idempotencyConflict";
+  if (message.includes("invalid_idempotency_key")) {
+    return "invalidIdempotencyKey";
   }
+  if (message.includes("operation_in_progress")) return "operationInProgress";
+  if (message.includes("invalid_selectable_specialist")) {
+    return "invalidSelectableSpecialist";
+  }
+  if (message.includes("specialist_unavailable")) {
+    return "specialistUnavailable";
+  }
+  if (message.includes("pro_locked")) return "proLocked";
+  if (message.includes("permission_denied")) return "permissionDenied";
+  if (message.includes("backend_misconfigured")) return "backendMisconfigured";
+  if (message.includes("transaction_failed")) return "transactionFailed";
+  if (message.includes("invalid_request")) return "invalidRequest";
+  if (message.includes("permission denied")) return "permissionDenied";
+  if (message.includes("function") || message.includes("schema cache")) {
+    return "backendMisconfigured";
+  }
+  return "unexpectedError";
 }
 
-async function fetchResolvedSpecialist(
-  fetcher: typeof fetch,
-  baseUrl: URL,
-  serviceRoleKey: string,
-  selectableId: string,
-) {
-  const url = new URL("/rest/v1/specialist_catalog", baseUrl);
-  url.searchParams.set(
-    "select",
-    "id,specialist_id,display_name,product_area,is_published,publication_status,availability_status,access_tier,supported_surfaces,is_conversable",
-  );
-  url.searchParams.set("id", `eq.${selectableId}`);
-  url.searchParams.set("is_published", "eq.true");
-  url.searchParams.set("publication_status", "eq.published");
-  url.searchParams.set("availability_status", "eq.available");
-  url.searchParams.set("supported_surfaces", "eq.{product}");
-  url.searchParams.set("is_conversable", "eq.true");
-  const rows = await requestJson(
-    fetcher,
-    url,
-    { headers: privilegedHeaders(serviceRoleKey) },
-    "backendMisconfigured",
-  );
-  return resolveSpecialist(rows);
-}
-
-async function assertSpecialistExists(
-  fetcher: typeof fetch,
-  baseUrl: URL,
-  serviceRoleKey: string,
-  internalId: string,
-): Promise<void> {
-  const url = new URL("/rest/v1/specialists", baseUrl);
-  url.searchParams.set("select", "id");
-  url.searchParams.set("id", `eq.${internalId}`);
-  const rows = await requestJson(
-    fetcher,
-    url,
-    { headers: privilegedHeaders(serviceRoleKey) },
-    "backendMisconfigured",
-  );
-  assertInternalSpecialistExists(rows);
-}
-
-async function createSession(
+async function invokeCreateSessionRpc(
   fetcher: typeof fetch,
   baseUrl: URL,
   serviceRoleKey: string,
   ownerId: string,
-  internalSpecialistId: string,
+  selectableId: string,
+  idempotencyKey: string,
 ): Promise<unknown> {
-  const url = new URL("/rest/v1/chat_sessions", baseUrl);
-  url.searchParams.set(
-    "select",
-    "id,started_at,last_message_at,status,message_count",
-  );
-  return await requestJson(
-    fetcher,
-    url,
-    {
-      method: "POST",
-      headers: {
-        ...privilegedHeaders(serviceRoleKey),
-        "content-type": "application/json",
-        prefer: "return=representation",
-      },
-      body: JSON.stringify({
-        user_id: ownerId,
-        specialist_id: internalSpecialistId,
-        status: "active",
-        message_count: 0,
-      }),
+  const url = new URL("/rest/v1/rpc/create_own_chat_session_core", baseUrl);
+  const response = await fetcher(url, {
+    method: "POST",
+    headers: {
+      ...privilegedHeaders(serviceRoleKey),
+      "content-type": "application/json",
     },
-    "backendMisconfigured",
-  );
+    body: JSON.stringify({
+      p_owner_user_id: ownerId,
+      p_selectable_specialist_id: selectableId,
+      p_idempotency_key: idempotencyKey,
+    }),
+  });
+  if (!response.ok) {
+    let body: unknown = null;
+    try {
+      body = await response.json();
+    } catch {
+      // Keep backend details opaque.
+    }
+    throw new Error(mapRpcErrorBody(body));
+  }
+  if (response.status === 204) throw new Error("contractViolation");
+  return await response.json();
 }
 
 export function createHandler(
@@ -196,6 +146,7 @@ export function createHandler(
     try {
       if (request.method !== "POST") throw new Error("methodNotAllowed");
       const selectableId = await parseRequestBody(request);
+      const idempotencyKey = requireIdempotencyKey(request);
       const authorization = await prepareBackendAuthorization({
         request,
         fetcher,
@@ -206,32 +157,15 @@ export function createHandler(
       id = authorization.context.correlationId;
       const baseUrl = authorization.baseUrl;
       const ownerId = authorization.identitySubjectId;
-      await assertOwnerProfile(
+      const rows = await invokeCreateSessionRpc(
         fetcher,
         baseUrl,
         config.serviceRoleKey,
         ownerId,
-      );
-      const specialist = await fetchResolvedSpecialist(
-        fetcher,
-        baseUrl,
-        config.serviceRoleKey,
         selectableId,
+        idempotencyKey,
       );
-      await assertSpecialistExists(
-        fetcher,
-        baseUrl,
-        config.serviceRoleKey,
-        specialist.internalId,
-      );
-      const rows = await createSession(
-        fetcher,
-        baseUrl,
-        config.serviceRoleKey,
-        ownerId,
-        specialist.internalId,
-      );
-      const session = sanitizeCreatedSession(rows, specialist);
+      const sanitized = sanitizeCreatedSession(rows);
       finalizeBackendAuthorization(
         authorization,
         BACKEND_OPERATIONS.createOwnChatSession,
@@ -239,9 +173,9 @@ export function createHandler(
       );
       result = "success";
       return Response.json(
-        { session },
+        { session: sanitized.session },
         {
-          status: 201,
+          status: sanitized.idempotentReplay ? 200 : 201,
           headers: {
             ...corsHeadersFor(request, config, METHODS),
             "cache-control": "no-store",

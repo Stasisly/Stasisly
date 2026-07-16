@@ -352,6 +352,14 @@ String _failureLabel(OwnChatSessionsFailureType type) {
       'La identidad no está autenticada.',
     OwnChatSessionsFailureType.invalidSession => 'La sesión no es válida.',
     OwnChatSessionsFailureType.invalidRequest => 'La petición no es válida.',
+    OwnChatSessionsFailureType.invalidIdempotencyKey =>
+      'La operación no tiene una clave válida.',
+    OwnChatSessionsFailureType.idempotencyConflict =>
+      'La operación entra en conflicto con un intento anterior.',
+    OwnChatSessionsFailureType.operationInProgress =>
+      'La operación continúa en curso.',
+    OwnChatSessionsFailureType.transactionFailed =>
+      'El backend no pudo completar la operación.',
     OwnChatSessionsFailureType.invalidSelectableSpecialist =>
       'El especialista seleccionable no es válido.',
     OwnChatSessionsFailureType.specialistUnavailable =>

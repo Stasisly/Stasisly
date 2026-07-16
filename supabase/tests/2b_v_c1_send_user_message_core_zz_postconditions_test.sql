@@ -56,11 +56,11 @@ select is(
 select ok(
   not has_function_privilege(
     'anon',
-    'public.send_user_message_core(uuid, uuid, text)',
+    'public.send_user_message_core(uuid, uuid, text, text)',
     'EXECUTE'
   ) and not has_function_privilege(
     'authenticated',
-    'public.send_user_message_core(uuid, uuid, text)',
+    'public.send_user_message_core(uuid, uuid, text, text)',
     'EXECUTE'
   ),
   'client roles still cannot execute C1 RPC after rollback'

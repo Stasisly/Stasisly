@@ -3,12 +3,7 @@ import {
   assertNotEquals,
   assertRejects,
 } from "jsr:@std/assert@1";
-import {
-  assertInternalSpecialistExists,
-  parseRequestBody,
-  resolveSpecialist,
-  sanitizeCreatedSession,
-} from "./contract.ts";
+import { parseRequestBody, sanitizeCreatedSession } from "./contract.ts";
 import {
   assertLocalRuntime,
   createHandler,
@@ -28,22 +23,10 @@ const LOCAL_CONFIG: RuntimeConfig = {
   allowDevelopmentRemote: "false",
   corsAllowedOrigins: "",
 };
-const CATALOG_ROW = {
-  id: SELECTABLE_ID,
-  specialist_id: INTERNAL_ID,
-  display_name: "Fixture local",
-  product_area: "wellness",
-  is_published: true,
-  publication_status: "published",
-  availability_status: "available",
-  access_tier: "free",
-  supported_surfaces: ["product"],
-  is_conversable: true,
-};
-
 function request(
   body: unknown = { selectableSpecialistId: SELECTABLE_ID },
   token = "valid-local-jwt",
+  idempotencyKey = "create_attempt_00000001",
 ): Request {
   return new Request(
     "http://127.0.0.1:54321/functions/v1/create-own-chat-session",
@@ -52,6 +35,7 @@ function request(
       headers: {
         authorization: `Bearer ${token}`,
         "content-type": "application/json",
+        "Idempotency-Key": idempotencyKey,
       },
       body: JSON.stringify(body),
     },
@@ -68,25 +52,23 @@ function statefulFetcher() {
     if (url.pathname === "/auth/v1/user") {
       return Response.json({ id: OWNER_ID });
     }
-    if (url.pathname === "/rest/v1/users") {
-      return Response.json([{ id: OWNER_ID }]);
-    }
-    if (url.pathname === "/rest/v1/specialist_catalog") {
-      return Response.json([CATALOG_ROW]);
-    }
-    if (url.pathname === "/rest/v1/specialists") {
-      return Response.json([{ id: INTERNAL_ID }]);
-    }
-    if (url.pathname === "/rest/v1/chat_sessions" && init?.method === "POST") {
+    if (
+      url.pathname === "/rest/v1/rpc/create_own_chat_session_core" &&
+      init?.method === "POST"
+    ) {
       const body = JSON.parse(String(init.body));
       inserted.push(body);
       const sequence = inserted.length.toString().padStart(12, "0");
       return Response.json([{
-        id: `44000000-0000-4000-8000-${sequence}`,
+        session_id: `44000000-0000-4000-8000-${sequence}`,
         started_at: "2026-06-14T10:00:00Z",
         last_message_at: "2026-06-14T10:00:00Z",
         status: "active",
         message_count: 0,
+        selectable_specialist_id: SELECTABLE_ID,
+        specialist_display_name: "Fixture local",
+        product_area: "wellness",
+        idempotent_replay: false,
       }], { status: 201 });
     }
     return new Response(null, { status: 404 });
@@ -171,106 +153,34 @@ Deno.test("body accepts only selectableSpecialistId", async () => {
   );
 });
 
-Deno.test("specialist resolution fails closed", async () => {
-  assertEquals(resolveSpecialist([CATALOG_ROW]).internalId, INTERNAL_ID);
-  await assertRejects(
-    async () => resolveSpecialist([]),
-    Error,
-    "invalidSelectableSpecialist",
-  );
-  await assertRejects(
-    async () => resolveSpecialist([{ ...CATALOG_ROW, is_published: false }]),
-    Error,
-    "invalidSelectableSpecialist",
-  );
-  await assertRejects(
-    async () =>
-      resolveSpecialist([{
-        ...CATALOG_ROW,
-        availability_status: "unavailable",
-      }]),
-    Error,
-    "invalidSelectableSpecialist",
-  );
-  for (
-    const invalid of [
-      { publication_status: "draft" },
-      { is_conversable: false },
-      { supported_surfaces: ["admin"] },
-      { supported_surfaces: ["development"] },
-    ]
-  ) {
-    await assertRejects(
-      async () => resolveSpecialist([{ ...CATALOG_ROW, ...invalid }]),
-      Error,
-      "invalidSelectableSpecialist",
-    );
-  }
-  await assertRejects(
-    async () => resolveSpecialist([{ ...CATALOG_ROW, product_area: "admin" }]),
-    Error,
-    "contractViolation",
-  );
-  await assertRejects(
-    async () => resolveSpecialist([{ ...CATALOG_ROW, access_tier: "pro" }]),
-    Error,
-    "proLocked",
-  );
-  await assertRejects(
-    async () => resolveSpecialist([{ ...CATALOG_ROW, access_tier: "vip" }]),
-    Error,
-    "proLocked",
-  );
-  await assertRejects(
-    async () => resolveSpecialist([{ ...CATALOG_ROW, access_tier: "premium" }]),
-    Error,
-    "contractViolation",
-  );
-  await assertRejects(
-    async () => assertInternalSpecialistExists([]),
-    Error,
-    "backendMisconfigured",
-  );
-});
-
-Deno.test("catalog lookup applies the exact Product selection predicate", async () => {
-  let catalogUrl: URL | undefined;
-  const { fetcher } = statefulFetcher();
+Deno.test("handler delegates eligibility and insert to one transactional RPC", async () => {
+  const { fetcher, inserted } = statefulFetcher();
   const handler = createHandler(LOCAL_CONFIG, {
-    fetcher: (async (input, init) => {
-      const url = new URL(input instanceof Request ? input.url : input);
-      if (url.pathname === "/rest/v1/specialist_catalog") catalogUrl = url;
-      return await fetcher(input, init);
-    }) as typeof fetch,
+    fetcher,
     logWriter: () => {},
   });
   assertEquals((await handler(request())).status, 201);
-  assertEquals(catalogUrl?.searchParams.get("id"), `eq.${SELECTABLE_ID}`);
-  assertEquals(catalogUrl?.searchParams.get("is_published"), "eq.true");
-  assertEquals(
-    catalogUrl?.searchParams.get("publication_status"),
-    "eq.published",
-  );
-  assertEquals(
-    catalogUrl?.searchParams.get("availability_status"),
-    "eq.available",
-  );
-  assertEquals(
-    catalogUrl?.searchParams.get("supported_surfaces"),
-    "eq.{product}",
-  );
-  assertEquals(catalogUrl?.searchParams.get("is_conversable"), "eq.true");
-  assertEquals(catalogUrl?.searchParams.get("select")?.includes("*"), false);
+  assertEquals(inserted.length, 1);
+  assertEquals(inserted[0], {
+    p_owner_user_id: OWNER_ID,
+    p_selectable_specialist_id: SELECTABLE_ID,
+    p_idempotency_key: "create_attempt_00000001",
+  });
 });
 
 Deno.test("public response excludes user_id and specialist_id", () => {
-  const session = sanitizeCreatedSession([{
-    id: "44000000-0000-4000-8000-000000000001",
+  const sanitized = sanitizeCreatedSession([{
+    session_id: "44000000-0000-4000-8000-000000000001",
     started_at: "2026-06-14T10:00:00Z",
     last_message_at: "2026-06-14T10:00:00Z",
     status: "active",
     message_count: 0,
-  }], resolveSpecialist([CATALOG_ROW]));
+    selectable_specialist_id: SELECTABLE_ID,
+    specialist_display_name: "Fixture local",
+    product_area: "wellness",
+    idempotent_replay: false,
+  }]);
+  const session = sanitized.session;
   const serialized = JSON.stringify(session);
   assertEquals(serialized.includes("user_id"), false);
   assertEquals(serialized.includes("specialist_id"), false);
@@ -297,16 +207,17 @@ Deno.test("two valid calls create two distinct sessions and no message request",
     logWriter: () => {},
   });
   const first = await handler(request());
-  const second = await handler(request());
+  const second = await handler(
+    request(undefined, undefined, "create_attempt_00000002"),
+  );
   const firstBody = await first.json();
   const secondBody = await second.json();
   assertEquals(first.status, 201);
   assertEquals(second.status, 201);
   assertNotEquals(firstBody.session.sessionId, secondBody.session.sessionId);
   assertEquals(inserted.length, 2);
-  assertEquals(inserted[0].user_id, OWNER_ID);
-  assertEquals(inserted[0].specialist_id, INTERNAL_ID);
-  assertEquals(inserted[0].message_count, 0);
+  assertEquals(inserted[0].p_owner_user_id, OWNER_ID);
+  assertEquals(inserted[0].p_selectable_specialist_id, SELECTABLE_ID);
   assertEquals(paths.includes("/rest/v1/messages"), false);
   assertEquals(JSON.stringify(firstBody).includes("user_id"), false);
   assertEquals(JSON.stringify(firstBody).includes("specialist_id"), false);
@@ -379,6 +290,83 @@ Deno.test("preflight returns before auth and backend access", async () => {
     response.headers.get("access-control-allow-origin"),
     "http://localhost:3000",
   );
+});
+
+Deno.test("create requires idempotency metadata without backend access", async () => {
+  let calls = 0;
+  const handler = createHandler(LOCAL_CONFIG, {
+    fetcher: (async () => {
+      calls++;
+      return new Response(null, { status: 500 });
+    }) as typeof fetch,
+    requestId: () => "request-test",
+    logWriter: () => {},
+  });
+  const missing = request();
+  missing.headers.delete("Idempotency-Key");
+  const missingResponse = await handler(missing);
+  assertEquals(missingResponse.status, 400);
+  assertEquals(
+    (await missingResponse.json()).error.code,
+    "missingIdempotencyKey",
+  );
+  const invalidResponse = await handler(
+    request(undefined, undefined, "invalid key"),
+  );
+  assertEquals(invalidResponse.status, 400);
+  assertEquals(
+    (await invalidResponse.json()).error.code,
+    "invalidIdempotencyKey",
+  );
+  assertEquals(calls, 0);
+});
+
+Deno.test("create replay is successful without changing the public DTO", async () => {
+  const { fetcher } = statefulFetcher();
+  const handler = createHandler(LOCAL_CONFIG, {
+    fetcher: (async (input, init) => {
+      const response = await fetcher(input, init);
+      const url = new URL(input instanceof Request ? input.url : input);
+      if (url.pathname !== "/rest/v1/rpc/create_own_chat_session_core") {
+        return response;
+      }
+      const rows = await response.json();
+      rows[0].idempotent_replay = true;
+      return Response.json(rows);
+    }) as typeof fetch,
+    logWriter: () => {},
+  });
+  const response = await handler(request());
+  const body = await response.json();
+  assertEquals(response.status, 200);
+  assertEquals(Object.keys(body), ["session"]);
+  assertEquals(JSON.stringify(body).includes("idempotent"), false);
+});
+
+Deno.test("create maps idempotency and transaction failures opaquely", async () => {
+  const cases = [
+    ["idempotency_conflict", 409, "idempotencyConflict"],
+    ["operation_in_progress", 409, "operationInProgress"],
+    ["transaction_failed", 503, "transactionFailed"],
+  ] as const;
+  for (const [message, status, code] of cases) {
+    const handler = createHandler(LOCAL_CONFIG, {
+      fetcher: (async (input) => {
+        const url = new URL(input instanceof Request ? input.url : input);
+        if (url.pathname === "/auth/v1/user") {
+          return Response.json({ id: OWNER_ID });
+        }
+        if (url.pathname === "/rest/v1/rpc/create_own_chat_session_core") {
+          return Response.json({ message }, { status: 400 });
+        }
+        return new Response(null, { status: 404 });
+      }) as typeof fetch,
+      logWriter: () => {},
+    });
+    const response = await handler(request());
+    assertEquals(response.status, status);
+    assertEquals((await response.json()).error.code, code);
+  }
 });
 
 Deno.test("local runtime and logs fail closed", async () => {

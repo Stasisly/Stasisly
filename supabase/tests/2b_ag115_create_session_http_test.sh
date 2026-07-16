@@ -45,7 +45,8 @@ postconditions() {
       (select count(*) from public.chat_sessions cs join public.users u on u.id=cs.user_id where u.display_name like 'test_only_2b_ag115%'),
       (select count(*) from public.messages m join public.chat_sessions cs on cs.id=m.session_id join public.users u on u.id=cs.user_id where u.display_name like 'test_only_2b_ag115%'),
       (select count(*) from public.specialists where name like 'test_only_2b_ag115%'),
-      (select count(*) from public.specialist_catalog where display_name like 'test_only_2b_ag115%')
+      (select count(*) from public.specialist_catalog where display_name like 'test_only_2b_ag115%'),
+      (select count(*) from public.conversation_idempotency where idempotency_key like 'ag115-%')
     );"
 }
 
@@ -59,7 +60,7 @@ cleanup() {
     >/dev/null 2>&1 || true
   local counts
   counts="$(postconditions 2>/dev/null || true)"
-  if [ "$counts" != "0|0|0|0|0|0" ]; then
+  if [ "$counts" != "0|0|0|0|0|0|0" ]; then
     echo "2B-AG115 cleanup did not leave zero temporary fixtures: ${counts:-unavailable}" >&2
     supabase db reset --local --no-seed >/dev/null 2>&1 || true
   fi
@@ -69,7 +70,7 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 echo "2B-AG115 stage: verify AG114 seed and clean preconditions"
-test "$(postconditions)" = "0|0|0|0|0|0"
+test "$(postconditions)" = "0|0|0|0|0|0|0"
 test "$(db_psql -Atc "select count(*) from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%';")" = "19"
 test "$(db_psql -Atc "select count(*) from public.specialists where id::text like '11000000-0000-4000-8000-%';")" = "19"
 catalog_before="$(db_psql -Atc "select md5(string_agg(row_to_json(c)::text,'' order by c.id)) from public.specialist_catalog c where c.id::text like '21000000-0000-4000-8000-%';")"
@@ -81,6 +82,8 @@ SUPABASE_URL=$API_URL
 SUPABASE_ANON_KEY=$ANON_KEY
 SUPABASE_SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY
 STASISLY_ALLOW_LOCAL_ONLY=true
+STASISLY_RUNTIME_MODE=local
+STASISLY_ALLOW_DEVELOPMENT_REMOTE=false
 EOF
 chmod 600 "$edge_env"
 
@@ -108,14 +111,17 @@ stasis_id="21000000-0000-4000-8000-000000000001"
 kitesurf_id="21000000-0000-4000-8000-000000000011"
 call() {
   local name=$1 token=$2 body=$3
+  local key=${4:-ag115-$name-000000000001}
   curl -sS -o "$tmp_dir/$name.json" -w '%{http_code}' -X POST \
     -H "Authorization: Bearer $token" -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' -d "$body" "$endpoint"
+    -H 'Accept: application/json' \
+    -H "Idempotency-Key: $key" \
+    -d "$body" "$endpoint"
 }
 
 echo "2B-AG115 stage: fail-closed request and selection cases"
 valid_body="{\"selectableSpecialistId\":\"$stasis_id\"}"
-no_jwt_status="$(curl -sS -o "$tmp_dir/no-jwt.json" -w '%{http_code}' -X POST -H 'Content-Type: application/json' -d "$valid_body" "$endpoint")"
+no_jwt_status="$(curl -sS -o "$tmp_dir/no-jwt.json" -w '%{http_code}' -X POST -H 'Content-Type: application/json' -H 'Idempotency-Key: ag115-no-jwt-000000000001' -d "$valid_body" "$endpoint")"
 invalid_jwt_status="$(call invalid-jwt invalid "$valid_body")"
 missing_body_status="$(call missing-body "$token_a" '{}')"
 wrong_type_status="$(call wrong-type "$token_a" '[]')"
@@ -136,13 +142,15 @@ permissions_status="$(call permissions "$token_a" "{\"selectableSpecialistId\":\
 session_status="$(call session "$token_a" "{\"selectableSpecialistId\":\"$stasis_id\",\"sessionId\":\"53000000-0000-4000-8000-000000000001\"}")"
 specialist_status="$(call specialist "$token_a" "{\"selectableSpecialistId\":\"$stasis_id\",\"specialistId\":\"11000000-0000-4000-8000-000000000001\"}")"
 user_status="$(call user "$token_a" "{\"selectableSpecialistId\":\"$stasis_id\",\"userId\":\"$owner_b\"}")"
+echo "2B-AG115 validation statuses: no-jwt=$no_jwt_status invalid-jwt=$invalid_jwt_status missing-body=$missing_body_status wrong-type=$wrong_type_status malformed=$malformed_status empty-id=$empty_id_status id-type=$id_type_status bad-uuid=$bad_uuid_status internal-id=$internal_id_status missing=$missing_status draft=$draft_status unavailable=$unavailable_status nonconversable=$nonconversable_status pro=$pro_status vip=$vip_status owner=$owner_status role=$role_status permissions=$permissions_status session=$session_status specialist=$specialist_status user=$user_status"
 test "$no_jwt_status" = "401"; test "$invalid_jwt_status" = "401"
 for status in "$missing_body_status" "$wrong_type_status" "$malformed_status" "$empty_id_status" "$id_type_status" "$bad_uuid_status" "$owner_status" "$role_status" "$permissions_status" "$session_status" "$specialist_status" "$user_status"; do test "$status" = "400"; done
-for status in "$internal_id_status" "$missing_status" "$draft_status" "$unavailable_status" "$nonconversable_status"; do test "$status" = "404"; done
+for status in "$internal_id_status" "$missing_status" "$draft_status" "$nonconversable_status"; do test "$status" = "404"; done
+test "$unavailable_status" = "409"
 test "$pro_status" = "403"; test "$vip_status" = "403"
 test "$(jq -r '.error.code' "$tmp_dir/missing.json")" = "invalidSelectableSpecialist"
 test "$(jq -r '.error.code' "$tmp_dir/draft.json")" = "invalidSelectableSpecialist"
-test "$(jq -r '.error.code' "$tmp_dir/unavailable.json")" = "invalidSelectableSpecialist"
+test "$(jq -r '.error.code' "$tmp_dir/unavailable.json")" = "specialistUnavailable"
 test "$(jq -r '.error.code' "$tmp_dir/nonconversable.json")" = "invalidSelectableSpecialist"
 test "$(db_psql -Atc "select count(*) from public.chat_sessions where user_id in ('$owner_a','$owner_b');")" = "0"
 for response in "$tmp_dir"/{no-jwt,invalid-jwt,missing-body,wrong-type,malformed,empty-id,id-type,bad-uuid,internal-id,missing,draft,unavailable,nonconversable,pro,vip,owner,role,permissions,session,specialist,user}.json; do
@@ -158,12 +166,18 @@ done
 
 echo "2B-AG115 stage: positive Stasis, Kitesurf and ownership cases"
 stasis_first_status="$(call stasis-first "$token_a" "$valid_body")"
+stasis_replay_status="$(call stasis-replay "$token_a" "$valid_body" 'ag115-stasis-first-000000000001')"
+stasis_conflict_status="$(call stasis-conflict "$token_a" "{\"selectableSpecialistId\":\"$kitesurf_id\"}" 'ag115-stasis-first-000000000001')"
 stasis_second_status="$(call stasis-second "$token_a" "$valid_body")"
 kitesurf_a_status="$(call kitesurf-a "$token_a" "{\"selectableSpecialistId\":\"$kitesurf_id\"}")"
 kitesurf_b_status="$(call kitesurf-b "$token_b" "{\"selectableSpecialistId\":\"$kitesurf_id\"}")"
 for status in "$stasis_first_status" "$stasis_second_status" "$kitesurf_a_status" "$kitesurf_b_status"; do test "$status" = "201"; done
+test "$stasis_replay_status" = "200"
+test "$stasis_conflict_status" = "409"
 stasis_first_session="$(jq -r '.session.sessionId' "$tmp_dir/stasis-first.json")"
 stasis_second_session="$(jq -r '.session.sessionId' "$tmp_dir/stasis-second.json")"
+test "$(jq -r '.session.sessionId' "$tmp_dir/stasis-replay.json")" = "$stasis_first_session"
+test "$(jq -r '.error.code' "$tmp_dir/stasis-conflict.json")" = "idempotencyConflict"
 kitesurf_a_session="$(jq -r '.session.sessionId' "$tmp_dir/kitesurf-a.json")"
 kitesurf_b_session="$(jq -r '.session.sessionId' "$tmp_dir/kitesurf-b.json")"
 test "$stasis_first_session" != "$stasis_second_session"
@@ -173,8 +187,18 @@ test "$(db_psql -Atc "select user_id from public.chat_sessions where id='$kitesu
 test "$(db_psql -Atc "select user_id from public.chat_sessions where id='$kitesurf_b_session';")" = "$owner_b"
 test "$(db_psql -Atc "select count(*) from public.chat_sessions where user_id in ('$owner_a','$owner_b') and status='active' and message_count=0;")" = "4"
 
+echo "2B-AG115 stage: parallel idempotent create"
+call parallel-a "$token_a" "$valid_body" 'ag115-parallel-create-00000001' >"$tmp_dir/parallel-a.status" &
+parallel_a_pid=$!
+call parallel-b "$token_a" "$valid_body" 'ag115-parallel-create-00000001' >"$tmp_dir/parallel-b.status" &
+parallel_b_pid=$!
+wait "$parallel_a_pid" "$parallel_b_pid"
+test "$(sort "$tmp_dir/parallel-a.status" "$tmp_dir/parallel-b.status" | tr '\n' ' ')" = "200 201 "
+test "$(jq -r '.session.sessionId' "$tmp_dir/parallel-a.json")" = "$(jq -r '.session.sessionId' "$tmp_dir/parallel-b.json")"
+test "$(db_psql -Atc "select count(*) from public.chat_sessions where user_id in ('$owner_a','$owner_b') and status='active' and message_count=0;")" = "5"
+
 echo "2B-AG115 stage: public response, atomicity and catalog integrity"
-for response in "$tmp_dir/stasis-first.json" "$tmp_dir/stasis-second.json" "$tmp_dir/kitesurf-a.json" "$tmp_dir/kitesurf-b.json"; do
+for response in "$tmp_dir/stasis-first.json" "$tmp_dir/stasis-second.json" "$tmp_dir/kitesurf-a.json" "$tmp_dir/kitesurf-b.json" "$tmp_dir/parallel-a.json" "$tmp_dir/parallel-b.json"; do
   test "$(jq -r 'keys == ["session"]' "$response")" = "true"
   test "$(jq -r '.session | keys == ["lastMessageAt","messageCount","selectableSpecialist","sessionId","startedAt","status"]' "$response")" = "true"
   test "$(jq -r '.session.selectableSpecialist | keys == ["area","displayName","id"]' "$response")" = "true"
@@ -202,7 +226,7 @@ cleanup
 trap - EXIT INT TERM
 counts="$(postconditions)"
 echo "$counts"
-test "$counts" = "0|0|0|0|0|0"
+test "$counts" = "0|0|0|0|0|0|0"
 test "$(db_psql -Atc "select count(*) from public.specialist_catalog where id::text like '21000000-0000-4000-8000-%';")" = "19"
 test "$(db_psql -Atc "select count(*) from public.specialists where id::text like '11000000-0000-4000-8000-%';")" = "19"
 

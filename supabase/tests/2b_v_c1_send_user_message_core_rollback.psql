@@ -2,11 +2,11 @@
 
 BEGIN;
 
-DROP FUNCTION IF EXISTS public.send_user_message_core(uuid, uuid, text);
+DROP FUNCTION IF EXISTS public.send_user_message_core(uuid, uuid, text, text);
 
 DO $$
 BEGIN
-  IF to_regprocedure('public.send_user_message_core(uuid, uuid, text)') IS NOT NULL THEN
+  IF to_regprocedure('public.send_user_message_core(uuid, uuid, text, text)') IS NOT NULL THEN
     RAISE EXCEPTION '2B-V-C1 rollback failed to remove RPC';
   END IF;
 
@@ -41,7 +41,7 @@ $$;
 COMMIT;
 
 SELECT
-  to_regprocedure('public.send_user_message_core(uuid, uuid, text)') IS NULL AS rpc_removed,
+  to_regprocedure('public.send_user_message_core(uuid, uuid, text, text)') IS NULL AS rpc_removed,
   (SELECT count(*) FROM pg_catalog.pg_policies
     WHERE schemaname = 'public'
       AND tablename IN ('messages', 'chat_sessions')) AS policies;

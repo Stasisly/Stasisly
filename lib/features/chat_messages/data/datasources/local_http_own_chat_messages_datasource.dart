@@ -5,6 +5,7 @@ import 'package:stasisly/features/chat_messages/data/local/own_chat_messages_htt
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message_results.dart';
 import 'package:stasisly/features/chat_messages/domain/repositories/own_chat_messages_repository.dart';
 import 'package:stasisly/features/chat_messages/domain/validation/own_chat_message_input_validator.dart';
+import 'package:stasisly/features/conversations/application/idempotency/operation_attempt_id_factory.dart';
 
 class LocalHttpOwnChatMessagesDataSource implements OwnChatMessagesRepository {
   const LocalHttpOwnChatMessagesDataSource({
@@ -14,6 +15,7 @@ class LocalHttpOwnChatMessagesDataSource implements OwnChatMessagesRepository {
     required this.transport,
     this.payloadValidator = const OwnChatMessagesPayloadValidator(),
     this.inputValidator = const OwnChatMessageInputValidator(),
+    this.operationAttemptIds = const SecureOperationAttemptIdFactory(),
   });
 
   static const sendPath = '/functions/v1/send-user-message';
@@ -25,6 +27,7 @@ class LocalHttpOwnChatMessagesDataSource implements OwnChatMessagesRepository {
   final OwnChatMessagesHttpTransport transport;
   final OwnChatMessagesPayloadValidator payloadValidator;
   final OwnChatMessageInputValidator inputValidator;
+  final OperationAttemptIdFactory operationAttemptIds;
 
   @override
   Future<SendUserMessageResult> sendUserMessage({
@@ -45,7 +48,10 @@ class LocalHttpOwnChatMessagesDataSource implements OwnChatMessagesRepository {
         OwnChatMessagesHttpRequest(
           method: OwnChatMessagesHttpMethod.post,
           uri: baseUri.resolve(sendPath),
-          headers: _headers(token as String),
+          headers: _headers(
+            token as String,
+            idempotencyKey: operationAttemptIds.create(),
+          ),
           body: {'sessionId': sessionId, 'content': content.trim()},
         ),
       );
@@ -163,11 +169,12 @@ class LocalHttpOwnChatMessagesDataSource implements OwnChatMessagesRepository {
     return token;
   }
 
-  Map<String, String> _headers(String token) {
+  Map<String, String> _headers(String token, {String? idempotencyKey}) {
     return {
       'Accept': 'application/json',
       'Authorization': 'Bearer $token',
       'Content-Type': 'application/json',
+      if (idempotencyKey != null) 'Idempotency-Key': idempotencyKey,
     };
   }
 
@@ -206,6 +213,13 @@ class LocalHttpOwnChatMessagesDataSource implements OwnChatMessagesRepository {
       'contentInvalid' => SendOwnChatMessageFailureType.contentInvalid,
       'contentTooLong' => SendOwnChatMessageFailureType.contentTooLong,
       'invalidRequest' => SendOwnChatMessageFailureType.invalidRequest,
+      'missingIdempotencyKey' || 'invalidIdempotencyKey' =>
+        SendOwnChatMessageFailureType.invalidIdempotencyKey,
+      'idempotencyConflict' =>
+        SendOwnChatMessageFailureType.idempotencyConflict,
+      'operationInProgress' =>
+        SendOwnChatMessageFailureType.operationInProgress,
+      'transactionFailed' => SendOwnChatMessageFailureType.transactionFailed,
       'sessionNotFound' => SendOwnChatMessageFailureType.sessionNotFound,
       'sessionArchived' => SendOwnChatMessageFailureType.sessionArchived,
       'writeUnconfirmed' => SendOwnChatMessageFailureType.writeUnconfirmed,

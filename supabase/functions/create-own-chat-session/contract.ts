@@ -1,19 +1,6 @@
 const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-const CATALOG_KEYS = [
-  "access_tier",
-  "availability_status",
-  "display_name",
-  "id",
-  "is_conversable",
-  "is_published",
-  "product_area",
-  "publication_status",
-  "specialist_id",
-  "supported_surfaces",
-].sort();
-
 const PRODUCT_AREAS = [
   "stasis",
   "health",
@@ -22,20 +9,17 @@ const PRODUCT_AREAS = [
   "wellness",
 ];
 
-const SESSION_KEYS = [
-  "id",
+const RPC_KEYS = [
+  "idempotent_replay",
   "last_message_at",
   "message_count",
+  "product_area",
+  "selectable_specialist_id",
+  "session_id",
+  "specialist_display_name",
   "started_at",
   "status",
 ].sort();
-
-export interface ResolvedSpecialist {
-  selectableId: string;
-  internalId: string;
-  displayName: string;
-  area: string;
-}
 
 export interface PublicSession {
   sessionId: string;
@@ -48,6 +32,11 @@ export interface PublicSession {
   lastMessageAt: string;
   status: "active";
   messageCount: 0;
+}
+
+export interface SanitizedCreatedSession {
+  session: PublicSession;
+  idempotentReplay: boolean;
 }
 
 function assertExactKeys(
@@ -85,64 +74,7 @@ export async function parseRequestBody(request: Request): Promise<string> {
   return record.selectableSpecialistId;
 }
 
-export function resolveSpecialist(rows: unknown): ResolvedSpecialist {
-  if (!Array.isArray(rows) || rows.length !== 1) {
-    throw new Error("invalidSelectableSpecialist");
-  }
-  const value = rows[0];
-  if (typeof value !== "object" || value === null || Array.isArray(value)) {
-    throw new Error("contractViolation");
-  }
-  const row = value as Record<string, unknown>;
-  assertExactKeys(row, CATALOG_KEYS);
-  if (
-    !UUID_PATTERN.test(String(row.id)) ||
-    !UUID_PATTERN.test(String(row.specialist_id)) ||
-    typeof row.display_name !== "string" ||
-    row.display_name.length === 0 ||
-    typeof row.product_area !== "string" ||
-    !PRODUCT_AREAS.includes(row.product_area)
-  ) {
-    throw new Error("contractViolation");
-  }
-  if (
-    row.is_published !== true ||
-    row.publication_status !== "published" ||
-    row.availability_status !== "available" ||
-    row.is_conversable !== true ||
-    !Array.isArray(row.supported_surfaces) ||
-    row.supported_surfaces.length !== 1 ||
-    row.supported_surfaces[0] !== "product"
-  ) {
-    throw new Error("invalidSelectableSpecialist");
-  }
-  if (row.access_tier === "pro" || row.access_tier === "vip") {
-    throw new Error("proLocked");
-  }
-  if (row.access_tier !== "free") throw new Error("contractViolation");
-  return {
-    selectableId: row.id as string,
-    internalId: row.specialist_id as string,
-    displayName: row.display_name,
-    area: row.product_area,
-  };
-}
-
-export function assertInternalSpecialistExists(rows: unknown): void {
-  if (
-    !Array.isArray(rows) || rows.length !== 1 ||
-    typeof rows[0] !== "object" || rows[0] === null ||
-    Object.keys(rows[0] as Record<string, unknown>).length !== 1 ||
-    typeof (rows[0] as Record<string, unknown>).id !== "string"
-  ) {
-    throw new Error("backendMisconfigured");
-  }
-}
-
-export function sanitizeCreatedSession(
-  rows: unknown,
-  specialist: ResolvedSpecialist,
-): PublicSession {
+export function sanitizeCreatedSession(rows: unknown): SanitizedCreatedSession {
   if (!Array.isArray(rows) || rows.length !== 1) {
     throw new Error("contractViolation");
   }
@@ -151,26 +83,35 @@ export function sanitizeCreatedSession(
     throw new Error("contractViolation");
   }
   const row = value as Record<string, unknown>;
-  assertExactKeys(row, SESSION_KEYS);
+  assertExactKeys(row, RPC_KEYS);
   if (
-    !UUID_PATTERN.test(String(row.id)) ||
+    !UUID_PATTERN.test(String(row.session_id)) ||
+    !UUID_PATTERN.test(String(row.selectable_specialist_id)) ||
     typeof row.started_at !== "string" ||
     typeof row.last_message_at !== "string" ||
     row.status !== "active" ||
-    row.message_count !== 0
+    row.message_count !== 0 ||
+    typeof row.specialist_display_name !== "string" ||
+    row.specialist_display_name.length === 0 ||
+    typeof row.product_area !== "string" ||
+    !PRODUCT_AREAS.includes(row.product_area) ||
+    typeof row.idempotent_replay !== "boolean"
   ) {
     throw new Error("contractViolation");
   }
   return {
-    sessionId: row.id as string,
-    selectableSpecialist: {
-      id: specialist.selectableId,
-      displayName: specialist.displayName,
-      area: specialist.area,
+    session: {
+      sessionId: row.session_id as string,
+      selectableSpecialist: {
+        id: row.selectable_specialist_id as string,
+        displayName: row.specialist_display_name,
+        area: row.product_area,
+      },
+      startedAt: row.started_at,
+      lastMessageAt: row.last_message_at,
+      status: "active",
+      messageCount: 0,
     },
-    startedAt: row.started_at,
-    lastMessageAt: row.last_message_at,
-    status: "active",
-    messageCount: 0,
+    idempotentReplay: row.idempotent_replay,
   };
 }

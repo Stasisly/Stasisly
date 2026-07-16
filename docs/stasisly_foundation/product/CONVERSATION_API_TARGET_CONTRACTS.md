@@ -123,3 +123,12 @@ Current endpoints remain local compatibility APIs. Canonical endpoints/routes
 must be introduced behind a versioned adapter with dual-contract tests where
 needed. There is no alias from `/chat/:id`; an `agentId` cannot be interpreted as
 a `conversationId`. No endpoint or route is implemented by FOUNDATION-012.
+
+## FOUNDATION-013B local adoption
+
+Create and send now require `Idempotency-Key` at the local transitional Edge
+Functions. Create validates catalog eligibility and inserts in one locked SQL
+transaction; send atomically inserts one user Message and updates counters.
+Matching retries return the original DTO (`200` after initial `201`), while a
+conflicting payload returns `409`. Endpoint names and `sessionId` remain
+transitional; canonical routes/endpoints and remote rollout remain absent.

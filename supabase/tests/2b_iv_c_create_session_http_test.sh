@@ -70,12 +70,15 @@ call() {
   curl -sS -o "$tmp_dir/$name.json" -w '%{http_code}' \
     -X POST -H "Authorization: Bearer $token_value" \
     -H "Content-Type: application/json" -H "Accept: application/json" \
+    -H "Idempotency-Key: iv-c-$name-000000000001" \
     -d "$body" "$endpoint"
 }
 
 echo "2B-IV-C stage: request/JWT and specialist rejection tests"
 no_jwt_status="$(curl -sS -o "$tmp_dir/no-jwt.json" -w '%{http_code}' \
-  -X POST -H "Content-Type: application/json" -d "$valid_body" "$endpoint")"
+  -X POST -H "Content-Type: application/json" \
+  -H "Idempotency-Key: iv-c-no-jwt-000000000001" \
+  -d "$valid_body" "$endpoint")"
 invalid_jwt_status="$(call invalid-jwt "$valid_body" invalid)"
 empty_status="$(call empty '{}')"
 extra_status="$(call extra '{"selectableSpecialistId":"4c300000-0000-4000-8000-000000000001","user_id":"attacker"}')"

@@ -288,6 +288,11 @@ and message contracts, neutral results and compatibility over existing safe
 repositories. Backend API canonicalization, transaction/idempotency, lifecycle,
 provenance, UI retirement and Product routes remain 013B-013F debt.
 
+FOUNDATION-013B closes locally the create TOCTOU and create/send duplicate-retry
+risk with a deny-all server ledger and transactional RPCs. Physical naming,
+canonical endpoint rollout, lifecycle, provenance, UI retirement, Product routes,
+retention automation and every remote gate remain debt for later packages.
+
 ## Common completion rule
 
 A local controlled package should close one coherent risk unit with

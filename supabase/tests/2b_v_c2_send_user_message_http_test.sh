@@ -44,7 +44,8 @@ postconditions() {
       (select count(*) from public.specialists where name like 'test_only_2b_v_c2%'),
       (select count(*) from public.specialist_catalog where display_name like 'test_only_2b_v_c2%'),
       (select count(*) from public.chat_sessions where specialist_id::text like '5c200000-0000-4000-8000-%'),
-      (select count(*) from public.messages m join public.chat_sessions s on s.id = m.session_id where s.specialist_id::text like '5c200000-0000-4000-8000-%')
+      (select count(*) from public.messages m join public.chat_sessions s on s.id = m.session_id where s.specialist_id::text like '5c200000-0000-4000-8000-%'),
+      (select count(*) from public.conversation_idempotency where idempotency_key like 'v-c2-%')
     );"
 }
 
@@ -58,7 +59,7 @@ cleanup() {
     >/dev/null 2>&1 || true
   local counts
   counts="$(postconditions 2>/dev/null || true)"
-  if [ "$counts" != "0|0|0|0|0|0" ]; then
+  if [ "$counts" != "0|0|0|0|0|0|0" ]; then
     echo "2B-V-C2 cleanup did not leave zero fixtures: ${counts:-unavailable}" >&2
     supabase db reset --local --no-seed >/dev/null 2>&1 || true
   fi
@@ -68,13 +69,15 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 echo "2B-V-C2 stage: verify clean preconditions"
-test "$(postconditions)" = "0|0|0|0|0|0"
+test "$(postconditions)" = "0|0|0|0|0|0|0"
 
 cat > "$edge_env" <<EOF
 SUPABASE_URL=$API_URL
 SUPABASE_ANON_KEY=$ANON_KEY
 SUPABASE_SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY
 STASISLY_ALLOW_LOCAL_ONLY=true
+STASISLY_RUNTIME_MODE=local
+STASISLY_ALLOW_DEVELOPMENT_REMOTE=false
 EOF
 chmod 600 "$edge_env"
 
@@ -126,15 +129,19 @@ endpoint="$FUNCTIONS_URL/send-user-message"
 valid_body='{"sessionId":"5c400000-0000-4000-8000-000000000001","content":"  Hello C2  "}'
 call() {
   local name=$1 token=$2 body=$3
+  local key=${4:-v-c2-$name-000000000001}
   curl -sS -o "$tmp_dir/$name.json" -w '%{http_code}' \
     -X POST -H "Authorization: Bearer $token" \
     -H "Content-Type: application/json" -H "Accept: application/json" \
+    -H "Idempotency-Key: $key" \
     -d "$body" "$endpoint"
 }
 
 echo "2B-V-C2 stage: request/JWT/body validation"
 no_jwt_status="$(curl -sS -o "$tmp_dir/no-jwt.json" -w '%{http_code}' \
-  -X POST -H "Content-Type: application/json" -d "$valid_body" "$endpoint")"
+  -X POST -H "Content-Type: application/json" \
+  -H "Idempotency-Key: v-c2-no-jwt-000000000001" \
+  -d "$valid_body" "$endpoint")"
 invalid_jwt_status="$(call invalid-jwt invalid "$valid_body")"
 empty_status="$(call empty "$token_owner" '{}')"
 role_status="$(call role "$token_owner" '{"sessionId":"5c400000-0000-4000-8000-000000000001","content":"x","role":"assistant"}')"
@@ -150,6 +157,7 @@ empty_content_status="$(call empty-content "$token_owner" '{"sessionId":"5c40000
 space_content_status="$(call space-content "$token_owner" '{"sessionId":"5c400000-0000-4000-8000-000000000001","content":"    "}')"
 long_status="$(call long "$token_owner" "$(jq -nc --arg c "$(printf 'x%.0s' {1..4001})" --arg s "5c400000-0000-4000-8000-000000000001" '{sessionId:$s,content:$c}')")"
 ok_4000_status="$(call ok-4000 "$token_owner" "$(jq -nc --arg c " $(printf 'x%.0s' {1..4000}) " --arg s "5c400000-0000-4000-8000-000000000001" '{sessionId:$s,content:$c}')")"
+echo "2B-V-C2 validation statuses: no-jwt=$no_jwt_status invalid-jwt=$invalid_jwt_status empty=$empty_status role=$role_status user=$user_status specialist=$specialist_status created=$created_status count=$count_status last=$last_status attachments=$attachments_status metadata=$metadata_status null=$null_status empty-content=$empty_content_status space=$space_content_status long=$long_status ok-4000=$ok_4000_status"
 test "$no_jwt_status" = "401"
 test "$invalid_jwt_status" = "401"
 for status in "$empty_status" "$role_status" "$user_status" "$specialist_status" "$created_status" "$count_status" "$last_status" "$attachments_status" "$metadata_status"; do
@@ -163,12 +171,30 @@ test "$ok_4000_status" = "201"
 
 echo "2B-V-C2 stage: valid sends and atomic session updates"
 first_status="$(call first "$token_owner" "$valid_body")"
+replay_status="$(call replay "$token_owner" "$valid_body" 'v-c2-first-000000000001')"
+conflict_status="$(call conflict "$token_owner" '{"sessionId":"5c400000-0000-4000-8000-000000000001","content":"conflict"}' 'v-c2-first-000000000001')"
 second_status="$(call second "$token_owner" '{"sessionId":"5c400000-0000-4000-8000-000000000001","content":"Second C2"}')"
 test "$first_status" = "201"
+test "$replay_status" = "200"
+test "$conflict_status" = "409"
 test "$second_status" = "201"
+test "$(jq -r '.message.messageId' "$tmp_dir/replay.json")" = "$(jq -r '.message.messageId' "$tmp_dir/first.json")"
+test "$(jq -r '.error.code' "$tmp_dir/conflict.json")" = "idempotencyConflict"
 test "$(db_psql -Atc "select count(*) from public.messages where session_id='5c400000-0000-4000-8000-000000000001';")" = "3"
 test "$(db_psql -Atc "select message_count from public.chat_sessions where id='5c400000-0000-4000-8000-000000000001';")" = "3"
 test "$(db_psql -Atc "select exists(select 1 from public.chat_sessions cs join public.messages m on m.session_id=cs.id where cs.id='5c400000-0000-4000-8000-000000000001' and cs.last_message_at=(select max(created_at) from public.messages where session_id=cs.id));")" = "t"
+
+echo "2B-V-C2 stage: parallel idempotent send"
+parallel_body='{"sessionId":"5c400000-0000-4000-8000-000000000001","content":"Parallel C2"}'
+call parallel-a "$token_owner" "$parallel_body" 'v-c2-parallel-send-00000001' >"$tmp_dir/parallel-a.status" &
+parallel_a_pid=$!
+call parallel-b "$token_owner" "$parallel_body" 'v-c2-parallel-send-00000001' >"$tmp_dir/parallel-b.status" &
+parallel_b_pid=$!
+wait "$parallel_a_pid" "$parallel_b_pid"
+test "$(sort "$tmp_dir/parallel-a.status" "$tmp_dir/parallel-b.status" | tr '\n' ' ')" = "200 201 "
+test "$(jq -r '.message.messageId' "$tmp_dir/parallel-a.json")" = "$(jq -r '.message.messageId' "$tmp_dir/parallel-b.json")"
+test "$(db_psql -Atc "select count(*) from public.messages where session_id='5c400000-0000-4000-8000-000000000001';")" = "4"
+test "$(db_psql -Atc "select message_count from public.chat_sessions where id='5c400000-0000-4000-8000-000000000001';")" = "4"
 
 echo "2B-V-C2 stage: session errors do not leak foreign existence"
 foreign_status="$(call foreign "$token_owner" '{"sessionId":"5c400000-0000-4000-8000-000000000003","content":"foreign"}')"
@@ -189,7 +215,7 @@ fi
 test "$(db_psql -Atc "select count(*) from public.messages where session_id in ('5c400000-0000-4000-8000-000000000002','5c400000-0000-4000-8000-000000000003');")" = "0"
 
 echo "2B-V-C2 stage: public response is sanitized"
-for response in "$tmp_dir/first.json" "$tmp_dir/second.json" "$tmp_dir/ok-4000.json"; do
+for response in "$tmp_dir/first.json" "$tmp_dir/second.json" "$tmp_dir/ok-4000.json" "$tmp_dir/parallel-a.json" "$tmp_dir/parallel-b.json"; do
   test "$(jq -r 'keys == ["message","session"]' "$response")" = "true"
   test "$(jq -r '.message.role' "$response")" = "user"
   test "$(jq -r '.message | keys == ["content","createdAt","messageId","role","sessionId"]' "$response")" = "true"
@@ -222,6 +248,6 @@ cleanup
 trap - EXIT INT TERM
 counts="$(postconditions)"
 echo "$counts"
-test "$counts" = "0|0|0|0|0|0"
+test "$counts" = "0|0|0|0|0|0|0"
 
 echo "2B-V-C2 send-user-message local HTTP harness: PASS"

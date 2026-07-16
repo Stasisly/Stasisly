@@ -83,7 +83,7 @@ conversation slice. It is decomposed, without renumbering FOUNDATION-014-020:
 
 ```text
 FOUNDATION-013A  canonical Product Conversation contracts and adapters [LOCAL COMPLETE]
-FOUNDATION-013B  transactional Conversation creation and TOCTOU/idempotency
+FOUNDATION-013B  transactional Conversation creation and TOCTOU/idempotency [LOCAL COMPLETE]
 FOUNDATION-013C  Conversation listing, read, archive and restore boundary
 FOUNDATION-013D  Message author, visibility and provenance contracts
 FOUNDATION-013E  legacy UI extraction, freeze guards and retirement migration
@@ -94,3 +94,7 @@ Each child requires separate approval and G0-G7. FOUNDATION-014 remains Agent
 Constitution/Engine design; FOUNDATION-015-020 retain their approved meanings.
 Remote/staging remains G8+ and outside all local child packages unless separately
 authorized.
+
+FOUNDATION-013B advances L3 only: it replaces direct create/send orchestration
+with trusted transactional RPC boundaries and retry contracts. It does not
+activate a replacement UI or route, so no legacy source may yet be removed.

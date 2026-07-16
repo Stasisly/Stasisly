@@ -194,3 +194,15 @@ deuda residual.
 - UI y rutas Conversation, API backend canónica y Stasis Engine:
   `NOT_IMPLEMENTED`.
 - chat legacy: continúa `DEPRECATED_AND_BLOCKED`, sin fallback ni cambios.
+
+## Adopción de FOUNDATION-013B
+
+- `conversation_idempotency`: `FOUNDATION_ADOPTED_LOCALLY / SERVER_MANAGED`;
+  RLS deny-all para clientes y retención automática aún no implementada.
+- RPCs create/send: `FOUNDATION_ADOPTED_LOCALLY` como frontera transaccional;
+  nombres y tablas físicas permanecen `TRANSITIONAL`.
+- Edge Functions create/send: `ADAPT / KEEP_TEMPORARILY`; solo llaman RPC para
+  writes, con JWT verificado e `Idempotency-Key` obligatorio.
+- generación Flutter de operation-attempt IDs: `FOUNDATION_ADOPTED_LOCALLY`;
+  no añade autoridad ni Product wiring.
+- API backend canónica completa, remoto y Product routes: `NOT_IMPLEMENTED`.

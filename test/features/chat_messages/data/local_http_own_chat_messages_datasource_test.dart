@@ -6,6 +6,7 @@ import 'package:stasisly/features/chat_messages/data/local/local_session_token_p
 import 'package:stasisly/features/chat_messages/data/local/own_chat_messages_http_transport.dart';
 import 'package:stasisly/features/chat_messages/data/local/secure_session_chat_messages_token_provider.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message_results.dart';
+import 'package:stasisly/features/conversations/application/idempotency/operation_attempt_id_factory.dart';
 
 void main() {
   group('fail closed before token or transport', () {
@@ -122,8 +123,14 @@ void main() {
       expect(request.method, OwnChatMessagesHttpMethod.post);
       expect(request.uri.path, '/functions/v1/send-user-message');
       expect(request.body, {'sessionId': 'session-1', 'content': 'hola'});
-      expect(request.headers.keys, {'Accept', 'Authorization', 'Content-Type'});
+      expect(request.headers.keys, {
+        'Accept',
+        'Authorization',
+        'Content-Type',
+        'Idempotency-Key',
+      });
       expect(request.headers['Authorization'], 'Bearer local-token');
+      expect(request.headers['Idempotency-Key'], 'test_attempt_00000001');
       for (final forbidden in [
         'role',
         'userId',
@@ -426,13 +433,23 @@ LocalHttpOwnChatMessagesDataSource _source({
   ),
   LocalSessionTokenProvider? tokenProvider,
   _FakeTransport? transport,
+  OperationAttemptIdFactory? operationAttemptIds,
 }) {
   return LocalHttpOwnChatMessagesDataSource(
     baseUri: baseUri ?? Uri.parse('http://127.0.0.1:54321'),
     hostPolicy: policy,
     tokenProvider: tokenProvider ?? _FakeTokenProvider('local-token'),
     transport: transport ?? _FakeTransport(response: _listSuccess()),
+    operationAttemptIds:
+        operationAttemptIds ?? _FakeOperationAttemptIdFactory(),
   );
+}
+
+class _FakeOperationAttemptIdFactory implements OperationAttemptIdFactory {
+  int _next = 1;
+
+  @override
+  String create() => 'test_attempt_${(_next++).toString().padLeft(8, '0')}';
 }
 
 class _FakeTokenProvider implements LocalSessionTokenProvider {

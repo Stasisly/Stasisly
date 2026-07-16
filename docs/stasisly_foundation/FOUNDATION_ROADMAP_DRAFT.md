@@ -205,3 +205,10 @@ siguiente gate técnico es FOUNDATION-013B.
 - Stasis Engine y Model Gateway no se implementan antes de F3/F6.
 - Ninguna fase presume que la anterior está aprobada solo por existir este
   borrador.
+
+## FOUNDATION-013B evidence
+
+F8 adopta localmente creación transaccional de Conversation e idempotencia de
+create/send sobre persistencia transitoria. El TOCTOU queda cerrado localmente,
+pero lifecycle completo, API canónica, retirada legacy, rutas Product y gates
+remotos G8-G10 siguen pendientes.

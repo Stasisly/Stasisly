@@ -111,6 +111,7 @@ echo "2B-IV-H stage: wait for local function readiness"
 for _ in $(seq 1 20); do
   status="$(curl -sS -o /dev/null -w '%{http_code}' \
     -X POST -H "Content-Type: application/json" \
+    -H "Idempotency-Key: iv-h-readiness-000000000001" \
     -d "{\"selectableSpecialistId\":\"$selectable_id\"}" \
     "$FUNCTIONS_URL/create-own-chat-session" || true)"
   if [ "$status" = "401" ]; then

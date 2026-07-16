@@ -23,6 +23,7 @@ const LOCAL_CONFIG: RuntimeConfig = {
 function request(
   body: unknown = { sessionId: SESSION_ID, content: "  hello  " },
   token = "valid-local-jwt",
+  idempotencyKey = "send_attempt_0000000001",
 ): Request {
   return new Request(
     "http://127.0.0.1:54321/functions/v1/send-user-message",
@@ -31,6 +32,7 @@ function request(
       headers: {
         authorization: `Bearer ${token}`,
         "content-type": "application/json",
+        "Idempotency-Key": idempotencyKey,
       },
       body: JSON.stringify(body),
     },
@@ -46,6 +48,7 @@ function rpcRow(overrides: Record<string, unknown> = {}) {
     created_at: "2026-06-20T10:00:00Z",
     session_message_count: 1,
     session_last_message_at: "2026-06-20T10:00:00Z",
+    idempotent_replay: false,
     ...overrides,
   };
 }
@@ -150,20 +153,20 @@ Deno.test("content validation trims and fails closed", async () => {
 
 Deno.test("RPC response is sanitized and public", () => {
   const payload = sanitizeRpcResult([rpcRow()]);
-  assertEquals(Object.keys(payload).sort(), ["message", "session"]);
-  assertEquals(Object.keys(payload.message).sort(), [
+  assertEquals(Object.keys(payload).sort(), ["idempotentReplay", "payload"]);
+  assertEquals(Object.keys(payload.payload.message).sort(), [
     "content",
     "createdAt",
     "messageId",
     "role",
     "sessionId",
   ]);
-  assertEquals(Object.keys(payload.session).sort(), [
+  assertEquals(Object.keys(payload.payload.session).sort(), [
     "lastMessageAt",
     "messageCount",
     "sessionId",
   ]);
-  const serialized = JSON.stringify(payload);
+  const serialized = JSON.stringify(payload.payload);
   for (
     const forbidden of [
       "user_id",
@@ -208,6 +211,7 @@ Deno.test("handler validates JWT, calls only RPC, and performs no direct writes"
     p_session_id: SESSION_ID,
     p_owner_user_id: OWNER_ID,
     p_content: "hello",
+    p_idempotency_key: "send_attempt_0000000001",
   });
 });
 
@@ -261,6 +265,9 @@ Deno.test("RPC errors map to public errors without leaking ownership", async () 
     ["content_invalid", 400, "contentInvalid"],
     ["content_too_long", 400, "contentTooLong"],
     ["write_unconfirmed", 409, "writeUnconfirmed"],
+    ["idempotency_conflict", 409, "idempotencyConflict"],
+    ["operation_in_progress", 409, "operationInProgress"],
+    ["transaction_failed", 503, "transactionFailed"],
   ] as const;
   for (const [message, status, code] of cases) {
     const handler = createHandler(LOCAL_CONFIG, {
@@ -284,6 +291,24 @@ Deno.test("RPC errors map to public errors without leaking ownership", async () 
     assertEquals(JSON.stringify(body).includes("owner"), false);
     assertEquals(JSON.stringify(body).includes("exists"), false);
   }
+});
+
+Deno.test("send requires idempotency metadata without backend access", async () => {
+  let calls = 0;
+  const handler = createHandler(LOCAL_CONFIG, {
+    fetcher: (async () => {
+      calls++;
+      return new Response(null, { status: 500 });
+    }) as typeof fetch,
+    requestId: () => "request-test",
+    logWriter: () => {},
+  });
+  const missing = request();
+  missing.headers.delete("Idempotency-Key");
+  const response = await handler(missing);
+  assertEquals(response.status, 400);
+  assertEquals((await response.json()).error.code, "missingIdempotencyKey");
+  assertEquals(calls, 0);
 });
 
 Deno.test("local runtime and logs fail closed", async () => {

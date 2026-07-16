@@ -3,12 +3,17 @@ export type CreateSessionErrorCode =
   | "unauthenticated"
   | "invalidSession"
   | "invalidRequest"
+  | "missingIdempotencyKey"
+  | "invalidIdempotencyKey"
+  | "idempotencyConflict"
+  | "operationInProgress"
   | "invalidSelectableSpecialist"
   | "specialistUnavailable"
   | "proLocked"
   | "permissionDenied"
   | "contractViolation"
   | "backendMisconfigured"
+  | "transactionFailed"
   | "unexpectedError";
 
 const ERROR_STATUS: Record<CreateSessionErrorCode, number> = {
@@ -16,12 +21,17 @@ const ERROR_STATUS: Record<CreateSessionErrorCode, number> = {
   unauthenticated: 401,
   invalidSession: 401,
   invalidRequest: 400,
+  missingIdempotencyKey: 400,
+  invalidIdempotencyKey: 400,
+  idempotencyConflict: 409,
+  operationInProgress: 409,
   invalidSelectableSpecialist: 404,
   specialistUnavailable: 409,
   proLocked: 403,
   permissionDenied: 403,
   contractViolation: 502,
   backendMisconfigured: 500,
+  transactionFailed: 503,
   unexpectedError: 500,
 };
 

@@ -5,7 +5,7 @@
 Status: **APPROVED working execution structure**. Package status is recorded
 below; every future package requires its own approval and exact scope.
 
-Package status after FOUNDATION-013A:
+Package status after FOUNDATION-013B:
 
 ```text
 FOUNDATION-007: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
@@ -15,7 +15,8 @@ FOUNDATION-010: IMPLEMENTED LOCALLY / PUBLISHED
 FOUNDATION-011: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
 FOUNDATION-012: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
 FOUNDATION-013A: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
-FOUNDATION-013B..013F: NOT EXECUTED
+FOUNDATION-013B: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
+FOUNDATION-013C..013F: NOT EXECUTED
 FOUNDATION-014..020: NOT EXECUTED
 ```
 
@@ -46,15 +47,16 @@ FOUNDATION-014..020: NOT EXECUTED
 4. A package stops when an unapproved file, authority decision or remote
    dependency becomes necessary.
 5. FOUNDATION-013A implements canonical Product Conversation contracts and
-   transitional adapters locally. FOUNDATION-013B is next under separate
-   approval; routes, schema, legacy deletion and remote remain excluded.
+   adapters; FOUNDATION-013B implements local transactional create/send and
+   idempotency. FOUNDATION-013C is next only after separate approval; routes,
+   legacy deletion and remote remain excluded.
 
 ## FOUNDATION-013 child sequence
 
 | Child | Scope | Explicit exclusions |
 |---|---|---|
 | 013A | Canonical Product Conversation contracts and adapters — IMPLEMENTED LOCALLY | No routes, schema or legacy deletion |
-| 013B | Transactional creation, TOCTOU and create/send idempotency | No remote migration |
+| 013B | Transactional creation, TOCTOU and create/send idempotency — IMPLEMENTED LOCALLY | No remote migration |
 | 013C | List/read/archive/restore/history boundary | No Product route registration |
 | 013D | Message author, visibility and provenance contracts | No Engine trace exposure |
 | 013E | Legacy UI extraction, freeze guards and retirement migration | No removal before parity/data gates |
