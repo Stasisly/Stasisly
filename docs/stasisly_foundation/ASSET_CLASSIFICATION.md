@@ -181,3 +181,16 @@ deuda residual.
 - rutas dev-only: `KEEP_TEMPORARILY`; rutas legacy: `DEPRECATE` y luego `REMOVE`
   solo tras replacement, parity, data compatibility y rollback aprobados.
 - Product Conversation architecture: `APPROVED / NOT_IMPLEMENTED`.
+
+## Adopción de FOUNDATION-013A
+
+- `lib/features/conversations/domain/**`: `FOUNDATION_ADOPTED` como contrato
+  Product canónico, sin provider, UI ni runtime.
+- `ConversationRepository`, inputs y resultados: `FOUNDATION_ADOPTED`.
+- adapters de `OwnChatSession`/`OwnChatMessage` y repositorio compuesto:
+  `FOUNDATION_ADOPTED_LOCALLY`.
+- `chat_sessions` y `chat_messages`: `TRANSITIONAL_ADAPTER_SOURCE`; sus
+  contratos permanecen sin cambios.
+- UI y rutas Conversation, API backend canónica y Stasis Engine:
+  `NOT_IMPLEMENTED`.
+- chat legacy: continúa `DEPRECATED_AND_BLOCKED`, sin fallback ni cambios.

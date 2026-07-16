@@ -52,6 +52,11 @@ legacy chat are not reusable Product contracts. UI reuse is selective:
 
 FOUNDATION-012 executes none of these phases.
 
+FOUNDATION-013A begins L3 locally by implementing canonical contracts, adapters
+and guards. L3 is not closed because canonical backend API contracts and Product
+wiring remain absent. L0 remains enforced; no legacy source, route or runtime
+was modified, reused or removed.
+
 ## Mandatory gates
 
 Removal requires all of:
@@ -77,7 +82,7 @@ The approved master ID `FOUNDATION-013` remains the first controlled Product
 conversation slice. It is decomposed, without renumbering FOUNDATION-014-020:
 
 ```text
-FOUNDATION-013A  canonical Product Conversation contracts and adapters
+FOUNDATION-013A  canonical Product Conversation contracts and adapters [LOCAL COMPLETE]
 FOUNDATION-013B  transactional Conversation creation and TOCTOU/idempotency
 FOUNDATION-013C  Conversation listing, read, archive and restore boundary
 FOUNDATION-013D  Message author, visibility and provenance contracts

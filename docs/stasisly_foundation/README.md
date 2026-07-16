@@ -158,12 +158,21 @@ persistente, Founder access y nuevas capacidades Product siguen cerrados.
 - [Matriz de adopción](product/CONVERSATION_ASSET_ADOPTION_MATRIX.md)
 - [Retirada del chat legacy](product/LEGACY_CHAT_RETIREMENT_PLAN.md)
 - [ADR-F009](adr/ADR-F009-product-conversation-architecture-and-legacy-chat-retirement.md)
+- [Implementación FOUNDATION-013A](implementation/FOUNDATION-013A_CANONICAL_CONVERSATION_CONTRACTS_AND_ADAPTERS.md)
+- [ADR-F010](adr/ADR-F010-canonical-conversation-contracts-and-transitional-adapters.md)
 
 FOUNDATION-012 aprueba `Conversation` como agregado Product y reserva
 `ExecutionSession` al futuro runtime. Stasis coordina Product; historial,
 ejecución, memoria, research y trazas permanecen separados. El chat legacy queda
 `DEPRECATED_AND_BLOCKED`; las rutas `/stasis` y `/conversations` son objetivo no
 implementado. Los activos modernos se adaptarán mediante FOUNDATION-013A-013F.
+
+FOUNDATION-013A adopta localmente `Conversation`, `ConversationId`,
+`ConversationMessage`, inputs/resultados provider-neutral y
+`ConversationRepository`. Los adapters transitorios componen los repositorios
+seguros actuales sin cambiar DTOs, backend, schema, rutas ni UI. El owner se
+deriva exclusivamente de identidad autenticada confiable y los autores
+ambiguos fallan cerrados.
 
 La auditoría identificó componentes modernos reutilizables, deuda legacy y un
 P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
@@ -214,6 +223,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras publicar FOUNDATION-012, el siguiente gate es `FOUNDATION-013A`, contratos
-y adapters canónicos Product de Conversation. Requiere aprobación separada y no
-autoriza rutas, schema, retirada de código ni remoto.
+Tras publicar FOUNDATION-013A, el siguiente gate es `FOUNDATION-013B`, creación
+transaccional de Conversation, cierre del TOCTOU e idempotencia. Requiere
+aprobación separada y no autoriza rutas, UI, retirada legacy ni remoto.

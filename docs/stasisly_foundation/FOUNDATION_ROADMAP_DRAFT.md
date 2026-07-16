@@ -156,6 +156,11 @@ coordinador, chat legacy queda deprecated/blocked y `/stasis` más
 en 013A-013F para contratos, atomicidad, historial, provenance, retirada legacy
 y routing, cada hijo con gate separado.
 
+FOUNDATION-013A completa localmente el primer hijo: contratos Product canónicos,
+ownership desde identidad autenticada, resultados neutrales y adapters sobre
+sessions/messages existentes. No activa rutas, UI o backend canónico. El
+siguiente gate técnico es FOUNDATION-013B.
+
 ## F9 — Administration inicial
 
 - **Objetivo:** operar capacidades autorizadas con Gerendi y auditoría.

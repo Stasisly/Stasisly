@@ -10,7 +10,7 @@
 | Owner | Dirección de Documentación y Conocimiento under Rector (conceptual) |
 | Approver | Founder for authority assignments |
 | Version | 2.0 |
-| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-012 |
+| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-013A |
 | Supersedes | No Foundation register |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -77,6 +77,8 @@
 | `product/CONVERSATION_API_TARGET_CONTRACTS.md` | APPROVED target / NOT_IMPLEMENTED | 3 | Product API Architecture | Founder | Yes conceptually | Session-named local compatibility APIs | ADR-F009; API boundaries | Public Conversation API/versioning change |
 | `product/CONVERSATION_ASSET_ADOPTION_MATRIX.md` | ACTIVE | 6 | Product Architecture + Documentation | Evidence owner; Founder for adoption/removal | No, evidence/planning | Earlier broad chat classifications | FOUNDATION-005 matrix; ADR-F009 | Asset evidence, classification or gate change |
 | `adr/ADR-F009-product-conversation-architecture-and-legacy-chat-retirement.md` | APPROVED / NOT_IMPLEMENTED | 2 | Product + Architecture under Stasis/Rector | Founder | Yes | Legacy chat and session semantics as implicit Product architecture | ADR-F002; ADR-F004-F008 | Conversation, Stasis, specialist, lifecycle or retirement decision changes |
+| `implementation/FOUNDATION-013A_CANONICAL_CONVERSATION_CONTRACTS_AND_ADAPTERS.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Product + Flutter Architecture + QA + Documentation | Evidence owner | No, local implementation evidence | Canonical Product contracts absent | ADR-F009; ADR-F010 | Contract, adapter, compatibility or activation change |
+| `adr/ADR-F010-canonical-conversation-contracts-and-transitional-adapters.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Product + Architecture under Stasis/Rector | Founder | Yes | Session contracts as direct Product vocabulary | ADR-F009; FOUNDATION-013A | Conversation contracts, owner construction, mapping or adapter strategy change |
 | `DOCUMENT_AUTHORITY_REGISTER.md` | ACTIVE | 6 | Documentation under Rector (conceptual) | Founder for authority changes | Operational register | No prior register | Documentation governance | Any authority/status/supersession change |
 | `archive_index/DISCOVERY_ARCHIVE_INDEX.md` | ACTIVE | 6 | Documentation | Evidence owner | No, evidence/index | Informal Discovery locations | Discovery archive | Archive path or successor changes |
 | `implementation/FOUNDATION_SESSION_TRACKER.md` | ACTIVE | 6 | Program Management | Evidence owner | No, tracker | Historical Discovery tracker for Foundation work | Foundation packages | Every completed Foundation package |

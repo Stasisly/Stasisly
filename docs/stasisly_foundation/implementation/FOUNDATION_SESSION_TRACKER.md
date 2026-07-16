@@ -86,6 +86,9 @@ backend-owned request context, operation registry and six Product Edge Function 
 
 FOUNDATION-012 closure:
 canonical Product Conversation architecture and formal legacy-chat retirement plan approved; no code, route, schema or remote implementation
+
+FOUNDATION-013A closure:
+canonical Conversation domain, provider-neutral port/results/inputs and transitional session/message adapters implemented locally; no backend, schema, route, UI or remote activation
 ```
 
 ## Rules
@@ -114,3 +117,4 @@ canonical Product Conversation architecture and formal legacy-chat retirement pl
 | FOUNDATION-010 | Completed locally | Enforce explicit surface/environment metadata at existing routes and focal Product repository entry points without backend or remote changes | Analyzer 0 errors/51 inherited infos; Flutter 478 pass/5 approved skips; Deno 52/52 and format 41 files; two clean local resets without seed plus two full SQL suites at 18 files and 649/649; no remote | `SURFACE_AND_ENVIRONMENT BOUNDARIES ENFORCED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-011 may be proposed after publication under a separate approval; G8-G10 remain unauthorized |
 | FOUNDATION-011 | Completed locally | Enforce backend-derived identity, registered Product surface/environment/action/resource and trusted ownership across six existing Edge Functions | Deno 72/72 and format 53 files; two HTTP harnesses with 3/3 each and cleanup `0|0|0|0|0|0`; one local reset plus SQL 649/649; analyzer 0 errors/51 inherited infos; Flutter 483 pass/5 approved skips; ADR-F008; no remote | `BACKEND AUTHORIZATION_CONTEXT_AND_OWNED_API ENFORCED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-012 Product taxonomy/conversation boundary decision package; G8-G10 remain unauthorized |
 | FOUNDATION-012 | Completed conceptually | Define Conversation, ExecutionSession, Message, Stasis/specialist roles, lifecycle, memory/research boundaries, target APIs/routes and formal legacy-chat retirement | Seven Product documents, ADR-F009, asset audit/matrix, 013A-013F child plan, documentation/security checks; no code or remote | `PRODUCT CONVERSATION_ARCHITECTURE ESTABLISHED_AND_PUSHED` upon successful push | FOUNDATION-013A canonical Product Conversation contracts/adapters after separate approval |
+| FOUNDATION-013A | Completed locally | Implement canonical Conversation/Message contracts, opaque ID, trusted ownership, neutral inputs/results/port and transitional adapters over current safe repositories | Focal analyzer 0 issues; 31/31 focal tests; full analyzer 0 errors/51 inherited infos; Flutter 514 pass/5 approved skips; Deno 72/72; local reset without seed plus SQL 649/649; ADR-F010; no backend/schema/routes/UI/remote | `CANONICAL CONVERSATION_CONTRACTS_AND_ADAPTERS IMPLEMENTED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-013B canonical backend creation, TOCTOU and idempotency after separate approval |

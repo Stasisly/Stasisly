@@ -5,7 +5,7 @@
 Status: **APPROVED working execution structure**. Package status is recorded
 below; every future package requires its own approval and exact scope.
 
-Package status after FOUNDATION-012:
+Package status after FOUNDATION-013A:
 
 ```text
 FOUNDATION-007: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
@@ -14,7 +14,9 @@ FOUNDATION-009: IMPLEMENTED LOCALLY / FULL ENFORCEMENT PARTIAL
 FOUNDATION-010: IMPLEMENTED LOCALLY / PUBLISHED
 FOUNDATION-011: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
 FOUNDATION-012: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
-FOUNDATION-013..020: NOT EXECUTED
+FOUNDATION-013A: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
+FOUNDATION-013B..013F: NOT EXECUTED
+FOUNDATION-014..020: NOT EXECUTED
 ```
 
 | Package | Title | Type | Objective | Dependencies | Gate | Expected result |
@@ -43,15 +45,15 @@ FOUNDATION-013..020: NOT EXECUTED
    destructive migrations receive independent packages and G8-G10 gates.
 4. A package stops when an unapproved file, authority decision or remote
    dependency becomes necessary.
-5. FOUNDATION-013A is next after FOUNDATION-012 publication. It implements only
-   canonical Product Conversation contracts/adapters under separate approval;
-   routes, schema, legacy deletion and remote remain excluded.
+5. FOUNDATION-013A implements canonical Product Conversation contracts and
+   transitional adapters locally. FOUNDATION-013B is next under separate
+   approval; routes, schema, legacy deletion and remote remain excluded.
 
 ## FOUNDATION-013 child sequence
 
 | Child | Scope | Explicit exclusions |
 |---|---|---|
-| 013A | Canonical Product Conversation contracts and adapters | No routes, schema or legacy deletion |
+| 013A | Canonical Product Conversation contracts and adapters — IMPLEMENTED LOCALLY | No routes, schema or legacy deletion |
 | 013B | Transactional creation, TOCTOU and create/send idempotency | No remote migration |
 | 013C | List/read/archive/restore/history boundary | No Product route registration |
 | 013D | Message author, visibility and provenance contracts | No Engine trace exposure |

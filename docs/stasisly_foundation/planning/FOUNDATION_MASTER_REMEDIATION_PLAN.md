@@ -282,6 +282,12 @@ transactional creation, 013C lifecycle/history, 013D author/provenance, 013E UI
 extraction/retirement and 013F Product routes. FOUNDATION-014-020 retain their
 existing meanings and remote gates remain separate.
 
+FOUNDATION-013A closes locally the canonical client-domain and adapter portion
+of Conversation debt: opaque Product IDs, trusted owner construction, lifecycle
+and message contracts, neutral results and compatibility over existing safe
+repositories. Backend API canonicalization, transaction/idempotency, lifecycle,
+provenance, UI retirement and Product routes remain 013B-013F debt.
+
 ## Common completion rule
 
 A local controlled package should close one coherent risk unit with
