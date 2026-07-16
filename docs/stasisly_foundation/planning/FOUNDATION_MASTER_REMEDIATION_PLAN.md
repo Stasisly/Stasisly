@@ -21,8 +21,8 @@ asserted.
 
 ```text
 P0: CLOSED_LOCALLY / REMOTE_NOT_APPLIED
-P1-P4: OPEN
-Foundation reconstruction: PLANNED, NOT EXECUTED
+P1-P4: OPEN / PARTIAL LOCAL REMEDIATION
+Foundation reconstruction: ACTIVE LOCALLY
 ```
 
 ## Strategy
@@ -61,6 +61,11 @@ files, owners and acceptance evidence do not conflict.
 validation `IMPLEMENTED LOCALLY`; full enforcement remains
 `PARTIALLY_IMPLEMENTED`. Persistent RBAC/ABAC/JIT, Founder elevation and remote
 enforcement remain `NOT_IMPLEMENTED`.
+
+**FOUNDATION-010 status:** route and focal provider surface/environment
+boundaries are implemented and reproducibly validated locally; package
+publication completes G7. Backend/global/production enforcement remains
+`NOT_IMPLEMENTED`.
 
 - **ID / title:** A — Technical authorization and trust foundation.
 - **Objective:** define RBAC, ABAC, JIT, ownership and policy evaluation without

@@ -64,13 +64,14 @@ void main() {
     }
   });
 
-  test('runtime provider keeps every non-demo mode blocked', () {
+  test('runtime provider applies boundary and remains backend blocked', () {
     final providers = File(
       'lib/features/specialists/presentation/providers/'
       'selectable_specialists_providers.dart',
     ).readAsStringSync();
 
-    expect(providers, contains('DemoSelectableSpecialistsRepository'));
+    expect(providers, contains('EntryPointBoundaryEnforcer'));
+    expect(providers, isNot(contains('DemoSelectableSpecialistsRepository')));
     expect(
       providers,
       contains('BackendBlockedSelectableSpecialistsRepository'),

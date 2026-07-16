@@ -13,7 +13,10 @@ y `FOUNDATION-005-R1` cerró localmente su P0 de tablas públicas legacy.
 `FOUNDATION-008` implementa localmente los contratos propios de identidad,
 sesión y contexto API con Supabase Auth confinado como adapter actual.
 `FOUNDATION-009` adopta contratos tipados de autorización, puertos PDP/PEP y
-una política local deny-by-default con integración focal de perfil propio.
+una política local deny-by-default con integración focal de perfil propio; y
+`FOUNDATION-010` implementa y valida localmente fronteras tipadas de surface y
+entorno en rutas y providers focales, bloqueando chat/orchestrator legacy y
+manteniendo Administration, Platform, remoto y producción sin activar.
 
 La documentación Foundation registra decisiones y evidencia según su nivel de
 autoridad. No demuestra por sí sola que una capacidad esté implementada.
@@ -124,6 +127,16 @@ puertos PDP/PEP/audit. El PDP local solo valida el caso existente de lectura de
 perfil propio en local/development. El enforcement global sigue parcial;
 RBAC/ABAC persistente, Founder elevation, remoto y producción no se implementan.
 
+## Fronteras de surface y entorno
+
+- [Implementación FOUNDATION-010](implementation/FOUNDATION-010_SURFACE_AND_ENVIRONMENT_ENFORCEMENT.md)
+- [ADR-F007 — Enforcement de surface y entorno](adr/ADR-F007-surface-and-environment-enforcement-boundaries.md)
+
+FOUNDATION-010 adopta localmente `SurfaceBoundary`, `EnvironmentBoundary`,
+metadata tipada por entry point y decisiones fail-closed. Product queda limitado a
+local/development, Development solo a local/development, y las rutas heredadas
+de chat/orchestrator no construyen capacidad. Backend sigue siendo autoridad.
+
 La auditoría identificó componentes modernos reutilizables, deuda legacy y un
 P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
 por el repositorio: RLS activo, cero policies y cero grants cliente en las diez
@@ -173,6 +186,7 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Con FOUNDATION-009 implementado localmente, el siguiente gate recomendado es
-`FOUNDATION-010 — Surface and environment enforcement boundaries`, sujeto a
-aprobación separada. Ninguna operación remota queda autorizada.
+Tras publicar FOUNDATION-010, el siguiente gate recomendado es
+`FOUNDATION-011 — Backend authorization context and owned API enforcement`,
+sujeto a aprobación separada y sin despliegue remoto. Ninguna operación remota
+queda autorizada.

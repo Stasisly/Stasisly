@@ -8,7 +8,7 @@ import 'package:stasisly/features/specialists/domain/entities/selectable_special
 import 'package:stasisly/features/specialists/presentation/providers/selectable_specialists_providers.dart';
 
 void main() {
-  test('demo mode selects only the local demo catalog', () {
+  test('demo mode cannot implicitly select a Product catalog', () {
     final container = ProviderContainer(
       overrides: [
         appEnvironmentProvider.overrideWithValue(
@@ -20,7 +20,7 @@ void main() {
 
     expect(
       container.read(selectableSpecialistsRepositoryProvider),
-      isA<DemoSelectableSpecialistsRepository>(),
+      isA<BackendBlockedSelectableSpecialistsRepository>(),
     );
   });
 

@@ -24,7 +24,7 @@ obtenga la decisión correspondiente.
 | F4 | COMPLETED | Auditoría, P0 cerrado localmente y plan maestro FOUNDATION-006 |
 | F5 | PROPOSED / PARTIALLY_DEFINED | Agent Constitution y organización tras autorización/surfaces |
 | F6 | PROPOSED / PARTIALLY_DEFINED | Engine modular después de FOUNDATION-014 |
-| F7 | ACTIVE / PARTIALLY_IMPLEMENTED | FOUNDATION-009 adopta contratos PDP/PEP y política local; FOUNDATION-010 debe extender boundaries por surface/entorno; enforcement global sigue parcial |
+| F7 | ACTIVE / PARTIALLY_IMPLEMENTED | FOUNDATION-009 adopta PDP/PEP; FOUNDATION-010 adopta boundaries cliente validados localmente; enforcement backend, persistente y productivo sigue pendiente |
 | F8 | PROPOSED / BLOCKED | Requiere P1, taxonomía y primer slice aprobado |
 | F9 | PROPOSED / BLOCKED | Requiere autorización y surface Administration |
 | F10 | PROPOSED / BLOCKED | Requiere autorización y surface Development |
@@ -134,8 +134,8 @@ deny-by-default con RBAC+ABAC, surfaces, entornos, JIT, niveles Founder,
 identidades técnicas, PDP/PEP, auditoría y revocación. FOUNDATION-008 convierte
 sus inputs mínimos en contratos propios de identidad, sesión y API.
 FOUNDATION-009 adopta contratos tipados de contexto/decisión, puertos PDP/PEP y
-una política local deny-by-default con un consumidor focal. FOUNDATION-010 debe
-aplicar boundaries de surface/entorno sin Founder elevation ni remoto.
+una política local deny-by-default con un consumidor focal. FOUNDATION-010
+aplica boundaries locales de surface/entorno sin Founder elevation ni remoto.
 
 ## F8 — Product inicial
 

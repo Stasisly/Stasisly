@@ -30,14 +30,14 @@ siguen sin estar autorizadas por esta clasificación.
 | 43 agentes AAA | `docs/archive/discovery/stasisly_definition/agents/` | ADAPT | Base experta de Development | COST_CRITICAL | Extraer plantilla y roster | Gobierno de agentes |
 | 6 comités | `docs/archive/discovery/stasisly_definition/committees/` | ADAPT | Gobierno útil, posible sobredimensión | Coste de coordinación | Revisar mandato/gates | Nexus/Rector futuros |
 | Orquestador Codex | `docs/archive/discovery/stasisly_definition/orchestrator/` | ADAPT | Controles operativos valiosos | Puede frenar o sobreactuar | Convertir a estándar Foundation | Program Management |
-| Flutter core/config | `lib/core/` | ADAPT / PARTIALLY_ADOPTED | Identidad/sesión y contratos de autorización canónicos; enforcement global parcial | SECURITY_CRITICAL | Continuar aislamiento de surfaces | Riverpod, GoRouter |
+| Flutter core/config | `lib/core/` | ADAPT / PARTIALLY_ADOPTED | Identidad/sesión, autorización y fronteras route/surface/environment canónicas; backend global pendiente | SECURITY_CRITICAL | Continuar enforcement backend | Riverpod, GoRouter |
 | Auth legacy | `lib/features/auth/` | ADAPT / PARTIALLY_ADAPTED | Consume puerto propio, pero conserva fachadas legacy y bootstrap proveedor | SECURITY_CRITICAL, VENDOR_COUPLED | Migración gradual; no declarar feature completa adoptada | Auth, RBAC/ABAC |
-| Chat legacy | `lib/features/chat/` | REWRITE | Contratos y rutas antiguas | SECURITY_CRITICAL | No conectar; reemplazar gradualmente | Sessions/messages |
+| Chat legacy | `lib/features/chat/` | REWRITE / LEGACY_BLOCKED | Contratos antiguos; su ruta solo devuelve bloqueo seguro | SECURITY_CRITICAL | No conectar; reemplazar gradualmente | Sessions/messages |
 | Chat local-safe | `lib/features/chat_sessions/`, `chat_messages/` | ADAPT | Fronteras y tests valiosos | Local/dev-only | Adoptar tras arquitectura F3/F7 | Auth, API |
 | Perfil y especialistas | `lib/features/profile/`, `specialists/` | ADAPT | Contratos mínimos sanitizados | VENDOR_COUPLED parcial | Introducir puertos backend | Identidad/catálogo |
 | Orchestrator UI | `lib/features/orchestrator/` | REWRITE | Prototipo, no Stasis Engine | FOUNDATION_BLOCKER | Redefinir bajo Product/Stasis | Agent organization |
 | Áreas antiguas | `health`, `nutrition`, `physical_training`, `mental_training` | ADAPT | Pantallas de prototipo | Taxonomía legacy | Mapear a áreas Foundation | Product architecture |
-| Routing actual | `lib/core/config/routes.dart` | REWRITE | Contiene rutas legacy y dev-only | SECURITY_CRITICAL | Diseñar routing por surface | Auth y permisos |
+| Routing actual | `lib/core/config/routes.dart`, `lib/core/routing/` | ADAPT / FOUNDATION_ADOPTED_LOCALLY | Registro tipado y gates locales; backend y producción pendientes | SECURITY_CRITICAL | Propagar contexto a backend | Auth y permisos |
 | Migraciones 00001-00008 | `supabase/migrations/` | ADAPT | Base probada, schema heredado | SECURITY_CRITICAL, VENDOR_COUPLED | Auditar antes de Foundation técnica | PostgreSQL/Supabase |
 | Seed sintético | `supabase/seed.sql` | KEEP | Fixture local determinista | No productivo | Mantener aislado y etiquetado | Schema 00008 |
 | Edge Functions | `supabase/functions/` | ADAPT | Contratos backend probados | VENDOR_COUPLED, SECURITY_CRITICAL | Extraer puertos/API | Supabase/Deno |
@@ -146,3 +146,13 @@ deuda residual.
 - RBAC/ABAC persistente, Founder elevation y enforcement remoto:
   `NOT_IMPLEMENTED`.
 - Profile permanece `ADAPT`; chat, rutas, DTOs y backend no cambiaron.
+
+## Adopción de FOUNDATION-010
+
+- `SurfaceBoundary`, `EnvironmentBoundary`, `EntryPointContext`, registro y
+  decisiones: `FOUNDATION_ADOPTED` localmente.
+- Routing Product/Development: `FOUNDATION_ADOPTED_LOCALLY` tras dos resets y
+  dos suites SQL 649/649; no autoriza producción ni remoto.
+- Chat y orchestrator legacy: `LEGACY_BLOCKED`; código conservado sin fallback.
+- Administration, Platform UI, Stasis Engine y enforcement backend global:
+  `NOT_IMPLEMENTED`.

@@ -19,6 +19,8 @@ class AuthorizationAuditEvent extends Equatable {
     required this.reasonCode,
     required this.policyReference,
     required this.correlationId,
+    this.entryPointReference,
+    this.legacyStateReference,
   });
 
   final String? subjectId;
@@ -31,6 +33,8 @@ class AuthorizationAuditEvent extends Equatable {
   final AuthorizationReasonCode reasonCode;
   final String policyReference;
   final String correlationId;
+  final String? entryPointReference;
+  final String? legacyStateReference;
 
   @override
   List<Object?> get props => [
@@ -44,5 +48,7 @@ class AuthorizationAuditEvent extends Equatable {
     reasonCode,
     policyReference,
     correlationId,
+    entryPointReference,
+    legacyStateReference,
   ];
 }

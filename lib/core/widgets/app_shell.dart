@@ -35,11 +35,6 @@ class AppShell extends StatelessWidget {
             selectedIcon: Icon(Icons.psychology),
             label: 'Mental',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.smart_toy_outlined),
-            selectedIcon: Icon(Icons.smart_toy),
-            label: 'Orquestador',
-          ),
         ],
       ),
     );
@@ -59,9 +54,6 @@ class AppShell extends StatelessWidget {
     if (location.startsWith('/mental')) {
       return 3;
     }
-    if (location.startsWith('/orchestrator')) {
-      return 4;
-    }
     return 0;
   }
 
@@ -75,8 +67,6 @@ class AppShell extends StatelessWidget {
         context.go('/physical');
       case 3:
         context.go('/mental');
-      case 4:
-        context.go('/orchestrator');
     }
   }
 }

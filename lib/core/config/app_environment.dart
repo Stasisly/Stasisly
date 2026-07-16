@@ -69,8 +69,7 @@ class AppEnvironment {
   bool get allowsRealAuth => allowsRemoteSupabase && realAuthEnabled;
   bool get allowsRealData => false;
   bool get allowsSyntheticData => !isProduction;
-  bool get allowsDevRoutes =>
-      devRoutesEnabled && (isLocal || isDemo || isDevelopment);
+  bool get allowsDevRoutes => devRoutesEnabled && (isLocal || isDevelopment);
   bool get allowsConversationsRoute => false;
   bool get requiresSecrets => usesBackend;
 

@@ -7,7 +7,7 @@ not schedules.
 
 | ID | Debt / risk | Evidence | Owner | Priority | Dependency | Acceptance condition | Target phase |
 |---|---|---|---|---|---|---|---|
-| SEC-01 | Authorization enforcement partial | FOUNDATION-009 adopts typed context/decision, PDP/PEP and local deny-default profile validation; persistent RBAC/ABAC/JIT and broad enforcement remain absent | Security under Rector | P1 residual | 010 and later policy implementation | Approved boundaries, persistent model decisions and negative tests across consumers | F7 before Product expansion |
+| SEC-01 | Authorization enforcement partial | FOUNDATION-009 adopts PDP/PEP; FOUNDATION-010 boundaries are implemented and validated locally; backend and persistent RBAC/ABAC/JIT remain absent | Security under Rector | P1 residual | Complete 011 and later policy implementation | Backend context enforcement and negative tests | F7 before Product expansion |
 | SEC-02 | Legacy chat/client authority reachable | Direct Supabase, client role/IDs, legacy routes | Flutter + Backend Architecture | P1 | 008-011 | No Product path reaches legacy writes | F7 |
 | ARC-01 | Provider-owned identity/API boundary partially remediated | FOUNDATION-008 owns identity/session/errors and confines Auth SDK; bootstrap and backend adapters remain provider-coupled | Architecture under Rector | P2 residual | 009-010, 018 | Complete consumer migration and provider exit evidence | F7 |
 | ARC-02 | Surface isolation incomplete | Typed surface/environment policy exists, but mixed legacy routes/data domains are not yet comprehensively enforced | Architecture + Nexus | P1 | 010 | Explicit access matrix and enforced local route/API guards | F7 |
@@ -46,7 +46,8 @@ FOUNDATION-008 closes the canonical client identity/session contract portion of
 ARC-01 locally. It does not close SEC-01, ARC-02, LOCK-01, remote uncertainty,
 legacy route reachability or the transitional `backendReal` vocabulary.
 
-FOUNDATION-009 partially remediates SEC-01 by adopting owned policy contracts,
-a local deny-by-default PDP and one profile enforcement point. SEC-01 and
-ARC-02 remain open until broader surface/environment enforcement and persistent
-policy decisions are separately approved. No remote or Founder control exists.
+FOUNDATION-009 partially remediates SEC-01 with owned policy contracts and a
+profile PEP. FOUNDATION-010 implements and reproducibly validates local
+route/provider isolation while blocking legacy entry points. SEC-01 and ARC-02
+remain open for backend/global and persistent policy enforcement. No remote,
+production or Founder control exists.

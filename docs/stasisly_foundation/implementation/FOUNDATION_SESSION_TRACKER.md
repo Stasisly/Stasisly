@@ -33,6 +33,9 @@ completed locally
 FOUNDATION-009:
 completed locally
 
+FOUNDATION-010:
+implemented and validated locally; publication completed by the package commit and push
+
 Discovery baseline:
 7f747e0
 
@@ -68,6 +71,9 @@ owned identity, session and API contracts implemented locally; authorization and
 
 FOUNDATION-009 closure:
 typed authorization context/decision, PDP/PEP ports and local deny-default profile validation implemented; full enforcement and remote remain incomplete
+
+FOUNDATION-010 closure:
+local implementation and reproducible validation complete; package commit and push complete G7
 ```
 
 ## Rules
@@ -93,3 +99,4 @@ typed authorization context/decision, PDP/PEP ports and local deny-default profi
 | FOUNDATION-007 | Completed conceptually | Define global threats and authorization across identities, surfaces, environments, Founder, services and agents without implementation | Seven security documents, ADR-F004, 22 threats, 20 abuse cases, 32 representative decisions, trust boundaries, RBAC+ABAC/JIT/PDP/PEP, audit/revocation and synchronized plans; no code or remote action | `TECHNICAL AUTHORIZATION_AND_THREAT_MODEL ESTABLISHED_AND_PUSHED` upon successful push | FOUNDATION-008 owned identity, session and API contracts after separate approval |
 | FOUNDATION-008 | Completed locally | Implement provider-neutral identity, authentication state, session, token, request-context and error contracts; confine Supabase Auth to an adapter | Canonical contracts/port/adapters/bridge; analyzer 0 errors; Flutter 425 pass/5 approved remote skips; Deno 52/52 and format 41 files; local reset plus SQL 649/649; architecture/security review; ADR-F005; no remote | `OWNED IDENTITY_SESSION_API CONTRACTS IMPLEMENTED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-009 completed later; compatibility cleanup remains future evidence-driven work |
 | FOUNDATION-009 | Completed locally | Implement typed authorization context/decision, action/resource/surface/environment/ownership/entitlement/purpose/delegation/elevation contracts, PDP/PEP/audit ports and minimal local deny-by-default policy | One focal own-profile read PEP; architecture guards; analyzer 0 errors and 51 inherited infos; Flutter 453 pass/5 approved skips; Deno 52/52 and format 41 files; local reset without seed plus SQL 649/649; ADR-F006; no remote, route, schema, RLS or Edge change | `AUTHORIZATION CONTEXT_AND_POLICY CONTRACTS IMPLEMENTED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-010 surface/environment enforcement boundaries after separate approval |
+| FOUNDATION-010 | Completed locally | Enforce explicit surface/environment metadata at existing routes and focal Product repository entry points without backend or remote changes | Analyzer 0 errors/51 inherited infos; Flutter 478 pass/5 approved skips; Deno 52/52 and format 41 files; two clean local resets without seed plus two full SQL suites at 18 files and 649/649; no remote | `SURFACE_AND_ENVIRONMENT BOUNDARIES ENFORCED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-011 may be proposed after publication under a separate approval; G8-G10 remain unauthorized |

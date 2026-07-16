@@ -1,136 +1,208 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:stasisly/core/auth/session/providers/secure_session_providers.dart';
+import 'package:stasisly/core/authorization/domain/authorization_surface.dart';
+import 'package:stasisly/core/authorization/infrastructure/app_environment_authorization_mapper.dart';
+import 'package:stasisly/core/authorization/infrastructure/no_op_authorization_audit_sink.dart';
 import 'package:stasisly/core/config/app_environment.dart';
+import 'package:stasisly/core/routing/application/boundary_audit_recorder.dart';
+import 'package:stasisly/core/routing/application/entry_point_boundary_enforcer.dart';
+import 'package:stasisly/core/routing/domain/boundary_decision.dart';
+import 'package:stasisly/core/routing/domain/entry_point_context.dart';
+import 'package:stasisly/core/routing/domain/entry_point_definition.dart';
+import 'package:stasisly/core/routing/infrastructure/entry_point_registry.dart';
+import 'package:stasisly/core/routing/presentation/entry_point_boundary_gate.dart';
 import 'package:stasisly/core/widgets/app_shell.dart';
 import 'package:stasisly/features/auth/presentation/pages/login_page.dart';
 import 'package:stasisly/features/auth/presentation/pages/onboarding_page.dart';
 import 'package:stasisly/features/auth/presentation/pages/register_page.dart';
-import 'package:stasisly/features/auth/presentation/viewmodels/auth_providers.dart';
-import 'package:stasisly/features/chat/presentation/pages/agent_chat_wrapper.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_composed_safe_shell.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_messages_route_params_adapter.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_messages_safe_shell.dart';
 import 'package:stasisly/features/health/presentation/pages/health_page.dart';
 import 'package:stasisly/features/mental_training/presentation/pages/mental_training_page.dart';
 import 'package:stasisly/features/nutrition/presentation/pages/nutrition_page.dart';
-import 'package:stasisly/features/orchestrator/presentation/pages/orchestrator_chat_page.dart'
-    as stasisly_orchestrator;
-import 'package:stasisly/features/orchestrator/presentation/pages/orchestrator_page.dart';
 import 'package:stasisly/features/physical_training/presentation/pages/physical_training_page.dart';
 
-/// Provides the GoRouter instance.
+const _boundaryEnforcer = EntryPointBoundaryEnforcer();
+const _boundaryAuditRecorder = BoundaryAuditRecorder(
+  LocalNoOpAuthorizationAuditSink(),
+);
+
+/// Provides the router with explicit Foundation metadata for every entry point.
 final routerProvider = Provider<GoRouter>((ref) {
   final environment = ref.watch(appEnvironmentProvider);
-  final authState = environment.usesBackend
-      ? ref.watch(authControllerProvider)
-      : null;
+  final isAuthenticated = ref.watch(secureSessionStateProvider).isAuthenticated;
 
   return GoRouter(
-    initialLocation: '/orchestrator',
+    initialLocation: '/health',
     redirect: (context, state) {
-      // Demo is intentionally local and does not pretend to authenticate.
-      if (environment.isDemo) return null;
+      final definition = EntryPointRegistry.resolvePath(state.uri.path);
+      final decision = _evaluateBoundary(
+        definition: definition,
+        environment: environment,
+        isAuthenticated: isAuthenticated,
+      );
+      _recordBoundary(definition, environment, decision);
 
-      if (environment.allowsDevRoutes && state.uri.path.startsWith('/dev/')) {
-        return null;
+      if (decision.type == BoundaryDecisionType.redirectToAuthentication &&
+          state.uri.path != EntryPointRegistry.onboarding.pathPattern) {
+        return EntryPointRegistry.onboarding.pathPattern;
       }
-
-      if (authState == null || authState.isLoading) return null;
-
-      final isAuth = authState.valueOrNull?.isAuthenticated ?? false;
-      final isLoggingIn =
-          state.uri.path == '/login' ||
-          state.uri.path == '/register' ||
-          state.uri.path == '/onboarding';
-
-      // Si no está autenticado y no está en la página de login, redirigir al login
-      if (!isAuth && !isLoggingIn) {
-        return '/onboarding';
+      if (isAuthenticated &&
+          definition?.surface == AuthorizationSurface.product &&
+          definition?.authenticationRequirement ==
+              EntryPointAuthenticationRequirement.public) {
+        return EntryPointRegistry.health.pathPattern;
       }
-
-      // Si está autenticado pero intenta ir al login, redirigir a inicio
-      if (isAuth && isLoggingIn) {
-        return '/health';
-      }
-
       return null;
     },
-    routes: [
-      GoRoute(
-        path: '/onboarding',
-        builder: (context, state) => const OnboardingPage(),
+    errorBuilder: (context, state) => const EntryPointBoundaryGate(
+      decision: BoundaryDecision(
+        type: BoundaryDecisionType.notAvailable,
+        reasonCode: BoundaryReasonCode.unknownEntryPoint,
+        auditRequired: true,
+        safeUserMessageKey: BoundarySafeUserMessageKey.notAvailable,
       ),
-      GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
-      GoRoute(
-        path: '/register',
-        builder: (context, state) => const RegisterPage(),
+      childBuilder: _emptyBoundaryChild,
+    ),
+    routes: [
+      _route(
+        definition: EntryPointRegistry.onboarding,
+        environment: environment,
+        isAuthenticated: isAuthenticated,
+        childBuilder: (context, state) => const OnboardingPage(),
+      ),
+      _route(
+        definition: EntryPointRegistry.login,
+        environment: environment,
+        isAuthenticated: isAuthenticated,
+        childBuilder: (context, state) => const LoginPage(),
+      ),
+      _route(
+        definition: EntryPointRegistry.register,
+        environment: environment,
+        isAuthenticated: isAuthenticated,
+        childBuilder: (context, state) => const RegisterPage(),
       ),
       ShellRoute(
-        builder: (context, state, child) {
-          return AppShell(child: child);
-        },
+        builder: (context, state, child) => AppShell(child: child),
         routes: [
-          GoRoute(
-            path: '/health',
-            pageBuilder: (context, state) =>
-                const NoTransitionPage(child: HealthPage()),
+          _route(
+            definition: EntryPointRegistry.health,
+            environment: environment,
+            isAuthenticated: isAuthenticated,
+            childBuilder: (context, state) => const HealthPage(),
           ),
-          GoRoute(
-            path: '/nutrition',
-            pageBuilder: (context, state) =>
-                const NoTransitionPage(child: NutritionPage()),
+          _route(
+            definition: EntryPointRegistry.nutrition,
+            environment: environment,
+            isAuthenticated: isAuthenticated,
+            childBuilder: (context, state) => const NutritionPage(),
           ),
-          GoRoute(
-            path: '/physical',
-            pageBuilder: (context, state) =>
-                const NoTransitionPage(child: PhysicalTrainingPage()),
+          _route(
+            definition: EntryPointRegistry.physicalTraining,
+            environment: environment,
+            isAuthenticated: isAuthenticated,
+            childBuilder: (context, state) => const PhysicalTrainingPage(),
           ),
-          GoRoute(
-            path: '/mental',
-            pageBuilder: (context, state) =>
-                const NoTransitionPage(child: MentalTrainingPage()),
-          ),
-          GoRoute(
-            path: '/orchestrator',
-            pageBuilder: (context, state) =>
-                const NoTransitionPage(child: OrchestratorPage()),
+          _route(
+            definition: EntryPointRegistry.mentalTraining,
+            environment: environment,
+            isAuthenticated: isAuthenticated,
+            childBuilder: (context, state) => const MentalTrainingPage(),
           ),
         ],
       ),
-      GoRoute(
-        path: '/orchestrator/chat',
-        builder: (context, state) =>
-            const stasisly_orchestrator.OrchestratorChatPage(),
+      _blockedLegacyRoute(
+        definition: EntryPointRegistry.legacyOrchestrator,
+        environment: environment,
+        isAuthenticated: isAuthenticated,
       ),
-      GoRoute(
-        path: '/chat/:id',
-        builder: (context, state) {
-          final id = state.pathParameters['id'] ?? '';
-          return AgentChatWrapper(agentId: id);
-        },
+      _blockedLegacyRoute(
+        definition: EntryPointRegistry.legacyOrchestratorChat,
+        environment: environment,
+        isAuthenticated: isAuthenticated,
       ),
-      ..._devOnlyChatMessageRoutes(environment),
+      _blockedLegacyRoute(
+        definition: EntryPointRegistry.legacyAgentChat,
+        environment: environment,
+        isAuthenticated: isAuthenticated,
+      ),
+      ..._developmentChatMessageRoutes(
+        environment,
+        isAuthenticated: isAuthenticated,
+      ),
     ],
   );
 });
 
-List<RouteBase> _devOnlyChatMessageRoutes(AppEnvironment environment) {
-  if (kReleaseMode || !environment.allowsDevRoutes) return const [];
+GoRoute _route({
+  required EntryPointDefinition definition,
+  required AppEnvironment environment,
+  required bool isAuthenticated,
+  required Widget Function(BuildContext, GoRouterState) childBuilder,
+}) {
+  return GoRoute(
+    path: definition.pathPattern,
+    builder: (context, state) {
+      final decision = _evaluateBoundary(
+        definition: definition,
+        environment: environment,
+        isAuthenticated: isAuthenticated,
+      );
+      _recordBoundary(definition, environment, decision);
+      return EntryPointBoundaryGate(
+        decision: decision,
+        childBuilder: (context) => childBuilder(context, state),
+      );
+    },
+  );
+}
+
+GoRoute _blockedLegacyRoute({
+  required EntryPointDefinition definition,
+  required AppEnvironment environment,
+  required bool isAuthenticated,
+}) {
+  return _route(
+    definition: definition,
+    environment: environment,
+    isAuthenticated: isAuthenticated,
+    childBuilder: _emptyRouteChild,
+  );
+}
+
+List<RouteBase> _developmentChatMessageRoutes(
+  AppEnvironment environment, {
+  required bool isAuthenticated,
+}) {
+  if (kReleaseMode) return const [];
 
   return [
-    GoRoute(
-      path: '/dev/chat/composed',
-      builder: _buildDevOnlyComposedChatRoute,
+    _route(
+      definition: EntryPointRegistry.developmentChatComposed,
+      environment: environment,
+      isAuthenticated: isAuthenticated,
+      childBuilder: (context, state) => Scaffold(
+        body: OwnChatComposedSafeShell(
+          onOpenSession: (sessionId) =>
+              context.go('/dev/chat/session/$sessionId'),
+        ),
+      ),
     ),
-    GoRoute(
-      path: '/dev/chat/session/:sessionId',
-      builder: (context, state) {
+    _route(
+      definition: EntryPointRegistry.developmentChatSession,
+      environment: environment,
+      isAuthenticated: isAuthenticated,
+      childBuilder: (context, state) {
         final sessionId = const OwnChatMessagesRouteParamsAdapter()
             .sessionIdFrom(state.pathParameters);
-
         return Scaffold(
           body: OwnChatMessagesSafeShell(sessionId: sessionId ?? ''),
         );
@@ -139,13 +211,51 @@ List<RouteBase> _devOnlyChatMessageRoutes(AppEnvironment environment) {
   ];
 }
 
-Widget _buildDevOnlyComposedChatRoute(
-  BuildContext context,
-  GoRouterState state,
+BoundaryDecision _evaluateBoundary({
+  required EntryPointDefinition? definition,
+  required AppEnvironment environment,
+  required bool isAuthenticated,
+}) {
+  return _boundaryEnforcer.evaluate(
+    definition: definition,
+    actualSurface: definition?.surface ?? AuthorizationSurface.unknown,
+    actualEnvironment: AppEnvironmentAuthorizationMapper.fromRuntimeMode(
+      environment.mode,
+    ),
+    isAuthenticated: isAuthenticated,
+    remotePermissionGranted: environment.allowsDevRoutes,
+  );
+}
+
+void _recordBoundary(
+  EntryPointDefinition? definition,
+  AppEnvironment environment,
+  BoundaryDecision decision,
 ) {
-  return Scaffold(
-    body: OwnChatComposedSafeShell(
-      onOpenSession: (sessionId) => context.go('/dev/chat/session/$sessionId'),
+  if (definition == null || !decision.auditRequired) return;
+  final authorizationEnvironment =
+      AppEnvironmentAuthorizationMapper.fromRuntimeMode(environment.mode);
+  unawaited(
+    _boundaryAuditRecorder.recordIfRequired(
+      EntryPointContext(
+        surface: definition.surface,
+        environment: authorizationEnvironment,
+        entryPointId: definition.id,
+        authenticationRequirement: definition.authenticationRequirement,
+        authorizationRequirement: definition.authorizationRequirement,
+        legacyState: definition.legacyState,
+        correlationId:
+            'route-${definition.id.name}-${DateTime.now().microsecondsSinceEpoch}',
+      ),
+      decision,
     ),
   );
+}
+
+Widget _emptyRouteChild(BuildContext context, GoRouterState state) {
+  return const SizedBox.shrink();
+}
+
+Widget _emptyBoundaryChild(BuildContext context) {
+  return const SizedBox.shrink();
 }

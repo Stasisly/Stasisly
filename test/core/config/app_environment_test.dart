@@ -366,6 +366,10 @@ void main() {
         const AppEnvironment(mode: AppRuntimeMode.development).allowsDevRoutes,
         isTrue,
       );
+      expect(
+        const AppEnvironment(mode: AppRuntimeMode.demo).allowsDevRoutes,
+        isFalse,
+      );
     });
   });
 }

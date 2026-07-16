@@ -62,6 +62,9 @@ void main() {
       final routesSource = File(
         'lib/core/config/routes.dart',
       ).readAsStringSync();
+      final registrySource = File(
+        'lib/core/routing/infrastructure/entry_point_registry.dart',
+      ).readAsStringSync();
       final sessionsPanelSource = File(
         'lib/features/chat_sessions/presentation/widgets/'
         'own_chat_sessions_panel.dart',
@@ -80,18 +83,24 @@ void main() {
         detailSource,
         contains('Detalle dev-only por sessionId explícito.'),
       );
-      expect(routesSource, contains("path: '/dev/chat/composed'"));
-      expect(routesSource, contains("path: '/dev/chat/session/:sessionId'"));
+      expect(registrySource, contains("pathPattern: '/dev/chat/composed'"));
+      expect(
+        registrySource,
+        contains("pathPattern: '/dev/chat/session/:sessionId'"),
+      );
       expect(routesSource, contains("context.go('/dev/chat/session/"));
       expect(routesSource, isNot(contains("path: '/conversations'")));
       expect(
         routesSource,
         isNot(contains("path: '/conversations/:sessionId'")),
       );
-      expect(routesSource, isNot(contains("path: '/dev/chat/session/:id'")));
       expect(
-        routesSource,
-        isNot(contains("path: '/dev/chat/session/:agentId'")),
+        registrySource,
+        isNot(contains("pathPattern: '/dev/chat/session/:id'")),
+      );
+      expect(
+        registrySource,
+        isNot(contains("pathPattern: '/dev/chat/session/:agentId'")),
       );
       expect(sessionsPanelSource, contains('active sessions count:'));
       expect(sessionsPanelSource, contains('all sessions count:'));

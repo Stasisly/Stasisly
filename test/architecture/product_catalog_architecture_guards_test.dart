@@ -12,21 +12,6 @@ void main() {
         .where((file) => file.path.endsWith('.dart'));
   }
 
-  String routeSlice(String routesSource, String path) {
-    final start = routesSource.indexOf("path: '$path'");
-    expect(start, isNonNegative, reason: 'Missing route $path');
-
-    final remaining = routesSource.substring(start + 1);
-    final nextRoute = remaining.indexOf('GoRoute(');
-    final nextSpread = remaining.indexOf('..._devOnlyChatMessageRoutes');
-    final candidates = [
-      if (nextRoute != -1) nextRoute,
-      if (nextSpread != -1) nextSpread,
-    ]..sort();
-    if (candidates.isEmpty) return routesSource.substring(start);
-    return routesSource.substring(start, start + 1 + candidates.first);
-  }
-
   test('product catalog has no direct Supabase, secrets or SQL coupling', () {
     final files = dartFilesUnder(productCatalogDirectory).toList();
 
@@ -74,8 +59,9 @@ void main() {
       expect(repository, contains('SelectableSpecialistsContractViolation'));
       expect(repository, contains('SelectableSpecialistsUnexpectedError'));
 
-      expect(provider, contains('if (environment.isDemo)'));
-      expect(provider, contains('DemoSelectableSpecialistsRepository'));
+      expect(provider, isNot(contains('if (environment.isDemo)')));
+      expect(provider, isNot(contains('DemoSelectableSpecialistsRepository')));
+      expect(provider, contains('EntryPointBoundaryEnforcer'));
       expect(
         provider,
         contains('BackendBlockedSelectableSpecialistsRepository'),
@@ -107,55 +93,37 @@ void main() {
 
   test('legacy chat routes are not product catalog or session routes', () {
     final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
+    final registrySource = File(
+      'lib/core/routing/infrastructure/entry_point_registry.dart',
+    ).readAsStringSync();
 
     expect(routesSource, isNot(contains("path: '/conversations'")));
     expect(routesSource, isNot(contains("path: '/conversations/:sessionId'")));
     expect(routesSource, isNot(contains("path: '/conversations/:id'")));
     expect(routesSource, isNot(contains("path: '/conversations/:agentId'")));
     expect(routesSource, isNot(contains("path: '/conversation'")));
-    expect(routesSource, contains("path: '/chat/:id'"));
-    expect(routesSource, contains("path: '/orchestrator/chat'"));
-
-    final inheritedChatRoute = routeSlice(routesSource, '/chat/:id');
-    final orchestratorChatRoute = routeSlice(
-      routesSource,
-      '/orchestrator/chat',
-    );
-
-    for (final routeSource in [inheritedChatRoute, orchestratorChatRoute]) {
-      for (final forbidden in [
-        'sessionId',
-        'selectableSpecialistId',
-        'SelectableSpecialist',
-        'selectableSpecialists',
-        'OwnChatMessagesSafeShell',
-        'OwnChatComposedSafeShell',
-        '/functions/v1/',
-        'Supabase.instance.client',
-        'service_role',
-        'SYNTHETIC_ACCESS_TOKEN',
-        'fixture',
-        'Fixture',
-        'Wizard',
-        'Admin',
-      ]) {
-        expect(routeSource, isNot(contains(forbidden)), reason: forbidden);
-      }
-    }
+    expect(registrySource, contains("pathPattern: '/chat/:id'"));
+    expect(registrySource, contains("pathPattern: '/orchestrator/chat'"));
+    expect(registrySource, contains('EntryPointLegacyState.legacyBlocked'));
+    expect(routesSource, isNot(contains('AgentChatWrapper')));
+    expect(routesSource, isNot(contains('OrchestratorChatPage')));
   });
 
   test('dev-only routes are not product routes or catalog entry points', () {
     final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
+    final registrySource = File(
+      'lib/core/routing/infrastructure/entry_point_registry.dart',
+    ).readAsStringSync();
     final devRouteSource = routesSource.substring(
-      routesSource.indexOf('List<RouteBase> _devOnlyChatMessageRoutes'),
+      routesSource.indexOf('List<RouteBase> _developmentChatMessageRoutes'),
     );
 
-    expect(devRouteSource, contains("path: '/dev/chat/composed'"));
-    expect(devRouteSource, contains("path: '/dev/chat/session/:sessionId'"));
+    expect(registrySource, contains("pathPattern: '/dev/chat/composed'"));
     expect(
-      devRouteSource,
-      contains('kReleaseMode || !environment.allowsDevRoutes'),
+      registrySource,
+      contains("pathPattern: '/dev/chat/session/:sessionId'"),
     );
+    expect(devRouteSource, contains('if (kReleaseMode) return const []'));
     expect(devRouteSource, isNot(contains('/conversations')));
     expect(devRouteSource, isNot(contains('SelectableSpecialistsRepository')));
     expect(devRouteSource, isNot(contains('SelectableSpecialistModel')));

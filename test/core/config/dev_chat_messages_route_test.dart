@@ -17,10 +17,14 @@ void main() {
   testWidgets('dev-only route mounts safe messages shell with sessionId', (
     tester,
   ) async {
+    tester.view.physicalSize = const Size(1200, 1600);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
     final container = ProviderContainer(
       overrides: [
         appEnvironmentProvider.overrideWithValue(
-          const AppEnvironment(mode: AppRuntimeMode.demo),
+          const AppEnvironment(mode: AppRuntimeMode.local),
         ),
       ],
     );
@@ -34,7 +38,6 @@ void main() {
     container.read(routerProvider).go('/dev/chat/session/$sessionId');
     await tester.pumpAndSettle();
 
-    expect(find.text('MODO DEMO MENSAJES'), findsOneWidget);
     expect(find.text('Mensaje'), findsOneWidget);
     expect(find.text('Sesión no válida'), findsNothing);
     expect(find.byType(Scaffold), findsOneWidget);
@@ -43,10 +46,14 @@ void main() {
   testWidgets('dev-only composed route mounts composed safe shell', (
     tester,
   ) async {
+    tester.view.physicalSize = const Size(1200, 1600);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
     final container = ProviderContainer(
       overrides: [
         appEnvironmentProvider.overrideWithValue(
-          const AppEnvironment(mode: AppRuntimeMode.demo),
+          const AppEnvironment(mode: AppRuntimeMode.local),
         ),
       ],
     );
@@ -62,7 +69,6 @@ void main() {
 
     expect(find.byType(OwnChatComposedSafeShell), findsOneWidget);
     expect(find.text('DEV ONLY'), findsOneWidget);
-    expect(find.text('REMOTE DEVELOPMENT'), findsOneWidget);
     expect(find.text('SYNTHETIC DATA'), findsOneWidget);
     expect(find.text('NOT PRODUCT'), findsOneWidget);
     expect(
@@ -111,29 +117,41 @@ void main() {
 
   test('dev-only route is guarded by allowsDevRoutes and release mode', () {
     final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
+    final registrySource = File(
+      'lib/core/routing/infrastructure/entry_point_registry.dart',
+    ).readAsStringSync();
 
-    expect(routesSource, contains("path: '/dev/chat/session/:sessionId'"));
-    expect(routesSource, contains("path: '/dev/chat/composed'"));
     expect(
-      routesSource,
-      contains('kReleaseMode || !environment.allowsDevRoutes'),
+      registrySource,
+      contains("pathPattern: '/dev/chat/session/:sessionId'"),
     );
+    expect(registrySource, contains("pathPattern: '/dev/chat/composed'"));
+    expect(routesSource, contains('if (kReleaseMode) return const []'));
     expect(routesSource, contains('OwnChatMessagesRouteParamsAdapter'));
     expect(routesSource, contains('OwnChatMessagesSafeShell'));
     expect(routesSource, contains('OwnChatComposedSafeShell'));
     expect(routesSource, contains('state.pathParameters'));
     expect(routesSource, contains('sessionIdFrom(state.pathParameters)'));
     expect(routesSource, contains("context.go('/dev/chat/session/"));
-    expect(routesSource, isNot(contains("path: '/dev/chat/session/:id'")));
-    expect(routesSource, isNot(contains("path: '/dev/chat/session/:agentId'")));
-    expect(routesSource, isNot(contains("path: '/dev/chat/composed/:id'")));
     expect(
-      routesSource,
-      isNot(contains("path: '/dev/chat/composed/:agentId'")),
+      registrySource,
+      isNot(contains("pathPattern: '/dev/chat/session/:id'")),
     );
     expect(
-      routesSource,
-      isNot(contains("path: '/dev/chat/composed/:sessionId'")),
+      registrySource,
+      isNot(contains("pathPattern: '/dev/chat/session/:agentId'")),
+    );
+    expect(
+      registrySource,
+      isNot(contains("pathPattern: '/dev/chat/composed/:id'")),
+    );
+    expect(
+      registrySource,
+      isNot(contains("pathPattern: '/dev/chat/composed/:agentId'")),
+    );
+    expect(
+      registrySource,
+      isNot(contains("pathPattern: '/dev/chat/composed/:sessionId'")),
     );
   });
 
@@ -151,7 +169,7 @@ void main() {
   test('dev-only route keeps inherited chat and runtime services out', () {
     final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
     final devRouteSource = routesSource.substring(
-      routesSource.indexOf('List<RouteBase> _devOnlyChatMessageRoutes'),
+      routesSource.indexOf('List<RouteBase> _developmentChatMessageRoutes'),
     );
 
     for (final forbidden in [

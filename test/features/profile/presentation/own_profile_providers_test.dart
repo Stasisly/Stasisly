@@ -8,7 +8,7 @@ import 'package:stasisly/features/profile/domain/entities/own_profile_results.da
 import 'package:stasisly/features/profile/presentation/providers/own_profile_providers.dart';
 
 void main() {
-  test('demo mode selects local repository and never needs Supabase', () {
+  test('demo mode cannot implicitly select a Product repository', () {
     final container = ProviderContainer(
       overrides: [
         appEnvironmentProvider.overrideWithValue(
@@ -20,6 +20,16 @@ void main() {
 
     expect(
       container.read(ownProfileRepositoryProvider),
+      isA<BackendBlockedOwnProfileRepository>(),
+    );
+  });
+
+  test('explicit demo repository remains test-only and overrideable', () {
+    final container = ProviderContainer();
+    addTearDown(container.dispose);
+
+    expect(
+      container.read(demoOwnProfileRepositoryProvider),
       isA<DemoOwnProfileRepository>(),
     );
   });

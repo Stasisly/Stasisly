@@ -94,7 +94,8 @@ void main() {
     expect(legacyAuthProvider, isNot(contains('Supabase.instance.client')));
     expect(legacyAuthProvider, isNot(contains('supabase_flutter')));
     expect(legacyAuthProvider, contains('class AuthController'));
-    expect(routes, contains('authControllerProvider'));
+    expect(routes, contains('secureSessionStateProvider'));
+    expect(routes, isNot(contains('authControllerProvider')));
 
     final safeExports = File(
       'lib/core/auth/session/secure_session.dart',

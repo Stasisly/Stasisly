@@ -5,14 +5,15 @@
 Status: **APPROVED working execution structure**. Package status is recorded
 below; every future package requires its own approval and exact scope.
 
-Package status after FOUNDATION-009:
+Package status after FOUNDATION-010:
 
 ```text
 FOUNDATION-007: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
 FOUNDATION-008: IMPLEMENTED LOCALLY / PROVIDER ADAPTER CURRENT
 FOUNDATION-009: IMPLEMENTED LOCALLY / FULL ENFORCEMENT PARTIAL
-FOUNDATION-010: NOT EXECUTED / NEXT GATE
-FOUNDATION-011..020: NOT EXECUTED
+FOUNDATION-010: IMPLEMENTED IN WORKTREE / SQL VALIDATION AND PUBLICATION BLOCKED
+FOUNDATION-011: NOT EXECUTED / GATED
+FOUNDATION-012..020: NOT EXECUTED
 ```
 
 | Package | Title | Type | Objective | Dependencies | Gate | Expected result |
@@ -20,8 +21,8 @@ FOUNDATION-011..020: NOT EXECUTED
 | FOUNDATION-007 | Technical authorization and threat model | DOCUMENTATION / SECURITY | Define identity/action/resource/context, RBAC/ABAC/JIT, ownership, service identities, Founder elevation and audit events | R1, ADR-F003 | G0-G2 satisfied conceptually; no implementation | ADR-F004, approved conceptual models and active security matrices |
 | FOUNDATION-008 | Owned identity, session and API contracts | IMPLEMENTATION / ARCHITECTURE | Separate identity, authentication, authorization, ownership and session; own DTO/error contracts and confine provider SDK | FOUNDATION-007 | G0-G7 completed after publication | Provider-neutral ports and local adapters implemented; no authorization or remote activation |
 | FOUNDATION-009 | Authorization context and policy contracts | IMPLEMENTATION / SECURITY | Adopt typed authorization context/decision, PDP/PEP/audit ports and minimal local deny-by-default validation | FOUNDATION-007, FOUNDATION-008 | G0-G7 completed after publication | Local contracts/policy and focal profile defense; no new access or remote enforcement |
-| FOUNDATION-010 | Surface and environment enforcement boundaries | IMPLEMENTATION / SECURITY | Apply explicit Product/Development/Administration and environment boundaries to approved routes/APIs/operations without Founder elevation or remote | FOUNDATION-009 | New G0-G7 scope required | Negative boundary evidence and legacy-route containment; no cross-surface fallback |
-| FOUNDATION-011 | Sessions/messages owned API adoption | IMPLEMENTATION | Adapt modern contracts behind owned API, preserving explicit IDs, ownership and atomic messaging | FOUNDATION-009, FOUNDATION-010 | G0-G7 | Local end-to-end safe flow with no legacy chat or direct Product Supabase |
+| FOUNDATION-010 | Surface and environment enforcement boundaries | IMPLEMENTATION / SECURITY | Apply explicit Product/Development/Administration and environment boundaries to approved routes/APIs/operations without Founder elevation or remote | FOUNDATION-009 | G0-G7 completed after publication | Typed local boundaries, negative navigation evidence and legacy-route containment; no backend/remote authority |
+| FOUNDATION-011 | Backend authorization context and owned API enforcement | IMPLEMENTATION / SECURITY | Carry typed surface/environment, identity and ownership through owned backend entry points without remote deployment | FOUNDATION-009, FOUNDATION-010 | New G0-G7 scope required | Local backend negative enforcement and owned API evidence; no deployment |
 | FOUNDATION-012 | Product taxonomy and conversation decisions | DOCUMENTATION / PRODUCT | Decide Wellness/Training naming, catalog, profile, conversation route, entitlements and view boundaries | FOUNDATION-007-009 | Founder Product gate; G0-G2 | Approved Product ADRs and bounded first vertical slice |
 | FOUNDATION-013 | First controlled Product conversation slice | IMPLEMENTATION | Implement the approved catalog-to-session-to-message flow with privacy and accessibility states | FOUNDATION-011, FOUNDATION-012 | G0-G7; no remote | Tested local Product increment, rollback route and accepted residual debt |
 | FOUNDATION-014 | Agent Constitution and Engine foundation | DOCUMENTATION / ARCHITECTURE / SECURITY | Define Agent Constitution, registries, runtime/gateway modules, evaluation and safety boundaries | FOUNDATION-007, FOUNDATION-009 | Founder Agent gate; G0-G2 | Approved modular Engine design; no agents or runtime activated |
@@ -41,5 +42,6 @@ FOUNDATION-011..020: NOT EXECUTED
    destructive migrations receive independent packages and G8-G10 gates.
 4. A package stops when an unapproved file, authority decision or remote
    dependency becomes necessary.
-5. FOUNDATION-010 is next because authorization contracts now exist but route,
-   API and operation boundaries remain incomplete; it requires separate approval.
+5. FOUNDATION-011 is next because client entry points are now bounded but
+   backend authorization context and owned API enforcement remain incomplete;
+   it requires separate approval.
