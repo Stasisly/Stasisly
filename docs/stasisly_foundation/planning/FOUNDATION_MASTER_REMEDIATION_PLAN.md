@@ -275,6 +275,13 @@ backend-derived identity/ownership and shared fail-closed PDP/PEP are adopted.
 Persistent RBAC/ABAC, legacy Product retirement, remote enforcement, rate limits
 and productive audit remain scheduled debt and are not implied closed.
 
+FOUNDATION-012 closes the conceptual Product Conversation and formal legacy-chat
+retirement decision. It does not close implementation debt. The approved
+FOUNDATION-013 parent slice is decomposed into 013A contracts/adapters, 013B
+transactional creation, 013C lifecycle/history, 013D author/provenance, 013E UI
+extraction/retirement and 013F Product routes. FOUNDATION-014-020 retain their
+existing meanings and remote gates remain separate.
+
 ## Common completion rule
 
 A local controlled package should close one coherent risk unit with

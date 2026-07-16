@@ -8,10 +8,12 @@ not schedules.
 | ID | Debt / risk | Evidence | Owner | Priority | Dependency | Acceptance condition | Target phase |
 |---|---|---|---|---|---|---|---|
 | SEC-01 | Authorization enforcement partial | FOUNDATION-011 enforces registered local Product operations and trusted ownership in six Edge Functions; persistent RBAC/ABAC/JIT, remote and other backend domains remain absent | Security under Rector | P1 residual | Later persistent policy and domain packages | Persisted policy plus negative tests across approved domains | F7 before broader Product expansion |
-| SEC-02 | Legacy chat/client authority reachable | Direct Supabase, client role/IDs, legacy routes | Flutter + Backend Architecture | P1 | 008-011 | No Product path reaches legacy writes | F7 |
+| SEC-02 | Legacy chat/client authority retained in frozen source | Direct Supabase, client role/IDs and `agentId` remain in `lib/features/chat/**`, but routes are blocked and FOUNDATION-012 formally deprecates the feature | Flutter + Backend Architecture | P1 residual | 013A-013F | Replacement active, no Product references, guarded removal | F7/F8 |
 | ARC-01 | Provider-owned identity/API boundary partially remediated | FOUNDATION-008 owns identity/session/errors and confines Auth SDK; bootstrap and backend adapters remain provider-coupled | Architecture under Rector | P2 residual | 009-010, 018 | Complete consumer migration and provider exit evidence | F7 |
 | ARC-02 | Surface isolation incomplete | Product route boundaries and six Product Edge Functions enforce local/development context; mixed legacy and future domains remain | Architecture + Nexus | P1 residual | 012-013 and later surface packages | Approved Product boundary with no legacy bypass | F7/F8 |
-| PROD-01 | Product taxonomy and route semantics unresolved | Mental/physical naming; no `/conversations` | Product Owner under Stasis | P2, blocks Product slice | 012 | Founder-approved taxonomy and route contract | F8 |
+| PROD-01 | Product taxonomy partially unresolved | Conversation/Stasis routes are decided by FOUNDATION-012; mental/physical/Wellness naming remains separate | Product Owner under Stasis | P2 residual | Separate taxonomy decision before affected rename | Founder-approved area taxonomy | F8 |
+| CONV-01 | Canonical Conversation architecture not implemented | ADR-F009 and target contracts approved; runtime still uses transitional sessions/messages and dev-only UI | Product + Flutter + Backend Architecture | P1 | 013A-013F | Canonical local slice, parity, retirement and rollback evidence | F8 |
+| CONV-02 | Conversation lifecycle/privacy incomplete | Archive exists; restore, deletion, retention, sharing, attachments, memory and research are target-only | Product + Data + Privacy | P1/P3 | 013C, 016 and later scoped packages | Approved implementation plus privacy controls | F8 before sensitive rollout |
 | DATA-01 | Privacy lifecycle incomplete | Health/conversation data without full retention/deletion/provenance | Data + Privacy | P3; before sensitive scope | 016 | Approved lifecycle, threat controls and test plan | F7/F8 before production |
 | TEST-01 | Backend security suites absent from CI | Local Deno/pgTAP/reset only | QA + DevOps | P2 | 015 | Protected reproducible CI jobs | F7 before staging |
 | OPS-01 | Observability/SLO incomplete | Safe logs but no metrics/audit/SLO program | Observability + DevOps | P3 | 017 | Sanitized metrics, runbooks and SLO proposal | F7/F11 |
@@ -55,3 +57,7 @@ production or Founder control exists.
 FOUNDATION-011 closes the six current Edge Function context gap locally. It
 does not close persistent policy, other backend domains, TOCTOU/idempotency,
 rate limits, productive audit, legacy retirement or remote uncertainty.
+
+FOUNDATION-012 closes the terminology, route target and formal retirement
+decision only. SEC-02 and CONV-01 remain open until 013A-013F implement a
+replacement and prove no references; CONV-02 remains privacy-gated.

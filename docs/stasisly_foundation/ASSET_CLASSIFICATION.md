@@ -167,3 +167,17 @@ deuda residual.
 - Runtime con fallback local implícito: `SUPERSEDED` por configuración explícita.
 - Remoto, producción, RBAC/ABAC persistente, Founder access y audit sink:
   `NOT_IMPLEMENTED`.
+
+## Decisión de FOUNDATION-012
+
+- `lib/features/chat/**`: `DEPRECATED_AND_BLOCKED`; no nuevo Product work,
+  routes, fallback, Supabase directo ni reutilización como Engine.
+- `MessageBubble`: `ADAPT_CANDIDATE`; `ChatInput`, `ChatPage` y wrapper:
+  `REWRITE_CANDIDATE` bajo contratos canónicos.
+- `chat_sessions` y `chat_messages`: `ADAPT` hacia Conversation/Message, sin
+  afirmar migración ni implementación.
+- seis Edge Functions: `KEEP_TEMPORARILY / ADAPT` detrás de API versionada.
+- `specialist_catalog`: `ADAPT`; Agent Registry y roster: `NOT_IMPLEMENTED`.
+- rutas dev-only: `KEEP_TEMPORARILY`; rutas legacy: `DEPRECATE` y luego `REMOVE`
+  solo tras replacement, parity, data compatibility y rollback aprobados.
+- Product Conversation architecture: `APPROVED / NOT_IMPLEMENTED`.

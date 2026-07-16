@@ -1,0 +1,125 @@
+# Conversation API Target Contracts
+
+## Metadata
+
+```text
+Status: APPROVED target contracts
+Implementation: NOT IMPLEMENTED
+Owner: Product API Architecture under Stasis/Rector
+Approver: Founder
+```
+
+## Boundary rules
+
+All target operations are Stasisly-owned Product API contracts. Identity,
+ownership, surface and environment are backend-derived; DTOs are allowlisted;
+errors are stable and sanitized; limits are bounded; provider data and policy
+internals are excluded. Existing Edge Function names and `sessionId` remain
+temporary compatibility contracts until a versioned migration.
+
+## Target operations
+
+| Operation | Status | Core input | Core result / rule |
+|---|---|---|---|
+| List conversations | MVP | status, bounded limit, cursor | Owned summaries, stable cursor |
+| Create conversation | MVP | optional title and `selectableSpecialistId` | New `conversationId`; owner from backend |
+| Read conversation | MVP | `conversationId` | Owned aggregate summary; no internal IDs |
+| Rename conversation | MVP | `conversationId`, bounded title | Confirmed sanitized summary |
+| Archive conversation | MVP | `conversationId` | Naturally idempotent target state |
+| Restore conversation | MVP | `conversationId` | Naturally idempotent target state |
+| List messages | MVP | `conversationId`, bounded limit, cursor | Visible Product Messages only |
+| Send user message | MVP | `conversationId`, content, idempotency key | Accepted user Message; no author input |
+| Select specialist | MVP at creation | `selectableSpecialistId` | Backend resolves approved definition |
+| Change specialist | MVP decision, implementation later in slice | conversation/catalog IDs, idempotency key | Visible selection event and updated summary |
+| List participants | FUTURE | `conversationId` | Visible participants only |
+| Request deletion | FUTURE / PRIVACY-GATED | `conversationId`, idempotency key | `pendingDeletion`, no immediate-delete promise |
+| Read authorized trace | RESTRICTED FUTURE | Conversation/execution reference | Minimized provenance, explicit authorization |
+| Start/read research | FUTURE / RESEARCH-GATED | Conversation and explicit request | Separate artifact reference/status |
+| Add attachment | FUTURE / SECURITY-GATED | Separate upload contract | Scanned, classified attachment reference |
+| Shared membership | NOT APPROVED | none | No MVP operation |
+
+## Public DTO targets
+
+Conceptual Conversation DTO:
+
+```text
+conversationId
+title
+status
+createdAt
+updatedAt
+archivedAt optional
+primaryContext
+participantsSummary
+```
+
+Conceptual Message DTO:
+
+```text
+messageId
+conversationId
+authorType
+content
+createdAt
+status
+visibility
+provenanceSummary optional
+```
+
+No owner ID, internal specialist ID, agent ID, prompt, provider thread/model,
+policy context, trace body or credential is public.
+
+## Compatibility mapping
+
+| Current operation | Target | Classification | Required change |
+|---|---|---|---|
+| `list-selectable-specialists` | Product catalog listing | KEEP_TEMPORARILY then ADAPT | Preserve sanitized catalog ID; version naming independently |
+| `create-own-chat-session` | Create conversation | ADAPT | Transactional eligibility, idempotency, `conversationId` contract |
+| `list-own-chat-sessions` | List conversations | ADAPT | Rename semantics/DTO; preserve bounded cursor where compatible |
+| `archive-own-chat-session` | Archive conversation | ADAPT | Target idempotency and canonical identifier |
+| `list-session-messages` | List messages | ADAPT | Filter/map Product-visible authors and provenance |
+| `send-user-message` | Send user message | ADAPT | Preserve content-only/atomicity; add idempotency and canonical ID |
+
+None is removed before replacement, parity, compatibility evidence and rollback.
+
+## Idempotency and concurrency
+
+- Create conversation requires an idempotency key and one atomic eligibility +
+  create boundary. The current catalog-check/insert TOCTOU is P1.
+- Send user message requires an idempotency key in addition to the current
+  atomic session lock/insert/counter update.
+- Archive and restore target state semantics are naturally idempotent; retries
+  return the same public state without leaking existence across owners.
+- Change specialist, deletion request, research start, tool execution and agent
+  execution require operation-specific idempotency.
+- Read/list operations are side-effect free and do not require idempotency keys.
+
+The future technical package must evaluate a transactional database function,
+single statement, locking, constraint-backed validation and versioned catalog
+eligibility. This architecture does not select one.
+
+## Pagination
+
+Cursor-based pagination with stable ordering and bounded limits is mandatory for
+Conversation and Message history. Existing `(lastMessageAt, sessionId)` and
+`(createdAt, messageId)` cursor behavior is a useful compatibility invariant,
+but cursor encodings are opaque and may be versioned. No unbounded history or
+offset-only Product contract is approved.
+
+## Errors, limits and cost readiness
+
+Target errors distinguish invalid request, unauthenticated, opaque not found,
+archived/not writable, conflict/idempotency, rate limited, policy blocked and
+backend unavailable without leaking ownership or infrastructure.
+
+Before rollout, packages must define limits for Messages, Conversations,
+content, model tokens, tool calls, research, attachments, concurrency and
+retention. Budgets may depend on plan but never substitute authorization. No
+price, entitlement or quota is set here.
+
+## Versioning and rollout
+
+Current endpoints remain local compatibility APIs. Canonical endpoints/routes
+must be introduced behind a versioned adapter with dual-contract tests where
+needed. There is no alias from `/chat/:id`; an `agentId` cannot be interpreted as
+a `conversationId`. No endpoint or route is implemented by FOUNDATION-012.

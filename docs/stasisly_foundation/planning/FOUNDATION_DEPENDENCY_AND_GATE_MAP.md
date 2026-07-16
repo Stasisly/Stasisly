@@ -32,8 +32,13 @@ FOUNDATION-005-R1
         -> FOUNDATION-009 authorization context/PDP/PEP [COMPLETED LOCALLY]
           -> FOUNDATION-010 surface/environment enforcement boundaries [COMPLETED LOCALLY]
             -> FOUNDATION-011 backend authorization/owned API enforcement [COMPLETED LOCALLY]
-      -> FOUNDATION-012 Product taxonomy decisions
-        -> FOUNDATION-013 first Product slice
+      -> FOUNDATION-012 Product Conversation decisions [COMPLETED CONCEPTUALLY]
+        -> FOUNDATION-013A contracts/adapters
+          -> FOUNDATION-013B transactional creation
+          -> FOUNDATION-013C lifecycle/history
+          -> FOUNDATION-013D author/provenance
+          -> FOUNDATION-013E legacy retirement migration
+          -> FOUNDATION-013F Product routes/screens
       -> FOUNDATION-014 Agent Constitution/Engine design
       -> FOUNDATION-015 backend security CI
         -> FOUNDATION-017 observability/limits/cost foundation
@@ -54,6 +59,11 @@ satisfies G0-G6 with reproducible Flutter, Deno and two-cycle SQL evidence; its
 package commit and push complete G7. FOUNDATION-011 satisfies G0-G6 with six
 registered Product operations, shared local PDP/PEP, HTTP/Deno/SQL/Flutter
 evidence and no remote action; its package commit and push complete G7.
+
+FOUNDATION-012 satisfies G0-G2 for canonical terminology, lifecycle/ownership,
+Stasis/specialist/runtime separation, target API/routes and legacy retirement.
+It provides no G3 implementation evidence. FOUNDATION-013A is the next technical
+gate; later 013 children depend on the exact predecessors their scope consumes.
 
 ## Surface dependency matrix
 

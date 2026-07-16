@@ -17,9 +17,9 @@ Product behavior or touch a remote project.
 | Issue | Evidence | Risk | Recommended package / acceptance |
 |---|---|---|---|
 | No Stasisly-owned identity/API boundary - `PARTIALLY_CLOSED_LOCALLY` | FOUNDATION-008 adds owned identity/session/API context and confines Auth SDK; bootstrap and wider provider coupling remain | Residual lock-in and incomplete consumer migration | Canonical boundary complete locally; continue containment/adoption without declaring full auth adopted. |
-| Legacy chat is reachable | `/chat/:id`, `/orchestrator/chat`, direct Supabase and client `role` | Authority bypass and unsafe route semantics | Legacy containment/deprecation package; no Product entry reaches legacy writes. |
+| Legacy chat frozen but not removed | `/chat/:id` and orchestrator routes are blocked; direct Supabase/client `role` remain in frozen source; FOUNDATION-012 marks `DEPRECATED_AND_BLOCKED` | Reconnection or unsafe reuse before replacement | Execute 013A-013F with freeze guards, parity, compatibility and rollback before removal. |
 | Surface authorization implementation partial | FOUNDATION-011 enforces registered Product/local-development context and trusted ownership across six Edge Functions; persistent RBAC/ABAC/JIT and other domains remain unenforced | Policy breadth and remote state remain incomplete | Continue with separately approved persistent policy and Product-boundary packages; do not weaken local backend enforcement. |
-| Modern chat not Product-ready | Dev-only adapters/routes and incomplete auth | Premature promotion of local-safe code | Controlled adoption plan preserving explicit `sessionId` and DTO allowlists. |
+| Modern chat not Product-ready | FOUNDATION-012 defines canonical Conversation target; current adapters/routes remain dev-only and session-named | Premature promotion or semantic mismatch | Execute 013A-013F preserving ownership, explicit IDs, content-only and DTO allowlists. |
 | Create/archive lack transaction/idempotency contracts | Multi-request create; direct conditional archive | TOCTOU and duplicate-request behavior | Domain/API decision package with explicit semantics and concurrency tests. |
 | Orchestrator could be mistaken for Engine | Static Product UI at orchestrator routes | Architectural misrepresentation | Deprecation/rewrite decision; prohibit Engine naming/reuse. |
 
@@ -61,6 +61,8 @@ packages completed locally; P1 continues with separately authorized
 FOUNDATION-010 surface/environment work is completed and published locally;
 FOUNDATION-011 backend authorization context and owned API work is completed
 locally with Deno/HTTP/SQL/Flutter evidence and no remote action;
+FOUNDATION-012 Product Conversation architecture and legacy retirement are
+approved conceptually with implementation still gated under 013A-013F;
 P2 maps primarily to FOUNDATION-015, 018 and 020; P3 to FOUNDATION-016, 017 and
 later release work; P4 remains deferred. No P1-P4 implementation or remote
 rollout is authorized by this mapping.

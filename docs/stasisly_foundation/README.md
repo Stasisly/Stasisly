@@ -148,6 +148,23 @@ se derivan de JWT validado y datos confiables; el cliente no aporta autoridad.
 Solo local/development están permitidos. Remoto, producción, RBAC/ABAC
 persistente, Founder access y nuevas capacidades Product siguen cerrados.
 
+## Arquitectura Product de conversaciones
+
+- [Arquitectura Product](product/PRODUCT_CONVERSATION_ARCHITECTURE.md)
+- [Glosario](product/CONVERSATION_DOMAIN_GLOSSARY.md)
+- [Ciclo de vida y ownership](product/CONVERSATION_LIFECYCLE_AND_OWNERSHIP.md)
+- [Memoria y research](product/CONVERSATION_MEMORY_RESEARCH_BOUNDARIES.md)
+- [Contratos API objetivo](product/CONVERSATION_API_TARGET_CONTRACTS.md)
+- [Matriz de adopción](product/CONVERSATION_ASSET_ADOPTION_MATRIX.md)
+- [Retirada del chat legacy](product/LEGACY_CHAT_RETIREMENT_PLAN.md)
+- [ADR-F009](adr/ADR-F009-product-conversation-architecture-and-legacy-chat-retirement.md)
+
+FOUNDATION-012 aprueba `Conversation` como agregado Product y reserva
+`ExecutionSession` al futuro runtime. Stasis coordina Product; historial,
+ejecución, memoria, research y trazas permanecen separados. El chat legacy queda
+`DEPRECATED_AND_BLOCKED`; las rutas `/stasis` y `/conversations` son objetivo no
+implementado. Los activos modernos se adaptarán mediante FOUNDATION-013A-013F.
+
 La auditoría identificó componentes modernos reutilizables, deuda legacy y un
 P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
 por el repositorio: RLS activo, cero policies y cero grants cliente en las diez
@@ -197,7 +214,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras publicar FOUNDATION-011, el siguiente gate del mapa es FOUNDATION-012:
-decisiones Product sobre taxonomía, frontera de conversación y retiro del chat
-legacy. Debe empezar como decisión documental separada. Ninguna operación
-remota queda autorizada.
+Tras publicar FOUNDATION-012, el siguiente gate es `FOUNDATION-013A`, contratos
+y adapters canónicos Product de Conversation. Requiere aprobación separada y no
+autoriza rutas, schema, retirada de código ni remoto.

@@ -9,8 +9,8 @@
 | Authority level | 6 — Evidence, audits and trackers |
 | Owner | Dirección de Documentación y Conocimiento under Rector (conceptual) |
 | Approver | Founder for authority assignments |
-| Version | 1.9 |
-| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-011 |
+| Version | 2.0 |
+| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-012 |
 | Supersedes | No Foundation register |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -69,6 +69,14 @@
 | `adr/ADR-F007-surface-and-environment-enforcement-boundaries.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Implicit route surface/environment authority | ADR-F004-F006 | Surface, environment, route or entry-point enforcement semantics change |
 | `implementation/FOUNDATION-011_BACKEND_AUTHORIZATION_CONTEXT_AND_OWNED_API_ENFORCEMENT.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Backend Architecture + Security + QA + Documentation | Evidence owner | No, local implementation evidence | Implicit backend operation context | ADR-F008; FOUNDATION-008-010 | Backend policy, operation, ownership or remote activation change |
 | `adr/ADR-F008-backend-authorization-context-and-owned-api-enforcement.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Backend Architecture + Security under Rector | Founder | Yes | Implicit backend surface/environment/action/resource authority | ADR-F004-F007 | Backend authorization, owned API or environment semantics change |
+| `product/PRODUCT_CONVERSATION_ARCHITECTURE.md` | APPROVED / NOT_IMPLEMENTED | 3 | Product Architecture under Stasis | Founder | Yes | Discovery-era chat/session semantics | ADR-F009; Foundation architecture | Product Conversation semantics or route model change |
+| `product/CONVERSATION_DOMAIN_GLOSSARY.md` | APPROVED | 3 | Product Architecture under Stasis | Founder | Yes | Duplicated chat/agent/session vocabulary | Product Conversation Architecture | Canonical term changes |
+| `product/CONVERSATION_LIFECYCLE_AND_OWNERSHIP.md` | APPROVED conceptually / NOT_IMPLEMENTED | 3 | Product + Data + Security | Founder | Yes conceptually | Active/archived legacy-only lifecycle | ADR-F009; authorization model | Lifecycle, ownership, sharing or deletion change |
+| `product/CONVERSATION_MEMORY_RESEARCH_BOUNDARIES.md` | APPROVED conceptually / NOT_IMPLEMENTED | 3 | Product + Data/Memory + Research Governance | Founder | Yes conceptually | Conversation/history/memory ambiguity | Data/Memory architecture; ADR-F009 | Memory, research, attachment or trace boundary change |
+| `product/LEGACY_CHAT_RETIREMENT_PLAN.md` | APPROVED plan / NOT_STARTED | 4 | Product + Flutter + Backend Architecture | Founder | Yes for retirement gates | Informal DEPRECATE_CANDIDATE | ADR-F009; replacement packages | Retirement phase or removal-gate change |
+| `product/CONVERSATION_API_TARGET_CONTRACTS.md` | APPROVED target / NOT_IMPLEMENTED | 3 | Product API Architecture | Founder | Yes conceptually | Session-named local compatibility APIs | ADR-F009; API boundaries | Public Conversation API/versioning change |
+| `product/CONVERSATION_ASSET_ADOPTION_MATRIX.md` | ACTIVE | 6 | Product Architecture + Documentation | Evidence owner; Founder for adoption/removal | No, evidence/planning | Earlier broad chat classifications | FOUNDATION-005 matrix; ADR-F009 | Asset evidence, classification or gate change |
+| `adr/ADR-F009-product-conversation-architecture-and-legacy-chat-retirement.md` | APPROVED / NOT_IMPLEMENTED | 2 | Product + Architecture under Stasis/Rector | Founder | Yes | Legacy chat and session semantics as implicit Product architecture | ADR-F002; ADR-F004-F008 | Conversation, Stasis, specialist, lifecycle or retirement decision changes |
 | `DOCUMENT_AUTHORITY_REGISTER.md` | ACTIVE | 6 | Documentation under Rector (conceptual) | Founder for authority changes | Operational register | No prior register | Documentation governance | Any authority/status/supersession change |
 | `archive_index/DISCOVERY_ARCHIVE_INDEX.md` | ACTIVE | 6 | Documentation | Evidence owner | No, evidence/index | Informal Discovery locations | Discovery archive | Archive path or successor changes |
 | `implementation/FOUNDATION_SESSION_TRACKER.md` | ACTIVE | 6 | Program Management | Evidence owner | No, tracker | Historical Discovery tracker for Foundation work | Foundation packages | Every completed Foundation package |

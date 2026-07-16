@@ -149,6 +149,13 @@ solo local/development; no añade política persistente ni despliegue.
 - **Salida:** incremento Product verificable sin mocks engañosos.
 - **Fundador:** aprobar valor, alcance MVP y rollout.
 
+FOUNDATION-012 aprueba la arquitectura de Conversation para F8: Conversation es
+el agregado Product, ExecutionSession pertenece al futuro Engine, Stasis es el
+coordinador, chat legacy queda deprecated/blocked y `/stasis` más
+`/conversations` son rutas objetivo no implementadas. FOUNDATION-013 se divide
+en 013A-013F para contratos, atomicidad, historial, provenance, retirada legacy
+y routing, cada hijo con gate separado.
+
 ## F9 — Administration inicial
 
 - **Objetivo:** operar capacidades autorizadas con Gerendi y auditoría.

@@ -5,7 +5,7 @@
 Status: **APPROVED working execution structure**. Package status is recorded
 below; every future package requires its own approval and exact scope.
 
-Package status after FOUNDATION-011:
+Package status after FOUNDATION-012:
 
 ```text
 FOUNDATION-007: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
@@ -13,7 +13,8 @@ FOUNDATION-008: IMPLEMENTED LOCALLY / PROVIDER ADAPTER CURRENT
 FOUNDATION-009: IMPLEMENTED LOCALLY / FULL ENFORCEMENT PARTIAL
 FOUNDATION-010: IMPLEMENTED LOCALLY / PUBLISHED
 FOUNDATION-011: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
-FOUNDATION-012..020: NOT EXECUTED
+FOUNDATION-012: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
+FOUNDATION-013..020: NOT EXECUTED
 ```
 
 | Package | Title | Type | Objective | Dependencies | Gate | Expected result |
@@ -23,8 +24,8 @@ FOUNDATION-012..020: NOT EXECUTED
 | FOUNDATION-009 | Authorization context and policy contracts | IMPLEMENTATION / SECURITY | Adopt typed authorization context/decision, PDP/PEP/audit ports and minimal local deny-by-default validation | FOUNDATION-007, FOUNDATION-008 | G0-G7 completed after publication | Local contracts/policy and focal profile defense; no new access or remote enforcement |
 | FOUNDATION-010 | Surface and environment enforcement boundaries | IMPLEMENTATION / SECURITY | Apply explicit Product/Development/Administration and environment boundaries to approved routes/APIs/operations without Founder elevation or remote | FOUNDATION-009 | G0-G7 completed after publication | Typed local boundaries, negative navigation evidence and legacy-route containment; no backend/remote authority |
 | FOUNDATION-011 | Backend authorization context and owned API enforcement | IMPLEMENTATION / SECURITY | Carry typed surface/environment, identity and ownership through owned backend entry points without remote deployment | FOUNDATION-009, FOUNDATION-010 | G0-G7 complete after publication | Six locally enforced registered Product operations, negative authorization evidence and unchanged public DTOs; no deployment |
-| FOUNDATION-012 | Product taxonomy and conversation decisions | DOCUMENTATION / PRODUCT | Decide Wellness/Training naming, catalog, profile, conversation route, entitlements and view boundaries | FOUNDATION-007-009 | Founder Product gate; G0-G2 | Approved Product ADRs and bounded first vertical slice |
-| FOUNDATION-013 | First controlled Product conversation slice | IMPLEMENTATION | Implement the approved catalog-to-session-to-message flow with privacy and accessibility states | FOUNDATION-011, FOUNDATION-012 | G0-G7; no remote | Tested local Product increment, rollback route and accepted residual debt |
+| FOUNDATION-012 | Product Conversation architecture and legacy chat retirement | DOCUMENTATION / PRODUCT | Decide canonical Conversation semantics, Stasis/specialist boundaries, target routes, lifecycle, memory/research separation and legacy retirement | FOUNDATION-007-011 | G0-G2 complete after publication | ADR-F009, seven approved Product documents and no implementation |
+| FOUNDATION-013 | First controlled Product Conversation slice | IMPLEMENTATION parent | Implement the approved catalog-to-Conversation-to-Message flow through separately approved 013A-013F children | FOUNDATION-011, FOUNDATION-012 | G0-G7 per child; no remote | Tested local Product increment, retirement progress and accepted residual debt |
 | FOUNDATION-014 | Agent Constitution and Engine foundation | DOCUMENTATION / ARCHITECTURE / SECURITY | Define Agent Constitution, registries, runtime/gateway modules, evaluation and safety boundaries | FOUNDATION-007, FOUNDATION-009 | Founder Agent gate; G0-G2 | Approved modular Engine design; no agents or runtime activated |
 | FOUNDATION-015 | Backend security CI baseline | IMPLEMENTATION | Add Deno, pgTAP, reset, migration, architecture and secret checks to CI | FOUNDATION-007 contracts stable | G0-G7 | Reproducible protected local/security pipeline before staging |
 | FOUNDATION-016 | Data/privacy lifecycle and threat controls | DOCUMENTATION / SECURITY | Define classification, consent, retention, deletion, provenance, encryption and regional controls | FOUNDATION-007, FOUNDATION-012 | Founder privacy gate; G0-G2 | Approved lifecycle model and testable controls before sensitive Product data |
@@ -42,6 +43,20 @@ FOUNDATION-012..020: NOT EXECUTED
    destructive migrations receive independent packages and G8-G10 gates.
 4. A package stops when an unapproved file, authority decision or remote
    dependency becomes necessary.
-5. FOUNDATION-012 is next after FOUNDATION-011 publication. It must decide
-   Product taxonomy, conversation API boundaries and legacy retirement before
-   FOUNDATION-013; it requires separate approval and begins without code.
+5. FOUNDATION-013A is next after FOUNDATION-012 publication. It implements only
+   canonical Product Conversation contracts/adapters under separate approval;
+   routes, schema, legacy deletion and remote remain excluded.
+
+## FOUNDATION-013 child sequence
+
+| Child | Scope | Explicit exclusions |
+|---|---|---|
+| 013A | Canonical Product Conversation contracts and adapters | No routes, schema or legacy deletion |
+| 013B | Transactional creation, TOCTOU and create/send idempotency | No remote migration |
+| 013C | List/read/archive/restore/history boundary | No Product route registration |
+| 013D | Message author, visibility and provenance contracts | No Engine trace exposure |
+| 013E | Legacy UI extraction, freeze guards and retirement migration | No removal before parity/data gates |
+| 013F | `/stasis` and `/conversations` Product routes/screens | No staging/production activation |
+
+These are children of the existing FOUNDATION-013 ID. They do not renumber or
+replace FOUNDATION-014-020 and each requires a separate approval.
