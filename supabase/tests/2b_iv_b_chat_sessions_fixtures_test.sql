@@ -262,7 +262,7 @@ select is(
     where a.attrelid = 'public.messages'::regclass
       and a.attnum > 0 and not a.attisdropped
   ),
-  '{id,session_id,role,content,attachments,created_at}',
+  '{id,session_id,role,content,attachments,created_at,author_type,provenance_type,visibility_type}',
   'messages structure remains intact'
 );
 select ok(

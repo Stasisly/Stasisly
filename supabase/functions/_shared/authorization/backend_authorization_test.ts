@@ -62,6 +62,25 @@ Deno.test("all eight backend operations are registered Product local/development
     assertEquals(operation.authenticationRequired, true);
     assertEquals(operation.entitlementRequired, false);
   }
+  assertEquals(
+    BACKEND_OPERATIONS.sendUserMessage.operationId,
+    "conversation.message.sendUser",
+  );
+  assertEquals(
+    BACKEND_OPERATIONS.listSessionMessages.operationId,
+    "conversation.message.listOwn",
+  );
+  const serialized = JSON.stringify(BACKEND_OPERATIONS);
+  for (
+    const futureOperation of [
+      "appendStasis",
+      "appendSpecialist",
+      "appendSystemNotice",
+      "conversation.message.redact",
+    ]
+  ) {
+    assertEquals(serialized.includes(futureOperation), false);
+  }
 });
 
 Deno.test("local policy allows valid local and development contexts", () => {

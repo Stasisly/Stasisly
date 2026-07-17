@@ -1,5 +1,14 @@
 # Stasisly Foundation
 
+## FOUNDATION-013D message boundary
+
+`FOUNDATION-013D` adopts locally the canonical Message author, provenance and
+visibility contracts, backend-controlled user metadata and SQL-before-limit
+visibility filtering. See the [implementation record](implementation/FOUNDATION-013D_CANONICAL_MESSAGE_AUTHOR_PROVENANCE_VISIBILITY.md)
+and [ADR-F013](adr/ADR-F013-canonical-message-author-provenance-and-visibility.md).
+Stasis/specialist messages, Engine traces, Product routes and remote remain
+unimplemented.
+
 ## Estado
 
 Índice Foundation activo. `FOUNDATION-001` congeló e inventarió el baseline;
@@ -237,6 +246,7 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras publicar FOUNDATION-013C, el siguiente gate propuesto es `FOUNDATION-013D`
-para author, visibility y provenance de Message. Requiere aprobación separada y
-no autoriza rutas, UI, retirada legacy, Engine ni remoto.
+Tras publicar FOUNDATION-013D, el siguiente gate exacto del mapa es
+`FOUNDATION-013E` para extracción de UI legacy, freeze guards y migración de
+retirada. Requiere aprobación separada y no autoriza rutas Product, Engine ni
+remoto.

@@ -65,6 +65,16 @@ void main() {
     expect(sentMessage.message.sessionId, ownerActiveSessionId);
     expect(sentMessage.message.role, OwnChatMessageRole.user);
     expect(sentMessage.message.content, 'mensaje de prueba');
+    expect(sentMessage.message.authorType, OwnChatMessageAuthorType.user);
+    expect(
+      sentMessage.message.provenance,
+      OwnChatMessageProvenance.userProvided,
+    );
+    expect(
+      sentMessage.message.visibility,
+      OwnChatMessageVisibility.productVisible,
+    );
+    expect(sentMessage.message.status, OwnChatMessageStatus.accepted);
     expect(sentMessage.message.isDemo, isFalse);
     expect(sentMessage.isDemo, isFalse);
     expect(sentMessage.messageCount, initialMessageCount + 1);
@@ -82,6 +92,15 @@ void main() {
     );
     expect(listedSentMessage.role, OwnChatMessageRole.user);
     expect(listedSentMessage.content, 'mensaje de prueba');
+    expect(listedSentMessage.authorType, OwnChatMessageAuthorType.user);
+    expect(
+      page.items.any((message) => message.content == 'active assistant'),
+      isFalse,
+    );
+    expect(
+      page.items.any((message) => message.content == 'active tool'),
+      isFalse,
+    );
     expect(listedSentMessage.isDemo, isFalse);
 
     final archived = await datasource.listSessionMessages(

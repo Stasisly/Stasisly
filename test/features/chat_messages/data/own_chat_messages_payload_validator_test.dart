@@ -6,11 +6,15 @@ void main() {
   const validator = OwnChatMessagesPayloadValidator();
 
   Map<String, Object?> messagePayload({String role = 'user'}) => {
+    'author': {'type': 'user'},
     'messageId': 'message-1',
     'sessionId': 'session-1',
     'role': role,
     'content': 'hola',
     'createdAt': '2026-06-21T10:00:00Z',
+    'status': 'accepted',
+    'provenance': 'userProvided',
+    'visibility': 'productVisible',
   };
 
   Map<String, Object?> sentPayload() => {
@@ -23,7 +27,7 @@ void main() {
   };
 
   Map<String, Object?> pagePayload() => {
-    'items': [messagePayload(role: 'assistant')],
+    'items': [messagePayload()],
     'nextCursor': null,
   };
 
@@ -42,12 +46,13 @@ void main() {
       'nextCursor': null,
     });
     final page = validator.parseMessagesPage({
-      'items': [messagePayload(role: 'assistant')],
+      'items': [messagePayload()],
       'nextCursor': 'opaque-cursor',
     });
 
     expect(empty.items, isEmpty);
-    expect(page.items.single.role, OwnChatMessageRole.assistant);
+    expect(page.items.single.role, OwnChatMessageRole.user);
+    expect(page.items.single.authorType, OwnChatMessageAuthorType.user);
     expect(page.nextCursor, 'opaque-cursor');
   });
 
@@ -154,4 +159,29 @@ void main() {
       throwsA(isA<OwnChatMessagesContractException>()),
     );
   });
+
+  test(
+    'internal and unknown visibility fail closed; redaction hides content',
+    () {
+      for (final visibility in ['internal', 'unknown']) {
+        final message = messagePayload()..['visibility'] = visibility;
+        expect(
+          () => validator.parseMessagesPage({
+            'items': [message],
+            'nextCursor': null,
+          }),
+          throwsA(isA<OwnChatMessagesContractException>()),
+        );
+      }
+      final redacted = messagePayload()
+        ..remove('content')
+        ..['status'] = 'redacted'
+        ..['visibility'] = 'redacted';
+      final page = validator.parseMessagesPage({
+        'items': [redacted],
+        'nextCursor': null,
+      });
+      expect(page.items.single.content, OwnChatMessageRedaction.placeholder);
+    },
+  );
 }

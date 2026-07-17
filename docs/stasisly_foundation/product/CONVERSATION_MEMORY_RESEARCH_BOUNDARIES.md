@@ -1,5 +1,11 @@
 # Conversation, Memory and Research Boundaries
 
+## Message separation adopted locally
+
+Conversation history contains only Product-readable Messages. Tool/model/agent
+execution, private reasoning, memory proposals and research artifacts remain
+separate governed objects and are not persisted or exposed by FOUNDATION-013D.
+
 ## Metadata
 
 ```text

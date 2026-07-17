@@ -514,11 +514,15 @@ OwnChatMessagesHttpResponse _listSuccess() {
 
 Map<String, Object?> _message() {
   return {
+    'author': {'type': 'user'},
     'messageId': 'message-1',
     'sessionId': 'session-1',
     'role': 'user',
     'content': 'hola',
     'createdAt': '2026-06-21T10:00:00Z',
+    'status': 'accepted',
+    'provenance': 'userProvided',
+    'visibility': 'productVisible',
   };
 }
 

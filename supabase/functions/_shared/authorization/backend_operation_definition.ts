@@ -13,7 +13,7 @@ export type BackendOperationId =
   | "conversation.archiveOwn"
   | "conversation.restoreOwn"
   | "conversation.message.listOwn"
-  | "sendUserMessage";
+  | "conversation.message.sendUser";
 
 export interface BackendOperationDefinition {
   readonly operationId: BackendOperationId;
@@ -95,7 +95,7 @@ export const BACKEND_OPERATIONS = Object.freeze({
     auditRequired: true,
   }),
   sendUserMessage: operation({
-    operationId: "sendUserMessage",
+    operationId: "conversation.message.sendUser",
     expectedSurface: "product",
     allowedEnvironments: PRODUCT_ENVIRONMENTS,
     action: "create",

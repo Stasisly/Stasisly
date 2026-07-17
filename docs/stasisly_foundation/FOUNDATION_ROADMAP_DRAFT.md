@@ -1,5 +1,12 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Estado FOUNDATION-013D
+
+Autor, procedencia y visibilidad de Message quedan implementados y validados
+localmente. El siguiente hijo exacto del mapa es `FOUNDATION-013E - Legacy UI
+extraction, freeze guards and retirement migration`; requiere aprobación propia
+y no autoriza rutas Product ni remoto.
+
 ```text
 F0–F12 INITIAL FRAMEWORK: APPROVED
 DATES / DURATIONS / CAPACITY / ASSIGNMENTS / COSTS / INTERNAL ORDER: PROPOSED

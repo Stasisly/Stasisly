@@ -1,5 +1,11 @@
 # Foundation Master Remediation Plan
 
+## FOUNDATION-013D completion
+
+G0-G6 are complete locally for Message author/provenance/visibility; G7 completes
+only with this package commit and push. G8-G10, Engine, routes and remote remain
+blocked. Residual transitional DTO/schema debt moves to later approved work.
+
 ## Metadata
 
 | Field | Value |

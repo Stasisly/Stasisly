@@ -1,5 +1,11 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-013D gate result
+
+013D completes G0-G6 locally for canonical Message semantics; publication
+completes G7. FOUNDATION-013E is the next separately approved dependency gate.
+G8-G10 and Product route activation remain unauthorized.
+
 ## Status
 
 **APPROVED.** This map governs sequencing; it does not authorize execution.
@@ -69,8 +75,9 @@ SQL cycles at 684/684, Deno 76/76, Flutter 515/5 skips and two real local HTTP
 harnesses ending `0|0|0|0|0|0|0`; publication completes G7. FOUNDATION-013C
 satisfies G0-G6 with owner-scoped lifecycle/history, two SQL cycles 713/713,
 Deno 85/85, Flutter 517/5 skips and local HTTP cleanup at seven ceros;
-publication completes G7. FOUNDATION-013D is the next proposed gate and
-requires separate approval.
+publication completes G7. FOUNDATION-013D satisfies G0-G6 for canonical
+Message metadata and SQL visibility filtering; publication completes G7.
+FOUNDATION-013E is the next proposed gate and requires separate approval.
 
 ## Surface dependency matrix
 

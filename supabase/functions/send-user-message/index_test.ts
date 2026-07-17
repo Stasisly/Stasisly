@@ -46,6 +46,10 @@ function rpcRow(overrides: Record<string, unknown> = {}) {
     role: "user",
     content: "hello",
     created_at: "2026-06-20T10:00:00Z",
+    author_type: "user",
+    provenance_type: "userProvided",
+    visibility_type: "productVisible",
+    message_status: "accepted",
     session_message_count: 1,
     session_last_message_at: "2026-06-20T10:00:00Z",
     idempotent_replay: false,
@@ -88,6 +92,10 @@ Deno.test("body accepts only sessionId and content", async () => {
   for (
     const field of [
       "role",
+      "author",
+      "authorType",
+      "provenance",
+      "visibility",
       "userId",
       "user_id",
       "owner",
@@ -105,6 +113,9 @@ Deno.test("body accepts only sessionId and content", async () => {
       "assistant",
       "system",
       "tool",
+      "agentId",
+      "model",
+      "selectableSpecialistId",
       "metadata",
       "extra",
     ]
@@ -155,11 +166,15 @@ Deno.test("RPC response is sanitized and public", () => {
   const payload = sanitizeRpcResult([rpcRow()]);
   assertEquals(Object.keys(payload).sort(), ["idempotentReplay", "payload"]);
   assertEquals(Object.keys(payload.payload.message).sort(), [
+    "author",
     "content",
     "createdAt",
     "messageId",
+    "provenance",
     "role",
     "sessionId",
+    "status",
+    "visibility",
   ]);
   assertEquals(Object.keys(payload.payload.session).sort(), [
     "lastMessageAt",
@@ -178,6 +193,9 @@ Deno.test("RPC response is sanitized and public", () => {
       "JWT",
       "attachments",
       "metadata",
+      "agentId",
+      "model",
+      "tool",
     ]
   ) {
     assertEquals(serialized.includes(forbidden), false);
@@ -324,7 +342,7 @@ Deno.test("local runtime and logs fail closed", async () => {
   );
   let serialized = "";
   safeLog({
-    operation: "sendUserMessage",
+    operation: "conversation.message.sendUser",
     result: "error",
     latency: 1,
     contract_version: "1",

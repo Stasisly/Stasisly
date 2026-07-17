@@ -3,14 +3,18 @@ const UUID_PATTERN =
 
 const REQUEST_KEYS = ["content", "sessionId"].sort();
 const RPC_KEYS = [
+  "author_type",
   "content",
   "created_at",
   "idempotent_replay",
+  "message_status",
   "message_id",
+  "provenance_type",
   "role",
   "session_id",
   "session_last_message_at",
   "session_message_count",
+  "visibility_type",
 ].sort();
 
 export interface SendMessageCommand {
@@ -25,6 +29,10 @@ export interface PublicSendMessageResponse {
     role: "user";
     content: string;
     createdAt: string;
+    author: { type: "user" };
+    status: "accepted";
+    provenance: "userProvided";
+    visibility: "productVisible";
   };
   session: {
     sessionId: string;
@@ -100,6 +108,10 @@ export function sanitizeRpcResult(rows: unknown): SanitizedSendMessage {
     typeof row.session_id !== "string" ||
     !UUID_PATTERN.test(row.session_id) ||
     row.role !== "user" ||
+    row.author_type !== "user" ||
+    row.provenance_type !== "userProvided" ||
+    row.visibility_type !== "productVisible" ||
+    row.message_status !== "accepted" ||
     typeof row.content !== "string" ||
     row.content.length === 0 ||
     typeof row.created_at !== "string" ||
@@ -117,6 +129,10 @@ export function sanitizeRpcResult(rows: unknown): SanitizedSendMessage {
         role: "user",
         content: row.content,
         createdAt: row.created_at,
+        author: { type: "user" },
+        status: "accepted",
+        provenance: "userProvided",
+        visibility: "productVisible",
       },
       session: {
         sessionId: row.session_id,

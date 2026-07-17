@@ -1,5 +1,5 @@
 export interface SafeLogEvent {
-  operation: "listSessionMessages";
+  operation: "conversation.message.listOwn";
   result: "success" | "error";
   latency: number;
   count: number;

@@ -1,5 +1,11 @@
 # Product Conversation Architecture
 
+## Adopted Message boundary
+
+A Product Message is not an execution trace. Author, provenance and visibility
+are independent backend-controlled contracts; unknown/internal content is
+filtered in SQL. `assistant` is not Stasis and `tool` is not a specialist.
+
 ## Metadata
 
 | Field | Value |

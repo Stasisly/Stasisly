@@ -1,5 +1,11 @@
 \set ON_ERROR_STOP on
 
+delete from public.conversation_idempotency
+where subject_id in (
+  select id from auth.users
+  where email like 'test_only_2b_v_g_%@stasisly.local'
+);
+
 delete from public.messages
 where session_id in (
   select id from public.chat_sessions
@@ -28,6 +34,13 @@ begin
     or exists (select 1 from public.specialists where name like 'test_only_2b_v_g%')
     or exists (select 1 from public.specialist_catalog where display_name like 'test_only_2b_v_g%')
     or exists (select 1 from public.chat_sessions where specialist_id::text like '5e200000-0000-4000-8000-%')
+    or exists (
+      select 1 from public.conversation_idempotency
+      where subject_id in (
+        select id from auth.users
+        where email like 'test_only_2b_v_g_%@stasisly.local'
+      )
+    )
     or exists (
       select 1
       from public.messages m

@@ -1,5 +1,12 @@
 # FOUNDATION-005 Remediation Backlog
 
+## FOUNDATION-013D remediation evidence
+
+Message semantic ambiguity is remediated locally with closed metadata,
+conservative backfill, RPC-only user writes and owner-scoped SQL visibility
+filtering. Legacy UI retirement, Product routing, Engine and remote rollout stay
+open and separately gated.
+
 Status: **ACTIVE tracking**. P0 was separately authorized and is
 `CLOSED_LOCALLY`; P1-P4 remain proposed and unauthorized.
 

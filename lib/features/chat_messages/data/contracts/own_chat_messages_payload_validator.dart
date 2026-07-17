@@ -32,11 +32,26 @@ class OwnChatMessagesPayloadValidator {
   };
 
   static const Set<String> _messageKeys = {
+    'author',
     'messageId',
     'sessionId',
     'role',
     'content',
     'createdAt',
+    'status',
+    'provenance',
+    'visibility',
+  };
+
+  static const Set<String> _redactedMessageKeys = {
+    'author',
+    'messageId',
+    'sessionId',
+    'role',
+    'createdAt',
+    'status',
+    'provenance',
+    'visibility',
   };
 
   static const Set<String> _sentKeys = {'message', 'session'};
@@ -108,11 +123,56 @@ class OwnChatMessagesPayloadValidator {
     Map<String, Object?> payload, {
     required bool isDemo,
   }) {
-    _expectKeys(payload, _messageKeys, 'message');
+    final visibilityValue = _expectNonEmptyString(
+      payload['visibility'],
+      'message.visibility',
+    );
+    final visibility = OwnChatMessageVisibility.tryParse(visibilityValue);
+    if (visibility == null ||
+        visibility == OwnChatMessageVisibility.internal ||
+        visibility == OwnChatMessageVisibility.unknown) {
+      throw const OwnChatMessagesContractException(
+        'message is not Product-visible',
+      );
+    }
+    final isRedacted = visibility == OwnChatMessageVisibility.redacted;
+    _expectKeys(
+      payload,
+      isRedacted ? _redactedMessageKeys : _messageKeys,
+      'message',
+    );
     final roleValue = _expectNonEmptyString(payload['role'], 'message.role');
     final role = OwnChatMessageRole.tryParse(roleValue);
     if (role == null) {
       throw OwnChatMessagesContractException('invalid role $roleValue');
+    }
+    final authorPayload = _expectMap(payload['author'], 'message.author');
+    _expectKeys(authorPayload, const {'type'}, 'message.author');
+    final author = OwnChatMessageAuthorType.tryParse(
+      _expectNonEmptyString(authorPayload['type'], 'message.author.type'),
+    );
+    final provenance = OwnChatMessageProvenance.tryParse(
+      _expectNonEmptyString(payload['provenance'], 'message.provenance'),
+    );
+    final statusValue = _expectNonEmptyString(
+      payload['status'],
+      'message.status',
+    );
+    final status = switch (statusValue) {
+      'accepted' => OwnChatMessageStatus.accepted,
+      'redacted' => OwnChatMessageStatus.redacted,
+      _ => null,
+    };
+    if (author == null || provenance == null || status == null) {
+      throw const OwnChatMessagesContractException(
+        'invalid canonical message metadata',
+      );
+    }
+    if ((isRedacted && status != OwnChatMessageStatus.redacted) ||
+        (!isRedacted && status != OwnChatMessageStatus.accepted)) {
+      throw const OwnChatMessagesContractException(
+        'incoherent canonical message metadata',
+      );
     }
     return OwnChatMessage(
       messageId: _expectNonEmptyString(
@@ -124,9 +184,15 @@ class OwnChatMessagesPayloadValidator {
         'message.sessionId',
       ),
       role: role,
-      content: _expectNonEmptyString(payload['content'], 'message.content'),
+      content: isRedacted
+          ? OwnChatMessageRedaction.placeholder
+          : _expectNonEmptyString(payload['content'], 'message.content'),
       createdAt: _expectDateTime(payload['createdAt'], 'message.createdAt'),
       isDemo: isDemo,
+      authorType: author,
+      provenance: provenance,
+      visibility: visibility,
+      status: status,
     );
   }
 

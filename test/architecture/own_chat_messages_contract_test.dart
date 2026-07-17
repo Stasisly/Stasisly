@@ -70,7 +70,6 @@ void main() {
         'userId',
         'user_id',
         'ownerId',
-        'owner',
         'specialistId',
         'specialist_id',
         'internalSpecialistId',

@@ -1,5 +1,12 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-013D risk update
+
+Closed locally: false assistant-to-Stasis/tool-to-specialist attribution and
+post-limit hidden-row filtering. Residual debt: transitional role/session
+vocabulary, no specialist display snapshot, redaction writes contract-only and
+no Engine execution store. Remote exposure risk remains blocked, not accepted.
+
 ## Status
 
 **ACTIVE evidence.** No date or duration is inferred. Priorities express gates,

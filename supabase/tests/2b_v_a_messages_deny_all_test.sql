@@ -13,7 +13,7 @@ select is(
     where a.attrelid = 'public.messages'::regclass
       and a.attnum > 0 and not a.attisdropped
   ),
-  '{id,session_id,role,content,attachments,created_at}',
+  '{id,session_id,role,content,attachments,created_at,author_type,provenance_type,visibility_type}',
   'messages has exactly the expected columns'
 );
 
@@ -24,8 +24,8 @@ select is(
     where a.attrelid = 'public.messages'::regclass
       and a.attnum > 0 and not a.attisdropped and a.attnotnull
   ),
-  5::bigint,
-  'id, session_id, role, content and created_at are NOT NULL'
+  8::bigint,
+  'all canonical message columns except attachments are NOT NULL'
 );
 
 select ok(

@@ -138,7 +138,7 @@ void main() {
     );
 
     final success = result as ConversationMessageListSuccess;
-    expect(success.page.items.single.author, ConversationMessageAuthor.user);
+    expect(success.page.items.single.author, isA<UserAuthor>());
     expect(success.page.nextCursor, 'next-message');
     expect(messages.lastSessionId, 'session-1');
     expect(messages.lastLimit, 30);
@@ -169,7 +169,7 @@ void main() {
       expect(messages.lastSessionId, 'session-1');
       expect(messages.lastContent, 'Hola');
       expect(success.receipt.messageCount, 4);
-      expect(success.receipt.message.author, ConversationMessageAuthor.user);
+      expect(success.receipt.message.author, isA<UserAuthor>());
     },
   );
 
@@ -306,6 +306,10 @@ final _message = OwnChatMessage(
   content: 'Hola',
   createdAt: DateTime.utc(2026),
   isDemo: false,
+  authorType: OwnChatMessageAuthorType.user,
+  provenance: OwnChatMessageProvenance.userProvided,
+  visibility: OwnChatMessageVisibility.productVisible,
+  status: OwnChatMessageStatus.accepted,
 );
 
 class _FakeSessionsRepository

@@ -10,7 +10,6 @@ import {
 } from "../_shared/authorization/backend_request_authorization.ts";
 import { assertAllowedRuntime } from "../_shared/runtime_guard.ts";
 import {
-  assertOwnedSession,
   buildMessagesResponse,
   type CursorValue,
   parseListMessagesRequest,
@@ -22,7 +21,7 @@ import {
 } from "./errors.ts";
 import { type LogWriter, safeLog } from "./safe_log.ts";
 
-const OPERATION = "listSessionMessages";
+const OPERATION = "conversation.message.listOwn";
 const METHODS = ["GET", "OPTIONS"];
 
 export interface RuntimeConfig {
@@ -67,7 +66,24 @@ async function requestJson(
   error: ListMessagesErrorCode,
 ): Promise<unknown> {
   const response = await fetcher(url, init);
-  if (!response.ok || response.status === 204) throw new Error(error);
+  if (!response.ok) {
+    let body: unknown = null;
+    try {
+      body = await response.json();
+    } catch {
+      // Keep database details opaque.
+    }
+    const message = typeof body === "object" && body !== null &&
+        !Array.isArray(body) &&
+        typeof (body as Record<string, unknown>).message === "string"
+      ? String((body as Record<string, unknown>).message)
+      : "";
+    if (message.includes("session_not_found")) {
+      throw new Error("sessionNotFound");
+    }
+    throw new Error(error);
+  }
+  if (response.status === 204) throw new Error(error);
   return await response.json();
 }
 
@@ -79,31 +95,24 @@ function privilegedHeaders(serviceRoleKey: string): HeadersInit {
   };
 }
 
-function sessionUrl(baseUrl: URL, sessionId: string, ownerId: string): URL {
-  const url = new URL("/rest/v1/chat_sessions", baseUrl);
-  url.searchParams.set("select", "id,user_id,status");
-  url.searchParams.set("id", `eq.${sessionId}`);
-  url.searchParams.set("user_id", `eq.${ownerId}`);
-  return url;
-}
-
 function messagesUrl(
   baseUrl: URL,
+  ownerId: string,
   sessionId: string,
   limit: number,
   cursor?: CursorValue,
 ): URL {
-  const url = new URL("/rest/v1/messages", baseUrl);
-  url.searchParams.set("select", "id,session_id,role,content,created_at");
-  url.searchParams.set("session_id", `eq.${sessionId}`);
+  const url = new URL(
+    "/rest/v1/rpc/list_own_conversation_messages_core",
+    baseUrl,
+  );
+  url.searchParams.set("p_owner_user_id", ownerId);
+  url.searchParams.set("p_session_id", sessionId);
+  url.searchParams.set("p_limit", String(limit + 1));
   if (cursor) {
-    url.searchParams.set(
-      "or",
-      `(created_at.gt.${cursor.createdAt},and(created_at.eq.${cursor.createdAt},id.gt.${cursor.messageId}))`,
-    );
+    url.searchParams.set("p_after_created_at", cursor.createdAt);
+    url.searchParams.set("p_after_message_id", cursor.messageId);
   }
-  url.searchParams.set("order", "created_at.asc,id.asc");
-  url.searchParams.set("limit", String(limit + 1));
   return url;
 }
 
@@ -139,28 +148,22 @@ export function createHandler(
       id = authorization.context.correlationId;
       const baseUrl = authorization.baseUrl;
       const ownerId = authorization.identitySubjectId;
-      const sessionRows = await requestJson(
-        fetcher,
-        sessionUrl(baseUrl, listRequest.sessionId, ownerId),
-        { headers: privilegedHeaders(config.serviceRoleKey) },
-        "backendMisconfigured",
-      );
-      assertOwnedSession(sessionRows, ownerId, listRequest.sessionId);
-      finalizeBackendAuthorization(
-        authorization,
-        BACKEND_OPERATIONS.listSessionMessages,
-        "owned",
-      );
       const messageRows = await requestJson(
         fetcher,
         messagesUrl(
           baseUrl,
+          ownerId,
           listRequest.sessionId,
           listRequest.limit,
           listRequest.cursor,
         ),
         { headers: privilegedHeaders(config.serviceRoleKey) },
         "backendMisconfigured",
+      );
+      finalizeBackendAuthorization(
+        authorization,
+        BACKEND_OPERATIONS.listSessionMessages,
+        "owned",
       );
       const response = buildMessagesResponse(messageRows, listRequest.limit);
       count = response.items.length;

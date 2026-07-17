@@ -57,21 +57,19 @@ void main() {
   test('maps only authors demonstrated by transitional evidence', () {
     final user = messageAdapter.map(_message(OwnChatMessageRole.user));
     final system = messageAdapter.map(_message(OwnChatMessageRole.system));
-    final assistant = messageAdapter.map(
-      _message(OwnChatMessageRole.assistant),
-    );
-    final tool = messageAdapter.map(_message(OwnChatMessageRole.tool));
 
-    expect(user.author, ConversationMessageAuthor.user);
-    expect(user.provenanceSummary, ConversationMessageProvenance.userProvided);
-    expect(system.author, ConversationMessageAuthor.systemNotice);
+    expect(user.author, isA<UserAuthor>());
+    expect(user.provenance, ConversationMessageProvenance.userProvided);
+    expect(system.author, isA<SystemNoticeAuthor>());
+    expect(system.provenance, ConversationMessageProvenance.systemGenerated);
     expect(
-      system.provenanceSummary,
-      ConversationMessageProvenance.systemGenerated,
+      () => messageAdapter.map(_message(OwnChatMessageRole.assistant)),
+      throwsA(isA<ConversationContractException>()),
     );
-    expect(assistant.author, ConversationMessageAuthor.unknown);
-    expect(assistant.isDisplaySafe, isFalse);
-    expect(tool.author, ConversationMessageAuthor.unknown);
+    expect(
+      () => messageAdapter.map(_message(OwnChatMessageRole.tool)),
+      throwsA(isA<ConversationContractException>()),
+    );
   });
 
   test('persisted source maps to accepted without provider metadata', () {
@@ -79,7 +77,7 @@ void main() {
 
     expect(message.status, ConversationMessageStatus.accepted);
     expect(message.content, 'Hola');
-    expect(message.props, hasLength(7));
+    expect(message.props, hasLength(8));
   });
 
   test('invalid transitional message contract fails closed', () {
@@ -115,6 +113,8 @@ OwnChatSession _session(ChatSessionStatus status) {
 }
 
 OwnChatMessage _message(OwnChatMessageRole role) {
+  final isUser = role == OwnChatMessageRole.user;
+  final isSystem = role == OwnChatMessageRole.system;
   return OwnChatMessage(
     messageId: 'message-1',
     sessionId: 'session-1',
@@ -122,5 +122,23 @@ OwnChatMessage _message(OwnChatMessageRole role) {
     content: 'Hola',
     createdAt: DateTime.utc(2026),
     isDemo: false,
+    authorType: isUser
+        ? OwnChatMessageAuthorType.user
+        : isSystem
+        ? OwnChatMessageAuthorType.systemNotice
+        : OwnChatMessageAuthorType.unknown,
+    provenance: isUser
+        ? OwnChatMessageProvenance.userProvided
+        : isSystem
+        ? OwnChatMessageProvenance.systemGenerated
+        : OwnChatMessageProvenance.unknown,
+    visibility: isUser
+        ? OwnChatMessageVisibility.productVisible
+        : isSystem
+        ? OwnChatMessageVisibility.systemVisible
+        : role == OwnChatMessageRole.tool
+        ? OwnChatMessageVisibility.internal
+        : OwnChatMessageVisibility.unknown,
+    status: OwnChatMessageStatus.accepted,
   );
 }

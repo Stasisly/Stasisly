@@ -1,5 +1,12 @@
 # Clasificación inicial de activos
 
+## Reclasificación FOUNDATION-013D
+
+`messages`, `send-user-message`, `list-session-messages` y sus adapters pasan a
+`FOUNDATION_ADOPTED_LOCALLY` para metadata de usuario y lectura Product
+filtrada. Los nombres `sessionId`/`role` siguen siendo transitorios; cualquier
+fila assistant/tool sin evidencia es `UNKNOWN/INTERNAL`, no autoridad Product.
+
 ## Criterio
 
 Esta clasificación orienta decisiones futuras y no ejecuta acciones

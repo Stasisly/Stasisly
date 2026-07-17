@@ -1,5 +1,5 @@
 export interface SafeLogEvent {
-  operation: "sendUserMessage";
+  operation: "conversation.message.sendUser";
   result: "success" | "error";
   latency: number;
   contract_version: "1";

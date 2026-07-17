@@ -23,16 +23,21 @@ insert into public.specialists (
 );
 
 insert into public.specialist_catalog (
-  id, specialist_id, display_name, product_area, short_description,
-  is_published, availability_status, access_tier, sort_order
+  id, specialist_id, slug, display_name, product_area, short_description,
+  publication_status, is_published, availability_status, access_tier,
+  supported_surfaces, is_conversable, sort_order
 ) values (
   '5e300000-0000-4000-8000-000000000001',
   '5e200000-0000-4000-8000-000000000001',
+  'test-only-2b-v-g-public-specialist',
   'test_only_2b_v_g public specialist',
   'wellness',
   'Fixture local no productivo.',
+  'published',
   true,
   'available',
   'free',
+  ARRAY['product']::text[],
+  true,
   1
 );

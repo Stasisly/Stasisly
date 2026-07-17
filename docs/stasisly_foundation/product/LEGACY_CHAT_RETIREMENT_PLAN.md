@@ -1,5 +1,11 @@
 # Legacy Chat Retirement Plan
 
+## FOUNDATION-013D checkpoint
+
+Canonical Message semantics now fail closed over the transitional transport.
+This does not unfreeze or reconnect legacy chat. FOUNDATION-013E may extract and
+guard legacy UI only after separate approval and parity evidence.
+
 ## Metadata
 
 ```text

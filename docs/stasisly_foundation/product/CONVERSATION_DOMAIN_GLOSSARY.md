@@ -1,5 +1,13 @@
 # Conversation Domain Glossary
 
+## FOUNDATION-013D terms
+
+- **MessageAuthor**: Product display author backed by evidence.
+- **MessageProvenance**: verifiable origin, distinct from author.
+- **MessageVisibility**: Product access category; unknown/internal fail closed.
+- **Redacted Message**: visible record with no original content.
+- **Execution record**: internal artifact that is never a Message by default.
+
 ## Metadata
 
 ```text

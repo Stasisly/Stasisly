@@ -22,7 +22,7 @@ import {
 } from "./errors.ts";
 import { type LogWriter, safeLog } from "./safe_log.ts";
 
-const OPERATION = "sendUserMessage";
+const OPERATION = "conversation.message.sendUser";
 const METHODS = ["POST", "OPTIONS"];
 
 export interface RuntimeConfig {

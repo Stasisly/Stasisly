@@ -34,6 +34,10 @@ class DemoOwnChatMessagesRepository implements OwnChatMessagesRepository {
       content: content.trim(),
       createdAt: createdAt,
       isDemo: true,
+      authorType: OwnChatMessageAuthorType.user,
+      provenance: OwnChatMessageProvenance.userProvided,
+      visibility: OwnChatMessageVisibility.productVisible,
+      status: OwnChatMessageStatus.accepted,
     );
     messages.add(message);
     return SendUserMessageDemo(

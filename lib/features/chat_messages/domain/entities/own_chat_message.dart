@@ -16,6 +16,59 @@ enum OwnChatMessageRole {
   }
 }
 
+enum OwnChatMessageAuthorType {
+  user,
+  stasis,
+  specialist,
+  systemNotice,
+  unknown;
+
+  static OwnChatMessageAuthorType? tryParse(String value) {
+    for (final item in values) {
+      if (item.name == value) return item;
+    }
+    return null;
+  }
+}
+
+enum OwnChatMessageProvenance {
+  userProvided,
+  stasisConsolidated,
+  specialistProvided,
+  systemGenerated,
+  imported,
+  unknown;
+
+  static OwnChatMessageProvenance? tryParse(String value) {
+    for (final item in values) {
+      if (item.name == value) return item;
+    }
+    return null;
+  }
+}
+
+enum OwnChatMessageVisibility {
+  productVisible,
+  ownerOnly,
+  systemVisible,
+  internal,
+  redacted,
+  unknown;
+
+  static OwnChatMessageVisibility? tryParse(String value) {
+    for (final item in values) {
+      if (item.name == value) return item;
+    }
+    return null;
+  }
+}
+
+enum OwnChatMessageStatus { accepted, redacted, unknown }
+
+abstract final class OwnChatMessageRedaction {
+  static const placeholder = '[redacted]';
+}
+
 class OwnChatMessage extends Equatable {
   const OwnChatMessage({
     required this.messageId,
@@ -24,6 +77,10 @@ class OwnChatMessage extends Equatable {
     required this.content,
     required this.createdAt,
     required this.isDemo,
+    this.authorType = OwnChatMessageAuthorType.unknown,
+    this.provenance = OwnChatMessageProvenance.unknown,
+    this.visibility = OwnChatMessageVisibility.unknown,
+    this.status = OwnChatMessageStatus.unknown,
   });
 
   final String messageId;
@@ -32,6 +89,10 @@ class OwnChatMessage extends Equatable {
   final String content;
   final DateTime createdAt;
   final bool isDemo;
+  final OwnChatMessageAuthorType authorType;
+  final OwnChatMessageProvenance provenance;
+  final OwnChatMessageVisibility visibility;
+  final OwnChatMessageStatus status;
 
   @override
   List<Object?> get props => [
@@ -41,6 +102,10 @@ class OwnChatMessage extends Equatable {
     content,
     createdAt,
     isDemo,
+    authorType,
+    provenance,
+    visibility,
+    status,
   ];
 }
 

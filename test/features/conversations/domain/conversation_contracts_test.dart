@@ -92,11 +92,12 @@ void main() {
       final message = ConversationMessage(
         messageId: 'message-1',
         conversationId: ConversationId('conversation-1'),
-        author: ConversationMessageAuthor.user,
+        author: const UserAuthor(),
         content: ' Hola ',
         createdAt: DateTime.utc(2026),
         status: ConversationMessageStatus.accepted,
-        provenanceSummary: ConversationMessageProvenance.userProvided,
+        provenance: ConversationMessageProvenance.userProvided,
+        visibility: ConversationMessageVisibility.productVisible,
       );
 
       expect(message.content, 'Hola');
@@ -105,28 +106,31 @@ void main() {
         () => ConversationMessage(
           messageId: 'message-2',
           conversationId: ConversationId('conversation-1'),
-          author: ConversationMessageAuthor.user,
+          author: const UserAuthor(),
           content: ' ',
           createdAt: DateTime.utc(2026),
           status: ConversationMessageStatus.accepted,
-          provenanceSummary: ConversationMessageProvenance.userProvided,
+          provenance: ConversationMessageProvenance.userProvided,
+          visibility: ConversationMessageVisibility.productVisible,
         ),
         throwsArgumentError,
       );
     });
 
-    test('unknown author is not display-safe', () {
-      final message = ConversationMessage(
-        messageId: 'message-1',
-        conversationId: ConversationId('conversation-1'),
-        author: ConversationMessageAuthor.unknown,
-        content: 'Persisted but ambiguous',
-        createdAt: DateTime.utc(2026),
-        status: ConversationMessageStatus.accepted,
-        provenanceSummary: ConversationMessageProvenance.unknown,
+    test('unknown author and internal visibility fail closed', () {
+      expect(
+        () => ConversationMessage(
+          messageId: 'message-1',
+          conversationId: ConversationId('conversation-1'),
+          author: const UnknownAuthor(),
+          content: 'Persisted but ambiguous',
+          createdAt: DateTime.utc(2026),
+          status: ConversationMessageStatus.accepted,
+          provenance: ConversationMessageProvenance.unknown,
+          visibility: ConversationMessageVisibility.internal,
+        ),
+        throwsArgumentError,
       );
-
-      expect(message.isDisplaySafe, isFalse);
     });
 
     test('inputs expose only allowlisted Product fields', () {

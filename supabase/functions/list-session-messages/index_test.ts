@@ -1,6 +1,5 @@
 import { assertEquals, assertRejects } from "jsr:@std/assert@1";
 import {
-  assertOwnedSession,
   buildMessagesResponse,
   decodeCursor,
   encodeCursor,
@@ -37,10 +36,6 @@ function request(
   );
 }
 
-function sessionRow(id = SESSION_ACTIVE, owner = OWNER_A, status = "active") {
-  return { id, user_id: owner, status };
-}
-
 function messageRow(
   id: string,
   createdAt: string,
@@ -48,11 +43,15 @@ function messageRow(
   sessionId = SESSION_ACTIVE,
 ) {
   return {
-    id,
+    message_id: id,
     session_id: sessionId,
     role,
     content: `content-${id.slice(-1)}`,
     created_at: createdAt,
+    author_type: role === "user" ? "user" : "unknown",
+    provenance_type: role === "user" ? "userProvided" : "unknown",
+    visibility_type: "productVisible",
+    message_status: "accepted",
   };
 }
 
@@ -99,31 +98,7 @@ Deno.test("query params, limits and strict cursor are validated", async () => {
   }
 });
 
-Deno.test("owned active and archived sessions are accepted", () => {
-  assertOwnedSession([sessionRow()], OWNER_A, SESSION_ACTIVE);
-  assertOwnedSession(
-    [sessionRow(SESSION_ARCHIVED, OWNER_A, "archived")],
-    OWNER_A,
-    SESSION_ARCHIVED,
-  );
-  assertRejects(
-    async () => assertOwnedSession([], OWNER_A, SESSION_ACTIVE),
-    Error,
-    "sessionNotFound",
-  );
-  assertRejects(
-    async () =>
-      assertOwnedSession(
-        [sessionRow(SESSION_ACTIVE, OWNER_B)],
-        OWNER_A,
-        SESSION_ACTIVE,
-      ),
-    Error,
-    "contractViolation",
-  );
-});
-
-Deno.test("response is public, ordered input is paginated and roles are accepted", () => {
+Deno.test("response is public, metadata-backed and safely paginated", () => {
   const rows = [
     messageRow(
       "5d500000-0000-4000-8000-000000000001",
@@ -133,12 +108,12 @@ Deno.test("response is public, ordered input is paginated and roles are accepted
     messageRow(
       "5d500000-0000-4000-8000-000000000002",
       "2026-06-21T10:00:00Z",
-      "assistant",
+      "user",
     ),
     messageRow(
       "5d500000-0000-4000-8000-000000000003",
       "2026-06-21T10:01:00Z",
-      "system",
+      "user",
     ),
   ];
   const first = buildMessagesResponse(rows, 2);
@@ -172,6 +147,58 @@ Deno.test("response is public, ordered input is paginated and roles are accepted
   }
 });
 
+Deno.test("assistant, tool, internal and unknown rows fail closed at DTO boundary", async () => {
+  for (
+    const row of [
+      messageRow(
+        "5d500000-0000-4000-8000-000000000008",
+        "2026-06-21T10:00:00Z",
+        "assistant",
+      ),
+      messageRow(
+        "5d500000-0000-4000-8000-000000000009",
+        "2026-06-21T10:00:00Z",
+        "tool",
+      ),
+      {
+        ...messageRow(
+          "5d500000-0000-4000-8000-000000000010",
+          "2026-06-21T10:00:00Z",
+        ),
+        visibility_type: "internal",
+      },
+      {
+        ...messageRow(
+          "5d500000-0000-4000-8000-000000000011",
+          "2026-06-21T10:00:00Z",
+        ),
+        visibility_type: "unknown",
+      },
+    ]
+  ) {
+    await assertRejects(
+      async () => buildMessagesResponse([row], 1),
+      Error,
+      "contractViolation",
+    );
+  }
+});
+
+Deno.test("redacted DTO omits content rather than masking the original", () => {
+  const row = {
+    ...messageRow(
+      "5d500000-0000-4000-8000-000000000012",
+      "2026-06-21T10:00:00Z",
+    ),
+    content: null,
+    visibility_type: "redacted",
+    message_status: "redacted",
+  };
+  const message = buildMessagesResponse([row], 1).items[0];
+  assertEquals(Object.hasOwn(message, "content"), false);
+  assertEquals(message.visibility, "redacted");
+});
+
 Deno.test("handler validates owner, reads only session messages and does no writes", async () => {
   const paths: Array<{ path: string; method: string; query: string }> = [];
   const handler = createHandler(LOCAL_CONFIG, {
@@ -185,12 +212,7 @@ Deno.test("handler validates owner, reads only session messages and does no writ
       if (url.pathname === "/auth/v1/user") {
         return Response.json({ id: OWNER_A });
       }
-      if (url.pathname === "/rest/v1/chat_sessions") {
-        return Response.json([
-          sessionRow(SESSION_ARCHIVED, OWNER_A, "archived"),
-        ]);
-      }
-      if (url.pathname === "/rest/v1/messages") {
+      if (url.pathname === "/rest/v1/rpc/list_own_conversation_messages_core") {
         return Response.json([
           messageRow(
             "5d500000-0000-4000-8000-000000000001",
@@ -210,8 +232,7 @@ Deno.test("handler validates owner, reads only session messages and does no writ
   assertEquals(body.items.length, 1);
   assertEquals(paths.map((entry) => entry.path), [
     "/auth/v1/user",
-    "/rest/v1/chat_sessions",
-    "/rest/v1/messages",
+    "/rest/v1/rpc/list_own_conversation_messages_core",
   ]);
   assertEquals(
     paths.some((entry) =>
@@ -219,12 +240,10 @@ Deno.test("handler validates owner, reads only session messages and does no writ
     ),
     false,
   );
-  const sessionQuery = new URL(`http://local${paths[1].query}`).searchParams;
-  assertEquals(sessionQuery.get("id"), `eq.${SESSION_ARCHIVED}`);
-  assertEquals(sessionQuery.get("user_id"), `eq.${OWNER_A}`);
-  const messageQuery = new URL(`http://local${paths[2].query}`).searchParams;
-  assertEquals(messageQuery.get("session_id"), `eq.${SESSION_ARCHIVED}`);
-  assertEquals(messageQuery.get("order"), "created_at.asc,id.asc");
+  const messageQuery = new URL(`http://local${paths[1].query}`).searchParams;
+  assertEquals(messageQuery.get("p_session_id"), SESSION_ARCHIVED);
+  assertEquals(messageQuery.get("p_owner_user_id"), OWNER_A);
+  assertEquals(messageQuery.get("p_limit"), "51");
 });
 
 Deno.test("foreign and missing sessions are indistinguishable", async () => {
@@ -234,7 +253,9 @@ Deno.test("foreign and missing sessions are indistinguishable", async () => {
       if (url.pathname === "/auth/v1/user") {
         return Response.json({ id: OWNER_A });
       }
-      if (url.pathname === "/rest/v1/chat_sessions") return Response.json([]);
+      if (url.pathname === "/rest/v1/rpc/list_own_conversation_messages_core") {
+        return Response.json({ message: "session_not_found" }, { status: 400 });
+      }
       return new Response(null, { status: 404 });
     }) as typeof fetch,
     requestId: () => "request-test",
@@ -305,7 +326,7 @@ Deno.test("JWT, runtime and logs fail closed", async () => {
   );
   let serialized = "";
   safeLog({
-    operation: "listSessionMessages",
+    operation: "conversation.message.listOwn",
     result: "success",
     latency: 1,
     count: 2,

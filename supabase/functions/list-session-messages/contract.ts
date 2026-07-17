@@ -1,9 +1,17 @@
 const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
-const SESSION_KEYS = ["id", "status", "user_id"].sort();
-const MESSAGE_KEYS = ["content", "created_at", "id", "role", "session_id"]
-  .sort();
+const MESSAGE_KEYS = [
+  "author_type",
+  "content",
+  "created_at",
+  "message_id",
+  "message_status",
+  "provenance_type",
+  "role",
+  "session_id",
+  "visibility_type",
+].sort();
 const ALLOWED_QUERY_KEYS = new Set(["cursor", "limit", "sessionId"]);
 const ALLOWED_ROLES = new Set(["user", "assistant", "system", "tool"]);
 
@@ -23,8 +31,20 @@ export interface PublicMessage {
   messageId: string;
   sessionId: string;
   role: "user" | "assistant" | "system" | "tool";
-  content: string;
+  content?: string;
   createdAt: string;
+  author: {
+    type: "user" | "stasis" | "specialist" | "systemNotice" | "unknown";
+  };
+  status: "accepted" | "redacted";
+  provenance:
+    | "userProvided"
+    | "stasisConsolidated"
+    | "specialistProvided"
+    | "systemGenerated"
+    | "imported"
+    | "unknown";
+  visibility: "productVisible" | "ownerOnly" | "systemVisible" | "redacted";
 }
 
 export interface PublicListMessagesResponse {
@@ -98,29 +118,6 @@ export function parseListMessagesRequest(url: URL): ListMessagesRequest {
   };
 }
 
-export function assertOwnedSession(
-  rows: unknown,
-  ownerId: string,
-  sessionId: string,
-): void {
-  if (!Array.isArray(rows)) throw new Error("contractViolation");
-  if (rows.length === 0) throw new Error("sessionNotFound");
-  if (rows.length !== 1) throw new Error("contractViolation");
-  const value = rows[0];
-  if (typeof value !== "object" || value === null || Array.isArray(value)) {
-    throw new Error("contractViolation");
-  }
-  const row = value as Record<string, unknown>;
-  if (
-    !exactKeys(row, SESSION_KEYS) ||
-    row.id !== sessionId ||
-    row.user_id !== ownerId ||
-    !["active", "archived"].includes(String(row.status))
-  ) {
-    throw new Error("contractViolation");
-  }
-}
-
 export function buildMessagesResponse(
   rows: unknown,
   limit: number,
@@ -137,23 +134,59 @@ export function buildMessagesResponse(
     }
     const row = value as Record<string, unknown>;
     if (
-      !UUID_PATTERN.test(String(row.id)) ||
+      !UUID_PATTERN.test(String(row.message_id)) ||
       !UUID_PATTERN.test(String(row.session_id)) ||
       typeof row.role !== "string" ||
       !ALLOWED_ROLES.has(row.role) ||
-      typeof row.content !== "string" ||
-      row.content.length === 0 ||
+      !["user", "stasis", "specialist", "systemNotice", "unknown"].includes(
+        String(row.author_type),
+      ) ||
+      ![
+        "userProvided",
+        "stasisConsolidated",
+        "specialistProvided",
+        "systemGenerated",
+        "imported",
+        "unknown",
+      ].includes(String(row.provenance_type)) ||
+      !["productVisible", "ownerOnly", "systemVisible", "redacted"].includes(
+        String(row.visibility_type),
+      ) ||
+      !["accepted", "redacted"].includes(String(row.message_status)) ||
       !validTimestamp(row.created_at)
     ) {
       throw new Error("contractViolation");
     }
-    return {
-      messageId: row.id as string,
+    const redacted = row.visibility_type === "redacted";
+    if (
+      redacted
+        ? row.content !== null
+        : typeof row.content !== "string" || row.content.length === 0
+    ) {
+      throw new Error("contractViolation");
+    }
+    const coherentVisible =
+      (row.role === "user" && row.author_type === "user" &&
+        row.provenance_type === "userProvided" &&
+        ["productVisible", "ownerOnly"].includes(
+          String(row.visibility_type),
+        )) ||
+      (row.role === "system" && row.author_type === "systemNotice" &&
+        row.provenance_type === "systemGenerated" &&
+        ["systemVisible", "ownerOnly"].includes(String(row.visibility_type)));
+    if (!redacted && !coherentVisible) throw new Error("contractViolation");
+    const message: PublicMessage = {
+      messageId: row.message_id as string,
       sessionId: row.session_id as string,
       role: row.role as PublicMessage["role"],
-      content: row.content as string,
       createdAt: row.created_at as string,
+      author: { type: row.author_type as PublicMessage["author"]["type"] },
+      status: row.message_status as PublicMessage["status"],
+      provenance: row.provenance_type as PublicMessage["provenance"],
+      visibility: row.visibility_type as PublicMessage["visibility"],
     };
+    if (!redacted) message.content = row.content as string;
+    return message;
   });
   const last = page.at(-1);
   return {

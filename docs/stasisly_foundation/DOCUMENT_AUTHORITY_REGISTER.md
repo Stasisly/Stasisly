@@ -1,5 +1,12 @@
 # Document Authority Register
 
+## FOUNDATION-013D authority addition
+
+ADR-F013 is normative for Message author/provenance/visibility. The 013D
+implementation record is verified local evidence; transitional role/schema
+documents remain subordinate and do not authorize Stasis, specialists, Engine,
+routes or remote execution.
+
 ## Metadata
 
 | Field | Value |

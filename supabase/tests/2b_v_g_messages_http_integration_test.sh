@@ -54,7 +54,8 @@ postconditions() {
       (select count(*) from public.specialists where name like 'test_only_2b_v_g%'),
       (select count(*) from public.specialist_catalog where display_name like 'test_only_2b_v_g%'),
       (select count(*) from public.chat_sessions where specialist_id::text like '5e200000-0000-4000-8000-%'),
-      (select count(*) from public.messages m join public.chat_sessions s on s.id = m.session_id where s.specialist_id::text like '5e200000-0000-4000-8000-%')
+      (select count(*) from public.messages m join public.chat_sessions s on s.id = m.session_id where s.specialist_id::text like '5e200000-0000-4000-8000-%'),
+      (select count(*) from public.conversation_idempotency where subject_id in (select id from auth.users where email like 'test_only_2b_v_g_%@stasisly.local'))
     );"
 }
 
@@ -68,7 +69,7 @@ cleanup() {
     >/dev/null 2>&1 || true
   local counts
   counts="$(postconditions 2>/dev/null || true)"
-  if [ "$counts" != "0|0|0|0|0|0" ]; then
+  if [ "$counts" != "0|0|0|0|0|0|0" ]; then
     echo "2B-V-G cleanup did not leave zero fixtures: ${counts:-unavailable}" >&2
     supabase db reset --local --no-seed >/dev/null 2>&1 || true
   fi
@@ -78,13 +79,15 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 echo "2B-V-G stage: verify clean preconditions"
-test "$(postconditions)" = "0|0|0|0|0|0"
+test "$(postconditions)" = "0|0|0|0|0|0|0"
 
 cat > "$edge_env" <<EOF
 SUPABASE_URL=$API_URL
 SUPABASE_ANON_KEY=$ANON_KEY
 SUPABASE_SERVICE_ROLE_KEY=$SERVICE_ROLE_KEY
 STASISLY_ALLOW_LOCAL_ONLY=true
+STASISLY_RUNTIME_MODE=local
+STASISLY_ALLOW_DEVELOPMENT_REMOTE=false
 EOF
 chmod 600 "$edge_env"
 
@@ -113,14 +116,14 @@ insert into public.chat_sessions(id,user_id,specialist_id,started_at,last_messag
 ('$owner_active_session_id','$owner_id','5e200000-0000-4000-8000-000000000001',now() - interval '20 minutes',now() - interval '17 minutes','active',4,null),
 ('$owner_archived_session_id','$owner_id','5e200000-0000-4000-8000-000000000001',now() - interval '40 minutes',now() - interval '29 minutes','archived',2,now() - interval '28 minutes'),
 ('$other_session_id','$other_id','5e200000-0000-4000-8000-000000000001',now() - interval '60 minutes',now() - interval '30 minutes','active',1,null);
-insert into public.messages(id,session_id,role,content,created_at) values
-('5e500000-0000-4000-8000-000000000001','$owner_active_session_id','user','active user one',now() - interval '19 minutes'),
-('5e500000-0000-4000-8000-000000000002','$owner_active_session_id','assistant','active assistant',now() - interval '19 minutes'),
-('5e500000-0000-4000-8000-000000000003','$owner_active_session_id','system','active system',now() - interval '18 minutes'),
-('5e500000-0000-4000-8000-000000000004','$owner_active_session_id','tool','active tool',now() - interval '17 minutes'),
-('5e500000-0000-4000-8000-000000000005','$owner_archived_session_id','user','archived historical one',now() - interval '30 minutes'),
-('5e500000-0000-4000-8000-000000000006','$owner_archived_session_id','assistant','archived historical assistant',now() - interval '29 minutes'),
-('5e500000-0000-4000-8000-000000000007','$other_session_id','user','other private',now() - interval '30 minutes');" >/dev/null
+insert into public.messages(id,session_id,role,content,created_at,author_type,provenance_type,visibility_type) values
+('5e500000-0000-4000-8000-000000000001','$owner_active_session_id','user','active user one',now() - interval '19 minutes','user','userProvided','productVisible'),
+('5e500000-0000-4000-8000-000000000002','$owner_active_session_id','assistant','active assistant',now() - interval '19 minutes','unknown','unknown','unknown'),
+('5e500000-0000-4000-8000-000000000003','$owner_active_session_id','system','active system',now() - interval '18 minutes','systemNotice','systemGenerated','systemVisible'),
+('5e500000-0000-4000-8000-000000000004','$owner_active_session_id','tool','active tool',now() - interval '17 minutes','unknown','unknown','internal'),
+('5e500000-0000-4000-8000-000000000005','$owner_archived_session_id','user','archived historical one',now() - interval '30 minutes','user','userProvided','productVisible'),
+('5e500000-0000-4000-8000-000000000006','$owner_archived_session_id','assistant','archived historical assistant',now() - interval '29 minutes','unknown','unknown','unknown'),
+('5e500000-0000-4000-8000-000000000007','$other_session_id','user','other private',now() - interval '30 minutes','user','userProvided','productVisible');" >/dev/null
 
 initial_count="$(db_psql -Atc "select message_count from public.chat_sessions where id='$owner_active_session_id';")"
 initial_last_message_at="$(db_psql -Atc "select last_message_at from public.chat_sessions where id='$owner_active_session_id';")"
@@ -142,8 +145,13 @@ if rg -n '/rest/v1/(messages|chat_sessions)' \
   echo "Direct table write/read path found in send-user-message source" >&2
   exit 1
 fi
-rg -n '/rest/v1/messages' supabase/functions/list-session-messages/index.ts
-rg -n '/rest/v1/chat_sessions' supabase/functions/list-session-messages/index.ts
+rg -n '/rest/v1/rpc/list_own_conversation_messages_core' \
+  supabase/functions/list-session-messages/index.ts
+if rg -n '/rest/v1/(messages|chat_sessions)' \
+  supabase/functions/list-session-messages/index.ts; then
+  echo "Direct table path found in list-session-messages source" >&2
+  exit 1
+fi
 if rg -n '\\b(POST|PATCH|PUT|DELETE)\\b' \
   supabase/functions/list-session-messages/index.ts; then
   echo "Mutating HTTP method found in list-session-messages runtime" >&2
@@ -208,6 +216,6 @@ cleanup
 trap - EXIT INT TERM
 counts="$(postconditions)"
 echo "$counts"
-test "$counts" = "0|0|0|0|0|0"
+test "$counts" = "0|0|0|0|0|0|0"
 
 echo "2B-V-G messages local HTTP integration harness: PASS"

@@ -1,5 +1,12 @@
 # Conversation API Target Contracts
 
+## Implemented local Message contract
+
+Send accepts only Conversation/session reference, content and transport
+idempotency. List returns sanitized author/status/provenance/visibility metadata;
+redacted content is omitted. Active operation IDs are
+`conversation.message.sendUser` and `conversation.message.listOwn` only.
+
 ## Metadata
 
 ```text

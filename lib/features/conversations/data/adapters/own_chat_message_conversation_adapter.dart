@@ -7,20 +7,19 @@ class OwnChatMessageConversationAdapter {
   const OwnChatMessageConversationAdapter();
 
   ConversationMessage map(OwnChatMessage source) {
-    final (author, provenance) = switch (source.role) {
-      OwnChatMessageRole.user => (
-        ConversationMessageAuthor.user,
-        ConversationMessageProvenance.userProvided,
-      ),
-      OwnChatMessageRole.system => (
-        ConversationMessageAuthor.systemNotice,
-        ConversationMessageProvenance.systemGenerated,
-      ),
-      OwnChatMessageRole.assistant || OwnChatMessageRole.tool => (
-        ConversationMessageAuthor.unknown,
-        ConversationMessageProvenance.unknown,
-      ),
+    final author = switch (source.authorType) {
+      OwnChatMessageAuthorType.user => const UserAuthor(),
+      OwnChatMessageAuthorType.systemNotice => const SystemNoticeAuthor(),
+      OwnChatMessageAuthorType.stasis ||
+      OwnChatMessageAuthorType.specialist ||
+      OwnChatMessageAuthorType.unknown => const UnknownAuthor(),
     };
+    final provenance = ConversationMessageProvenance.values.firstWhere(
+      (value) => value.name == source.provenance.name,
+    );
+    final visibility = ConversationMessageVisibility.values.firstWhere(
+      (value) => value.name == source.visibility.name,
+    );
     final conversationId = ConversationId.tryParse(source.sessionId);
     final content = source.content.trim();
     if (conversationId == null ||
@@ -31,14 +30,22 @@ class OwnChatMessageConversationAdapter {
         'Invalid transitional message contract.',
       );
     }
+    if (author is UnknownAuthor || !visibility.isProductReadable) {
+      throw const ConversationContractException(
+        'Message is not safely attributable and Product-visible.',
+      );
+    }
     return ConversationMessage(
       messageId: source.messageId.trim(),
       conversationId: conversationId,
       author: author,
       content: source.content,
       createdAt: source.createdAt.toUtc(),
-      status: ConversationMessageStatus.accepted,
-      provenanceSummary: provenance,
+      status: source.status == OwnChatMessageStatus.redacted
+          ? ConversationMessageStatus.redacted
+          : ConversationMessageStatus.accepted,
+      provenance: provenance,
+      visibility: visibility,
     );
   }
 }
