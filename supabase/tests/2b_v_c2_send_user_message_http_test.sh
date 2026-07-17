@@ -102,10 +102,10 @@ done
 db_psql -c "insert into public.users(id, display_name) values
 ('$owner_id','test_only_2b_v_c2 owner'),
 ('$other_id','test_only_2b_v_c2 other');
-insert into public.chat_sessions(id,user_id,specialist_id,started_at,last_message_at,status,message_count) values
-('5c400000-0000-4000-8000-000000000001','$owner_id','5c200000-0000-4000-8000-000000000001','2026-06-20 08:00:00','2026-06-20 08:00:00','active',0),
-('5c400000-0000-4000-8000-000000000002','$owner_id','5c200000-0000-4000-8000-000000000001','2026-06-20 08:30:00','2026-06-20 08:45:00','archived',0),
-('5c400000-0000-4000-8000-000000000003','$other_id','5c200000-0000-4000-8000-000000000001','2026-06-20 09:00:00','2026-06-20 09:00:00','active',0);" >/dev/null
+insert into public.chat_sessions(id,user_id,specialist_id,started_at,last_message_at,status,message_count,archived_at) values
+('5c400000-0000-4000-8000-000000000001','$owner_id','5c200000-0000-4000-8000-000000000001','2026-06-20 08:00:00','2026-06-20 08:00:00','active',0,null),
+('5c400000-0000-4000-8000-000000000002','$owner_id','5c200000-0000-4000-8000-000000000001','2026-06-20 08:30:00','2026-06-20 08:45:00','archived',0,'2026-06-20 08:50:00'),
+('5c400000-0000-4000-8000-000000000003','$other_id','5c200000-0000-4000-8000-000000000001','2026-06-20 09:00:00','2026-06-20 09:00:00','active',0,null);" >/dev/null
 
 catalog_before="$(db_psql -Atc "select md5(string_agg(row_to_json(c)::text,'' order by c.id)) from public.specialist_catalog c where display_name like 'test_only_2b_v_c2%';")"
 specialist_before="$(db_psql -Atc "select md5(string_agg(row_to_json(s)::text,'' order by s.id)) from public.specialists s where name like 'test_only_2b_v_c2%';")"

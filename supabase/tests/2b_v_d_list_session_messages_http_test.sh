@@ -99,10 +99,10 @@ done
 db_psql -c "insert into public.users(id, display_name) values
 ('$owner_id','test_only_2b_v_d owner'),
 ('$other_id','test_only_2b_v_d other');
-insert into public.chat_sessions(id,user_id,specialist_id,started_at,last_message_at,status,message_count) values
-('5d400000-0000-4000-8000-000000000001','$owner_id','5d200000-0000-4000-8000-000000000001','2026-06-21 08:00:00','2026-06-21 10:00:00','active',4),
-('5d400000-0000-4000-8000-000000000002','$owner_id','5d200000-0000-4000-8000-000000000001','2026-06-21 07:00:00','2026-06-21 09:00:00','archived',2),
-('5d400000-0000-4000-8000-000000000003','$other_id','5d200000-0000-4000-8000-000000000001','2026-06-21 06:00:00','2026-06-21 08:30:00','active',1);
+insert into public.chat_sessions(id,user_id,specialist_id,started_at,last_message_at,status,message_count,archived_at) values
+('5d400000-0000-4000-8000-000000000001','$owner_id','5d200000-0000-4000-8000-000000000001','2026-06-21 08:00:00','2026-06-21 10:00:00','active',4,null),
+('5d400000-0000-4000-8000-000000000002','$owner_id','5d200000-0000-4000-8000-000000000001','2026-06-21 07:00:00','2026-06-21 09:00:00','archived',2,'2026-06-21 09:30:00'),
+('5d400000-0000-4000-8000-000000000003','$other_id','5d200000-0000-4000-8000-000000000001','2026-06-21 06:00:00','2026-06-21 08:30:00','active',1,null);
 insert into public.messages(id,session_id,role,content,created_at) values
 ('5d500000-0000-4000-8000-000000000001','5d400000-0000-4000-8000-000000000001','user','active user one','2026-06-21 08:01:00'),
 ('5d500000-0000-4000-8000-000000000002','5d400000-0000-4000-8000-000000000001','assistant','active assistant','2026-06-21 08:01:00'),

@@ -11,7 +11,6 @@ import {
 import { assertAllowedRuntime } from "../_shared/runtime_guard.ts";
 import {
   buildListResponse,
-  internalSpecialistIds,
   type ListRequest,
   parseListRequest,
 } from "./contract.ts";
@@ -79,41 +78,8 @@ function privilegedHeaders(serviceRoleKey: string): HeadersInit {
   };
 }
 
-function sessionsUrl(
-  baseUrl: URL,
-  ownerId: string,
-  request: ListRequest,
-): URL {
-  const url = new URL("/rest/v1/chat_sessions", baseUrl);
-  url.searchParams.set(
-    "select",
-    "id,user_id,specialist_id,started_at,last_message_at,status,message_count",
-  );
-  url.searchParams.set("user_id", `eq.${ownerId}`);
-  if (request.status !== "all") {
-    url.searchParams.set("status", `eq.${request.status}`);
-  }
-  if (request.cursor) {
-    const timestamp = request.cursor.lastMessageAt;
-    const id = request.cursor.sessionId;
-    url.searchParams.set(
-      "or",
-      `(last_message_at.lt.${timestamp},and(last_message_at.eq.${timestamp},id.lt.${id}))`,
-    );
-  }
-  url.searchParams.set("order", "last_message_at.desc,id.desc");
-  url.searchParams.set("limit", String(request.limit + 1));
-  return url;
-}
-
-function catalogUrl(baseUrl: URL, specialistIds: string[]): URL {
-  const url = new URL("/rest/v1/specialist_catalog", baseUrl);
-  url.searchParams.set(
-    "select",
-    "id,specialist_id,display_name,product_area,is_published",
-  );
-  url.searchParams.set("specialist_id", `in.(${specialistIds.join(",")})`);
-  url.searchParams.set("is_published", "eq.true");
+function sessionsUrl(baseUrl: URL): URL {
+  const url = new URL("/rest/v1/rpc/list_own_conversations_core", baseUrl);
   return url;
 }
 
@@ -149,23 +115,24 @@ export function createHandler(
       const ownerId = authorization.identitySubjectId;
       const sessionRows = await requestJson(
         fetcher,
-        sessionsUrl(baseUrl, ownerId, listRequest),
-        { headers: privilegedHeaders(config.serviceRoleKey) },
+        sessionsUrl(baseUrl),
+        {
+          method: "POST",
+          headers: {
+            ...privilegedHeaders(config.serviceRoleKey),
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            p_owner_user_id: ownerId,
+            p_status: listRequest.status,
+            p_limit: listRequest.limit + 1,
+            p_cursor_updated_at: listRequest.cursor?.lastMessageAt ?? null,
+            p_cursor_id: listRequest.cursor?.sessionId ?? null,
+          }),
+        },
         "backendMisconfigured",
       );
-      const specialistIds = internalSpecialistIds(sessionRows);
-      const catalogRows = specialistIds.length === 0 ? [] : await requestJson(
-        fetcher,
-        catalogUrl(baseUrl, specialistIds),
-        { headers: privilegedHeaders(config.serviceRoleKey) },
-        "backendMisconfigured",
-      );
-      const response = buildListResponse(
-        sessionRows,
-        catalogRows,
-        ownerId,
-        listRequest.limit,
-      );
+      const response = buildListResponse(sessionRows, listRequest.limit);
       finalizeBackendAuthorization(
         authorization,
         BACKEND_OPERATIONS.listOwnChatSessions,

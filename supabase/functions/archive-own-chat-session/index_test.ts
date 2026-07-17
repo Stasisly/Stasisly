@@ -78,7 +78,7 @@ Deno.test("body accepts only sessionId", async () => {
 Deno.test("archive result is minimal and exact", async () => {
   assertEquals(
     sanitizeArchiveResult([{
-      id: SESSION_ID,
+      conversation_id: SESSION_ID,
       status: "archived",
     }], SESSION_ID),
     { sessionId: SESSION_ID, status: "archived" },
@@ -86,12 +86,16 @@ Deno.test("archive result is minimal and exact", async () => {
   for (
     const rows of [
       [],
-      [{ id: SESSION_ID, status: "active" }],
-      [{ id: OWNER_A, status: "archived" }],
-      [{ id: SESSION_ID, status: "archived", last_message_at: "x" }],
+      [{ conversation_id: SESSION_ID, status: "active" }],
+      [{ conversation_id: OWNER_A, status: "archived" }],
+      [{
+        conversation_id: SESSION_ID,
+        status: "archived",
+        last_message_at: "x",
+      }],
       [
-        { id: SESSION_ID, status: "archived" },
-        { id: SESSION_ID, status: "archived" },
+        { conversation_id: SESSION_ID, status: "archived" },
+        { conversation_id: SESSION_ID, status: "archived" },
       ],
     ]
   ) {
@@ -102,7 +106,7 @@ Deno.test("archive result is minimal and exact", async () => {
   }
 });
 
-Deno.test("handler performs one narrow PATCH and returns minimal response", async () => {
+Deno.test("handler performs one narrow RPC and returns minimal response", async () => {
   let patchUrl = "";
   let patchBody = "";
   const paths: string[] = [];
@@ -113,11 +117,14 @@ Deno.test("handler performs one narrow PATCH and returns minimal response", asyn
       if (url.pathname === "/auth/v1/user") {
         return Response.json({ id: OWNER_A });
       }
-      if (url.pathname === "/rest/v1/chat_sessions") {
+      if (url.pathname === "/rest/v1/rpc/archive_own_conversation_core") {
         patchUrl = url.toString();
         patchBody = String(init?.body);
-        assertEquals(init?.method, "PATCH");
-        return Response.json([{ id: SESSION_ID, status: "archived" }]);
+        assertEquals(init?.method, "POST");
+        return Response.json([{
+          conversation_id: SESSION_ID,
+          status: "archived",
+        }]);
       }
       return new Response(null, { status: 404 });
     }) as typeof fetch,
@@ -129,13 +136,16 @@ Deno.test("handler performs one narrow PATCH and returns minimal response", asyn
   assertEquals(body, {
     session: { sessionId: SESSION_ID, status: "archived" },
   });
-  assertEquals(JSON.parse(patchBody), { status: "archived" });
+  assertEquals(JSON.parse(patchBody), {
+    p_owner_user_id: OWNER_A,
+    p_conversation_id: SESSION_ID,
+  });
   const url = new URL(patchUrl);
-  assertEquals(url.searchParams.get("id"), `eq.${SESSION_ID}`);
-  assertEquals(url.searchParams.get("user_id"), `eq.${OWNER_A}`);
-  assertEquals(url.searchParams.get("status"), "eq.active");
-  assertEquals(url.searchParams.get("select"), "id,status");
-  assertEquals(paths, ["/auth/v1/user", "/rest/v1/chat_sessions"]);
+  assertEquals(url.search, "");
+  assertEquals(paths, [
+    "/auth/v1/user",
+    "/rest/v1/rpc/archive_own_conversation_core",
+  ]);
 });
 
 Deno.test("missing, foreign and archived all produce indistinguishable response", async () => {

@@ -261,21 +261,23 @@ values (
   '{"system":"test_only"}'
 );
 insert into public.chat_sessions (
-  id, user_id, specialist_id, started_at, last_message_at, status
+  id, user_id, specialist_id, started_at, last_message_at, status, archived_at
 ) values (
   '33000000-0000-4000-8000-000000000001',
   '11000000-0000-4000-8000-000000000001',
   '22000000-0000-4000-8000-000000000001',
   '2026-06-15 10:00:00',
   '2026-06-15 10:00:00',
-  'active'
+  'active',
+  null
 ), (
   '33000000-0000-4000-8000-000000000002',
   '11000000-0000-4000-8000-000000000001',
   '22000000-0000-4000-8000-000000000001',
   '2026-06-15 11:00:00',
   '2026-06-15 11:00:00',
-  'archived'
+  'archived',
+  '2026-06-15 11:30:00'
 );
 
 select lives_ok(

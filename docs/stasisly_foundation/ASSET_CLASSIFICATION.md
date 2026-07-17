@@ -206,3 +206,14 @@ deuda residual.
 - generación Flutter de operation-attempt IDs: `FOUNDATION_ADOPTED_LOCALLY`;
   no añade autoridad ni Product wiring.
 - API backend canónica completa, remoto y Product routes: `NOT_IMPLEMENTED`.
+
+## Adopción de FOUNDATION-013C
+
+- list/read/archive/restore e historia Message propia:
+  `FOUNDATION_ADOPTED_LOCALLY` mediante RPCs estrechas y Edge PDP/PEP.
+- `chat_sessions`/`messages` y endpoints session-named: `TRANSITIONAL`; no se
+  renombran ni se exponen por acceso directo de cliente.
+- archive/restore: `FOUNDATION_ADOPTED_LOCALLY / STATE_IDEMPOTENT`; archive no
+  elimina identidad ni historia y restore no crea una Conversation nueva.
+- API backend Conversation: `PARTIALLY_IMPLEMENTED`; author/provenance, UI,
+  rutas, delete/pendingDeletion y remoto siguen `NOT_IMPLEMENTED`.

@@ -10,7 +10,7 @@
 | Owner | Dirección de Documentación y Conocimiento under Rector (conceptual) |
 | Approver | Founder for authority assignments |
 | Version | 2.0 |
-| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-013B |
+| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-013C |
 | Supersedes | No Foundation register |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -81,6 +81,8 @@
 | `adr/ADR-F010-canonical-conversation-contracts-and-transitional-adapters.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Product + Architecture under Stasis/Rector | Founder | Yes | Session contracts as direct Product vocabulary | ADR-F009; FOUNDATION-013A | Conversation contracts, owner construction, mapping or adapter strategy change |
 | `implementation/FOUNDATION-013B_TRANSACTIONAL_CONVERSATION_CREATION_AND_IDEMPOTENCY.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Backend + Security + Product Architecture | Evidence owner | No, local implementation evidence | Create TOCTOU and duplicate retry behavior | ADR-F011; FOUNDATION-013A | Transaction, idempotency, grants, retention or remote activation change |
 | `adr/ADR-F011-transactional-conversation-creation-and-idempotency.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Backend + Security under Stasis/Rector | Founder | Yes | Multi-request create and non-idempotent writes | ADR-F009/F010; FOUNDATION-013B | Transaction, locking, idempotency scope or trusted-boundary change |
+| `implementation/FOUNDATION-013C_CANONICAL_CONVERSATION_READ_LIST_ARCHIVE_RESTORE.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Backend + Product Architecture + Security + QA | Evidence owner | No, local implementation evidence | Transitional read/list/archive and absent restore | ADR-F012; FOUNDATION-013A/B | Lifecycle, DTO, pagination, endpoint or remote activation change |
+| `adr/ADR-F012-canonical-conversation-read-and-lifecycle-boundary.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Backend + Product Architecture + Security under Stasis/Rector | Founder | Yes | Distributed lifecycle/ownership and non-idempotent archive replay | ADR-F009-F011; FOUNDATION-013C | Lifecycle, ownership, pagination or trusted-boundary change |
 | `DOCUMENT_AUTHORITY_REGISTER.md` | ACTIVE | 6 | Documentation under Rector (conceptual) | Founder for authority changes | Operational register | No prior register | Documentation governance | Any authority/status/supersession change |
 | `archive_index/DISCOVERY_ARCHIVE_INDEX.md` | ACTIVE | 6 | Documentation | Evidence owner | No, evidence/index | Informal Discovery locations | Discovery archive | Archive path or successor changes |
 | `implementation/FOUNDATION_SESSION_TRACKER.md` | ACTIVE | 6 | Program Management | Evidence owner | No, tracker | Historical Discovery tracker for Foundation work | Foundation packages | Every completed Foundation package |

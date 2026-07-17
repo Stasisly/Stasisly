@@ -238,7 +238,7 @@ select throws_ok(
   'P0001', 'session_not_found', 'non-owner receives opaque not found'
 );
 
-update public.chat_sessions set status = 'archived'
+update public.chat_sessions set status = 'archived', archived_at = now()
 where id = (select session_id from foundation_013b_create_first);
 select throws_ok(
   $$select * from public.send_user_message_core(

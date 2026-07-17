@@ -109,10 +109,10 @@ done
 db_psql -c "insert into public.users(id, display_name) values
 ('$owner_id','test_only_2b_v_g owner'),
 ('$other_id','test_only_2b_v_g other');
-insert into public.chat_sessions(id,user_id,specialist_id,started_at,last_message_at,status,message_count) values
-('$owner_active_session_id','$owner_id','5e200000-0000-4000-8000-000000000001',now() - interval '20 minutes',now() - interval '17 minutes','active',4),
-('$owner_archived_session_id','$owner_id','5e200000-0000-4000-8000-000000000001',now() - interval '40 minutes',now() - interval '29 minutes','archived',2),
-('$other_session_id','$other_id','5e200000-0000-4000-8000-000000000001',now() - interval '60 minutes',now() - interval '30 minutes','active',1);
+insert into public.chat_sessions(id,user_id,specialist_id,started_at,last_message_at,status,message_count,archived_at) values
+('$owner_active_session_id','$owner_id','5e200000-0000-4000-8000-000000000001',now() - interval '20 minutes',now() - interval '17 minutes','active',4,null),
+('$owner_archived_session_id','$owner_id','5e200000-0000-4000-8000-000000000001',now() - interval '40 minutes',now() - interval '29 minutes','archived',2,now() - interval '28 minutes'),
+('$other_session_id','$other_id','5e200000-0000-4000-8000-000000000001',now() - interval '60 minutes',now() - interval '30 minutes','active',1,null);
 insert into public.messages(id,session_id,role,content,created_at) values
 ('5e500000-0000-4000-8000-000000000001','$owner_active_session_id','user','active user one',now() - interval '19 minutes'),
 ('5e500000-0000-4000-8000-000000000002','$owner_active_session_id','assistant','active assistant',now() - interval '19 minutes'),

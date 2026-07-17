@@ -62,10 +62,10 @@ done
 db_psql -c "insert into public.users(id,display_name) values
 ('$owner_a','test_only_2b_iv_e owner a'),
 ('$owner_b','test_only_2b_iv_e owner b');
-insert into public.chat_sessions(id,user_id,specialist_id,started_at,last_message_at,status,message_count) values
-('4e400000-0000-4000-8000-000000000001','$owner_a','4e200000-0000-4000-8000-000000000001','2026-06-14 08:00:00','2026-06-14 12:34:56','active',7),
-('4e400000-0000-4000-8000-000000000002','$owner_a','4e200000-0000-4000-8000-000000000001','2026-06-14 08:00:00','2026-06-14 11:00:00','archived',3),
-('4e400000-0000-4000-8000-000000000003','$owner_b','4e200000-0000-4000-8000-000000000001','2026-06-14 09:00:00','2026-06-14 13:00:00','active',5);" >/dev/null
+insert into public.chat_sessions(id,user_id,specialist_id,started_at,last_message_at,status,message_count,archived_at) values
+('4e400000-0000-4000-8000-000000000001','$owner_a','4e200000-0000-4000-8000-000000000001','2026-06-14 08:00:00','2026-06-14 12:34:56','active',7,null),
+('4e400000-0000-4000-8000-000000000002','$owner_a','4e200000-0000-4000-8000-000000000001','2026-06-14 08:00:00','2026-06-14 11:00:00','archived',3,'2026-06-14 11:30:00'),
+('4e400000-0000-4000-8000-000000000003','$owner_b','4e200000-0000-4000-8000-000000000001','2026-06-14 09:00:00','2026-06-14 13:00:00','active',5,null);" >/dev/null
 
 db_psql -Atc "select row_to_json(s) from public.chat_sessions s where id='4e400000-0000-4000-8000-000000000001';" > "$tmp_dir/target-before.json"
 others_before="$(db_psql -Atc "select md5(string_agg(row_to_json(s)::text,'' order by s.id)) from public.chat_sessions s where specialist_id='4e200000-0000-4000-8000-000000000001' and id <> '4e400000-0000-4000-8000-000000000001';")"
@@ -97,7 +97,7 @@ test "$authority_status" = "400"
 test "$internal_status" = "400"
 test "$status_status" = "400"
 
-echo "2B-IV-E stage: owner archives and only status changes"
+echo "2B-IV-E stage: owner archives and only lifecycle fields change"
 success_status="$(call success "$token_a" "$valid_body")"
 test "$success_status" = "200"
 test "$(jq -r 'keys == ["session"]' "$tmp_dir/success.json")" = "true"
@@ -117,16 +117,19 @@ for field in id user_id specialist_id started_at last_message_at message_count; 
 done
 test "$(jq -r '.last_message_at' "$tmp_dir/target-after.json")" = "2026-06-14T12:34:56"
 
-echo "2B-IV-E stage: missing, foreign and already archived are indistinguishable"
+echo "2B-IV-E stage: missing/foreign opaque and archive replay idempotent"
 foreign_status="$(call foreign "$token_a" '{"sessionId":"4e400000-0000-4000-8000-000000000003"}')"
 archived_status="$(call archived "$token_a" '{"sessionId":"4e400000-0000-4000-8000-000000000002"}')"
 missing_status="$(call missing "$token_a" '{"sessionId":"4e400000-0000-4000-8000-000000000099"}')"
 repeat_status="$(call repeat "$token_a" "$valid_body")"
 test "$foreign_status" = "404"
-test "$archived_status" = "404"
+test "$archived_status" = "200"
 test "$missing_status" = "404"
-test "$repeat_status" = "404"
-for response in foreign archived missing repeat; do
+test "$repeat_status" = "200"
+for response in archived repeat; do
+  test "$(jq -r '.session.status' "$tmp_dir/$response.json")" = "archived"
+done
+for response in foreign missing; do
   test "$(jq -r '.error.code' "$tmp_dir/$response.json")" = "sessionNotFound"
   test "$(jq -r 'keys == ["error"] and (.error | keys == ["code","requestId"])' "$tmp_dir/$response.json")" = "true"
   if rg -n 'user_id|specialist_id|status|owner|archived|active|exists' "$tmp_dir/$response.json"; then

@@ -1,20 +1,15 @@
 const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const SESSION_KEYS = [
-  "id",
-  "last_message_at",
+  "archived_at",
+  "conversation_id",
   "message_count",
-  "specialist_id",
-  "started_at",
-  "status",
-  "user_id",
-].sort();
-const CATALOG_KEYS = [
-  "display_name",
-  "id",
-  "is_published",
   "product_area",
-  "specialist_id",
+  "selectable_specialist_id",
+  "specialist_display_name",
+  "status",
+  "created_at",
+  "updated_at",
 ].sort();
 
 export type StatusFilter = "active" | "archived" | "all";
@@ -33,19 +28,13 @@ export interface ListRequest {
 
 interface InternalSession {
   id: string;
-  userId: string;
-  specialistId: string;
-  startedAt: string;
-  lastMessageAt: string;
+  selectableSpecialistId: string;
+  specialistDisplayName: string;
+  productArea: string;
+  createdAt: string;
+  updatedAt: string;
   status: "active" | "archived";
   messageCount: number;
-}
-
-interface PublicCatalogEntry {
-  id: string;
-  specialistId: string;
-  displayName: string;
-  area: string;
 }
 
 export interface PublicSession {
@@ -122,7 +111,7 @@ export function parseListRequest(url: URL): ListRequest {
   };
 }
 
-function parseSessions(rows: unknown, ownerId: string): InternalSession[] {
+function parseSessions(rows: unknown): InternalSession[] {
   if (!Array.isArray(rows)) throw new Error("contractViolation");
   return rows.map((value) => {
     if (
@@ -131,76 +120,49 @@ function parseSessions(rows: unknown, ownerId: string): InternalSession[] {
     ) throw new Error("contractViolation");
     const row = value as Record<string, unknown>;
     if (
-      !UUID_PATTERN.test(String(row.id)) ||
-      row.user_id !== ownerId ||
-      !UUID_PATTERN.test(String(row.specialist_id)) ||
-      !validTimestamp(row.started_at) ||
-      !validTimestamp(row.last_message_at) ||
+      !UUID_PATTERN.test(String(row.conversation_id)) ||
+      !UUID_PATTERN.test(String(row.selectable_specialist_id)) ||
+      typeof row.specialist_display_name !== "string" ||
+      row.specialist_display_name.length === 0 ||
+      typeof row.product_area !== "string" || row.product_area.length === 0 ||
+      !validTimestamp(row.created_at) ||
+      !validTimestamp(row.updated_at) ||
       !["active", "archived"].includes(String(row.status)) ||
+      (row.status === "active" && row.archived_at !== null) ||
+      (row.status === "archived" && !validTimestamp(row.archived_at)) ||
       !Number.isInteger(row.message_count) ||
       Number(row.message_count) < 0
     ) throw new Error("contractViolation");
     return {
-      id: row.id as string,
-      userId: row.user_id as string,
-      specialistId: row.specialist_id as string,
-      startedAt: row.started_at,
-      lastMessageAt: row.last_message_at,
+      id: row.conversation_id as string,
+      selectableSpecialistId: row.selectable_specialist_id as string,
+      specialistDisplayName: row.specialist_display_name as string,
+      productArea: row.product_area as string,
+      createdAt: row.created_at,
+      updatedAt: row.updated_at,
       status: row.status as "active" | "archived",
       messageCount: row.message_count as number,
     };
   });
 }
 
-function parseCatalog(rows: unknown): Map<string, PublicCatalogEntry> {
-  if (!Array.isArray(rows)) throw new Error("contractViolation");
-  const entries = new Map<string, PublicCatalogEntry>();
-  for (const value of rows) {
-    if (
-      typeof value !== "object" || value === null || Array.isArray(value) ||
-      !exactKeys(value as Record<string, unknown>, CATALOG_KEYS)
-    ) throw new Error("contractViolation");
-    const row = value as Record<string, unknown>;
-    if (
-      !UUID_PATTERN.test(String(row.id)) ||
-      !UUID_PATTERN.test(String(row.specialist_id)) ||
-      row.is_published !== true ||
-      typeof row.display_name !== "string" || row.display_name.length === 0 ||
-      typeof row.product_area !== "string" || row.product_area.length === 0 ||
-      entries.has(row.specialist_id as string)
-    ) throw new Error("contractViolation");
-    entries.set(row.specialist_id as string, {
-      id: row.id as string,
-      specialistId: row.specialist_id as string,
-      displayName: row.display_name,
-      area: row.product_area,
-    });
-  }
-  return entries;
-}
-
 export function buildListResponse(
   sessionRows: unknown,
-  catalogRows: unknown,
-  ownerId: string,
   limit: number,
 ): { items: PublicSession[]; nextCursor: string | null } {
-  const sessions = parseSessions(sessionRows, ownerId);
+  const sessions = parseSessions(sessionRows);
   if (sessions.length > limit + 1) throw new Error("contractViolation");
   const page = sessions.slice(0, limit);
-  const catalog = parseCatalog(catalogRows);
   const items = page.map((session) => {
-    const entry = catalog.get(session.specialistId);
-    if (!entry) throw new Error("contractViolation");
     return {
       sessionId: session.id,
       selectableSpecialist: {
-        id: entry.id,
-        displayName: entry.displayName,
-        area: entry.area,
+        id: session.selectableSpecialistId,
+        displayName: session.specialistDisplayName,
+        area: session.productArea,
       },
-      startedAt: session.startedAt,
-      lastMessageAt: session.lastMessageAt,
+      startedAt: session.createdAt,
+      lastMessageAt: session.updatedAt,
       status: session.status,
       messageCount: session.messageCount,
     };
@@ -211,21 +173,9 @@ export function buildListResponse(
     nextCursor: sessions.length > limit && last
       ? encodeCursor({
         v: 1,
-        lastMessageAt: last.lastMessageAt,
+        lastMessageAt: last.updatedAt,
         sessionId: last.id,
       })
       : null,
   };
-}
-
-export function internalSpecialistIds(sessionRows: unknown): string[] {
-  if (!Array.isArray(sessionRows)) throw new Error("contractViolation");
-  const values = sessionRows.map((row) => {
-    if (
-      typeof row !== "object" || row === null || Array.isArray(row) ||
-      typeof (row as Record<string, unknown>).specialist_id !== "string"
-    ) throw new Error("contractViolation");
-    return (row as Record<string, string>).specialist_id;
-  });
-  return [...new Set(values)];
 }

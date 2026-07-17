@@ -35,8 +35,9 @@ export function sanitizeArchiveResult(
   const record = value as Record<string, unknown>;
   const keys = Object.keys(record).sort();
   if (
-    keys.length !== 2 || keys[0] !== "id" || keys[1] !== "status" ||
-    record.id !== expectedSessionId || record.status !== "archived"
+    keys.length !== 2 || keys[0] !== "conversation_id" ||
+    keys[1] !== "status" || record.conversation_id !== expectedSessionId ||
+    record.status !== "archived"
   ) throw new Error("contractViolation");
   return { sessionId: expectedSessionId, status: "archived" };
 }

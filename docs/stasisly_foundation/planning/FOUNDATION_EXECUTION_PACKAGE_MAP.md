@@ -5,7 +5,7 @@
 Status: **APPROVED working execution structure**. Package status is recorded
 below; every future package requires its own approval and exact scope.
 
-Package status after FOUNDATION-013B:
+Package status after FOUNDATION-013C:
 
 ```text
 FOUNDATION-007: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
@@ -16,7 +16,8 @@ FOUNDATION-011: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
 FOUNDATION-012: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
 FOUNDATION-013A: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
 FOUNDATION-013B: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
-FOUNDATION-013C..013F: NOT EXECUTED
+FOUNDATION-013C: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
+FOUNDATION-013D..013F: NOT EXECUTED
 FOUNDATION-014..020: NOT EXECUTED
 ```
 
@@ -48,8 +49,9 @@ FOUNDATION-014..020: NOT EXECUTED
    dependency becomes necessary.
 5. FOUNDATION-013A implements canonical Product Conversation contracts and
    adapters; FOUNDATION-013B implements local transactional create/send and
-   idempotency. FOUNDATION-013C is next only after separate approval; routes,
-   legacy deletion and remote remain excluded.
+   idempotency; FOUNDATION-013C implements local lifecycle/history. 013D is
+   next only after separate approval; routes, legacy deletion and remote remain
+   excluded.
 
 ## FOUNDATION-013 child sequence
 
@@ -57,7 +59,7 @@ FOUNDATION-014..020: NOT EXECUTED
 |---|---|---|
 | 013A | Canonical Product Conversation contracts and adapters — IMPLEMENTED LOCALLY | No routes, schema or legacy deletion |
 | 013B | Transactional creation, TOCTOU and create/send idempotency — IMPLEMENTED LOCALLY | No remote migration |
-| 013C | List/read/archive/restore/history boundary | No Product route registration |
+| 013C | List/read/archive/restore/history boundary — IMPLEMENTED LOCALLY | No Product route registration |
 | 013D | Message author, visibility and provenance contracts | No Engine trace exposure |
 | 013E | Legacy UI extraction, freeze guards and retirement migration | No removal before parity/data gates |
 | 013F | `/stasis` and `/conversations` Product routes/screens | No staging/production activation |

@@ -13,7 +13,7 @@ select is(
     where a.attrelid = 'public.chat_sessions'::regclass
       and a.attnum > 0 and not a.attisdropped
   ),
-  '{id,user_id,specialist_id,started_at,last_message_at,status,message_count}',
+  '{id,user_id,specialist_id,started_at,last_message_at,status,message_count,archived_at}',
   'chat_sessions has exactly the expected columns'
 );
 
@@ -131,7 +131,7 @@ select is(
 );
 
 select has_index(
-  'public', 'chat_sessions', 'idx_chat_sessions_owner_listing',
+  'public', 'chat_sessions', 'idx_chat_sessions_owner_status_listing',
   'owner listing index exists'
 );
 select is(
@@ -139,9 +139,9 @@ select is(
     select pg_get_indexdef(i.indexrelid)
     from pg_catalog.pg_index i
     join pg_catalog.pg_class c on c.oid = i.indexrelid
-    where c.relname = 'idx_chat_sessions_owner_listing'
+    where c.relname = 'idx_chat_sessions_owner_status_listing'
   ),
-  'CREATE INDEX idx_chat_sessions_owner_listing ON public.chat_sessions USING btree (user_id, last_message_at DESC, id DESC)',
+  'CREATE INDEX idx_chat_sessions_owner_status_listing ON public.chat_sessions USING btree (user_id, status, last_message_at DESC, id DESC)',
   'owner listing index has the exact approved shape'
 );
 select ok(

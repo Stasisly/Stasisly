@@ -52,16 +52,18 @@ final remoteOwnChatSessionsRepositoryProvider =
     Provider<OwnChatSessionsRepository>((ref) {
       final environment = ref.watch(appEnvironmentProvider);
       final baseUri = Uri.parse(environment.supabaseUrl);
-      return ValidatingOwnChatSessionsRepository(
-        source: LocalHttpOwnChatSessionsDataSource(
-          baseUri: baseUri,
-          hostPolicy: DevelopmentRemoteHostPolicy(
-            enabled: environment.allowsRealAuth,
-            approvedHost: baseUri.host,
-          ),
-          tokenProvider: ref.watch(ownChatSessionsLocalSessionTokenProvider),
-          transport: createDioOwnChatSessionsHttpTransport(),
+      final source = LocalHttpOwnChatSessionsDataSource(
+        baseUri: baseUri,
+        hostPolicy: DevelopmentRemoteHostPolicy(
+          enabled: environment.allowsRealAuth,
+          approvedHost: baseUri.host,
         ),
+        tokenProvider: ref.watch(ownChatSessionsLocalSessionTokenProvider),
+        transport: createDioOwnChatSessionsHttpTransport(),
+      );
+      return ValidatingOwnChatSessionsRepository(
+        source: source,
+        lifecycleSource: source,
       );
     });
 

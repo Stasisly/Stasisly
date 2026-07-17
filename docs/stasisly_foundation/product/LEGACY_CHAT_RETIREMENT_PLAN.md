@@ -84,7 +84,7 @@ conversation slice. It is decomposed, without renumbering FOUNDATION-014-020:
 ```text
 FOUNDATION-013A  canonical Product Conversation contracts and adapters [LOCAL COMPLETE]
 FOUNDATION-013B  transactional Conversation creation and TOCTOU/idempotency [LOCAL COMPLETE]
-FOUNDATION-013C  Conversation listing, read, archive and restore boundary
+FOUNDATION-013C  Conversation listing, read, archive and restore boundary [LOCAL COMPLETE]
 FOUNDATION-013D  Message author, visibility and provenance contracts
 FOUNDATION-013E  legacy UI extraction, freeze guards and retirement migration
 FOUNDATION-013F  Product /stasis and /conversations routes/screens
@@ -98,3 +98,7 @@ authorized.
 FOUNDATION-013B advances L3 only: it replaces direct create/send orchestration
 with trusted transactional RPC boundaries and retry contracts. It does not
 activate a replacement UI or route, so no legacy source may yet be removed.
+
+FOUNDATION-013C advances L3 with owner-scoped lifecycle/history boundaries and
+read/restore adapters. It does not activate Product UI/routes or prove Message
+author/provenance parity, so L4-L7 and all legacy removal remain blocked.

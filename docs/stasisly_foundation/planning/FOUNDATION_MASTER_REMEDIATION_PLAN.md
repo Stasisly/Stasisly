@@ -293,6 +293,11 @@ risk with a deny-all server ledger and transactional RPCs. Physical naming,
 canonical endpoint rollout, lifecycle, provenance, UI retirement, Product routes,
 retention automation and every remote gate remain debt for later packages.
 
+FOUNDATION-013C closes locally owner isolation, canonical read/list mapping,
+stable bounded lifecycle pagination and naturally idempotent archive/restore.
+Physical naming, Message author/provenance, UI retirement, Product routes,
+delete/privacy lifecycle and every remote gate remain later-package debt.
+
 ## Common completion rule
 
 A local controlled package should close one coherent risk unit with

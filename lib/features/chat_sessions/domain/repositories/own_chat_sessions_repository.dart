@@ -16,3 +16,13 @@ abstract interface class OwnChatSessionsRepository {
     required String sessionId,
   });
 }
+
+abstract interface class OwnChatSessionLifecycleRepository {
+  Future<ReadOwnChatSessionResult> readOwnChatSession({
+    required String sessionId,
+  });
+
+  Future<RestoreOwnChatSessionResult> restoreOwnChatSession({
+    required String sessionId,
+  });
+}

@@ -13,7 +13,6 @@ import {
 import { safeLog } from "./safe_log.ts";
 
 const OWNER_A = "41000000-0000-4000-8000-000000000001";
-const OWNER_B = "41000000-0000-4000-8000-000000000002";
 const SPECIALIST = "42000000-0000-4000-8000-000000000001";
 const SELECTABLE = "43000000-0000-4000-8000-000000000001";
 const LOCAL_CONFIG: RuntimeConfig = {
@@ -25,29 +24,21 @@ const LOCAL_CONFIG: RuntimeConfig = {
   allowDevelopmentRemote: "false",
   corsAllowedOrigins: "",
 };
-const CATALOG = [{
-  id: SELECTABLE,
-  specialist_id: SPECIALIST,
-  display_name: "Fixture local",
-  product_area: "wellness",
-  is_published: true,
-}];
-
 function row(
   id: string,
   lastMessageAt: string,
-  owner = OWNER_A,
-  specialist = SPECIALIST,
   status = "active",
 ) {
   return {
-    id,
-    user_id: owner,
-    specialist_id: specialist,
-    started_at: "2026-06-14T10:00:00Z",
-    last_message_at: lastMessageAt,
+    conversation_id: id,
     status,
+    created_at: "2026-06-14T10:00:00Z",
+    updated_at: lastMessageAt,
+    archived_at: status === "archived" ? "2026-06-15T10:00:00Z" : null,
     message_count: 0,
+    selectable_specialist_id: SELECTABLE,
+    specialist_display_name: "Fixture local",
+    product_area: "wellness",
   };
 }
 
@@ -99,8 +90,6 @@ Deno.test("projection excludes user_id, specialist_id and internal ID", () => {
     [
       row("44000000-0000-4000-8000-000000000001", "2026-06-14T12:00:00Z"),
     ],
-    CATALOG,
-    OWNER_A,
     20,
   );
   const serialized = JSON.stringify(response);
@@ -117,35 +106,37 @@ Deno.test("projection excludes user_id, specialist_id and internal ID", () => {
   ]);
 });
 
-Deno.test("broken or duplicate catalog aborts complete response", async () => {
+Deno.test("malformed canonical rows abort the complete response", async () => {
   const sessions = [
     row("44000000-0000-4000-8000-000000000001", "2026-06-14T12:00:00Z"),
     row(
       "44000000-0000-4000-8000-000000000002",
       "2026-06-14T11:00:00Z",
-      OWNER_A,
-      "42000000-0000-4000-8000-000000000002",
+      "active",
     ),
   ];
   await assertRejects(
-    async () => buildListResponse(sessions, CATALOG, OWNER_A, 20),
+    async () => buildListResponse([{ ...sessions[0], product_area: "" }], 20),
     Error,
     "contractViolation",
   );
   await assertRejects(
     async () =>
-      buildListResponse([sessions[0]], [...CATALOG, ...CATALOG], OWNER_A, 20),
+      buildListResponse([{ ...sessions[0], ownerUserId: OWNER_A }], 20),
     Error,
     "contractViolation",
   );
   await assertRejects(
     async () =>
-      buildListResponse(
-        [sessions[0]],
-        [{ ...CATALOG[0], is_published: false }],
-        OWNER_A,
-        20,
-      ),
+      buildListResponse([{
+        ...sessions[0],
+        archived_at: "2026-06-15T10:00:00Z",
+      }], 20),
+    Error,
+    "contractViolation",
+  );
+  await assertRejects(
+    async () => buildListResponse([{ ...sessions[0], status: "archived" }], 20),
     Error,
     "contractViolation",
   );
@@ -157,10 +148,10 @@ Deno.test("cursor pages do not duplicate sessions", () => {
     row("44000000-0000-4000-8000-000000000002", "2026-06-14T12:00:00Z"),
     row("44000000-0000-4000-8000-000000000001", "2026-06-14T11:00:00Z"),
   ];
-  const first = buildListResponse(rows, CATALOG, OWNER_A, 2);
+  const first = buildListResponse(rows, 2);
   const cursor = decodeCursor(first.nextCursor!);
   assertEquals(cursor.sessionId, first.items[1].sessionId);
-  const second = buildListResponse([rows[2]], CATALOG, OWNER_A, 2);
+  const second = buildListResponse([rows[2]], 2);
   const firstIds = new Set(first.items.map((item) => item.sessionId));
   assertEquals(
     second.items.some((item) => firstIds.has(item.sessionId)),
@@ -170,15 +161,15 @@ Deno.test("cursor pages do not duplicate sessions", () => {
 });
 
 Deno.test("handler derives owner and applies stable query", async () => {
-  let sessionsQuery = "";
+  let rpcBody = "";
   const handler = createHandler(LOCAL_CONFIG, {
-    fetcher: (async (input: string | URL | Request) => {
+    fetcher: (async (input: string | URL | Request, init?: RequestInit) => {
       const url = new URL(input instanceof Request ? input.url : input);
       if (url.pathname === "/auth/v1/user") {
         return Response.json({ id: OWNER_A });
       }
-      if (url.pathname === "/rest/v1/chat_sessions") {
-        sessionsQuery = url.toString();
+      if (url.pathname === "/rest/v1/rpc/list_own_conversations_core") {
+        rpcBody = String(init?.body);
         return Response.json([]);
       }
       return new Response(null, { status: 404 });
@@ -187,11 +178,13 @@ Deno.test("handler derives owner and applies stable query", async () => {
   });
   const response = await handler(request("?status=all&limit=2"));
   assertEquals(response.status, 200);
-  const url = new URL(sessionsQuery);
-  assertEquals(url.searchParams.get("user_id"), `eq.${OWNER_A}`);
-  assertEquals(url.searchParams.has("status"), false);
-  assertEquals(url.searchParams.get("order"), "last_message_at.desc,id.desc");
-  assertEquals(url.searchParams.get("limit"), "3");
+  assertEquals(JSON.parse(rpcBody), {
+    p_owner_user_id: OWNER_A,
+    p_status: "all",
+    p_limit: 3,
+    p_cursor_updated_at: null,
+    p_cursor_id: null,
+  });
 });
 
 Deno.test("handler rejects authority-bearing headers before backend access", async () => {
@@ -220,15 +213,10 @@ Deno.test("handler rejects authority-bearing headers before backend access", asy
   assertEquals(calls, 0);
 });
 
-Deno.test("handler returns no partial items for broken catalog", async () => {
+Deno.test("handler returns complete canonical rows from RPC", async () => {
   const sessions = [
     row("44000000-0000-4000-8000-000000000001", "2026-06-14T12:00:00Z"),
-    row(
-      "44000000-0000-4000-8000-000000000002",
-      "2026-06-14T11:00:00Z",
-      OWNER_A,
-      "42000000-0000-4000-8000-000000000002",
-    ),
+    row("44000000-0000-4000-8000-000000000002", "2026-06-14T11:00:00Z"),
   ];
   const handler = createHandler(LOCAL_CONFIG, {
     fetcher: (async (input: string | URL | Request) => {
@@ -236,11 +224,8 @@ Deno.test("handler returns no partial items for broken catalog", async () => {
       if (url.pathname === "/auth/v1/user") {
         return Response.json({ id: OWNER_A });
       }
-      if (url.pathname === "/rest/v1/chat_sessions") {
+      if (url.pathname === "/rest/v1/rpc/list_own_conversations_core") {
         return Response.json(sessions);
-      }
-      if (url.pathname === "/rest/v1/specialist_catalog") {
-        return Response.json(CATALOG);
       }
       return new Response(null, { status: 404 });
     }) as typeof fetch,
@@ -248,29 +233,11 @@ Deno.test("handler returns no partial items for broken catalog", async () => {
   });
   const response = await handler(request());
   const body = await response.json();
-  assertEquals(response.status, 502);
-  assertEquals(body.error.code, "contractViolation");
-  assertEquals(Object.hasOwn(body, "items"), false);
+  assertEquals(response.status, 200);
+  assertEquals(body.items.length, 2);
 });
 
-Deno.test("JWT, ownership contract, runtime and logs fail closed", async () => {
-  await assertRejects(
-    async () =>
-      buildListResponse(
-        [
-          row(
-            "44000000-0000-4000-8000-000000000001",
-            "2026-06-14T12:00:00Z",
-            OWNER_B,
-          ),
-        ],
-        CATALOG,
-        OWNER_A,
-        20,
-      ),
-    Error,
-    "contractViolation",
-  );
+Deno.test("JWT, runtime and logs fail closed", async () => {
   assertEquals(assertLocalRuntime(LOCAL_CONFIG).hostname, "127.0.0.1");
   await assertRejects(
     async () =>

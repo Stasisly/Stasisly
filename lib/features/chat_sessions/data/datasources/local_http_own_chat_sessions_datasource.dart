@@ -6,7 +6,9 @@ import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session
 import 'package:stasisly/features/conversations/application/idempotency/operation_attempt_id_factory.dart';
 
 class LocalHttpOwnChatSessionsDataSource
-    implements OwnChatSessionsContractSource {
+    implements
+        OwnChatSessionsContractSource,
+        OwnChatSessionLifecycleContractSource {
   const LocalHttpOwnChatSessionsDataSource({
     required this.baseUri,
     required this.hostPolicy,
@@ -18,6 +20,8 @@ class LocalHttpOwnChatSessionsDataSource
   static const _createPath = '/functions/v1/create-own-chat-session';
   static const _listPath = '/functions/v1/list-own-chat-sessions';
   static const _archivePath = '/functions/v1/archive-own-chat-session';
+  static const _readPath = '/functions/v1/read-own-conversation';
+  static const _restorePath = '/functions/v1/restore-own-conversation';
 
   final Uri baseUri;
   final OwnChatSessionsHostPolicy hostPolicy;
@@ -62,6 +66,28 @@ class LocalHttpOwnChatSessionsDataSource
       method: OwnChatSessionsHttpMethod.post,
       path: _archivePath,
       body: {'sessionId': sessionId},
+    );
+  }
+
+  @override
+  Future<OwnChatSessionsContractResponse> readOwnChatSession({
+    required String sessionId,
+  }) {
+    return _send(
+      method: OwnChatSessionsHttpMethod.post,
+      path: _readPath,
+      body: {'conversationId': sessionId},
+    );
+  }
+
+  @override
+  Future<OwnChatSessionsContractResponse> restoreOwnChatSession({
+    required String sessionId,
+  }) {
+    return _send(
+      method: OwnChatSessionsHttpMethod.post,
+      path: _restorePath,
+      body: {'conversationId': sessionId},
     );
   }
 

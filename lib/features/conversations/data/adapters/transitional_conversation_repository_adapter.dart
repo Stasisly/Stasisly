@@ -19,12 +19,14 @@ class TransitionalConversationRepositoryAdapter
     required this.chatSessions,
     required this.chatMessages,
     required this.trustedOwner,
+    this.lifecycle,
     this.sessionAdapter = const OwnChatSessionConversationAdapter(),
     this.messageAdapter = const OwnChatMessageConversationAdapter(),
   });
 
   final OwnChatSessionsRepository chatSessions;
   final OwnChatMessagesRepository chatMessages;
+  final OwnChatSessionLifecycleRepository? lifecycle;
   final StasislyIdentity trustedOwner;
   final OwnChatSessionConversationAdapter sessionAdapter;
   final OwnChatMessageConversationAdapter messageAdapter;
@@ -120,6 +122,34 @@ class TransitionalConversationRepositoryAdapter
   }
 
   @override
+  Future<ConversationReadResult> readOwnConversation(
+    ConversationId conversationId,
+  ) async {
+    if (!_hasTrustedOwner) {
+      return const ConversationReadFailure(
+        ConversationResultStatus.unauthenticated,
+      );
+    }
+    final boundary = lifecycle;
+    if (boundary == null) {
+      return const ConversationReadFailure(
+        ConversationResultStatus.environmentBlocked,
+      );
+    }
+    final result = await boundary.readOwnChatSession(
+      sessionId: conversationId.value,
+    );
+    return switch (result) {
+      ReadOwnChatSessionSuccess(:final session) => ConversationReadSuccess(
+        _mapLifecycleSnapshot(session),
+      ),
+      ReadOwnChatSessionFailure(:final type) => ConversationReadFailure(
+        _sessionFailure(type),
+      ),
+    };
+  }
+
+  @override
   Future<ConversationMutationResult> archiveOwnConversation(
     ArchiveConversationInput input,
   ) async {
@@ -151,6 +181,38 @@ class TransitionalConversationRepositoryAdapter
         ConversationResultStatus.unknownFailure,
       );
     }
+  }
+
+  @override
+  Future<ConversationMutationResult> restoreOwnConversation(
+    RestoreConversationInput input,
+  ) async {
+    if (!_hasTrustedOwner) {
+      return const ConversationMutationFailure(
+        ConversationResultStatus.unauthenticated,
+      );
+    }
+    final boundary = lifecycle;
+    if (boundary == null) {
+      return const ConversationMutationFailure(
+        ConversationResultStatus.environmentBlocked,
+      );
+    }
+    final result = await boundary.restoreOwnChatSession(
+      sessionId: input.conversationId.value,
+    );
+    return switch (result) {
+      RestoreOwnChatSessionSuccess(:final sessionId) =>
+        ConversationMutationSuccess(
+          receipt: ConversationMutationReceipt(
+            conversationId: ConversationId(sessionId),
+            status: ConversationStatus.active,
+          ),
+        ),
+      RestoreOwnChatSessionFailure(:final type) => ConversationMutationFailure(
+        _sessionFailure(type),
+      ),
+    };
   }
 
   @override
@@ -278,6 +340,32 @@ class TransitionalConversationRepositoryAdapter
     return ConversationMutationReceipt(
       conversationId: conversationId,
       status: ConversationStatus.archived,
+    );
+  }
+
+  Conversation _mapLifecycleSnapshot(OwnChatSessionLifecycleSnapshot source) {
+    final id = ConversationId.tryParse(source.sessionId);
+    if (id == null) {
+      throw const ConversationContractException('Invalid conversation id.');
+    }
+    final selected = source.selectableSpecialist;
+    return Conversation.fromTrustedIdentity(
+      conversationId: id,
+      ownerIdentity: trustedOwner,
+      status: source.status == ChatSessionStatus.active
+          ? ConversationStatus.active
+          : ConversationStatus.archived,
+      createdAt: source.createdAt,
+      updatedAt: source.updatedAt,
+      archivedAt: source.archivedAt,
+      selectedSpecialistReference: selected == null
+          ? null
+          : ConversationSpecialistSelection(
+              selectableSpecialistId: selected.id,
+              displayName: selected.displayName,
+              area: selected.area.name,
+              state: ConversationSpecialistSelectionState.selected,
+            ),
     );
   }
 }

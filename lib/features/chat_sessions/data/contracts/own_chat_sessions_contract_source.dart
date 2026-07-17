@@ -28,3 +28,13 @@ abstract interface class OwnChatSessionsContractSource {
     required String sessionId,
   });
 }
+
+abstract interface class OwnChatSessionLifecycleContractSource {
+  Future<OwnChatSessionsContractResponse> readOwnChatSession({
+    required String sessionId,
+  });
+
+  Future<OwnChatSessionsContractResponse> restoreOwnChatSession({
+    required String sessionId,
+  });
+}

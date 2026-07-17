@@ -86,3 +86,31 @@ class ArchivedOwnChatSession extends Equatable {
   @override
   List<Object?> get props => [sessionId, status];
 }
+
+class OwnChatSessionLifecycleSnapshot extends Equatable {
+  const OwnChatSessionLifecycleSnapshot({
+    required this.sessionId,
+    required this.status,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.archivedAt,
+    required this.selectableSpecialist,
+  });
+
+  final String sessionId;
+  final ChatSessionStatus status;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final DateTime? archivedAt;
+  final SelectableSpecialistSummary? selectableSpecialist;
+
+  @override
+  List<Object?> get props => [
+    sessionId,
+    status,
+    createdAt,
+    updatedAt,
+    archivedAt,
+    selectableSpecialist,
+  ];
+}

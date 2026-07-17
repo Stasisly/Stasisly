@@ -62,7 +62,25 @@ async function requestJson(
   error: ArchiveErrorCode,
 ): Promise<unknown> {
   const response = await fetcher(url, init);
-  if (!response.ok) throw new Error(error);
+  if (!response.ok) {
+    let body: unknown = null;
+    try {
+      body = await response.json();
+    } catch {
+      throw new Error(error);
+    }
+    const message = typeof body === "object" && body !== null &&
+        typeof (body as Record<string, unknown>).message === "string"
+      ? String((body as Record<string, unknown>).message)
+      : "";
+    if (message.includes("conversation_not_found")) {
+      throw new Error("sessionNotFound");
+    }
+    if (message.includes("invalid_lifecycle")) {
+      throw new Error("contractViolation");
+    }
+    throw new Error(error);
+  }
   if (response.status === 204) throw new Error("archiveUnconfirmed");
   return await response.json();
 }
@@ -74,24 +92,22 @@ async function archiveOwnSession(
   ownerId: string,
   sessionId: string,
 ): Promise<unknown> {
-  const url = new URL("/rest/v1/chat_sessions", baseUrl);
-  url.searchParams.set("select", "id,status");
-  url.searchParams.set("id", `eq.${sessionId}`);
-  url.searchParams.set("user_id", `eq.${ownerId}`);
-  url.searchParams.set("status", "eq.active");
+  const url = new URL("/rest/v1/rpc/archive_own_conversation_core", baseUrl);
   return await requestJson(
     fetcher,
     url,
     {
-      method: "PATCH",
+      method: "POST",
       headers: {
         apikey: serviceRoleKey,
         authorization: `Bearer ${serviceRoleKey}`,
         accept: "application/json",
         "content-type": "application/json",
-        prefer: "return=representation",
       },
-      body: JSON.stringify({ status: "archived" }),
+      body: JSON.stringify({
+        p_owner_user_id: ownerId,
+        p_conversation_id: sessionId,
+      }),
     },
     "backendMisconfigured",
   );

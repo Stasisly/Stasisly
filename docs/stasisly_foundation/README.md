@@ -162,6 +162,8 @@ persistente, Founder access y nuevas capacidades Product siguen cerrados.
 - [ADR-F010](adr/ADR-F010-canonical-conversation-contracts-and-transitional-adapters.md)
 - [Implementación FOUNDATION-013B](implementation/FOUNDATION-013B_TRANSACTIONAL_CONVERSATION_CREATION_AND_IDEMPOTENCY.md)
 - [ADR-F011](adr/ADR-F011-transactional-conversation-creation-and-idempotency.md)
+- [Implementación FOUNDATION-013C](implementation/FOUNDATION-013C_CANONICAL_CONVERSATION_READ_LIST_ARCHIVE_RESTORE.md)
+- [ADR-F012](adr/ADR-F012-canonical-conversation-read-and-lifecycle-boundary.md)
 
 FOUNDATION-012 aprueba `Conversation` como agregado Product y reserva
 `ExecutionSession` al futuro runtime. Stasis coordina Product; historial,
@@ -180,6 +182,11 @@ FOUNDATION-013B adopta localmente la creación transaccional y la idempotencia
 server-enforced de create/send. Elegibilidad e inserción comparten transacción;
 los reintentos producen un efecto y los conflictos fallan cerrados. El esquema
 físico sigue siendo transitorio y no se autoriza remoto, rutas ni producto.
+
+FOUNDATION-013C adopta localmente list/read/archive/restore owner-scoped,
+paginación estable acotada y lectura de historia archivada. Archive y restore
+son transiciones atómicas naturalmente idempotentes; los endpoints y tablas
+físicos siguen siendo transitorios y no se activan rutas, UI ni remoto.
 
 La auditoría identificó componentes modernos reutilizables, deuda legacy y un
 P0 en diez tablas públicas. R1 lo remedia en el estado PostgreSQL local definido
@@ -230,6 +237,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras publicar FOUNDATION-013B, el siguiente gate propuesto es `FOUNDATION-013C`
-para lifecycle/list/read/archive/restore. Requiere aprobación separada y no
-autoriza rutas, UI, retirada legacy ni remoto.
+Tras publicar FOUNDATION-013C, el siguiente gate propuesto es `FOUNDATION-013D`
+para author, visibility y provenance de Message. Requiere aprobación separada y
+no autoriza rutas, UI, retirada legacy, Engine ni remoto.

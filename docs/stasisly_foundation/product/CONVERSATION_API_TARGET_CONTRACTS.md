@@ -132,3 +132,13 @@ transaction; send atomically inserts one user Message and updates counters.
 Matching retries return the original DTO (`200` after initial `201`), while a
 conflicting payload returns `409`. Endpoint names and `sessionId` remain
 transitional; canonical routes/endpoints and remote rollout remain absent.
+
+## FOUNDATION-013C local adoption
+
+List/read/archive/restore are now owner-scoped local backend operations with
+registered Product metadata, bounded stable cursors, sanitized Conversation
+DTOs and opaque foreign/not-found behavior. Archive and restore use locked,
+state-based idempotent RPC transitions. Archived Message history remains
+readable by its owner while send remains denied until restore. Session-named
+compatibility endpoints and tables remain transitional; Product routes, delete,
+pendingDeletion, provenance and remote rollout remain absent.

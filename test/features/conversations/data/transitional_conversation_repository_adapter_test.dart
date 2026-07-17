@@ -28,6 +28,7 @@ void main() {
       chatSessions: sessions,
       chatMessages: messages,
       trustedOwner: _authenticatedOwner,
+      lifecycle: sessions,
     );
   });
 
@@ -88,6 +89,39 @@ void main() {
     expect(sessions.lastArchivedSessionId, 'session-1');
     expect(success.receipt?.conversationId.value, 'session-1');
     expect(success.receipt?.status, ConversationStatus.archived);
+  });
+
+  test(
+    'read maps canonical lifecycle without exposing owner transport',
+    () async {
+      sessions.readResult = ReadOwnChatSessionSuccess(
+        OwnChatSessionLifecycleSnapshot(
+          sessionId: 'session-1',
+          status: ChatSessionStatus.archived,
+          createdAt: DateTime.utc(2026),
+          updatedAt: DateTime.utc(2026, 1, 2),
+          archivedAt: DateTime.utc(2026, 1, 3),
+          selectableSpecialist: _session.selectableSpecialist,
+        ),
+      );
+      final result = await repository.readOwnConversation(
+        ConversationId('session-1'),
+      );
+      final conversation = (result as ConversationReadSuccess).conversation;
+      expect(conversation.status, ConversationStatus.archived);
+      expect(conversation.archivedAt, DateTime.utc(2026, 1, 3));
+      expect(conversation.ownerSubjectId, 'owner-subject');
+    },
+  );
+
+  test('restore returns active receipt using only ConversationId', () async {
+    sessions.restoreResult = const RestoreOwnChatSessionSuccess('session-1');
+    final result = await repository.restoreOwnConversation(
+      RestoreConversationInput(conversationId: ConversationId('session-1')),
+    );
+    final receipt = (result as ConversationMutationSuccess).receipt!;
+    expect(receipt.status, ConversationStatus.active);
+    expect(sessions.lastRestoredSessionId, 'session-1');
   });
 
   test('message list adapts items and preserves cursor', () async {
@@ -235,6 +269,7 @@ void main() {
         identityType: IdentityType.humanUser,
         authenticationState: AuthenticationState.unauthenticated,
       ),
+      lifecycle: sessions,
     );
 
     expect(
@@ -273,7 +308,8 @@ final _message = OwnChatMessage(
   isDemo: false,
 );
 
-class _FakeSessionsRepository implements OwnChatSessionsRepository {
+class _FakeSessionsRepository
+    implements OwnChatSessionsRepository, OwnChatSessionLifecycleRepository {
   CreateOwnChatSessionResult createResult = const CreateOwnChatSessionFailure(
     OwnChatSessionsFailureType.unexpectedError,
   );
@@ -284,6 +320,13 @@ class _FakeSessionsRepository implements OwnChatSessionsRepository {
       const ArchiveOwnChatSessionFailure(
         OwnChatSessionsFailureType.unexpectedError,
       );
+  ReadOwnChatSessionResult readResult = const ReadOwnChatSessionFailure(
+    OwnChatSessionsFailureType.unexpectedError,
+  );
+  RestoreOwnChatSessionResult restoreResult =
+      const RestoreOwnChatSessionFailure(
+        OwnChatSessionsFailureType.unexpectedError,
+      );
 
   int createCalls = 0;
   int listCalls = 0;
@@ -292,6 +335,7 @@ class _FakeSessionsRepository implements OwnChatSessionsRepository {
   int? lastLimit;
   String? lastCursor;
   String? lastArchivedSessionId;
+  String? lastRestoredSessionId;
 
   @override
   Future<CreateOwnChatSessionResult> createOwnChatSession({
@@ -321,6 +365,19 @@ class _FakeSessionsRepository implements OwnChatSessionsRepository {
   }) async {
     lastArchivedSessionId = sessionId;
     return archiveResult;
+  }
+
+  @override
+  Future<ReadOwnChatSessionResult> readOwnChatSession({
+    required String sessionId,
+  }) async => readResult;
+
+  @override
+  Future<RestoreOwnChatSessionResult> restoreOwnChatSession({
+    required String sessionId,
+  }) async {
+    lastRestoredSessionId = sessionId;
+    return restoreResult;
   }
 }
 

@@ -5,10 +5,15 @@ import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session
 import 'package:stasisly/features/chat_sessions/domain/repositories/own_chat_sessions_repository.dart';
 
 /// Validates simulated public payloads. It does not perform I/O.
-class ValidatingOwnChatSessionsRepository implements OwnChatSessionsRepository {
-  const ValidatingOwnChatSessionsRepository({required this.source});
+class ValidatingOwnChatSessionsRepository
+    implements OwnChatSessionsRepository, OwnChatSessionLifecycleRepository {
+  const ValidatingOwnChatSessionsRepository({
+    required this.source,
+    this.lifecycleSource,
+  });
 
   final OwnChatSessionsContractSource source;
+  final OwnChatSessionLifecycleContractSource? lifecycleSource;
 
   @override
   Future<CreateOwnChatSessionResult> createOwnChatSession({
@@ -106,6 +111,87 @@ class ValidatingOwnChatSessionsRepository implements OwnChatSessionsRepository {
       );
     }
   }
+
+  @override
+  Future<ReadOwnChatSessionResult> readOwnChatSession({
+    required String sessionId,
+  }) async {
+    if (sessionId.trim().isEmpty) {
+      return const ReadOwnChatSessionFailure(
+        OwnChatSessionsFailureType.invalidRequest,
+      );
+    }
+    final lifecycle = lifecycleSource;
+    if (lifecycle == null) {
+      return const ReadOwnChatSessionFailure(
+        OwnChatSessionsFailureType.backendBlocked,
+      );
+    }
+    try {
+      final response = await lifecycle.readOwnChatSession(sessionId: sessionId);
+      final failure = _failureFor(response);
+      if (failure != null) return ReadOwnChatSessionFailure(failure);
+      return ReadOwnChatSessionSuccess(
+        _parseLifecycleSnapshotEnvelope(response.body),
+      );
+    } on NetworkException {
+      return const ReadOwnChatSessionFailure(
+        OwnChatSessionsFailureType.networkError,
+      );
+    } on FormatException {
+      return const ReadOwnChatSessionFailure(
+        OwnChatSessionsFailureType.contractViolation,
+      );
+    } on Exception {
+      return const ReadOwnChatSessionFailure(
+        OwnChatSessionsFailureType.unexpectedError,
+      );
+    }
+  }
+
+  @override
+  Future<RestoreOwnChatSessionResult> restoreOwnChatSession({
+    required String sessionId,
+  }) async {
+    if (sessionId.trim().isEmpty) {
+      return const RestoreOwnChatSessionFailure(
+        OwnChatSessionsFailureType.invalidRequest,
+      );
+    }
+    final lifecycle = lifecycleSource;
+    if (lifecycle == null) {
+      return const RestoreOwnChatSessionFailure(
+        OwnChatSessionsFailureType.backendBlocked,
+      );
+    }
+    try {
+      final response = await lifecycle.restoreOwnChatSession(
+        sessionId: sessionId,
+      );
+      final failure = _failureFor(response);
+      if (failure != null) return RestoreOwnChatSessionFailure(failure);
+      _expectExactKeys(response.body, const {'conversation'});
+      final conversation = _expectMap(response.body!['conversation']);
+      _expectExactKeys(conversation, const {'conversationId', 'status'});
+      if (conversation['conversationId'] != sessionId ||
+          conversation['status'] != 'active') {
+        throw const FormatException('Invalid restored conversation.');
+      }
+      return RestoreOwnChatSessionSuccess(sessionId);
+    } on NetworkException {
+      return const RestoreOwnChatSessionFailure(
+        OwnChatSessionsFailureType.networkError,
+      );
+    } on FormatException {
+      return const RestoreOwnChatSessionFailure(
+        OwnChatSessionsFailureType.contractViolation,
+      );
+    } on Exception {
+      return const RestoreOwnChatSessionFailure(
+        OwnChatSessionsFailureType.unexpectedError,
+      );
+    }
+  }
 }
 
 OwnChatSessionsFailureType? _failureFor(
@@ -128,6 +214,7 @@ OwnChatSessionsFailureType? _failureFor(
     'specialistUnavailable' => OwnChatSessionsFailureType.specialistUnavailable,
     'proLocked' => OwnChatSessionsFailureType.proLocked,
     'sessionNotFound' => OwnChatSessionsFailureType.sessionNotFound,
+    'conversationNotFound' => OwnChatSessionsFailureType.sessionNotFound,
     'permissionDenied' => OwnChatSessionsFailureType.permissionDenied,
     'contractViolation' ||
     'archiveUnconfirmed' => OwnChatSessionsFailureType.contractViolation,
@@ -140,6 +227,56 @@ OwnChatSessionsFailureType? _failureFor(
           ? OwnChatSessionsFailureType.permissionDenied
           : OwnChatSessionsFailureType.unexpectedError,
   };
+}
+
+OwnChatSessionLifecycleSnapshot _parseLifecycleSnapshotEnvelope(
+  Map<String, dynamic>? body,
+) {
+  _expectExactKeys(body, const {'conversation'});
+  final json = _expectMap(body!['conversation']);
+  final allowed = {
+    'conversationId',
+    'status',
+    'createdAt',
+    'updatedAt',
+    'archivedAt',
+    'selectedSpecialist',
+  };
+  if (json.keys.any((key) => !allowed.contains(key)) ||
+      !json.keys.toSet().containsAll(const {
+        'conversationId',
+        'status',
+        'createdAt',
+        'updatedAt',
+      })) {
+    throw const FormatException('Unexpected conversation shape.');
+  }
+  final status = _parseStatus(json['status']);
+  final archivedAt = json['archivedAt'] == null
+      ? null
+      : _parseDate(json['archivedAt']);
+  if ((status == ChatSessionStatus.active && archivedAt != null) ||
+      (status == ChatSessionStatus.archived && archivedAt == null)) {
+    throw const FormatException('Invalid lifecycle mapping.');
+  }
+  SelectableSpecialistSummary? specialist;
+  if (json['selectedSpecialist'] != null) {
+    final selected = _expectMap(json['selectedSpecialist']);
+    _expectExactKeys(selected, const {'id', 'displayName', 'area'});
+    specialist = SelectableSpecialistSummary(
+      id: _expectNonEmptyString(selected['id']),
+      displayName: _expectNonEmptyString(selected['displayName']),
+      area: _parseArea(selected['area']),
+    );
+  }
+  return OwnChatSessionLifecycleSnapshot(
+    sessionId: _expectNonEmptyString(json['conversationId']),
+    status: status,
+    createdAt: _parseDate(json['createdAt']),
+    updatedAt: _parseDate(json['updatedAt']),
+    archivedAt: archivedAt,
+    selectableSpecialist: specialist,
+  );
 }
 
 OwnChatSession _parseSessionEnvelope(Map<String, dynamic>? body) {

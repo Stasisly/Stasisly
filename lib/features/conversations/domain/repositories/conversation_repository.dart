@@ -1,6 +1,7 @@
 import 'package:stasisly/features/conversations/application/inputs/conversation_inputs.dart';
 import 'package:stasisly/features/conversations/domain/entities/conversation.dart';
 import 'package:stasisly/features/conversations/domain/results/conversation_results.dart';
+import 'package:stasisly/features/conversations/domain/value_objects/conversation_id.dart';
 
 abstract interface class ConversationRepository {
   Future<ConversationListResult> listOwnConversations({
@@ -13,8 +14,16 @@ abstract interface class ConversationRepository {
     CreateConversationInput input,
   );
 
+  Future<ConversationReadResult> readOwnConversation(
+    ConversationId conversationId,
+  );
+
   Future<ConversationMutationResult> archiveOwnConversation(
     ArchiveConversationInput input,
+  );
+
+  Future<ConversationMutationResult> restoreOwnConversation(
+    RestoreConversationInput input,
   );
 
   Future<ConversationMessageListResult> listOwnConversationMessages(

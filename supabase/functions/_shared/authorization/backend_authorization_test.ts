@@ -45,13 +45,15 @@ function changed(
   return Object.freeze({ ...context, ...values });
 }
 
-Deno.test("all six backend operations are registered Product local/development contracts", () => {
+Deno.test("all eight backend operations are registered Product local/development contracts", () => {
   assertEquals(Object.keys(BACKEND_OPERATIONS).sort(), [
     "archiveOwnChatSession",
     "createOwnChatSession",
     "listOwnChatSessions",
     "listSelectableSpecialists",
     "listSessionMessages",
+    "readOwnConversation",
+    "restoreOwnConversation",
     "sendUserMessage",
   ]);
   for (const operation of Object.values(BACKEND_OPERATIONS)) {

@@ -212,3 +212,10 @@ F8 adopta localmente creación transaccional de Conversation e idempotencia de
 create/send sobre persistencia transitoria. El TOCTOU queda cerrado localmente,
 pero lifecycle completo, API canónica, retirada legacy, rutas Product y gates
 remotos G8-G10 siguen pendientes.
+
+## FOUNDATION-013C evidence
+
+F8 adopta localmente la frontera owner-scoped de listado, lectura, archivo,
+restauración e historia. El lifecycle active/archived es coherente, acotado y
+atómico sobre persistencia transitoria. FOUNDATION-013D author/provenance,
+retirada legacy, Product UI/routing y G8-G10 permanecen pendientes.

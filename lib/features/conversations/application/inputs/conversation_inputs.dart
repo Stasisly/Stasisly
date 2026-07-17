@@ -19,6 +19,13 @@ class ArchiveConversationInput extends Equatable {
   List<Object?> get props => [conversationId];
 }
 
+class RestoreConversationInput extends Equatable {
+  const RestoreConversationInput({required this.conversationId});
+  final ConversationId conversationId;
+  @override
+  List<Object?> get props => [conversationId];
+}
+
 class ListConversationMessagesInput extends Equatable {
   ListConversationMessagesInput({
     required this.conversationId,

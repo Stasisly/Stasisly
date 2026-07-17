@@ -96,6 +96,42 @@ sealed class ArchiveOwnChatSessionResult extends Equatable {
   List<Object?> get props => [];
 }
 
+sealed class ReadOwnChatSessionResult extends Equatable {
+  const ReadOwnChatSessionResult();
+}
+
+final class ReadOwnChatSessionSuccess extends ReadOwnChatSessionResult {
+  const ReadOwnChatSessionSuccess(this.session);
+  final OwnChatSessionLifecycleSnapshot session;
+  @override
+  List<Object?> get props => [session];
+}
+
+final class ReadOwnChatSessionFailure extends ReadOwnChatSessionResult {
+  const ReadOwnChatSessionFailure(this.type);
+  final OwnChatSessionsFailureType type;
+  @override
+  List<Object?> get props => [type];
+}
+
+sealed class RestoreOwnChatSessionResult extends Equatable {
+  const RestoreOwnChatSessionResult();
+}
+
+final class RestoreOwnChatSessionSuccess extends RestoreOwnChatSessionResult {
+  const RestoreOwnChatSessionSuccess(this.sessionId);
+  final String sessionId;
+  @override
+  List<Object?> get props => [sessionId];
+}
+
+final class RestoreOwnChatSessionFailure extends RestoreOwnChatSessionResult {
+  const RestoreOwnChatSessionFailure(this.type);
+  final OwnChatSessionsFailureType type;
+  @override
+  List<Object?> get props => [type];
+}
+
 final class ArchiveOwnChatSessionSuccess extends ArchiveOwnChatSessionResult {
   const ArchiveOwnChatSessionSuccess(this.session);
 

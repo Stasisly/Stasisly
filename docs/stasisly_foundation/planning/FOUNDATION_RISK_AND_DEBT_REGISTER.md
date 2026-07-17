@@ -12,8 +12,8 @@ not schedules.
 | ARC-01 | Provider-owned identity/API boundary partially remediated | FOUNDATION-008 owns identity/session/errors and confines Auth SDK; bootstrap and backend adapters remain provider-coupled | Architecture under Rector | P2 residual | 009-010, 018 | Complete consumer migration and provider exit evidence | F7 |
 | ARC-02 | Surface isolation incomplete | Product route boundaries and six Product Edge Functions enforce local/development context; mixed legacy and future domains remain | Architecture + Nexus | P1 residual | 012-013 and later surface packages | Approved Product boundary with no legacy bypass | F7/F8 |
 | PROD-01 | Product taxonomy partially unresolved | Conversation/Stasis routes are decided by FOUNDATION-012; mental/physical/Wellness naming remains separate | Product Owner under Stasis | P2 residual | Separate taxonomy decision before affected rename | Founder-approved area taxonomy | F8 |
-| CONV-01 | Canonical Conversation adoption partial | FOUNDATION-013A adopts domain/port/adapters and 013B adopts local transactional create/send; physical APIs/tables remain transitional and UI dev-only | Product + Flutter + Backend Architecture | P1 residual | 013C-013F | Canonical backend slice, parity, retirement and rollback evidence | F8 |
-| CONV-02 | Conversation lifecycle/privacy incomplete | Archive exists; restore, deletion, retention, sharing, attachments, memory and research are target-only | Product + Data + Privacy | P1/P3 | 013C, 016 and later scoped packages | Approved implementation plus privacy controls | F8 before sensitive rollout |
+| CONV-01 | Canonical Conversation adoption partial | FOUNDATION-013A-C adopt domain/adapters, transactional writes and local lifecycle/history; physical APIs/tables remain transitional and UI dev-only | Product + Flutter + Backend Architecture | P1 residual | 013D-013F | Provenance parity, retirement and rollback evidence | F8 |
+| CONV-02 | Conversation privacy lifecycle incomplete | Archive/restore are local and preserve history; deletion, retention, sharing, attachments, memory and research remain target-only | Product + Data + Privacy | P3 | 016 and later scoped packages | Approved privacy implementation plus controls | F8 before sensitive rollout |
 | CONV-03 | Idempotency retention/operations incomplete | Local server ledger has no automatic expiry, cleanup job, metrics or durable failed-state recovery | Privacy + Backend + Operations | P2/P3 | 016/017 or dedicated package | Approved retention, safe cleanup, monitoring and recovery tests | Before remote write rollout |
 | DATA-01 | Privacy lifecycle incomplete | Health/conversation data without full retention/deletion/provenance | Data + Privacy | P3; before sensitive scope | 016 | Approved lifecycle, threat controls and test plan | F7/F8 before production |
 | TEST-01 | Backend security suites absent from CI | Local Deno/pgTAP/reset only | QA + DevOps | P2 | 015 | Protected reproducible CI jobs | F7 before staging |
@@ -71,3 +71,8 @@ FOUNDATION-013B closes the create TOCTOU and create/send duplicate-retry risk
 locally with transactional RPCs and a client-denied ledger. CONV-03 records the
 remaining retention, cleanup, failed-state operations and observability debt;
 remote state remains unknown and unauthorized.
+
+FOUNDATION-013C closes local list/read owner isolation and reversible archive
+lifecycle risk with restricted RPCs and opaque denial. CONV-01 remains open for
+Message provenance, Product wiring and legacy retirement; CONV-02 remains open
+for deletion, retention, sharing, attachments, memory and research.

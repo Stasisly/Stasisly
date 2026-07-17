@@ -66,8 +66,11 @@ It provides no G3 implementation evidence. FOUNDATION-013A now satisfies G0-G6
 for canonical local contracts/adapters with Flutter 514/5 skips, Deno 72/72 and
 SQL 649/649; publication completes G7. FOUNDATION-013B satisfies G0-G6 with two
 SQL cycles at 684/684, Deno 76/76, Flutter 515/5 skips and two real local HTTP
-harnesses ending `0|0|0|0|0|0|0`; publication completes G7. FOUNDATION-013C is
-the next proposed gate and requires separate approval.
+harnesses ending `0|0|0|0|0|0|0`; publication completes G7. FOUNDATION-013C
+satisfies G0-G6 with owner-scoped lifecycle/history, two SQL cycles 713/713,
+Deno 85/85, Flutter 517/5 skips and local HTTP cleanup at seven ceros;
+publication completes G7. FOUNDATION-013D is the next proposed gate and
+requires separate approval.
 
 ## Surface dependency matrix
 

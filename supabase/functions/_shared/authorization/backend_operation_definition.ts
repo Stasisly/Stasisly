@@ -8,9 +8,11 @@ import type {
 export type BackendOperationId =
   | "listSelectableSpecialists"
   | "createOwnChatSession"
-  | "listOwnChatSessions"
-  | "archiveOwnChatSession"
-  | "listSessionMessages"
+  | "conversation.listOwn"
+  | "conversation.readOwn"
+  | "conversation.archiveOwn"
+  | "conversation.restoreOwn"
+  | "conversation.message.listOwn"
   | "sendUserMessage";
 
 export interface BackendOperationDefinition {
@@ -60,7 +62,7 @@ export const BACKEND_OPERATIONS = Object.freeze({
     auditRequired: true,
   }),
   listOwnChatSessions: operation({
-    operationId: "listOwnChatSessions",
+    operationId: "conversation.listOwn",
     expectedSurface: "product",
     allowedEnvironments: PRODUCT_ENVIRONMENTS,
     action: "read",
@@ -71,7 +73,7 @@ export const BACKEND_OPERATIONS = Object.freeze({
     auditRequired: true,
   }),
   archiveOwnChatSession: operation({
-    operationId: "archiveOwnChatSession",
+    operationId: "conversation.archiveOwn",
     expectedSurface: "product",
     allowedEnvironments: PRODUCT_ENVIRONMENTS,
     action: "update",
@@ -82,7 +84,7 @@ export const BACKEND_OPERATIONS = Object.freeze({
     auditRequired: true,
   }),
   listSessionMessages: operation({
-    operationId: "listSessionMessages",
+    operationId: "conversation.message.listOwn",
     expectedSurface: "product",
     allowedEnvironments: PRODUCT_ENVIRONMENTS,
     action: "read",
@@ -103,12 +105,38 @@ export const BACKEND_OPERATIONS = Object.freeze({
     entitlementRequired: false,
     auditRequired: true,
   }),
+  readOwnConversation: operation({
+    operationId: "conversation.readOwn",
+    expectedSurface: "product",
+    allowedEnvironments: PRODUCT_ENVIRONMENTS,
+    action: "read",
+    resourceType: "chatSession",
+    authenticationRequired: true,
+    ownershipRequired: true,
+    entitlementRequired: false,
+    auditRequired: true,
+  }),
+  restoreOwnConversation: operation({
+    operationId: "conversation.restoreOwn",
+    expectedSurface: "product",
+    allowedEnvironments: PRODUCT_ENVIRONMENTS,
+    action: "update",
+    resourceType: "chatSession",
+    authenticationRequired: true,
+    ownershipRequired: true,
+    entitlementRequired: false,
+    auditRequired: true,
+  }),
 });
 
 export function registeredOperation(
   operationId: BackendOperationId,
 ): BackendOperationDefinition {
-  return BACKEND_OPERATIONS[operationId];
+  const registered = Object.values(BACKEND_OPERATIONS).find(
+    (definition) => definition.operationId === operationId,
+  );
+  if (!registered) throw new Error("operationNotRegistered");
+  return registered;
 }
 
 export function isRegisteredOperation(
