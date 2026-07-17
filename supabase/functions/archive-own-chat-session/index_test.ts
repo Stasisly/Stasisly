@@ -148,7 +148,7 @@ Deno.test("handler performs one narrow RPC and returns minimal response", async 
   ]);
 });
 
-Deno.test("missing, foreign and archived all produce indistinguishable response", async () => {
+Deno.test("missing and foreign sessions produce indistinguishable responses", async () => {
   for (const tokenOwner of [OWNER_A, OWNER_B]) {
     const handler = createHandler(LOCAL_CONFIG, {
       fetcher: (async (input: string | URL | Request) => {
