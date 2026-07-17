@@ -1,11 +1,18 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Estado FOUNDATION-013E
+
+La biblioteca presentacional canónica y el freeze del chat legacy quedan
+implementados localmente sin wiring ni rutas. El siguiente hijo exacto es
+`FOUNDATION-013F - Canonical Conversation application layer and inactive Product
+composition`; requiere aprobación propia y no autoriza rutas Product finales ni
+remoto.
+
 ## Estado FOUNDATION-013D
 
 Autor, procedencia y visibilidad de Message quedan implementados y validados
-localmente. El siguiente hijo exacto del mapa es `FOUNDATION-013E - Legacy UI
-extraction, freeze guards and retirement migration`; requiere aprobación propia
-y no autoriza rutas Product ni remoto.
+localmente. FOUNDATION-013E completó después la extracción visual y freeze; el
+siguiente hijo exacto es FOUNDATION-013F y no autoriza rutas Product ni remoto.
 
 ```text
 F0–F12 INITIAL FRAMEWORK: APPROVED

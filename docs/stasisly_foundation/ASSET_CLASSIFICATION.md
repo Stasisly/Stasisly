@@ -1,5 +1,13 @@
 # Clasificación inicial de activos
 
+## Reclasificación FOUNDATION-013E
+
+Las primitivas en `features/conversations/presentation` pasan a
+`FOUNDATION_ADOPTED_LOCALLY`. `features/chat` pasa de bloqueado a
+`DEPRECATED_AND_FROZEN`: `MessageBubble` queda adaptado visualmente, `ChatInput`
+y `ChatPage` requieren reescritura, y datos/dominio/providers legacy siguen
+`REMOVE_LATER / NOT_ADOPTED`.
+
 ## Reclasificación FOUNDATION-013D
 
 `messages`, `send-user-message`, `list-session-messages` y sus adapters pasan a

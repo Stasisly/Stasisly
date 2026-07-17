@@ -1,5 +1,12 @@
 # Product Conversation Architecture
 
+## Adopted presentation boundary
+
+Canonical Conversation presentation consumes only canonical domain/view
+models. It performs no repository, provider, ownership, provenance or visibility
+authority. Unknown/internal messages do not render; redaction never receives
+original content. The component library is inactive and route-free.
+
 ## Adopted Message boundary
 
 A Product Message is not an execution trace. Author, provenance and visibility

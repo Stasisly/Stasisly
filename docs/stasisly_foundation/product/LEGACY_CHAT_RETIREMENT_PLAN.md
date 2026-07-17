@@ -1,16 +1,23 @@
 # Legacy Chat Retirement Plan
 
+## FOUNDATION-013E execution checkpoint
+
+L1 freeze/guard is COMPLETE and the audited L2 reusable visual subset is
+COMPLETE. Canonical message/composer/state primitives are route-free and have no
+legacy imports. No Product consumer migrated: L4-L7 remain NOT STARTED and the
+blocked orchestrator import remains explicit removal debt.
+
 ## FOUNDATION-013D checkpoint
 
 Canonical Message semantics now fail closed over the transitional transport.
-This does not unfreeze or reconnect legacy chat. FOUNDATION-013E may extract and
-guard legacy UI only after separate approval and parity evidence.
+This did not unfreeze or reconnect legacy chat. FOUNDATION-013E subsequently
+extracted and guarded only the audited visual subset.
 
 ## Metadata
 
 ```text
 Status: APPROVED plan
-Implementation: NOT STARTED
+Implementation: L0-L3 COMPLETE LOCALLY; L4-L7 NOT STARTED
 Owner: Product + Flutter + Backend Architecture
 Approver: Founder
 ```
@@ -91,9 +98,9 @@ conversation slice. It is decomposed, without renumbering FOUNDATION-014-020:
 FOUNDATION-013A  canonical Product Conversation contracts and adapters [LOCAL COMPLETE]
 FOUNDATION-013B  transactional Conversation creation and TOCTOU/idempotency [LOCAL COMPLETE]
 FOUNDATION-013C  Conversation listing, read, archive and restore boundary [LOCAL COMPLETE]
-FOUNDATION-013D  Message author, visibility and provenance contracts
-FOUNDATION-013E  legacy UI extraction, freeze guards and retirement migration
-FOUNDATION-013F  Product /stasis and /conversations routes/screens
+FOUNDATION-013D  Message author, visibility and provenance contracts [LOCAL COMPLETE]
+FOUNDATION-013E  legacy UI extraction, freeze guards and retirement migration [LOCAL COMPLETE]
+FOUNDATION-013F  canonical application layer and inactive Product composition
 ```
 
 Each child requires separate approval and G0-G7. FOUNDATION-014 remains Agent

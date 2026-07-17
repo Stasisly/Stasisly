@@ -1,5 +1,12 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-013E risk update
+
+Closed locally: unsafe visual reuse and unguarded legacy-consumer growth.
+Residual debt remains explicit: blocked orchestrator import, legacy direct
+Supabase/provider graph, no Product consumer migration, no screen/routes and no
+physical removal. These risks remain contained, not accepted for production.
+
 ## FOUNDATION-013D risk update
 
 Closed locally: false assistant-to-Stasis/tool-to-specialist attribution and
@@ -15,11 +22,11 @@ not schedules.
 | ID | Debt / risk | Evidence | Owner | Priority | Dependency | Acceptance condition | Target phase |
 |---|---|---|---|---|---|---|---|
 | SEC-01 | Authorization enforcement partial | FOUNDATION-011 enforces registered local Product operations and trusted ownership in six Edge Functions; persistent RBAC/ABAC/JIT, remote and other backend domains remain absent | Security under Rector | P1 residual | Later persistent policy and domain packages | Persisted policy plus negative tests across approved domains | F7 before broader Product expansion |
-| SEC-02 | Legacy chat/client authority retained in frozen source | Direct Supabase, client role/IDs and `agentId` remain in `lib/features/chat/**`, but routes are blocked and FOUNDATION-012 formally deprecates the feature | Flutter + Backend Architecture | P1 residual | 013A-013F | Replacement active, no Product references, guarded removal | F7/F8 |
+| SEC-02 | Legacy chat/client authority retained in frozen source | Direct Supabase, client role/IDs and `agentId` remain, but 013E adds central freeze and exact no-spread guards; one blocked orchestrator consumer remains | Flutter + Backend Architecture | P1 residual | 013F and L4-L7 | Replacement active, no Product references, guarded removal | F7/F8 |
 | ARC-01 | Provider-owned identity/API boundary partially remediated | FOUNDATION-008 owns identity/session/errors and confines Auth SDK; bootstrap and backend adapters remain provider-coupled | Architecture under Rector | P2 residual | 009-010, 018 | Complete consumer migration and provider exit evidence | F7 |
 | ARC-02 | Surface isolation incomplete | Product route boundaries and six Product Edge Functions enforce local/development context; mixed legacy and future domains remain | Architecture + Nexus | P1 residual | 012-013 and later surface packages | Approved Product boundary with no legacy bypass | F7/F8 |
 | PROD-01 | Product taxonomy partially unresolved | Conversation/Stasis routes are decided by FOUNDATION-012; mental/physical/Wellness naming remains separate | Product Owner under Stasis | P2 residual | Separate taxonomy decision before affected rename | Founder-approved area taxonomy | F8 |
-| CONV-01 | Canonical Conversation adoption partial | FOUNDATION-013A-C adopt domain/adapters, transactional writes and local lifecycle/history; physical APIs/tables remain transitional and UI dev-only | Product + Flutter + Backend Architecture | P1 residual | 013D-013F | Provenance parity, retirement and rollback evidence | F8 |
+| CONV-01 | Canonical Conversation adoption partial | FOUNDATION-013A-E adopt domain/backend/message/presentation locally; physical APIs remain transitional and no Product composition or consumer migration exists | Product + Flutter + Backend Architecture | P1 residual | 013F and L4-L7 | Inactive composition, later approved routes, parity and retirement evidence | F8 |
 | CONV-02 | Conversation privacy lifecycle incomplete | Archive/restore are local and preserve history; deletion, retention, sharing, attachments, memory and research remain target-only | Product + Data + Privacy | P3 | 016 and later scoped packages | Approved privacy implementation plus controls | F8 before sensitive rollout |
 | CONV-03 | Idempotency retention/operations incomplete | Local server ledger has no automatic expiry, cleanup job, metrics or durable failed-state recovery | Privacy + Backend + Operations | P2/P3 | 016/017 or dedicated package | Approved retention, safe cleanup, monitoring and recovery tests | Before remote write rollout |
 | DATA-01 | Privacy lifecycle incomplete | Health/conversation data without full retention/deletion/provenance | Data + Privacy | P3; before sensitive scope | 016 | Approved lifecycle, threat controls and test plan | F7/F8 before production |

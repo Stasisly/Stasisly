@@ -5,7 +5,7 @@
 Status: **APPROVED working execution structure**. Package status is recorded
 below; every future package requires its own approval and exact scope.
 
-Package status after FOUNDATION-013D:
+Package status after FOUNDATION-013E:
 
 ```text
 FOUNDATION-007: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
@@ -18,7 +18,8 @@ FOUNDATION-013A: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
 FOUNDATION-013B: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
 FOUNDATION-013C: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
 FOUNDATION-013D: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
-FOUNDATION-013E..013F: NOT EXECUTED
+FOUNDATION-013E: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
+FOUNDATION-013F: NOT EXECUTED
 FOUNDATION-014..020: NOT EXECUTED
 ```
 
@@ -48,11 +49,10 @@ FOUNDATION-014..020: NOT EXECUTED
    destructive migrations receive independent packages and G8-G10 gates.
 4. A package stops when an unapproved file, authority decision or remote
    dependency becomes necessary.
-5. FOUNDATION-013A implements canonical Product Conversation contracts and
-   adapters; FOUNDATION-013B implements local transactional create/send and
-   idempotency; FOUNDATION-013C implements local lifecycle/history. 013D is
-   next only after separate approval; routes, legacy deletion and remote remain
-   excluded.
+5. FOUNDATION-013A-013D implement canonical Product Conversation contracts and
+   local backend boundaries. FOUNDATION-013E implements inactive presentation
+   primitives and legacy freeze. 013F remains separately gated; routes,
+   physical legacy deletion and remote remain excluded.
 
 ## FOUNDATION-013 child sequence
 
@@ -62,8 +62,8 @@ FOUNDATION-014..020: NOT EXECUTED
 | 013B | Transactional creation, TOCTOU and create/send idempotency — IMPLEMENTED LOCALLY | No remote migration |
 | 013C | List/read/archive/restore/history boundary — IMPLEMENTED LOCALLY | No Product route registration |
 | 013D | Message author, visibility and provenance contracts - IMPLEMENTED LOCALLY | No Engine trace exposure |
-| 013E | Legacy UI extraction, freeze guards and retirement migration | No removal before parity/data gates |
-| 013F | `/stasis` and `/conversations` Product routes/screens | No staging/production activation |
+| 013E | Legacy UI extraction, freeze guards and retirement migration - IMPLEMENTED LOCALLY | No removal before parity/data gates |
+| 013F | Canonical Conversation application layer and inactive Product composition | No Product route registration or staging/production activation |
 
 These are children of the existing FOUNDATION-013 ID. They do not renumber or
 replace FOUNDATION-014-020 and each requires a separate approval.

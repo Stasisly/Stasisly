@@ -1,10 +1,16 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-013E gate result
+
+013E completes G0-G6 locally for canonical presentation and legacy freeze;
+publication completes G7. FOUNDATION-013F application/composition is the next
+separately approved dependency gate. Product routes and G8-G10 remain blocked.
+
 ## FOUNDATION-013D gate result
 
-013D completes G0-G6 locally for canonical Message semantics; publication
-completes G7. FOUNDATION-013E is the next separately approved dependency gate.
-G8-G10 and Product route activation remain unauthorized.
+013D completed G0-G7 for canonical Message semantics. FOUNDATION-013E is now
+implemented locally and its publication completes G7. G8-G10 and Product route
+activation remain unauthorized.
 
 ## Status
 
@@ -43,8 +49,8 @@ FOUNDATION-005-R1
           -> FOUNDATION-013B transactional creation [COMPLETED LOCALLY]
           -> FOUNDATION-013C lifecycle/history
           -> FOUNDATION-013D author/provenance
-          -> FOUNDATION-013E legacy retirement migration
-          -> FOUNDATION-013F Product routes/screens
+          -> FOUNDATION-013E legacy presentation/freeze [COMPLETED LOCALLY]
+          -> FOUNDATION-013F application/inactive Product composition
       -> FOUNDATION-014 Agent Constitution/Engine design
       -> FOUNDATION-015 backend security CI
         -> FOUNDATION-017 observability/limits/cost foundation
@@ -77,7 +83,8 @@ satisfies G0-G6 with owner-scoped lifecycle/history, two SQL cycles 713/713,
 Deno 85/85, Flutter 517/5 skips and local HTTP cleanup at seven ceros;
 publication completes G7. FOUNDATION-013D satisfies G0-G6 for canonical
 Message metadata and SQL visibility filtering; publication completes G7.
-FOUNDATION-013E is the next proposed gate and requires separate approval.
+FOUNDATION-013E now satisfies G0-G6 for its local scope; publication completes
+G7. FOUNDATION-013F requires separate approval.
 
 ## Surface dependency matrix
 

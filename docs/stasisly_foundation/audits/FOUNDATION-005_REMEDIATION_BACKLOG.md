@@ -1,5 +1,12 @@
 # FOUNDATION-005 Remediation Backlog
 
+## FOUNDATION-013E remediation evidence
+
+Legacy visual reuse is remediated locally through canonical provider-neutral
+components, a complete file/symbol inventory, central freeze metadata and
+no-spread guards. Consumer migration, Product composition/routes and physical
+removal remain open; backend and remote state are unchanged.
+
 ## FOUNDATION-013D remediation evidence
 
 Message semantic ambiguity is remediated locally with closed metadata,

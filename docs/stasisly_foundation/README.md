@@ -1,5 +1,14 @@
 # Stasisly Foundation
 
+## FOUNDATION-013E presentation boundary
+
+`FOUNDATION-013E` adopts provider-neutral Conversation presentation primitives,
+a fail-closed canonical Message view mapper and a content-only inert composer.
+Legacy chat is centrally marked `DEPRECATED_AND_BLOCKED`, guarded against new
+consumers and retained for later removal. No Product screen, route, provider,
+backend or remote connection is implemented. See the [implementation record](implementation/FOUNDATION-013E_LEGACY_UI_EXTRACTION_FREEZE_AND_RETIREMENT_PREPARATION.md)
+and [ADR-F014](adr/ADR-F014-legacy-chat-ui-extraction-and-freeze.md).
+
 ## FOUNDATION-013D message boundary
 
 `FOUNDATION-013D` adopts locally the canonical Message author, provenance and
@@ -246,7 +255,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras publicar FOUNDATION-013D, el siguiente gate exacto del mapa es
-`FOUNDATION-013E` para extracción de UI legacy, freeze guards y migración de
-retirada. Requiere aprobación separada y no autoriza rutas Product, Engine ni
-remoto.
+Tras publicar FOUNDATION-013E, el siguiente gate exacto del mapa es
+`FOUNDATION-013F` para application layer y composición Product inactiva.
+Requiere aprobación separada y no autoriza rutas Product, Engine ni remoto.

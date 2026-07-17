@@ -60,11 +60,11 @@ void main() {
   });
 
   test(
-    'canonical feature has no presentation, routes or remote datasource',
+    'canonical feature has presentation primitives but no active wiring',
     () {
       expect(
         Directory('lib/features/conversations/presentation').existsSync(),
-        isFalse,
+        isTrue,
       );
       expect(
         Directory('lib/features/conversations/routes').existsSync(),

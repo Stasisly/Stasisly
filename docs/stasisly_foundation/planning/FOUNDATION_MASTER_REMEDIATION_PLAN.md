@@ -1,5 +1,12 @@
 # Foundation Master Remediation Plan
 
+## FOUNDATION-013E completion
+
+G0-G6 are complete locally for canonical presentation extraction and legacy
+freeze; publication completes G7. Consumer migration, Product composition,
+routes and physical legacy removal remain separately gated. Rollback never
+reactivates legacy fallback.
+
 ## FOUNDATION-013D completion
 
 G0-G6 are complete locally for Message author/provenance/visibility; G7 completes
@@ -285,7 +292,8 @@ FOUNDATION-012 closes the conceptual Product Conversation and formal legacy-chat
 retirement decision. It does not close implementation debt. The approved
 FOUNDATION-013 parent slice is decomposed into 013A contracts/adapters, 013B
 transactional creation, 013C lifecycle/history, 013D author/provenance, 013E UI
-extraction/retirement and 013F Product routes. FOUNDATION-014-020 retain their
+extraction/freeze and 013F inactive application composition. Product routes
+remain a later separately approved gate. FOUNDATION-014-020 retain their
 existing meanings and remote gates remain separate.
 
 FOUNDATION-013A closes locally the canonical client-domain and adapter portion

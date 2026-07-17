@@ -1,5 +1,11 @@
 # Document Authority Register
 
+## FOUNDATION-013E authority addition
+
+ADR-F014 is normative for visual-only legacy reuse, canonical presentation and
+legacy freeze. The 013E implementation record is verified local evidence. It
+does not authorize Product wiring, routes, physical removal or remote use.
+
 ## FOUNDATION-013D authority addition
 
 ADR-F013 is normative for Message author/provenance/visibility. The 013D
