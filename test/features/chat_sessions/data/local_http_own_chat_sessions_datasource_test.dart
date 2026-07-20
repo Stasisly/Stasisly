@@ -1,13 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:stasisly/core/auth/session/secure_session.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/data/datasources/local_http_own_chat_sessions_datasource.dart';
 import 'package:stasisly/features/chat_sessions/data/local/local_only_host_policy.dart';
 import 'package:stasisly/features/chat_sessions/data/local/local_session_token_provider.dart';
 import 'package:stasisly/features/chat_sessions/data/local/own_chat_sessions_http_transport.dart';
 import 'package:stasisly/features/chat_sessions/data/local/secure_session_chat_sessions_token_provider.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
-import 'package:stasisly/features/conversations/application/idempotency/operation_attempt_id_factory.dart';
+
+final _attempt = OperationAttemptId('test_attempt_00000001');
 
 void main() {
   group('fail closed before transport', () {
@@ -24,6 +26,7 @@ void main() {
 
         final response = await source.createOwnChatSession(
           selectableSpecialistId: 'catalog-public',
+          operationAttemptId: _attempt,
         );
 
         expect(response.errorCode, 'backendBlocked');
@@ -76,7 +79,10 @@ void main() {
             SecureSessionTokenResult.success('fake-secure-session-token'),
           ),
           transport: transport,
-        ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+        ).createOwnChatSession(
+          selectableSpecialistId: 'catalog-public',
+          operationAttemptId: _attempt,
+        );
 
         final request = transport.requests.single;
         expect(
@@ -130,9 +136,10 @@ void main() {
       () async {
         final transport = _FakeTransport();
 
-        await _source(
-          transport: transport,
-        ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+        await _source(transport: transport).createOwnChatSession(
+          selectableSpecialistId: 'catalog-public',
+          operationAttemptId: _attempt,
+        );
 
         final request = transport.requests.single;
         expect(request.method, OwnChatSessionsHttpMethod.post);
@@ -157,6 +164,51 @@ void main() {
         ]) {
           expect(request.body, isNot(containsPair(forbidden, anything)));
         }
+      },
+    );
+
+    test('create retries preserve the caller-owned attempt exactly', () async {
+      final transport = _FakeTransport();
+      final source = _source(transport: transport);
+
+      await source.createOwnChatSession(
+        selectableSpecialistId: 'catalog-public',
+        operationAttemptId: _attempt,
+      );
+      await source.createOwnChatSession(
+        selectableSpecialistId: 'catalog-public',
+        operationAttemptId: _attempt,
+      );
+
+      expect(transport.requests, hasLength(2));
+      expect(
+        transport.requests.map((request) => request.headers['Idempotency-Key']),
+        everyElement(_attempt.value),
+      );
+    });
+
+    test(
+      'new create intent uses only the new caller-supplied attempt',
+      () async {
+        final transport = _FakeTransport();
+        final source = _source(transport: transport);
+        final nextAttempt = OperationAttemptId('test_attempt_00000002');
+
+        await source.createOwnChatSession(
+          selectableSpecialistId: 'catalog-public',
+          operationAttemptId: _attempt,
+        );
+        await source.createOwnChatSession(
+          selectableSpecialistId: 'catalog-public',
+          operationAttemptId: nextAttempt,
+        );
+
+        expect(
+          transport.requests.map(
+            (request) => request.headers['Idempotency-Key'],
+          ),
+          [_attempt.value, nextAttempt.value],
+        );
       },
     );
 
@@ -232,14 +284,18 @@ void main() {
     test(
       'redirect response fails closed and is never returned as success',
       () async {
-        final response = await _source(
-          transport: _FakeTransport(
-            response: const OwnChatSessionsHttpResponse(
-              statusCode: 302,
-              body: null,
-            ),
-          ),
-        ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+        final response =
+            await _source(
+              transport: _FakeTransport(
+                response: const OwnChatSessionsHttpResponse(
+                  statusCode: 302,
+                  body: null,
+                ),
+              ),
+            ).createOwnChatSession(
+              selectableSpecialistId: 'catalog-public',
+              operationAttemptId: _attempt,
+            );
 
         expect(response.statusCode, 503);
         expect(response.errorCode, 'backendBlocked');
@@ -274,23 +330,13 @@ LocalHttpOwnChatSessionsDataSource _source({
   ),
   LocalSessionTokenProvider? tokenProvider,
   _FakeTransport? transport,
-  OperationAttemptIdFactory? operationAttemptIds,
 }) {
   return LocalHttpOwnChatSessionsDataSource(
     baseUri: baseUri ?? Uri.parse('http://127.0.0.1:54321'),
     hostPolicy: policy,
     tokenProvider: tokenProvider ?? _FakeTokenProvider('local-jwt'),
     transport: transport ?? _FakeTransport(),
-    operationAttemptIds:
-        operationAttemptIds ?? _FakeOperationAttemptIdFactory(),
   );
-}
-
-class _FakeOperationAttemptIdFactory implements OperationAttemptIdFactory {
-  int _next = 1;
-
-  @override
-  String create() => 'test_attempt_${(_next++).toString().padLeft(8, '0')}';
 }
 
 SecureSessionChatSessionsTokenProvider _secureSessionTokenProvider(

@@ -1,5 +1,12 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-013F-R1 gate result
+
+R1 completes G0-G6 locally with `OperationAttemptId`, explicit create/send
+propagation, 563 Flutter passes/5 approved skips, Deno 86/86 and SQL 740/740.
+Publication completes G7. FOUNDATION-013F is `READY_TO_RESUME`; G8-G10 and
+Product routing remain blocked.
+
 ## FOUNDATION-013E gate result
 
 013E completes G0-G6 locally for canonical presentation and legacy freeze;
@@ -50,7 +57,8 @@ FOUNDATION-005-R1
           -> FOUNDATION-013C lifecycle/history
           -> FOUNDATION-013D author/provenance
           -> FOUNDATION-013E legacy presentation/freeze [COMPLETED LOCALLY]
-          -> FOUNDATION-013F application/inactive Product composition
+          -> FOUNDATION-013F-R1 stable operation attempts [COMPLETED LOCALLY]
+            -> FOUNDATION-013F application/inactive Product composition [READY_TO_RESUME]
       -> FOUNDATION-014 Agent Constitution/Engine design
       -> FOUNDATION-015 backend security CI
         -> FOUNDATION-017 observability/limits/cost foundation
@@ -83,8 +91,9 @@ satisfies G0-G6 with owner-scoped lifecycle/history, two SQL cycles 713/713,
 Deno 85/85, Flutter 517/5 skips and local HTTP cleanup at seven ceros;
 publication completes G7. FOUNDATION-013D satisfies G0-G6 for canonical
 Message metadata and SQL visibility filtering; publication completes G7.
-FOUNDATION-013E now satisfies G0-G6 for its local scope; publication completes
-G7. FOUNDATION-013F requires separate approval.
+FOUNDATION-013E satisfies G0-G7. FOUNDATION-013F-R1 now satisfies G0-G6 for its
+local scope; publication completes G7. FOUNDATION-013F is ready to resume under
+its approved scope but remains not implemented.
 
 ## Surface dependency matrix
 

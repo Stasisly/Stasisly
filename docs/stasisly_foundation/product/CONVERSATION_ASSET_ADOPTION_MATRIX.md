@@ -1,5 +1,12 @@
 # Conversation Asset Adoption Matrix
 
+## FOUNDATION-013F-R1 delta
+
+The neutral attempt contract/factory and create/send propagation are adopted
+locally; datasource-owned generation is removed. Canonical application
+composition remains `NOT_IMPLEMENTED`, FOUNDATION-013F is `READY_TO_RESUME`,
+and no Product consumer, route or remote boundary is active.
+
 ## FOUNDATION-013E delta
 
 The complete legacy chat inventory is classified. Safe visual intent is

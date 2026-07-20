@@ -1,9 +1,9 @@
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/data/contracts/own_chat_sessions_contract_source.dart';
 import 'package:stasisly/features/chat_sessions/data/local/local_only_host_policy.dart';
 import 'package:stasisly/features/chat_sessions/data/local/local_session_token_provider.dart';
 import 'package:stasisly/features/chat_sessions/data/local/own_chat_sessions_http_transport.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
-import 'package:stasisly/features/conversations/application/idempotency/operation_attempt_id_factory.dart';
 
 class LocalHttpOwnChatSessionsDataSource
     implements
@@ -14,7 +14,6 @@ class LocalHttpOwnChatSessionsDataSource
     required this.hostPolicy,
     required this.tokenProvider,
     required this.transport,
-    this.operationAttemptIds = const SecureOperationAttemptIdFactory(),
   });
 
   static const _createPath = '/functions/v1/create-own-chat-session';
@@ -27,17 +26,17 @@ class LocalHttpOwnChatSessionsDataSource
   final OwnChatSessionsHostPolicy hostPolicy;
   final LocalSessionTokenProvider tokenProvider;
   final OwnChatSessionsHttpTransport transport;
-  final OperationAttemptIdFactory operationAttemptIds;
 
   @override
   Future<OwnChatSessionsContractResponse> createOwnChatSession({
     required String selectableSpecialistId,
+    required OperationAttemptId operationAttemptId,
   }) {
     return _send(
       method: OwnChatSessionsHttpMethod.post,
       path: _createPath,
       body: {'selectableSpecialistId': selectableSpecialistId},
-      idempotencyKey: operationAttemptIds.create(),
+      idempotencyKey: operationAttemptId,
     );
   }
 
@@ -96,7 +95,7 @@ class LocalHttpOwnChatSessionsDataSource
     required String path,
     Map<String, String>? queryParameters,
     Map<String, dynamic>? body,
-    String? idempotencyKey,
+    OperationAttemptId? idempotencyKey,
   }) async {
     if (!hostPolicy.allows(baseUri)) {
       return const OwnChatSessionsContractResponse(
@@ -134,7 +133,7 @@ class LocalHttpOwnChatSessionsDataSource
           'Accept': 'application/json',
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
-          if (idempotencyKey != null) 'Idempotency-Key': idempotencyKey,
+          if (idempotencyKey != null) 'Idempotency-Key': idempotencyKey.value,
         },
         body: body,
       ),

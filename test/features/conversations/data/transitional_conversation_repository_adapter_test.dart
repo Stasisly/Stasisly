@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/core/identity/domain/authentication_state.dart';
 import 'package:stasisly/core/identity/domain/identity_type.dart';
 import 'package:stasisly/core/identity/domain/stasisly_identity.dart';
@@ -15,6 +15,8 @@ import 'package:stasisly/features/conversations/domain/entities/conversation.dar
 import 'package:stasisly/features/conversations/domain/entities/conversation_message.dart';
 import 'package:stasisly/features/conversations/domain/results/conversation_results.dart';
 import 'package:stasisly/features/conversations/domain/value_objects/conversation_id.dart';
+
+final _attempt = OperationAttemptId('test_attempt_00000001');
 
 void main() {
   late _FakeSessionsRepository sessions;
@@ -55,18 +57,22 @@ void main() {
     sessions.createResult = CreateOwnChatSessionSuccess(_session);
 
     final result = await repository.createOwnConversation(
-      CreateConversationInput(selectableSpecialistId: 'catalog-public'),
+      CreateConversationInput(
+        selectableSpecialistId: 'catalog-public',
+        operationAttemptId: _attempt,
+      ),
     );
 
     final success = result as ConversationMutationSuccess;
     expect(sessions.lastSelectableSpecialistId, 'catalog-public');
+    expect(sessions.lastOperationAttemptId, same(_attempt));
     expect(success.conversation?.ownerSubjectId, 'owner-subject');
     expect(success.conversation?.conversationId.value, 'session-1');
   });
 
   test('create without specialist fails until backend supports it', () async {
     final result = await repository.createOwnConversation(
-      CreateConversationInput(),
+      CreateConversationInput(operationAttemptId: _attempt),
     );
 
     expect(
@@ -162,12 +168,14 @@ void main() {
         SendConversationMessageInput(
           conversationId: ConversationId('session-1'),
           content: ' Hola ',
+          operationAttemptId: _attempt,
         ),
       );
 
       final success = result as ConversationMessageSendSuccess;
       expect(messages.lastSessionId, 'session-1');
       expect(messages.lastContent, 'Hola');
+      expect(messages.lastOperationAttemptId, same(_attempt));
       expect(success.receipt.messageCount, 4);
       expect(success.receipt.message.author, isA<UserAuthor>());
     },
@@ -188,6 +196,7 @@ void main() {
       SendConversationMessageInput(
         conversationId: ConversationId('session-1'),
         content: 'Hola',
+        operationAttemptId: _attempt,
       ),
     );
 
@@ -234,6 +243,7 @@ void main() {
           SendConversationMessageInput(
             conversationId: ConversationId('session-1'),
             content: 'Hola',
+            operationAttemptId: _attempt,
           ),
         ),
         const ConversationMessageSendFailure(
@@ -249,7 +259,10 @@ void main() {
     );
 
     final result = await repository.createOwnConversation(
-      CreateConversationInput(selectableSpecialistId: 'catalog-public'),
+      CreateConversationInput(
+        selectableSpecialistId: 'catalog-public',
+        operationAttemptId: _attempt,
+      ),
     );
 
     expect(
@@ -335,6 +348,7 @@ class _FakeSessionsRepository
   int createCalls = 0;
   int listCalls = 0;
   String? lastSelectableSpecialistId;
+  OperationAttemptId? lastOperationAttemptId;
   ChatSessionStatusFilter? lastStatus;
   int? lastLimit;
   String? lastCursor;
@@ -344,9 +358,11 @@ class _FakeSessionsRepository
   @override
   Future<CreateOwnChatSessionResult> createOwnChatSession({
     required String selectableSpecialistId,
+    required OperationAttemptId operationAttemptId,
   }) async {
     createCalls++;
     lastSelectableSpecialistId = selectableSpecialistId;
+    lastOperationAttemptId = operationAttemptId;
     return createResult;
   }
 
@@ -393,6 +409,7 @@ class _FakeMessagesRepository implements OwnChatMessagesRepository {
 
   String? lastSessionId;
   String? lastContent;
+  OperationAttemptId? lastOperationAttemptId;
   int? lastLimit;
   String? lastCursor;
 
@@ -400,9 +417,11 @@ class _FakeMessagesRepository implements OwnChatMessagesRepository {
   Future<SendUserMessageResult> sendUserMessage({
     required String sessionId,
     required String content,
+    required OperationAttemptId operationAttemptId,
   }) async {
     lastSessionId = sessionId;
     lastContent = content;
+    lastOperationAttemptId = operationAttemptId;
     return sendResult;
   }
 

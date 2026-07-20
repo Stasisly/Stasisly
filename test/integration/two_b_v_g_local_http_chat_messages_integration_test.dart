@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_messages/data/datasources/local_http_own_chat_messages_datasource.dart';
 import 'package:stasisly/features/chat_messages/data/local/local_only_host_policy.dart';
 import 'package:stasisly/features/chat_messages/data/local/local_session_token_provider.dart';
@@ -58,6 +59,7 @@ void main() {
     final sent = await datasource.sendUserMessage(
       sessionId: ownerActiveSessionId,
       content: '  mensaje de prueba  ',
+      operationAttemptId: OperationAttemptId('integration_send_000001'),
     );
     expect(sent, isA<SendUserMessageSuccess>());
     final sentMessage = (sent as SendUserMessageSuccess).sent;
@@ -113,6 +115,7 @@ void main() {
     final archivedSend = await datasource.sendUserMessage(
       sessionId: ownerArchivedSessionId,
       content: 'no debe escribirse',
+      operationAttemptId: OperationAttemptId('integration_send_000002'),
     );
     expect(
       archivedSend,
@@ -135,6 +138,7 @@ void main() {
     final otherSend = await datasource.sendUserMessage(
       sessionId: otherSessionId,
       content: 'opaco',
+      operationAttemptId: OperationAttemptId('integration_send_000003'),
     );
     expect(
       otherSend,
@@ -241,6 +245,7 @@ void main() {
       await remote.sendUserMessage(
         sessionId: ownerActiveSessionId,
         content: 'blocked',
+        operationAttemptId: OperationAttemptId('integration_send_000004'),
       ),
       const SendUserMessageFailure(
         SendOwnChatMessageFailureType.backendBlocked,

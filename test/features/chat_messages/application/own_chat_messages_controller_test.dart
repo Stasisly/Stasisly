@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_controller.dart';
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_state.dart';
@@ -378,6 +379,7 @@ class _FakeOwnChatMessagesRepository implements OwnChatMessagesRepository {
   Future<SendUserMessageResult> sendUserMessage({
     required String sessionId,
     required String content,
+    required OperationAttemptId operationAttemptId,
   }) async {
     sendCalls.add(_SendCall(sessionId, content));
     return _sendResults.removeAt(0);

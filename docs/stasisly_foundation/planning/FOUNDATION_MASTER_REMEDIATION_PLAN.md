@@ -1,5 +1,12 @@
 # Foundation Master Remediation Plan
 
+## FOUNDATION-013F-R1 completion
+
+The application-to-transport idempotency gap is closed locally with explicit,
+stable attempt propagation. G0-G6 are complete; publication completes G7.
+FOUNDATION-013F is `READY_TO_RESUME`, while application composition, routes,
+remote writes and G8-G10 remain unimplemented/unauthorized.
+
 ## FOUNDATION-013E completion
 
 G0-G6 are complete locally for canonical presentation extraction and legacy

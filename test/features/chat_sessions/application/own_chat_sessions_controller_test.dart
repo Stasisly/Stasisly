@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 
 import 'package:stasisly/features/chat_sessions/application/own_chat_sessions_controller.dart';
 import 'package:stasisly/features/chat_sessions/application/own_chat_sessions_state.dart';
@@ -476,6 +477,7 @@ class _FakeOwnChatSessionsRepository implements OwnChatSessionsRepository {
   @override
   Future<CreateOwnChatSessionResult> createOwnChatSession({
     required String selectableSpecialistId,
+    required OperationAttemptId operationAttemptId,
   }) async {
     createCalls.add(_CreateCall(selectableSpecialistId));
     return _createResults.isEmpty

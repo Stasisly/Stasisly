@@ -1,3 +1,4 @@
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session_results.dart';
 import 'package:stasisly/features/chat_sessions/domain/repositories/own_chat_sessions_repository.dart';
@@ -18,6 +19,7 @@ class BackendBlockedOwnChatSessionsRepository
   @override
   Future<CreateOwnChatSessionResult> createOwnChatSession({
     required String selectableSpecialistId,
+    required OperationAttemptId operationAttemptId,
   }) async {
     return const CreateOwnChatSessionFailure(_blocked);
   }

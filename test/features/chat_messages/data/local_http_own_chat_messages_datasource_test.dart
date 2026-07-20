@@ -1,12 +1,14 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:stasisly/core/auth/session/secure_session.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_messages/data/datasources/local_http_own_chat_messages_datasource.dart';
 import 'package:stasisly/features/chat_messages/data/local/local_only_host_policy.dart';
 import 'package:stasisly/features/chat_messages/data/local/local_session_token_provider.dart';
 import 'package:stasisly/features/chat_messages/data/local/own_chat_messages_http_transport.dart';
 import 'package:stasisly/features/chat_messages/data/local/secure_session_chat_messages_token_provider.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message_results.dart';
-import 'package:stasisly/features/conversations/application/idempotency/operation_attempt_id_factory.dart';
+
+final _attempt = OperationAttemptId('test_attempt_00000001');
 
 void main() {
   group('fail closed before token or transport', () {
@@ -22,6 +24,7 @@ void main() {
       final result = await source.sendUserMessage(
         sessionId: 'session-1',
         content: 'hola',
+        operationAttemptId: _attempt,
       );
 
       expect(
@@ -57,10 +60,15 @@ void main() {
     test('missing or empty token never executes transport', () async {
       for (final token in <String?>[null, '']) {
         final transport = _FakeTransport();
-        final result = await _source(
-          tokenProvider: _FakeTokenProvider(token),
-          transport: transport,
-        ).sendUserMessage(sessionId: 'session-1', content: 'hola');
+        final result =
+            await _source(
+              tokenProvider: _FakeTokenProvider(token),
+              transport: transport,
+            ).sendUserMessage(
+              sessionId: 'session-1',
+              content: 'hola',
+              operationAttemptId: _attempt,
+            );
 
         expect(
           result,
@@ -74,12 +82,17 @@ void main() {
 
     test('secure session wrapper null never executes transport', () async {
       final transport = _FakeTransport();
-      final result = await _source(
-        tokenProvider: _secureTokenProvider(
-          const SecureSessionTokenResult.demo(),
-        ),
-        transport: transport,
-      ).sendUserMessage(sessionId: 'session-1', content: 'hola');
+      final result =
+          await _source(
+            tokenProvider: _secureTokenProvider(
+              const SecureSessionTokenResult.demo(),
+            ),
+            transport: transport,
+          ).sendUserMessage(
+            sessionId: 'session-1',
+            content: 'hola',
+            operationAttemptId: _attempt,
+          );
 
       expect(
         result,
@@ -115,9 +128,11 @@ void main() {
     test('send posts only sessionId and content', () async {
       final transport = _FakeTransport(response: _sendSuccess());
 
-      await _source(
-        transport: transport,
-      ).sendUserMessage(sessionId: 'session-1', content: '  hola  ');
+      await _source(transport: transport).sendUserMessage(
+        sessionId: 'session-1',
+        content: '  hola  ',
+        operationAttemptId: _attempt,
+      );
 
       final request = transport.requests.single;
       expect(request.method, OwnChatMessagesHttpMethod.post);
@@ -149,6 +164,70 @@ void main() {
       }
     });
 
+    test('send retries preserve the caller-owned attempt exactly', () async {
+      final transport = _FakeTransport(response: _sendSuccess());
+      final source = _source(transport: transport);
+
+      await source.sendUserMessage(
+        sessionId: 'session-1',
+        content: 'hola',
+        operationAttemptId: _attempt,
+      );
+      await source.sendUserMessage(
+        sessionId: 'session-1',
+        content: 'hola',
+        operationAttemptId: _attempt,
+      );
+
+      expect(transport.requests, hasLength(2));
+      expect(
+        transport.requests.map((request) => request.headers['Idempotency-Key']),
+        everyElement(_attempt.value),
+      );
+    });
+
+    test('edited send intent uses only its new supplied attempt', () async {
+      final transport = _FakeTransport(response: _sendSuccess());
+      final source = _source(transport: transport);
+      final nextAttempt = OperationAttemptId('test_attempt_00000002');
+
+      await source.sendUserMessage(
+        sessionId: 'session-1',
+        content: 'hola',
+        operationAttemptId: _attempt,
+      );
+      await source.sendUserMessage(
+        sessionId: 'session-1',
+        content: 'contenido editado',
+        operationAttemptId: nextAttempt,
+      );
+
+      expect(
+        transport.requests.map((request) => request.headers['Idempotency-Key']),
+        [_attempt.value, nextAttempt.value],
+      );
+    });
+
+    test('transport retry reuses the same request and header', () async {
+      final transport = _RetryingTransport(response: _sendSuccess());
+
+      await _source(transport: transport).sendUserMessage(
+        sessionId: 'session-1',
+        content: 'hola',
+        operationAttemptId: _attempt,
+      );
+
+      expect(transport.requests, hasLength(2));
+      expect(
+        identical(transport.requests.first, transport.requests.last),
+        true,
+      );
+      expect(
+        transport.requests.map((request) => request.headers['Idempotency-Key']),
+        everyElement(_attempt.value),
+      );
+    });
+
     test(
       'secure session wrapper supplies Authorization without payload leak',
       () async {
@@ -159,7 +238,11 @@ void main() {
             SecureSessionTokenResult.success('fake-secure-message-token'),
           ),
           transport: transport,
-        ).sendUserMessage(sessionId: 'session-1', content: 'hola');
+        ).sendUserMessage(
+          sessionId: 'session-1',
+          content: 'hola',
+          operationAttemptId: _attempt,
+        );
 
         final request = transport.requests.single;
         expect(
@@ -218,9 +301,11 @@ void main() {
       () async {
         final transport = _FakeTransport(response: _sendSuccess());
 
-        await _source(
-          transport: transport,
-        ).sendUserMessage(sessionId: '/chat/:id', content: 'hola');
+        await _source(transport: transport).sendUserMessage(
+          sessionId: '/chat/:id',
+          content: 'hola',
+          operationAttemptId: _attempt,
+        );
 
         final request = transport.requests.single;
         expect(request.uri.path, '/functions/v1/send-user-message');
@@ -233,9 +318,14 @@ void main() {
 
   group('untrusted responses', () {
     test('valid send and list success payloads are accepted', () async {
-      final send = await _source(
-        transport: _FakeTransport(response: _sendSuccess()),
-      ).sendUserMessage(sessionId: 'session-1', content: 'hola');
+      final send =
+          await _source(
+            transport: _FakeTransport(response: _sendSuccess()),
+          ).sendUserMessage(
+            sessionId: 'session-1',
+            content: 'hola',
+            operationAttemptId: _attempt,
+          );
       final list = await _source(
         transport: _FakeTransport(response: _listSuccess()),
       ).listSessionMessages(sessionId: 'session-1');
@@ -319,14 +409,19 @@ void main() {
             SendOwnChatMessageFailureType.backendMisconfigured,
       };
       for (final entry in cases.entries) {
-        final result = await _source(
-          transport: _FakeTransport(
-            response: OwnChatMessagesHttpResponse(
-              statusCode: _statusFor(entry.key),
-              body: _error(entry.key),
-            ),
-          ),
-        ).sendUserMessage(sessionId: 'session-1', content: 'hola');
+        final result =
+            await _source(
+              transport: _FakeTransport(
+                response: OwnChatMessagesHttpResponse(
+                  statusCode: _statusFor(entry.key),
+                  body: _error(entry.key),
+                ),
+              ),
+            ).sendUserMessage(
+              sessionId: 'session-1',
+              content: 'hola',
+              operationAttemptId: _attempt,
+            );
 
         expect(result, SendUserMessageFailure(entry.value));
         expect(result, isNot(isA<SendUserMessageDemo>()));
@@ -359,14 +454,19 @@ void main() {
     });
 
     test('expired or invalid remote token maps to unauthenticated', () async {
-      final sendResult = await _source(
-        transport: _FakeTransport(
-          response: OwnChatMessagesHttpResponse(
-            statusCode: 401,
-            body: _error('unauthenticated'),
-          ),
-        ),
-      ).sendUserMessage(sessionId: 'session-1', content: 'hola');
+      final sendResult =
+          await _source(
+            transport: _FakeTransport(
+              response: OwnChatMessagesHttpResponse(
+                statusCode: 401,
+                body: _error('unauthenticated'),
+              ),
+            ),
+          ).sendUserMessage(
+            sessionId: 'session-1',
+            content: 'hola',
+            operationAttemptId: _attempt,
+          );
       final listResult = await _source(
         transport: _FakeTransport(
           response: OwnChatMessagesHttpResponse(
@@ -393,9 +493,14 @@ void main() {
     });
 
     test('transport exception maps to networkError without demo', () async {
-      final result = await _source(
-        transport: _FakeTransport(throwsTransport: true),
-      ).sendUserMessage(sessionId: 'session-1', content: 'hola');
+      final result =
+          await _source(
+            transport: _FakeTransport(throwsTransport: true),
+          ).sendUserMessage(
+            sessionId: 'session-1',
+            content: 'hola',
+            operationAttemptId: _attempt,
+          );
 
       expect(
         result,
@@ -433,23 +538,13 @@ LocalHttpOwnChatMessagesDataSource _source({
   ),
   LocalSessionTokenProvider? tokenProvider,
   _FakeTransport? transport,
-  OperationAttemptIdFactory? operationAttemptIds,
 }) {
   return LocalHttpOwnChatMessagesDataSource(
     baseUri: baseUri ?? Uri.parse('http://127.0.0.1:54321'),
     hostPolicy: policy,
     tokenProvider: tokenProvider ?? _FakeTokenProvider('local-token'),
     transport: transport ?? _FakeTransport(response: _listSuccess()),
-    operationAttemptIds:
-        operationAttemptIds ?? _FakeOperationAttemptIdFactory(),
   );
-}
-
-class _FakeOperationAttemptIdFactory implements OperationAttemptIdFactory {
-  int _next = 1;
-
-  @override
-  String create() => 'test_attempt_${(_next++).toString().padLeft(8, '0')}';
 }
 
 class _FakeTokenProvider implements LocalSessionTokenProvider {
@@ -484,6 +579,20 @@ class _FakeTransport implements OwnChatMessagesHttpTransport {
   ) async {
     requests.add(request);
     if (throwsTransport) throw const OwnChatMessagesTransportException();
+    return response;
+  }
+}
+
+class _RetryingTransport extends _FakeTransport {
+  _RetryingTransport({required super.response});
+
+  @override
+  Future<OwnChatMessagesHttpResponse> send(
+    OwnChatMessagesHttpRequest request,
+  ) async {
+    requests
+      ..add(request)
+      ..add(request);
     return response;
   }
 }

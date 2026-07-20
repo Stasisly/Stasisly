@@ -1,9 +1,11 @@
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session_results.dart';
 
 abstract interface class OwnChatSessionsRepository {
   Future<CreateOwnChatSessionResult> createOwnChatSession({
     required String selectableSpecialistId,
+    required OperationAttemptId operationAttemptId,
   });
 
   Future<ListOwnChatSessionsResult> listOwnChatSessions({

@@ -1,3 +1,4 @@
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_state.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message_results.dart';
@@ -6,10 +7,12 @@ import 'package:stasisly/features/chat_messages/domain/repositories/own_chat_mes
 class OwnChatMessagesController {
   OwnChatMessagesController({
     required OwnChatMessagesRepository repository,
+    this.operationAttemptIds = const SecureOperationAttemptIdFactory(),
     this.pageSize = 50,
   }) : _repository = repository;
 
   final OwnChatMessagesRepository _repository;
+  final OperationAttemptIdFactory operationAttemptIds;
   final int pageSize;
 
   OwnChatMessagesState state = const OwnChatMessagesState();
@@ -50,6 +53,7 @@ class OwnChatMessagesController {
     final result = await _repository.sendUserMessage(
       sessionId: sessionId,
       content: content,
+      operationAttemptId: operationAttemptIds.create(),
     );
     state = _stateFromSendResult(previous, result);
   }

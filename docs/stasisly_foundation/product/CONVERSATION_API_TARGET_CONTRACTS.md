@@ -1,5 +1,13 @@
 # Conversation API Target Contracts
 
+## FOUNDATION-013F-R1 local contract
+
+Canonical create/send inputs now require a provider-neutral
+`OperationAttemptId`. One application intent retains one value through
+repository, adapter and transport retries; only the HTTP boundary renders it as
+`Idempotency-Key`. New or edited intents require a new value. The identifier has
+no identity/authorization/ownership semantics and is absent from public DTOs.
+
 ## Implemented local Message contract
 
 Send accepts only Conversation/session reference, content and transport

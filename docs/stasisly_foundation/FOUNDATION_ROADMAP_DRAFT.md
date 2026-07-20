@@ -1,5 +1,12 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Estado FOUNDATION-013F-R1
+
+La identidad estable de intento para create/send queda implementada y validada
+localmente. FOUNDATION-013F pasa de `BLOCKED_PENDING_013F-R1` a
+`READY_TO_RESUME`; su application layer/composición inactiva no está
+implementada. Product routes y G8-G10 siguen bloqueados.
+
 ## Estado FOUNDATION-013E
 
 La biblioteca presentacional canónica y el freeze del chat legacy quedan

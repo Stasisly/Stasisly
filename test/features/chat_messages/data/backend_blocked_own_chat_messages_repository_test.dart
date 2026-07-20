@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_messages/data/repositories/backend_blocked_own_chat_messages_repository.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message_results.dart';
 
@@ -9,6 +10,7 @@ void main() {
     final result = await repository.sendUserMessage(
       sessionId: 'session-1',
       content: 'hola',
+      operationAttemptId: OperationAttemptId('test_attempt_00000001'),
     );
 
     expect(

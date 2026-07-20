@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:stasisly/core/auth/session/secure_session.dart';
 import 'package:stasisly/core/config/app_environment.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_state.dart';
 import 'package:stasisly/features/chat_messages/data/datasources/local_http_own_chat_messages_datasource.dart';
 import 'package:stasisly/features/chat_messages/data/repositories/backend_blocked_own_chat_messages_repository.dart';
@@ -558,6 +558,7 @@ class _FakeOwnChatMessagesRepository implements OwnChatMessagesRepository {
   Future<SendUserMessageResult> sendUserMessage({
     required String sessionId,
     required String content,
+    required OperationAttemptId operationAttemptId,
   }) async {
     sendCalls.add(_SendCall(sessionId, content));
     return _sendResults.removeAt(0);
@@ -582,6 +583,7 @@ class _PendingOwnChatMessagesRepository implements OwnChatMessagesRepository {
   Future<SendUserMessageResult> sendUserMessage({
     required String sessionId,
     required String content,
+    required OperationAttemptId operationAttemptId,
   }) {
     _sendCompleter = Completer<SendUserMessageResult>();
     return _sendCompleter.future;

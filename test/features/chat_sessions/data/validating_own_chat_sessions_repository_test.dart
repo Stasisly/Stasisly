@@ -1,10 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:stasisly/core/error/exceptions.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/data/contracts/own_chat_sessions_contract_source.dart';
 import 'package:stasisly/features/chat_sessions/data/repositories/validating_own_chat_sessions_repository.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session_results.dart';
+
+final _attempt = OperationAttemptId('test_attempt_00000001');
 
 void main() {
   group('strict public payload validation', () {
@@ -24,6 +27,7 @@ void main() {
       expect(
         await repository.createOwnChatSession(
           selectableSpecialistId: 'catalog-public',
+          operationAttemptId: _attempt,
         ),
         isA<CreateOwnChatSessionSuccess>(),
       );
@@ -129,6 +133,7 @@ void main() {
       expect(
         await repository.createOwnChatSession(
           selectableSpecialistId: 'catalog-public',
+          operationAttemptId: _attempt,
         ),
         const CreateOwnChatSessionFailure(
           OwnChatSessionsFailureType.backendBlocked,
@@ -166,13 +171,17 @@ void main() {
     );
 
     test('invalid successful JSON shape becomes contract violation', () async {
-      final result = await ValidatingOwnChatSessionsRepository(
-        source: _FakeSource(
-          createResponse: const OwnChatSessionsContractResponse(
-            statusCode: 200,
-          ),
-        ),
-      ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+      final result =
+          await ValidatingOwnChatSessionsRepository(
+            source: _FakeSource(
+              createResponse: const OwnChatSessionsContractResponse(
+                statusCode: 200,
+              ),
+            ),
+          ).createOwnChatSession(
+            selectableSpecialistId: 'catalog-public',
+            operationAttemptId: _attempt,
+          );
 
       expect(
         result,
@@ -183,14 +192,18 @@ void main() {
     });
 
     test('accepts create response with HTTP 201 Created', () async {
-      final result = await ValidatingOwnChatSessionsRepository(
-        source: _FakeSource(
-          createResponse: OwnChatSessionsContractResponse(
-            statusCode: 201,
-            body: {'session': _session()},
-          ),
-        ),
-      ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+      final result =
+          await ValidatingOwnChatSessionsRepository(
+            source: _FakeSource(
+              createResponse: OwnChatSessionsContractResponse(
+                statusCode: 201,
+                body: {'session': _session()},
+              ),
+            ),
+          ).createOwnChatSession(
+            selectableSpecialistId: 'catalog-public',
+            operationAttemptId: _attempt,
+          );
 
       expect(result, isA<CreateOwnChatSessionSuccess>());
     });
@@ -205,12 +218,15 @@ void main() {
           ),
         );
 
-        final result = await ValidatingOwnChatSessionsRepository(
-          source: source,
-        ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+        final result = await ValidatingOwnChatSessionsRepository(source: source)
+            .createOwnChatSession(
+              selectableSpecialistId: 'catalog-public',
+              operationAttemptId: _attempt,
+            );
 
         expect(result, isA<CreateOwnChatSessionSuccess>());
         expect(source.receivedSelectableSpecialistId, 'catalog-public');
+        expect(source.receivedOperationAttemptId, same(_attempt));
       },
     );
 
@@ -219,9 +235,11 @@ void main() {
       () async {
         final source = _FakeSource();
 
-        final result = await ValidatingOwnChatSessionsRepository(
-          source: source,
-        ).createOwnChatSession(selectableSpecialistId: '   ');
+        final result = await ValidatingOwnChatSessionsRepository(source: source)
+            .createOwnChatSession(
+              selectableSpecialistId: '   ',
+              operationAttemptId: _attempt,
+            );
 
         expect(
           result,
@@ -240,14 +258,18 @@ void main() {
           ..['startedAt'] = '2026-06-15T21:39:48.919204'
           ..['lastMessageAt'] = '2026-06-15T21:39:48.919204';
 
-        final result = await ValidatingOwnChatSessionsRepository(
-          source: _FakeSource(
-            createResponse: OwnChatSessionsContractResponse(
-              statusCode: 201,
-              body: {'session': session},
-            ),
-          ),
-        ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+        final result =
+            await ValidatingOwnChatSessionsRepository(
+              source: _FakeSource(
+                createResponse: OwnChatSessionsContractResponse(
+                  statusCode: 201,
+                  body: {'session': session},
+                ),
+              ),
+            ).createOwnChatSession(
+              selectableSpecialistId: 'catalog-public',
+              operationAttemptId: _attempt,
+            );
 
         expect(result, isA<CreateOwnChatSessionSuccess>());
         final created = result as CreateOwnChatSessionSuccess;
@@ -301,14 +323,18 @@ void main() {
         ];
 
         for (final (statusCode, errorCode, expected) in cases) {
-          final result = await ValidatingOwnChatSessionsRepository(
-            source: _FakeSource(
-              createResponse: OwnChatSessionsContractResponse(
-                statusCode: statusCode,
-                errorCode: errorCode,
-              ),
-            ),
-          ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+          final result =
+              await ValidatingOwnChatSessionsRepository(
+                source: _FakeSource(
+                  createResponse: OwnChatSessionsContractResponse(
+                    statusCode: statusCode,
+                    errorCode: errorCode,
+                  ),
+                ),
+              ).createOwnChatSession(
+                selectableSpecialistId: 'catalog-public',
+                operationAttemptId: _attempt,
+              );
 
           expect(
             result,
@@ -326,7 +352,10 @@ void main() {
 Future<CreateOwnChatSessionResult> _createFrom(Map<String, dynamic> session) {
   return ValidatingOwnChatSessionsRepository(
     source: _FakeSource(createResponse: _response({'session': session})),
-  ).createOwnChatSession(selectableSpecialistId: 'catalog-public');
+  ).createOwnChatSession(
+    selectableSpecialistId: 'catalog-public',
+    operationAttemptId: _attempt,
+  );
 }
 
 OwnChatSessionsContractResponse _response(Map<String, dynamic> body) {
@@ -366,6 +395,7 @@ class _FakeSource implements OwnChatSessionsContractSource {
   final Exception? error;
   String? receivedCursor;
   String? receivedSelectableSpecialistId;
+  OperationAttemptId? receivedOperationAttemptId;
 
   @override
   Future<OwnChatSessionsContractResponse> archiveOwnChatSession({
@@ -378,9 +408,11 @@ class _FakeSource implements OwnChatSessionsContractSource {
   @override
   Future<OwnChatSessionsContractResponse> createOwnChatSession({
     required String selectableSpecialistId,
+    required OperationAttemptId operationAttemptId,
   }) async {
     if (error case final error?) throw error;
     receivedSelectableSpecialistId = selectableSpecialistId;
+    receivedOperationAttemptId = operationAttemptId;
     return createResponse;
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/core/identity/domain/authentication_state.dart';
 import 'package:stasisly/core/identity/domain/identity_type.dart';
 import 'package:stasisly/core/identity/domain/stasisly_identity.dart';
@@ -134,8 +134,11 @@ void main() {
     });
 
     test('inputs expose only allowlisted Product fields', () {
+      final createAttempt = OperationAttemptId('test_attempt_00000001');
+      final sendAttempt = OperationAttemptId('test_attempt_00000002');
       final create = CreateConversationInput(
         selectableSpecialistId: 'catalog-public',
+        operationAttemptId: createAttempt,
       );
       final list = ListConversationMessagesInput(
         conversationId: ConversationId('conversation-1'),
@@ -145,11 +148,16 @@ void main() {
       final send = SendConversationMessageInput(
         conversationId: ConversationId('conversation-1'),
         content: ' Hola ',
+        operationAttemptId: sendAttempt,
       );
 
-      expect(create.props, ['catalog-public']);
+      expect(create.props, ['catalog-public', createAttempt]);
       expect(list.props, [ConversationId('conversation-1'), 25, 'cursor-1']);
-      expect(send.props, [ConversationId('conversation-1'), 'Hola']);
+      expect(send.props, [
+        ConversationId('conversation-1'),
+        'Hola',
+        sendAttempt,
+      ]);
       expect(
         () => ListConversationMessagesInput(
           conversationId: ConversationId('conversation-1'),

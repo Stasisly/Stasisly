@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/data/repositories/backend_blocked_own_chat_sessions_repository.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session_results.dart';
 
@@ -11,6 +12,7 @@ void main() {
     expect(
       await repository.createOwnChatSession(
         selectableSpecialistId: 'catalog-public',
+        operationAttemptId: OperationAttemptId('test_attempt_00000001'),
       ),
       const CreateOwnChatSessionFailure(blocked),
     );

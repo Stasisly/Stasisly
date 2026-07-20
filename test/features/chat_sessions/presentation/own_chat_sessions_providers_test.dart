@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:stasisly/core/auth/session/secure_session.dart';
 import 'package:stasisly/core/config/app_environment.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/application/own_chat_sessions_state.dart';
 import 'package:stasisly/features/chat_sessions/data/repositories/backend_blocked_own_chat_sessions_repository.dart';
 import 'package:stasisly/features/chat_sessions/data/repositories/demo_own_chat_sessions_repository.dart';
@@ -639,6 +639,7 @@ class _FakeOwnChatSessionsRepository implements OwnChatSessionsRepository {
   @override
   Future<CreateOwnChatSessionResult> createOwnChatSession({
     required String selectableSpecialistId,
+    required OperationAttemptId operationAttemptId,
   }) async {
     createCalls.add(_CreateCall(selectableSpecialistId));
     return _createResults.removeAt(0);
@@ -715,6 +716,7 @@ class _PendingOwnChatSessionsRepository implements OwnChatSessionsRepository {
   @override
   Future<CreateOwnChatSessionResult> createOwnChatSession({
     required String selectableSpecialistId,
+    required OperationAttemptId operationAttemptId,
   }) {
     _createCompleter = Completer<CreateOwnChatSessionResult>();
     return _createCompleter.future;

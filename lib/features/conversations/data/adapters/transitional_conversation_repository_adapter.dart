@@ -93,6 +93,7 @@ class TransitionalConversationRepositoryAdapter
     try {
       final result = await chatSessions.createOwnChatSession(
         selectableSpecialistId: specialistId,
+        operationAttemptId: input.operationAttemptId,
       );
       return switch (result) {
         CreateOwnChatSessionSuccess(:final session) ||
@@ -268,6 +269,7 @@ class TransitionalConversationRepositoryAdapter
       final result = await chatMessages.sendUserMessage(
         sessionId: input.conversationId.value,
         content: input.content,
+        operationAttemptId: input.operationAttemptId,
       );
       return switch (result) {
         SendUserMessageSuccess(:final sent) ||

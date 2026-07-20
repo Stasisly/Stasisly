@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/application/own_chat_sessions_controller.dart';
 import 'package:stasisly/features/chat_sessions/application/own_chat_sessions_state.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
@@ -184,6 +184,7 @@ class _NeverDevRepository implements OwnChatSessionsRepository {
   @override
   Future<CreateOwnChatSessionResult> createOwnChatSession({
     required String selectableSpecialistId,
+    required OperationAttemptId operationAttemptId,
   }) {
     throw UnimplementedError('The dev host uses provider overrides only');
   }

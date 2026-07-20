@@ -1,5 +1,12 @@
 # Document Authority Register
 
+## FOUNDATION-013F-R1 authority addition
+
+ADR-F015 is normative for application-owned idempotent operation attempts and
+unchanged layer propagation. The R1 implementation record is verified local
+evidence. It does not implement FOUNDATION-013F application composition or
+authorize Product routes/backend changes/remote use. ADR-F016 remains reserved.
+
 ## FOUNDATION-013E authority addition
 
 ADR-F014 is normative for visual-only legacy reuse, canonical presentation and
@@ -23,7 +30,7 @@ routes or remote execution.
 | Owner | Dirección de Documentación y Conocimiento under Rector (conceptual) |
 | Approver | Founder for authority assignments |
 | Version | 2.0 |
-| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-013C |
+| Effective condition/date | Effective upon merge of FOUNDATION-002; updated through FOUNDATION-013F-R1 |
 | Supersedes | No Foundation register |
 | Dependencies | DOCUMENTATION_GOVERNANCE |
 
@@ -96,6 +103,8 @@ routes or remote execution.
 | `adr/ADR-F011-transactional-conversation-creation-and-idempotency.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Backend + Security under Stasis/Rector | Founder | Yes | Multi-request create and non-idempotent writes | ADR-F009/F010; FOUNDATION-013B | Transaction, locking, idempotency scope or trusted-boundary change |
 | `implementation/FOUNDATION-013C_CANONICAL_CONVERSATION_READ_LIST_ARCHIVE_RESTORE.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Backend + Product Architecture + Security + QA | Evidence owner | No, local implementation evidence | Transitional read/list/archive and absent restore | ADR-F012; FOUNDATION-013A/B | Lifecycle, DTO, pagination, endpoint or remote activation change |
 | `adr/ADR-F012-canonical-conversation-read-and-lifecycle-boundary.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Backend + Product Architecture + Security under Stasis/Rector | Founder | Yes | Distributed lifecycle/ownership and non-idempotent archive replay | ADR-F009-F011; FOUNDATION-013C | Lifecycle, ownership, pagination or trusted-boundary change |
+| `implementation/FOUNDATION-013F-R1_IDEMPOTENT_OPERATION_ATTEMPT_PROPAGATION.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Flutter Architecture + Security + QA | Evidence owner | No, local implementation evidence | Unstable client operation attempts across retries | ADR-F015; FOUNDATION-013A/B/E | Attempt ownership, propagation, retry or activation change |
+| `adr/ADR-F015-idempotent-operation-attempt-propagation.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Flutter + Product Architecture + Security under Rector | Founder | Yes | Datasource-owned idempotency generation | ADR-F010/F011/F014; FOUNDATION-013F-R1 | Attempt semantics, ownership, transport mapping or authority change |
 | `DOCUMENT_AUTHORITY_REGISTER.md` | ACTIVE | 6 | Documentation under Rector (conceptual) | Founder for authority changes | Operational register | No prior register | Documentation governance | Any authority/status/supersession change |
 | `archive_index/DISCOVERY_ARCHIVE_INDEX.md` | ACTIVE | 6 | Documentation | Evidence owner | No, evidence/index | Informal Discovery locations | Discovery archive | Archive path or successor changes |
 | `implementation/FOUNDATION_SESSION_TRACKER.md` | ACTIVE | 6 | Program Management | Evidence owner | No, tracker | Historical Discovery tracker for Foundation work | Foundation packages | Every completed Foundation package |

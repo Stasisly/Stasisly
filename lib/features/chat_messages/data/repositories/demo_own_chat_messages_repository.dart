@@ -1,3 +1,4 @@
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message_results.dart';
 import 'package:stasisly/features/chat_messages/domain/repositories/own_chat_messages_repository.dart';
@@ -17,6 +18,7 @@ class DemoOwnChatMessagesRepository implements OwnChatMessagesRepository {
   Future<SendUserMessageResult> sendUserMessage({
     required String sessionId,
     required String content,
+    required OperationAttemptId operationAttemptId,
   }) async {
     final error = _validator.validateSend(
       sessionId: sessionId,

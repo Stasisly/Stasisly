@@ -1,8 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/data/repositories/demo_own_chat_sessions_repository.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session_results.dart';
+
+final _attempt = OperationAttemptId('test_attempt_00000001');
 
 void main() {
   late DemoOwnChatSessionsRepository repository;
@@ -14,9 +17,11 @@ void main() {
   test('creates a distinct explicit demo session on every call', () async {
     final first = await repository.createOwnChatSession(
       selectableSpecialistId: 'catalog-demo',
+      operationAttemptId: _attempt,
     );
     final second = await repository.createOwnChatSession(
       selectableSpecialistId: 'catalog-demo',
+      operationAttemptId: _attempt,
     );
 
     expect(first, isA<CreateOwnChatSessionDemo>());
@@ -33,6 +38,7 @@ void main() {
     for (var index = 0; index < 3; index++) {
       await repository.createOwnChatSession(
         selectableSpecialistId: 'catalog-$index',
+        operationAttemptId: _attempt,
       );
     }
 
@@ -55,6 +61,7 @@ void main() {
   test('archives only status and preserves conversation timestamps', () async {
     final created = await repository.createOwnChatSession(
       selectableSpecialistId: 'catalog-demo',
+      operationAttemptId: _attempt,
     );
     final original = (created as CreateOwnChatSessionDemo).session;
 
@@ -75,7 +82,10 @@ void main() {
 
   test('validates only basic client inputs', () async {
     expect(
-      await repository.createOwnChatSession(selectableSpecialistId: ' '),
+      await repository.createOwnChatSession(
+        selectableSpecialistId: ' ',
+        operationAttemptId: _attempt,
+      ),
       const CreateOwnChatSessionFailure(
         OwnChatSessionsFailureType.invalidSelectableSpecialist,
       ),

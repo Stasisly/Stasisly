@@ -5,7 +5,7 @@
 Status: **APPROVED working execution structure**. Package status is recorded
 below; every future package requires its own approval and exact scope.
 
-Package status after FOUNDATION-013E:
+Package status after FOUNDATION-013F-R1:
 
 ```text
 FOUNDATION-007: COMPLETED CONCEPTUALLY / IMPLEMENTATION NOT STARTED
@@ -19,7 +19,8 @@ FOUNDATION-013B: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
 FOUNDATION-013C: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
 FOUNDATION-013D: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
 FOUNDATION-013E: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
-FOUNDATION-013F: NOT EXECUTED
+FOUNDATION-013F-R1: IMPLEMENTED LOCALLY / PUBLICATION COMPLETES G7
+FOUNDATION-013F: READY_TO_RESUME / NOT IMPLEMENTED
 FOUNDATION-014..020: NOT EXECUTED
 ```
 
@@ -63,7 +64,8 @@ FOUNDATION-014..020: NOT EXECUTED
 | 013C | List/read/archive/restore/history boundary — IMPLEMENTED LOCALLY | No Product route registration |
 | 013D | Message author, visibility and provenance contracts - IMPLEMENTED LOCALLY | No Engine trace exposure |
 | 013E | Legacy UI extraction, freeze guards and retirement migration - IMPLEMENTED LOCALLY | No removal before parity/data gates |
-| 013F | Canonical Conversation application layer and inactive Product composition | No Product route registration or staging/production activation |
+| 013F-R1 | Stable application-owned create/send operation attempts - IMPLEMENTED LOCALLY | No application composition, routes, backend or remote |
+| 013F | Canonical Conversation application layer and inactive Product composition - READY_TO_RESUME | No Product route registration or staging/production activation |
 
 These are children of the existing FOUNDATION-013 ID. They do not renumber or
 replace FOUNDATION-014-020 and each requires a separate approval.

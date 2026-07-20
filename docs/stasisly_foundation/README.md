@@ -1,5 +1,14 @@
 # Stasisly Foundation
 
+## FOUNDATION-013F-R1 idempotent attempts
+
+`FOUNDATION-013F-R1` adopts the provider-neutral `OperationAttemptId` contract
+and explicit create/send propagation through canonical inputs, transitional
+repositories/adapters and local HTTP headers. Datasource-owned generation is
+removed. FOUNDATION-013F is `READY_TO_RESUME`, not implemented; Product wiring,
+routes and remote remain blocked. See the [implementation record](implementation/FOUNDATION-013F-R1_IDEMPOTENT_OPERATION_ATTEMPT_PROPAGATION.md)
+and [ADR-F015](adr/ADR-F015-idempotent-operation-attempt-propagation.md).
+
 ## FOUNDATION-013E presentation boundary
 
 `FOUNDATION-013E` adopts provider-neutral Conversation presentation primitives,
@@ -255,6 +264,6 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras publicar FOUNDATION-013E, el siguiente gate exacto del mapa es
-`FOUNDATION-013F` para application layer y composición Product inactiva.
-Requiere aprobación separada y no autoriza rutas Product, Engine ni remoto.
+Tras publicar FOUNDATION-013F-R1, `FOUNDATION-013F` queda `READY_TO_RESUME` para
+application layer y composición Product inactiva bajo su alcance ya aprobado.
+R1 no implementa esa capa ni autoriza rutas Product, Engine o remoto.

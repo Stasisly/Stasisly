@@ -1,5 +1,12 @@
 # Legacy Chat Retirement Plan
 
+## FOUNDATION-013F-R1 checkpoint
+
+R1 closes stable create/send attempt propagation without touching
+`lib/features/chat/**`, legacy routes or Product consumers. It is a prerequisite
+repair only: L4-L7 and physical removal remain blocked until FOUNDATION-013F
+composition, parity and later route gates are separately completed.
+
 ## FOUNDATION-013E execution checkpoint
 
 L1 freeze/guard is COMPLETE and the audited L2 reusable visual subset is

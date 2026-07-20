@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/data/datasources/local_http_own_chat_sessions_datasource.dart';
 import 'package:stasisly/features/chat_sessions/data/local/local_only_host_policy.dart';
 import 'package:stasisly/features/chat_sessions/data/local/local_session_token_provider.dart';
@@ -43,6 +44,7 @@ void main() {
 
     final created = await repository.createOwnChatSession(
       selectableSpecialistId: selectableId,
+      operationAttemptId: OperationAttemptId('integration_create_0001'),
     );
     expect(created, isA<CreateOwnChatSessionSuccess>());
     final createdSession = (created as CreateOwnChatSessionSuccess).session;
@@ -122,6 +124,7 @@ void main() {
     expect(
       await blocked.createOwnChatSession(
         selectableSpecialistId: _requiredEnv('STASISLY_2B_IV_H_SELECTABLE_ID'),
+        operationAttemptId: OperationAttemptId('integration_blocked_001'),
       ),
       const CreateOwnChatSessionFailure(
         OwnChatSessionsFailureType.backendBlocked,

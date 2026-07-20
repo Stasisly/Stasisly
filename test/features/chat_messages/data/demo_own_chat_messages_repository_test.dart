@@ -1,7 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_messages/data/repositories/demo_own_chat_messages_repository.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message.dart';
 import 'package:stasisly/features/chat_messages/domain/entities/own_chat_message_results.dart';
+
+final _attempt = OperationAttemptId('test_attempt_00000001');
 
 void main() {
   test('send demo creates user message marked as demo', () async {
@@ -10,6 +13,7 @@ void main() {
     final result = await repository.sendUserMessage(
       sessionId: 'session-1',
       content: '  hola demo  ',
+      operationAttemptId: _attempt,
     );
 
     expect(result, isA<SendUserMessageDemo>());
@@ -25,8 +29,16 @@ void main() {
     'list demo returns demo messages with stable cursor pagination',
     () async {
       final repository = DemoOwnChatMessagesRepository();
-      await repository.sendUserMessage(sessionId: 'session-1', content: 'uno');
-      await repository.sendUserMessage(sessionId: 'session-1', content: 'dos');
+      await repository.sendUserMessage(
+        sessionId: 'session-1',
+        content: 'uno',
+        operationAttemptId: _attempt,
+      );
+      await repository.sendUserMessage(
+        sessionId: 'session-1',
+        content: 'dos',
+        operationAttemptId: _attempt,
+      );
 
       final first = await repository.listSessionMessages(
         sessionId: 'session-1',
@@ -55,7 +67,11 @@ void main() {
       final repository = DemoOwnChatMessagesRepository();
 
       expect(
-        await repository.sendUserMessage(sessionId: '', content: 'hola'),
+        await repository.sendUserMessage(
+          sessionId: '',
+          content: 'hola',
+          operationAttemptId: _attempt,
+        ),
         const SendUserMessageFailure(
           SendOwnChatMessageFailureType.invalidSession,
         ),
@@ -64,6 +80,7 @@ void main() {
         await repository.sendUserMessage(
           sessionId: 'session-1',
           content: '   ',
+          operationAttemptId: _attempt,
         ),
         const SendUserMessageFailure(
           SendOwnChatMessageFailureType.contentInvalid,
@@ -85,7 +102,11 @@ void main() {
     'demo repository never turns invalid cursor into fallback data',
     () async {
       final repository = DemoOwnChatMessagesRepository();
-      await repository.sendUserMessage(sessionId: 'session-1', content: 'uno');
+      await repository.sendUserMessage(
+        sessionId: 'session-1',
+        content: 'uno',
+        operationAttemptId: _attempt,
+      );
 
       final result = await repository.listSessionMessages(
         sessionId: 'session-1',

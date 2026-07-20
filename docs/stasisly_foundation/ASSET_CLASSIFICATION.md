@@ -1,5 +1,13 @@
 # Clasificación inicial de activos
 
+## Reclasificación FOUNDATION-013F-R1
+
+- `OperationAttemptId` y `OperationAttemptIdFactory`: `FOUNDATION_ADOPTED`.
+- propagación create/send: `FOUNDATION_ADOPTED_LOCALLY`.
+- generación datasource-owned: `REMOVED`.
+- application layer canónica: `NOT_IMPLEMENTED`.
+- FOUNDATION-013F: `READY_TO_RESUME`; remoto: `NOT_IMPLEMENTED`.
+
 ## Reclasificación FOUNDATION-013E
 
 Las primitivas en `features/conversations/presentation` pasan a

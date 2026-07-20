@@ -1,15 +1,19 @@
 import 'package:equatable/equatable.dart';
 
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/conversations/domain/value_objects/conversation_id.dart';
 
 class CreateConversationInput extends Equatable {
-  CreateConversationInput({String? selectableSpecialistId})
-    : selectableSpecialistId = _optionalRequired(selectableSpecialistId);
+  CreateConversationInput({
+    required this.operationAttemptId,
+    String? selectableSpecialistId,
+  }) : selectableSpecialistId = _optionalRequired(selectableSpecialistId);
 
+  final OperationAttemptId operationAttemptId;
   final String? selectableSpecialistId;
 
   @override
-  List<Object?> get props => [selectableSpecialistId];
+  List<Object?> get props => [selectableSpecialistId, operationAttemptId];
 }
 
 class ArchiveConversationInput extends Equatable {
@@ -48,16 +52,18 @@ class ListConversationMessagesInput extends Equatable {
 class SendConversationMessageInput extends Equatable {
   SendConversationMessageInput({
     required this.conversationId,
+    required this.operationAttemptId,
     required String content,
   }) : content = _content(content);
 
   static const int maxContentLength = 4000;
 
   final ConversationId conversationId;
+  final OperationAttemptId operationAttemptId;
   final String content;
 
   @override
-  List<Object?> get props => [conversationId, content];
+  List<Object?> get props => [conversationId, content, operationAttemptId];
 }
 
 String? _optionalRequired(String? value) {

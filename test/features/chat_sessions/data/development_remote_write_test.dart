@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_messages/data/datasources/local_http_own_chat_messages_datasource.dart';
 import 'package:stasisly/features/chat_messages/data/local/local_only_host_policy.dart'
     as messages_policy;
@@ -96,6 +97,7 @@ void main() {
 
       final createResult = await sessionsRepository.createOwnChatSession(
         selectableSpecialistId: syntheticSpecialist.id,
+        operationAttemptId: OperationAttemptId('development_create_0001'),
       );
       expect(createResult, isA<CreateOwnChatSessionSuccess>());
       final createdSession =
@@ -106,6 +108,7 @@ void main() {
       final sendResult = await messagesRepository.sendUserMessage(
         sessionId: createdSession.sessionId,
         content: 'synthetic-development-message-ag57',
+        operationAttemptId: OperationAttemptId('development_send_000001'),
       );
       expect(sendResult, isA<SendUserMessageSuccess>());
       final sent = (sendResult as SendUserMessageSuccess).sent;

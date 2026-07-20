@@ -80,7 +80,9 @@ approved conceptually; FOUNDATION-013A canonical local contracts/adapters are
 implemented, and FOUNDATION-013B closes local create/send transaction and
 idempotency; FOUNDATION-013C closes local list/read/archive/restore/history with
 restricted RPCs, full local regressions and HTTP cleanup at seven zeros, while
-013D-013F remain;
+013D/013E are complete and FOUNDATION-013F-R1 closes stable client attempt
+propagation;
+013F is `READY_TO_RESUME` but its application composition remains unimplemented;
 P2 maps primarily to FOUNDATION-015, 018 and 020; P3 to FOUNDATION-016, 017 and
 later release work; P4 remains deferred. No P1-P4 implementation or remote
 rollout is authorized by this mapping.

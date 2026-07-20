@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_controller.dart';
 import 'package:stasisly/features/chat_messages/application/own_chat_messages_state.dart';
@@ -145,6 +146,7 @@ class _NeverRepository implements OwnChatMessagesRepository {
   Future<SendUserMessageResult> sendUserMessage({
     required String sessionId,
     required String content,
+    required OperationAttemptId operationAttemptId,
   }) {
     throw StateError('Repository must not be called by shell tests.');
   }

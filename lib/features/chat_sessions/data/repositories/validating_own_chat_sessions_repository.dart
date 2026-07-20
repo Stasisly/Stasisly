@@ -1,4 +1,5 @@
 import 'package:stasisly/core/error/exceptions.dart';
+import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/features/chat_sessions/data/contracts/own_chat_sessions_contract_source.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session_results.dart';
@@ -18,6 +19,7 @@ class ValidatingOwnChatSessionsRepository
   @override
   Future<CreateOwnChatSessionResult> createOwnChatSession({
     required String selectableSpecialistId,
+    required OperationAttemptId operationAttemptId,
   }) async {
     if (selectableSpecialistId.trim().isEmpty) {
       return const CreateOwnChatSessionFailure(
@@ -27,6 +29,7 @@ class ValidatingOwnChatSessionsRepository
     try {
       final response = await source.createOwnChatSession(
         selectableSpecialistId: selectableSpecialistId,
+        operationAttemptId: operationAttemptId,
       );
       final failure = _failureFor(response);
       if (failure != null) return CreateOwnChatSessionFailure(failure);
