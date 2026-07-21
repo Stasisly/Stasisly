@@ -1,10 +1,18 @@
 # Conversation Asset Adoption Matrix
 
+## FOUNDATION-013F delta
+
+Canonical use cases/states are adopted; controllers/providers are adopted
+locally; the inactive host is adopted for local validation. The canonical
+Product screen/routes and active shell remain not implemented, while legacy
+consumer migration remains not started.
+
 ## FOUNDATION-013F-R1 delta
 
 The neutral attempt contract/factory and create/send propagation are adopted
 locally; datasource-owned generation is removed. Canonical application
-composition remains `NOT_IMPLEMENTED`, FOUNDATION-013F is `READY_TO_RESUME`,
+composition is now `IMPLEMENTED_LOCALLY` and inactive; Product activation is
+`NOT_IMPLEMENTED`,
 and no Product consumer, route or remote boundary is active.
 
 ## FOUNDATION-013E delta
@@ -36,7 +44,7 @@ Approver: Founder for adoption/removal decisions
 | Legacy `ChatPage`/wrapper | Frozen and route-blocked | Canonical Conversation screen | REWRITE / REMOVE_LATER | No component adopted; layout intent audited | `agentId` starts session; legacy providers/entities | 013F/later L4 | Canonical composition and accessibility parity |
 | Legacy `MessageBubble` | Frozen component | Product Message renderer | ADAPT completed locally | Alignment/grouping intent only | Original still uses legacy entity and `chief_intervention` | 013E complete | `ConversationMessageBubble` tested; consumer migration pending |
 | Legacy `ChatInput` | Frozen component | Content composer | REWRITE completed as safe shell | Text-entry and keyboard intent only | Original mock attachment remains frozen | 013E complete; attachments later | Content-only shell tested; wiring pending |
-| `lib/features/conversations/**` | Canonical local domain/port/adapters/presentation | Product Conversation boundary | FOUNDATION_ADOPTED_LOCALLY | Opaque ID, trusted owner, canonical Message metadata and neutral UI primitives | No Product wiring or screen | 013A-013E complete; 013F | Full composition and consumer migration evidence |
+| `lib/features/conversations/**` | Canonical local domain/port/adapters/application/presentation | Product Conversation boundary | FOUNDATION_ADOPTED_LOCALLY | Opaque ID, trusted owner, canonical Message metadata, typed controllers/providers and inactive host | No Product route, active screen or legacy migration | 013A-013F complete locally | Product activation and consumer migration evidence |
 | `lib/features/chat_sessions/**` | Local-safe/dev-only adapter source | Conversation application/client boundary | TRANSITIONAL_ADAPTER_SOURCE | Explicit ID, backend-blocked states, owner-safe DTO, stable cursor, lifecycle source | Session terminology, dev hosts, no Product route | 013A-013C complete | Canonical lifecycle adapter implemented; physical naming retained |
 | `lib/features/chat_messages/**` | Local-safe/dev-only adapter source | Product Message boundary | TRANSITIONAL_ADAPTER_SOURCE | Content-only send, explicit ID, sanitization, metadata validation | Session/role vocabulary; Stasis/specialist authoring absent | 013A and 013D complete | Canonical fail-closed adapter implemented |
 | `lib/features/specialists/**` | Sanitized catalog boundary | Product specialist selection | ADAPT | `selectableSpecialistId`, six-field public model | Runtime/catalog bridge absent | 013A contract complete; later Engine package | Public reference adopted; no internal IDs |

@@ -1,5 +1,12 @@
 # FOUNDATION-005 Remediation Backlog
 
+## FOUNDATION-013F remediation evidence
+
+The modern Conversation boundary now includes local canonical use cases,
+controllers/providers and an inactive host with tested environment, concurrency
+and retry guards. This partially closes the Product-readiness item; routes,
+active shell, legacy migration/removal and remote evidence remain open.
+
 ## FOUNDATION-013E remediation evidence
 
 Legacy visual reuse is remediated locally through canonical provider-neutral
@@ -33,7 +40,7 @@ Product behavior or touch a remote project.
 | No Stasisly-owned identity/API boundary - `PARTIALLY_CLOSED_LOCALLY` | FOUNDATION-008 adds owned identity/session/API context and confines Auth SDK; bootstrap and wider provider coupling remain | Residual lock-in and incomplete consumer migration | Canonical boundary complete locally; continue containment/adoption without declaring full auth adopted. |
 | Legacy chat frozen but not removed | `/chat/:id` and orchestrator routes are blocked; direct Supabase/client `role` remain in frozen source; FOUNDATION-012 marks `DEPRECATED_AND_BLOCKED` | Reconnection or unsafe reuse before replacement | Execute 013A-013F with freeze guards, parity, compatibility and rollback before removal. |
 | Surface authorization implementation partial | FOUNDATION-011 enforces registered Product/local-development context and trusted ownership across six Edge Functions; persistent RBAC/ABAC/JIT and other domains remain unenforced | Policy breadth and remote state remain incomplete | Continue with separately approved persistent policy and Product-boundary packages; do not weaken local backend enforcement. |
-| Modern chat not Product-ready — `PARTIALLY_CLOSED_LOCALLY` | FOUNDATION-013A-C add canonical contracts/adapters, transactional writes and lifecycle/history; physical API and dev-only UI remain session-named | Premature promotion or semantic mismatch | Execute 013D-013F preserving ownership, explicit IDs, content-only and DTO allowlists. |
+| Modern chat not Product-ready — `PARTIALLY_CLOSED_LOCALLY` | FOUNDATION-013A-F add canonical contracts/backend/message semantics/presentation/application and inactive composition; physical APIs remain transitional and no Product route is active | Premature promotion or semantic mismatch | Require separately approved Product routing/shell, parity and legacy migration while preserving ownership, explicit IDs, content-only and DTO allowlists. |
 | Create/send transaction/idempotency gap — `CLOSED_LOCALLY` | FOUNDATION-013B uses locked transactional RPCs and server ledger; FOUNDATION-013C adds naturally idempotent archive/restore | Remote rollout and retention still absent | Preserve deny-all and add retention/operations policy before remote writes. |
 | Orchestrator could be mistaken for Engine | Static Product UI at orchestrator routes | Architectural misrepresentation | Deprecation/rewrite decision; prohibit Engine naming/reuse. |
 
@@ -82,7 +89,8 @@ idempotency; FOUNDATION-013C closes local list/read/archive/restore/history with
 restricted RPCs, full local regressions and HTTP cleanup at seven zeros, while
 013D/013E are complete and FOUNDATION-013F-R1 closes stable client attempt
 propagation;
-013F is `READY_TO_RESUME` but its application composition remains unimplemented;
+013F application composition is implemented locally but Product activation,
+legacy consumer migration and remote remain unimplemented;
 P2 maps primarily to FOUNDATION-015, 018 and 020; P3 to FOUNDATION-016, 017 and
 later release work; P4 remains deferred. No P1-P4 implementation or remote
 rollout is authorized by this mapping.

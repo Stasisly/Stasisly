@@ -1,5 +1,12 @@
 # Legacy Chat Retirement Plan
 
+## FOUNDATION-013F checkpoint
+
+The canonical replacement now has a tested local application layer and inactive
+composition. This improves replacement readiness but does not satisfy L4-L7:
+there is no active Product route, consumer migration, parity evidence in the
+real shell or authorization to remove legacy files. Legacy remains frozen.
+
 ## FOUNDATION-013F-R1 checkpoint
 
 R1 closes stable create/send attempt propagation without touching
@@ -107,7 +114,7 @@ FOUNDATION-013B  transactional Conversation creation and TOCTOU/idempotency [LOC
 FOUNDATION-013C  Conversation listing, read, archive and restore boundary [LOCAL COMPLETE]
 FOUNDATION-013D  Message author, visibility and provenance contracts [LOCAL COMPLETE]
 FOUNDATION-013E  legacy UI extraction, freeze guards and retirement migration [LOCAL COMPLETE]
-FOUNDATION-013F  canonical application layer and inactive Product composition
+FOUNDATION-013F  canonical application layer and inactive Product composition [LOCAL COMPLETE]
 ```
 
 Each child requires separate approval and G0-G7. FOUNDATION-014 remains Agent

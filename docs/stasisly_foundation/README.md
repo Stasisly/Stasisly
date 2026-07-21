@@ -1,12 +1,21 @@
 # Stasisly Foundation
 
+## FOUNDATION-013F canonical application composition
+
+`FOUNDATION-013F` is `IMPLEMENTED_LOCALLY`: seven canonical use cases, typed
+application state, pure-Dart controllers, local/development fail-closed
+providers and `InactiveConversationFeatureHost` now form an executable local
+validation boundary. No Product route, active shell, legacy migration, backend
+change or remote activation exists. See the [implementation record](implementation/FOUNDATION-013F_CANONICAL_CONVERSATION_APPLICATION_AND_INACTIVE_COMPOSITION.md)
+and [ADR-F016](adr/ADR-F016-canonical-conversation-application-and-inactive-composition.md).
+
 ## FOUNDATION-013F-R1 idempotent attempts
 
 `FOUNDATION-013F-R1` adopts the provider-neutral `OperationAttemptId` contract
 and explicit create/send propagation through canonical inputs, transitional
 repositories/adapters and local HTTP headers. Datasource-owned generation is
-removed. FOUNDATION-013F is `READY_TO_RESUME`, not implemented; Product wiring,
-routes and remote remain blocked. See the [implementation record](implementation/FOUNDATION-013F-R1_IDEMPOTENT_OPERATION_ATTEMPT_PROPAGATION.md)
+removed. FOUNDATION-013F later consumed this contract locally; Product routes
+and remote remain blocked. See the [implementation record](implementation/FOUNDATION-013F-R1_IDEMPOTENT_OPERATION_ATTEMPT_PROPAGATION.md)
 and [ADR-F015](adr/ADR-F015-idempotent-operation-attempt-propagation.md).
 
 ## FOUNDATION-013E presentation boundary
@@ -264,6 +273,7 @@ El código y las pruebas demuestran implementación.
 
 ## Próximo gate
 
-Tras publicar FOUNDATION-013F-R1, `FOUNDATION-013F` queda `READY_TO_RESUME` para
-application layer y composición Product inactiva bajo su alcance ya aprobado.
-R1 no implementa esa capa ni autoriza rutas Product, Engine o remoto.
+Tras FOUNDATION-013F-R1, `FOUNDATION-013F` implementó localmente la application
+layer y la composición Product inactiva. El siguiente gate no está autorizado:
+requiere aprobación separada y no puede activar rutas Product, Engine, remoto ni
+iniciar FOUNDATION-014 implícitamente.

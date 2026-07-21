@@ -1,5 +1,14 @@
 # Product Conversation Architecture
 
+## FOUNDATION-013F local application boundary
+
+The canonical Product path now reaches provider-neutral use cases, typed
+controllers and feature-scoped providers, ending at an inactive local
+validation host. The host uses explicit `ConversationId`, canonical Messages
+and content-only intents. This is not a Product screen or route. Backend
+ownership and policy remain authoritative; legacy chat and remote activation
+remain outside the composition.
+
 ## Adopted presentation boundary
 
 Canonical Conversation presentation consumes only canonical domain/view
@@ -22,7 +31,7 @@ filtered in SQL. `assistant` is not Stasis and `tool` is not a specialist.
 | Owner | Product Architecture under Stasis, reviewed by Rector and Security |
 | Approver | Founder |
 | Version | 1.0 |
-| Implementation | NOT IMPLEMENTED |
+| Implementation | PARTIALLY IMPLEMENTED LOCALLY; PRODUCT ROUTES NOT IMPLEMENTED |
 | Dependencies | ADR-F002, ADR-F004-F009, FOUNDATION-008-012 |
 
 ## Decision summary
@@ -205,3 +214,11 @@ Commercial tiers do not become authorization.
 No code, route, schema, endpoint, migration, prompt, agent, runtime, upload,
 memory, research system, entitlement, price, remote operation or production
 capability is created by this architecture.
+## FOUNDATION-013F local application boundary
+
+The canonical Product path now reaches provider-neutral use cases, typed
+controllers and feature-scoped providers, ending at an inactive local
+validation host. The host uses explicit `ConversationId`, canonical Messages
+and content-only intents. This is not a Product screen or route. Backend
+ownership and policy remain authoritative; legacy chat and remote activation
+remain outside the composition.

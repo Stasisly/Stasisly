@@ -1,5 +1,13 @@
+export 'application/controllers/conversation_create_controller.dart';
+export 'application/controllers/conversation_detail_controller.dart';
+export 'application/controllers/conversation_list_controller.dart';
+export 'application/state/conversation_application_states.dart';
+export 'application/use_cases/conversation_use_cases.dart';
+export 'composition/conversation_providers.dart';
+export 'composition/inactive_conversation_feature_host.dart';
 export 'domain/entities/conversation_message.dart';
 export 'presentation/mappers/conversation_message_view_mapper.dart';
+export 'presentation/models/conversation_list_item_view_model.dart';
 export 'presentation/models/conversation_message_view_model.dart';
 export 'presentation/widgets/conversation_composer_shell.dart';
 export 'presentation/widgets/conversation_message_bubble.dart';

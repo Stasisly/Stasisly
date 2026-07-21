@@ -1,12 +1,21 @@
 # Clasificación inicial de activos
 
+## Reclasificación FOUNDATION-013F
+
+- Casos de uso y estados Conversation: `FOUNDATION_ADOPTED`.
+- Controllers y providers canónicos: `FOUNDATION_ADOPTED_LOCALLY`.
+- Host Product inactivo: `FOUNDATION_ADOPTED_FOR_LOCAL_VALIDATION`.
+- Pantalla/rutas/shell Product: `NOT_IMPLEMENTED`.
+- Migración de consumidores legacy: `NOT_STARTED`; remoto: `NOT_IMPLEMENTED`.
+
 ## Reclasificación FOUNDATION-013F-R1
 
 - `OperationAttemptId` y `OperationAttemptIdFactory`: `FOUNDATION_ADOPTED`.
 - propagación create/send: `FOUNDATION_ADOPTED_LOCALLY`.
 - generación datasource-owned: `REMOVED`.
 - application layer canónica: `NOT_IMPLEMENTED`.
-- FOUNDATION-013F: `READY_TO_RESUME`; remoto: `NOT_IMPLEMENTED`.
+- FOUNDATION-013F: `IMPLEMENTED_LOCALLY`; rutas Product y remoto:
+  `NOT_IMPLEMENTED`.
 
 ## Reclasificación FOUNDATION-013E
 

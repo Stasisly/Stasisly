@@ -1,5 +1,12 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Estado FOUNDATION-013F
+
+FOUNDATION-013F implementa localmente la capa de aplicación canónica,
+controllers, providers fail-closed y composición Product inactiva. Cierra G0-G6
+localmente; G7 depende de publicación. No registra rutas, no activa shell, no
+migra legacy y no autoriza remoto. FOUNDATION-014 no se inicia aquí.
+
 ## Estado FOUNDATION-013F-R1
 
 La identidad estable de intento para create/send queda implementada y validada
@@ -18,8 +25,9 @@ remoto.
 ## Estado FOUNDATION-013D
 
 Autor, procedencia y visibilidad de Message quedan implementados y validados
-localmente. FOUNDATION-013E completó después la extracción visual y freeze; el
-siguiente hijo exacto es FOUNDATION-013F y no autoriza rutas Product ni remoto.
+localmente. FOUNDATION-013E completó después la extracción visual y freeze;
+FOUNDATION-013F completa ahora la composición local inactiva sin autorizar rutas
+Product ni remoto.
 
 ```text
 F0–F12 INITIAL FRAMEWORK: APPROVED

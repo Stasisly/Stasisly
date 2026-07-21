@@ -1,10 +1,18 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-013F gate result
+
+013F completes G0-G6 locally for canonical application use cases, typed state,
+controllers, fail-closed providers and inactive composition. Package publication
+completes G7. No G8-G10, Product route, active shell or remote action is
+authorized.
+
 ## FOUNDATION-013F-R1 gate result
 
 R1 completes G0-G6 locally with `OperationAttemptId`, explicit create/send
 propagation, 563 Flutter passes/5 approved skips, Deno 86/86 and SQL 740/740.
-Publication completes G7. FOUNDATION-013F is `READY_TO_RESUME`; G8-G10 and
+Publication completed R1 G7. FOUNDATION-013F later became
+`IMPLEMENTED_LOCALLY`; G8-G10 and
 Product routing remain blocked.
 
 ## FOUNDATION-013E gate result
@@ -58,7 +66,7 @@ FOUNDATION-005-R1
           -> FOUNDATION-013D author/provenance
           -> FOUNDATION-013E legacy presentation/freeze [COMPLETED LOCALLY]
           -> FOUNDATION-013F-R1 stable operation attempts [COMPLETED LOCALLY]
-            -> FOUNDATION-013F application/inactive Product composition [READY_TO_RESUME]
+            -> FOUNDATION-013F application/inactive Product composition [COMPLETED LOCALLY]
       -> FOUNDATION-014 Agent Constitution/Engine design
       -> FOUNDATION-015 backend security CI
         -> FOUNDATION-017 observability/limits/cost foundation

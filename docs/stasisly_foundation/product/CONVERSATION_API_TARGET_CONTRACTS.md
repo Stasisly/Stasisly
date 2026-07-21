@@ -1,5 +1,13 @@
 # Conversation API Target Contracts
 
+## FOUNDATION-013F application contract
+
+Seven application use cases preserve the canonical repository inputs/results.
+List/read/message retries are new reads; create/send same-intent retry preserves
+the exact `OperationAttemptId`; archive/restore remain natural transitions.
+Application state contains controlled error codes rather than provider/HTTP
+payloads. No API or DTO changed in this package.
+
 ## FOUNDATION-013F-R1 local contract
 
 Canonical create/send inputs now require a provider-neutral

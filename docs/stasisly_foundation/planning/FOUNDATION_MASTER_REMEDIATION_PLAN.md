@@ -1,10 +1,17 @@
 # Foundation Master Remediation Plan
 
+## FOUNDATION-013F completion
+
+FOUNDATION-013F implements the canonical application boundary and inactive
+Product composition locally. It closes application orchestration and retry
+coordination debt without activating routes, shell, legacy migration or remote.
+G8-G10 and FOUNDATION-014 remain separately gated.
+
 ## FOUNDATION-013F-R1 completion
 
 The application-to-transport idempotency gap is closed locally with explicit,
 stable attempt propagation. G0-G6 are complete; publication completes G7.
-FOUNDATION-013F is `READY_TO_RESUME`, while application composition, routes,
+FOUNDATION-013F is `IMPLEMENTED_LOCALLY`; Product routes,
 remote writes and G8-G10 remain unimplemented/unauthorized.
 
 ## FOUNDATION-013E completion
