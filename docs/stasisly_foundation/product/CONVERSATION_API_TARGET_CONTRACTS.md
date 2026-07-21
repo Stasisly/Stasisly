@@ -1,5 +1,12 @@
 # Conversation API Target Contracts
 
+## FOUNDATION-016-R1 boundary delta
+
+No public DTO, endpoint or backend contract changed. Removal eliminates the
+parallel `ChatRepository` contract and direct legacy provider path. Product
+continues through `ConversationRepository`; transitional own-session/message
+ports remain internal to the adapter and are not widget-facing APIs.
+
 ## FOUNDATION-015-R1 Product consumer delta
 
 Canonical Product screens now consume list/read/message/send/archive/restore

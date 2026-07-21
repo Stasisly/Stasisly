@@ -1,5 +1,13 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Estado FOUNDATION-016-R1
+
+FOUNDATION-016 queda implementado localmente: chat legacy, su consumidor
+Orchestrator muerto y `/chat/:id` se retiran físicamente; L0-L7 quedan
+completos. La infraestructura transitoria segura se conserva encapsulada. El
+siguiente paquete recomendado es FOUNDATION-017 de hardening posterior a la
+activación, no IA ni Stasis Engine.
+
 ## Estado FOUNDATION-015-R1
 
 FOUNDATION-015 queda implementado localmente: Stasis es la entrada Product y

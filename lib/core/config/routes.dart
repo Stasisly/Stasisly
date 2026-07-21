@@ -154,11 +154,6 @@ final routerProvider = Provider<GoRouter>((ref) {
         environment: environment,
         isAuthenticated: isAuthenticated,
       ),
-      _blockedLegacyRoute(
-        definition: EntryPointRegistry.legacyAgentChat,
-        environment: environment,
-        isAuthenticated: isAuthenticated,
-      ),
       ..._developmentChatMessageRoutes(
         environment,
         isAuthenticated: isAuthenticated,

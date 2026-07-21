@@ -74,7 +74,7 @@ void main() {
     expect(registry, contains("pathPattern: '/stasis'"));
   });
 
-  test('legacy chat imports remain frozen to the blocked orchestrator page', () {
+  test('legacy chat and dead orchestrator consumer are physically absent', () {
     final consumers = Directory('lib')
         .listSync(recursive: true)
         .whereType<File>()
@@ -84,8 +84,14 @@ void main() {
         .map((file) => file.path)
         .toSet();
 
-    expect(consumers, {
-      'lib/features/orchestrator/presentation/pages/orchestrator_chat_page.dart',
-    });
+    expect(consumers, isEmpty);
+    expect(Directory('lib/features/chat').existsSync(), isFalse);
+    expect(
+      File(
+        'lib/features/orchestrator/presentation/pages/'
+        'orchestrator_chat_page.dart',
+      ).existsSync(),
+      isFalse,
+    );
   });
 }

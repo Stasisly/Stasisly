@@ -1,5 +1,13 @@
 # FOUNDATION-005 Remediation Backlog
 
+## FOUNDATION-016-R1 remediation evidence
+
+The P1 legacy chat runtime is physically removed after deleting its sole dead
+Orchestrator source consumer. `/chat/:id`, direct Supabase/demo code and legacy
+authority models are absent; the static gate reports zero runtime references.
+Canonical Conversation remains sole Product architecture, while approved
+transitional session/message infrastructure remains encapsulated.
+
 ## FOUNDATION-015-R1 evidence update
 
 Canonical local Product routes/screens and user-message lifecycle are adopted.
@@ -53,9 +61,9 @@ Product behavior or touch a remote project.
 | Issue | Evidence | Risk | Recommended package / acceptance |
 |---|---|---|---|
 | No Stasisly-owned identity/API boundary - `PARTIALLY_CLOSED_LOCALLY` | FOUNDATION-008 adds owned identity/session/API context and confines Auth SDK; bootstrap and wider provider coupling remain | Residual lock-in and incomplete consumer migration | Canonical boundary complete locally; continue containment/adoption without declaring full auth adopted. |
-| Legacy chat frozen but not removed | `/chat/:id` and orchestrator routes are blocked; direct Supabase/client `role` remain in frozen source; FOUNDATION-012 marks `DEPRECATED_AND_BLOCKED` | Reconnection or unsafe reuse before replacement | Execute 013A-013F with freeze guards, parity, compatibility and rollback before removal. |
+| Legacy chat runtime - `CLOSED_LOCALLY` | FOUNDATION-016-R1 physically removes `features/chat`, `/chat/:id` and the dead Orchestrator consumer; zero runtime references | Recreation through future changes | Preserve `LEGACY_CHAT_REFERENCE_ERADICATION` and Git rollback evidence. |
 | Surface authorization implementation partial | FOUNDATION-011 enforces registered Product/local-development context and trusted ownership across six Edge Functions; persistent RBAC/ABAC/JIT and other domains remain unenforced | Policy breadth and remote state remain incomplete | Continue with separately approved persistent policy and Product-boundary packages; do not weaken local backend enforcement. |
-| Modern chat Product activation — `PARTIALLY_CLOSED_LOCALLY` | FOUNDATION-013A-015-R1 add canonical contracts/backend/message semantics/application plus authenticated local Product routes/screens; physical APIs and legacy source remain transitional | Premature remote promotion or legacy reconnection | Execute FOUNDATION-016 physical retirement and later remote gates while preserving ownership, explicit IDs, content-only send and DTO allowlists. |
+| Modern Conversation Product activation - `PARTIALLY_CLOSED_LOCALLY` | FOUNDATION-013A-016-R1 add canonical contracts/backend/message semantics/application, authenticated local Product routes/screens and physical legacy retirement; persistence adapters remain transitional | Premature remote promotion | Continue later hardening and remote gates while preserving ownership, explicit IDs, content-only send and DTO allowlists. |
 | Create/send transaction/idempotency gap — `CLOSED_LOCALLY` | FOUNDATION-013B uses locked transactional RPCs and server ledger; FOUNDATION-013C adds naturally idempotent archive/restore | Remote rollout and retention still absent | Preserve deny-all and add retention/operations policy before remote writes. |
 | Orchestrator could be mistaken for Engine | Static Product UI at orchestrator routes | Architectural misrepresentation | Deprecation/rewrite decision; prohibit Engine naming/reuse. |
 

@@ -1,5 +1,13 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-016-R1 risk update
+
+Closed locally: accidental legacy chat reconnection, direct legacy Supabase/demo
+fallback, `agent.id` route ambiguity and dead Orchestrator-to-chat coupling.
+Residual debt: transitional physical naming/dev hosts, blocked Orchestrator,
+Product catalog runtime, environment readiness and unimplemented AI. No remote
+risk was accepted.
+
 ## FOUNDATION-015-R1 risk update
 
 Canonical Product routing debt is reduced locally. Residual P1/P2 debt remains

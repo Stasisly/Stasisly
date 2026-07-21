@@ -1,5 +1,13 @@
 # Product Conversation Architecture
 
+## FOUNDATION-016-R1 implementation delta
+
+Canonical Conversation is now the sole physical Product conversation runtime.
+The legacy feature and `/chat/:id` are absent, with no redirects or aliases.
+The Product graph ends at the canonical repository and encapsulated
+`chat_sessions`/`chat_messages` adapter sources; Orchestrator remains blocked
+and has no Conversation or legacy-chat dependency.
+
 ## FOUNDATION-015-R1 implementation delta
 
 The approved `/stasis`, `/conversations` and
@@ -188,12 +196,13 @@ The approved future Product model is:
   one owned Conversation
 ```
 
-These routes are target contracts only. FOUNDATION-012 registers none. Existing
-`/chat/:id` and orchestrator paths remain blocked and are not aliases.
+These were target contracts at FOUNDATION-012; FOUNDATION-015-R1 later
+registered the canonical Product routes. FOUNDATION-016-R1 removes `/chat/:id`;
+orchestrator paths remain blocked and are not aliases.
 
 ## Current asset direction
 
-- `lib/features/chat/**`: `DEPRECATED_AND_BLOCKED`.
+- `lib/features/chat/**`: `PHYSICALLY_REMOVED`.
 - `chat_sessions`: `ADAPT` toward Conversation semantics.
 - `chat_messages`: `ADAPT` toward canonical Message/provenance semantics.
 - specialist catalog: `ADAPT`; Agent Registry and roster remain unimplemented.

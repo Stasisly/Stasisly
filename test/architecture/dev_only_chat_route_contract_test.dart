@@ -23,18 +23,19 @@ void main() {
     expect(registrySource, isNot(contains(':agentId')));
   });
 
-  test('inherited chat and orchestrator routes are metadata-only blocked', () {
+  test('legacy chat is absent while orchestrator routes remain blocked', () {
     final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
     final registrySource = File(
       'lib/core/routing/infrastructure/entry_point_registry.dart',
     ).readAsStringSync();
 
-    expect(registrySource, contains("pathPattern: '/chat/:id'"));
+    expect(registrySource, isNot(contains("pathPattern: '/chat/:id'")));
     expect(registrySource, contains("pathPattern: '/orchestrator/chat'"));
     expect(registrySource, contains('EntryPointLegacyState.legacyBlocked'));
     expect(routesSource, isNot(contains('AgentChatWrapper')));
     expect(routesSource, isNot(contains('OrchestratorChatPage')));
     expect(routesSource, isNot(contains('SupabaseChatDataSource')));
+    expect(routesSource, isNot(contains('legacyAgentChat')));
   });
 
   test('Development route does not reuse inherited chat runtime', () {

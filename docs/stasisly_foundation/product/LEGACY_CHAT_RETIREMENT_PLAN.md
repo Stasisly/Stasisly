@@ -1,5 +1,22 @@
 # Legacy Chat Retirement Plan
 
+## FOUNDATION-016-R1 completion
+
+```text
+L0 Routes blocked: COMPLETE
+L1 Freeze and guard: COMPLETE
+L2 Extract reusable UI: COMPLETE
+L3 Canonical boundaries: COMPLETE LOCALLY
+L4 Migrate Product consumers: COMPLETE
+L5 Remove routes/providers: COMPLETE
+L6 Remove legacy code: COMPLETE
+L7 Verify no references: COMPLETE
+```
+
+`features/chat`, `OrchestratorChatPage` and `/chat/:id` are physically absent.
+There is no redirect or identifier reinterpretation. `/orchestrator*` remains
+blocked and transitional session/message infrastructure remains encapsulated.
+
 ## FOUNDATION-015-R1 gate update
 
 Canonical Product replacement routes/screens now exist locally and do not
@@ -50,27 +67,27 @@ Canonical Message semantics now fail closed over the transitional transport.
 This did not unfreeze or reconnect legacy chat. FOUNDATION-013E subsequently
 extracted and guarded only the audited visual subset.
 
-## Metadata
+## Current metadata
 
 ```text
 Status: APPROVED plan
-Implementation: L0-L3 COMPLETE LOCALLY; L4-L7 NOT STARTED
+Implementation: L0-L7 COMPLETE (L3 LOCALLY)
 Owner: Product + Flutter + Backend Architecture
 Approver: Founder
 ```
 
-## Formal decision
+## Current formal decision
 
 ```text
-lib/features/chat/** = DEPRECATED_AND_BLOCKED
+lib/features/chat/** = PHYSICALLY_REMOVED
 ```
 
 The feature cannot receive new Product work, routes, fallback, direct Supabase
-Product use, client role/owner authority or Engine reuse. Existing source is
-retained only as frozen evidence until replacement and removal gates pass.
+Product use, client role/owner authority or Engine reuse. Git and Foundation
+documents retain evidence; no dormant source or feature flag remains.
 
-`/chat/:id` remains a blocked legacy route whose `id` was an `agentId`; it is
-never a `sessionId` or `conversationId`. `/orchestrator` and
+`/chat/:id` is absent and its former `id` is never a `sessionId` or
+`conversationId`. `/orchestrator` and
 `/orchestrator/chat` remain blocked and are not Stasis Engine.
 
 ## Reuse policy

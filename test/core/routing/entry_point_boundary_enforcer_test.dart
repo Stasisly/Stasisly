@@ -144,11 +144,8 @@ void main() {
       );
     });
 
-    test('legacy chat and orchestrator remain blocked', () {
-      expect(
-        evaluate(EntryPointRegistry.legacyAgentChat).type,
-        BoundaryDecisionType.legacyBlocked,
-      );
+    test('legacy chat is absent and orchestrator remains blocked', () {
+      expect(EntryPointRegistry.resolvePath('/chat/legacy-agent'), isNull);
       expect(
         evaluate(
           EntryPointRegistry.legacyOrchestrator,

@@ -1,5 +1,12 @@
 # Foundation Master Remediation Plan
 
+## FOUNDATION-016-R1 completion
+
+The scoped Orchestrator blocker is removed and legacy retirement L5-L7 closes
+locally. G0-G7 pass with zero runtime references and preserved transitional
+infrastructure. G8-G10, remote and AI remain closed; FOUNDATION-017 hardening is
+the next separately approved package.
+
 ## FOUNDATION-015-R1 completion
 
 G0-G7 adopt the canonical Product routing/screens locally after the router

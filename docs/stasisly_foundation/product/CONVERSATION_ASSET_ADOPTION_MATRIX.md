@@ -1,5 +1,12 @@
 # Conversation Asset Adoption Matrix
 
+## FOUNDATION-016-R1 delta
+
+`features/chat`, `OrchestratorChatPage` and the legacy `/chat/:id` route move to
+`PHYSICALLY_REMOVED`. Canonical Conversation is `SOLE_PRODUCT_ARCHITECTURE`.
+`chat_sessions` and `chat_messages` remain `TRANSITIONAL_AND_ENCAPSULATED` and
+must not be exposed as Product API. L0-L7 are complete.
+
 ## FOUNDATION-015-R1 delta
 
 Canonical Stasis/list/detail routes, screens and active Product composition are
@@ -53,11 +60,11 @@ Approver: Founder for adoption/removal decisions
 
 | Asset | Current status | Foundation target | Classification | Reusable invariants | Unsafe coupling/gap | Required package | Adoption gate |
 |---|---|---|---|---|---|---|---|
-| `lib/features/chat/**` | Frozen legacy feature with exact external-consumer guard | No Product runtime dependency | DEPRECATED_AND_FROZEN / REMOVE_LATER | Audited visual reference only | Client `userId`/`specialistId`/`role`, Supabase direct, realtime, `agentId` | 013E complete; L4-L7 later | Replacement, parity, no references |
-| Legacy `ChatPage`/wrapper | Frozen and route-blocked | Canonical Conversation screen | REWRITE / REMOVE_LATER | No component adopted; layout intent audited | `agentId` starts session; legacy providers/entities | 013F/later L4 | Canonical composition and accessibility parity |
-| Legacy `MessageBubble` | Frozen component | Product Message renderer | ADAPT completed locally | Alignment/grouping intent only | Original still uses legacy entity and `chief_intervention` | 013E complete | `ConversationMessageBubble` tested; consumer migration pending |
-| Legacy `ChatInput` | Frozen component | Content composer | REWRITE completed as safe shell | Text-entry and keyboard intent only | Original mock attachment remains frozen | 013E complete; attachments later | Content-only shell tested; wiring pending |
-| `lib/features/conversations/**` | Canonical local domain/port/adapters/application/presentation/Product screens | Product Conversation boundary | FOUNDATION_ADOPTED_LOCALLY | Opaque ID, trusted owner, canonical Message metadata, typed controllers/providers and active local Product screens | Physical legacy implementation and remote activation remain | 013A-015-R1 complete locally | Physical retirement and remote gates remain separate |
+| `lib/features/chat/**` | Physically absent | No Product runtime dependency | PHYSICALLY_REMOVED | Historical evidence in Git/Foundation docs | Recreation risk guarded statically | 016-R1 complete | Zero runtime/test violations |
+| Legacy `ChatPage`/wrapper | Physically absent | Canonical `ConversationPage` | REMOVED | No alias or redirect | None in runtime | 016-R1 complete | Static eradication gate |
+| Legacy `MessageBubble` | Physically absent after visual intent extraction | Product Message renderer | REMOVED_AFTER_ADAPTATION | Alignment/grouping intent only | None in runtime | 013E + 016-R1 | Canonical mapper/bubble tests |
+| Legacy `ChatInput` | Physically absent after safe rewrite | Content composer | REMOVED_AFTER_REWRITE | Text-entry and keyboard intent | Attachments remain unimplemented | 013E + 016-R1 | Content-only shell tests |
+| `lib/features/conversations/**` | Canonical local domain/port/adapters/application/presentation/Product screens | Product Conversation boundary | FOUNDATION_ADOPTED_LOCALLY / SOLE_PRODUCT_ARCHITECTURE | Opaque ID, trusted owner, canonical Message metadata, typed controllers/providers and active local Product screens | Remote activation remains | 013A-016-R1 complete locally | Remote gates remain separate |
 | `lib/features/chat_sessions/**` | Local-safe/dev-only adapter source | Conversation application/client boundary | TRANSITIONAL_ADAPTER_SOURCE | Explicit ID, backend-blocked states, owner-safe DTO, stable cursor, lifecycle source | Session terminology, dev hosts, no Product route | 013A-013C complete | Canonical lifecycle adapter implemented; physical naming retained |
 | `lib/features/chat_messages/**` | Local-safe/dev-only adapter source | Product Message boundary | TRANSITIONAL_ADAPTER_SOURCE | Content-only send, explicit ID, sanitization, metadata validation | Session/role vocabulary; Stasis/specialist authoring absent | 013A and 013D complete | Canonical fail-closed adapter implemented |
 | `lib/features/specialists/**` | Sanitized catalog boundary | Product specialist selection | ADAPT | `selectableSpecialistId`, six-field public model | Runtime/catalog bridge absent | 013A contract complete; later Engine package | Public reference adopted; no internal IDs |
@@ -69,9 +76,10 @@ Approver: Founder for adoption/removal decisions
 | `specialist_catalog` | Product catalog prepared | Sanitized selection boundary | ADAPT | Product-only surface, publication/availability/tier guards | Functional/runtime bridge not implemented | Catalog/Engine packages | Versioned backend-only bridge |
 | `specialists` table | Internal legacy specialist definition | Future approved definition adapter | ADAPT_CANDIDATE | Internal identity lookup currently required | Prompt/category/runtime concepts co-located | 014/later data package | Registry separation and no public exposure |
 | Current dev routes | Development-only and guarded | Test hosts only until a separately approved Product route package | KEEP_TEMPORARILY | Explicit `sessionId`, environment guards | Not Product UX | Later route package, not 013F | Product routes separate; dev guards retained |
-| `/chat/:id`, `/orchestrator*` | LEGACY_BLOCKED | No route/fallback | DEPRECATE then REMOVE | Recognition for safe blocked response | `agentId` ambiguity and Engine confusion | 013E/013F | Replacement live, rollback, no references |
+| `/chat/:id` | Physically absent | No route/fallback | REMOVED | Generic unknown-route handling | Recreation/redirect risk guarded | 016-R1 complete | Zero registrations and redirects |
+| `/orchestrator*` | LEGACY_BLOCKED | No Product/Engine route | KEEP_BLOCKED_TEMPORARILY | Explicit blocked metadata | Engine confusion remains controlled debt | Separate future decision | No Product/Conversation imports |
 | Modern tests/harnesses | Passing local evidence | Regression baseline for Conversation adapters | ADAPT / KEEP | Ownership, sanitization, cleanup, content-only, cursors | Session naming and dev-only assumptions | Every 013 child | Equal/stronger coverage and CI later |
-| Legacy chat tests | Retained historical evidence plus freeze guards | Retirement guards only | KEEP_BLOCKED / REMOVE_LATER | Repository behavior inventory | Unsafe contracts remain frozen | 013E guard complete | No weakening; remove only with L4-L7 evidence |
+| Legacy chat tests | Removed with source | Retirement guards only | REMOVED / MIGRATED_TO_GUARD | Historical repository behavior remains in Git | None in active tests | 016-R1 complete | Eradication and transitional-preservation guards pass |
 
 ## Adoption rule
 

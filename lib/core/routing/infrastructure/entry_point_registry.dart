@@ -148,16 +148,6 @@ abstract final class EntryPointRegistry {
     legacyState: EntryPointLegacyState.current,
     backendAuthorityRequired: true,
   );
-  static const legacyAgentChat = EntryPointDefinition(
-    id: EntryPointId.legacyAgentChat,
-    pathPattern: '/chat/:id',
-    surface: AuthorizationSurface.unknown,
-    allowedEnvironments: <AuthorizationEnvironment>{},
-    authenticationRequirement:
-        EntryPointAuthenticationRequirement.authenticated,
-    authorizationRequirement: EntryPointAuthorizationRequirement.none,
-    legacyState: EntryPointLegacyState.legacyBlocked,
-  );
   static const legacyOrchestrator = EntryPointDefinition(
     id: EntryPointId.legacyOrchestrator,
     pathPattern: '/orchestrator',
@@ -214,7 +204,6 @@ abstract final class EntryPointRegistry {
     mentalTraining,
     legacyOrchestrator,
     legacyOrchestratorChat,
-    legacyAgentChat,
     developmentChatComposed,
     developmentChatSession,
   ];

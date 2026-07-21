@@ -1,5 +1,15 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-016-R1 classification
+
+- `lib/features/chat/**`: `PHYSICALLY_REMOVED`.
+- `OrchestratorChatPage`: `REMOVED`; `/orchestrator*` remains `BLOCKED`.
+- Legacy `/chat/:id`: `REMOVED`, with no redirect or ID translation.
+- Canonical Conversation: `SOLE_PRODUCT_ARCHITECTURE`.
+- `chat_sessions` / `chat_messages`: `TRANSITIONAL_AND_ENCAPSULATED`,
+  `BACKEND_TRANSPORT_INFRASTRUCTURE`, not Product API.
+- Legacy runtime references: `0`; retirement L0-L7: `COMPLETE`.
+
 ## FOUNDATION-015-R1 classification
 
 - Stasis Product route/screen: `FOUNDATION_ADOPTED_LOCALLY`.
@@ -84,7 +94,7 @@ siguen sin estar autorizadas por esta clasificación.
 | Orquestador Codex | `docs/archive/discovery/stasisly_definition/orchestrator/` | ADAPT | Controles operativos valiosos | Puede frenar o sobreactuar | Convertir a estándar Foundation | Program Management |
 | Flutter core/config | `lib/core/` | ADAPT / PARTIALLY_ADOPTED | Identidad/sesión, autorización y fronteras route/surface/environment canónicas; backend global pendiente | SECURITY_CRITICAL | Continuar enforcement backend | Riverpod, GoRouter |
 | Auth legacy | `lib/features/auth/` | ADAPT / PARTIALLY_ADAPTED | Consume puerto propio, pero conserva fachadas legacy y bootstrap proveedor | SECURITY_CRITICAL, VENDOR_COUPLED | Migración gradual; no declarar feature completa adoptada | Auth, RBAC/ABAC |
-| Chat legacy | `lib/features/chat/` | REWRITE / LEGACY_BLOCKED | Contratos antiguos; su ruta solo devuelve bloqueo seguro | SECURITY_CRITICAL | No conectar; reemplazar gradualmente | Sessions/messages |
+| Chat legacy | `lib/features/chat/` | PHYSICALLY_REMOVED | Retirado en FOUNDATION-016-R1 tras reemplazo y auditoría de referencias | CLOSED_LOCALLY | Impedir recreación mediante guard | Git history |
 | Chat local-safe | `lib/features/chat_sessions/`, `chat_messages/` | ADAPT | Fronteras y tests valiosos | Local/dev-only | Adoptar tras arquitectura F3/F7 | Auth, API |
 | Perfil y especialistas | `lib/features/profile/`, `specialists/` | ADAPT | Contratos mínimos sanitizados | VENDOR_COUPLED parcial | Introducir puertos backend | Identidad/catálogo |
 | Orchestrator UI | `lib/features/orchestrator/` | REWRITE | Prototipo, no Stasis Engine | FOUNDATION_BLOCKER | Redefinir bajo Product/Stasis | Agent organization |
@@ -220,7 +230,7 @@ deuda residual.
 - Remoto, producción, RBAC/ABAC persistente, Founder access y audit sink:
   `NOT_IMPLEMENTED`.
 
-## Decisión de FOUNDATION-012
+## Decisión histórica de FOUNDATION-012
 
 - `lib/features/chat/**`: `DEPRECATED_AND_BLOCKED`; no nuevo Product work,
   routes, fallback, Supabase directo ni reutilización como Engine.
@@ -247,7 +257,8 @@ deuda residual.
 - At FOUNDATION-013A, UI/routes, canonical backend API and Stasis Engine were
   `NOT_IMPLEMENTED`; later packages implement local Conversation UI/routes and
   transitional canonical boundaries, while Stasis Engine remains absent.
-- chat legacy: continúa `DEPRECATED_AND_BLOCKED`, sin fallback ni cambios.
+- chat legacy: en FOUNDATION-013A continuaba `DEPRECATED_AND_BLOCKED`; fue
+  retirado físicamente por FOUNDATION-016-R1 sin fallback.
 
 ## Adopción de FOUNDATION-013B
 

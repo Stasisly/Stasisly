@@ -72,21 +72,23 @@ void main() {
     expect(find.byType(OwnChatComposedSafeShell), findsNothing);
   });
 
-  testWidgets('legacy chat and orchestrator render only blocked state', (
+  testWidgets('legacy chat is unknown and orchestrator remains blocked', (
     tester,
   ) async {
     final container = await pumpApp(
       tester,
       const AppEnvironment(mode: AppRuntimeMode.local),
     );
-    for (final path in ['/chat/legacy-agent', '/orchestrator']) {
-      container.read(routerProvider).go(path);
-      await tester.pumpAndSettle();
-      expect(
-        find.text('Esta capacidad heredada no está disponible.'),
-        findsOneWidget,
-      );
-    }
+    container.read(routerProvider).go('/chat/legacy-agent');
+    await tester.pumpAndSettle();
+    expect(find.text('Esta página no está disponible.'), findsOneWidget);
+
+    container.read(routerProvider).go('/orchestrator');
+    await tester.pumpAndSettle();
+    expect(
+      find.text('Esta capacidad heredada no está disponible.'),
+      findsOneWidget,
+    );
   });
 
   testWidgets('unknown route renders safe not-available state', (tester) async {

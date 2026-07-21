@@ -16,13 +16,7 @@ void main() {
     expect(authDataSource, isNot(contains("'role':")));
   });
 
-  test('chat consumes central identity without a local demo id', () {
-    final chatProviders = File(
-      'lib/features/chat/presentation/viewmodels/chat_providers.dart',
-    ).readAsStringSync();
-
-    expect(chatProviders, contains('currentIdentityProvider'));
-    expect(chatProviders, isNot(contains('demo-user')));
-    expect(chatProviders, isNot(contains('chatUserIdProvider')));
+  test('removed legacy chat cannot define a parallel identity source', () {
+    expect(Directory('lib/features/chat').existsSync(), isFalse);
   });
 }

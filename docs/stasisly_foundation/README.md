@@ -1,5 +1,14 @@
 # Stasisly Foundation
 
+## FOUNDATION-016-R1 physical legacy retirement
+
+FOUNDATION-016 is `IMPLEMENTED_LOCALLY`: `lib/features/chat/**`, the dead
+`OrchestratorChatPage` consumer and `/chat/:id` registration are physically
+removed. Canonical Conversation is the sole Product architecture;
+`chat_sessions`/`chat_messages` remain encapsulated transitional transport and
+`/orchestrator*` remains blocked. See [ADR-F019](adr/ADR-F019-physical-legacy-chat-removal-and-reference-eradication.md)
+and the [implementation record](implementation/FOUNDATION-016_PHYSICAL_LEGACY_CHAT_REMOVAL_AND_REFERENCE_ERADICATION.md).
+
 ## FOUNDATION-015-R1 controlled Product activation
 
 FOUNDATION-015 is `IMPLEMENTED_LOCALLY`: `/stasis`, `/conversations` and

@@ -1,5 +1,23 @@
 # Foundation Session Tracker
 
+## FOUNDATION-016-R1 closure
+
+```text
+FOUNDATION-016: IMPLEMENTED_LOCALLY
+OrchestratorChatPage: REMOVED
+Legacy chat feature/route/providers/controllers/repositories/datasources/entities: REMOVED
+Legacy runtime references: 0
+Canonical Conversation: SOLE_PRODUCT_ARCHITECTURE
+chat_sessions/chat_messages: TRANSITIONAL_AND_ENCAPSULATED
+Orchestrator: BLOCKED_AND_ISOLATED
+Retirement L0-L7: COMPLETE
+Flutter: 610 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 36 inherited infos
+Deno: 86/86 pass
+SQL local: 740/740 pass
+Remote: NOT_IMPLEMENTED
+```
+
 ## FOUNDATION-015-R1 closure
 
 ```text
@@ -158,3 +176,4 @@ canonical application use cases, typed controllers/providers and inactive local 
 | FOUNDATION-013F | Completed locally | Implement canonical Conversation use cases, typed state/controllers, fail-closed feature providers and inactive Product composition | Seven use cases; list/create/detail coordination; same-intent retries; deterministic invalidation; local/development composition; inactive host; Flutter 597 pass/5 approved skips; architecture 108/108; analyzer 0 errors/51 inherited infos; Deno 86/86 and format 62 files; one no-seed local reset plus SQL 740/740; ADR-F016; no backend/schema/routes/legacy/remote | `CANONICAL CONVERSATION_APPLICATION_AND_INACTIVE_COMPOSITION IMPLEMENTED_LOCAL_AND_PUSHED` upon successful push | Do not start FOUNDATION-014 without separate approval; Product routing/shell, legacy migration and G8-G10 unauthorized |
 | FOUNDATION-014-R1 | Completed locally | Remove four Product `agent.id -> /chat/:id` CTAs and resume legacy wiring retirement | Shared non-actionable specialist card; four page tests; architecture guards; static audit 0 Product violations; Flutter 605 pass/5 approved skips; analyzer 0 errors/51 inherited infos; Deno 86/86; one no-seed local reset plus SQL 740/740; ADR-F017; no routes/backend/schema/orchestrator/remote | `PRODUCT CONVERSATION_CONSUMERS_MIGRATED_AND_LEGACY_WIRING_RETIRED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-015 controlled Product route activation only after separate approval; L5-L7 and orchestrator retirement remain separate |
 | FOUNDATION-015-R1 | Completed locally | Activate Stasis and canonical Conversation list/detail through the single Product router | Explicit route metadata; authenticated local/development gates; canonical screens/controllers; strict ConversationId adapter; user-only send; archive/restore; opaque not-found; Flutter 615 pass/5 approved skips; analyzer 0 errors/51 inherited infos; Deno 86/86; one no-seed local reset plus SQL 740/740; ADR-F018; no backend/schema/orchestrator/remote/AI | `PRODUCT CONVERSATION_ROUTES_AND_SCREENS ACTIVATED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-016 physical legacy chat removal/reference eradication only after separate approval; G8-G10 remain unauthorized |
+| FOUNDATION-016-R1 | Completed locally | Remove the dead Orchestrator chat consumer, all legacy chat runtime/tests and `/chat/:id`; preserve blocked Orchestrator and transitional session/message infrastructure | 20 legacy files plus `OrchestratorChatPage` removed; replacement eradication guard; zero runtime references; Flutter 610 pass/5 approved skips; analyzer 0 errors/36 inherited infos; Deno 86/86; one no-seed local reset plus SQL 740/740; ADR-F019; no backend/schema/Product page/remote/AI | `LEGACY CHAT_RUNTIME_REMOVED_AND_REFERENCES_ERADICATED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-017 post-activation hardening only after separate approval; G8-G10 remain unauthorized |

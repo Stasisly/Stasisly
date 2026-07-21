@@ -16,7 +16,6 @@ enum EntryPointId {
   mentalTraining,
   profileRead,
   specialistsCatalog,
-  legacyAgentChat,
   legacyOrchestrator,
   legacyOrchestratorChat,
   developmentChatComposed,

@@ -302,14 +302,17 @@ void main() {
         final transport = _FakeTransport(response: _sendSuccess());
 
         await _source(transport: transport).sendUserMessage(
-          sessionId: '/chat/:id',
+          sessionId: 'synthetic-session-id',
           content: 'hola',
           operationAttemptId: _attempt,
         );
 
         final request = transport.requests.single;
         expect(request.uri.path, '/functions/v1/send-user-message');
-        expect(request.body, {'sessionId': '/chat/:id', 'content': 'hola'});
+        expect(request.body, {
+          'sessionId': 'synthetic-session-id',
+          'content': 'hola',
+        });
         expect(request.body, isNot(containsPair('id', anything)));
         expect(request.body, isNot(containsPair('agentId', anything)));
       },

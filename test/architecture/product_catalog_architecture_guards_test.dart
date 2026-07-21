@@ -106,7 +106,7 @@ void main() {
     expect(routesSource, isNot(contains("path: '/conversations/:id'")));
     expect(routesSource, isNot(contains("path: '/conversations/:agentId'")));
     expect(routesSource, isNot(contains("path: '/conversation'")));
-    expect(registrySource, contains("pathPattern: '/chat/:id'"));
+    expect(registrySource, isNot(contains("pathPattern: '/chat/:id'")));
     expect(registrySource, contains("pathPattern: '/orchestrator/chat'"));
     expect(registrySource, contains('EntryPointLegacyState.legacyBlocked'));
     expect(routesSource, isNot(contains('AgentChatWrapper')));

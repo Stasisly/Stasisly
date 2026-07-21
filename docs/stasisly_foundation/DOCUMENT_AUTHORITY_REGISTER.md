@@ -1,5 +1,16 @@
 # Document Authority Register
 
+## FOUNDATION-016-R1 authority addition
+
+ADR-F019 is normative for physical legacy-chat retirement and zero-reference
+enforcement. The implementation record owns local evidence; neither authorizes
+remote, AI, staging or production.
+
+| Document | Status | Authority level | Owner | Approver | Normative | Supersedes | Dependencies | Review condition |
+|---|---|---:|---|---|---|---|---|---|
+| `adr/ADR-F019-physical-legacy-chat-removal-and-reference-eradication.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture + Security | Founder | Yes | Legacy freeze/removal policy | ADR-F014/F017/F018 | Legacy route, adapter or Orchestrator boundary changes |
+| `implementation/FOUNDATION-016_PHYSICAL_LEGACY_CHAT_REMOVAL_AND_REFERENCE_ERADICATION.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Flutter + QA + Documentation | Evidence owner | No, evidence | FOUNDATION-016 blocked attempt | ADR-F019; FOUNDATION-015-R1 | Retirement or validation evidence changes |
+
 ## FOUNDATION-015-R1 authority addition
 
 ADR-F018 is normative for controlled canonical Product route/screen activation.

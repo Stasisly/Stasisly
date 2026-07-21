@@ -1,5 +1,12 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-016-R1 gate result
+
+FOUNDATION-013A-F, 014-R1 and 015-R1 provided the replacement and consumer
+migration. R1 removes the final blocked Orchestrator source dependency; G0-G7
+then pass for physical retirement and zero-reference evidence. G8-G10 remain
+unauthorized.
+
 ## FOUNDATION-015-R1 gate result
 
 FOUNDATION-013A-F and FOUNDATION-014-R1 supplied the contracts, composition and
