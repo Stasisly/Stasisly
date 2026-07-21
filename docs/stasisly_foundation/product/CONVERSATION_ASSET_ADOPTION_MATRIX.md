@@ -1,5 +1,11 @@
 # Conversation Asset Adoption Matrix
 
+## FOUNDATION-015-R1 delta
+
+Canonical Stasis/list/detail routes, screens and active Product composition are
+`FOUNDATION_ADOPTED_LOCALLY`. The inactive host remains test-only. Legacy chat
+and orchestrator stay blocked, while their physical removal remains pending.
+
 ## FOUNDATION-014-R1 delta
 
 The four Product `/chat/${agent.id}` affordances are removed. Their legacy agent
@@ -51,7 +57,7 @@ Approver: Founder for adoption/removal decisions
 | Legacy `ChatPage`/wrapper | Frozen and route-blocked | Canonical Conversation screen | REWRITE / REMOVE_LATER | No component adopted; layout intent audited | `agentId` starts session; legacy providers/entities | 013F/later L4 | Canonical composition and accessibility parity |
 | Legacy `MessageBubble` | Frozen component | Product Message renderer | ADAPT completed locally | Alignment/grouping intent only | Original still uses legacy entity and `chief_intervention` | 013E complete | `ConversationMessageBubble` tested; consumer migration pending |
 | Legacy `ChatInput` | Frozen component | Content composer | REWRITE completed as safe shell | Text-entry and keyboard intent only | Original mock attachment remains frozen | 013E complete; attachments later | Content-only shell tested; wiring pending |
-| `lib/features/conversations/**` | Canonical local domain/port/adapters/application/presentation | Product Conversation boundary | FOUNDATION_ADOPTED_LOCALLY | Opaque ID, trusted owner, canonical Message metadata, typed controllers/providers and inactive host | No Product route, active screen or legacy migration | 013A-013F complete locally | Product activation and consumer migration evidence |
+| `lib/features/conversations/**` | Canonical local domain/port/adapters/application/presentation/Product screens | Product Conversation boundary | FOUNDATION_ADOPTED_LOCALLY | Opaque ID, trusted owner, canonical Message metadata, typed controllers/providers and active local Product screens | Physical legacy implementation and remote activation remain | 013A-015-R1 complete locally | Physical retirement and remote gates remain separate |
 | `lib/features/chat_sessions/**` | Local-safe/dev-only adapter source | Conversation application/client boundary | TRANSITIONAL_ADAPTER_SOURCE | Explicit ID, backend-blocked states, owner-safe DTO, stable cursor, lifecycle source | Session terminology, dev hosts, no Product route | 013A-013C complete | Canonical lifecycle adapter implemented; physical naming retained |
 | `lib/features/chat_messages/**` | Local-safe/dev-only adapter source | Product Message boundary | TRANSITIONAL_ADAPTER_SOURCE | Content-only send, explicit ID, sanitization, metadata validation | Session/role vocabulary; Stasis/specialist authoring absent | 013A and 013D complete | Canonical fail-closed adapter implemented |
 | `lib/features/specialists/**` | Sanitized catalog boundary | Product specialist selection | ADAPT | `selectableSpecialistId`, six-field public model | Runtime/catalog bridge absent | 013A contract complete; later Engine package | Public reference adopted; no internal IDs |

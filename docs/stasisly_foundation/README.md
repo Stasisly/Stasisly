@@ -1,13 +1,22 @@
 # Stasisly Foundation
 
+## FOUNDATION-015-R1 controlled Product activation
+
+FOUNDATION-015 is `IMPLEMENTED_LOCALLY`: `/stasis`, `/conversations` and
+`/conversations/:conversationId` are canonical authenticated Product routes in
+local/development only. ADR-F018 and the [implementation record](implementation/FOUNDATION-015-R1_CONTROLLED_PRODUCT_CONVERSATION_ROUTE_AND_SCREEN_ACTIVATION.md)
+are authoritative. Legacy routes remain blocked; AI, Stasis Engine, specialist
+responses, remote, staging and production remain unavailable.
+
 ## FOUNDATION-014-R1 Product consumer retirement
 
 FOUNDATION-014 is resumed and `IMPLEMENTED_LOCALLY`: the four Product area CTAs
 no longer use `agent.id`, `/chat/:id` or any conversation action. Because their
 legacy display source has no verified `selectableSpecialistId`, they render a
 shared non-actionable unavailable state. The canonical inactive composition is
-the sole approved Product Conversation composition; Product routes remain
-unregistered. See the [implementation record](implementation/FOUNDATION-014-R1_PRODUCT_CTA_MIGRATION_AND_LEGACY_WIRING_RETIREMENT.md)
+the sole approved Product Conversation composition at that package boundary;
+FOUNDATION-015-R1 subsequently activates its canonical Product routes. See the
+[implementation record](implementation/FOUNDATION-014-R1_PRODUCT_CTA_MIGRATION_AND_LEGACY_WIRING_RETIREMENT.md)
 and [ADR-F017](adr/ADR-F017-product-consumer-migration-and-legacy-wiring-retirement.md).
 
 ## FOUNDATION-013F canonical application composition
@@ -15,8 +24,9 @@ and [ADR-F017](adr/ADR-F017-product-consumer-migration-and-legacy-wiring-retirem
 `FOUNDATION-013F` is `IMPLEMENTED_LOCALLY`: seven canonical use cases, typed
 application state, pure-Dart controllers, local/development fail-closed
 providers and `InactiveConversationFeatureHost` now form an executable local
-validation boundary. No Product route, active shell, legacy migration, backend
-change or remote activation exists. See the [implementation record](implementation/FOUNDATION-013F_CANONICAL_CONVERSATION_APPLICATION_AND_INACTIVE_COMPOSITION.md)
+validation boundary. That package introduced no route, shell, backend or remote
+activation; FOUNDATION-015-R1 later activates only the local Product route and
+screen layer. See the [implementation record](implementation/FOUNDATION-013F_CANONICAL_CONVERSATION_APPLICATION_AND_INACTIVE_COMPOSITION.md)
 and [ADR-F016](adr/ADR-F016-canonical-conversation-application-and-inactive-composition.md).
 
 ## FOUNDATION-013F-R1 idempotent attempts
@@ -214,8 +224,9 @@ persistente, Founder access y nuevas capacidades Product siguen cerrados.
 FOUNDATION-012 aprueba `Conversation` como agregado Product y reserva
 `ExecutionSession` al futuro runtime. Stasis coordina Product; historial,
 ejecución, memoria, research y trazas permanecen separados. El chat legacy queda
-`DEPRECATED_AND_BLOCKED`; las rutas `/stasis` y `/conversations` son objetivo no
-implementado. Los activos modernos se adaptarán mediante FOUNDATION-013A-013F.
+`DEPRECATED_AND_BLOCKED`; FOUNDATION-015-R1 implementa después las rutas
+`/stasis` y `/conversations` solo en local/development. Los activos modernos se
+adaptan mediante FOUNDATION-013A-015-R1.
 
 FOUNDATION-013A adopta localmente `Conversation`, `ConversationId`,
 `ConversationMessage`, inputs/resultados provider-neutral y

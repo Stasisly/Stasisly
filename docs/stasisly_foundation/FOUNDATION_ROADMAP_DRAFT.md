@@ -1,5 +1,13 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Estado FOUNDATION-015-R1
+
+FOUNDATION-015 queda implementado localmente: Stasis es la entrada Product y
+las rutas canónicas de lista/detalle Conversation están activas solo en
+local/development, autenticadas y sin fallback legacy. FOUNDATION-016, retirada
+física de chat legacy y referencias, es el siguiente paquete recomendado y no
+se inicia aquí.
+
 ## Estado FOUNDATION-014-R1
 
 FOUNDATION-014 queda implementado localmente tras retirar los cuatro CTAs
@@ -188,10 +196,10 @@ solo local/development; no añade política persistente ni despliegue.
 
 FOUNDATION-012 aprueba la arquitectura de Conversation para F8: Conversation es
 el agregado Product, ExecutionSession pertenece al futuro Engine, Stasis es el
-coordinador, chat legacy queda deprecated/blocked y `/stasis` más
-`/conversations` son rutas objetivo no implementadas. FOUNDATION-013 se divide
-en 013A-013F para contratos, atomicidad, historial, provenance, retirada legacy
-y routing, cada hijo con gate separado.
+coordinador y chat legacy queda deprecated/blocked. FOUNDATION-015-R1 implementa
+después `/stasis` y `/conversations` en local/development. FOUNDATION-013 se
+divide en 013A-013F para contratos, atomicidad, historial, provenance y retirada
+legacy, con routing en su gate posterior separado.
 
 FOUNDATION-013A completa localmente el primer hijo: contratos Product canónicos,
 ownership desde identidad autenticada, resultados neutrales y adapters sobre

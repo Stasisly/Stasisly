@@ -1,5 +1,16 @@
 # Document Authority Register
 
+## FOUNDATION-015-R1 authority addition
+
+ADR-F018 is normative for controlled canonical Product route/screen activation.
+The FOUNDATION-015-R1 implementation record owns local evidence; neither record
+authorizes remote execution, staging, production or AI responses.
+
+| Document | Status | Authority level | Owner | Approver | Normative | Supersedes | Dependencies | Review condition |
+|---|---|---:|---|---|---|---|---|---|
+| `adr/ADR-F018-controlled-product-conversation-route-and-screen-activation.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Product + Flutter Architecture + Security | Founder | Yes | Product routes as target-only | ADR-F009/F016/F017 | Route, screen, environment or authority change |
+| `implementation/FOUNDATION-015-R1_CONTROLLED_PRODUCT_CONVERSATION_ROUTE_AND_SCREEN_ACTIVATION.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Flutter + QA + Documentation | Evidence owner | No, evidence | FOUNDATION-015 blocked attempt | ADR-F018; FOUNDATION-014-R1 | Product activation or validation evidence changes |
+
 ## FOUNDATION-014-R1 authority addition
 
 ADR-F017 is normative for Product Conversation selection identity, safe
@@ -108,11 +119,11 @@ routes or remote execution.
 | `adr/ADR-F007-surface-and-environment-enforcement-boundaries.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Implicit route surface/environment authority | ADR-F004-F006 | Surface, environment, route or entry-point enforcement semantics change |
 | `implementation/FOUNDATION-011_BACKEND_AUTHORIZATION_CONTEXT_AND_OWNED_API_ENFORCEMENT.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Backend Architecture + Security + QA + Documentation | Evidence owner | No, local implementation evidence | Implicit backend operation context | ADR-F008; FOUNDATION-008-010 | Backend policy, operation, ownership or remote activation change |
 | `adr/ADR-F008-backend-authorization-context-and-owned-api-enforcement.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Backend Architecture + Security under Rector | Founder | Yes | Implicit backend surface/environment/action/resource authority | ADR-F004-F007 | Backend authorization, owned API or environment semantics change |
-| `product/PRODUCT_CONVERSATION_ARCHITECTURE.md` | APPROVED / NOT_IMPLEMENTED | 3 | Product Architecture under Stasis | Founder | Yes | Discovery-era chat/session semantics | ADR-F009; Foundation architecture | Product Conversation semantics or route model change |
+| `product/PRODUCT_CONVERSATION_ARCHITECTURE.md` | APPROVED / PARTIALLY_IMPLEMENTED_LOCALLY | 3 | Product Architecture under Stasis | Founder | Yes | Discovery-era chat/session semantics | ADR-F009; ADR-F018; Foundation architecture | Product Conversation semantics or route model change |
 | `product/CONVERSATION_DOMAIN_GLOSSARY.md` | APPROVED | 3 | Product Architecture under Stasis | Founder | Yes | Duplicated chat/agent/session vocabulary | Product Conversation Architecture | Canonical term changes |
 | `product/CONVERSATION_LIFECYCLE_AND_OWNERSHIP.md` | APPROVED conceptually / NOT_IMPLEMENTED | 3 | Product + Data + Security | Founder | Yes conceptually | Active/archived legacy-only lifecycle | ADR-F009; authorization model | Lifecycle, ownership, sharing or deletion change |
 | `product/CONVERSATION_MEMORY_RESEARCH_BOUNDARIES.md` | APPROVED conceptually / NOT_IMPLEMENTED | 3 | Product + Data/Memory + Research Governance | Founder | Yes conceptually | Conversation/history/memory ambiguity | Data/Memory architecture; ADR-F009 | Memory, research, attachment or trace boundary change |
-| `product/LEGACY_CHAT_RETIREMENT_PLAN.md` | APPROVED plan / NOT_STARTED | 4 | Product + Flutter + Backend Architecture | Founder | Yes for retirement gates | Informal DEPRECATE_CANDIDATE | ADR-F009; replacement packages | Retirement phase or removal-gate change |
+| `product/LEGACY_CHAT_RETIREMENT_PLAN.md` | APPROVED plan / PARTIALLY_IMPLEMENTED_LOCALLY | 4 | Product + Flutter + Backend Architecture | Founder | Yes for retirement gates | Informal DEPRECATE_CANDIDATE | ADR-F009; ADR-F017/F018; replacement packages | Retirement phase or removal-gate change |
 | `product/CONVERSATION_API_TARGET_CONTRACTS.md` | APPROVED target / PARTIALLY_IMPLEMENTED_LOCALLY | 3 | Product API Architecture | Founder | Yes conceptually | Session-named local compatibility APIs | ADR-F009; ADR-F011; API boundaries | Public Conversation API/versioning change |
 | `product/CONVERSATION_ASSET_ADOPTION_MATRIX.md` | ACTIVE | 6 | Product Architecture + Documentation | Evidence owner; Founder for adoption/removal | No, evidence/planning | Earlier broad chat classifications | FOUNDATION-005 matrix; ADR-F009 | Asset evidence, classification or gate change |
 | `adr/ADR-F009-product-conversation-architecture-and-legacy-chat-retirement.md` | APPROVED / NOT_IMPLEMENTED | 2 | Product + Architecture under Stasis/Rector | Founder | Yes | Legacy chat and session semantics as implicit Product architecture | ADR-F002; ADR-F004-F008 | Conversation, Stasis, specialist, lifecycle or retirement decision changes |

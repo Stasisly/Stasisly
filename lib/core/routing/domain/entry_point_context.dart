@@ -7,6 +7,9 @@ enum EntryPointId {
   onboarding,
   login,
   register,
+  stasis,
+  conversations,
+  conversationDetail,
   health,
   nutrition,
   physicalTraining,
@@ -23,6 +26,15 @@ enum EntryPointId {
   sharedInfrastructure,
   unknown,
 }
+
+enum EntryPointResourceType {
+  unspecified,
+  productEntry,
+  conversationCollection,
+  conversation,
+}
+
+enum EntryPointClassification { unspecified, canonicalProduct }
 
 enum EntryPointAuthenticationRequirement { public, authenticated }
 

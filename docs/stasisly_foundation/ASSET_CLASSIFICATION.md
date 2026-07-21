@@ -1,5 +1,15 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-015-R1 classification
+
+- Stasis Product route/screen: `FOUNDATION_ADOPTED_LOCALLY`.
+- Conversation list/detail routes and screens: `FOUNDATION_ADOPTED_LOCALLY`.
+- Active canonical Product composition/user-message flow:
+  `FOUNDATION_ADOPTED_LOCALLY`.
+- Inactive host: `TEST_ONLY`, not routed.
+- Legacy routes/chat/orchestrator: `BLOCKED`; physical removal remains pending.
+- AI, Engine, specialist responses and remote activation: `NOT_IMPLEMENTED`.
+
 ## Reclasificación FOUNDATION-014-R1
 
 - Cuatro CTAs Product basados en `agent.id`: `REMOVED`.
@@ -222,7 +232,8 @@ deuda residual.
 - `specialist_catalog`: `ADAPT`; Agent Registry y roster: `NOT_IMPLEMENTED`.
 - rutas dev-only: `KEEP_TEMPORARILY`; rutas legacy: `DEPRECATE` y luego `REMOVE`
   solo tras replacement, parity, data compatibility y rollback aprobados.
-- Product Conversation architecture: `APPROVED / NOT_IMPLEMENTED`.
+- Product Conversation architecture: approved conceptually at FOUNDATION-012
+  and `PARTIALLY_IMPLEMENTED_LOCALLY` through FOUNDATION-015-R1.
 
 ## Adopción de FOUNDATION-013A
 
@@ -233,8 +244,9 @@ deuda residual.
   `FOUNDATION_ADOPTED_LOCALLY`.
 - `chat_sessions` y `chat_messages`: `TRANSITIONAL_ADAPTER_SOURCE`; sus
   contratos permanecen sin cambios.
-- UI y rutas Conversation, API backend canónica y Stasis Engine:
-  `NOT_IMPLEMENTED`.
+- At FOUNDATION-013A, UI/routes, canonical backend API and Stasis Engine were
+  `NOT_IMPLEMENTED`; later packages implement local Conversation UI/routes and
+  transitional canonical boundaries, while Stasis Engine remains absent.
 - chat legacy: continúa `DEPRECATED_AND_BLOCKED`, sin fallback ni cambios.
 
 ## Adopción de FOUNDATION-013B

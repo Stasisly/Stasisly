@@ -53,7 +53,7 @@ void main() {
     expect(source, contains('Conversaciones no disponibles todavía'));
   });
 
-  test('orchestrator debt stays isolated and Product routes stay absent', () {
+  test('orchestrator debt stays isolated from canonical Product routes', () {
     final productSources = productPages
         .map((path) => File(path).readAsStringSync())
         .join('\n');
@@ -69,12 +69,9 @@ void main() {
     expect(orchestrator, contains("context.go('/orchestrator/chat')"));
     expect(registry, contains("pathPattern: '/orchestrator/chat'"));
     expect(registry, contains('EntryPointLegacyState.legacyBlocked'));
-    expect(registry, isNot(contains("pathPattern: '/conversations'")));
-    expect(
-      registry,
-      isNot(contains("pathPattern: '/conversations/:conversationId'")),
-    );
-    expect(registry, isNot(contains("pathPattern: '/stasis'")));
+    expect(registry, contains("pathPattern: '/conversations'"));
+    expect(registry, contains("pathPattern: '/conversations/:conversationId'"));
+    expect(registry, contains("pathPattern: '/stasis'"));
   });
 
   test('legacy chat imports remain frozen to the blocked orchestrator page', () {

@@ -1,12 +1,21 @@
 # Product Conversation Architecture
 
+## FOUNDATION-015-R1 implementation delta
+
+The approved `/stasis`, `/conversations` and
+`/conversations/:conversationId` routes are now implemented locally through the
+single active router and canonical application providers. Ownership remains
+backend-authoritative; `conversationId` is only a locator. AI and remote
+capabilities remain unimplemented.
+
 ## FOUNDATION-014-R1 Product consumer boundary
 
 Product area pages no longer interpret `AgentEntity.id` as Conversation
 identity or navigate to legacy chat. Without a verified
 `selectableSpecialistId`, they expose no start action and render an honest
-unavailable state. The canonical inactive composition is the sole approved
-Product Conversation composition; target routes remain unregistered.
+unavailable state. At FOUNDATION-014-R1 the canonical inactive composition was
+the sole approved boundary; FOUNDATION-015-R1 subsequently registers its
+canonical Product routes without changing specialist identity semantics.
 
 ## FOUNDATION-013F local application boundary
 

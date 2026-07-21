@@ -1,5 +1,11 @@
 # Foundation Execution Package Map
 
+## FOUNDATION-015-R1 package state
+
+`FOUNDATION-015: IMPLEMENTED_LOCALLY`. It registers the three canonical Product
+routes and screens through the existing router. `FOUNDATION-016` is proposed as
+the next separately authorized physical legacy-removal package.
+
 ## FOUNDATION-014-R1 status
 
 ```text

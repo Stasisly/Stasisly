@@ -47,6 +47,44 @@ abstract final class EntryPointRegistry {
     authorizationRequirement: EntryPointAuthorizationRequirement.none,
     legacyState: EntryPointLegacyState.current,
   );
+  static const stasis = EntryPointDefinition(
+    id: EntryPointId.stasis,
+    pathPattern: '/stasis',
+    surface: AuthorizationSurface.product,
+    allowedEnvironments: _productEnvironments,
+    authenticationRequirement:
+        EntryPointAuthenticationRequirement.authenticated,
+    authorizationRequirement: EntryPointAuthorizationRequirement.none,
+    resourceType: EntryPointResourceType.productEntry,
+    entryPointClassification: EntryPointClassification.canonicalProduct,
+    legacyState: EntryPointLegacyState.current,
+  );
+  static const conversations = EntryPointDefinition(
+    id: EntryPointId.conversations,
+    pathPattern: '/conversations',
+    surface: AuthorizationSurface.product,
+    allowedEnvironments: _productEnvironments,
+    authenticationRequirement:
+        EntryPointAuthenticationRequirement.authenticated,
+    authorizationRequirement: EntryPointAuthorizationRequirement.none,
+    resourceType: EntryPointResourceType.conversationCollection,
+    entryPointClassification: EntryPointClassification.canonicalProduct,
+    legacyState: EntryPointLegacyState.current,
+    backendAuthorityRequired: true,
+  );
+  static const conversationDetail = EntryPointDefinition(
+    id: EntryPointId.conversationDetail,
+    pathPattern: '/conversations/:conversationId',
+    surface: AuthorizationSurface.product,
+    allowedEnvironments: _productEnvironments,
+    authenticationRequirement:
+        EntryPointAuthenticationRequirement.authenticated,
+    authorizationRequirement: EntryPointAuthorizationRequirement.none,
+    resourceType: EntryPointResourceType.conversation,
+    entryPointClassification: EntryPointClassification.canonicalProduct,
+    legacyState: EntryPointLegacyState.current,
+    backendAuthorityRequired: true,
+  );
   static const health = EntryPointDefinition(
     id: EntryPointId.health,
     pathPattern: '/health',
@@ -167,6 +205,9 @@ abstract final class EntryPointRegistry {
     onboarding,
     login,
     register,
+    stasis,
+    conversations,
+    conversationDetail,
     health,
     nutrition,
     physicalTraining,

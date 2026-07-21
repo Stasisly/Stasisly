@@ -53,10 +53,17 @@ void main() {
     },
   );
 
-  test('product conversations route is not registered', () {
+  test('product conversations route uses canonical explicit parameter', () {
     final routesSource = File('lib/core/config/routes.dart').readAsStringSync();
+    final registrySource = File(
+      'lib/core/routing/infrastructure/entry_point_registry.dart',
+    ).readAsStringSync();
 
-    expect(routesSource, isNot(contains("path: '/conversations'")));
+    expect(registrySource, contains("pathPattern: '/conversations'"));
+    expect(
+      registrySource,
+      contains("pathPattern: '/conversations/:conversationId'"),
+    );
     expect(routesSource, isNot(contains("path: '/conversations/:sessionId'")));
     expect(routesSource, isNot(contains("path: '/conversations/:id'")));
     expect(routesSource, isNot(contains("path: '/conversations/:agentId'")));

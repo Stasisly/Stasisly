@@ -1,5 +1,11 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-015-R1 gate result
+
+FOUNDATION-013A-F and FOUNDATION-014-R1 supplied the contracts, composition and
+consumer retirement required for local Product activation. FOUNDATION-015-R1
+closes G0-G7 only; remote/product rollout gates remain unauthorized.
+
 ## FOUNDATION-014-R1 gate result
 
 G0-G6 pass locally for Product consumer migration, static isolation, Flutter,

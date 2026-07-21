@@ -60,7 +60,7 @@ void main() {
   });
 
   test(
-    'canonical feature has presentation primitives but no active wiring',
+    'canonical primitives stay isolated while Product wiring is explicit',
     () {
       expect(
         Directory('lib/features/conversations/presentation').existsSync(),
@@ -75,7 +75,9 @@ void main() {
         isFalse,
       );
 
-      for (final file in dartFiles(feature)) {
+      for (final file in dartFiles(
+        feature,
+      ).where((file) => !file.path.contains('/product/'))) {
         final source = file.readAsStringSync();
         expect(source, isNot(contains("'/conversations")), reason: file.path);
         expect(source, isNot(contains('"/conversations')), reason: file.path);
@@ -94,20 +96,18 @@ void main() {
     },
   );
 
-  test('Product routes remain unregistered', () {
+  test('Product routes use only canonical path semantics', () {
     final routes = File('lib/core/config/routes.dart').readAsStringSync();
     final registry = File(
       'lib/core/routing/infrastructure/entry_point_registry.dart',
     ).readAsStringSync();
 
+    expect(registry, contains("pathPattern: '/stasis'"));
+    expect(registry, contains("pathPattern: '/conversations'"));
+    expect(registry, contains("pathPattern: '/conversations/:conversationId'"));
     for (final source in [routes, registry]) {
-      expect(source, isNot(contains("path: '/conversations'")));
-      expect(source, isNot(contains("path: '/conversations/:conversationId'")));
-      expect(source, isNot(contains("pathPattern: '/conversations'")));
-      expect(
-        source,
-        isNot(contains("pathPattern: '/conversations/:conversationId'")),
-      );
+      expect(source, isNot(contains('/conversations/:sessionId')));
+      expect(source, isNot(contains('/conversations/:agentId')));
     }
   });
 

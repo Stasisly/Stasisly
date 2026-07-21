@@ -1,5 +1,12 @@
 # Conversation API Target Contracts
 
+## FOUNDATION-015-R1 Product consumer delta
+
+Canonical Product screens now consume list/read/message/send/archive/restore
+through the canonical repository boundary. Route input is only
+`conversationId`; send UI supplies only content while the controller owns the
+stable operation attempt. No public DTO or backend API changed.
+
 ## FOUNDATION-014-R1 consumer contract
 
 Product selection uses only a verified `selectableSpecialistId`. Legacy

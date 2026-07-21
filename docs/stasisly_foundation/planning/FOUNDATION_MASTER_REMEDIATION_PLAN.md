@@ -1,5 +1,11 @@
 # Foundation Master Remediation Plan
 
+## FOUNDATION-015-R1 completion
+
+G0-G7 adopt the canonical Product routing/screens locally after the router
+allowlist correction. G8-G10, remote, staging, production and AI remain closed.
+The next controlled remediation is FOUNDATION-016 legacy chat removal.
+
 ## FOUNDATION-014-R1 completion
 
 The Product consumer migration is complete locally: four legacy CTAs are safely
@@ -314,15 +320,16 @@ FOUNDATION-012 closes the conceptual Product Conversation and formal legacy-chat
 retirement decision. It does not close implementation debt. The approved
 FOUNDATION-013 parent slice is decomposed into 013A contracts/adapters, 013B
 transactional creation, 013C lifecycle/history, 013D author/provenance, 013E UI
-extraction/freeze and 013F inactive application composition. Product routes
-remain a later separately approved gate. FOUNDATION-014-020 retain their
-existing meanings and remote gates remain separate.
+extraction/freeze and 013F inactive application composition. FOUNDATION-015-R1
+closes the separately approved local Product route gate. FOUNDATION-016-020 and
+all remote gates remain separate.
 
 FOUNDATION-013A closes locally the canonical client-domain and adapter portion
 of Conversation debt: opaque Product IDs, trusted owner construction, lifecycle
 and message contracts, neutral results and compatibility over existing safe
 repositories. Backend API canonicalization, transaction/idempotency, lifecycle,
-provenance, UI retirement and Product routes remain 013B-013F debt.
+provenance and UI retirement were subsequent gated debt; Product routes are
+closed locally by FOUNDATION-015-R1.
 
 FOUNDATION-013B closes locally the create TOCTOU and create/send duplicate-retry
 risk with a deny-all server ledger and transactional RPCs. Physical naming,

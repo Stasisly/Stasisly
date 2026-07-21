@@ -148,14 +148,15 @@ void main() {
     });
   });
 
-  test('legacy routes remain blocked and Product routes remain absent', () {
+  test('legacy routes remain blocked beside canonical Product routes', () {
     final registry = File(
       'lib/core/routing/infrastructure/entry_point_registry.dart',
     ).readAsStringSync();
 
     expect(registry, contains("pathPattern: '/chat/:id'"));
     expect(registry, contains('EntryPointLegacyState.legacyBlocked'));
-    expect(registry, isNot(contains("pathPattern: '/conversations'")));
-    expect(registry, isNot(contains("pathPattern: '/stasis'")));
+    expect(registry, contains("pathPattern: '/conversations'"));
+    expect(registry, contains("pathPattern: '/stasis'"));
+    expect(registry, contains("pathPattern: '/conversations/:conversationId'"));
   });
 }

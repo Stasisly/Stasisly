@@ -1,5 +1,12 @@
 # Legacy Chat Retirement Plan
 
+## FOUNDATION-015-R1 gate update
+
+Canonical Product replacement routes/screens now exist locally and do not
+redirect from legacy IDs. `/chat/:id`, `/orchestrator` and
+`/orchestrator/chat` remain blocked. Physical deletion is deferred to the
+separately approved FOUNDATION-016 package.
+
 ## FOUNDATION-014-R1 checkpoint
 
 ```text

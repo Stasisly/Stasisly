@@ -9,7 +9,7 @@ import 'package:stasisly/core/auth/session/secure_session_auth_state.dart';
 import 'package:stasisly/core/config/app_environment.dart';
 import 'package:stasisly/core/config/routes.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_composed_safe_shell.dart';
-import 'package:stasisly/features/health/presentation/pages/health_page.dart';
+import 'package:stasisly/features/conversations/product/presentation/stasis_page.dart';
 
 void main() {
   const authenticatedSession = SecureSessionState(
@@ -45,7 +45,7 @@ void main() {
     tester,
   ) async {
     await pumpApp(tester, const AppEnvironment(mode: AppRuntimeMode.local));
-    expect(find.byType(HealthPage), findsOneWidget);
+    expect(find.byType(StasisPage), findsOneWidget);
   });
 
   testWidgets('approved Development route builds in local', (tester) async {
@@ -108,7 +108,7 @@ void main() {
       session: const SecureSessionState(),
     );
     expect(find.text('Comenzar'), findsOneWidget);
-    expect(find.byType(HealthPage), findsNothing);
+    expect(find.byType(StasisPage), findsNothing);
   });
 
   testWidgets('public login route remains available unauthenticated', (

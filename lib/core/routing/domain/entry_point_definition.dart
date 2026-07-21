@@ -13,6 +13,8 @@ class EntryPointDefinition extends Equatable {
     required this.authenticationRequirement,
     required this.authorizationRequirement,
     required this.legacyState,
+    this.resourceType = EntryPointResourceType.unspecified,
+    this.entryPointClassification = EntryPointClassification.unspecified,
     this.backendAuthorityRequired = false,
     this.requiresRuntimeEnablement = false,
   });
@@ -24,6 +26,8 @@ class EntryPointDefinition extends Equatable {
   final EntryPointAuthenticationRequirement authenticationRequirement;
   final EntryPointAuthorizationRequirement authorizationRequirement;
   final EntryPointLegacyState legacyState;
+  final EntryPointResourceType resourceType;
+  final EntryPointClassification entryPointClassification;
   final bool backendAuthorityRequired;
   final bool requiresRuntimeEnablement;
 
@@ -36,6 +40,8 @@ class EntryPointDefinition extends Equatable {
     authenticationRequirement,
     authorizationRequirement,
     legacyState,
+    resourceType,
+    entryPointClassification,
     backendAuthorityRequired,
     requiresRuntimeEnablement,
   ];

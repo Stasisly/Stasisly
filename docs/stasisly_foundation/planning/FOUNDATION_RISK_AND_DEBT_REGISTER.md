@@ -1,5 +1,12 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-015-R1 risk update
+
+Canonical Product routing debt is reduced locally. Residual P1/P2 debt remains
+in physical legacy chat/orchestrator code and transitional adapters. Product
+catalog runtime, AI replies, remote, staging and production remain deliberately
+closed rather than represented as completed capability.
+
 ## FOUNDATION-014-R1 risk update
 
 Closed locally: Product navigation with `agent.id`, visible legacy chat CTAs and
@@ -49,7 +56,7 @@ not schedules.
 | ARC-01 | Provider-owned identity/API boundary partially remediated | FOUNDATION-008 owns identity/session/errors and confines Auth SDK; bootstrap and backend adapters remain provider-coupled | Architecture under Rector | P2 residual | 009-010, 018 | Complete consumer migration and provider exit evidence | F7 |
 | ARC-02 | Surface isolation incomplete | Product route boundaries and six Product Edge Functions enforce local/development context; mixed legacy and future domains remain | Architecture + Nexus | P1 residual | 012-013 and later surface packages | Approved Product boundary with no legacy bypass | F7/F8 |
 | PROD-01 | Product taxonomy partially unresolved | Conversation/Stasis routes are decided by FOUNDATION-012; mental/physical/Wellness naming remains separate | Product Owner under Stasis | P2 residual | Separate taxonomy decision before affected rename | Founder-approved area taxonomy | F8 |
-| CONV-01 | Canonical Conversation adoption partial | FOUNDATION-013A-F adopt domain/backend/message/presentation, stable attempts and inactive local composition; physical APIs remain transitional and no Product route/shell or consumer migration exists | Product + Flutter + Backend Architecture | P1 residual | Future Product activation and L4-L7 | Separately approved routes, parity and retirement evidence | F8 |
+| CONV-01 | Canonical Conversation adoption partial | FOUNDATION-013A-015-R1 adopt domain/backend/message/presentation, stable attempts, Product routes/screens and user-message flow locally; physical APIs and legacy source remain transitional | Product + Flutter + Backend Architecture | P1 residual | FOUNDATION-016 and later remote gates | Physical retirement evidence without weakening canonical boundaries | F8 |
 | CONV-02 | Conversation privacy lifecycle incomplete | Archive/restore are local and preserve history; deletion, retention, sharing, attachments, memory and research remain target-only | Product + Data + Privacy | P3 | 016 and later scoped packages | Approved privacy implementation plus controls | F8 before sensitive rollout |
 | CONV-03 | Idempotency retention/operations incomplete | Local server ledger has no automatic expiry, cleanup job, metrics or durable failed-state recovery | Privacy + Backend + Operations | P2/P3 | 016/017 or dedicated package | Approved retention, safe cleanup, monitoring and recovery tests | Before remote write rollout |
 | DATA-01 | Privacy lifecycle incomplete | Health/conversation data without full retention/deletion/provenance | Data + Privacy | P3; before sensitive scope | 016 | Approved lifecycle, threat controls and test plan | F7/F8 before production |

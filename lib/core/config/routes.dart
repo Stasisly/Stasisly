@@ -24,6 +24,10 @@ import 'package:stasisly/features/auth/presentation/pages/register_page.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_composed_safe_shell.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_messages_route_params_adapter.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_messages_safe_shell.dart';
+import 'package:stasisly/features/conversations/product/presentation/conversation_page.dart';
+import 'package:stasisly/features/conversations/product/presentation/conversations_page.dart';
+import 'package:stasisly/features/conversations/product/presentation/stasis_page.dart';
+import 'package:stasisly/features/conversations/product/routing/conversation_route_params_adapter.dart';
 import 'package:stasisly/features/health/presentation/pages/health_page.dart';
 import 'package:stasisly/features/mental_training/presentation/pages/mental_training_page.dart';
 import 'package:stasisly/features/nutrition/presentation/pages/nutrition_page.dart';
@@ -40,7 +44,7 @@ final routerProvider = Provider<GoRouter>((ref) {
   final isAuthenticated = ref.watch(secureSessionStateProvider).isAuthenticated;
 
   return GoRouter(
-    initialLocation: '/health',
+    initialLocation: '/stasis',
     redirect: (context, state) {
       final definition = EntryPointRegistry.resolvePath(state.uri.path);
       final decision = _evaluateBoundary(
@@ -58,7 +62,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           definition?.surface == AuthorizationSurface.product &&
           definition?.authenticationRequirement ==
               EntryPointAuthenticationRequirement.public) {
-        return EntryPointRegistry.health.pathPattern;
+        return EntryPointRegistry.stasis.pathPattern;
       }
       return null;
     },
@@ -93,6 +97,27 @@ final routerProvider = Provider<GoRouter>((ref) {
       ShellRoute(
         builder: (context, state, child) => AppShell(child: child),
         routes: [
+          _route(
+            definition: EntryPointRegistry.stasis,
+            environment: environment,
+            isAuthenticated: isAuthenticated,
+            childBuilder: (context, state) => const StasisPage(),
+          ),
+          _route(
+            definition: EntryPointRegistry.conversations,
+            environment: environment,
+            isAuthenticated: isAuthenticated,
+            childBuilder: (context, state) => const ConversationsPage(),
+          ),
+          _route(
+            definition: EntryPointRegistry.conversationDetail,
+            environment: environment,
+            isAuthenticated: isAuthenticated,
+            childBuilder: (context, state) => ConversationPage(
+              conversationId: const ConversationRouteParamsAdapter()
+                  .conversationIdFrom(state.pathParameters),
+            ),
+          ),
           _route(
             definition: EntryPointRegistry.health,
             environment: environment,
