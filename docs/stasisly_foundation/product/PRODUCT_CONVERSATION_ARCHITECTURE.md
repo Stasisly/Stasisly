@@ -1,5 +1,13 @@
 # Product Conversation Architecture
 
+## FOUNDATION-014-R1 Product consumer boundary
+
+Product area pages no longer interpret `AgentEntity.id` as Conversation
+identity or navigate to legacy chat. Without a verified
+`selectableSpecialistId`, they expose no start action and render an honest
+unavailable state. The canonical inactive composition is the sole approved
+Product Conversation composition; target routes remain unregistered.
+
 ## FOUNDATION-013F local application boundary
 
 The canonical Product path now reaches provider-neutral use cases, typed

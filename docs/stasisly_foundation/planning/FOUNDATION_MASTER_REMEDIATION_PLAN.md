@@ -1,5 +1,13 @@
 # Foundation Master Remediation Plan
 
+## FOUNDATION-014-R1 completion
+
+The Product consumer migration is complete locally: four legacy CTAs are safely
+disabled, the canonical composition remains sole and inactive, and route
+activation is ready for separate review. Physical legacy retirement and the
+blocked Development orchestrator CTA remain controlled debt; G8-G10 remain
+unauthorized.
+
 ## FOUNDATION-013F completion
 
 FOUNDATION-013F implements the canonical application boundary and inactive

@@ -1,5 +1,15 @@
 # Foundation Execution Package Map
 
+## FOUNDATION-014-R1 status
+
+```text
+FOUNDATION-014: IMPLEMENTED_LOCALLY via FOUNDATION-014-R1
+PRODUCT_CONVERSATION_ROUTE_ACTIVATION_READY: READY
+FOUNDATION-015: PROPOSED / REQUIRES SEPARATE APPROVAL
+L5-L7 physical retirement: PENDING
+Remote and G8-G10: NOT_AUTHORIZED
+```
+
 ## Authority and sequencing
 
 Status: **APPROVED working execution structure**. Package status is recorded

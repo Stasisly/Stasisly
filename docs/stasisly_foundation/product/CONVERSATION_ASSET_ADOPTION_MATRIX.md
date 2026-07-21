@@ -1,5 +1,12 @@
 # Conversation Asset Adoption Matrix
 
+## FOUNDATION-014-R1 delta
+
+The four Product `/chat/${agent.id}` affordances are removed. Their legacy agent
+catalog remains display-only and cannot supply Conversation identity. The safe
+unavailable card is adopted locally; the orchestrator CTA remains blocked
+Development debt. L4 is complete, L5 partial and L6-L7 not started.
+
 ## FOUNDATION-013F delta
 
 Canonical use cases/states are adopted; controllers/providers are adopted

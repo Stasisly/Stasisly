@@ -1,5 +1,13 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-014-R1 risk update
+
+Closed locally: Product navigation with `agent.id`, visible legacy chat CTAs and
+fallback pressure caused by the absent Product route. `CONV-01` is reduced but
+remains open for L5-L7 physical retirement and route activation. `SEC-02`
+remains open while frozen legacy source exists. Display dependence on the mock
+orchestrator catalog and the blocked Development CTA are explicit separate debt.
+
 ## FOUNDATION-013F risk update
 
 Application orchestration, stale-result handling and same-intent retry ownership

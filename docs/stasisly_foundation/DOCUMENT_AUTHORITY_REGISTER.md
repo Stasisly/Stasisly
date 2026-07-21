@@ -1,5 +1,17 @@
 # Document Authority Register
 
+## FOUNDATION-014-R1 authority addition
+
+ADR-F017 is normative for Product Conversation selection identity, safe
+unavailable behavior and legacy wiring retirement. The FOUNDATION-014-R1 record
+is implementation evidence. Neither document authorizes Product routes, remote
+use or physical removal beyond the recorded evidence.
+
+| Document | Status | Authority | Owner | Normative | Replaces | Depends on | Review trigger |
+|---|---|---:|---|---|---|---|---|
+| `implementation/FOUNDATION-014-R1_PRODUCT_CTA_MIGRATION_AND_LEGACY_WIRING_RETIREMENT.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Evidence owner | No | FOUNDATION-014 blocked finding | ADR-F017; FOUNDATION-013E/F | Consumer, route or retirement evidence changes |
+| `adr/ADR-F017-product-consumer-migration-and-legacy-wiring-retirement.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Founder | Yes | Legacy Product CTA semantics | ADR-F009/F014/F016 | Selection identity, route or fallback policy changes |
+
 ## FOUNDATION-013F authority addition
 
 ADR-F016 is normative for the canonical application layer, local/development

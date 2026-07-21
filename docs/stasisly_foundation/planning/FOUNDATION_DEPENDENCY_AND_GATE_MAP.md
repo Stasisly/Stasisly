@@ -1,5 +1,12 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-014-R1 gate result
+
+G0-G6 pass locally for Product consumer migration, static isolation, Flutter,
+Deno, SQL and security review. G7 completes upon publication of this changeset.
+The route-activation prerequisite is `READY`, but route registration remains a
+separate FOUNDATION-015 decision. G8-G10 are not authorized.
+
 ## FOUNDATION-013F gate result
 
 013F completes G0-G6 locally for canonical application use cases, typed state,

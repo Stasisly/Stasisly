@@ -1,5 +1,13 @@
 # FOUNDATION-005 Remediation Backlog
 
+## FOUNDATION-014-R1 remediation evidence
+
+Product legacy Conversation consumers are retired locally: Health, Nutrition,
+Physical Training and Mental Training no longer use `agent.id` or `/chat/:id`.
+The canonical inactive composition is sole, the blocked Development orchestrator
+remains isolated, and route activation is separately gated. CONV-01 remains
+open only for route activation and L5-L7 physical retirement evidence.
+
 ## FOUNDATION-013F remediation evidence
 
 The modern Conversation boundary now includes local canonical use cases,

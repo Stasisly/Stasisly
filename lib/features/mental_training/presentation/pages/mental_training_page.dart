@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:stasisly/core/theme/app_colors.dart';
 import 'package:stasisly/core/theme/app_spacing.dart';
 import 'package:stasisly/core/theme/app_typography.dart';
 import 'package:stasisly/features/orchestrator/domain/entities/agent_entity.dart';
 import 'package:stasisly/features/orchestrator/presentation/viewmodels/agent_providers.dart';
-import 'package:stasisly/features/orchestrator/presentation/widgets/agent_card.dart';
+import 'package:stasisly/features/specialists/presentation/widgets/unavailable_specialist_card.dart';
 
 class MentalTrainingPage extends ConsumerWidget {
   const MentalTrainingPage({super.key});
@@ -32,13 +31,18 @@ class MentalTrainingPage extends ConsumerWidget {
           return ListView.separated(
             padding: AppSpacing.pagePadding,
             itemCount: agents.length,
-            separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.sm),
+            separatorBuilder: (context, index) =>
+                const SizedBox(height: AppSpacing.sm),
             itemBuilder: (context, index) {
               final agent = agents[index];
-              return AgentCard(
-                agent: agent,
+              return UnavailableSpecialistCard(
+                name: agent.name,
+                specialty: agent.specialty,
+                description: agent.description,
                 color: AppColors.mentalAccent,
-                onTap: () => context.go('/chat/${agent.id}'),
+                isHighlighted:
+                    agent.role == AgentRole.branchChief ||
+                    agent.role == AgentRole.subChief,
               );
             },
           );

@@ -1,5 +1,15 @@
 # Clasificación inicial de activos
 
+## Reclasificación FOUNDATION-014-R1
+
+- Cuatro CTAs Product basados en `agent.id`: `REMOVED`.
+- Información visual legacy de agentes: `KEEP_TEMPORARILY / DISPLAY_ONLY`.
+- Componente Product no accionable: `FOUNDATION_ADOPTED_LOCALLY`.
+- Wiring Product legacy de Conversation: `RETIRED_LOCALLY`.
+- CTA orchestrator Development: `KEEP_BLOCKED_TEMPORARILY`.
+- Rutas Product canónicas y remoto: `NOT_IMPLEMENTED`.
+- Retirada física legacy L5-L7: `PARTIAL / NOT_STARTED` según fase.
+
 ## Reclasificación FOUNDATION-013F
 
 - Casos de uso y estados Conversation: `FOUNDATION_ADOPTED`.

@@ -1,5 +1,21 @@
 # Legacy Chat Retirement Plan
 
+## FOUNDATION-014-R1 checkpoint
+
+```text
+L0 Routes blocked: COMPLETE
+L1 Freeze and guard: COMPLETE
+L2 Extract reusable UI: COMPLETE
+L3 Canonical boundaries: COMPLETE LOCALLY
+L4 Migrate Product consumers: COMPLETE
+L5 Remove routes/providers: PARTIAL
+L6 Remove legacy code: NOT STARTED
+L7 Verify no references: NOT STARTED
+```
+
+The blocked Development orchestrator CTA is isolated and does not block Product
+route readiness. It still requires a separate retirement package.
+
 ## FOUNDATION-013F checkpoint
 
 The canonical replacement now has a tested local application layer and inactive

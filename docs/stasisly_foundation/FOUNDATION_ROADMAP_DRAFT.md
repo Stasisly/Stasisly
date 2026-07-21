@@ -1,5 +1,13 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Estado FOUNDATION-014-R1
+
+FOUNDATION-014 queda implementado localmente tras retirar los cuatro CTAs
+Product legacy mediante un estado seguro no accionable. L4 queda completo; L5
+es parcial y L6-L7 siguen pendientes. El gate de activación está listo para una
+decisión separada, pero no existe ruta Product ni autorización remota. El
+siguiente paquete posible es FOUNDATION-015, sujeto a aprobación explícita.
+
 ## Estado FOUNDATION-013F
 
 FOUNDATION-013F implementa localmente la capa de aplicación canónica,

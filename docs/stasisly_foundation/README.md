@@ -1,5 +1,15 @@
 # Stasisly Foundation
 
+## FOUNDATION-014-R1 Product consumer retirement
+
+FOUNDATION-014 is resumed and `IMPLEMENTED_LOCALLY`: the four Product area CTAs
+no longer use `agent.id`, `/chat/:id` or any conversation action. Because their
+legacy display source has no verified `selectableSpecialistId`, they render a
+shared non-actionable unavailable state. The canonical inactive composition is
+the sole approved Product Conversation composition; Product routes remain
+unregistered. See the [implementation record](implementation/FOUNDATION-014-R1_PRODUCT_CTA_MIGRATION_AND_LEGACY_WIRING_RETIREMENT.md)
+and [ADR-F017](adr/ADR-F017-product-consumer-migration-and-legacy-wiring-retirement.md).
+
 ## FOUNDATION-013F canonical application composition
 
 `FOUNDATION-013F` is `IMPLEMENTED_LOCALLY`: seven canonical use cases, typed

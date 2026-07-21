@@ -1,5 +1,12 @@
 # Conversation API Target Contracts
 
+## FOUNDATION-014-R1 consumer contract
+
+Product selection uses only a verified `selectableSpecialistId`. Legacy
+`AgentEntity.id` cannot be renamed, mapped or sent as a Conversation reference.
+Where the approved reference is absent, Product emits no create intent and makes
+no API call. This package changes no DTO, endpoint or backend behavior.
+
 ## FOUNDATION-013F application contract
 
 Seven application use cases preserve the canonical repository inputs/results.
