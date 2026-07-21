@@ -1,5 +1,13 @@
 # FOUNDATION-005 Remediation Backlog
 
+## FOUNDATION-017 remediation evidence
+
+The activated canonical Product flow is hardened locally: closed outcome-only
+observability, NoOp runtime, partial-data preservation, deterministic
+race/replay/lifecycle tests, responsive fixtures and accessibility findings
+with zero open critical/high severity. Remote telemetry, production and future
+AI capabilities remain blocked rather than represented as complete.
+
 ## FOUNDATION-016-R1 remediation evidence
 
 The P1 legacy chat runtime is physically removed after deleting its sole dead

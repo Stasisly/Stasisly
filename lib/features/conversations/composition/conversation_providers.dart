@@ -6,6 +6,7 @@ import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/core/identity/domain/authentication_state.dart';
 import 'package:stasisly/core/identity/domain/identity_type.dart';
 import 'package:stasisly/core/identity/domain/stasisly_identity.dart';
+import 'package:stasisly/core/observability/conversation_observability.dart';
 import 'package:stasisly/features/chat_messages/presentation/providers/own_chat_messages_providers.dart';
 import 'package:stasisly/features/chat_sessions/domain/repositories/own_chat_sessions_repository.dart';
 import 'package:stasisly/features/chat_sessions/presentation/providers/own_chat_sessions_providers.dart';
@@ -25,6 +26,18 @@ import 'package:stasisly/features/conversations/presentation/models/conversation
 
 /// Availability of the explicit, inactive Conversation composition.
 enum ConversationCompositionAvailability { available, environmentBlocked }
+
+final conversationObservabilitySinkProvider =
+    Provider<ConversationObservabilitySink>(
+      (ref) => const NoOpConversationObservabilitySink(),
+    );
+
+final conversationObservedEnvironmentProvider =
+    Provider<ConversationObservedEnvironment>((ref) {
+      return ConversationObservedEnvironment.values.byName(
+        ref.watch(appEnvironmentProvider).mode.name,
+      );
+    });
 
 final conversationCompositionAvailabilityProvider =
     Provider<ConversationCompositionAvailability>((ref) {
@@ -123,6 +136,8 @@ final conversationListControllerProvider =
     >((ref) {
       return ConversationListControllerNotifier(
         listOwnConversations: ref.watch(listOwnConversationsProvider),
+        observability: ref.watch(conversationObservabilitySinkProvider),
+        observedEnvironment: ref.watch(conversationObservedEnvironmentProvider),
       );
     });
 
@@ -159,6 +174,8 @@ final conversationDetailControllerProvider = StateNotifierProvider.autoDispose
         operationAttemptIds: ref.watch(
           conversationOperationAttemptIdFactoryProvider,
         ),
+        observability: ref.watch(conversationObservabilitySinkProvider),
+        observedEnvironment: ref.watch(conversationObservedEnvironmentProvider),
         onListsInvalidated: () =>
             ref.invalidate(conversationListControllerProvider),
       );
@@ -168,9 +185,13 @@ class ConversationListControllerNotifier
     extends StateNotifier<ConversationListState> {
   ConversationListControllerNotifier({
     required ListOwnConversations listOwnConversations,
+    required ConversationObservabilitySink observability,
+    required ConversationObservedEnvironment observedEnvironment,
   }) : super(const ConversationListState()) {
     _controller = ConversationListController(
       listOwnConversations: listOwnConversations,
+      observability: observability,
+      observedEnvironment: observedEnvironment,
       onStateChanged: (next) => state = next,
     );
   }
@@ -228,6 +249,8 @@ class ConversationDetailControllerNotifier
     required RestoreOwnConversation restoreOwnConversation,
     required OperationAttemptIdFactory operationAttemptIds,
     required void Function() onListsInvalidated,
+    required ConversationObservabilitySink observability,
+    required ConversationObservedEnvironment observedEnvironment,
   }) : super(const ConversationDetailState()) {
     _controller = ConversationDetailController(
       conversationId: conversationId,
@@ -237,6 +260,8 @@ class ConversationDetailControllerNotifier
       archiveOwnConversation: archiveOwnConversation,
       restoreOwnConversation: restoreOwnConversation,
       operationAttemptIds: operationAttemptIds,
+      observability: observability,
+      observedEnvironment: observedEnvironment,
       onStateChanged: (next) => state = next,
       onListsInvalidated: onListsInvalidated,
     );

@@ -1,5 +1,17 @@
 # Document Authority Register
 
+## FOUNDATION-017 authority addition
+
+ADR-F020 is normative for local-safe Conversation outcome observability and
+post-activation hardening. The implementation record owns local test,
+accessibility and performance evidence; neither authorizes remote telemetry or
+production readiness.
+
+| Document | Status | Authority level | Owner | Approver | Normative | Supersedes | Dependencies | Review condition |
+|---|---|---:|---|---|---|---|---|---|
+| `adr/ADR-F020-product-conversation-safe-observability-and-hardening.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture + Security + Accessibility | Founder | Yes | None | ADR-F018/F019 | Sink, event contract, Product route or accessibility gate changes |
+| `implementation/FOUNDATION-017_PRODUCT_CONVERSATION_POST_ACTIVATION_HARDENING.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Flutter + QA + Documentation | Evidence owner | No, evidence | None | ADR-F020; FOUNDATION-016-R1 | Validation, findings or readiness evidence changes |
+
 ## FOUNDATION-016-R1 authority addition
 
 ADR-F019 is normative for physical legacy-chat retirement and zero-reference

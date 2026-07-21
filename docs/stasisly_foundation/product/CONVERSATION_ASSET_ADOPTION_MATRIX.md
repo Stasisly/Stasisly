@@ -1,5 +1,12 @@
 # Conversation Asset Adoption Matrix
 
+## FOUNDATION-017 delta
+
+Safe observability contracts are `FOUNDATION_ADOPTED`; NoOp runtime sink,
+controller/route instrumentation and post-activation hardening are
+`FOUNDATION_ADOPTED_LOCALLY`. Accessibility is `COMPLETED_LOCALLY` with zero
+open critical/high findings. Remote observability is `NOT_IMPLEMENTED`.
+
 ## FOUNDATION-016-R1 delta
 
 `features/chat`, `OrchestratorChatPage` and the legacy `/chat/:id` route move to

@@ -28,7 +28,10 @@ class ConversationMessageBubble extends StatelessWidget {
     final foreground = isUser
         ? colorScheme.onPrimary
         : colorScheme.onSurfaceVariant;
-    final maxWidth = MediaQuery.sizeOf(context).width * 0.78;
+    final viewportWidth = MediaQuery.sizeOf(context).width;
+    final maxWidth = viewportWidth <= 0
+        ? 240.0
+        : (viewportWidth * 0.78).clamp(0.0, AppSpacing.maxContentWidth);
 
     return Semantics(
       container: true,
@@ -42,9 +45,7 @@ class ConversationMessageBubble extends StatelessWidget {
           child: Align(
             alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
             child: ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: maxWidth.clamp(240, AppSpacing.maxContentWidth),
-              ),
+              constraints: BoxConstraints(maxWidth: maxWidth),
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   color: bubbleColor,

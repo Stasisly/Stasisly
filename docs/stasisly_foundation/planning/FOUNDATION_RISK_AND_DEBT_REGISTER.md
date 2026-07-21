@@ -1,5 +1,13 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-017 risk update
+
+Closed locally: sensitive/free-form Conversation telemetry, duplicate outcome
+effects, destructive partial-error rendering, inaccessible retry action and
+very-narrow bubble overflow. Remaining debt: formal manual accessibility/WCAG
+review, production performance baselines, remote environment readiness and
+encapsulated transitional infrastructure. No remote risk was accepted.
+
 ## FOUNDATION-016-R1 risk update
 
 Closed locally: accidental legacy chat reconnection, direct legacy Supabase/demo

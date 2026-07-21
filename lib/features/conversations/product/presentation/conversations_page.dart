@@ -97,9 +97,27 @@ class _ConversationsPageState extends ConsumerState<ConversationsPage> {
       onRefresh: notifier.refresh,
       child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
-        itemCount: state.conversations.length + (state.hasMore ? 1 : 0),
+        itemCount:
+            state.conversations.length +
+            (state.error == null ? 0 : 1) +
+            (state.hasMore ? 1 : 0),
         itemBuilder: (context, index) {
-          if (index == state.conversations.length) {
+          if (state.error != null && index == 0) {
+            return Semantics(
+              liveRegion: true,
+              child: MaterialBanner(
+                content: Text(conversationSafeError(state.error)),
+                actions: [
+                  TextButton(
+                    onPressed: notifier.refresh,
+                    child: const Text('Reintentar'),
+                  ),
+                ],
+              ),
+            );
+          }
+          final dataIndex = index - (state.error == null ? 0 : 1);
+          if (dataIndex == state.conversations.length) {
             return Padding(
               padding: AppSpacing.pagePadding,
               child: OutlinedButton(
@@ -112,28 +130,30 @@ class _ConversationsPageState extends ConsumerState<ConversationsPage> {
             );
           }
           final item = ConversationListItemViewModel.fromConversation(
-            state.conversations[index],
+            state.conversations[dataIndex],
           );
           return Semantics(
             button: true,
             label:
                 '${item.title}, ${item.status == ConversationStatus.archived ? 'archivada' : 'activa'}',
-            child: ListTile(
-              key: ValueKey('conversation-${item.conversationId.value}'),
-              title: Text(item.title),
-              subtitle: Text(
-                [
-                  if (item.specialistSummary != null) item.specialistSummary!,
-                  _date(item.updatedAt),
-                ].join(' · '),
-              ),
-              trailing: Text(
-                item.status == ConversationStatus.archived
-                    ? 'Archivada'
-                    : 'Activa',
-              ),
-              onTap: () => context.push(
-                '/conversations/${Uri.encodeComponent(item.conversationId.value)}',
+            child: ExcludeSemantics(
+              child: ListTile(
+                key: ValueKey('conversation-${item.conversationId.value}'),
+                title: Text(item.title),
+                subtitle: Text(
+                  [
+                    if (item.specialistSummary != null) item.specialistSummary!,
+                    _date(item.updatedAt),
+                  ].join(' · '),
+                ),
+                trailing: Text(
+                  item.status == ConversationStatus.archived
+                      ? 'Archivada'
+                      : 'Activa',
+                ),
+                onTap: () => context.push(
+                  '/conversations/${Uri.encodeComponent(item.conversationId.value)}',
+                ),
               ),
             ),
           );

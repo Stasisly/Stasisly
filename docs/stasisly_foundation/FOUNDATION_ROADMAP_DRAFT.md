@@ -1,5 +1,13 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Estado FOUNDATION-017
+
+FOUNDATION-017 queda implementado localmente con observabilidad cerrada NoOp en
+runtime, hardening de fallos/carreras y auditoría local de accesibilidad y
+rendimiento. G0-G7 cierran tras push; G8-G10 permanecen bloqueados. El siguiente
+paquete recomendado es FOUNDATION-018, auditoría de readiness de entorno y
+preparación remota controlada, sin activar remoto.
+
 ## Estado FOUNDATION-016-R1
 
 FOUNDATION-016 queda implementado localmente: chat legacy, su consumidor

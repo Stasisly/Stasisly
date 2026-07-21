@@ -1,5 +1,12 @@
 # Conversation API Target Contracts
 
+## FOUNDATION-017 observability boundary
+
+No API/DTO/backend contract changes. Local events expose only operation outcome,
+stable route/category, environment/surface and bounded duration/count/retry/error
+enums. They cannot expose content, owner, token, attempt, idempotency key, raw
+ConversationId, provider payload or exception.
+
 ## FOUNDATION-016-R1 boundary delta
 
 No public DTO, endpoint or backend contract changed. Removal eliminates the

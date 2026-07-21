@@ -53,30 +53,34 @@ class ConversationErrorState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      container: true,
-      liveRegion: true,
-      label: message,
-      child: ExcludeSemantics(
-        child: Center(
-          child: Padding(
-            padding: AppSpacing.pagePadding,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.error_outline),
-                const SizedBox(height: AppSpacing.sm),
-                Text(message, textAlign: TextAlign.center),
-                if (onRetry != null) ...[
-                  const SizedBox(height: AppSpacing.lg),
-                  FilledButton.tonal(
-                    onPressed: onRetry,
-                    child: const Text('Reintentar'),
-                  ),
-                ],
-              ],
+    return Center(
+      child: Padding(
+        padding: AppSpacing.pagePadding,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Semantics(
+              container: true,
+              liveRegion: true,
+              label: message,
+              child: ExcludeSemantics(
+                child: Column(
+                  children: [
+                    const Icon(Icons.error_outline),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(message, textAlign: TextAlign.center),
+                  ],
+                ),
+              ),
             ),
-          ),
+            if (onRetry != null) ...[
+              const SizedBox(height: AppSpacing.lg),
+              FilledButton.tonal(
+                onPressed: onRetry,
+                child: const Text('Reintentar'),
+              ),
+            ],
+          ],
         ),
       ),
     );

@@ -1,5 +1,12 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-017 gate result
+
+FOUNDATION-015-R1 and 016-R1 supplied canonical activation and physical legacy
+retirement. FOUNDATION-017 passes G0-G7 locally with zero sensitive event
+fields, zero critical/high accessibility findings and complete regressions.
+Remote observability and G8-G10 remain closed.
+
 ## FOUNDATION-016-R1 gate result
 
 FOUNDATION-013A-F, 014-R1 and 015-R1 provided the replacement and consumer

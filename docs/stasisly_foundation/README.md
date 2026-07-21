@@ -1,5 +1,14 @@
 # Stasisly Foundation
 
+## FOUNDATION-017 post-activation hardening
+
+FOUNDATION-017 is `IMPLEMENTED_LOCALLY`: canonical Product Conversation now
+uses closed local-safe outcome observability with a runtime NoOp sink, hardened
+partial failures/races and locally audited accessibility/responsive behavior.
+ADR-F020 and the [implementation record](implementation/FOUNDATION-017_PRODUCT_CONVERSATION_POST_ACTIVATION_HARDENING.md)
+are authoritative. Remote telemetry, staging, production, AI and Engine remain
+unauthorized/unimplemented.
+
 ## FOUNDATION-016-R1 physical legacy retirement
 
 FOUNDATION-016 is `IMPLEMENTED_LOCALLY`: `lib/features/chat/**`, the dead

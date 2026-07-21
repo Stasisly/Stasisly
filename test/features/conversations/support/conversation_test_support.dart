@@ -2,6 +2,7 @@ import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
 import 'package:stasisly/core/identity/domain/authentication_state.dart';
 import 'package:stasisly/core/identity/domain/identity_type.dart';
 import 'package:stasisly/core/identity/domain/stasisly_identity.dart';
+import 'package:stasisly/core/observability/conversation_observability.dart';
 import 'package:stasisly/features/conversations/application/inputs/conversation_inputs.dart';
 import 'package:stasisly/features/conversations/domain/entities/conversation.dart';
 import 'package:stasisly/features/conversations/domain/entities/conversation_message.dart';
@@ -14,6 +15,18 @@ const testIdentity = StasislyIdentity(
   identityType: IdentityType.humanUser,
   authenticationState: AuthenticationState.authenticated,
 );
+
+class InMemoryConversationObservabilitySink
+    implements ConversationObservabilitySink {
+  final List<ConversationObservation> observations = [];
+
+  @override
+  void record(ConversationObservation observation) {
+    observations.add(observation);
+  }
+
+  void clear() => observations.clear();
+}
 
 Conversation conversation({
   String id = 'conversation-1',

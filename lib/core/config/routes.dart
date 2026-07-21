@@ -10,6 +10,7 @@ import 'package:stasisly/core/authorization/domain/authorization_surface.dart';
 import 'package:stasisly/core/authorization/infrastructure/app_environment_authorization_mapper.dart';
 import 'package:stasisly/core/authorization/infrastructure/no_op_authorization_audit_sink.dart';
 import 'package:stasisly/core/config/app_environment.dart';
+import 'package:stasisly/core/observability/conversation_observability.dart';
 import 'package:stasisly/core/routing/application/boundary_audit_recorder.dart';
 import 'package:stasisly/core/routing/application/entry_point_boundary_enforcer.dart';
 import 'package:stasisly/core/routing/domain/boundary_decision.dart';
@@ -24,6 +25,7 @@ import 'package:stasisly/features/auth/presentation/pages/register_page.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_composed_safe_shell.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_messages_route_params_adapter.dart';
 import 'package:stasisly/features/chat_messages/presentation/shell/own_chat_messages_safe_shell.dart';
+import 'package:stasisly/features/conversations/composition/conversation_providers.dart';
 import 'package:stasisly/features/conversations/product/presentation/conversation_page.dart';
 import 'package:stasisly/features/conversations/product/presentation/conversations_page.dart';
 import 'package:stasisly/features/conversations/product/presentation/stasis_page.dart';
@@ -42,6 +44,12 @@ const _boundaryAuditRecorder = BoundaryAuditRecorder(
 final routerProvider = Provider<GoRouter>((ref) {
   final environment = ref.watch(appEnvironmentProvider);
   final isAuthenticated = ref.watch(secureSessionStateProvider).isAuthenticated;
+  final conversationObservability = ref.watch(
+    conversationObservabilitySinkProvider,
+  );
+  final observedEnvironment = ref.watch(
+    conversationObservedEnvironmentProvider,
+  );
 
   return GoRouter(
     initialLocation: '/stasis',
@@ -53,6 +61,14 @@ final routerProvider = Provider<GoRouter>((ref) {
         isAuthenticated: isAuthenticated,
       );
       _recordBoundary(definition, environment, decision);
+      _recordConversationBoundary(
+        conversationObservability,
+        observedEnvironment,
+        definition,
+        decision,
+        isUnknownLegacyChat:
+            state.uri.path == '/chat' || state.uri.path.startsWith('/chat/'),
+      );
 
       if (decision.type == BoundaryDecisionType.redirectToAuthentication &&
           state.uri.path != EntryPointRegistry.onboarding.pathPattern) {
@@ -183,6 +199,86 @@ GoRoute _route({
       );
     },
   );
+}
+
+void _recordConversationBoundary(
+  ConversationObservabilitySink sink,
+  ConversationObservedEnvironment environment,
+  EntryPointDefinition? definition,
+  BoundaryDecision decision, {
+  required bool isUnknownLegacyChat,
+}) {
+  final route = switch (definition?.id) {
+    EntryPointId.stasis => ConversationObservedRoute.stasis,
+    EntryPointId.conversations => ConversationObservedRoute.conversations,
+    EntryPointId.conversationDetail =>
+      ConversationObservedRoute.conversationDetail,
+    _ => null,
+  };
+  if (route == null) {
+    if (isUnknownLegacyChat) {
+      _recordConversationObservation(
+        sink,
+        ConversationObservation(
+          event: ConversationObservabilityEventName.routeBlocked,
+          category: ConversationObservationCategory.routing,
+          result: ConversationObservationResult.unknownFailure,
+          environment: environment,
+        ),
+      );
+    }
+    return;
+  }
+
+  final event = switch (decision.type) {
+    BoundaryDecisionType.allow =>
+      ConversationObservabilityEventName.routeEntered,
+    BoundaryDecisionType.redirectToAuthentication =>
+      ConversationObservabilityEventName.authenticationRequired,
+    BoundaryDecisionType.blockedByEnvironment =>
+      ConversationObservabilityEventName.environmentBlocked,
+    _ => ConversationObservabilityEventName.routeBlocked,
+  };
+  final category =
+      decision.type == BoundaryDecisionType.redirectToAuthentication
+      ? ConversationObservationCategory.authentication
+      : decision.type == BoundaryDecisionType.blockedByEnvironment
+      ? ConversationObservationCategory.environment
+      : ConversationObservationCategory.routing;
+  final result = switch (decision.type) {
+    BoundaryDecisionType.allow => ConversationObservationResult.success,
+    BoundaryDecisionType.redirectToAuthentication =>
+      ConversationObservationResult.unauthenticated,
+    BoundaryDecisionType.blockedByEnvironment =>
+      ConversationObservationResult.environmentBlocked,
+    _ => ConversationObservationResult.unknownFailure,
+  };
+  _recordConversationObservation(
+    sink,
+    ConversationObservation(
+      event: event,
+      category: category,
+      result: result,
+      route: route,
+      environment: environment,
+      error: decision.type == BoundaryDecisionType.redirectToAuthentication
+          ? ConversationSafeErrorCode.unauthenticated
+          : decision.type == BoundaryDecisionType.blockedByEnvironment
+          ? ConversationSafeErrorCode.environmentBlocked
+          : null,
+    ),
+  );
+}
+
+void _recordConversationObservation(
+  ConversationObservabilitySink sink,
+  ConversationObservation observation,
+) {
+  try {
+    sink.record(observation);
+  } on Object {
+    // Navigation must remain fail-closed even if diagnostics are unavailable.
+  }
 }
 
 GoRoute _blockedLegacyRoute({

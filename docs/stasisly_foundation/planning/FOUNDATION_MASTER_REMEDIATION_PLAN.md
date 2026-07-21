@@ -1,5 +1,12 @@
 # Foundation Master Remediation Plan
 
+## FOUNDATION-017 completion
+
+G0-G7 close the local post-activation hardening gate: safe NoOp observability,
+race/failure hardening, accessibility review and complete Flutter/backend/SQL
+regression evidence. G8-G10 remain unauthorized. FOUNDATION-018 is readiness
+audit only and requires separate approval.
+
 ## FOUNDATION-016-R1 completion
 
 The scoped Orchestrator blocker is removed and legacy retirement L5-L7 closes

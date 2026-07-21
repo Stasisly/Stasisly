@@ -1,5 +1,13 @@
 # Product Conversation Architecture
 
+## FOUNDATION-017 implementation delta
+
+The canonical application-controller boundary owns local-safe outcome events;
+the router emits only stable route categories. Runtime uses a NoOp sink and
+widgets emit nothing. Partial list/message failures preserve existing data,
+while the canonical repository/backend authority and transitional adapter graph
+remain unchanged.
+
 ## FOUNDATION-016-R1 implementation delta
 
 Canonical Conversation is now the sole physical Product conversation runtime.

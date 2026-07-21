@@ -1,4 +1,5 @@
 import 'package:stasisly/core/idempotency/operation_attempt_id.dart';
+import 'package:stasisly/core/observability/conversation_observability.dart';
 import 'package:stasisly/features/conversations/application/inputs/conversation_inputs.dart';
 import 'package:stasisly/features/conversations/application/state/conversation_application_states.dart';
 import 'package:stasisly/features/conversations/application/state/conversation_result_mapping.dart';
@@ -18,6 +19,8 @@ class ConversationDetailController {
     required RestoreOwnConversation restoreOwnConversation,
     required OperationAttemptIdFactory operationAttemptIds,
     this.pageSize = 50,
+    this.observability = const NoOpConversationObservabilitySink(),
+    this.observedEnvironment = ConversationObservedEnvironment.unknown,
     void Function(ConversationDetailState)? onStateChanged,
     void Function()? onListsInvalidated,
   }) : _conversationId = conversationId,
@@ -38,6 +41,8 @@ class ConversationDetailController {
   final RestoreOwnConversation _restoreOwnConversation;
   final OperationAttemptIdFactory _operationAttemptIds;
   final int pageSize;
+  final ConversationObservabilitySink observability;
+  final ConversationObservedEnvironment observedEnvironment;
   final void Function(ConversationDetailState)? _onStateChanged;
   final void Function()? _onListsInvalidated;
 
@@ -64,11 +69,19 @@ class ConversationDetailController {
     if (_disposed) return;
     final generation = ++_generation;
     final id = _conversationId;
+    final stopwatch = Stopwatch()..start();
+    _record(
+      ConversationObservabilityEventName.conversationReadRequested,
+      ConversationObservationCategory.read,
+      ConversationObservationResult.requested,
+    );
     _emit(
       const ConversationDetailState(phase: ConversationDetailPhase.loading),
     );
     final result = await _readOwnConversation(id);
-    if (!_isCurrent(generation, id)) return;
+    if (!_isCurrent(generation, id)) {
+      return;
+    }
     switch (result) {
       case ConversationReadSuccess(:final conversation):
         if (conversation.conversationId != id ||
@@ -79,8 +92,19 @@ class ConversationDetailController {
           _emitDetailFailure(
             ConversationApplicationErrorCode.contractViolation,
           );
+          _recordFailure(
+            stopwatch,
+            ConversationObservabilityEventName.contractViolationDetected,
+            ConversationObservationCategory.contract,
+            ConversationApplicationErrorCode.contractViolation,
+          );
           return;
         }
+        _recordSuccess(
+          stopwatch,
+          ConversationObservabilityEventName.conversationReadSucceeded,
+          ConversationObservationCategory.read,
+        );
         _emit(
           ConversationDetailState(
             phase: conversation.status == ConversationStatus.archived
@@ -94,17 +118,33 @@ class ConversationDetailController {
         );
         await _loadFirstMessages(generation, id);
       case ConversationReadFailure(:final status):
-        _emitDetailFailure(mapConversationError(status));
+        final error = mapConversationError(status);
+        _recordFailure(
+          stopwatch,
+          ConversationObservabilityEventName.conversationReadFailed,
+          ConversationObservationCategory.read,
+          error,
+        );
+        _emitDetailFailure(error);
     }
   }
 
   Future<void> refresh() => load();
 
   Future<void> _loadFirstMessages(int generation, ConversationId id) async {
+    final stopwatch = Stopwatch()..start();
+    _record(
+      ConversationObservabilityEventName.paginationRequested,
+      ConversationObservationCategory.messages,
+      ConversationObservationResult.requested,
+    );
     final result = await _listOwnConversationMessages(
       ListConversationMessagesInput(conversationId: id, limit: pageSize),
     );
-    if (!_isCurrent(generation, id)) return;
+    if (!_isCurrent(generation, id)) {
+      return;
+    }
+    _recordMessageResult(stopwatch, result);
     _applyMessagePage(result, append: false);
   }
 
@@ -113,6 +153,12 @@ class ConversationDetailController {
     _loadingMore = true;
     final generation = _generation;
     final id = _conversationId;
+    final stopwatch = Stopwatch()..start();
+    _record(
+      ConversationObservabilityEventName.paginationRequested,
+      ConversationObservationCategory.messages,
+      ConversationObservationResult.requested,
+    );
     _emit(
       state.copyWith(
         messages: state.messages.copyWith(
@@ -129,7 +175,10 @@ class ConversationDetailController {
       ),
     );
     _loadingMore = false;
-    if (!_isCurrent(generation, id)) return;
+    if (!_isCurrent(generation, id)) {
+      return;
+    }
+    _recordMessageResult(stopwatch, result);
     _applyMessagePage(result, append: true);
   }
 
@@ -157,18 +206,20 @@ class ConversationDetailController {
     if (_disposed || _sendInFlight || _lifecycleInFlight) return;
     if (state.isArchived) {
       _emitComposerFailure(ConversationApplicationErrorCode.archived);
+      _recordRejectedSend(ConversationApplicationErrorCode.archived);
       return;
     }
     final content = state.composer.draft.trim();
     if (content.isEmpty ||
         content.length > SendConversationMessageInput.maxContentLength) {
       _emitComposerFailure(ConversationApplicationErrorCode.invalidInput);
+      _recordRejectedSend(ConversationApplicationErrorCode.invalidInput);
       return;
     }
     if (_pendingSend == null || _pendingSend!.content != content) {
       _pendingSend = _SendIntent(content, _operationAttemptIds.create());
     }
-    await _submitPendingSend();
+    await _submitPendingSend(retry: false);
   }
 
   Future<void> retrySend() async {
@@ -179,11 +230,24 @@ class ConversationDetailController {
         state.isArchived) {
       return;
     }
-    await _submitPendingSend();
+    await _submitPendingSend(retry: true);
   }
 
-  Future<void> _submitPendingSend() async {
+  Future<void> _submitPendingSend({required bool retry}) async {
     final intent = _pendingSend!;
+    final stopwatch = Stopwatch()..start();
+    _record(
+      retry
+          ? ConversationObservabilityEventName.messageSendReplayed
+          : ConversationObservabilityEventName.messageSendRequested,
+      ConversationObservationCategory.send,
+      retry
+          ? ConversationObservationResult.replay
+          : ConversationObservationResult.requested,
+      retry: retry
+          ? ConversationRetryClass.userInitiated
+          : ConversationRetryClass.none,
+    );
     _sendInFlight = true;
     _emit(
       state.copyWith(
@@ -202,13 +266,24 @@ class ConversationDetailController {
       ),
     );
     _sendInFlight = false;
-    if (_disposed || !identical(intent, _pendingSend)) return;
+    if (_disposed || !identical(intent, _pendingSend)) {
+      return;
+    }
     switch (result) {
       case ConversationMessageSendSuccess(:final receipt):
         if (receipt.message.conversationId != _conversationId) {
           _pendingSend = null;
           _emitComposerFailure(
             ConversationApplicationErrorCode.contractViolation,
+          );
+          _recordFailure(
+            stopwatch,
+            ConversationObservabilityEventName.contractViolationDetected,
+            ConversationObservationCategory.contract,
+            ConversationApplicationErrorCode.contractViolation,
+            retry: retry
+                ? ConversationRetryClass.userInitiated
+                : ConversationRetryClass.none,
           );
           return;
         }
@@ -230,6 +305,14 @@ class ConversationDetailController {
             ),
           ),
         );
+        _recordSuccess(
+          stopwatch,
+          ConversationObservabilityEventName.messageSendSucceeded,
+          ConversationObservationCategory.send,
+          retry: retry
+              ? ConversationRetryClass.userInitiated
+              : ConversationRetryClass.none,
+        );
       case ConversationMessageSendFailure(:final status):
         final submittedContentStillCurrent =
             state.composer.draft.trim() == intent.content;
@@ -243,6 +326,15 @@ class ConversationDetailController {
         _emitComposerFailure(
           mapConversationError(status),
           canRetry: retainsIntent,
+        );
+        _recordFailure(
+          stopwatch,
+          ConversationObservabilityEventName.messageSendFailed,
+          ConversationObservationCategory.send,
+          mapConversationError(status),
+          retry: retry
+              ? ConversationRetryClass.userInitiated
+              : ConversationRetryClass.none,
         );
     }
   }
@@ -267,6 +359,8 @@ class ConversationDetailController {
   }
 
   Future<void> _changeLifecycle({required bool archive}) async {
+    final stopwatch = Stopwatch()..start();
+    const category = ConversationObservationCategory.lifecycle;
     _lifecycleInFlight = true;
     _emit(
       state.copyWith(
@@ -296,6 +390,12 @@ class ConversationDetailController {
           _emitLifecycleFailure(
             ConversationApplicationErrorCode.contractViolation,
           );
+          _recordFailure(
+            stopwatch,
+            ConversationObservabilityEventName.contractViolationDetected,
+            ConversationObservationCategory.contract,
+            ConversationApplicationErrorCode.contractViolation,
+          );
           return;
         }
         _pendingSend = null;
@@ -316,8 +416,24 @@ class ConversationDetailController {
           ),
         );
         _onListsInvalidated?.call();
+        _recordSuccess(
+          stopwatch,
+          archive
+              ? ConversationObservabilityEventName.conversationArchived
+              : ConversationObservabilityEventName.conversationRestored,
+          category,
+        );
       case ConversationMutationFailure(:final status):
-        _emitLifecycleFailure(mapConversationError(status));
+        final error = mapConversationError(status);
+        _emitLifecycleFailure(error);
+        _recordFailure(
+          stopwatch,
+          archive
+              ? ConversationObservabilityEventName.conversationArchived
+              : ConversationObservabilityEventName.conversationRestored,
+          category,
+          error,
+        );
     }
   }
 
@@ -360,9 +476,10 @@ class ConversationDetailController {
         _emit(
           state.copyWith(
             messages: state.messages.copyWith(
-              phase: ConversationMessagesPhase.error,
+              phase: state.messages.messages.isEmpty
+                  ? ConversationMessagesPhase.error
+                  : ConversationMessagesPhase.data,
               error: mapConversationError(status),
-              nextCursor: null,
             ),
           ),
         );
@@ -419,6 +536,120 @@ class ConversationDetailController {
     );
   }
 
+  void _recordMessageResult(
+    Stopwatch stopwatch,
+    ConversationMessageListResult result,
+  ) {
+    switch (result) {
+      case ConversationMessageListSuccess(:final page):
+        final invalid =
+            page.nextCursor != null && page.nextCursor!.trim().isEmpty ||
+            page.items.any((item) => item.conversationId != _conversationId);
+        if (invalid) {
+          _recordFailure(
+            stopwatch,
+            ConversationObservabilityEventName.contractViolationDetected,
+            ConversationObservationCategory.contract,
+            ConversationApplicationErrorCode.contractViolation,
+          );
+        } else {
+          _recordSuccess(
+            stopwatch,
+            ConversationObservabilityEventName.paginationCompleted,
+            ConversationObservationCategory.messages,
+            itemCount: page.items.length,
+          );
+        }
+      case ConversationMessageListFailure(:final status):
+        _recordFailure(
+          stopwatch,
+          ConversationObservabilityEventName.paginationCompleted,
+          ConversationObservationCategory.messages,
+          mapConversationError(status),
+        );
+    }
+  }
+
+  void _recordRejectedSend(ConversationApplicationErrorCode error) {
+    _record(
+      ConversationObservabilityEventName.messageSendFailed,
+      ConversationObservationCategory.send,
+      _safeObservationResult(error),
+      error: ConversationSafeErrorCode.values.byName(error.name),
+    );
+  }
+
+  void _record(
+    ConversationObservabilityEventName event,
+    ConversationObservationCategory category,
+    ConversationObservationResult result, {
+    ConversationDurationBucket? duration,
+    ConversationItemCountBucket? itemCount,
+    ConversationRetryClass retry = ConversationRetryClass.none,
+    ConversationSafeErrorCode? error,
+  }) {
+    try {
+      observability.record(
+        ConversationObservation(
+          event: event,
+          category: category,
+          result: result,
+          environment: observedEnvironment,
+          duration: duration,
+          itemCount: itemCount,
+          retry: retry,
+          error: error,
+        ),
+      );
+    } on Object {
+      // Observability is diagnostic and must never alter Product behavior.
+    }
+  }
+
+  void _recordSuccess(
+    Stopwatch stopwatch,
+    ConversationObservabilityEventName event,
+    ConversationObservationCategory category, {
+    int? itemCount,
+    ConversationRetryClass retry = ConversationRetryClass.none,
+  }) {
+    stopwatch.stop();
+    _record(
+      event,
+      category,
+      itemCount == 0
+          ? ConversationObservationResult.empty
+          : ConversationObservationResult.success,
+      duration: conversationDurationBucket(stopwatch.elapsed),
+      itemCount: itemCount == null
+          ? null
+          : conversationItemCountBucket(itemCount),
+      retry: retry,
+    );
+  }
+
+  void _recordFailure(
+    Stopwatch stopwatch,
+    ConversationObservabilityEventName event,
+    ConversationObservationCategory category,
+    ConversationApplicationErrorCode error, {
+    ConversationRetryClass retry = ConversationRetryClass.none,
+  }) {
+    stopwatch.stop();
+    _record(
+      error == ConversationApplicationErrorCode.environmentBlocked
+          ? ConversationObservabilityEventName.environmentBlocked
+          : event,
+      error == ConversationApplicationErrorCode.environmentBlocked
+          ? ConversationObservationCategory.environment
+          : category,
+      _safeObservationResult(error),
+      duration: conversationDurationBucket(stopwatch.elapsed),
+      retry: retry,
+      error: ConversationSafeErrorCode.values.byName(error.name),
+    );
+  }
+
   bool _isCurrent(int generation, ConversationId id) =>
       !_disposed && generation == _generation && id == _conversationId;
 
@@ -434,6 +665,14 @@ class ConversationDetailController {
     _pendingSend = null;
   }
 }
+
+ConversationObservationResult _safeObservationResult(
+  ConversationApplicationErrorCode error,
+) => ConversationObservationResult.values.byName(switch (error) {
+  ConversationApplicationErrorCode.notFound => 'notFoundOpaque',
+  ConversationApplicationErrorCode.unauthorized => 'unknownFailure',
+  _ => error.name,
+});
 
 class _SendIntent {
   const _SendIntent(this.content, this.operationAttemptId);

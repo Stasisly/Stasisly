@@ -138,25 +138,31 @@ class _ConversationPageState extends ConsumerState<ConversationPage> {
           ),
         ),
         if (state.lifecycle.status == ConversationLifecycleStatus.failed)
-          Padding(
-            padding: AppSpacing.pageHorizontal,
-            child: Text(conversationSafeError(state.lifecycle.error)),
+          Semantics(
+            liveRegion: true,
+            child: Padding(
+              padding: AppSpacing.pageHorizontal,
+              child: Text(conversationSafeError(state.lifecycle.error)),
+            ),
           ),
         Expanded(child: _messages(state, notifier, visibleMessages)),
         if (state.composer.sendStatus == ConversationSendStatus.failed)
-          Padding(
-            padding: AppSpacing.pageHorizontal,
-            child: Row(
-              children: [
-                Expanded(
-                  child: Text(conversationSafeError(state.composer.error)),
-                ),
-                if (state.composer.canRetry)
-                  TextButton(
-                    onPressed: notifier.retrySend,
-                    child: const Text('Reintentar envío'),
+          Semantics(
+            liveRegion: true,
+            child: Padding(
+              padding: AppSpacing.pageHorizontal,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(conversationSafeError(state.composer.error)),
                   ),
-              ],
+                  if (state.composer.canRetry)
+                    TextButton(
+                      onPressed: notifier.retrySend,
+                      child: const Text('Reintentar envío'),
+                    ),
+                ],
+              ),
             ),
           ),
         ConversationComposerShell(
@@ -202,9 +208,25 @@ class _ConversationPageState extends ConsumerState<ConversationPage> {
     }
     return ListView.builder(
       key: const Key('conversation-message-list'),
-      itemCount: visibleMessages.length + (state.messages.hasMore ? 1 : 0),
+      itemCount:
+          visibleMessages.length +
+          (state.messages.error == null ? 0 : 1) +
+          (state.messages.hasMore ? 1 : 0),
       itemBuilder: (context, index) {
-        if (index == visibleMessages.length) {
+        if (state.messages.error != null && index == 0) {
+          return Semantics(
+            liveRegion: true,
+            child: ListTile(
+              title: Text(conversationSafeError(state.messages.error)),
+              trailing: TextButton(
+                onPressed: notifier.refresh,
+                child: const Text('Reintentar'),
+              ),
+            ),
+          );
+        }
+        final messageIndex = index - (state.messages.error == null ? 0 : 1);
+        if (messageIndex == visibleMessages.length) {
           return TextButton(
             key: const Key('load-more-messages'),
             onPressed:
@@ -214,7 +236,9 @@ class _ConversationPageState extends ConsumerState<ConversationPage> {
             child: const Text('Cargar mensajes anteriores'),
           );
         }
-        return ConversationMessageBubble(message: visibleMessages[index]);
+        return ConversationMessageBubble(
+          message: visibleMessages[messageIndex],
+        );
       },
     );
   }

@@ -9,11 +9,13 @@ import 'package:stasisly/core/auth/session/providers/secure_session_providers.da
 import 'package:stasisly/core/auth/session/secure_session_auth_state.dart';
 import 'package:stasisly/core/config/app_environment.dart';
 import 'package:stasisly/core/config/routes.dart';
+import 'package:stasisly/core/observability/conversation_observability.dart';
 import 'package:stasisly/features/conversations/composition/conversation_providers.dart';
 import 'package:stasisly/features/conversations/domain/entities/conversation.dart';
 import 'package:stasisly/features/conversations/domain/entities/conversation_message.dart';
 import 'package:stasisly/features/conversations/domain/results/conversation_results.dart';
 import 'package:stasisly/features/conversations/domain/value_objects/conversation_id.dart';
+import 'package:stasisly/features/conversations/presentation/widgets/conversation_message_bubble.dart';
 import 'package:stasisly/features/conversations/product/presentation/conversation_page.dart'
     as product;
 import 'package:stasisly/features/conversations/product/presentation/conversations_page.dart';
@@ -218,6 +220,7 @@ void main() {
             ),
           );
         };
+      final observability = InMemoryConversationObservabilitySink();
       final container = ProviderContainer(
         overrides: [
           appEnvironmentProvider.overrideWithValue(
@@ -231,6 +234,9 @@ void main() {
             ),
           ),
           conversationRepositoryProvider.overrideWithValue(repository),
+          conversationObservabilitySinkProvider.overrideWithValue(
+            observability,
+          ),
           conversationOperationAttemptIdFactoryProvider.overrideWithValue(
             SequenceOperationAttemptIdFactory(),
           ),
@@ -267,6 +273,14 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
       expect(find.byType(ConversationsPage), findsOneWidget);
       expect(find.text('Conversación sintética'), findsOneWidget);
+      expect(
+        observability.observations.any(
+          (event) =>
+              event.event == ConversationObservabilityEventName.routeEntered &&
+              event.route == ConversationObservedRoute.conversationDetail,
+        ),
+        isTrue,
+      );
     },
   );
 
@@ -274,6 +288,7 @@ void main() {
     tester,
   ) async {
     final repository = FakeConversationRepository();
+    final observability = InMemoryConversationObservabilitySink();
     final container = ProviderContainer(
       overrides: [
         appEnvironmentProvider.overrideWithValue(
@@ -287,6 +302,7 @@ void main() {
           ),
         ),
         conversationRepositoryProvider.overrideWithValue(repository),
+        conversationObservabilitySinkProvider.overrideWithValue(observability),
       ],
     );
     addTearDown(container.dispose);
@@ -301,6 +317,139 @@ void main() {
       findsOneWidget,
     );
     expect(repository.listStatuses, isEmpty);
+    expect(
+      observability.observations.any(
+        (event) =>
+            event.event ==
+                ConversationObservabilityEventName.environmentBlocked &&
+            event.route == ConversationObservedRoute.conversations,
+      ),
+      isTrue,
+    );
+  });
+
+  testWidgets('100 conversations and 200 messages stay lazy and responsive', (
+    tester,
+  ) async {
+    final repository = FakeConversationRepository()
+      ..listResult = ConversationListSuccess(
+        ConversationPage(
+          items: List.generate(
+            100,
+            (index) => conversation(id: 'conversation-$index'),
+          ),
+          nextCursor: null,
+        ),
+      )
+      ..messagesResult = ConversationMessageListSuccess(
+        ConversationMessagePage(
+          items: List.generate(200, (index) => message(id: 'message-$index')),
+          nextCursor: null,
+        ),
+      );
+    await tester.binding.setSurfaceSize(const Size(320, 700));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    await tester.pumpWidget(
+      _app(repository, const MaterialApp(home: ConversationsPage())),
+    );
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(find.byType(ListTile).evaluate().length, lessThan(100));
+
+    await tester.pumpWidget(
+      _app(
+        repository,
+        MediaQuery(
+          data: const MediaQueryData(textScaler: TextScaler.linear(2)),
+          child: MaterialApp(
+            home: product.ConversationPage(
+              conversationId: ConversationId('conversation-1'),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(
+      find.byType(ConversationMessageBubble).evaluate().length,
+      lessThan(200),
+    );
+  });
+
+  testWidgets('unknown legacy chat path emits only a safe blocked event', (
+    tester,
+  ) async {
+    final observability = InMemoryConversationObservabilitySink();
+    final container = ProviderContainer(
+      overrides: [
+        appEnvironmentProvider.overrideWithValue(
+          const AppEnvironment(mode: AppRuntimeMode.local),
+        ),
+        secureSessionStateProvider.overrideWithValue(
+          const SecureSessionState(
+            authState: SecureSessionAuthState.authenticated(
+              subjectId: 'synthetic-product-subject',
+            ),
+          ),
+        ),
+        conversationObservabilitySinkProvider.overrideWithValue(observability),
+      ],
+    );
+    addTearDown(container.dispose);
+    await tester.pumpWidget(
+      UncontrolledProviderScope(container: container, child: const App()),
+    );
+
+    container.read(routerProvider).go('/chat/legacy-value');
+    await tester.pumpAndSettle();
+
+    expect(
+      observability.observations.any(
+        (event) =>
+            event.event == ConversationObservabilityEventName.routeBlocked &&
+            event.route == null,
+      ),
+      isTrue,
+    );
+  });
+
+  testWidgets('unauthenticated canonical route emits safe auth requirement', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 900));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    final observability = InMemoryConversationObservabilitySink();
+    final container = ProviderContainer(
+      overrides: [
+        appEnvironmentProvider.overrideWithValue(
+          const AppEnvironment(mode: AppRuntimeMode.local),
+        ),
+        secureSessionStateProvider.overrideWithValue(
+          const SecureSessionState(),
+        ),
+        conversationObservabilitySinkProvider.overrideWithValue(observability),
+      ],
+    );
+    addTearDown(container.dispose);
+    await tester.pumpWidget(
+      UncontrolledProviderScope(container: container, child: const App()),
+    );
+
+    container.read(routerProvider).go('/conversations');
+    await tester.pumpAndSettle();
+
+    expect(
+      observability.observations.any(
+        (event) =>
+            event.event ==
+                ConversationObservabilityEventName.authenticationRequired &&
+            event.route == ConversationObservedRoute.conversations &&
+            event.result == ConversationObservationResult.unauthenticated,
+      ),
+      isTrue,
+    );
   });
 }
 

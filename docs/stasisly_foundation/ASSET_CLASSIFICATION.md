@@ -1,5 +1,13 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-017 classification
+
+- Conversation observability contract: `FOUNDATION_ADOPTED`.
+- Runtime Conversation sink: `NO_OP`, `LOCAL_SAFE`, non-persistent.
+- Controller/route outcome instrumentation: `FOUNDATION_ADOPTED_LOCALLY`.
+- Accessibility audit: `COMPLETED_LOCALLY`, not WCAG certification.
+- Remote observability/staging/production: `NOT_AUTHORIZED`.
+
 ## FOUNDATION-016-R1 classification
 
 - `lib/features/chat/**`: `PHYSICALLY_REMOVED`.
