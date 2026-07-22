@@ -1,5 +1,26 @@
 # Foundation Session Tracker
 
+## FOUNDATION-019B closure
+
+```text
+FOUNDATION-019B: IMPLEMENTED_LOCALLY
+FOUNDATION-018 initial attempt: BLOCKED_PENDING_019B
+Supabase CLI remote context: ISOLATED
+Remote project metadata: ABSENT_FROM_ACTIVE_LOCAL_CONTEXT
+Remote identifier evidence: NOT_RECORDED
+Local Supabase: FUNCTIONAL
+Remote-context preflight: FOUNDATION_ADOPTED_LOCALLY
+Accidental remote targeting: BLOCKED_LOCALLY
+FOUNDATION-018: READY_TO_RETRY
+Guard fixtures: 11/11 pass
+Flutter: 631 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 36 inherited infos
+Deno: 62 formatted / 86 of 86 pass
+SQL local: one no-seed reset / 740 of 740 pass
+Remote network/commands/identifiers/secrets: 0/0/0/0
+Remote/staging/production: NOT_AUTHORIZED
+```
+
 ## FOUNDATION-017 closure
 
 ```text
@@ -196,3 +217,4 @@ canonical application use cases, typed controllers/providers and inactive local 
 | FOUNDATION-015-R1 | Completed locally | Activate Stasis and canonical Conversation list/detail through the single Product router | Explicit route metadata; authenticated local/development gates; canonical screens/controllers; strict ConversationId adapter; user-only send; archive/restore; opaque not-found; Flutter 615 pass/5 approved skips; analyzer 0 errors/51 inherited infos; Deno 86/86; one no-seed local reset plus SQL 740/740; ADR-F018; no backend/schema/orchestrator/remote/AI | `PRODUCT CONVERSATION_ROUTES_AND_SCREENS ACTIVATED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-016 physical legacy chat removal/reference eradication only after separate approval; G8-G10 remain unauthorized |
 | FOUNDATION-016-R1 | Completed locally | Remove the dead Orchestrator chat consumer, all legacy chat runtime/tests and `/chat/:id`; preserve blocked Orchestrator and transitional session/message infrastructure | 20 legacy files plus `OrchestratorChatPage` removed; replacement eradication guard; zero runtime references; Flutter 610 pass/5 approved skips; analyzer 0 errors/36 inherited infos; Deno 86/86; one no-seed local reset plus SQL 740/740; ADR-F019; no backend/schema/Product page/remote/AI | `LEGACY CHAT_RUNTIME_REMOVED_AND_REFERENCES_ERADICATED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-017 post-activation hardening only after separate approval; G8-G10 remain unauthorized |
 | FOUNDATION-017 | Completed locally | Harden activated canonical Product Conversation with local-safe outcome observability, partial-failure preservation, race/soak guards and accessibility/responsive audit | Closed enum-only contract; runtime NoOp; route/controller instrumentation; 100/200 fixtures; 50 filter switches; 20 retry and lifecycle cycles; Flutter 620 pass/5 approved skips; analyzer 0 errors/36 inherited infos; Deno 86/86; one no-seed reset plus SQL 740/740; ADR-F020; no backend/schema/remote/AI | `PRODUCT CONVERSATION_POST_ACTIVATION_HARDENED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-018 environment-readiness audit only after separate approval; G8-G10 remain unauthorized |
+| FOUNDATION-019B | Completed locally | Isolate ignored Supabase CLI remote-link metadata and prevent implicit remote targeting in local-only work | Two ignored link markers removed without value disclosure; cache preserved; guard 11/11; Flutter 631 pass/5 skips; Deno 86/86; one no-seed reset plus SQL 740/740; ADR-F022; zero remote actions | `SUPABASE CLI_REMOTE_CONTEXT_ISOLATED_LOCAL_AND_PUSHED` upon successful push | Retry FOUNDATION-018 from the new baseline; do not start FOUNDATION-019A |

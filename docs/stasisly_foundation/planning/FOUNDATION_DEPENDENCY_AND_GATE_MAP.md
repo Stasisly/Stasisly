@@ -1,5 +1,12 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-019B gate result
+
+FOUNDATION-018 correctly stopped on active ignored CLI link metadata.
+FOUNDATION-019B isolates that state, preserves local runtime and adopts a
+read-only/no-network fail-closed preflight. G0-G7 close after publication;
+FOUNDATION-018 becomes `READY_TO_RETRY`. G8-G10 remain unauthorized.
+
 ## FOUNDATION-017 gate result
 
 FOUNDATION-015-R1 and 016-R1 supplied canonical activation and physical legacy

@@ -1,5 +1,16 @@
 # Document Authority Register
 
+## FOUNDATION-019B authority addition
+
+ADR-F022 governs zero-linked-context requirements for local-only Foundation
+work. The implementation record owns non-sensitive isolation and validation
+evidence; neither document authorizes a remote link or action.
+
+| Document | Status | Authority level | Owner | Approver | Normative | Supersedes | Dependencies | Review condition |
+|---|---|---:|---|---|---|---|---|---|
+| `adr/ADR-F022-supabase-cli-remote-context-isolation.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Security + DevOps + Architecture | Founder | Yes | Implicit linked CLI context | ADR-F002/F004 | CLI targeting, local guard or remote-link policy changes |
+| `implementation/FOUNDATION-019B_SUPABASE_CLI_REMOTE_CONTEXT_ISOLATION.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | DevOps + QA + Documentation | Evidence owner | No, evidence | FOUNDATION-018 blocked preflight | ADR-F022; FOUNDATION-017 | Isolation or validation evidence changes |
+
 ## FOUNDATION-017 authority addition
 
 ADR-F020 is normative for local-safe Conversation outcome observability and

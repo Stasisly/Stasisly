@@ -1,5 +1,12 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Estado FOUNDATION-019B
+
+El contexto remoto implícito de Supabase CLI queda aislado localmente y
+protegido por un preflight read-only/no-network. FOUNDATION-018 vuelve a
+`READY_TO_RETRY` desde el nuevo baseline. No se autoriza link remoto,
+Development remoto, staging, production ni G8-G10.
+
 ## Estado FOUNDATION-017
 
 FOUNDATION-017 queda implementado localmente con observabilidad cerrada NoOp en

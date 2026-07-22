@@ -1,5 +1,13 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-019B risk update
+
+Closed locally: ignored Supabase CLI link metadata, implicit remote targeting,
+ambiguous local database validation and unsafe executable tooling recurrence.
+Residual risk requires deliberate relinking or bypass of the preflight. Future
+CI integration, FOUNDATION-018 readiness and every remote operation remain
+separate debt/gates; no remote risk was accepted.
+
 ## FOUNDATION-017 risk update
 
 Closed locally: sensitive/free-form Conversation telemetry, duplicate outcome

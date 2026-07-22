@@ -1,5 +1,13 @@
 # Foundation Master Remediation Plan
 
+## FOUNDATION-019B completion
+
+The ignored CLI state that blocked FOUNDATION-018 is isolated without remote
+access or loss of local Supabase runtime. A read-only no-network guard prevents
+implicit targets and ambiguous local commands. Publication completes G7 and
+allows FOUNDATION-018 to retry; it does not authorize Development remote or
+G8-G10.
+
 ## FOUNDATION-017 completion
 
 G0-G7 close the local post-activation hardening gate: safe NoOp observability,

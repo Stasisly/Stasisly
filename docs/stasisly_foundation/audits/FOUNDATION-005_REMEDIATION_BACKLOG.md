@@ -1,5 +1,13 @@
 # FOUNDATION-005 Remediation Backlog
 
+## FOUNDATION-019B remediation evidence
+
+Closed locally: ignored Supabase CLI metadata could provide an implicit remote
+target despite a clean worktree. Only remote link markers were isolated; local
+cache/runtime metadata was preserved. A read-only no-network guard now blocks
+linked state, dangerous tooling and ambiguous local database commands.
+FOUNDATION-018 is ready to retry, not completed or remotely authorized.
+
 ## FOUNDATION-017 remediation evidence
 
 The activated canonical Product flow is hardened locally: closed outcome-only

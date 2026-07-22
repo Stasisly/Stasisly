@@ -1,5 +1,13 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-019B classification
+
+- Supabase CLI remote link metadata: `ISOLATED`, local ignored files removed.
+- Remaining `supabase/.temp/` versions/cache: `LOCAL_RUNTIME_METADATA` or
+  `CACHE_ONLY`, preserved and unversioned.
+- Remote-context preflight: `FOUNDATION_ADOPTED_LOCALLY`, read-only/no-network.
+- FOUNDATION-018: `READY_TO_RETRY`; remote/staging/production: `NOT_AUTHORIZED`.
+
 ## FOUNDATION-017 classification
 
 - Conversation observability contract: `FOUNDATION_ADOPTED`.

@@ -1,5 +1,19 @@
 # Stasisly Foundation
 
+## FOUNDATION-019B Supabase CLI isolation
+
+FOUNDATION-019B is `IMPLEMENTED_LOCALLY`: ignored remote-link metadata has been
+isolated without recording its values, local Supabase remains functional and a
+read-only/no-network preflight blocks recurrence. See [ADR-F022](adr/ADR-F022-supabase-cli-remote-context-isolation.md)
+and the [implementation record](implementation/FOUNDATION-019B_SUPABASE_CLI_REMOTE_CONTEXT_ISOLATION.md).
+FOUNDATION-018 is only `READY_TO_RETRY`; no remote operation is authorized.
+
+Run the local safety gate before local-only Supabase work:
+
+```bash
+dart run tool/check_supabase_remote_context.dart
+```
+
 ## FOUNDATION-017 post-activation hardening
 
 FOUNDATION-017 is `IMPLEMENTED_LOCALLY`: canonical Product Conversation now
