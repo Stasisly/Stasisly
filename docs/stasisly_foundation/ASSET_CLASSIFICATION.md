@@ -319,3 +319,13 @@ deuda residual.
 - Retención idempotente: `POST_DEVELOPMENT_OPERATIONAL_BLOCKER`; no cleanup
   destructivo implementado.
 - Agent Registry, IA, Stasis Engine y datos reales: `NOT_ADOPTED`.
+
+## Adopción de FOUNDATION-019A-R1
+
+- Manifest remoto y cleanup éxito/fallo: `FOUNDATION_ADOPTED`.
+- Gate multifactor: `FOUNDATION_ADOPTED_LOCALLY`; tests
+  `CLASSIFIED_NOT_ENABLED`.
+- CORS: contrato `FOUNDATION_ADOPTED`; origen exacto `UNASSIGNED`.
+- Lifecycle remoto: `SIMULATED_LOCALLY`, no validado remotamente.
+- Ejecución: `NOT_AUTHORIZED`; retención:
+  `POST_DEVELOPMENT_OPERATIONAL_BLOCKER`.

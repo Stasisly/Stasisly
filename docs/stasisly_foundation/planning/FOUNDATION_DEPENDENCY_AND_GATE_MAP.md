@@ -187,3 +187,16 @@ FOUNDATION-018 + ADR-F021 + remote-context SAFE
 
 Retention for sustained operation is a post-Development operational gate, not
 permission to run destructive cleanup or to bypass fixture cleanup.
+
+## FOUNDATION-019A-R1 dependency and gates
+
+```text
+FOUNDATION-019C + blocked FOUNDATION-019A attempt
+→ separate remote manifest
+→ exact success/failure cleanup contract
+→ eleven-condition skip gate
+→ local success x2 + controlled failure x2 + seven-zero residue
+→ CORS remains explicit UNASSIGNED input
+→ ADR-F024 + G7 commit/push
+→ new Founder authorization required; G8-G10 remain closed
+```

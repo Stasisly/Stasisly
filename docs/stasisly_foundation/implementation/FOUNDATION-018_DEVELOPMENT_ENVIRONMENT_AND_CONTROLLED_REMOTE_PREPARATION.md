@@ -451,3 +451,10 @@ REMOTE_IDENTIFIERS_ADDED: 0
 REMOTE_SKIPS_ENABLED: 0
 DEPLOYMENT_MANIFEST_APPROVAL: NOT_GRANTED
 ```
+
+## FOUNDATION-019A-R1 continuation
+
+La preparación se endurece con manifests separados, cleanup exacto de éxito y
+fallo, gate multifactor y CORS fail-closed. `allowedWebOriginStatus` permanece
+`UNASSIGNED`, `remoteTests` permanece `NOT_ENABLED` y cualquier ejecución exige
+nueva autorización commit-specific.

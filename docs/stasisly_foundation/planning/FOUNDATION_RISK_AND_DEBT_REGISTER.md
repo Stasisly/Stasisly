@@ -169,3 +169,13 @@ for deletion, retention, sharing, attachments, memory and research.
   unblock with approved duration, eligible states, actor, bounded batch, locking
   and audit contract. No arbitrary retention or destructive job is approved.
 - Remote target/operator/secrets/execution remain unknown and unauthorized.
+
+## FOUNDATION-019A-R1 risk update
+
+- DEV-REMOTE-B001-B003: `RESOLVED_LOCALLY`.
+- DEV-REMOTE-B004: `EXPLICIT_REAUTHORIZATION_INPUT_REQUIRED`; exact CORS is
+  absent, severity high if bypassed, owner Founder + Security + Release.
+- Dirty-run risk is mitigated locally by exact finally-cleanup and blocking
+  classification; remote effectiveness remains unverified until authorized.
+- Idempotency retention remains `POST_DEVELOPMENT_OPERATIONAL_BLOCKER` and bars
+  sustained operation or campaigns.

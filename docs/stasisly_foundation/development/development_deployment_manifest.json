@@ -6,6 +6,15 @@
   "approval": "NOT_GRANTED",
   "deployment": "NOT_EXECUTED",
   "remoteValidation": "NOT_EXECUTED",
+  "fixtureManifestVersion": "FOUNDATION-019A-R1-v1",
+  "cleanupContractVersion": "FOUNDATION-019A-R1-v1",
+  "remoteSkipGateVersion": "FOUNDATION-019A-R1-v1",
+  "allowedWebOriginStatus": "UNASSIGNED",
+  "allowedWebOrigins": [],
+  "authorizedCommit": "REQUIRES_NEW_FOUNDER_AUTHORIZATION",
+  "operatorStatus": "RUNTIME_INPUT_NOT_COMMITTED",
+  "founderAuthorizationStatus": "NOT_GRANTED",
+  "remoteTests": "NOT_ENABLED",
   "routeStatus": "PLANNED_FOR_DEVELOPMENT",
   "expectedMigrations": [
     "00001_initial_schema.sql",
@@ -141,7 +150,7 @@
       "dataCreated": "none; read-only synthetic fixture",
       "cleanup": "not applicable",
       "risk": "remote read against an unapproved target",
-      "activationGate": "founder authorization and exact Development target",
+      "activationGate": "FOUNDATION-019A-R1-v1",
       "status": "CLASSIFIED_NOT_ENABLED"
     },
     {
@@ -154,7 +163,7 @@
       "dataCreated": "synthetic conversation and user message",
       "cleanup": "mandatory owner-scoped fixture cleanup",
       "risk": "remote mutation or incomplete cleanup",
-      "activationGate": "founder authorization, exact target and cleanup rehearsal",
+      "activationGate": "FOUNDATION-019A-R1-v1",
       "status": "CLASSIFIED_NOT_ENABLED"
     },
     {
@@ -167,7 +176,7 @@
       "dataCreated": "none; read-only synthetic fixture",
       "cleanup": "not applicable",
       "risk": "remote read or stale transitional expectation",
-      "activationGate": "founder authorization and canonical Product review",
+      "activationGate": "FOUNDATION-019A-R1-v1",
       "status": "CLASSIFIED_NOT_ENABLED"
     }
   ],

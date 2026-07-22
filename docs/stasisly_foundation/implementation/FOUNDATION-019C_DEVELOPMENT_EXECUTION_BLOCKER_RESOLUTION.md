@@ -172,3 +172,10 @@ remote action.
 G0-G7 are complete only after successful validation, commit and push.
 Remote actions, real secrets, production data, agent-ID conversions and remote
 skips enabled remain zero. FOUNDATION-019A requires a separate Founder order.
+
+## FOUNDATION-019A-R1 follow-up
+
+El fixture local continúa `localOnly=true`. Un manifest remoto separado y un
+runner operador versionado añaden cleanup exacto, idempotente y obligatorio tras
+éxito/fallo. Dos simulaciones de fallo adicionales terminaron con siete ceros.
+No cambia la retención ni constituye ejecución remota.

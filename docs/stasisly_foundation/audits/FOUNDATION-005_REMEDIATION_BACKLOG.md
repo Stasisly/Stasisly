@@ -151,3 +151,10 @@ executable local contracts. Idempotency retention remains explicit P2
 operational debt before sustained Development use; no migration, maintenance
 function or destructive cleanup is introduced. Remote rollout remains outside
 this remediation.
+
+## FOUNDATION-019A-R1 remediation evidence
+
+Remote fixture reuse, missing deterministic cleanup and prose-only activation
+are remediated with versioned fail-closed contracts and local tests. Exact CORS
+and new commit-specific Founder authorization remain external blockers. No
+remote rollout, migration, secret operation or sustained use is authorized.

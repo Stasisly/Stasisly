@@ -24,12 +24,17 @@ import 'package:stasisly/features/specialists/data/repositories/selectable_speci
 import 'package:stasisly/features/specialists/domain/entities/selectable_specialist.dart';
 import 'package:stasisly/features/specialists/domain/entities/selectable_specialists_result.dart';
 
+import '../../../../tool/development_remote_execution_contracts.dart';
+
 void main() {
   test(
     'development remote write creates sends lists and archives synthetic session',
     () async {
       final env = _DevelopmentRemoteEnv.fromProcess();
-      if (!env.isComplete) {
+      final gate = DevelopmentRemoteGateInput.fromEnvironment(
+        Platform.environment,
+      );
+      if (!env.isComplete || !gate.isReady) {
         markTestSkipped(
           'Requires complete development remote write environment.',
         );
@@ -74,7 +79,7 @@ void main() {
       expect(specialists, isNotEmpty);
       final syntheticSpecialist = specialists.firstWhere(
         (specialist) =>
-            specialist.displayName == 'Synthetic Development Specialist',
+            specialist.displayName == env.syntheticSpecialistDisplayName,
       );
       expect(
         syntheticSpecialist.accessState,
@@ -89,14 +94,11 @@ void main() {
         status: ChatSessionStatusFilter.all,
       );
       expect(initialAll, isA<ListOwnChatSessionsSuccess>());
-      expect(
-        (initialAll as ListOwnChatSessionsSuccess).page.items,
-        hasLength(1),
-      );
+      expect((initialAll as ListOwnChatSessionsSuccess).page.items, isEmpty);
 
       final createResult = await sessionsRepository.createOwnChatSession(
         selectableSpecialistId: syntheticSpecialist.selectableSpecialistId,
-        operationAttemptId: OperationAttemptId('development_create_0001'),
+        operationAttemptId: OperationAttemptId('${env.runAlias}_create_0001'),
       );
       expect(createResult, isA<CreateOwnChatSessionSuccess>());
       final createdSession =
@@ -106,14 +108,14 @@ void main() {
 
       final sendResult = await messagesRepository.sendUserMessage(
         sessionId: createdSession.sessionId,
-        content: 'synthetic-development-message-ag57',
-        operationAttemptId: OperationAttemptId('development_send_000001'),
+        content: 'synthetic development lifecycle message',
+        operationAttemptId: OperationAttemptId('${env.runAlias}_send_000001'),
       );
       expect(sendResult, isA<SendUserMessageSuccess>());
       final sent = (sendResult as SendUserMessageSuccess).sent;
       expect(sent.isDemo, isFalse);
       expect(sent.sessionId, createdSession.sessionId);
-      expect(sent.message.content, 'synthetic-development-message-ag57');
+      expect(sent.message.content, 'synthetic development lifecycle message');
 
       final messagesResult = await messagesRepository.listSessionMessages(
         sessionId: createdSession.sessionId,
@@ -123,7 +125,7 @@ void main() {
       expect(messagesPage.items, hasLength(1));
       expect(
         messagesPage.items.single.content,
-        'synthetic-development-message-ag57',
+        'synthetic development lifecycle message',
       );
       expect(messagesPage.items.single.isDemo, isFalse);
 
@@ -145,12 +147,12 @@ void main() {
       );
       expect(finalAll, isA<ListOwnChatSessionsSuccess>());
       final finalAllItems = (finalAll as ListOwnChatSessionsSuccess).page.items;
-      expect(finalAllItems, hasLength(2));
+      expect(finalAllItems, hasLength(1));
       expect(
         finalAllItems.where(
           (session) => session.status == ChatSessionStatus.archived,
         ),
-        hasLength(2),
+        hasLength(1),
       );
     },
   );
@@ -166,6 +168,8 @@ final class _DevelopmentRemoteEnv {
     required this.enableConversationsRoute,
     required this.supabaseUrl,
     required this.syntheticAccessToken,
+    required this.runAlias,
+    required this.syntheticSpecialistDisplayName,
   });
 
   factory _DevelopmentRemoteEnv.fromProcess() {
@@ -179,6 +183,9 @@ final class _DevelopmentRemoteEnv {
       enableConversationsRoute: env['ENABLE_CONVERSATIONS_ROUTE'] ?? '',
       supabaseUrl: env['SUPABASE_URL'] ?? '',
       syntheticAccessToken: env['SYNTHETIC_ACCESS_TOKEN'] ?? '',
+      runAlias: env['REMOTE_FIXTURE_RUN_ALIAS'] ?? '',
+      syntheticSpecialistDisplayName:
+          env['REMOTE_FIXTURE_SPECIALIST_DISPLAY_NAME'] ?? '',
     );
   }
 
@@ -190,6 +197,8 @@ final class _DevelopmentRemoteEnv {
   final String enableConversationsRoute;
   final String supabaseUrl;
   final String syntheticAccessToken;
+  final String runAlias;
+  final String syntheticSpecialistDisplayName;
 
   bool get isComplete {
     return appMode == 'development' &&
@@ -199,7 +208,9 @@ final class _DevelopmentRemoteEnv {
         allowDevRoutes == 'true' &&
         enableConversationsRoute == 'false' &&
         supabaseUrl.trim().isNotEmpty &&
-        syntheticAccessToken.trim().isNotEmpty;
+        syntheticAccessToken.trim().isNotEmpty &&
+        RegExp(r'^[a-z0-9][a-z0-9-]{7,31}$').hasMatch(runAlias) &&
+        syntheticSpecialistDisplayName.startsWith('Synthetic ');
   }
 }
 

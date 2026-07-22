@@ -10,5 +10,12 @@
   "testResultSummary": "ROLLBACK_NOT_STARTED",
   "timestampStatus": "NOT_RECORDED",
   "rollbackReference": "ADR-F021",
-  "resultStatus": "NOT_STARTED"
+  "resultStatus": "NOT_STARTED",
+  "fixtureSetupStatus": "NOT_STARTED",
+  "fixtureNamespaceReference": "UNASSIGNED",
+  "cleanupStatus": "NOT_STARTED",
+  "cleanupCounts": [0, 0, 0, 0, 0, 0, 0],
+  "remoteSkipGateStatus": "NOT_ENABLED",
+  "corsValidationStatus": "UNASSIGNED",
+  "dirtyRunBlockerStatus": "CLEAR"
 }

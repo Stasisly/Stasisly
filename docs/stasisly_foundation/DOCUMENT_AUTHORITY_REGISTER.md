@@ -195,3 +195,12 @@ routes or remote execution.
 | `adr/ADR-F023-development-pre-execution-blocker-resolution.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Agent-ID reuse, unsafe fixtures and unverifiable evidence | ADR-F020/F021/F022 | Remote authorization or retention policy changes |
 | `development/development_fixture_manifest.json` | ACTIVE / NOT_EXECUTED_REMOTE | 6 | QA + Security | Evidence owner | No, machine-readable fixture contract | Broad or unowned fixture cleanup | ADR-F023 | Namespace, ownership or cleanup changes |
 | `development/schemas/*.schema.json` | ACTIVE / VALIDATED_LOCALLY | 6 | Release Engineering + Security | Evidence owner | No, machine-readable evidence contract | Secret-bearing or false remote evidence | ADR-F023 | Evidence field/state changes |
+
+## FOUNDATION-019A-R1 additions
+
+| Document | Status | Level | Owner | Approval | Normative use | Prevents | Depends on | Review trigger |
+|---|---|---:|---|---|---|---|---|---|
+| `implementation/FOUNDATION-019A-R1_REMOTE_EXECUTION_PREPARATION_CORRECTION.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Architecture + Security + QA + Release | Evidence owner | No, local evidence | Ungated remote fixture execution | ADR-F021/F023/F024 | Remote authorization or lifecycle change |
+| `adr/ADR-F024-development-remote-fixture-cleanup-and-execution-gating.md` | APPROVED / PREPARATION_IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Persistent synthetic residue and one-flag activation | ADR-F021/F023 | Fixture, cleanup, CORS, gate or retention change |
+| `development/development_remote_fixture_manifest.json` | ACTIVE / NOT_APPROVED | 6 | QA + Security + Release | Founder at runtime | No, machine-readable contract | Local fixture reuse and broad cleanup | ADR-F024 | Runtime approval or cleanup order change |
+| `development/development_remote_skip_gate.json` | ACTIVE / TESTS_DISABLED | 6 | Security + Release | Founder at runtime | No, machine-readable gate | Single-flag remote activation | ADR-F024 | Gate or skip state change |

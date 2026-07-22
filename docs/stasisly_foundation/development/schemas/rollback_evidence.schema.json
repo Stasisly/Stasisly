@@ -2,7 +2,7 @@
   "title": "Rollback evidence",
   "type": "object",
   "additionalProperties": false,
-  "required": ["environment", "projectIdentifier", "commitSha", "operatorReference", "founderApprovalReference", "migrationInventoryVersion", "functionInventoryVersion", "configurationInventoryVersion", "testResultSummary", "timestampStatus", "rollbackReference", "resultStatus"],
+  "required": ["environment", "projectIdentifier", "commitSha", "operatorReference", "founderApprovalReference", "migrationInventoryVersion", "functionInventoryVersion", "configurationInventoryVersion", "testResultSummary", "timestampStatus", "rollbackReference", "resultStatus", "fixtureSetupStatus", "fixtureNamespaceReference", "cleanupStatus", "cleanupCounts", "remoteSkipGateStatus", "corsValidationStatus", "dirtyRunBlockerStatus"],
   "properties": {
     "environment": {"const": "development"},
     "projectIdentifier": {"type": "string", "minLength": 1},
@@ -15,6 +15,13 @@
     "testResultSummary": {"type": "string", "minLength": 1},
     "timestampStatus": {"type": "string", "minLength": 1},
     "rollbackReference": {"type": "string", "minLength": 1},
-    "resultStatus": {"enum": ["NOT_STARTED", "PREPARED", "AUTHORIZED", "EXECUTED", "PASSED", "FAILED", "ROLLED_BACK"]}
+    "resultStatus": {"enum": ["NOT_STARTED", "PREPARED", "AUTHORIZED", "EXECUTED", "PASSED", "FAILED", "ROLLED_BACK"]},
+    "fixtureSetupStatus": {"enum": ["NOT_STARTED", "PASSED", "FAILED"]},
+    "fixtureNamespaceReference": {"type": "string", "minLength": 1},
+    "cleanupStatus": {"enum": ["NOT_STARTED", "PASSED", "FAILED"]},
+    "cleanupCounts": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"type": "integer", "minimum": 0}},
+    "remoteSkipGateStatus": {"enum": ["NOT_ENABLED", "READY", "BLOCKED"]},
+    "corsValidationStatus": {"enum": ["UNASSIGNED", "PASSED", "FAILED"]},
+    "dirtyRunBlockerStatus": {"enum": ["CLEAR", "BLOCKED"]}
   }
 }

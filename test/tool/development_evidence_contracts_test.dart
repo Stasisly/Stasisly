@@ -42,6 +42,27 @@ void main() {
     expect(findings.join(' '), contains('external execution'));
     expect(findings.join(' '), contains('Forbidden evidence field'));
   });
+
+  test('validator rejects a clean pass without successful cleanup', () {
+    final root = Directory.systemTemp.createTempSync('evidence-cleanup-test-');
+    addTearDown(() => root.deleteSync(recursive: true));
+    _copyContracts(root);
+    final file = File(
+      '${root.path}/docs/stasisly_foundation/development/evidence/'
+      'smoke_test_result.json',
+    );
+    file.writeAsStringSync(
+      file
+          .readAsStringSync()
+          .replaceFirst('"NOT_RUN"', '"PASSED_CLEAN"')
+          .replaceFirst('"NOT_STARTED"', '"PASSED"'),
+    );
+
+    expect(
+      DevelopmentEvidenceContractValidator(root).validate().join(' '),
+      contains('Smoke pass lacks successful cleanup'),
+    );
+  });
 }
 
 void _copyContracts(Directory root) {

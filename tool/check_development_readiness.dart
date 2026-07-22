@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'check_supabase_remote_context.dart';
 import 'development_evidence_contracts.dart';
+import 'development_remote_execution_contracts.dart';
 
 enum DevelopmentReadinessFindingKind {
   remoteContext,
@@ -23,6 +24,9 @@ enum DevelopmentReadinessFindingKind {
   invalidFixtureLifecycle,
   invalidEvidenceContracts,
   unclassifiedRetention,
+  invalidRemoteFixtureContract,
+  invalidRemoteCleanupContract,
+  invalidRemoteSkipGate,
 }
 
 final class DevelopmentReadinessFinding {
@@ -68,6 +72,12 @@ final class DevelopmentReadinessFinding {
       'Development evidence schemas or artifacts are invalid.',
     DevelopmentReadinessFindingKind.unclassifiedRetention =>
       'Conversation idempotency retention is not explicitly classified.',
+    DevelopmentReadinessFindingKind.invalidRemoteFixtureContract =>
+      'Development remote fixture contract is invalid.',
+    DevelopmentReadinessFindingKind.invalidRemoteCleanupContract =>
+      'Development remote cleanup contract is invalid.',
+    DevelopmentReadinessFindingKind.invalidRemoteSkipGate =>
+      'Development remote skip gate is invalid or enabled.',
   };
 }
 
@@ -184,7 +194,45 @@ final class DevelopmentReadinessChecker {
     _validateExamplesAndSecretNames(manifest, findings);
     _validateFlutterCredentialBoundary(findings);
     _validateExecutionBlockers(manifest, findings);
+    _validateRemotePreparation(manifest, findings);
     return findings;
+  }
+
+  void _validateRemotePreparation(
+    Map<String, Object?> manifest,
+    List<DevelopmentReadinessFinding> findings,
+  ) {
+    final allowedWebOrigins = manifest['allowedWebOrigins'];
+    final contractFindings = DevelopmentRemotePreparationValidator(
+      root,
+    ).validateContracts();
+    for (final finding in contractFindings) {
+      if (finding.toLowerCase().contains('skip gate')) {
+        _add(findings, DevelopmentReadinessFindingKind.invalidRemoteSkipGate);
+      } else if (finding.toLowerCase().contains('cleanup')) {
+        _add(
+          findings,
+          DevelopmentReadinessFindingKind.invalidRemoteCleanupContract,
+        );
+      } else {
+        _add(
+          findings,
+          DevelopmentReadinessFindingKind.invalidRemoteFixtureContract,
+        );
+      }
+    }
+    if (manifest['fixtureManifestVersion'] != 'FOUNDATION-019A-R1-v1' ||
+        manifest['cleanupContractVersion'] != 'FOUNDATION-019A-R1-v1' ||
+        manifest['remoteSkipGateVersion'] != 'FOUNDATION-019A-R1-v1' ||
+        manifest['allowedWebOriginStatus'] != 'UNASSIGNED' ||
+        allowedWebOrigins is! List ||
+        allowedWebOrigins.isNotEmpty ||
+        manifest['authorizedCommit'] != 'REQUIRES_NEW_FOUNDER_AUTHORIZATION' ||
+        manifest['operatorStatus'] != 'RUNTIME_INPUT_NOT_COMMITTED' ||
+        manifest['founderAuthorizationStatus'] != 'NOT_GRANTED' ||
+        manifest['remoteTests'] != 'NOT_ENABLED') {
+      _add(findings, DevelopmentReadinessFindingKind.invalidRemoteSkipGate);
+    }
   }
 
   void _validateExecutionBlockers(
@@ -211,7 +259,9 @@ final class DevelopmentReadinessChecker {
     );
     if (!smoke.existsSync() ||
         !smoke.readAsStringSync().contains('run_cycle 1') ||
-        !smoke.readAsStringSync().contains('run_cycle 2')) {
+        !smoke.readAsStringSync().contains('run_cycle 2') ||
+        !smoke.readAsStringSync().contains('run_failure_cycle 1') ||
+        !smoke.readAsStringSync().contains('run_failure_cycle 2')) {
       _add(findings, DevelopmentReadinessFindingKind.missingLocalCreateSmoke);
     }
     final evidenceFindings = DevelopmentEvidenceContractValidator(

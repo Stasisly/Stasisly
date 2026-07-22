@@ -340,3 +340,11 @@ exacto y repetible, y los contratos machine-readable de evidencia. La retención
 de idempotencia queda decidida como gate operativo posterior a la primera
 ejecución Development acotada. El manifest sigue `UNASSIGNED`, `NOT_GRANTED` y
 `NOT_EXECUTED`; FOUNDATION-019A requiere autorización separada.
+
+## FOUNDATION-019A-R1
+
+R1 separa manifests local/remoto, versiona cleanup exacto en éxito y fallo y
+adopta un gate remoto multifactor. CORS queda `UNASSIGNED`, los tests remotos
+siguen deshabilitados y la ejecución permanece bloqueada. Dos éxitos y dos
+fallos controlados se simularon localmente sin residuo. La autorización ligada a
+`70528c1` queda sustituida por el nuevo commit.

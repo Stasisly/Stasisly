@@ -18,12 +18,17 @@ import 'package:stasisly/features/chat_sessions/data/repositories/validating_own
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session_results.dart';
 
+import '../../../../tool/development_remote_execution_contracts.dart';
+
 void main() {
   test(
     'development remote read lists own sessions and messages without writes',
     () async {
       final env = _DevelopmentRemoteEnv.fromProcess();
-      if (!env.isComplete) {
+      final gate = DevelopmentRemoteGateInput.fromEnvironment(
+        Platform.environment,
+      );
+      if (!env.isComplete || !gate.isReady) {
         markTestSkipped(
           'Requires complete development remote read environment.',
         );
@@ -53,12 +58,12 @@ void main() {
       );
       expect(allResult, isA<ListOwnChatSessionsSuccess>());
       final allPage = (allResult as ListOwnChatSessionsSuccess).page;
-      expect(allPage.items, hasLength(2));
+      expect(allPage.items, hasLength(1));
       expect(
         allPage.items.where(
           (session) => session.status == ChatSessionStatus.archived,
         ),
-        hasLength(2),
+        hasLength(1),
       );
 
       final messagesRepository = LocalHttpOwnChatMessagesDataSource(
@@ -85,7 +90,7 @@ void main() {
         }
         totalMessages += messagesPage.items.length;
       }
-      expect(totalMessages, 2);
+      expect(totalMessages, 1);
     },
   );
 }

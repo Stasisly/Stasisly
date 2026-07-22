@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "FOUNDATION-019A-R1-v1",
+  "environment": "development",
+  "status": "CLASSIFIED_NOT_ENABLED",
+  "gateImplementation": "READY",
+  "requiredConditions": [
+    "remoteContextAuthorizationModeActive",
+    "exactProjectConfirmed",
+    "operatorConfirmed",
+    "founderAuthorizationReferencePresent",
+    "authorizedCommitMatchesHead",
+    "deploymentManifestApprovedAtRuntime",
+    "fixtureManifestApprovedAtRuntime",
+    "cleanupPreflightPassed",
+    "exactCorsOriginValidated",
+    "requiredConfigurationComplete",
+    "requiredSecretNamesAcknowledged"
+  ],
+  "singleBooleanSufficient": false,
+  "environmentAloneSufficient": false,
+  "testsEnabled": false
+}

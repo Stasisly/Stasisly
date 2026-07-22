@@ -19,12 +19,17 @@ import 'package:stasisly/features/chat_sessions/data/repositories/validating_own
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session.dart';
 import 'package:stasisly/features/chat_sessions/domain/entities/own_chat_session_results.dart';
 
+import '../../../../tool/development_remote_execution_contracts.dart';
+
 void main() {
   test(
     'development remote UX source is compatible with retained fixture without writes',
     () async {
       final env = _DevelopmentRemoteEnv.fromProcess();
-      if (!env.isComplete) {
+      final gate = DevelopmentRemoteGateInput.fromEnvironment(
+        Platform.environment,
+      );
+      if (!env.isComplete || !gate.isReady) {
         markTestSkipped(
           'Requires complete development remote read environment.',
         );
@@ -33,19 +38,19 @@ void main() {
 
       final fixture = await _loadRemoteReadFixture(env);
       expect(fixture.activeSessions, isEmpty);
-      expect(fixture.allSessions, hasLength(2));
+      expect(fixture.allSessions, hasLength(1));
       expect(
         fixture.allSessions.where(
           (session) => session.status == ChatSessionStatus.archived,
         ),
-        hasLength(2),
+        hasLength(1),
       );
       expect(
         fixture.messagesBySession.values.fold<int>(
           0,
           (count, messages) => count + messages.length,
         ),
-        2,
+        1,
       );
       for (final messages in fixture.messagesBySession.values) {
         expect(messages, isNotEmpty);

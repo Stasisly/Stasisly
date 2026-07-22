@@ -60,6 +60,19 @@ final class DevelopmentEvidenceContractValidator {
           findings.add('Evidence state enum is not closed: $name');
         }
       }
+      final required = (schema['required'] as List?)
+          ?.whereType<String>()
+          .toSet();
+      if (required == null ||
+          !required.containsAll(const {
+            'cleanupStatus',
+            'cleanupCounts',
+            'remoteSkipGateStatus',
+            'corsValidationStatus',
+            'dirtyRunBlockerStatus',
+          })) {
+        findings.add('Remote lifecycle evidence fields are missing: $name');
+      }
     }
 
     for (final name in evidenceNames) {
@@ -96,12 +109,19 @@ final class DevelopmentEvidenceContractValidator {
         'testResultSummary',
         'timestampStatus',
         'rollbackReference',
+        'fixtureSetupStatus',
+        'fixtureNamespaceReference',
+        'cleanupStatus',
+        'remoteSkipGateStatus',
+        'corsValidationStatus',
+        'dirtyRunBlockerStatus',
       ]) {
         final fieldValue = artifact[field];
         if (fieldValue is! String || fieldValue.trim().isEmpty) {
           findings.add('Missing evidence field $field: $name');
         }
       }
+      _validateCleanupFields(name, artifact, findings);
       if (artifact['projectIdentifier'] == 'UNASSIGNED' &&
           status != 'NOT_STARTED' &&
           status != 'PREPARED') {
@@ -114,13 +134,39 @@ final class DevelopmentEvidenceContractValidator {
         'safeResultCategory',
         'durationBucket',
         'cleanupStatus',
+        'cleanupCounts',
+        'remoteSkipGateStatus',
+        'corsValidationStatus',
+        'dirtyRunBlockerStatus',
         'evidenceReference',
       };
       if (!_sameStrings(artifact.keys, allowed)) {
         findings.add('Smoke result exposes unapproved fields: $name');
       }
+      _validateCleanupFields(name, artifact, findings);
+      if (artifact['safeResultCategory'] == 'PASSED_CLEAN' &&
+          artifact['cleanupStatus'] != 'PASSED') {
+        findings.add('Smoke pass lacks successful cleanup: $name');
+      }
     }
     _scanSafeValues(artifact, name, findings);
+  }
+
+  void _validateCleanupFields(
+    String name,
+    Map<String, Object?> artifact,
+    List<String> findings,
+  ) {
+    final counts = artifact['cleanupCounts'];
+    if (counts is! List ||
+        counts.length != 7 ||
+        counts.any((value) => value is! int || value < 0)) {
+      findings.add('Invalid cleanup count evidence: $name');
+    }
+    if (artifact['dirtyRunBlockerStatus'] == 'BLOCKED' &&
+        artifact['cleanupStatus'] != 'FAILED') {
+      findings.add('Dirty-run blocker lacks failed cleanup: $name');
+    }
   }
 
   void _validateFixture(List<String> findings) {

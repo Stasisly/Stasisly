@@ -304,3 +304,9 @@ evidencia validable. La retención idempotente queda como gate operativo antes d
 uso sostenido. El siguiente paquete posible es FOUNDATION-019A, pero solo tras
 orden separada con target, operador, commit, inventarios, rollback y referencia
 de autorización exactos.
+
+## Estado FOUNDATION-019A-R1
+
+Los blockers de fixture, cleanup y gate quedan resueltos localmente. El CORS
+exacto permanece como input externo explícito y bloquea ejecución. El siguiente
+gate exige nueva autorización Founder ligada al nuevo SHA; G8-G10 no se ejecutan.

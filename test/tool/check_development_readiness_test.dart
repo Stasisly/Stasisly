@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../tool/check_development_readiness.dart';
 import '../../tool/development_evidence_contracts.dart';
+import '../../tool/development_remote_execution_contracts.dart';
 
 void main() {
   test('repository Development readiness preflight passes without network', () {
@@ -170,7 +171,7 @@ void _createValidFixture(Directory root) {
     root,
     'supabase/tests/'
         'foundation_019c_development_fixture_lifecycle_http_test.sh',
-    'run_cycle 1\nrun_cycle 2\n',
+    'run_cycle 1\nrun_cycle 2\nrun_failure_cycle 1\nrun_failure_cycle 2\n',
   );
   _copyDirectory(
     Directory('docs/stasisly_foundation/development/schemas'),
@@ -187,6 +188,13 @@ void _createValidFixture(Directory root) {
       DevelopmentEvidenceContractValidator.fixtureManifestPath,
     ).readAsStringSync(),
   );
+  for (final path in [
+    DevelopmentRemotePreparationValidator.localManifestPath,
+    DevelopmentRemotePreparationValidator.remoteManifestPath,
+    DevelopmentRemotePreparationValidator.skipGatePath,
+  ]) {
+    _write(root, path, File(path).readAsStringSync());
+  }
 }
 
 void _copyDirectory(Directory source, Directory destination) {

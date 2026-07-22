@@ -165,7 +165,38 @@ run_cycle() {
   echo "FOUNDATION-019C local fixture cycle $cycle: PASS"
 }
 
+run_failure_cycle() {
+  local cycle=$1 flow_status
+  test "$(counts)" = "0|0|0|0|0|0|0"
+  set +e
+  (
+    db_psql -c "
+      insert into public.specialists(id,name,category,prompt_template,is_premium,is_active)
+      values('$specialist_id','$fixture_display_name','salud','{}',false,true);
+      insert into public.specialist_catalog(
+        id,specialist_id,slug,display_name,product_area,short_description,
+        publication_status,is_published,availability_status,access_tier,
+        supported_surfaces,is_conversable)
+      values(
+        '$catalog_id','$specialist_id','foundation-019c-fixture',
+        'Foundation 019C synthetic','stasis','Synthetic local fixture.',
+        'published',true,'available','free',array['product']::text[],true);
+    " >/dev/null
+    false # Controlled failure after partial setup.
+  )
+  flow_status=$?
+  set -e
+  test "$flow_status" -ne 0
+  cleanup_fixture
+  cleanup_fixture
+  test "$(counts)" = "0|0|0|0|0|0|0"
+  echo "FOUNDATION-019A-R1 controlled failure cleanup cycle $cycle: PASS"
+}
+
 run_cycle 1
 run_cycle 2
+run_failure_cycle 1
+run_failure_cycle 2
 test "$(counts)" = "0|0|0|0|0|0|0"
 echo "FOUNDATION-019C local create smoke and repeatability: PASS"
+echo "REMOTE_LIFECYCLE_CONTRACT_SIMULATED_LOCALLY"

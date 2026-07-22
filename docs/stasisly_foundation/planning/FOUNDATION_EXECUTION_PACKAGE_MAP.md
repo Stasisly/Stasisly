@@ -130,3 +130,4 @@ replace FOUNDATION-014-020 and each requires a separate approval.
 |---|---|---|---|
 | FOUNDATION-019C | Resolve catalog, create smoke, fixture, retention classification and evidence blockers locally | IMPLEMENTED_LOCALLY | Commit/push G7 |
 | FOUNDATION-019A | Exact Development remote execution authorization | NOT_AUTHORIZED | Separate Founder order and exact external context |
+| FOUNDATION-019A-R1 | Version remote fixture/cleanup/gate/CORS contracts | IMPLEMENTED_LOCALLY_PENDING_PUSH | New commit-specific Founder authorization and exact CORS |

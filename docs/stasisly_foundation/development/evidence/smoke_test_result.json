@@ -4,5 +4,9 @@
   "safeResultCategory": "NOT_RUN",
   "durationBucket": "NOT_MEASURED",
   "cleanupStatus": "NOT_STARTED",
+  "cleanupCounts": [0, 0, 0, 0, 0, 0, 0],
+  "remoteSkipGateStatus": "NOT_ENABLED",
+  "corsValidationStatus": "UNASSIGNED",
+  "dirtyRunBlockerStatus": "CLEAR",
   "evidenceReference": "UNASSIGNED"
 }

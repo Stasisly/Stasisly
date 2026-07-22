@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "FOUNDATION-019A-R1-v1",
+  "environment": "development",
+  "executionMode": "remoteControlled",
+  "projectResolution": "AUTHORIZED_RUNTIME_ONLY",
+  "dataClassification": "synthetic",
+  "parallelExecution": "FORBIDDEN",
+  "namespaceTemplate": "foundation-019a-r1-{runAlias}",
+  "setup": "VERSIONED_OPERATOR_RUNNER",
+  "cleanup": "MANDATORY_EXACT_RUN_NAMESPACE",
+  "cleanupOnSuccess": "REQUIRED",
+  "cleanupOnFailure": "REQUIRED",
+  "cleanupOrder": [
+    "messages",
+    "conversation_idempotency",
+    "chat_sessions",
+    "public_user_profile",
+    "specialist_catalog",
+    "specialists",
+    "synthetic_auth_user"
+  ],
+  "maximumRetention": "IMMEDIATE_AFTER_BOUNDED_RUN",
+  "partialSetupCleanup": "REQUIRED",
+  "idempotentCleanup": "REQUIRED",
+  "wildcardsAllowed": false,
+  "safeEvidence": "COUNT_BUCKETS_ONLY",
+  "approval": "NOT_GRANTED",
+  "execution": "NOT_EXECUTED"
+}
