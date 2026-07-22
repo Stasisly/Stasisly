@@ -13,8 +13,7 @@ void main() {
 
       expect(result, isA<SelectableSpecialistsSuccess>());
       final item = (result as SelectableSpecialistsSuccess).specialists.single;
-      expect(item.isDemo, isFalse);
-      expect(item.area, SelectableSpecialistArea.health);
+      expect(item.publicArea, SelectableSpecialistArea.health);
     });
 
     test('maps an approved empty catalog explicitly', () async {
@@ -25,9 +24,13 @@ void main() {
     });
 
     test('rejects extra or missing fields and extra envelope keys', () async {
-      final missing = _validItem()..remove('shortDescription');
+      final missing = _validItem()..remove('publicDescription');
 
       for (final forbidden in [
+        'id',
+        'area',
+        'shortDescription',
+        'isDemo',
         'specialist_id',
         'specialistId',
         'internalSpecialistId',
@@ -83,12 +86,11 @@ void main() {
         isA<SelectableSpecialistsContractViolation>(),
       );
       for (final requiredField in [
-        'id',
+        'selectableSpecialistId',
         'displayName',
-        'area',
-        'shortDescription',
+        'publicArea',
+        'publicDescription',
         'accessState',
-        'isDemo',
       ]) {
         final item = _validItem()..remove(requiredField);
         expect(
@@ -278,12 +280,11 @@ SelectableSpecialistsRemoteResponse _response({
 
 Map<String, dynamic> _validItem() {
   return {
-    'id': 'health-general',
+    'selectableSpecialistId': 'health-general',
     'displayName': 'Salud general',
-    'area': 'health',
-    'shortDescription': 'Orientación general.',
+    'publicArea': 'health',
+    'publicDescription': 'Orientación general.',
     'accessState': 'available',
-    'isDemo': false,
   };
 }
 

@@ -331,3 +331,12 @@ configuración y secretos por nombre, el manifest no aprobado y el preflight sin
 red. La preparación puede quedar `READY_FOR_EXPLICIT_REMOTE_AUTHORIZATION`, pero
 no identifica proyecto, no autoriza remoto y no inicia FOUNDATION-019A. Staging,
 Production, observabilidad remota, IA y Stasis Engine permanecen bloqueados.
+
+## FOUNDATION-019C
+
+FOUNDATION-019C adopta localmente el catálogo Product verificable, la selección
+manual y creación canónica desde Stasis, el lifecycle sintético con cleanup
+exacto y repetible, y los contratos machine-readable de evidencia. La retención
+de idempotencia queda decidida como gate operativo posterior a la primera
+ejecución Development acotada. El manifest sigue `UNASSIGNED`, `NOT_GRANTED` y
+`NOT_EXECUTED`; FOUNDATION-019A requiere autorización separada.

@@ -308,3 +308,14 @@ deuda residual.
   commit `UNASSIGNED` y ejecución/validación remota `NOT_EXECUTED`.
 - Migraciones 00001-00012 y ocho Edge Functions: `LOCALLY_AUDITED`.
 - Cinco skips aprobados: `CLASSIFIED_NOT_ENABLED`.
+
+## Adopción de FOUNDATION-019C
+
+- Catálogo runtime Product y Stasis create: `FOUNDATION_ADOPTED_LOCALLY`.
+- Contrato de fixture sintético: `FOUNDATION_ADOPTED`; cleanup:
+  `FOUNDATION_ADOPTED_LOCALLY`; remoto
+  `NOT_EXECUTED`.
+- Schemas de evidencia y smoke result: `FOUNDATION_ADOPTED_LOCALLY`.
+- Retención idempotente: `POST_DEVELOPMENT_OPERATIONAL_BLOCKER`; no cleanup
+  destructivo implementado.
+- Agent Registry, IA, Stasis Engine y datos reales: `NOT_ADOPTED`.

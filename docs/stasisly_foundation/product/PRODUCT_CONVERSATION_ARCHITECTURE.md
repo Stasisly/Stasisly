@@ -42,6 +42,16 @@ and content-only intents. This is not a Product screen or route. Backend
 ownership and policy remain authoritative; legacy chat and remote activation
 remain outside the composition.
 
+## FOUNDATION-019C selectable-specialist composition
+
+Product Stasis now composes a `SelectableSpecialistCatalog` through a typed
+controller and protected adapter. Its public reference is
+`selectableSpecialistId`, sourced from the backend catalog boundary. It is not
+an agent ID or internal specialist key. Create remains disabled until explicit
+selection; empty/error/blocked states have no demo fallback. Successful create
+uses the canonical application controller and Product detail route. Other area
+pages retain their blocked CTA state.
+
 ## Adopted presentation boundary
 
 Canonical Conversation presentation consumes only canonical domain/view

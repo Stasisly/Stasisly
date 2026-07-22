@@ -5,16 +5,15 @@ import 'package:stasisly/features/specialists/domain/entities/selectable_special
 void main() {
   test('selectable specialist exposes only catalog-safe semantics', () {
     const specialist = SelectableSpecialist(
-      id: 'nutrition-1',
+      selectableSpecialistId: 'nutrition-1',
       displayName: 'Nutrición',
-      area: SelectableSpecialistArea.nutrition,
-      shortDescription: 'Descripción segura.',
+      publicArea: SelectableSpecialistArea.nutrition,
+      publicDescription: 'Descripción segura.',
       accessState: SelectableSpecialistAccessState.available,
-      isDemo: false,
     );
 
-    expect(specialist.props, hasLength(6));
-    expect(specialist.area, SelectableSpecialistArea.nutrition);
+    expect(specialist.props, hasLength(5));
+    expect(specialist.publicArea, SelectableSpecialistArea.nutrition);
     expect(specialist.accessState, SelectableSpecialistAccessState.available);
   });
 }

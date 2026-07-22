@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../tool/check_development_readiness.dart';
+import '../../tool/development_evidence_contracts.dart';
 
 void main() {
   test('repository Development readiness preflight passes without network', () {
@@ -159,6 +160,43 @@ void _createValidFixture(Directory root) {
     DevelopmentReadinessChecker.manifestPath,
     File(DevelopmentReadinessChecker.manifestPath).readAsStringSync(),
   );
+  _write(
+    root,
+    'lib/features/specialists/domain/repositories/'
+        'selectable_specialists_repository.dart',
+    'abstract interface class SelectableSpecialistCatalog {}\n',
+  );
+  _write(
+    root,
+    'supabase/tests/'
+        'foundation_019c_development_fixture_lifecycle_http_test.sh',
+    'run_cycle 1\nrun_cycle 2\n',
+  );
+  _copyDirectory(
+    Directory('docs/stasisly_foundation/development/schemas'),
+    Directory('${root.path}/docs/stasisly_foundation/development/schemas'),
+  );
+  _copyDirectory(
+    Directory('docs/stasisly_foundation/development/evidence'),
+    Directory('${root.path}/docs/stasisly_foundation/development/evidence'),
+  );
+  _write(
+    root,
+    DevelopmentEvidenceContractValidator.fixtureManifestPath,
+    File(
+      DevelopmentEvidenceContractValidator.fixtureManifestPath,
+    ).readAsStringSync(),
+  );
+}
+
+void _copyDirectory(Directory source, Directory destination) {
+  for (final entity in source.listSync(recursive: true)) {
+    if (entity is! File) continue;
+    final relativePath = entity.path.substring(source.path.length + 1);
+    final target = File('${destination.path}/$relativePath');
+    target.parent.createSync(recursive: true);
+    target.writeAsStringSync(entity.readAsStringSync());
+  }
 }
 
 void _mutateManifest(

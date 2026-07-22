@@ -13,7 +13,13 @@ void main() {
   }
 
   test('product catalog has no direct Supabase, secrets or SQL coupling', () {
-    final files = dartFilesUnder(productCatalogDirectory).toList();
+    final files = dartFilesUnder(productCatalogDirectory)
+        .where(
+          (file) => !file.path.endsWith(
+            'http_selectable_specialists_remote_datasource.dart',
+          ),
+        )
+        .toList();
 
     expect(files, isNotEmpty);
     for (final file in files) {
@@ -35,6 +41,28 @@ void main() {
       ]) {
         expect(source, isNot(contains(forbidden)), reason: file.path);
       }
+    }
+
+    final httpAdapter = File(
+      'lib/features/specialists/data/datasources/'
+      'http_selectable_specialists_remote_datasource.dart',
+    ).readAsStringSync();
+    expect(httpAdapter, contains('SelectableSpecialistsHostPolicy'));
+    expect(httpAdapter, contains('SecureSessionTokenProvider'));
+    expect(httpAdapter, contains('followRedirects: false'));
+    expect(httpAdapter, contains("baseUri.host.endsWith('.supabase.co')"));
+    for (final forbidden in [
+      'supabase_flutter',
+      'Supabase.instance',
+      'functions.invoke',
+      'from(',
+      'rpc(',
+      'service_role',
+      'SUPABASE_SERVICE_ROLE_KEY',
+      'access_token',
+      'refresh_token',
+    ]) {
+      expect(httpAdapter, isNot(contains(forbidden)));
     }
   });
 
@@ -66,7 +94,9 @@ void main() {
         provider,
         contains('BackendBlockedSelectableSpecialistsRepository'),
       );
-      expect(provider, isNot(contains('SelectableSpecialistsRepositoryImpl')));
+      expect(provider, contains('SelectableSpecialistsRepositoryImpl'));
+      expect(provider, contains('HttpSelectableSpecialistsRemoteDataSource'));
+      expect(provider, contains('secureSessionTokenProvider'));
     },
   );
 

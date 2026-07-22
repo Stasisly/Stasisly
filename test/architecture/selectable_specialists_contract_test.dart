@@ -3,24 +3,27 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  test('catalog model contains only the approved six backend fields', () {
+  test('catalog model contains only the approved five backend fields', () {
     final model = File(
       'lib/features/specialists/data/models/selectable_specialist_model.dart',
     ).readAsStringSync();
 
     for (final field in [
-      "'id'",
+      "'selectableSpecialistId'",
       "'displayName'",
-      "'area'",
-      "'shortDescription'",
+      "'publicArea'",
+      "'publicDescription'",
       "'accessState'",
-      "'isDemo'",
     ]) {
       expect(model, contains(field));
     }
     for (final forbidden in [
       "'specialist_id'",
       "'specialistId'",
+      "'id'",
+      "'area'",
+      "'shortDescription'",
+      "'isDemo'",
       "'internalSpecialistId'",
       "'prompt'",
       "'prompt_template'",
@@ -64,7 +67,7 @@ void main() {
     }
   });
 
-  test('runtime provider applies boundary and remains backend blocked', () {
+  test('runtime provider applies boundary without demo fallback', () {
     final providers = File(
       'lib/features/specialists/presentation/providers/'
       'selectable_specialists_providers.dart',
@@ -76,6 +79,8 @@ void main() {
       providers,
       contains('BackendBlockedSelectableSpecialistsRepository'),
     );
-    expect(providers, isNot(contains('SelectableSpecialistsRepositoryImpl')));
+    expect(providers, contains('SelectableSpecialistsRepositoryImpl'));
+    expect(providers, contains('HttpSelectableSpecialistsRemoteDataSource'));
+    expect(providers, contains('secureSessionTokenProvider'));
   });
 }

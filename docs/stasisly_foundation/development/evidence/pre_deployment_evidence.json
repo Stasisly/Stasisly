@@ -1,0 +1,14 @@
+{
+  "environment": "development",
+  "projectIdentifier": "UNASSIGNED",
+  "commitSha": "UNASSIGNED",
+  "operatorReference": "UNASSIGNED",
+  "founderApprovalReference": "NOT_GRANTED",
+  "migrationInventoryVersion": "FOUNDATION-018-v1",
+  "functionInventoryVersion": "FOUNDATION-018-v1",
+  "configurationInventoryVersion": "FOUNDATION-018-v1",
+  "testResultSummary": "LOCAL_PREFLIGHT_PREPARED",
+  "timestampStatus": "NOT_RECORDED",
+  "rollbackReference": "ADR-F021",
+  "resultStatus": "PREPARED"
+}

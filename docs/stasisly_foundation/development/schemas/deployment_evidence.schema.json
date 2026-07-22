@@ -1,0 +1,20 @@
+{
+  "title": "Deployment evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["environment", "projectIdentifier", "commitSha", "operatorReference", "founderApprovalReference", "migrationInventoryVersion", "functionInventoryVersion", "configurationInventoryVersion", "testResultSummary", "timestampStatus", "rollbackReference", "resultStatus"],
+  "properties": {
+    "environment": {"const": "development"},
+    "projectIdentifier": {"type": "string", "minLength": 1},
+    "commitSha": {"type": "string", "minLength": 1},
+    "operatorReference": {"type": "string", "minLength": 1},
+    "founderApprovalReference": {"type": "string", "minLength": 1},
+    "migrationInventoryVersion": {"type": "string", "minLength": 1},
+    "functionInventoryVersion": {"type": "string", "minLength": 1},
+    "configurationInventoryVersion": {"type": "string", "minLength": 1},
+    "testResultSummary": {"type": "string", "minLength": 1},
+    "timestampStatus": {"type": "string", "minLength": 1},
+    "rollbackReference": {"type": "string", "minLength": 1},
+    "resultStatus": {"enum": ["NOT_STARTED", "PREPARED", "AUTHORIZED", "EXECUTED", "PASSED", "FAILED", "ROLLED_BACK"]}
+  }
+}

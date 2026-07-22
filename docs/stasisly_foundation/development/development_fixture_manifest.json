@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "fixtureSuiteId": "foundation-019c-conversation-development-synthetic",
+  "environment": "development",
+  "remoteExecution": "NOT_EXECUTED",
+  "namespace": "foundation_019c_fixture",
+  "requiredSyntheticUsers": ["conversation-owner"],
+  "requiredRoles": ["authenticated"],
+  "requiredSpecialistFixtures": ["published-free-product-conversable"],
+  "requiredConversationStates": ["active", "archived", "restored"],
+  "setupOperations": [
+    "create exact synthetic specialist fixture",
+    "create exact synthetic catalog fixture",
+    "create dedicated synthetic owner"
+  ],
+  "cleanupOperations": [
+    "delete exact synthetic messages",
+    "delete exact synthetic idempotency records",
+    "delete exact synthetic conversations",
+    "delete exact synthetic profile and auth user",
+    "delete exact synthetic catalog and specialist fixtures",
+    "verify zero residual counts"
+  ],
+  "maximumRetainedDuration": "UNTIL_BOUNDED_RUN_CLEANUP_COMPLETES",
+  "ownershipModel": "dedicated synthetic owner per bounded run",
+  "parallelizationPolicy": "SERIAL_ONLY_SHARED_NAMESPACE",
+  "cleanupContract": {
+    "localOnly": true,
+    "exactNamespaceRequired": true,
+    "wildcardsAllowed": false,
+    "idempotent": true,
+    "dependencySafeOrder": true,
+    "contentFreeCountsOnly": true
+  }
+}

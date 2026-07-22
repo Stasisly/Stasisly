@@ -77,17 +77,15 @@ Deno.test("accessState fails closed on contradictory values", async () => {
   );
 });
 
-Deno.test("contract emits exactly the six public fields", () => {
+Deno.test("contract emits exactly the five Product-safe fields", () => {
   const [item] = sanitizeCatalogRows([INTERNAL_ROW]);
   assertEquals(Object.keys(item).sort(), [
     "accessState",
-    "area",
     "displayName",
-    "id",
-    "isDemo",
-    "shortDescription",
+    "publicArea",
+    "publicDescription",
+    "selectableSpecialistId",
   ]);
-  assertEquals(item.isDemo, false);
   assertEquals(JSON.stringify(item).includes("specialist_id"), false);
   assertEquals(JSON.stringify(item).includes("prompt_template"), false);
 });

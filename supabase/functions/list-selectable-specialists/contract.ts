@@ -11,12 +11,11 @@ export const PUBLIC_AREAS = [
 export type PublicArea = typeof PUBLIC_AREAS[number];
 
 export interface SelectableSpecialist {
-  id: string;
+  selectableSpecialistId: string;
   displayName: string;
-  area: PublicArea;
-  shortDescription: string;
+  publicArea: PublicArea;
+  publicDescription: string;
   accessState: AccessState;
-  isDemo: false;
 }
 
 const EXPECTED_INTERNAL_KEYS = [
@@ -92,15 +91,14 @@ export function sanitizeCatalogRows(input: unknown): SelectableSpecialist[] {
     }
 
     return {
-      id: row.id as string,
+      selectableSpecialistId: row.id as string,
       displayName: row.display_name,
-      area: row.product_area,
-      shortDescription: row.short_description,
+      publicArea: row.product_area,
+      publicDescription: row.short_description,
       accessState: calculateAccessState(
         row.availability_status,
         row.access_tier,
       ),
-      isDemo: false,
     };
   });
 }

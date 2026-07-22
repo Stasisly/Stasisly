@@ -377,3 +377,10 @@ A local controlled package should close one coherent risk unit with
 implementation, tests, synchronized documentation, explicit commit and push.
 Remote operations, secrets, real data, production, irreversible migrations,
 access elevation and provider billing always require separate authorization.
+
+## FOUNDATION-019C remediation result
+
+DEV-B001, B002, B003, B005 and B006 are resolved locally. DEV-B004 is decided
+as a post-Development operational gate: bounded first-run fixtures remove their
+own idempotency rows, while sustained operation remains blocked pending a focal
+retention package. G0-G7 may close after commit/push; G8-G10 remain forbidden.

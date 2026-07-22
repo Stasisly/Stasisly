@@ -37,7 +37,9 @@ void main() {
         ),
       ],
     );
-    await tester.pumpWidget(MaterialApp.router(routerConfig: router));
+    await tester.pumpWidget(
+      ProviderScope(child: MaterialApp.router(routerConfig: router)),
+    );
 
     expect(find.text('Tu espacio central'), findsOneWidget);
     expect(find.textContaining('no están activas'), findsOneWidget);

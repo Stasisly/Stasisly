@@ -13,16 +13,18 @@ void main() {
     expect(result, isA<SelectableSpecialistsDemo>());
     final items = (result as SelectableSpecialistsDemo).specialists;
     expect(items, hasLength(6));
-    expect(items.every((item) => item.isDemo), isTrue);
     expect(
       items.every(
         (item) => item.accessState == SelectableSpecialistAccessState.demoOnly,
       ),
       isTrue,
     );
-    expect(items.map((item) => item.id).toSet(), hasLength(items.length));
+    expect(
+      items.map((item) => item.selectableSpecialistId).toSet(),
+      hasLength(items.length),
+    );
     final descriptions = items
-        .map((item) => item.shortDescription.toLowerCase())
+        .map((item) => item.publicDescription.toLowerCase())
         .join(' ');
     expect(descriptions, isNot(contains('diagnóstico')));
     expect(descriptions, isNot(contains('tratamiento')));
@@ -37,7 +39,9 @@ void main() {
     final items = (result as SelectableSpecialistsDemo).specialists;
     expect(items, hasLength(2));
     expect(
-      items.every((item) => item.area == SelectableSpecialistArea.wellness),
+      items.every(
+        (item) => item.publicArea == SelectableSpecialistArea.wellness,
+      ),
       isTrue,
     );
   });

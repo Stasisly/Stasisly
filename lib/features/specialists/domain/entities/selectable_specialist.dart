@@ -12,28 +12,25 @@ enum SelectableSpecialistAccessState {
 /// Minimal catalog item. It carries no prompt, authority or execution data.
 class SelectableSpecialist extends Equatable {
   const SelectableSpecialist({
-    required this.id,
+    required this.selectableSpecialistId,
     required this.displayName,
-    required this.area,
-    required this.shortDescription,
+    required this.publicArea,
+    required this.publicDescription,
     required this.accessState,
-    required this.isDemo,
   });
 
-  final String id;
+  final String selectableSpecialistId;
   final String displayName;
-  final SelectableSpecialistArea area;
-  final String shortDescription;
+  final SelectableSpecialistArea publicArea;
+  final String publicDescription;
   final SelectableSpecialistAccessState accessState;
-  final bool isDemo;
 
   @override
   List<Object?> get props => [
-    id,
+    selectableSpecialistId,
     displayName,
-    area,
-    shortDescription,
+    publicArea,
+    publicDescription,
     accessState,
-    isDemo,
   ];
 }

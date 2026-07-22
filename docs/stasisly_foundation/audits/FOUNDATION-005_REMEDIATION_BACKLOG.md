@@ -142,3 +142,12 @@ legacy consumer migration and remote remain unimplemented;
 P2 maps primarily to FOUNDATION-015, 018 and 020; P3 to FOUNDATION-016, 017 and
 later release work; P4 remains deferred. No P1-P4 implementation or remote
 rollout is authorized by this mapping.
+
+## FOUNDATION-019C remediation evidence
+
+The Product catalog/create gap is remediated locally without Agent Registry or
+agent-ID reuse. Development fixture cleanup and evidence validation are now
+executable local contracts. Idempotency retention remains explicit P2
+operational debt before sustained Development use; no migration, maintenance
+function or destructive cleanup is introduced. Remote rollout remains outside
+this remediation.

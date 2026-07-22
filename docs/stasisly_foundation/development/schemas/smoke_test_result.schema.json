@@ -1,0 +1,14 @@
+{
+  "title": "Safe smoke-test result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["testId", "status", "safeResultCategory", "durationBucket", "cleanupStatus", "evidenceReference"],
+  "properties": {
+    "testId": {"type": "string", "minLength": 1},
+    "status": {"enum": ["NOT_STARTED", "PREPARED", "AUTHORIZED", "EXECUTED", "PASSED", "FAILED", "ROLLED_BACK"]},
+    "safeResultCategory": {"enum": ["NOT_RUN", "SUCCESS", "SAFE_FAILURE", "ROLLED_BACK"]},
+    "durationBucket": {"enum": ["NOT_MEASURED", "UNDER_10_SECONDS", "UNDER_1_MINUTE", "ONE_TO_FIVE_MINUTES", "OVER_FIVE_MINUTES"]},
+    "cleanupStatus": {"enum": ["NOT_REQUIRED", "NOT_STARTED", "PASSED", "FAILED"]},
+    "evidenceReference": {"type": "string", "minLength": 1}
+  }
+}

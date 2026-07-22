@@ -295,3 +295,12 @@ F8 adopta localmente la frontera owner-scoped de listado, lectura, archivo,
 restauración e historia. El lifecycle active/archived es coherente, acotado y
 atómico sobre persistencia transitoria. FOUNDATION-013D author/provenance,
 retirada legacy, Product UI/routing y G8-G10 permanecen pendientes.
+
+## Estado FOUNDATION-019C
+
+Los blockers previos a una primera ejecución Development quedan resueltos
+localmente: catálogo verificable, create Stasis, fixture/cleanup repetible y
+evidencia validable. La retención idempotente queda como gate operativo antes de
+uso sostenido. El siguiente paquete posible es FOUNDATION-019A, pero solo tras
+orden separada con target, operador, commit, inventarios, rollback y referencia
+de autorización exactos.

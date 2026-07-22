@@ -2,12 +2,11 @@ import 'package:stasisly/features/specialists/domain/entities/selectable_special
 
 class SelectableSpecialistModel {
   const SelectableSpecialistModel({
-    required this.id,
+    required this.selectableSpecialistId,
     required this.displayName,
-    required this.area,
-    required this.shortDescription,
+    required this.publicArea,
+    required this.publicDescription,
     required this.accessState,
-    required this.isDemo,
   });
 
   factory SelectableSpecialistModel.fromBackendJson(Map<String, dynamic> json) {
@@ -17,56 +16,51 @@ class SelectableSpecialistModel {
       throw const FormatException('Unexpected specialist catalog fields.');
     }
 
-    final id = _nonEmptyString(json['id'], 'id');
-    final displayName = _nonEmptyString(json['displayName'], 'displayName');
-    final shortDescription = _nonEmptyString(
-      json['shortDescription'],
-      'shortDescription',
+    final selectableSpecialistId = _nonEmptyString(
+      json['selectableSpecialistId'],
+      'selectableSpecialistId',
     );
-    final area = _parseArea(json['area']);
+    final displayName = _nonEmptyString(json['displayName'], 'displayName');
+    final publicDescription = _nonEmptyString(
+      json['publicDescription'],
+      'publicDescription',
+    );
+    final publicArea = _parseArea(json['publicArea']);
     final accessState = _parseAccessState(json['accessState']);
-    final isDemo = json['isDemo'];
-    if (isDemo is! bool) {
-      throw const FormatException('Invalid specialist isDemo.');
-    }
-    if (isDemo || accessState == SelectableSpecialistAccessState.demoOnly) {
+    if (accessState == SelectableSpecialistAccessState.demoOnly) {
       throw const FormatException('Backend catalog cannot claim demo data.');
     }
 
     return SelectableSpecialistModel(
-      id: id,
+      selectableSpecialistId: selectableSpecialistId,
       displayName: displayName,
-      area: area,
-      shortDescription: shortDescription,
+      publicArea: publicArea,
+      publicDescription: publicDescription,
       accessState: accessState,
-      isDemo: isDemo,
     );
   }
 
   static const Set<String> allowedBackendFields = {
-    'id',
+    'selectableSpecialistId',
     'displayName',
-    'area',
-    'shortDescription',
+    'publicArea',
+    'publicDescription',
     'accessState',
-    'isDemo',
   };
 
-  final String id;
+  final String selectableSpecialistId;
   final String displayName;
-  final SelectableSpecialistArea area;
-  final String shortDescription;
+  final SelectableSpecialistArea publicArea;
+  final String publicDescription;
   final SelectableSpecialistAccessState accessState;
-  final bool isDemo;
 
   SelectableSpecialist toEntity() {
     return SelectableSpecialist(
-      id: id,
+      selectableSpecialistId: selectableSpecialistId,
       displayName: displayName,
-      area: area,
-      shortDescription: shortDescription,
+      publicArea: publicArea,
+      publicDescription: publicDescription,
       accessState: accessState,
-      isDemo: isDemo,
     );
   }
 

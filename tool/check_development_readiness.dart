@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'check_supabase_remote_context.dart';
+import 'development_evidence_contracts.dart';
 
 enum DevelopmentReadinessFindingKind {
   remoteContext,
@@ -17,6 +18,11 @@ enum DevelopmentReadinessFindingKind {
   incompleteSkipClassification,
   secretValueDetected,
   serverCredentialInFlutter,
+  missingCatalogContract,
+  missingLocalCreateSmoke,
+  invalidFixtureLifecycle,
+  invalidEvidenceContracts,
+  unclassifiedRetention,
 }
 
 final class DevelopmentReadinessFinding {
@@ -52,6 +58,16 @@ final class DevelopmentReadinessFinding {
       'A versionable example or manifest contains a secret-like value.',
     DevelopmentReadinessFindingKind.serverCredentialInFlutter =>
       'Server-only credential configuration detected in Flutter source.',
+    DevelopmentReadinessFindingKind.missingCatalogContract =>
+      'Canonical selectable-specialist catalog contract is missing.',
+    DevelopmentReadinessFindingKind.missingLocalCreateSmoke =>
+      'Local canonical create smoke test is missing.',
+    DevelopmentReadinessFindingKind.invalidFixtureLifecycle =>
+      'Development fixture lifecycle is invalid.',
+    DevelopmentReadinessFindingKind.invalidEvidenceContracts =>
+      'Development evidence schemas or artifacts are invalid.',
+    DevelopmentReadinessFindingKind.unclassifiedRetention =>
+      'Conversation idempotency retention is not explicitly classified.',
   };
 }
 
@@ -167,7 +183,57 @@ final class DevelopmentReadinessChecker {
     _validateInventory(manifest, findings);
     _validateExamplesAndSecretNames(manifest, findings);
     _validateFlutterCredentialBoundary(findings);
+    _validateExecutionBlockers(manifest, findings);
     return findings;
+  }
+
+  void _validateExecutionBlockers(
+    Map<String, Object?> manifest,
+    List<DevelopmentReadinessFinding> findings,
+  ) {
+    final catalog = File(
+      _resolve(
+        'lib/features/specialists/domain/repositories/'
+        'selectable_specialists_repository.dart',
+      ),
+    );
+    if (!catalog.existsSync() ||
+        !catalog.readAsStringSync().contains(
+          'abstract interface class SelectableSpecialistCatalog',
+        )) {
+      _add(findings, DevelopmentReadinessFindingKind.missingCatalogContract);
+    }
+    final smoke = File(
+      _resolve(
+        'supabase/tests/'
+        'foundation_019c_development_fixture_lifecycle_http_test.sh',
+      ),
+    );
+    if (!smoke.existsSync() ||
+        !smoke.readAsStringSync().contains('run_cycle 1') ||
+        !smoke.readAsStringSync().contains('run_cycle 2')) {
+      _add(findings, DevelopmentReadinessFindingKind.missingLocalCreateSmoke);
+    }
+    final evidenceFindings = DevelopmentEvidenceContractValidator(
+      root,
+    ).validate();
+    if (evidenceFindings.isNotEmpty) {
+      _add(findings, DevelopmentReadinessFindingKind.invalidEvidenceContracts);
+    }
+    final fixture = File(
+      _resolve(DevelopmentEvidenceContractValidator.fixtureManifestPath),
+    );
+    if (!fixture.existsSync()) {
+      _add(findings, DevelopmentReadinessFindingKind.invalidFixtureLifecycle);
+    }
+    final retention = manifest['idempotencyRetention'];
+    if (retention is! Map<String, Object?> ||
+        retention['status'] != 'DECIDED' ||
+        retention['classification'] != 'POST_DEVELOPMENT_OPERATIONAL_BLOCKER' ||
+        retention['duration'] != 'NOT_ARBITRARILY_ASSIGNED' ||
+        retention['destructiveCleanupImplemented'] != false) {
+      _add(findings, DevelopmentReadinessFindingKind.unclassifiedRetention);
+    }
   }
 
   void _validateStates(

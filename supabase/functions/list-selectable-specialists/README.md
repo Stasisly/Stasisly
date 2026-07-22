@@ -29,12 +29,11 @@ Un filtro inválido devuelve `400 catalogInvalidArea`. Cada elemento exitoso
 contiene exactamente:
 
 ```text
-id
+selectableSpecialistId
 displayName
-area
-shortDescription
+publicArea
+publicDescription
 accessState
-isDemo
 ```
 
 Cualquier parámetro distinto de `area`, incluido `user_id`, rol, entitlement o

@@ -186,3 +186,12 @@ routes or remote execution.
 - `UNKNOWN` values in inventories remain unknown until verified.
 - Archived Discovery documents are collectively level 7, `ARCHIVED`,
   non-normative and indexed separately.
+
+## FOUNDATION-019C additions
+
+| Document | Status | Level | Owner | Approval | Normative use | Prevents | Depends on | Review trigger |
+|---|---|---:|---|---|---|---|---|---|
+| `implementation/FOUNDATION-019C_DEVELOPMENT_EXECUTION_BLOCKER_RESOLUTION.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Architecture + Security + QA + Documentation | Founder | No, implementation evidence | Decisions invented during remote execution | ADR-F021/F023; FOUNDATION-018 | Catalog, fixtures, retention or evidence changes |
+| `adr/ADR-F023-development-pre-execution-blocker-resolution.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Agent-ID reuse, unsafe fixtures and unverifiable evidence | ADR-F020/F021/F022 | Remote authorization or retention policy changes |
+| `development/development_fixture_manifest.json` | ACTIVE / NOT_EXECUTED_REMOTE | 6 | QA + Security | Evidence owner | No, machine-readable fixture contract | Broad or unowned fixture cleanup | ADR-F023 | Namespace, ownership or cleanup changes |
+| `development/schemas/*.schema.json` | ACTIVE / VALIDATED_LOCALLY | 6 | Release Engineering + Security | Evidence owner | No, machine-readable evidence contract | Secret-bearing or false remote evidence | ADR-F023 | Evidence field/state changes |

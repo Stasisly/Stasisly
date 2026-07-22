@@ -74,7 +74,7 @@ Approver: Founder for adoption/removal decisions
 | `lib/features/conversations/**` | Canonical local domain/port/adapters/application/presentation/Product screens | Product Conversation boundary | FOUNDATION_ADOPTED_LOCALLY / SOLE_PRODUCT_ARCHITECTURE | Opaque ID, trusted owner, canonical Message metadata, typed controllers/providers and active local Product screens | Remote activation remains | 013A-016-R1 complete locally | Remote gates remain separate |
 | `lib/features/chat_sessions/**` | Local-safe/dev-only adapter source | Conversation application/client boundary | TRANSITIONAL_ADAPTER_SOURCE | Explicit ID, backend-blocked states, owner-safe DTO, stable cursor, lifecycle source | Session terminology, dev hosts, no Product route | 013A-013C complete | Canonical lifecycle adapter implemented; physical naming retained |
 | `lib/features/chat_messages/**` | Local-safe/dev-only adapter source | Product Message boundary | TRANSITIONAL_ADAPTER_SOURCE | Content-only send, explicit ID, sanitization, metadata validation | Session/role vocabulary; Stasis/specialist authoring absent | 013A and 013D complete | Canonical fail-closed adapter implemented |
-| `lib/features/specialists/**` | Sanitized catalog boundary | Product specialist selection | ADAPT | `selectableSpecialistId`, six-field public model | Runtime/catalog bridge absent | 013A contract complete; later Engine package | Public reference adopted; no internal IDs |
+| `lib/features/specialists/**` | Product-safe runtime catalog boundary | Product specialist selection | FOUNDATION_ADOPTED_LOCALLY | `selectableSpecialistId`, exact five-field public model | Remote activation remains gated | 019C complete locally; later Engine package separate | Public reference and Stasis create adopted; no internal IDs |
 | `lib/features/orchestrator/**` | Legacy blocked prototype | No Product/Engine reuse | REWRITE_CANDIDATE / HISTORICAL_ONLY | No executable invariant adopted | Static agents, route confusion, not Stasis Engine | 014 for Engine design | Separate Agent Constitution; no legacy import |
 | Eight Edge Functions | Local Product boundaries | Versioned Conversation APIs | ADAPT / KEEP_TEMPORARILY | Backend authz, ownership, DTOs, cursors; canonical Message metadata/filtering | Compatibility names remain; Stasis/specialist writes absent | 013D complete | API parity, negative auth, rollback |
 | `chat_sessions` table | Transitional persistence | Conversation storage or migration source | ADAPT | Owner, timestamps, archive, count, stable ID | Specialist binding, limited lifecycle, legacy name | 013B + data review | Approved migration/compatibility plan |
@@ -94,3 +94,14 @@ No `ADAPT_CANDIDATE` becomes Foundation-adopted by documentation alone. Each
 asset requires an approved child package, explicit files, security/privacy/UX
 review as applicable, tests, compatibility evidence and rollback. `REMOVE`
 requires replacement implementation and Founder-approved Product transition.
+
+## FOUNDATION-019C adoption delta
+
+| Asset | Decision | Evidence | Remaining boundary |
+|---|---|---|---|
+| Selectable specialist Product port/controller/adapter | FOUNDATION_ADOPTED_LOCALLY | Strict five-field contract and Product tests | Remote use separately authorized |
+| Stasis catalog-driven create | FOUNDATION_ADOPTED_LOCALLY | Explicit selection and canonical navigation tests | Other Product-area CTAs blocked |
+| Development fixture contract | FOUNDATION_ADOPTED | Versioned lifecycle and ownership contract | No remote fixture executable |
+| Local fixture cleanup | FOUNDATION_ADOPTED_LOCALLY | Two local API cycles and exact cleanup | Remote cleanup remains unauthorized |
+| Remote evidence schemas | FOUNDATION_ADOPTED_LOCALLY | Closed schemas/templates and negative validator tests | External evidence NOT_STARTED |
+| Idempotency retention cleanup | DEFER / GATED | Audit lacks approved duration/actor/cutoff | Resolve before sustained operation |

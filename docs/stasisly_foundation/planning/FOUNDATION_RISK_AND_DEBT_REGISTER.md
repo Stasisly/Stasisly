@@ -157,3 +157,15 @@ FOUNDATION-013C closes local list/read owner isolation and reversible archive
 lifecycle risk with restricted RPCs and opaque denial. CONV-01 remains open for
 Message provenance, Product wiring and legacy retirement; CONV-02 remains open
 for deletion, retention, sharing, attachments, memory and research.
+
+## FOUNDATION-019C risk update
+
+- Closed: invented/agent-derived Product specialist identity.
+- Closed locally: create smoke blocked by missing runtime catalog.
+- Closed locally: unowned, non-repeatable synthetic fixture cleanup.
+- Closed locally: secret-bearing or structurally unverifiable evidence model.
+- Open, classified: idempotency retention before sustained Development
+  operation. Severity medium, growth and replay risk; owner Backend + Security;
+  unblock with approved duration, eligible states, actor, bounded batch, locking
+  and audit contract. No arbitrary retention or destructive job is approved.
+- Remote target/operator/secrets/execution remain unknown and unauthorized.

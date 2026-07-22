@@ -171,3 +171,19 @@ its approved scope but remains not implemented.
 - Stop on dirty/unexpected baseline, missing evidence, unapproved authority,
   real-data need, remote need or irreversible migration.
 - A rollback never reconnects an unsafe legacy route or weakens deny-all.
+
+## FOUNDATION-019C dependency and gates
+
+```text
+FOUNDATION-018 + ADR-F021 + remote-context SAFE
+→ verified catalog source
+→ Product port/controller/Stasis selection
+→ local canonical lifecycle x2 + exact cleanup
+→ evidence schemas + no-network validation
+→ ADR-F023 + synchronized documentation
+→ G7 commit/push
+→ FOUNDATION-019A remains separately gated
+```
+
+Retention for sustained operation is a post-Development operational gate, not
+permission to run destructive cleanup or to bypass fixture cleanup.

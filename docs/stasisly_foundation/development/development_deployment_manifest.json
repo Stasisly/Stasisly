@@ -76,14 +76,33 @@
     "conversations": "NOT_EXECUTED",
     "conversationDetailOpacity": "NOT_EXECUTED",
     "activeArchivedList": "NOT_EXECUTED",
-    "createWithSelectableSpecialistId": "BLOCKED_BY_RUNTIME_CATALOG",
+    "createWithSelectableSpecialistId": "NOT_EXECUTED",
     "sendIdempotency": "NOT_EXECUTED",
     "archive": "NOT_EXECUTED",
     "restore": "NOT_EXECUTED",
     "foreignOwnerDenial": "NOT_EXECUTED",
     "legacyChatAbsent": "NOT_EXECUTED",
     "orchestratorBlocked": "NOT_EXECUTED",
-    "environmentEnforcement": "NOT_EXECUTED"
+    "environmentEnforcement": "NOT_EXECUTED",
+    "cleanup": "NOT_EXECUTED"
+  },
+  "localBlockerResolution": {
+    "runtimeSelectableSpecialistCatalog": "FOUNDATION_ADOPTED_LOCALLY",
+    "stasisCreateFlow": "FOUNDATION_ADOPTED_LOCALLY",
+    "createSmoke": "LOCALLY_VALIDATED",
+    "fixtureContract": "FOUNDATION_ADOPTED",
+    "localFixtureCleanup": "FOUNDATION_ADOPTED_LOCALLY",
+    "fixtureRepeatability": "VALIDATED_LOCALLY",
+    "evidenceSchemas": "FOUNDATION_ADOPTED_LOCALLY",
+    "smokeResultModel": "FOUNDATION_ADOPTED"
+  },
+  "idempotencyRetention": {
+    "status": "DECIDED",
+    "classification": "POST_DEVELOPMENT_OPERATIONAL_BLOCKER",
+    "duration": "NOT_ARBITRARILY_ASSIGNED",
+    "destructiveCleanupImplemented": false,
+    "boundedDevelopmentRunsRequireExplicitFixtureCleanup": true,
+    "futureDecisionRequiredBeforeSustainedOperation": true
   },
   "remoteSkips": [
     {
@@ -154,6 +173,7 @@
   ],
   "rollbackReferences": [
     "docs/stasisly_foundation/implementation/FOUNDATION-018_DEVELOPMENT_ENVIRONMENT_AND_CONTROLLED_REMOTE_PREPARATION.md",
-    "docs/stasisly_foundation/adr/ADR-F021-development-environment-and-controlled-remote-preparation.md"
+    "docs/stasisly_foundation/adr/ADR-F021-development-environment-and-controlled-remote-preparation.md",
+    "docs/stasisly_foundation/adr/ADR-F023-development-pre-execution-blocker-resolution.md"
   ]
 }

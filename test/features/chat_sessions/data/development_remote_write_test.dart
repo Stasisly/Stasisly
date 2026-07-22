@@ -76,7 +76,6 @@ void main() {
         (specialist) =>
             specialist.displayName == 'Synthetic Development Specialist',
       );
-      expect(syntheticSpecialist.isDemo, isFalse);
       expect(
         syntheticSpecialist.accessState,
         SelectableSpecialistAccessState.available,
@@ -96,7 +95,7 @@ void main() {
       );
 
       final createResult = await sessionsRepository.createOwnChatSession(
-        selectableSpecialistId: syntheticSpecialist.id,
+        selectableSpecialistId: syntheticSpecialist.selectableSpecialistId,
         operationAttemptId: OperationAttemptId('development_create_0001'),
       );
       expect(createResult, isA<CreateOwnChatSessionSuccess>());

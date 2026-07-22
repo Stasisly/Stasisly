@@ -193,3 +193,12 @@ state-based idempotent RPC transitions. Archived Message history remains
 readable by its owner while send remains denied until restore. Session-named
 compatibility endpoints and tables remain transitional; Product routes, delete,
 pendingDeletion, provenance and remote rollout remain absent.
+
+## FOUNDATION-019C catalog and smoke contracts
+
+`list-selectable-specialists` returns exactly `selectableSpecialistId`,
+`displayName`, `publicArea`, `publicDescription` and `accessState`. The ID is the
+backend-resolved Product catalog reference accepted by canonical create; no
+runtime agent identity is exposed. The local lifecycle smoke proves create,
+list/read, user-only send and replay, archive, archived historical read, denied
+archived send, restore and deterministic cleanup through canonical APIs.

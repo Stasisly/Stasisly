@@ -41,7 +41,10 @@ class SelectableSpecialistsRepositoryImpl
           })
           .toList(growable: false);
 
-      if (specialists.map((item) => item.id).toSet().length !=
+      if (specialists
+              .map((item) => item.selectableSpecialistId)
+              .toSet()
+              .length !=
           specialists.length) {
         return const SelectableSpecialistsContractViolation();
       }
