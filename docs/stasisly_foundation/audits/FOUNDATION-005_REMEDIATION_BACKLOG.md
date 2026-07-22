@@ -1,5 +1,14 @@
 # FOUNDATION-005 Remediation Backlog
 
+## FOUNDATION-018 update
+
+Development preparation is locally controlled by ADR-F021, an explicit
+fail-closed client target, migration/function/secret-name inventories, rollback
+and smoke plans, an unapproved manifest and a no-network preflight. This does
+not close remote-state uncertainty: exact target/operator, runtime catalog,
+remote RLS/grants/CORS/auth/backups and smoke evidence remain gated before any
+execution.
+
 ## FOUNDATION-019B remediation evidence
 
 Closed locally: ignored Supabase CLI metadata could provide an implicit remote

@@ -324,9 +324,10 @@ La documentación demuestra decisiones.
 El código y las pruebas demuestran implementación.
 ```
 
-## Próximo gate
+## Estado operativo actual
 
-Tras FOUNDATION-013F-R1, `FOUNDATION-013F` implementó localmente la application
-layer y la composición Product inactiva. El siguiente gate no está autorizado:
-requiere aprobación separada y no puede activar rutas Product, Engine, remoto ni
-iniciar FOUNDATION-014 implícitamente.
+FOUNDATION-018 adopta localmente el contrato de Development, los inventarios de
+configuración y secretos por nombre, el manifest no aprobado y el preflight sin
+red. La preparación puede quedar `READY_FOR_EXPLICIT_REMOTE_AUTHORIZATION`, pero
+no identifica proyecto, no autoriza remoto y no inicia FOUNDATION-019A. Staging,
+Production, observabilidad remota, IA y Stasis Engine permanecen bloqueados.

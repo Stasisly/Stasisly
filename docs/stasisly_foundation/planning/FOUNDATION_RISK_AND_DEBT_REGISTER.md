@@ -1,5 +1,18 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-018 residual risk
+
+- Implicit CLI targeting is mitigated locally by FOUNDATION-019B and integrated
+  preflight; remote context must remain absent.
+- Environment mismatch and partial configuration are blocked locally by an
+  explicit backend target and non-echoing startup validation.
+- Exact Development target/operator/commit and all remote evidence remain
+  unassigned/not executed.
+- Runtime catalog readiness for create smoke and idempotency retention are open
+  dependencies, not hidden completion.
+- Remote RLS, grant, CORS, auth, backup and smoke verification are
+  `REQUIRED_BEFORE_REMOTE_EXECUTION`.
+
 ## FOUNDATION-019B risk update
 
 Closed locally: ignored Supabase CLI link metadata, implicit remote targeting,

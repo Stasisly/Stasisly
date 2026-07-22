@@ -1,5 +1,13 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Estado FOUNDATION-018
+
+El contrato Development, la selección explícita fail-closed, los inventarios,
+el manifest no aprobado y el preflight local sin red quedan adoptados. El nivel
+máximo es `READY_FOR_EXPLICIT_REMOTE_AUTHORIZATION`; no existe target, aprobación
+ni ejecución remota. El siguiente paquete debe decidir separadamente entre
+FOUNDATION-019A y FOUNDATION-019C, sin iniciar ninguno implícitamente.
+
 ## Estado FOUNDATION-019B
 
 El contexto remoto implícito de Supabase CLI queda aislado localmente y

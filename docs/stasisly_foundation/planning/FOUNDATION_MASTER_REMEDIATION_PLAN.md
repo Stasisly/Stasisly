@@ -1,5 +1,13 @@
 # Foundation Master Remediation Plan
 
+## FOUNDATION-018 Development readiness
+
+FOUNDATION-018 completes local Development preparation: explicit fail-closed
+configuration, classified secret ownership, migration/function inventories,
+rollback/smoke plans, an unapproved manifest and a no-network preflight. This
+closes G0-G7 only after full local validation and publication. G8-G10, any exact
+remote target and all remote execution remain unauthorized.
+
 ## FOUNDATION-019B completion
 
 The ignored CLI state that blocked FOUNDATION-018 is isolated without remote

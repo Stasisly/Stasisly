@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "environment": "development",
+  "projectIdentifier": "UNASSIGNED",
+  "expectedCommit": "UNASSIGNED",
+  "approval": "NOT_GRANTED",
+  "deployment": "NOT_EXECUTED",
+  "remoteValidation": "NOT_EXECUTED",
+  "routeStatus": "PLANNED_FOR_DEVELOPMENT",
+  "expectedMigrations": [
+    "00001_initial_schema.sql",
+    "00002_enable_rls_public_users_deny_all.sql",
+    "00003_public_users_owner_profile_minimal.sql",
+    "00004_create_specialist_catalog_deny_all.sql",
+    "00005_harden_chat_sessions_deny_all.sql",
+    "00006_harden_messages_deny_all.sql",
+    "00007_create_send_user_message_core_rpc.sql",
+    "00008_prepare_product_catalog_schema.sql",
+    "00009_harden_legacy_public_tables_deny_all.sql",
+    "00010_add_conversation_idempotency_and_transactional_creation.sql",
+    "00011_add_canonical_conversation_read_and_lifecycle.sql",
+    "00012_add_message_author_provenance_and_visibility.sql"
+  ],
+  "expectedFunctions": [
+    "archive-own-chat-session",
+    "create-own-chat-session",
+    "list-own-chat-sessions",
+    "list-selectable-specialists",
+    "list-session-messages",
+    "read-own-conversation",
+    "restore-own-conversation",
+    "send-user-message"
+  ],
+  "requiredPublicConfigurationNames": [
+    "APP_MODE",
+    "BACKEND_TARGET_ENVIRONMENT",
+    "SUPABASE_URL",
+    "SUPABASE_ANON_KEY",
+    "ENABLE_REMOTE_BACKEND",
+    "ENABLE_REAL_AUTH",
+    "ENABLE_REAL_DATA",
+    "ENABLE_CONVERSATIONS_ROUTE",
+    "ALLOW_SYNTHETIC_DATA",
+    "ALLOW_DEV_ROUTES"
+  ],
+  "requiredSecretNames": [
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "SYNTHETIC_ACCESS_TOKEN"
+  ],
+  "edgeFunctionConfigurationNames": [
+    "SUPABASE_URL",
+    "SUPABASE_ANON_KEY",
+    "SUPABASE_SERVICE_ROLE_KEY",
+    "STASISLY_ALLOW_LOCAL_ONLY",
+    "STASISLY_ALLOW_DEVELOPMENT_REMOTE",
+    "STASISLY_RUNTIME_MODE",
+    "CORS_ALLOWED_ORIGINS"
+  ],
+  "capabilities": {
+    "productRoutes": "PLANNED_FOR_DEVELOPMENT",
+    "authentication": "PLANNED_FOR_DEVELOPMENT",
+    "conversationListRead": "PLANNED_FOR_DEVELOPMENT",
+    "conversationCreate": "PLANNED_FOR_DEVELOPMENT",
+    "messageSend": "PLANNED_FOR_DEVELOPMENT",
+    "archiveRestore": "PLANNED_FOR_DEVELOPMENT",
+    "observability": "NOT_AUTHORIZED",
+    "ai": "DISABLED",
+    "stasisEngine": "DISABLED",
+    "payments": "DISABLED",
+    "notifications": "DISABLED",
+    "adminOperations": "NOT_AUTHORIZED"
+  },
+  "smokeTests": {
+    "authentication": "NOT_EXECUTED",
+    "stasis": "NOT_EXECUTED",
+    "conversations": "NOT_EXECUTED",
+    "conversationDetailOpacity": "NOT_EXECUTED",
+    "activeArchivedList": "NOT_EXECUTED",
+    "createWithSelectableSpecialistId": "BLOCKED_BY_RUNTIME_CATALOG",
+    "sendIdempotency": "NOT_EXECUTED",
+    "archive": "NOT_EXECUTED",
+    "restore": "NOT_EXECUTED",
+    "foreignOwnerDenial": "NOT_EXECUTED",
+    "legacyChatAbsent": "NOT_EXECUTED",
+    "orchestratorBlocked": "NOT_EXECUTED",
+    "environmentEnforcement": "NOT_EXECUTED"
+  },
+  "remoteSkips": [
+    {
+      "testName": "2B-IV-H local integration requires the approved local harness",
+      "sourcePath": "test/integration/two_b_iv_h_local_http_chat_sessions_integration_test.dart",
+      "reason": "Requires an explicitly started local HTTP harness.",
+      "requiredEnvironment": "local",
+      "requiredConfigurationNames": ["SUPABASE_URL"],
+      "requiredSecretNames": ["SYNTHETIC_ACCESS_TOKEN"],
+      "dataCreated": "synthetic local conversation fixture",
+      "cleanup": "transactional local harness cleanup",
+      "risk": "accidental non-local target",
+      "activationGate": "explicit local harness",
+      "status": "CLASSIFIED_NOT_ENABLED"
+    },
+    {
+      "testName": "2B-V-G local integration requires the approved local harness",
+      "sourcePath": "test/integration/two_b_v_g_local_http_chat_messages_integration_test.dart",
+      "reason": "Requires an explicitly started local HTTP harness.",
+      "requiredEnvironment": "local",
+      "requiredConfigurationNames": ["SUPABASE_URL"],
+      "requiredSecretNames": ["SYNTHETIC_ACCESS_TOKEN"],
+      "dataCreated": "synthetic local message fixture",
+      "cleanup": "transactional local harness cleanup",
+      "risk": "accidental non-local target",
+      "activationGate": "explicit local harness",
+      "status": "CLASSIFIED_NOT_ENABLED"
+    },
+    {
+      "testName": "development remote read lists own sessions and messages without writes",
+      "sourcePath": "test/features/chat_sessions/data/development_remote_read_test.dart",
+      "reason": "Remote Development execution is not authorized.",
+      "requiredEnvironment": "development",
+      "requiredConfigurationNames": ["APP_MODE", "SUPABASE_URL", "ENABLE_REMOTE_BACKEND", "ENABLE_REAL_AUTH", "ENABLE_REAL_DATA", "ALLOW_DEV_ROUTES", "ENABLE_CONVERSATIONS_ROUTE"],
+      "requiredSecretNames": ["SYNTHETIC_ACCESS_TOKEN"],
+      "dataCreated": "none; read-only synthetic fixture",
+      "cleanup": "not applicable",
+      "risk": "remote read against an unapproved target",
+      "activationGate": "founder authorization and exact Development target",
+      "status": "CLASSIFIED_NOT_ENABLED"
+    },
+    {
+      "testName": "development remote write creates sends lists and archives synthetic session",
+      "sourcePath": "test/features/chat_sessions/data/development_remote_write_test.dart",
+      "reason": "Remote Development writes are not authorized.",
+      "requiredEnvironment": "development",
+      "requiredConfigurationNames": ["APP_MODE", "SUPABASE_URL", "ENABLE_REMOTE_BACKEND", "ENABLE_REAL_AUTH", "ENABLE_REAL_DATA", "ALLOW_DEV_ROUTES", "ENABLE_CONVERSATIONS_ROUTE"],
+      "requiredSecretNames": ["SYNTHETIC_ACCESS_TOKEN"],
+      "dataCreated": "synthetic conversation and user message",
+      "cleanup": "mandatory owner-scoped fixture cleanup",
+      "risk": "remote mutation or incomplete cleanup",
+      "activationGate": "founder authorization, exact target and cleanup rehearsal",
+      "status": "CLASSIFIED_NOT_ENABLED"
+    },
+    {
+      "testName": "development remote UX source is compatible with retained fixture without writes",
+      "sourcePath": "test/features/chat_messages/presentation/development_remote_ux_read_test.dart",
+      "reason": "Remote Development UX validation is not authorized.",
+      "requiredEnvironment": "development",
+      "requiredConfigurationNames": ["APP_MODE", "SUPABASE_URL", "ENABLE_REMOTE_BACKEND", "ENABLE_REAL_AUTH", "ENABLE_REAL_DATA", "ALLOW_DEV_ROUTES", "ENABLE_CONVERSATIONS_ROUTE"],
+      "requiredSecretNames": ["SYNTHETIC_ACCESS_TOKEN"],
+      "dataCreated": "none; read-only synthetic fixture",
+      "cleanup": "not applicable",
+      "risk": "remote read or stale transitional expectation",
+      "activationGate": "founder authorization and canonical Product review",
+      "status": "CLASSIFIED_NOT_ENABLED"
+    }
+  ],
+  "rollbackReferences": [
+    "docs/stasisly_foundation/implementation/FOUNDATION-018_DEVELOPMENT_ENVIRONMENT_AND_CONTROLLED_REMOTE_PREPARATION.md",
+    "docs/stasisly_foundation/adr/ADR-F021-development-environment-and-controlled-remote-preparation.md"
+  ]
+}

@@ -298,3 +298,13 @@ deuda residual.
   elimina identidad ni historia y restore no crea una Conversation nueva.
 - API backend Conversation: `PARTIALLY_IMPLEMENTED`; author/provenance, UI,
   rutas, delete/pendingDeletion y remoto siguen `NOT_IMPLEMENTED`.
+
+## Adopción de FOUNDATION-018
+
+- Configuración Flutter explícita y fail-closed: `FOUNDATION_ADOPTED_LOCALLY`;
+  no activa remoto.
+- Preflight Development sin red: `FOUNDATION_ADOPTED_LOCALLY`.
+- Manifest Development: `FOUNDATION_ADOPTED_LOCALLY_UNAPPROVED`, con target y
+  commit `UNASSIGNED` y ejecución/validación remota `NOT_EXECUTED`.
+- Migraciones 00001-00012 y ocho Edge Functions: `LOCALLY_AUDITED`.
+- Cinco skips aprobados: `CLASSIFIED_NOT_ENABLED`.

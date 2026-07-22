@@ -1,5 +1,13 @@
 # Foundation Execution Package Map
 
+## Current package boundary
+
+`FOUNDATION-018` prepares Development locally and may reach
+`READY_FOR_EXPLICIT_REMOTE_AUTHORIZATION`. It does not start `FOUNDATION-019A`.
+The next separately approved package is either 019A for exact Founder-authorized
+execution or 019C for remaining readiness blockers. Staging/Production are not
+valid continuations.
+
 ## FOUNDATION-019B package state
 
 ```text

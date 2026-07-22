@@ -12,6 +12,9 @@ enum AppRuntimeMode {
   production,
 }
 
+/// Explicit classification of the configured backend target.
+enum BackendTargetEnvironment { unassigned, development, staging, production }
+
 /// Raised when a runtime mode cannot start safely.
 class AppConfigurationException implements Exception {
   const AppConfigurationException(this.message);
@@ -28,6 +31,7 @@ class AppEnvironment {
     required this.mode,
     this.supabaseUrl = '',
     this.supabaseAnonKey = '',
+    this.backendTargetEnvironment = BackendTargetEnvironment.unassigned,
     this.remoteBackendEnabled = false,
     this.realAuthEnabled = false,
     this.realDataEnabled = false,
@@ -40,6 +44,9 @@ class AppEnvironment {
       mode: parseMode(Env.appMode),
       supabaseUrl: Env.supabaseUrl,
       supabaseAnonKey: Env.supabaseAnonKey,
+      backendTargetEnvironment: parseBackendTargetEnvironment(
+        Env.backendTargetEnvironment,
+      ),
       remoteBackendEnabled: Env.enableRemoteBackend,
       realAuthEnabled: Env.enableRealAuth,
       realDataEnabled: Env.enableRealData,
@@ -51,6 +58,7 @@ class AppEnvironment {
   final AppRuntimeMode mode;
   final String supabaseUrl;
   final String supabaseAnonKey;
+  final BackendTargetEnvironment backendTargetEnvironment;
   final bool remoteBackendEnabled;
   final bool realAuthEnabled;
   final bool realDataEnabled;
@@ -65,7 +73,11 @@ class AppEnvironment {
   bool get isProduction => mode == AppRuntimeMode.production;
   bool get usesBackend => !(isLocal || isDemo);
   bool get allowsRemoteSupabase =>
-      isDevelopment && remoteBackendEnabled && !realDataEnabled;
+      isDevelopment &&
+      backendTargetEnvironment == BackendTargetEnvironment.development &&
+      remoteBackendEnabled &&
+      !realDataEnabled &&
+      _hasCompleteRemoteConfiguration;
   bool get allowsRealAuth => allowsRemoteSupabase && realAuthEnabled;
   bool get allowsRealData => false;
   bool get allowsSyntheticData => !isProduction;
@@ -87,7 +99,15 @@ class AppEnvironment {
     bool backendActivationApproved = false,
     bool productionActivationApproved = false,
   }) {
-    if (isLocal || isDemo) return;
+    if (isLocal || isDemo) {
+      if (remoteBackendEnabled ||
+          backendTargetEnvironment != BackendTargetEnvironment.unassigned) {
+        throw const AppConfigurationException(
+          'Configuración bloqueada: el modo local/demo no puede seleccionar un backend remoto.',
+        );
+      }
+      return;
+    }
 
     if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
       throw AppConfigurationException(
@@ -95,15 +115,37 @@ class AppEnvironment {
       );
     }
 
-    if (!backendActivationApproved && !allowsRemoteSupabase) {
+    if (!_hasCompleteRemoteConfiguration) {
       throw AppConfigurationException(
-        '${_modeLabel()} bloqueado por ADR-006 hasta aprobar auth, RLS y pruebas.',
+        '${_modeLabel()} bloqueado: configuración remota inválida o placeholder.',
       );
     }
 
-    if (isProduction && !productionActivationApproved) {
+    if (isProduction) {
+      if (!productionActivationApproved) {
+        throw const AppConfigurationException('Production bloqueado.');
+      }
       throw const AppConfigurationException(
-        'Production bloqueado por ADR-006 hasta aprobar gates de producción.',
+        'Production bloqueado: este paquete no autoriza activación.',
+      );
+    }
+
+    if (!isDevelopment ||
+        backendTargetEnvironment != BackendTargetEnvironment.development) {
+      throw AppConfigurationException(
+        '${_modeLabel()} bloqueado: el entorno de aplicación y el destino backend no coinciden.',
+      );
+    }
+
+    if (!allowsRemoteSupabase) {
+      throw const AppConfigurationException(
+        'Development bloqueado: configuración incompleta o capacidades no autorizadas.',
+      );
+    }
+
+    if (!backendActivationApproved) {
+      throw const AppConfigurationException(
+        'Development bloqueado: requiere autorización remota explícita.',
       );
     }
   }
@@ -118,10 +160,43 @@ class AppEnvironment {
       'backendreal' ||
       'backend_real' => AppRuntimeMode.backendReal,
       'production' || 'produccion' => AppRuntimeMode.production,
-      _ => throw AppConfigurationException(
-        'APP_MODE no válido: "$value". Usa local, demo, development, staging, backendReal o production.',
+      _ => throw const AppConfigurationException(
+        'APP_MODE no válido. Usa local, demo, development, staging, backendReal o production.',
       ),
     };
+  }
+
+  static BackendTargetEnvironment parseBackendTargetEnvironment(String value) {
+    return switch (value.trim().toLowerCase()) {
+      '' || 'unassigned' => BackendTargetEnvironment.unassigned,
+      'development' => BackendTargetEnvironment.development,
+      'staging' => BackendTargetEnvironment.staging,
+      'production' => BackendTargetEnvironment.production,
+      _ => throw const AppConfigurationException(
+        'BACKEND_TARGET_ENVIRONMENT no válido.',
+      ),
+    };
+  }
+
+  bool get _hasCompleteRemoteConfiguration {
+    if (_isPlaceholder(supabaseUrl) || _isPlaceholder(supabaseAnonKey)) {
+      return false;
+    }
+    final uri = Uri.tryParse(supabaseUrl);
+    return uri != null &&
+        uri.scheme == 'https' &&
+        uri.host.isNotEmpty &&
+        uri.userInfo.isEmpty &&
+        supabaseAnonKey.trim().isNotEmpty;
+  }
+
+  static bool _isPlaceholder(String value) {
+    final normalized = value.trim().toLowerCase();
+    return normalized.isEmpty ||
+        normalized.contains('placeholder') ||
+        normalized.contains('example') ||
+        normalized.contains('<') ||
+        normalized.contains('your_');
   }
 
   String _modeLabel() => switch (mode) {

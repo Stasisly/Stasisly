@@ -27,17 +27,58 @@ void main() {
     });
 
     test('unknown APP_MODE fails closed', () {
+      const invalidValue = 'prod-real-sensitive-value';
       expect(
-        () => AppEnvironment.parseMode('prod-real'),
+        () => AppEnvironment.parseMode(invalidValue),
         throwsA(
           isA<AppConfigurationException>().having(
             (error) => error.message,
             'message',
-            contains('APP_MODE no válido'),
+            allOf(
+              contains('APP_MODE no válido'),
+              isNot(contains(invalidValue)),
+            ),
           ),
         ),
       );
     });
+
+    test(
+      'parses explicit backend target and rejects unknown values safely',
+      () {
+        expect(
+          AppEnvironment.parseBackendTargetEnvironment(''),
+          BackendTargetEnvironment.unassigned,
+        );
+        expect(
+          AppEnvironment.parseBackendTargetEnvironment('development'),
+          BackendTargetEnvironment.development,
+        );
+        expect(
+          AppEnvironment.parseBackendTargetEnvironment('staging'),
+          BackendTargetEnvironment.staging,
+        );
+        expect(
+          AppEnvironment.parseBackendTargetEnvironment('production'),
+          BackendTargetEnvironment.production,
+        );
+
+        const invalidValue = 'private-target-value';
+        expect(
+          () => AppEnvironment.parseBackendTargetEnvironment(invalidValue),
+          throwsA(
+            isA<AppConfigurationException>().having(
+              (error) => error.message,
+              'message',
+              allOf(
+                contains('BACKEND_TARGET_ENVIRONMENT no válido'),
+                isNot(contains(invalidValue)),
+              ),
+            ),
+          ),
+        );
+      },
+    );
 
     test('empty APP_MODE keeps documented compatibility default', () {
       expect(AppEnvironment.parseMode(''), AppRuntimeMode.demo);
@@ -123,6 +164,7 @@ void main() {
           mode: AppRuntimeMode.development,
           supabaseUrl: 'https://project.supabase.co',
           supabaseAnonKey: 'public-test-key',
+          backendTargetEnvironment: BackendTargetEnvironment.development,
           remoteBackendEnabled: true,
           realAuthEnabled: true,
         );
@@ -130,6 +172,7 @@ void main() {
           mode: AppRuntimeMode.development,
           supabaseUrl: 'https://project.supabase.co',
           supabaseAnonKey: 'public-test-key',
+          backendTargetEnvironment: BackendTargetEnvironment.development,
           remoteBackendEnabled: true,
           realAuthEnabled: true,
           realDataEnabled: true,
@@ -156,6 +199,7 @@ void main() {
             mode: mode,
             supabaseUrl: 'https://project.supabase.co',
             supabaseAnonKey: 'public-test-key',
+            backendTargetEnvironment: BackendTargetEnvironment.development,
             remoteBackendEnabled: true,
             realAuthEnabled: true,
           );
@@ -174,6 +218,7 @@ void main() {
             mode: AppRuntimeMode.development,
             supabaseUrl: 'https://project.supabase.co',
             supabaseAnonKey: 'public-test-key',
+            backendTargetEnvironment: BackendTargetEnvironment.development,
             remoteBackendEnabled: false,
             realAuthEnabled: true,
           ),
@@ -200,6 +245,7 @@ void main() {
         mode: AppRuntimeMode.development,
         supabaseUrl: 'https://project.supabase.co',
         supabaseAnonKey: 'public-test-key',
+        backendTargetEnvironment: BackendTargetEnvironment.development,
         remoteBackendEnabled: true,
         realAuthEnabled: false,
       );
@@ -214,6 +260,7 @@ void main() {
         mode: AppRuntimeMode.development,
         supabaseUrl: 'https://project.supabase.co',
         supabaseAnonKey: 'public-test-key',
+        backendTargetEnvironment: BackendTargetEnvironment.development,
         remoteBackendEnabled: true,
         realAuthEnabled: true,
         devRoutesEnabled: false,
@@ -265,15 +312,128 @@ void main() {
       }
     });
 
-    test('development remote gate can pass startup validation', () {
+    test('development remote startup requires separate explicit approval', () {
       const environment = AppEnvironment(
         mode: AppRuntimeMode.development,
         supabaseUrl: 'https://project.supabase.co',
         supabaseAnonKey: 'public-test-key',
+        backendTargetEnvironment: BackendTargetEnvironment.development,
         remoteBackendEnabled: true,
       );
 
-      expect(environment.validateForStartup, returnsNormally);
+      expect(
+        environment.validateForStartup,
+        throwsA(isA<AppConfigurationException>()),
+      );
+      expect(
+        () => environment.validateForStartup(backendActivationApproved: true),
+        returnsNormally,
+      );
+    });
+
+    test('development placeholders and partial configuration are blocked', () {
+      const environments = [
+        AppEnvironment(
+          mode: AppRuntimeMode.development,
+          supabaseUrl: 'https://placeholder.invalid',
+          supabaseAnonKey: 'public-test-key',
+          backendTargetEnvironment: BackendTargetEnvironment.development,
+          remoteBackendEnabled: true,
+        ),
+        AppEnvironment(
+          mode: AppRuntimeMode.development,
+          supabaseUrl: 'https://development.invalid',
+          supabaseAnonKey: 'your_anon_key',
+          backendTargetEnvironment: BackendTargetEnvironment.development,
+          remoteBackendEnabled: true,
+        ),
+        AppEnvironment(
+          mode: AppRuntimeMode.development,
+          supabaseUrl: 'http://development.invalid',
+          supabaseAnonKey: 'public-test-key',
+          backendTargetEnvironment: BackendTargetEnvironment.development,
+          remoteBackendEnabled: true,
+        ),
+      ];
+
+      for (final environment in environments) {
+        expect(environment.allowsRemoteSupabase, isFalse);
+        expect(
+          () => environment.validateForStartup(backendActivationApproved: true),
+          throwsA(isA<AppConfigurationException>()),
+        );
+      }
+    });
+
+    test('client environment and explicit backend target must match', () {
+      const developmentWithProductionTarget = AppEnvironment(
+        mode: AppRuntimeMode.development,
+        supabaseUrl: 'https://development.invalid',
+        supabaseAnonKey: 'public-test-key',
+        backendTargetEnvironment: BackendTargetEnvironment.production,
+        remoteBackendEnabled: true,
+      );
+      const productionWithDevelopmentTarget = AppEnvironment(
+        mode: AppRuntimeMode.production,
+        supabaseUrl: 'https://development.invalid',
+        supabaseAnonKey: 'public-test-key',
+        backendTargetEnvironment: BackendTargetEnvironment.development,
+        remoteBackendEnabled: true,
+      );
+
+      expect(
+        () => developmentWithProductionTarget.validateForStartup(
+          backendActivationApproved: true,
+        ),
+        throwsA(isA<AppConfigurationException>()),
+      );
+      expect(
+        () => productionWithDevelopmentTarget.validateForStartup(
+          backendActivationApproved: true,
+          productionActivationApproved: true,
+        ),
+        throwsA(isA<AppConfigurationException>()),
+      );
+    });
+
+    test('local and demo cannot select remote configuration implicitly', () {
+      const environments = [
+        AppEnvironment(
+          mode: AppRuntimeMode.local,
+          backendTargetEnvironment: BackendTargetEnvironment.development,
+        ),
+        AppEnvironment(mode: AppRuntimeMode.demo, remoteBackendEnabled: true),
+      ];
+
+      for (final environment in environments) {
+        expect(
+          environment.validateForStartup,
+          throwsA(isA<AppConfigurationException>()),
+        );
+      }
+    });
+
+    test('configuration errors do not expose configured values', () {
+      const url = 'https://private-value.invalid';
+      const key = 'private-key-value';
+      const environment = AppEnvironment(
+        mode: AppRuntimeMode.development,
+        supabaseUrl: url,
+        supabaseAnonKey: key,
+        backendTargetEnvironment: BackendTargetEnvironment.production,
+        remoteBackendEnabled: true,
+      );
+
+      expect(
+        () => environment.validateForStartup(backendActivationApproved: true),
+        throwsA(
+          isA<AppConfigurationException>().having(
+            (error) => error.message,
+            'message',
+            allOf(isNot(contains(url)), isNot(contains(key))),
+          ),
+        ),
+      );
     });
 
     test('backend-like modes without configuration are blocked explicitly', () {
@@ -329,7 +489,7 @@ void main() {
             isA<AppConfigurationException>().having(
               (error) => error.message,
               'message',
-              contains('bloqueado por ADR-006'),
+              contains('bloqueado'),
             ),
           ),
         );
@@ -339,8 +499,9 @@ void main() {
     test('production remains blocked without production gates', () {
       const environment = AppEnvironment(
         mode: AppRuntimeMode.production,
-        supabaseUrl: 'https://example.invalid',
+        supabaseUrl: 'https://production.invalid',
         supabaseAnonKey: 'public-test-key',
+        backendTargetEnvironment: BackendTargetEnvironment.production,
       );
 
       expect(

@@ -21,6 +21,12 @@ abstract final class Env {
     'SUPABASE_ANON_KEY',
   );
 
+  /// Explicit backend target classification; never inferred from the URL.
+  static const String backendTargetEnvironment = String.fromEnvironment(
+    'BACKEND_TARGET_ENVIRONMENT',
+    defaultValue: 'unassigned',
+  );
+
   /// Explicit gate for remote backend usage in development.
   static const bool enableRemoteBackend = bool.fromEnvironment(
     'ENABLE_REMOTE_BACKEND',

@@ -18,7 +18,14 @@ void main() {
     expect(source, contains('development'));
     expect(source, contains('staging'));
     expect(source, contains('backendReal'));
-    expect(source, contains('isDevelopment && remoteBackendEnabled'));
+    expect(source, contains('BackendTargetEnvironment'));
+    expect(
+      source,
+      contains(
+        'backendTargetEnvironment == BackendTargetEnvironment.development',
+      ),
+    );
+    expect(source, contains('remoteBackendEnabled'));
     expect(source, contains('allowsRemoteSupabase && realAuthEnabled'));
     expect(source, contains('allowsRealData => false'));
     expect(source, contains('allowsConversationsRoute => false'));

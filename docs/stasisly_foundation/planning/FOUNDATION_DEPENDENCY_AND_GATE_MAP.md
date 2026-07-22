@@ -1,5 +1,19 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-018 gates
+
+```text
+FOUNDATION-017 + FOUNDATION-019B
+-> remote-context SAFE
+-> explicit config + inventories + unapproved manifest
+-> local Flutter/Deno/SQL/security validation
+-> documentation + ADR-F021 + publication
+-> READY_FOR_EXPLICIT_REMOTE_AUTHORIZATION
+```
+
+Remote project identification, secrets, migration/function execution and smoke
+tests remain beyond G7 and require a new Founder authorization.
+
 ## FOUNDATION-019B gate result
 
 FOUNDATION-018 correctly stopped on active ignored CLI link metadata.
