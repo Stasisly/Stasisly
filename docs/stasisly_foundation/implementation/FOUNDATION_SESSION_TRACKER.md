@@ -1,5 +1,22 @@
 # Foundation Session Tracker
 
+## FOUNDATION-019A-R2C status
+
+```text
+Phase A: IMPLEMENTED_LOCALLY
+dirty attempt: diag-20260723-002
+exact namespace: foundation-019a-r1-diag-20260723-002
+possible residue: synthetic Auth user only
+remote residue: UNKNOWN
+remote cleanup: NOT_AUTHORIZED
+new fixtures: BLOCKED
+readiness: FOUNDATION-019A-R2C BLOCKED_REMOTE_CLEANUP_CONTRACT
+Flutter: 713 pass / 5 approved skips / 0 failures
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after reset without seed
+remote-context: SAFE
+```
+
 ## FOUNDATION-019B closure
 
 ```text

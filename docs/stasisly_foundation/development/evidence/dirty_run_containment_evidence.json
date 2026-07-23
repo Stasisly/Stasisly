@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "attemptAlias": "diag-20260723-002",
+  "containmentAuthorizationReference": "NOT_GRANTED",
+  "commit": "d94292a",
+  "environmentCategory": "development",
+  "targetAlias": "AUTHORIZED_DEVELOPMENT_TARGET",
+  "operatorAlias": "NOT_AUTHORIZED",
+  "resourceCategoriesInspected": [],
+  "preCleanupCounts": "NOT_INSPECTED",
+  "cleanupResult": "NOT_EXECUTED",
+  "postCleanupCounters": {
+    "messages": null,
+    "conversationIdempotency": null,
+    "chatSessions": null,
+    "publicUserProfiles": null,
+    "specialistCatalogEntries": null,
+    "specialists": null,
+    "syntheticAuthUsers": null
+  },
+  "containmentStatus": "BLOCKED_REMOTE_CLEANUP_CONTRACT",
+  "cliIsolationStatus": "SAFE"
+}

@@ -41,8 +41,32 @@ void main() {
       expect(runner, contains('FAILED_CLEAN'));
       expect(runner, contains('FAILED_DIRTY_BLOCKING'));
       expect(runner, contains(r'exit "${original_status:-1}"'));
+      expect(runner, contains('delete_auth_user_exact'));
+      expect(runner, contains('200|404'));
     },
   );
+
+  test('diagnostic evidence is isolated from Dart build output', () {
+    expect(runner, contains(r'--output-file "$diagnostic_output"'));
+    expect(runner, contains(r'>"$diagnostic_build_stdout"'));
+    expect(runner, contains(r'2>"$diagnostic_build_stderr"'));
+    expect(
+      runner,
+      contains(
+        r'test "$(head -n 1 "$diagnostic_output")" = '
+        'SAFE_HTTP_DIAGNOSTIC_BEGIN',
+      ),
+    );
+    expect(
+      runner,
+      contains(
+        r'test "$(tail -n 1 "$diagnostic_output")" = '
+        'SAFE_HTTP_DIAGNOSTIC_END',
+      ),
+    );
+    expect(sanitizer, contains("options['output-file']"));
+    expect(sanitizer, isNot(contains('stdout.writeln(diagnostic.toSafeBlock')));
+  });
 
   test('runner prohibits shell and curl leakage patterns', () {
     expect(runner, isNot(contains('set -x')));

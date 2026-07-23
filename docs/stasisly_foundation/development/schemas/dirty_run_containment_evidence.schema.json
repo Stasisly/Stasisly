@@ -1,0 +1,52 @@
+{
+  "title": "Development dirty-run containment evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "attemptAlias",
+    "containmentAuthorizationReference",
+    "commit",
+    "environmentCategory",
+    "targetAlias",
+    "operatorAlias",
+    "resourceCategoriesInspected",
+    "preCleanupCounts",
+    "cleanupResult",
+    "postCleanupCounters",
+    "containmentStatus",
+    "cliIsolationStatus"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "attemptAlias": {"const": "diag-20260723-002"},
+    "containmentAuthorizationReference": {"type": "string", "minLength": 1, "maxLength": 80},
+    "commit": {"type": "string", "pattern": "^[0-9a-f]{7,40}$"},
+    "environmentCategory": {"const": "development"},
+    "targetAlias": {"const": "AUTHORIZED_DEVELOPMENT_TARGET"},
+    "operatorAlias": {"type": "string", "minLength": 1, "maxLength": 80},
+    "resourceCategoriesInspected": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"enum": ["syntheticAuthUser"]}
+    },
+    "preCleanupCounts": {"oneOf": [{"const": "NOT_INSPECTED"}, {"type": "object"}]},
+    "cleanupResult": {"enum": ["NOT_EXECUTED", "PASSED", "FAILED"]},
+    "postCleanupCounters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["messages", "conversationIdempotency", "chatSessions", "publicUserProfiles", "specialistCatalogEntries", "specialists", "syntheticAuthUsers"],
+      "properties": {
+        "messages": {"type": ["integer", "null"], "minimum": 0},
+        "conversationIdempotency": {"type": ["integer", "null"], "minimum": 0},
+        "chatSessions": {"type": ["integer", "null"], "minimum": 0},
+        "publicUserProfiles": {"type": ["integer", "null"], "minimum": 0},
+        "specialistCatalogEntries": {"type": ["integer", "null"], "minimum": 0},
+        "specialists": {"type": ["integer", "null"], "minimum": 0},
+        "syntheticAuthUsers": {"type": ["integer", "null"], "minimum": 0}
+      }
+    },
+    "containmentStatus": {"enum": ["BLOCKED_REMOTE_CLEANUP_CONTRACT", "AUTHORIZED", "CLEAN", "DIRTY"]},
+    "cliIsolationStatus": {"enum": ["SAFE", "UNSAFE"]}
+  }
+}

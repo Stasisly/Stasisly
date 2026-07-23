@@ -49,9 +49,11 @@ case "$url" in
     if [ "$method" = DELETE ]; then
       if [ "${SIM_CLEANUP_FAIL:-false}" = true ]; then
         status=500
-      else
+      elif [ -f "$SIM_STATE_DIR/auth-user-exists" ]; then
         status=200
         rm -f "$SIM_STATE_DIR/auth-user-exists"
+      else
+        status=404
       fi
     elif [ -f "$SIM_STATE_DIR/auth-user-exists" ]; then
       status=200
@@ -129,6 +131,7 @@ run_case() {
   test "$status_code" -ne 64
   test "$output" = "${output//$'\n'$'\n'/$'\n'}"
   grep -q 'SAFE_HTTP_DIAGNOSTIC_BEGIN' <<<"$output"
+  test "$(head -n 1 <<<"$output")" = SAFE_HTTP_DIAGNOSTIC_BEGIN
   grep -q "statusCode=$status" <<<"$output"
   grep -q "$expected" <<<"$output"
   for canary in \

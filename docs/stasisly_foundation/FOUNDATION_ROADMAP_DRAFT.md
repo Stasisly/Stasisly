@@ -1,5 +1,12 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Active gate: FOUNDATION-019A-R2C
+
+The diagnostic dirty run is contained at the repository boundary. Progression
+to another Development fixture is blocked until exact Auth residue resolution,
+containment-only Founder authorization and clean pre/post counters are
+available. No staging or production progression is implied.
+
 ## Estado FOUNDATION-018
 
 El contrato Development, la selección explícita fail-closed, los inventarios,

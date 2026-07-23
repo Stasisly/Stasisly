@@ -1,5 +1,11 @@
 # Foundation Execution Package Map
 
+## FOUNDATION-019A-R2C
+
+Phase A prepares local containment, fixes cleanup idempotency and isolates the
+diagnostic stream. Phase B is not authorized and remains blocked by the missing
+exact Auth user identifier. A new remote fixture cannot be proposed meanwhile.
+
 ## Current package boundary
 
 `FOUNDATION-018` prepares Development locally and may reach

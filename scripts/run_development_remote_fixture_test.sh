@@ -81,6 +81,13 @@ delete_exact() {
   case "$status" in 200|204) return 0 ;; *) return 1 ;; esac
 }
 
+delete_auth_user_exact() {
+  local status
+  status="$(request DELETE "/auth/v1/admin/users/$owner_id" '' \
+    "$tmp_dir/delete-auth.json" "$SUPABASE_SERVICE_ROLE_KEY")" || return 1
+  case "$status" in 200|404) return 0 ;; *) return 1 ;; esac
+}
+
 remaining_counts() {
   local sessions='[]' messages='[]' idempotency='[]' users='[]'
   local catalog='[]' specialists='[]' auth_count=0 session_ids id
@@ -133,8 +140,7 @@ cleanup_remote_fixture() {
   delete_exact "/rest/v1/specialist_catalog?id=eq.$catalog_id" || return 1
   delete_exact "/rest/v1/specialists?id=eq.$specialist_id" || return 1
   if [ -n "$owner_id" ]; then
-    test "$(request DELETE "/auth/v1/admin/users/$owner_id" '' \
-      "$tmp_dir/delete-auth.json" "$SUPABASE_SERVICE_ROLE_KEY")" = 200 || return 1
+    delete_auth_user_exact || return 1
   fi
   test "$(remaining_counts)" = '0|0|0|0|0|0|0'
 }
@@ -192,14 +198,31 @@ if jq -e 'type == "object" and (.id | type == "string")' \
   owner_id="$(jq -r .id "$tmp_dir/auth-user.json")"
 fi
 
-dart run tool/safe_http_diagnostic.dart \
+diagnostic_output="$tmp_dir/safe-http-diagnostic.txt"
+diagnostic_build_stdout="$tmp_dir/diagnostic-build.stdout"
+diagnostic_build_stderr="$tmp_dir/diagnostic-build.stderr"
+diagnostic_tool_status=0
+if dart run tool/safe_http_diagnostic.dart \
   --operation syntheticUserCreate \
   --status-code "$synthetic_user_status" \
   --content-type "$synthetic_user_content_type" \
   --duration-seconds "$synthetic_user_duration" \
   --transport-result "$synthetic_user_transport" \
   --body-file "$tmp_dir/auth-user.json" \
-  --cleanup-required true
+  --cleanup-required true \
+  --output-file "$diagnostic_output" \
+  >"$diagnostic_build_stdout" 2>"$diagnostic_build_stderr"; then
+  diagnostic_tool_status=0
+else
+  diagnostic_tool_status=$?
+fi
+rm -f "$diagnostic_build_stdout" "$diagnostic_build_stderr"
+test -f "$diagnostic_output"
+test "$(head -n 1 "$diagnostic_output")" = SAFE_HTTP_DIAGNOSTIC_BEGIN
+test "$(tail -n 1 "$diagnostic_output")" = SAFE_HTTP_DIAGNOSTIC_END
+cat "$diagnostic_output"
+rm -f "$diagnostic_output"
+test "$diagnostic_tool_status" = 0
 test "$synthetic_user_status" = 200
 test -n "$owner_id"; test "$owner_id" != null
 

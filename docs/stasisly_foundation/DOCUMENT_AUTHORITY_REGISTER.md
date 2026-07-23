@@ -212,3 +212,13 @@ routes or remote execution.
 | `implementation/FOUNDATION-019A-R2A_SAFE_REMOTE_RUNNER_DIAGNOSTICS.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Security + QA + Release | Evidence owner | No, local evidence | Unsafe or insufficient remote diagnostics | ADR-F024/F025 | New remote diagnostic evidence |
 | `adr/ADR-F025-remote-runner-safe-http-diagnostics.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Raw response leakage and evidence-free assertion changes | ADR-F024 | Diagnostic contract or assertion change |
 | `development/schemas/safe_http_diagnostic.schema.json` | ACTIVE / VALIDATED_LOCALLY | 6 | Security + Release | Evidence owner | No, machine-readable contract | Free-form remote response evidence | ADR-F025 | Diagnostic field/category change |
+
+## FOUNDATION-019A-R2C additions
+
+| Document | Status | Level | Owner | Approval | Normative use | Prevents | Depends on | Review trigger |
+|---|---|---:|---|---|---|---|---|---|
+| `implementation/FOUNDATION-019A-R2C_DIRTY_RUN_CONTAINMENT_AND_VERIFICATION.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Security + QA + Release | Evidence owner | No, local evidence | Treating an unexplained dirty run as clean | ADR-F024/F025/F026 | Exact remote identity becomes available |
+| `adr/ADR-F026-dirty-run-containment-and-diagnostic-stream-isolation.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Non-idempotent cleanup and mixed diagnostic output | ADR-F024/F025 | Cleanup or diagnostic stream changes |
+| `development/development_dirty_run_containment.json` | ACTIVE / BLOCKED_REMOTE | 6 | Security + Release | Founder at runtime | No, machine-readable containment contract | Broad lookup or wildcard cleanup | ADR-F026 | Exact Auth ID resolution is approved |
+| `development/schemas/development_dirty_run_containment.schema.json` | ACTIVE / VALIDATED_LOCALLY | 6 | Security + Release | Evidence owner | No, machine-readable schema | Mutable attempt identity or unsafe fields | ADR-F026 | Contract field/state changes |
+| `development/evidence/dirty_run_containment_evidence.json` and schema | ACTIVE / NOT_EXECUTED_REMOTE | 6 | Security + Release | Founder at runtime | No, safe evidence contract | Secret-bearing or identity-bearing containment evidence | ADR-F026 | Containment authorization or execution |

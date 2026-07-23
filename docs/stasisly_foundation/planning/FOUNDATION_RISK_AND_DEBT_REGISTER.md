@@ -1,5 +1,13 @@
 # Foundation Risk and Debt Register
 
+## Active blocker: Development dirty run
+
+| Risk | Severity | State | Evidence | Unblock condition |
+|---|---|---|---|---|
+| Possible synthetic Auth residue from `diag-20260723-002` | High | Remote state `UNKNOWN`; new fixtures blocked | Exact namespace and reachable-step audit in FOUNDATION-019A-R2C | Approved exact-ID resolution plus containment-only authorization and zero post-cleanup counters |
+| False dirty classification on repeated Auth cleanup | Medium | Corrected and locally guarded | Exact delete accepts only `200/404`; shell simulation | Keep regression green |
+| Build output contaminates safe diagnostic stream | Medium | Corrected and locally guarded | Explicit diagnostic file and exact marker checks | Keep architecture guards green |
+
 ## FOUNDATION-018 residual risk
 
 - Implicit CLI targeting is mitigated locally by FOUNDATION-019B and integrated

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "FOUNDATION-019A-R2C-v1",
+  "environment": "development",
+  "dirtyAttemptAlias": "diag-20260723-002",
+  "runNamespace": "foundation-019a-r1-diag-20260723-002",
+  "dirtyAttemptCommit": "d94292a",
+  "fixtureContractVersion": "FOUNDATION-019A-R1-v1",
+  "remoteAuthorization": "NOT_GRANTED",
+  "remoteExecution": "NOT_EXECUTED",
+  "possibleResources": {
+    "syntheticAuthUser": "POSSIBLY_CREATED",
+    "specialists": "NOT_CREATED",
+    "specialistCatalogEntries": "NOT_CREATED",
+    "publicUserProfiles": "NOT_CREATED",
+    "chatSessions": "NOT_CREATED",
+    "conversationIdempotency": "NOT_CREATED",
+    "messages": "NOT_CREATED"
+  },
+  "residueCounterOrder": [
+    "messages",
+    "conversationIdempotency",
+    "chatSessions",
+    "publicUserProfiles",
+    "specialistCatalogEntries",
+    "specialists",
+    "syntheticAuthUsers"
+  ],
+  "exactAuthUserIdStatus": "UNAVAILABLE",
+  "broadLookupAllowed": false,
+  "wildcardCleanupAllowed": false,
+  "authDeleteAcceptedStatusCodes": [200, 404],
+  "cliIsolationRequired": true,
+  "readiness": "BLOCKED_REMOTE_CLEANUP_CONTRACT"
+}

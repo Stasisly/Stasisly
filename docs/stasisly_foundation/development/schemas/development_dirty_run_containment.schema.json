@@ -1,0 +1,74 @@
+{
+  "title": "Development dirty-run containment contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractVersion",
+    "environment",
+    "dirtyAttemptAlias",
+    "runNamespace",
+    "dirtyAttemptCommit",
+    "fixtureContractVersion",
+    "remoteAuthorization",
+    "remoteExecution",
+    "possibleResources",
+    "residueCounterOrder",
+    "exactAuthUserIdStatus",
+    "broadLookupAllowed",
+    "wildcardCleanupAllowed",
+    "authDeleteAcceptedStatusCodes",
+    "cliIsolationRequired",
+    "readiness"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "contractVersion": {"const": "FOUNDATION-019A-R2C-v1"},
+    "environment": {"const": "development"},
+    "dirtyAttemptAlias": {"const": "diag-20260723-002"},
+    "runNamespace": {"const": "foundation-019a-r1-diag-20260723-002"},
+    "dirtyAttemptCommit": {"const": "d94292a"},
+    "fixtureContractVersion": {"const": "FOUNDATION-019A-R1-v1"},
+    "remoteAuthorization": {"const": "NOT_GRANTED"},
+    "remoteExecution": {"const": "NOT_EXECUTED"},
+    "possibleResources": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "syntheticAuthUser",
+        "specialists",
+        "specialistCatalogEntries",
+        "publicUserProfiles",
+        "chatSessions",
+        "conversationIdempotency",
+        "messages"
+      ],
+      "properties": {
+        "syntheticAuthUser": {"const": "POSSIBLY_CREATED"},
+        "specialists": {"const": "NOT_CREATED"},
+        "specialistCatalogEntries": {"const": "NOT_CREATED"},
+        "publicUserProfiles": {"const": "NOT_CREATED"},
+        "chatSessions": {"const": "NOT_CREATED"},
+        "conversationIdempotency": {"const": "NOT_CREATED"},
+        "messages": {"const": "NOT_CREATED"}
+      }
+    },
+    "residueCounterOrder": {
+      "const": [
+        "messages",
+        "conversationIdempotency",
+        "chatSessions",
+        "publicUserProfiles",
+        "specialistCatalogEntries",
+        "specialists",
+        "syntheticAuthUsers"
+      ]
+    },
+    "exactAuthUserIdStatus": {"const": "UNAVAILABLE"},
+    "broadLookupAllowed": {"const": false},
+    "wildcardCleanupAllowed": {"const": false},
+    "authDeleteAcceptedStatusCodes": {"const": [200, 404]},
+    "cliIsolationRequired": {"const": true},
+    "readiness": {"const": "BLOCKED_REMOTE_CLEANUP_CONTRACT"}
+  }
+}

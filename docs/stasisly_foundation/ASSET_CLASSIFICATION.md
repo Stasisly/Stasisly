@@ -1,5 +1,14 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-019A-R2C classification
+
+- Dirty attempt `diag-20260723-002`: `FAILED_DIRTY_BLOCKING / CONTAINED_LOCALLY`.
+- Exact run namespace: `FOUNDATION_ADOPTED_AS_EVIDENCE`.
+- Auth cleanup `200/404`: `FOUNDATION_ADOPTED_LOCALLY`.
+- Diagnostic stream isolation: `FOUNDATION_ADOPTED_LOCALLY`.
+- Remote residue: `UNKNOWN`; remote cleanup: `NOT_AUTHORIZED`.
+- New remote fixtures: `BLOCKED`.
+
 ## FOUNDATION-019B classification
 
 - Supabase CLI remote link metadata: `ISOLATED`, local ignored files removed.

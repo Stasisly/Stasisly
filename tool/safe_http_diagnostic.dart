@@ -315,7 +315,8 @@ String _durationBucket(String rawSeconds) {
 void main(List<String> arguments) {
   final options = _parseOptions(arguments);
   final bodyPath = options['body-file'];
-  if (bodyPath == null) {
+  final outputPath = options['output-file'];
+  if (bodyPath == null || outputPath == null) {
     stderr.writeln('Safe diagnostic input invalid.');
     exitCode = 64;
     return;
@@ -330,7 +331,13 @@ void main(List<String> arguments) {
     bodyFile: File(bodyPath),
     cleanupRequired: options['cleanup-required'] == 'true',
   );
-  stdout.writeln(diagnostic.toSafeBlock());
+  try {
+    File(outputPath).writeAsStringSync('${diagnostic.toSafeBlock()}\n');
+  } on FileSystemException {
+    stderr.writeln('Safe diagnostic output unavailable.');
+    exitCode = 1;
+    return;
+  }
   if (diagnostic.diagnosticSanitization != 'passed') {
     exitCode = 1;
   }

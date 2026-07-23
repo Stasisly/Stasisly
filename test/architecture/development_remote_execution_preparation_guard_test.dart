@@ -104,6 +104,8 @@ void main() {
       expect(source, contains('FAILED_DIRTY_BLOCKING'));
       expect(source, contains('PASSED_CLEAN'));
       expect(source, contains('FAILED_CLEAN'));
+      expect(source, contains('delete_auth_user_exact'));
+      expect(source, contains('200|404'));
       expect(source, contains('AUTHORIZED_COMMIT_SHA'));
       expect(source, isNot(contains('RUN_REMOTE_TESTS')));
       expect(source, isNot(contains('like.')));

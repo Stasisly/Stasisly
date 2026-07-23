@@ -1,5 +1,12 @@
 # Stasisly Foundation
 
+## Current remote execution gate
+
+FOUNDATION-019A-R2C contains the Development dirty run locally. The exact
+namespace is known and the runner defect is corrected, but remote residue
+remains `UNKNOWN` because no exact Auth user ID is available. Remote cleanup and
+all new fixtures remain blocked and unauthorized.
+
 ## FOUNDATION-019B Supabase CLI isolation
 
 FOUNDATION-019B is `IMPLEMENTED_LOCALLY`: ignored remote-link metadata has been
