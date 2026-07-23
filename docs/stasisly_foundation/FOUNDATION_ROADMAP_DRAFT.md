@@ -310,3 +310,12 @@ de autorización exactos.
 Los blockers de fixture, cleanup y gate quedan resueltos localmente. El CORS
 exacto permanece como input externo explícito y bloquea ejecución. El siguiente
 gate exige nueva autorización Founder ligada al nuevo SHA; G8-G10 no se ejecutan.
+
+## Estado FOUNDATION-019A-R2A
+
+La primera ejecución controlada quedó `FAILED_CLEAN`; R2 confirmó que faltaba
+evidencia sanitizada para explicar la aserción focal. R2A añade solo
+instrumentación local allowlisted, mantiene la exigencia exacta `200` y preserva
+cleanup/dirty blocking. El siguiente gate posible es una nueva autorización
+Founder, ligada al SHA de R2A y exclusivamente diagnóstica; no autoriza
+migraciones, deploy, cambios de secretos ni smoke funcional.

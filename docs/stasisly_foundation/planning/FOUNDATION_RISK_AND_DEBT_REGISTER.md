@@ -179,3 +179,19 @@ for deletion, retention, sharing, attachments, memory and research.
   classification; remote effectiveness remains unverified until authorized.
 - Idempotency retention remains `POST_DEVELOPMENT_OPERATIONAL_BLOCKER` and bars
   sustained operation or campaigns.
+
+## FOUNDATION-019A-R2A risk update
+
+- First remote attempt: `FAILED_CLEAN`; remote residue counters were zero.
+- R2 evidence gap: closed locally by allowlisted instrumentation; root cause
+  remains `UNKNOWN_PENDING_DIAGNOSTIC_RUN`.
+- Raw response, header, value and credential leakage: prohibited by sanitizer,
+  canary tests and architecture guards.
+- Assertion drift: blocked; exact `200` remains required.
+- Diagnostic continuation risk: blocked by mandatory `diagnostic-only` mode and
+  immediate stop at the focal assertion.
+- Cleanup regression: guarded; exact double cleanup, exit preservation, seven
+  counters and dirty-run blocking remain.
+- Functional retry, migrations, deploy and secret/config changes:
+  `NOT_AUTHORIZED`.
+- Idempotency retention remains `POST_DEVELOPMENT_OPERATIONAL_BLOCKER`.

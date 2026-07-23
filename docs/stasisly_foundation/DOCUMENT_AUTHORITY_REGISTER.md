@@ -204,3 +204,11 @@ routes or remote execution.
 | `adr/ADR-F024-development-remote-fixture-cleanup-and-execution-gating.md` | APPROVED / PREPARATION_IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Persistent synthetic residue and one-flag activation | ADR-F021/F023 | Fixture, cleanup, CORS, gate or retention change |
 | `development/development_remote_fixture_manifest.json` | ACTIVE / NOT_APPROVED | 6 | QA + Security + Release | Founder at runtime | No, machine-readable contract | Local fixture reuse and broad cleanup | ADR-F024 | Runtime approval or cleanup order change |
 | `development/development_remote_skip_gate.json` | ACTIVE / TESTS_DISABLED | 6 | Security + Release | Founder at runtime | No, machine-readable gate | Single-flag remote activation | ADR-F024 | Gate or skip state change |
+
+## FOUNDATION-019A-R2A additions
+
+| Document | Status | Level | Owner | Approval | Normative use | Prevents | Depends on | Review trigger |
+|---|---|---:|---|---|---|---|---|---|
+| `implementation/FOUNDATION-019A-R2A_SAFE_REMOTE_RUNNER_DIAGNOSTICS.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Security + QA + Release | Evidence owner | No, local evidence | Unsafe or insufficient remote diagnostics | ADR-F024/F025 | New remote diagnostic evidence |
+| `adr/ADR-F025-remote-runner-safe-http-diagnostics.md` | APPROVED / IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Raw response leakage and evidence-free assertion changes | ADR-F024 | Diagnostic contract or assertion change |
+| `development/schemas/safe_http_diagnostic.schema.json` | ACTIVE / VALIDATED_LOCALLY | 6 | Security + Release | Evidence owner | No, machine-readable contract | Free-form remote response evidence | ADR-F025 | Diagnostic field/category change |

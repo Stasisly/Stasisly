@@ -348,3 +348,12 @@ adopta un gate remoto multifactor. CORS queda `UNASSIGNED`, los tests remotos
 siguen deshabilitados y la ejecución permanece bloqueada. Dos éxitos y dos
 fallos controlados se simularon localmente sin residuo. La autorización ligada a
 `70528c1` queda sustituida por el nuevo commit.
+
+## FOUNDATION-019A-R2A
+
+La primera ejecución Development terminó `FAILED_CLEAN`, pero sin evidencia
+sanitizada suficiente para clasificar la respuesta focal. R2A adopta localmente
+un diagnóstico HTTP cerrado, elimina el body temporal antes de mantener la
+aserción exacta `200` y obliga a detener cualquier reintento diagnóstico en
+`syntheticUserCreate`. La causa raíz sigue desconocida, no se ha ejecutado
+remoto y un retry funcional continúa no autorizado.

@@ -329,3 +329,15 @@ deuda residual.
 - Lifecycle remoto: `SIMULATED_LOCALLY`, no validado remotamente.
 - Ejecución: `NOT_AUTHORIZED`; retención:
   `POST_DEVELOPMENT_OPERATIONAL_BLOCKER`.
+
+## Adopción de FOUNDATION-019A-R2A
+
+- Contrato diagnóstico HTTP seguro: `FOUNDATION_ADOPTED`.
+- Instrumentación del runner: `FOUNDATION_ADOPTED_LOCALLY`.
+- Body y valores raw: `FORBIDDEN`.
+- Aserción focal `200`: `UNCHANGED`.
+- Cleanup: `PRESERVED_AND_VALIDATED`.
+- Causa raíz: `UNKNOWN_PENDING_DIAGNOSTIC_RUN`.
+- Retry solo diagnóstico: `READY_FOR_EXPLICIT_AUTHORIZATION`.
+- Retry funcional remoto: `NOT_AUTHORIZED`.
+- Skips remotos: `CLASSIFIED_NOT_ENABLED`.

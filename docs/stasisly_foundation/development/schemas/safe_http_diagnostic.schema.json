@@ -1,0 +1,46 @@
+{
+  "title": "Safe HTTP diagnostic",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "operation",
+    "statusCode",
+    "statusClass",
+    "contentTypeCategory",
+    "bodyPresence",
+    "bodySizeBucket",
+    "jsonParseStatus",
+    "topLevelFieldNames",
+    "safeErrorCategory",
+    "durationBucket",
+    "assertionOutcome",
+    "cleanupRequired",
+    "diagnosticSanitization",
+    "rawBodyLogged"
+  ],
+  "properties": {
+    "operation": {"const": "syntheticUserCreate"},
+    "statusCode": {"type": "integer", "minimum": 0, "maximum": 599},
+    "statusClass": {"enum": ["informational", "success", "redirect", "clientError", "serverError", "invalidStatus"]},
+    "contentTypeCategory": {"enum": ["json", "problemJson", "text", "html", "empty", "binary", "unknown"]},
+    "bodyPresence": {"enum": ["empty", "present"]},
+    "bodySizeBucket": {"enum": ["0", "1to255", "256to1023", "1kto4k", "over4k"]},
+    "jsonParseStatus": {"enum": ["validObject", "validArray", "validScalar", "invalid", "notAttempted"]},
+    "topLevelFieldNames": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "maxLength": 64,
+        "pattern": "^(REDACTED_FIELD_NAME|[A-Za-z_][A-Za-z0-9_.-]{0,63})$"
+      }
+    },
+    "safeErrorCategory": {"enum": ["none", "authenticationRejected", "authorizationRejected", "validationRejected", "conflict", "rateLimited", "backendUnavailable", "unexpectedResponse", "invalidJson", "transportFailure", "timeout", "unknownFailure"]},
+    "durationBucket": {"enum": ["under100ms", "100to300ms", "300to1000ms", "1to3s", "3to10s", "over10s"]},
+    "assertionOutcome": {"enum": ["passed", "failed"]},
+    "cleanupRequired": {"const": true},
+    "diagnosticSanitization": {"enum": ["passed", "failed"]},
+    "rawBodyLogged": {"const": false}
+  }
+}
