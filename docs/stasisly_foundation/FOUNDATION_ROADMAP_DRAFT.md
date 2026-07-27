@@ -1,5 +1,11 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Active gate: FOUNDATION-019A-R2C-R1
+
+Exact synthetic Auth identity resolution is prepared locally. The next gate is
+a containment-only Founder authorization bound to the R1 commit. No fixture,
+functional retry, staging or production work may advance through this gate.
+
 ## Active gate: FOUNDATION-019A-R2C
 
 The diagnostic dirty run is contained at the repository boundary. Progression

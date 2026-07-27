@@ -1,5 +1,12 @@
 # Stasisly Foundation
 
+## Exact Auth containment gate
+
+FOUNDATION-019A-R2C-R1 reconstructs the historical synthetic Auth lookup key
+locally and adopts an exact 0/1/>1 contract. Remote residue remains `UNKNOWN`;
+containment, new fixtures and functional retry remain blocked until a new
+commit-specific Founder authorization.
+
 ## Current remote execution gate
 
 FOUNDATION-019A-R2C contains the Development dirty run locally. The exact

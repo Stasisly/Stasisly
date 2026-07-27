@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "baselineCommit": "1f37250",
+  "historicalRunnerCommit": "d94292a",
+  "attemptAlias": "diag-20260723-002",
+  "runNamespace": "foundation-019a-r1-diag-20260723-002",
+  "fixtureManifestVersion": "FOUNDATION-019A-R1-v1",
+  "lookupKeyDerivationVersion": "FOUNDATION-019A-R2C-R1-v1",
+  "committedEvidenceAlias": "AUTH_RESOURCE_DIAG_002",
+  "historicalMatch": "HISTORICAL_SYNTHETIC_AUTH_LOOKUP_KEY_MATCH",
+  "matchPolicy": "EXACT_CASE_SENSITIVE",
+  "remoteActions": 0,
+  "remoteUserListings": 0,
+  "broadLookups": 0,
+  "broadDeletes": 0,
+  "secretCanaryLeaks": 0,
+  "remoteAuthorization": "NOT_GRANTED",
+  "remoteContainment": "NOT_EXECUTED",
+  "remoteResidue": "UNKNOWN"
+}

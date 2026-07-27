@@ -1,5 +1,26 @@
 # Foundation Session Tracker
 
+## FOUNDATION-019A-R2C-R1 status
+
+```text
+historical identity: RECONSTRUCTED_LOCALLY
+historical match: HISTORICAL_SYNTHETIC_AUTH_LOOKUP_KEY_MATCH
+committed alias: AUTH_RESOURCE_DIAG_002
+exact lookup/delete contracts: FOUNDATION_ADOPTED
+broad lookup/delete: FORBIDDEN
+remote actions: 0
+remote containment: NOT_AUTHORIZED
+remote residue: UNKNOWN
+new fixtures: BLOCKED
+functional retry: BLOCKED
+focal tests: 24/24 pass
+Flutter: 737 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after reset without seed
+remote-context: SAFE
+```
+
 ## FOUNDATION-019A-R2C status
 
 ```text
@@ -239,3 +260,4 @@ canonical application use cases, typed controllers/providers and inactive local 
 | FOUNDATION-019C | Completed locally | Resolve all decisions needed before a separately authorized first Development execution | Product-safe catalog and Stasis create; analyzer 0 errors/36 inherited infos; Flutter 659 pass/5 approved skips; Deno 86/86 and format 62 files; one local no-seed reset plus SQL 740/740; fixture contract adopted; two canonical API fixture cycles with exact cleanup `0|0|0|0|0|0|0`; retention classified post-Development; closed evidence/smoke schemas; both preflights SAFE; zero remote actions | `DEVELOPMENT EXECUTION_BLOCKERS_RESOLVED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-019A only by separate explicit Founder order; sustained operation additionally requires retention package |
 | FOUNDATION-019A-R1 | Completed locally pending commit/push | Correct remote fixture, cleanup, skip gate, CORS and evidence contracts without remote action | Separate remote manifest; eleven-condition gate; versioned operator runner; success x2 plus forced failure x2; seven-zero cleanup; Flutter 678 pass/5 skips; analyzer 0 errors/36 inherited infos; Deno 86/86; SQL 740/740; CORS `UNASSIGNED`; ADR-F024 | `FOUNDATION-019A READY_FOR_REAUTHORIZATION_LOCAL_AND_PUSHED` only after validation and push | New Founder authorization for new SHA and exact CORS; no automatic remote continuation |
 | FOUNDATION-019A-R2A | Completed locally; package Git gate required | Add allowlisted diagnostics after first Development attempt `FAILED_CLEAN` and R2 evidence blocker | Safe helper/schema; exact `200` unchanged; body deleted before assertion; diagnostic-only stop; focal tests 26/26; runner simulations including sanitizer/cleanup/signal pass; Flutter 704 pass/5 skips; analyzer 0 errors/36 inherited infos; Deno 86/86; SQL 740/740; cleanup preserved; ADR-F025; zero remote actions | `FOUNDATION-019A DIAGNOSTIC_RUNNER_READY_FOR_AUTHORIZATION_LOCAL_AND_PUSHED` only after explicit commit and push | New commit-specific Founder authorization for diagnostic-only attempt; root cause unknown; functional retry unauthorized |
+| FOUNDATION-019A-R2C-R1 | Completed locally | Reconstruct the dirty-run synthetic Auth identity and implement exact, bounded, collision-blocking lookup/delete preparation without remote access | Historical runner compatibility; deterministic redacted key; exact 0/1/>1 contract; five containment simulations; focal 24/24; Flutter 737 pass/5 skips; analyzer 0 errors/36 inherited infos; Deno 86/86; one no-seed local reset plus SQL 740/740; ADR-F027; remote context SAFE; zero remote actions | `FOUNDATION-019A EXACT_AUTH_RESOLUTION_READY_FOR_CONTAINMENT_AUTHORIZATION_LOCAL_AND_PUSHED` upon successful package push | Founder containment-only authorization bound to the resulting commit; fixtures and functional retry remain blocked |

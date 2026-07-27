@@ -1,5 +1,14 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-019A-R2C-R1 risks
+
+| Risk | Severity | State | Control | Unblock condition |
+|---|---|---|---|---|
+| Ambiguous Auth identity | Critical | Controlled locally | Exact case-sensitive key; >1 blocks | Authorized lookup returns 0 or 1 |
+| Directory overexposure | High | Prohibited | Ten-page bound, definitive end, sanitized output | Provider adapter proves contract |
+| Wrong-user deletion | Critical | Blocked | Ephemeral ID only after exactly one match | Founder authorization and exact target |
+| Unverified cleanup | High | Blocked | Post-delete lookup plus seven zero counters | Clean evidence and CLI isolation |
+
 ## Active blocker: Development dirty run
 
 | Risk | Severity | State | Evidence | Unblock condition |

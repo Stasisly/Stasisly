@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "contractVersion": "FOUNDATION-019A-R2C-R1-v1",
+  "environment": "development",
+  "historicalRunnerCommit": "d94292a",
+  "dirtyAttemptAlias": "diag-20260723-002",
+  "runNamespace": "foundation-019a-r1-diag-20260723-002",
+  "fixtureManifestVersion": "FOUNDATION-019A-R1-v1",
+  "lookupKeyDerivationVersion": "FOUNDATION-019A-R2C-R1-v1",
+  "historicalEmailTemplate": "{runAlias}@example.test",
+  "passwordDerivationCategory": "DETERMINISTIC_SYNTHETIC_NOT_LOOKUP",
+  "committedEvidenceAlias": "AUTH_RESOURCE_DIAG_002",
+  "operationalLookupKey": "AUTHORIZED_RUNTIME_ONLY",
+  "matchPolicy": "EXACT_CASE_SENSITIVE",
+  "maximumAcceptedMatches": 1,
+  "maximumLookupPages": 10,
+  "definitivePaginationEndRequired": true,
+  "broadLookupAllowed": false,
+  "fuzzyMatchAllowed": false,
+  "rawAuthUserIdPersistence": "FORBIDDEN",
+  "lookupOutcomes": [
+    "notFound",
+    "exactlyOne",
+    "multipleMatchesBlocking",
+    "lookupRejected",
+    "authorizationRejected",
+    "environmentMismatch",
+    "targetMismatch",
+    "transportFailure",
+    "unknownFailure"
+  ],
+  "deleteAcceptedStatusCodes": [200, 404],
+  "postDeleteRequirements": [
+    "exactLookupNotFound",
+    "sevenNamedCountersZero",
+    "cliContextIsolated"
+  ],
+  "remoteAuthorization": "NOT_GRANTED",
+  "remoteExecution": "NOT_EXECUTED",
+  "remoteResidue": "UNKNOWN",
+  "newFixtureExecution": "BLOCKED",
+  "readiness": "EXACT_AUTH_RESOLUTION_READY_FOR_CONTAINMENT_AUTHORIZATION"
+}

@@ -1,5 +1,11 @@
 # Foundation Execution Package Map
 
+## FOUNDATION-019A-R2C-R1
+
+Local-only package for historical identity derivation, exact-match lookup,
+ephemeral delete target, post-delete verification and authorization inputs. It
+does not inspect or mutate Development and cannot authorize the next phase.
+
 ## FOUNDATION-019A-R2C
 
 Phase A prepares local containment, fixes cleanup idempotency and isolates the

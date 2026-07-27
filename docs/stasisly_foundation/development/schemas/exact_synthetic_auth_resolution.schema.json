@@ -1,0 +1,83 @@
+{
+  "title": "Exact synthetic Auth resource resolution",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractVersion",
+    "environment",
+    "historicalRunnerCommit",
+    "dirtyAttemptAlias",
+    "runNamespace",
+    "fixtureManifestVersion",
+    "lookupKeyDerivationVersion",
+    "historicalEmailTemplate",
+    "passwordDerivationCategory",
+    "committedEvidenceAlias",
+    "operationalLookupKey",
+    "matchPolicy",
+    "maximumAcceptedMatches",
+    "maximumLookupPages",
+    "definitivePaginationEndRequired",
+    "broadLookupAllowed",
+    "fuzzyMatchAllowed",
+    "rawAuthUserIdPersistence",
+    "lookupOutcomes",
+    "deleteAcceptedStatusCodes",
+    "postDeleteRequirements",
+    "remoteAuthorization",
+    "remoteExecution",
+    "remoteResidue",
+    "newFixtureExecution",
+    "readiness"
+  ],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "contractVersion": {"const": "FOUNDATION-019A-R2C-R1-v1"},
+    "environment": {"const": "development"},
+    "historicalRunnerCommit": {"const": "d94292a"},
+    "dirtyAttemptAlias": {"const": "diag-20260723-002"},
+    "runNamespace": {"const": "foundation-019a-r1-diag-20260723-002"},
+    "fixtureManifestVersion": {"const": "FOUNDATION-019A-R1-v1"},
+    "lookupKeyDerivationVersion": {"const": "FOUNDATION-019A-R2C-R1-v1"},
+    "historicalEmailTemplate": {"const": "{runAlias}@example.test"},
+    "passwordDerivationCategory": {"const": "DETERMINISTIC_SYNTHETIC_NOT_LOOKUP"},
+    "committedEvidenceAlias": {"const": "AUTH_RESOURCE_DIAG_002"},
+    "operationalLookupKey": {"const": "AUTHORIZED_RUNTIME_ONLY"},
+    "matchPolicy": {"const": "EXACT_CASE_SENSITIVE"},
+    "maximumAcceptedMatches": {"const": 1},
+    "maximumLookupPages": {"const": 10},
+    "definitivePaginationEndRequired": {"const": true},
+    "broadLookupAllowed": {"const": false},
+    "fuzzyMatchAllowed": {"const": false},
+    "rawAuthUserIdPersistence": {"const": "FORBIDDEN"},
+    "lookupOutcomes": {
+      "const": [
+        "notFound",
+        "exactlyOne",
+        "multipleMatchesBlocking",
+        "lookupRejected",
+        "authorizationRejected",
+        "environmentMismatch",
+        "targetMismatch",
+        "transportFailure",
+        "unknownFailure"
+      ]
+    },
+    "deleteAcceptedStatusCodes": {"const": [200, 404]},
+    "postDeleteRequirements": {
+      "const": [
+        "exactLookupNotFound",
+        "sevenNamedCountersZero",
+        "cliContextIsolated"
+      ]
+    },
+    "remoteAuthorization": {"const": "NOT_GRANTED"},
+    "remoteExecution": {"const": "NOT_EXECUTED"},
+    "remoteResidue": {"const": "UNKNOWN"},
+    "newFixtureExecution": {"const": "BLOCKED"},
+    "readiness": {
+      "const": "EXACT_AUTH_RESOLUTION_READY_FOR_CONTAINMENT_AUTHORIZATION"
+    }
+  }
+}

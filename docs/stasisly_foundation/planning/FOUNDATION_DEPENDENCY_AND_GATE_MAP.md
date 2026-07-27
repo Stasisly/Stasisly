@@ -1,5 +1,20 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-019A-R2C-R1 gate
+
+```text
+R2C local containment
+→ historical exact identity reconstruction
+→ exact 0/1/>1 lookup contract
+→ ephemeral delete-by-ID target
+→ local tests and security review
+→ commit and push
+→ separate Founder containment authorization
+→ future exact remote containment
+```
+
+New fixtures and functional retry remain blocked before the final step.
+
 ## FOUNDATION-018 gates
 
 ```text

@@ -1,5 +1,14 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-019A-R2C-R1 classification
+
+- Historical synthetic Auth identity: `RECONSTRUCTED_LOCALLY`.
+- Exact lookup-key derivation: `FOUNDATION_ADOPTED_LOCALLY`.
+- Exact lookup/delete-target contracts: `FOUNDATION_ADOPTED`.
+- Broad lookup and broad deletion: `FORBIDDEN`.
+- Remote containment: `NOT_AUTHORIZED`; remote residue: `UNKNOWN`.
+- New fixtures and functional retry: `BLOCKED`.
+
 ## FOUNDATION-019A-R2C classification
 
 - Dirty attempt `diag-20260723-002`: `FAILED_DIRTY_BLOCKING / CONTAINED_LOCALLY`.

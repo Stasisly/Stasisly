@@ -222,3 +222,12 @@ routes or remote execution.
 | `development/development_dirty_run_containment.json` | ACTIVE / BLOCKED_REMOTE | 6 | Security + Release | Founder at runtime | No, machine-readable containment contract | Broad lookup or wildcard cleanup | ADR-F026 | Exact Auth ID resolution is approved |
 | `development/schemas/development_dirty_run_containment.schema.json` | ACTIVE / VALIDATED_LOCALLY | 6 | Security + Release | Evidence owner | No, machine-readable schema | Mutable attempt identity or unsafe fields | ADR-F026 | Contract field/state changes |
 | `development/evidence/dirty_run_containment_evidence.json` and schema | ACTIVE / NOT_EXECUTED_REMOTE | 6 | Security + Release | Founder at runtime | No, safe evidence contract | Secret-bearing or identity-bearing containment evidence | ADR-F026 | Containment authorization or execution |
+
+## FOUNDATION-019A-R2C-R1 additions
+
+| Document | Status | Level | Owner | Approval | Normative use | Prevents | Depends on | Review trigger |
+|---|---|---:|---|---|---|---|---|---|
+| `implementation/FOUNDATION-019A-R2C-R1_EXACT_AUTH_RESOURCE_RESOLUTION.md` | ACTIVE / IMPLEMENTED_LOCALLY | 6 | Security + QA + Release | Evidence owner | No, local evidence | Retrospective or ambiguous Auth identity | ADR-F026/F027 | Remote containment authorization |
+| `adr/ADR-F027-exact-synthetic-auth-resource-resolution.md` | APPROVED / PREPARATION_IMPLEMENTED_LOCALLY | 2 | Architecture + Security under Rector | Founder | Yes | Broad lookup and wrong-user deletion | ADR-F024/F026 | Lookup, pagination or delete contract changes |
+| `development/exact_synthetic_auth_resolution.json` and schema | ACTIVE / VALIDATED_LOCALLY | 6 | Security + Release | Evidence owner | No, machine-readable contract | Fuzzy matching and unbounded pagination | ADR-F027 | Provider adapter or version changes |
+| `development/evidence/exact_auth_resolution_evidence.json` and schema | ACTIVE / NOT_EXECUTED_REMOTE | 6 | Security + Release | Founder at runtime | No, local safe evidence | Claiming remote cleanup from local preparation | ADR-F027 | Containment execution |
