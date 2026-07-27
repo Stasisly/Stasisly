@@ -5,6 +5,9 @@ set -euo pipefail
 # is supplied at invocation time and the local multi-factor gate passes.
 test "${1:-}" = "--authorized-development-run" || exit 64
 for command in curl dart flutter git jq uuidgen; do command -v "$command" >/dev/null; done
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# shellcheck source=scripts/lib/development_remote_http_contract.sh
+source "$repo_root/scripts/lib/development_remote_http_contract.sh"
 
 required=(
   SUPABASE_URL SUPABASE_ANON_KEY SUPABASE_SERVICE_ROLE_KEY
@@ -30,7 +33,16 @@ test "$ENABLE_CONVERSATIONS_ROUTE" = false
 test "$(git rev-parse HEAD)" = "$AUTHORIZED_COMMIT_SHA"
 test "$REMOTE_FIXTURE_RUN_ALIAS" != '*'
 [[ "$REMOTE_FIXTURE_RUN_ALIAS" =~ ^[a-z0-9][a-z0-9-]{7,31}$ ]]
-test "$REMOTE_RUNNER_EXECUTION_MODE" = diagnostic-only
+case "$REMOTE_RUNNER_EXECUTION_MODE" in
+  diagnostic-only|second-functional-attempt) ;;
+  *) exit 66 ;;
+esac
+if [ "$REMOTE_RUNNER_EXECUTION_MODE" = second-functional-attempt ]; then
+  test "${SECOND_FUNCTIONAL_ATTEMPT_MANIFEST_VERSION:-}" = \
+    FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v1
+  test "${REMOTE_RUNNER_VERSION:-}" = R2B
+  test "${SECOND_FUNCTIONAL_ATTEMPT_AUTHORIZATION_STATUS:-}" = GRANTED_AT_RUNTIME
+fi
 dart run tool/check_development_remote_preparation.dart --validate-cors >/dev/null
 
 tmp_dir="$(mktemp -d /tmp/stasisly-foundation-019a-r1.XXXXXX)"
@@ -45,33 +57,37 @@ owner_id=""
 synthetic_access_token=""
 flow_status=1
 cleanup_status=1
+runner_state=INITIAL
+ledger_auth=false
+ledger_profile=false
+ledger_specialist=false
+ledger_catalog=false
+cleanup_verifiable=true
+
+transition_state() {
+  local expected=$1 next=$2
+  test "$runner_state" = "$expected"
+  runner_state=$next
+}
 
 request() {
   local method=$1 endpoint=$2 body=${3:-} output=$4 token=$5
-  local metadata=${6:-} curl_error=${7:-}
-  local write_format='%{http_code}'
-  if [ -n "$metadata" ]; then
-    write_format=$'%{http_code}\t%{content_type}\t%{time_total}'
-  fi
-  local args=(-sS -o "$output" -w "$write_format" -X "$method"
-    -H "apikey: $SUPABASE_SERVICE_ROLE_KEY"
-    -H "Authorization: Bearer $token"
-    -H 'Content-Type: application/json')
-  if [ -n "$body" ]; then args+=(-d "$body"); fi
-  if [ -n "$metadata" ] && [ -n "$curl_error" ]; then
-    curl "${args[@]}" "$SUPABASE_URL$endpoint" >"$metadata" 2>"$curl_error"
-    return
-  fi
-  local default_curl_error="$tmp_dir/request.curl-error"
-  local request_status=0
-  if curl "${args[@]}" "$SUPABASE_URL$endpoint" \
-    2>"$default_curl_error"; then
-    request_status=0
-  else
-    request_status=$?
-  fi
-  rm -f "$default_curl_error"
-  return "$request_status"
+  local prefix="$tmp_dir/request-$RANDOM"
+  local metadata="$prefix.metadata" diagnostic="$prefix.diagnostic"
+  local transport_file="$prefix.transport" status_file="$prefix.status"
+  local content_type_file="$prefix.content-type" duration_file="$prefix.duration"
+  local transport_exit status
+  capture_http_channels "$method" "$SUPABASE_URL$endpoint" "$body" "$output" \
+    "$token" "$metadata" "$diagnostic" "$transport_file"
+  transport_exit="$(strict_transport_exit_from_file "$transport_file")" ||
+    return 1
+  test "$transport_exit" = 0 || return "$transport_exit"
+  parse_curl_metadata "$metadata" "$status_file" "$content_type_file" \
+    "$duration_file" || return 1
+  status="$(strict_http_status_from_file "$status_file")" || return 1
+  rm -f "$metadata" "$diagnostic" "$transport_file" "$status_file" \
+    "$content_type_file" "$duration_file"
+  printf '%s' "$status"
 }
 
 delete_exact() {
@@ -125,6 +141,7 @@ remaining_counts() {
 
 cleanup_remote_fixture() {
   local sessions session_id
+  test "$cleanup_verifiable" = true || return 1
   if [ -n "$owner_id" ]; then
     request GET "/rest/v1/chat_sessions?user_id=eq.$owner_id&select=id" '' \
       "$tmp_dir/cleanup-sessions.json" "$SUPABASE_SERVICE_ROLE_KEY" >/dev/null || return 1
@@ -137,9 +154,13 @@ cleanup_remote_fixture() {
     delete_exact "/rest/v1/chat_sessions?user_id=eq.$owner_id" || return 1
     delete_exact "/rest/v1/users?id=eq.$owner_id" || return 1
   fi
-  delete_exact "/rest/v1/specialist_catalog?id=eq.$catalog_id" || return 1
-  delete_exact "/rest/v1/specialists?id=eq.$specialist_id" || return 1
-  if [ -n "$owner_id" ]; then
+  if [ "$ledger_catalog" = true ]; then
+    delete_exact "/rest/v1/specialist_catalog?id=eq.$catalog_id" || return 1
+  fi
+  if [ "$ledger_specialist" = true ]; then
+    delete_exact "/rest/v1/specialists?id=eq.$specialist_id" || return 1
+  fi
+  if [ "$ledger_auth" = true ] && [ -n "$owner_id" ]; then
     delete_auth_user_exact || return 1
   fi
   test "$(remaining_counts)" = '0|0|0|0|0|0|0'
@@ -164,38 +185,52 @@ finalize() {
 trap finalize EXIT INT TERM
 
 test "$(remaining_counts)" = '0|0|0|0|0|0|0'
+transition_state INITIAL PREFLIGHT_VALIDATED
+transition_state PREFLIGHT_VALIDATED TARGET_VERIFIED
 synthetic_user_metadata="$tmp_dir/auth-user.metadata"
 synthetic_user_curl_error="$tmp_dir/auth-user.curl-error"
+synthetic_user_transport_file="$tmp_dir/auth-user.transport"
+synthetic_user_status_file="$tmp_dir/auth-user.status"
+synthetic_user_content_type_file="$tmp_dir/auth-user.content-type"
+synthetic_user_duration_file="$tmp_dir/auth-user.duration"
 synthetic_user_transport=failure
-if request POST '/auth/v1/admin/users' \
+transition_state TARGET_VERIFIED SETUP_STARTED
+capture_http_channels POST "$SUPABASE_URL/auth/v1/admin/users" \
   "{\"email\":\"$fixture_email\",\"password\":\"$fixture_password\",\"email_confirm\":true}" \
   "$tmp_dir/auth-user.json" "$SUPABASE_SERVICE_ROLE_KEY" \
-  "$synthetic_user_metadata" "$synthetic_user_curl_error"; then
+  "$synthetic_user_metadata" "$synthetic_user_curl_error" \
+  "$synthetic_user_transport_file"
+synthetic_user_curl_status="$(
+  strict_transport_exit_from_file "$synthetic_user_transport_file"
+)" || synthetic_user_curl_status=255
+if [ "$synthetic_user_curl_status" -eq 0 ]; then
   synthetic_user_transport=ok
-else
-  synthetic_user_curl_status=$?
-  if [ "$synthetic_user_curl_status" -eq 28 ]; then
-    synthetic_user_transport=timeout
-  fi
+elif [ "$synthetic_user_curl_status" -eq 28 ]; then
+  synthetic_user_transport=timeout
 fi
 rm -f "$synthetic_user_curl_error"
 
 synthetic_user_status=0
 synthetic_user_content_type=''
 synthetic_user_duration=''
-if ! IFS=$'\t' read -r synthetic_user_status synthetic_user_content_type \
-  synthetic_user_duration <"$synthetic_user_metadata"; then
-  if [ -z "$synthetic_user_status" ]; then
-    synthetic_user_status=0
-    synthetic_user_content_type=''
-    synthetic_user_duration=''
-  fi
+if parse_curl_metadata "$synthetic_user_metadata" "$synthetic_user_status_file" \
+  "$synthetic_user_content_type_file" "$synthetic_user_duration_file"; then
+  synthetic_user_status="$(
+    strict_http_status_from_file "$synthetic_user_status_file"
+  )" || synthetic_user_status=0
+  synthetic_user_content_type="$(cat "$synthetic_user_content_type_file")"
+  synthetic_user_duration="$(cat "$synthetic_user_duration_file")"
 fi
-rm -f "$synthetic_user_metadata"
+rm -f "$synthetic_user_metadata" "$synthetic_user_transport_file" \
+  "$synthetic_user_status_file" "$synthetic_user_content_type_file" \
+  "$synthetic_user_duration_file"
 
 if jq -e 'type == "object" and (.id | type == "string")' \
   "$tmp_dir/auth-user.json" >/dev/null 2>&1; then
   owner_id="$(jq -r .id "$tmp_dir/auth-user.json")"
+  ledger_auth=true
+elif [ "$synthetic_user_status" = 200 ]; then
+  cleanup_verifiable=false
 fi
 
 diagnostic_output="$tmp_dir/safe-http-diagnostic.txt"
@@ -223,22 +258,30 @@ test "$(tail -n 1 "$diagnostic_output")" = SAFE_HTTP_DIAGNOSTIC_END
 cat "$diagnostic_output"
 rm -f "$diagnostic_output"
 test "$diagnostic_tool_status" = 0
+test "$synthetic_user_curl_status" = 0
 test "$synthetic_user_status" = 200
 test -n "$owner_id"; test "$owner_id" != null
+transition_state SETUP_STARTED AUTH_USER_CREATED
 
 # A diagnostic-only authorization always stops at the focal assertion.
-flow_status=0
-exit 0
+if [ "$REMOTE_RUNNER_EXECUTION_MODE" = diagnostic-only ]; then
+  flow_status=0
+  exit 0
+fi
 
 test "$(request POST '/rest/v1/specialists' \
   "{\"id\":\"$specialist_id\",\"name\":\"$fixture_display_name\",\"category\":\"salud\",\"prompt_template\":{},\"is_premium\":false,\"is_active\":true}" \
   "$tmp_dir/specialist.json" "$SUPABASE_SERVICE_ROLE_KEY")" = 201
+ledger_specialist=true
 test "$(request POST '/rest/v1/specialist_catalog' \
   "{\"id\":\"$catalog_id\",\"specialist_id\":\"$specialist_id\",\"slug\":\"$run_alias\",\"display_name\":\"$fixture_display_name\",\"product_area\":\"stasis\",\"short_description\":\"Synthetic bounded fixture.\",\"publication_status\":\"published\",\"is_published\":true,\"availability_status\":\"available\",\"access_tier\":\"free\",\"supported_surfaces\":[\"product\"],\"is_conversable\":true}" \
   "$tmp_dir/catalog.json" "$SUPABASE_SERVICE_ROLE_KEY")" = 201
+ledger_catalog=true
+transition_state AUTH_USER_CREATED SPECIALIST_RESOLVED
 test "$(request POST '/rest/v1/users' \
   "{\"id\":\"$owner_id\",\"display_name\":\"$fixture_display_name\"}" \
   "$tmp_dir/profile.json" "$SUPABASE_SERVICE_ROLE_KEY")" = 201
+ledger_profile=true
 test "$(request POST '/auth/v1/token?grant_type=password' \
   "{\"email\":\"$fixture_email\",\"password\":\"$fixture_password\"}" \
   "$tmp_dir/token.json" "$SUPABASE_ANON_KEY")" = 200
@@ -248,6 +291,7 @@ test -n "$synthetic_access_token"; test "$synthetic_access_token" != null
 export SYNTHETIC_ACCESS_TOKEN="$synthetic_access_token"
 export REMOTE_FIXTURE_SPECIALIST_DISPLAY_NAME="$fixture_display_name"
 flutter test test/features/chat_sessions/data/development_remote_write_test.dart
+runner_state=FLOW_COMPLETED
 flutter test test/features/chat_sessions/data/development_remote_read_test.dart
 flutter test test/features/chat_messages/presentation/development_remote_ux_read_test.dart
 flow_status=0

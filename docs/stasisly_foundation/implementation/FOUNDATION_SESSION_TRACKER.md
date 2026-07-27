@@ -1,5 +1,38 @@
 # Foundation Session Tracker
 
+## FOUNDATION-019A-R2B status
+
+```text
+baseline: 70edbbb
+historical failure: REPRODUCED_LOCALLY
+root cause: STDOUT_COMMAND_SUBSTITUTION_CONTAMINATION
+HTTP 200 assertion: CONFIRMED_AND_PRESERVED
+status/build/body/diagnostic channels: SEPARATED
+SafeHttpDiagnostic: PRESERVED
+cleanup 200/404: PRESERVED
+seven named counters: FOUNDATION_ADOPTED
+dirty containment: COMPLETED_CLEAN_ALREADY_ABSENT
+second functional attempt: PREPARED_NOT_AUTHORIZED
+manifest: FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v1
+remote skips: CLASSIFIED_NOT_ENABLED
+remote actions/reads/writes: 0/0/0
+sustained Development: NOT_AUTHORIZED
+focal runner/contracts tests: PASS
+Flutter: 744 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after reset without seed
+remote-context: SAFE
+```
+
+Consumed authorizations:
+
+```text
+FA-019A-20260723-001
+FA-019A-DIAG-20260723-002
+FA-019A-CONTAIN-20260727-003
+```
+
 ## FOUNDATION-019A-R2C-R1 status
 
 ```text

@@ -1,5 +1,14 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-019A-R2B risks
+
+| Risk | Severity | State | Control | Unblock condition |
+|---|---|---|---|---|
+| HTTP status contaminated by stdout/build output | High | Closed locally | Dedicated transport, metadata, status, body, diagnostic and build channels | Keep focal and full regression green |
+| Auth created without exact cleanup identity | Critical | Dirty blocking | `200` without exact ID cannot classify clean | Exact ID, post-delete `notFound`, seven zero counters |
+| Reuse of consumed Founder authorization | Critical | Blocked | Manifest remains `NOT_GRANTED`; new reference and commit required | New explicit commit-bound Founder authorization |
+| Functional retry enables remote skips or sustained operation | High | Blocked | `CLASSIFIED_NOT_ENABLED`; one bounded attempt only | Separate authorization and retained limitation |
+
 ## FOUNDATION-019A-R2C-R1 risks
 
 | Risk | Severity | State | Control | Unblock condition |
@@ -13,7 +22,7 @@
 
 | Risk | Severity | State | Evidence | Unblock condition |
 |---|---|---|---|---|
-| Possible synthetic Auth residue from `diag-20260723-002` | High | Remote state `UNKNOWN`; new fixtures blocked | Exact namespace and reachable-step audit in FOUNDATION-019A-R2C | Approved exact-ID resolution plus containment-only authorization and zero post-cleanup counters |
+| Possible synthetic Auth residue from `diag-20260723-002` | High | Closed: verified already absent | Exact namespace, exact lookup and seven zero counters | Keep containment evidence and authorization consumption |
 | False dirty classification on repeated Auth cleanup | Medium | Corrected and locally guarded | Exact delete accepts only `200/404`; shell simulation | Keep regression green |
 | Build output contaminates safe diagnostic stream | Medium | Corrected and locally guarded | Explicit diagnostic file and exact marker checks | Keep architecture guards green |
 

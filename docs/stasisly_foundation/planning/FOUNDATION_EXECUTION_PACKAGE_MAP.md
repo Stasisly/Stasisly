@@ -1,5 +1,12 @@
 # Foundation Execution Package Map
 
+## FOUNDATION-019A-R2B
+
+R2B proves and corrects the historical runner status-channel defect locally.
+The second functional attempt manifest is prepared but remains
+`NOT_GRANTED/NOT_EXECUTED`; a new unique Founder authorization must bind the R2B
+commit. No remote action occurs in this package.
+
 ## FOUNDATION-019A-R2C-R1
 
 Local-only package for historical identity derivation, exact-match lookup,
@@ -144,3 +151,4 @@ replace FOUNDATION-014-020 and each requires a separate approval.
 | FOUNDATION-019A | Exact Development remote execution authorization | NOT_AUTHORIZED | Separate Founder order and exact external context |
 | FOUNDATION-019A-R1 | Version remote fixture/cleanup/gate/CORS contracts | IMPLEMENTED_LOCALLY_PENDING_PUSH | New commit-specific Founder authorization and exact CORS |
 | FOUNDATION-019A-R2A | Instrument focal HTTP response with a closed safe diagnostic contract | VALIDATED_LOCALLY | Package Git gate, then diagnostic-only Founder authorization |
+| FOUNDATION-019A-R2B | Prove runner defect, separate channels and prepare second functional attempt | IMPLEMENTED_LOCALLY | New unique Founder authorization bound to final R2B commit |

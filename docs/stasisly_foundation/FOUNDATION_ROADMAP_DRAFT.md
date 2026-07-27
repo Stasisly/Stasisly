@@ -1,6 +1,13 @@
 # Borrador de roadmap Stasisly Foundation
 
-## Active gate: FOUNDATION-019A-R2C-R1
+## Active gate: FOUNDATION-019A-R2B
+
+R2B closes the historical runner status-channel defect locally and prepares,
+without authorizing, one second functional Development attempt. The next gate
+is a new commit-specific Founder authorization; no prior reference can be
+reused.
+
+## Superseded active gate: FOUNDATION-019A-R2C-R1
 
 Exact synthetic Auth identity resolution is prepared locally. The next gate is
 a containment-only Founder authorization bound to the R1 commit. No fixture,

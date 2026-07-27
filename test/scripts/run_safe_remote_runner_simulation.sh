@@ -71,6 +71,7 @@ esac
 if [ "${SIM_SANITIZER_FAIL:-false}" = true ] &&
    [ "$method" = POST ] &&
    [[ "$url" == */auth/v1/admin/users ]]; then
+  unlink "$output"
   mkdir -p "$output"
 else
   printf '%s' "$body" >"$output"
@@ -159,7 +160,7 @@ run_case conflict FAILED_CLEAN 409 application/json \
   '{"message":"FAKE_EMAIL_DO_NOT_LOG"}'
 run_case server-html FAILED_CLEAN 500 text/html \
   '<html>FAKE_PROJECT_REF_DO_NOT_LOG</html>'
-run_case invalid-json FAILED_CLEAN 200 application/json '{invalid'
+run_case invalid-json FAILED_DIRTY_BLOCKING 200 application/json '{invalid'
 
 sanitizer_dir="$simulation_root/sanitizer-failure"
 mkdir -p "$sanitizer_dir"
@@ -194,7 +195,7 @@ sanitizer_output="$(
 )" 2>&1
 set -e
 grep -q 'diagnosticSanitization=failed' <<<"$sanitizer_output"
-grep -q 'FAILED_CLEAN' <<<"$sanitizer_output"
+grep -q 'FAILED_DIRTY_BLOCKING' <<<"$sanitizer_output"
 
 cleanup_dir="$simulation_root/cleanup-failure"
 mkdir -p "$cleanup_dir"

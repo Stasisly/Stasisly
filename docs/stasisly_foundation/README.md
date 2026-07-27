@@ -371,3 +371,13 @@ un diagnóstico HTTP cerrado, elimina el body temporal antes de mantener la
 aserción exacta `200` y obliga a detener cualquier reintento diagnóstico en
 `syntheticUserCreate`. La causa raíz sigue desconocida, no se ha ejecutado
 remoto y un retry funcional continúa no autorizado.
+
+## FOUNDATION-019A-R2B
+
+R2B reproduce localmente el defecto histórico y lo clasifica como
+`STDOUT_COMMAND_SUBSTITUTION_CONTAMINATION`: el runner de `679d5cf` mezclaba
+stdout previo con el status curl. Transporte, status HTTP, body, build y
+diagnóstico quedan separados; la aserción exacta `200`, `SafeHttpDiagnostic`,
+cleanup `200/404` y los siete contadores se preservan. El segundo intento queda
+`PREPARED_NOT_AUTHORIZED`, con manifest `UNASSIGNED/NOT_GRANTED/NOT_EXECUTED`.
+No se ejecuta remoto y las autorizaciones anteriores permanecen consumidas.

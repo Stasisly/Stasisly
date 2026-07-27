@@ -1,5 +1,17 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-019A-R2B classification
+
+- Historical runner defect: `PROVEN_AND_CORRECTED_LOCALLY`.
+- HTTP status-channel integrity: `FOUNDATION_ADOPTED`.
+- Exact HTTP `200` assertion and `SafeHttpDiagnostic`: `PRESERVED`.
+- Ephemeral current-run ledger and seven named counters:
+  `FOUNDATION_ADOPTED_LOCALLY`.
+- Second functional attempt: `PREPARED_NOT_AUTHORIZED`.
+- Remote skips: `CLASSIFIED_NOT_ENABLED`; sustained Development:
+  `NOT_AUTHORIZED`.
+- Previous Founder authorizations: `CONSUMED`.
+
 ## FOUNDATION-019A-R2C-R1 classification
 
 - Historical synthetic Auth identity: `RECONSTRUCTED_LOCALLY`.

@@ -7,9 +7,18 @@ void main() {
     'scripts/run_development_remote_fixture_test.sh',
   ).readAsStringSync();
   final sanitizer = File('tool/safe_http_diagnostic.dart').readAsStringSync();
+  final httpContract = File(
+    'scripts/lib/development_remote_http_contract.sh',
+  ).readAsStringSync();
 
   test('remote runner keeps the exact focal request and 200 assertion', () {
-    expect(runner, contains("request POST '/auth/v1/admin/users'"));
+    expect(
+      runner,
+      contains(
+        'capture_http_channels POST '
+        r'"$SUPABASE_URL/auth/v1/admin/users"',
+      ),
+    );
     expect(runner, contains(r'\"email_confirm\":true'));
     expect(runner, contains(r'test "$synthetic_user_status" = 200'));
     expect(runner, isNot(contains(r'test "$synthetic_user_status" -ge 200')));
@@ -18,14 +27,18 @@ void main() {
   });
 
   test('diagnostic-only runner stops before downstream fixture setup', () {
-    final stop = runner.indexOf('flow_status=0\nexit 0');
+    final stop = runner.indexOf(
+      r'if [ "$REMOTE_RUNNER_EXECUTION_MODE" = diagnostic-only ]',
+    );
     final nextSetup = runner.indexOf("request POST '/rest/v1/specialists'");
     expect(stop, greaterThan(0));
     expect(nextSetup, greaterThan(stop));
     expect(runner, contains('REMOTE_RUNNER_EXECUTION_MODE'));
     expect(
       runner,
-      contains(r'test "$REMOTE_RUNNER_EXECUTION_MODE" = diagnostic-only'),
+      contains(
+        r'if [ "$REMOTE_RUNNER_EXECUTION_MODE" = diagnostic-only ]; then',
+      ),
     );
   });
 
@@ -75,12 +88,26 @@ void main() {
     expect(runner, isNot(contains('curl --trace')));
     expect(runner, isNot(contains(r'cat "$tmp_dir/auth-user.json"')));
     expect(runner, isNot(contains(r'echo "$synthetic_access_token"')));
-    expect(runner, contains(r'2>"$curl_error"'));
+    expect(runner, contains('capture_http_channels'));
     expect(runner, contains(r'rm -f "$synthetic_user_curl_error"'));
-    expect(runner, contains(r'2>"$default_curl_error"'));
-    expect(runner, contains(r'rm -f "$default_curl_error"'));
     expect(runner, contains(r'chmod 700 "$tmp_dir"'));
+    expect(httpContract, contains(r'>"$metadata_file" 2>"$diagnostic_file"'));
+    expect(httpContract, contains(r'>"$transport_file"'));
+    expect(httpContract, isNot(contains('set -x')));
   });
+
+  test(
+    'transport, HTTP status, body and diagnostics use separate channels',
+    () {
+      expect(httpContract, contains('strict_transport_exit_from_file'));
+      expect(httpContract, contains('strict_http_status_from_file'));
+      expect(httpContract, contains('response_body_file'));
+      expect(httpContract, contains('diagnostic_file'));
+      expect(httpContract, contains('metadata_file'));
+      expect(runner, contains(r'test "$synthetic_user_curl_status" = 0'));
+      expect(runner, contains(r'test "$synthetic_user_status" = 200'));
+    },
+  );
 
   test('sanitizer contract is closed and never emits raw content', () {
     for (final field in <String>[
