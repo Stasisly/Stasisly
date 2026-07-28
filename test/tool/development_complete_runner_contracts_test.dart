@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -33,6 +34,80 @@ void main() {
       );
     });
 
+    test('uses one canonical read-only specialist policy', () {
+      expect(manifest.specialistPolicy, canonicalSpecialistPolicy);
+      expect(manifest.specialistSource, canonicalSpecialistSource);
+      expect(
+        manifest.specialistSelectionMode,
+        canonicalSpecialistSelectionMode,
+      );
+      expect(manifest.specialistSelectionArea, canonicalSpecialistArea);
+      expect(manifest.specialistSelectionLimit, 20);
+      final operation = manifest.operations.singleWhere(
+        (operation) => operation.operation == 'specialistResolution',
+      );
+      expect(operation.runnerFunction, 'resolveSpecialistFromCanonicalCatalog');
+      expect(operation.ledgerEffect, 'VERIFIED_PREEXISTING_READ_ONLY');
+      expect(operation.cleanupEffect, 'NONE');
+    });
+
+    test('rejects every manifest specialist semantic divergence', () {
+      final source =
+          jsonDecode(
+                File(
+                  'docs/stasisly_foundation/development/'
+                  'development_second_functional_attempt_manifest.json',
+                ).readAsStringSync(),
+              )
+              as Map<String, dynamic>;
+      final mutations = <void Function(Map<String, dynamic>)>[
+        (value) => value['specialistPolicy'] = 'VERIFIED_OR_RUN_OWNED',
+        (value) => value['specialistSource'] = 'LOCAL_FIXTURE',
+        (value) => value['specialistCreation'] = 'ALLOWED',
+        (value) => value['catalogCreation'] = 'ALLOWED',
+        (value) => value['specialistCleanup'] = 'DELETE',
+        (value) => value['catalogCleanup'] = 'DELETE',
+        (value) =>
+            (value['specialistSelection'] as Map<String, dynamic>)['mode'] =
+                'FIRST_RESULT',
+        (value) {
+          final operation = (value['operations'] as List)
+              .cast<Map<String, dynamic>>()
+              .singleWhere(
+                (operation) => operation['operation'] == 'specialistResolution',
+              );
+          operation['ledgerEffect'] = 'SPECIALIST_CREATED_BY_RUN';
+        },
+        (value) {
+          final operation = (value['operations'] as List)
+              .cast<Map<String, dynamic>>()
+              .singleWhere(
+                (operation) => operation['operation'] == 'specialistResolution',
+              );
+          operation['cleanupEffect'] = 'DELETE_SPECIALIST';
+        },
+      ];
+      final directory = Directory.systemTemp.createTempSync(
+        'stasisly-r2e-manifest.',
+      );
+      try {
+        for (var index = 0; index < mutations.length; index++) {
+          final changed =
+              jsonDecode(jsonEncode(source)) as Map<String, dynamic>;
+          mutations[index](changed);
+          final file = File('${directory.path}/manifest-$index.json')
+            ..writeAsStringSync(jsonEncode(changed));
+          expect(
+            CompleteRunnerManifest.read(file).validate(),
+            isNotEmpty,
+            reason: 'mutation $index must fail closed',
+          );
+        }
+      } finally {
+        directory.deleteSync(recursive: true);
+      }
+    });
+
     test('contains every required executable operation', () {
       final operations = manifest.operations
           .map((operation) => operation.operation)
@@ -63,6 +138,134 @@ void main() {
           'cliIsolation',
           'localRegression',
         }),
+      );
+    });
+  });
+
+  group('canonical specialist resolution', () {
+    const policy = VerifiedPreexistingReadOnlyPolicy();
+
+    Map<String, Object?> candidate({
+      String id = '11111111-1111-4111-8111-111111111111',
+      String area = 'stasis',
+      String accessState = 'available',
+    }) => {
+      'selectableSpecialistId': id,
+      'displayName': 'Canonical test specialist',
+      'publicArea': area,
+      'publicDescription': 'Synthetic contract fixture.',
+      'accessState': accessState,
+    };
+
+    CanonicalSpecialistResolutionResult resolve(
+      Object? payload, {
+      bool available = true,
+      String environment = 'development',
+      bool authorized = true,
+    }) => policy.resolve(
+      catalogPayload: payload,
+      catalogAvailable: available,
+      environment: environment,
+      policyAuthorized: authorized,
+    );
+
+    test('exactly one available specialist may continue', () {
+      final result = resolve([candidate()]);
+      expect(
+        result.state,
+        CanonicalSpecialistResolutionState.exactlyOneSelectable,
+      );
+      expect(result.mayContinue, isTrue);
+      expect(
+        result.specialist?.selectableSpecialistId,
+        '11111111-1111-4111-8111-111111111111',
+      );
+    });
+
+    test('zero selectable specialists blocks', () {
+      expect(
+        resolve([]).state,
+        CanonicalSpecialistResolutionState.noneSelectable,
+      );
+      expect(
+        resolve([candidate(accessState: 'unavailable')]).state,
+        CanonicalSpecialistResolutionState.noneSelectable,
+      );
+    });
+
+    test('multiple selectable candidates block without picking first', () {
+      final result = resolve([
+        candidate(),
+        candidate(id: '22222222-2222-4222-8222-222222222222'),
+      ]);
+      expect(
+        result.state,
+        CanonicalSpecialistResolutionState.multipleSelectableCandidates,
+      );
+      expect(result.specialist, isNull);
+    });
+
+    test('canonical area match passes and missing area blocks', () {
+      expect(resolve([candidate()]).mayContinue, isTrue);
+      expect(
+        resolve([candidate(area: 'health')]).state,
+        CanonicalSpecialistResolutionState.noneSelectable,
+      );
+    });
+
+    test('catalog unavailable and malformed responses block closed', () {
+      expect(
+        resolve(null, available: false).state,
+        CanonicalSpecialistResolutionState.catalogUnavailable,
+      );
+      expect(
+        resolve({'not': 'a-list'}).state,
+        CanonicalSpecialistResolutionState.catalogContractInvalid,
+      );
+      expect(
+        resolve([
+          {...candidate(), 'unknown': true},
+        ]).state,
+        CanonicalSpecialistResolutionState.catalogContractInvalid,
+      );
+    });
+
+    test('invalid status, identifier and Product area block', () {
+      expect(
+        resolve([candidate(accessState: 'enabled')]).state,
+        CanonicalSpecialistResolutionState.catalogContractInvalid,
+      );
+      expect(
+        resolve([candidate(id: 'not-a-uuid')]).state,
+        CanonicalSpecialistResolutionState.catalogContractInvalid,
+      );
+      expect(
+        resolve([candidate(area: 'administration')]).state,
+        CanonicalSpecialistResolutionState.catalogContractInvalid,
+      );
+    });
+
+    test('environment mismatch and unauthorized policy block', () {
+      expect(
+        resolve([candidate()], environment: 'staging').state,
+        CanonicalSpecialistResolutionState.environmentMismatch,
+      );
+      expect(
+        resolve([candidate()], authorized: false).state,
+        CanonicalSpecialistResolutionState.authorizationRejected,
+      );
+    });
+
+    test('bounded catalog rejects more than twenty candidates', () {
+      final candidates = List.generate(
+        21,
+        (index) => candidate(
+          id: '${(index + 1).toString().padLeft(8, '0')}-1111-4111-8111-111111111111',
+        ),
+      );
+      expect(
+        resolve(candidates).state,
+        CanonicalSpecialistResolutionState.catalogContractInvalid,
       );
     });
   });
@@ -575,6 +778,63 @@ void main() {
           ),
         );
       expect(ledger.entriesForCleanup(), isEmpty);
+    });
+
+    test('canonical catalog and specialist are verified read-only', () {
+      final ledger = CompleteResourceLedger();
+      for (final category in [
+        ResourceCategory.catalog,
+        ResourceCategory.specialist,
+      ]) {
+        ledger
+          ..register(
+            LedgerEntry(
+              category: category,
+              disposition: ResourceDisposition.verifiedPreexistingReadOnly,
+              creationState: 'SPECIALIST_RESOLVED',
+              ownershipProof: canonicalSpecialistSource,
+              cleanupHandle: '',
+              cleanupRequired: false,
+            ),
+          )
+          ..markVerified(category);
+      }
+      expect(ledger.entriesForCleanup(), isEmpty);
+      expect(ledger[ResourceCategory.catalog]?.verificationCompleted, isTrue);
+      expect(
+        ledger[ResourceCategory.specialist]?.verificationCompleted,
+        isTrue,
+      );
+    });
+
+    test('read-only cleanup handles and unknown ownership are blocked', () {
+      final ledger = CompleteResourceLedger();
+      expect(
+        () => ledger.register(
+          LedgerEntry(
+            category: ResourceCategory.specialist,
+            disposition: ResourceDisposition.verifiedPreexistingReadOnly,
+            creationState: 'SPECIALIST_RESOLVED',
+            ownershipProof: canonicalSpecialistSource,
+            cleanupHandle: 'forbidden',
+            cleanupRequired: true,
+          ),
+        ),
+        throwsStateError,
+      );
+      expect(
+        () => ledger.register(
+          LedgerEntry(
+            category: ResourceCategory.catalog,
+            disposition: ResourceDisposition.unknownBlocking,
+            creationState: 'SPECIALIST_RESOLVED',
+            ownershipProof: '',
+            cleanupHandle: '',
+            cleanupRequired: false,
+          ),
+        ),
+        throwsStateError,
+      );
     });
 
     test('response-loss uncertainty is dirty blocking', () {

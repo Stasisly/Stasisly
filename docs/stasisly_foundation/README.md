@@ -1,5 +1,16 @@
 # Stasisly Foundation
 
+## Canonical specialist runner gate
+
+FOUNDATION-019A-R2E unifies the functional retry on a single
+`VERIFIED_PREEXISTING_READ_ONLY` specialist policy. Manifest v3 resolves exactly
+one available specialist from the bounded canonical `stasis` catalog, records
+it read-only and forbids specialist/catalog mutation or cleanup. See
+[ADR-F030](adr/ADR-F030-canonical-specialist-resolution-policy.md) and the
+[implementation record](implementation/FOUNDATION-019A-R2E_CANONICAL_SPECIALIST_SEMANTICS.md).
+Remote execution remains unauthorized and requires a new R2E-bound Founder
+order.
+
 ## Complete Development functional runner gate
 
 FOUNDATION-019A-R2D reconciles the v2 second-attempt manifest with a complete,

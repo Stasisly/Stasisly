@@ -1,5 +1,17 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-019A-R2E classification
+
+- Specialist policy: `VERIFIED_PREEXISTING_READ_ONLY`.
+- Canonical source: `SELECTABLE_SPECIALIST_CATALOG`.
+- Selection: exactly one available candidate in canonical `stasis`, bounded 20.
+- Manifest/runner: `SECOND-FUNCTIONAL-ATTEMPT-v3` /
+  `FOUNDATION-019A-R2E-RUNNER-v1`.
+- Specialist/catalog creation and cleanup: `FORBIDDEN` / `NOT_APPLICABLE`.
+- Ledger: canonical catalog and specialist `VERIFIED_PREEXISTING_READ_ONLY`.
+- `FA-019A-RETRY-20260728-005`: `NOT_CONSUMED`, invalid after R2E commit.
+- Remote attempt/skips: `NOT_AUTHORIZED/CLASSIFIED_NOT_ENABLED`.
+
 ## FOUNDATION-019A-R2D classification
 
 - Manifest-runner equivalence: `FOUNDATION_ADOPTED`.

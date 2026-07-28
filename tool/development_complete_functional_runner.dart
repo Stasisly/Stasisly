@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'development_complete_runner_contracts.dart';
 
@@ -101,8 +100,6 @@ final class _RunContext {
   late final String foreignEmail = _syntheticEmail('$alias-foreign');
   late final String password = 'Synthetic-$alias-Aa9!';
   late final String displayName = 'Synthetic $alias';
-  late final String specialistId = _uuid();
-  late final String catalogId = _uuid();
   late final String createAttempt = '${alias}_create_0001';
   late final String messageAttempt = '${alias}_send_000001';
   late final String messageContent = 'synthetic bounded message';
@@ -148,7 +145,7 @@ final class _FunctionalExecution {
       verifyTarget();
       startSetup();
       await createOwnerPrincipal();
-      await resolveSpecialist();
+      await resolveSpecialistFromCanonicalCatalog();
       await createConversation();
       await validateReplayStage();
       await validateActiveList();
@@ -248,8 +245,7 @@ final class _FunctionalExecution {
     _advance('AUTH_USER_CREATED', 'AUTH_USER_CREATED');
   }
 
-  Future<void> resolveSpecialist() async {
-    await _createRunOwnedSpecialistFixture();
+  Future<void> resolveSpecialistFromCanonicalCatalog() async {
     await _createProfile(context.ownerId);
     context.ownerToken = await _login(context.ownerEmail);
     final result = await client.request(
@@ -259,87 +255,38 @@ final class _FunctionalExecution {
       }),
       token: context.ownerToken,
     );
-    final body = result.body;
-    if (result.status != 200 || body is! List<Object?>) {
+    final resolution = const VerifiedPreexistingReadOnlyPolicy().resolve(
+      catalogPayload: result.body,
+      catalogAvailable: result.status == 200,
+      environment: context.environment['APP_MODE'] ?? '',
+      policyAuthorized:
+          manifest.specialistPolicy == canonicalSpecialistPolicy &&
+          manifest.specialistSource == canonicalSpecialistSource &&
+          manifest.specialistSelectionMode == canonicalSpecialistSelectionMode,
+    );
+    if (!resolution.mayContinue) {
       throw StateError('SPECIALIST_RESOLUTION_FAILED');
     }
-    final matches = body
-        .whereType<Map<Object?, Object?>>()
-        .map(Map<String, Object?>.from)
-        .where(
-          (item) =>
-              item['displayName'] == context.displayName &&
-              item['accessState'] == 'available',
+    context.selectableSpecialistId =
+        resolution.specialist!.selectableSpecialistId;
+    for (final category in [
+      ResourceCategory.catalog,
+      ResourceCategory.specialist,
+    ]) {
+      ledger
+        ..register(
+          LedgerEntry(
+            category: category,
+            disposition: ResourceDisposition.verifiedPreexistingReadOnly,
+            creationState: 'SPECIALIST_RESOLVED',
+            ownershipProof: canonicalSpecialistSource,
+            cleanupHandle: '',
+            cleanupRequired: false,
+          ),
         )
-        .toList(growable: false);
-    if (matches.length != 1) {
-      throw StateError('SPECIALIST_RESOLUTION_FAILED');
+        ..markVerified(category);
     }
-    context.selectableSpecialistId = _requiredUuid(
-      matches.single['selectableSpecialistId'],
-    );
     _advance('SPECIALIST_RESOLVED', 'SPECIALIST_RESOLVED');
-  }
-
-  Future<void> _createRunOwnedSpecialistFixture() async {
-    final specialist = await client.request(
-      method: 'POST',
-      uri: client.endpoint('/rest/v1/specialists'),
-      headers: {'Prefer': 'return=minimal'},
-      body: {
-        'id': context.specialistId,
-        'name': context.displayName,
-        'category': 'salud',
-        'prompt_template': <String, Object?>{},
-        'is_premium': false,
-        'is_active': true,
-      },
-    );
-    if (specialist.status != 201) {
-      throw StateError('SPECIALIST_RESOLUTION_FAILED');
-    }
-    ledger.register(
-      LedgerEntry(
-        category: ResourceCategory.specialist,
-        disposition: ResourceDisposition.createdByRun,
-        creationState: 'SETUP_STARTED',
-        ownershipProof: context.alias,
-        cleanupHandle: context.specialistId,
-        cleanupRequired: true,
-      ),
-    );
-    final catalog = await client.request(
-      method: 'POST',
-      uri: client.endpoint('/rest/v1/specialist_catalog'),
-      headers: {'Prefer': 'return=minimal'},
-      body: {
-        'id': context.catalogId,
-        'specialist_id': context.specialistId,
-        'slug': context.alias,
-        'display_name': context.displayName,
-        'product_area': 'stasis',
-        'short_description': 'Synthetic bounded fixture.',
-        'publication_status': 'published',
-        'is_published': true,
-        'availability_status': 'available',
-        'access_tier': 'free',
-        'supported_surfaces': ['product'],
-        'is_conversable': true,
-      },
-    );
-    if (catalog.status != 201) {
-      throw StateError('SPECIALIST_RESOLUTION_FAILED');
-    }
-    ledger.register(
-      LedgerEntry(
-        category: ResourceCategory.catalog,
-        disposition: ResourceDisposition.createdByRun,
-        creationState: 'SETUP_STARTED',
-        ownershipProof: context.alias,
-        cleanupHandle: context.catalogId,
-        cleanupRequired: true,
-      ),
-    );
   }
 
   Future<void> _createProfile(String ownerId) async {
@@ -819,13 +766,8 @@ final class _FunctionalExecution {
           'id': 'eq.${context.ownerId}',
         });
       case ResourceCategory.catalog:
-        uri = client.endpoint('/rest/v1/specialist_catalog', {
-          'id': 'eq.${context.catalogId}',
-        });
       case ResourceCategory.specialist:
-        uri = client.endpoint('/rest/v1/specialists', {
-          'id': 'eq.${context.specialistId}',
-        });
+        throw StateError('READ_ONLY_CLEANUP_BLOCKED');
       case ResourceCategory.foreignAuth:
         uri = client.endpoint('/auth/v1/admin/users/${context.foreignId}');
       case ResourceCategory.ownerAuth:
@@ -869,14 +811,6 @@ final class _FunctionalExecution {
         {'user_id': 'eq.${context.ownerId}', 'select': 'id'},
       ),
       ('/rest/v1/users', {'id': 'eq.${context.ownerId}', 'select': 'id'}),
-      (
-        '/rest/v1/specialist_catalog',
-        {'id': 'eq.${context.catalogId}', 'select': 'id'},
-      ),
-      (
-        '/rest/v1/specialists',
-        {'id': 'eq.${context.specialistId}', 'select': 'id'},
-      ),
     ]) {
       final result = await client.request(
         method: 'GET',
@@ -887,6 +821,20 @@ final class _FunctionalExecution {
         throw StateError('RESIDUE_UNKNOWN_OR_NONZERO');
       }
       counts.add(body.length);
+    }
+    // This attempt cannot create these categories; the ledger is authoritative.
+    for (final category in [
+      ResourceCategory.catalog,
+      ResourceCategory.specialist,
+    ]) {
+      final entry = ledger[category];
+      if (entry == null ||
+          entry.disposition !=
+              ResourceDisposition.verifiedPreexistingReadOnly ||
+          !entry.verificationCompleted) {
+        throw StateError('RESIDUE_UNKNOWN_OR_NONZERO');
+      }
+      counts.add(0);
     }
     var authCount = 0;
     for (final id in [context.ownerId, context.foreignId]) {
@@ -1031,7 +979,11 @@ Future<void> main(List<String> arguments) async {
       exitCode = 1;
       return;
     }
-    stdout.writeln('EXECUTABLE_RUNNER_CONTRACT_COMPLETE');
+    stdout.write(
+      'CANONICAL_SPECIALIST_CONTRACT_PASS\n'
+      'MANIFEST_RUNNER_SPECIALIST_SEMANTICS_MATCH\n'
+      'EXECUTABLE_RUNNER_CONTRACT_COMPLETE\n',
+    );
     return;
   }
   if (arguments.single != '--authorized-development-run') {
@@ -1062,19 +1014,6 @@ String _requiredUuid(Object? value) {
     throw const FormatException('Expected UUID.');
   }
   return value;
-}
-
-String _uuid() {
-  final random = Random.secure();
-  final bytes = List<int>.generate(16, (_) => random.nextInt(256));
-  bytes[6] = (bytes[6] & 0x0f) | 0x40;
-  bytes[8] = (bytes[8] & 0x3f) | 0x80;
-  final hex = bytes
-      .map((byte) => byte.toRadixString(16).padLeft(2, '0'))
-      .join();
-  return '${hex.substring(0, 8)}-${hex.substring(8, 12)}-'
-      '${hex.substring(12, 16)}-${hex.substring(16, 20)}-'
-      '${hex.substring(20)}';
 }
 
 String _syntheticEmail(String localPart) {

@@ -1,5 +1,16 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-019A-R2E risks
+
+| Risk | Severity | State | Control | Residual action |
+|---|---|---|---|---|
+| Runner invents specialist/catalog data | Critical | Closed locally | Manifest v3, canonical read-only policy and mutation guards | Keep policy gate mandatory |
+| Multiple catalog candidates selected implicitly | High | Closed locally | Exactly-one rule; zero/multiple block | Add alias only through a future backend contract |
+| Cleanup deletes a canonical resource | Critical | Closed locally | Read-only ledger has no handle; cleanup throws | Keep ledger tests |
+| Catalog growth creates unbounded reads | High | Controlled | Existing 20-entry backend bound and strict response validation | Version pagination before exceeding bound |
+| New specialist mode couples the central runner | Medium | Controlled | `SpecialistResolutionPolicy` substitution boundary | Separate manifest and authorization per policy |
+| R2D authorization reused | Critical | Blocked | New SHA and unique Founder reference required | Issue a new R2E-bound order |
+
 ## FOUNDATION-019A-R2D risks
 
 | Risk | Severity | State | Control | Unblock condition |

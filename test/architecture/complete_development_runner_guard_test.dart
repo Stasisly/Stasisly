@@ -76,8 +76,8 @@ void main() {
     expect(shell, contains('FOUNDER_AUTHORIZATION_REFERENCE'));
     expect(shell, contains('AUTHORIZED_COMMIT_SHA'));
     expect(shell, contains('SECOND_FUNCTIONAL_ATTEMPT_MANIFEST_VERSION'));
-    expect(shell, contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v2'));
-    expect(shell, contains('FOUNDATION-019A-R2D-RUNNER-v1'));
+    expect(shell, contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v3'));
+    expect(shell, contains('FOUNDATION-019A-R2E-RUNNER-v1'));
     expect(shell, contains('RETENTION_LIMITATION_ACKNOWLEDGED'));
     expect(shell, contains('supabase link --project-ref'));
     expect(shell, contains('check_supabase_remote_context.dart'));
@@ -93,6 +93,52 @@ void main() {
     expect(manifest['migration'], 'FORBIDDEN');
     expect(manifest['functionDeploy'], 'FORBIDDEN');
     expect(manifest['secretMutation'], 'FORBIDDEN');
+    expect(manifest['specialistPolicy'], 'VERIFIED_PREEXISTING_READ_ONLY');
+    expect(manifest['specialistSource'], 'SELECTABLE_SPECIALIST_CATALOG');
+    expect(manifest['specialistCreation'], 'FORBIDDEN');
+    expect(manifest['catalogCreation'], 'FORBIDDEN');
+    expect(manifest['specialistCleanup'], 'NOT_APPLICABLE');
+    expect(manifest['catalogCleanup'], 'NOT_APPLICABLE');
+  });
+
+  test('functional runner cannot create or delete catalog resources', () {
+    expect(runner, contains('resolveSpecialistFromCanonicalCatalog'));
+    expect(runner, contains('VerifiedPreexistingReadOnlyPolicy'));
+    expect(runner, contains('verifiedPreexistingReadOnly'));
+    expect(runner, isNot(contains('_createRunOwnedSpecialistFixture')));
+    expect(
+      runner,
+      isNot(
+        contains(
+          "method: 'POST',\n      uri: client.endpoint('/rest/v1/specialists'",
+        ),
+      ),
+    );
+    expect(
+      runner,
+      isNot(
+        contains(
+          "method: 'POST',\n      uri: client.endpoint('/rest/v1/specialist_catalog'",
+        ),
+      ),
+    );
+    expect(runner, isNot(contains("client.endpoint('/rest/v1/specialists'")));
+    expect(
+      runner,
+      isNot(contains("client.endpoint('/rest/v1/specialist_catalog'")),
+    );
+    expect(runner, contains('READ_ONLY_CLEANUP_BLOCKED'));
+  });
+
+  test('specialist selection is bounded and ambiguity blocks', () {
+    final selection = manifest['specialistSelection'] as Map<String, dynamic>;
+    expect(selection['mode'], 'EXACT_ONE_AVAILABLE_IN_CANONICAL_AREA');
+    expect(selection['canonicalArea'], 'stasis');
+    expect(selection['maxCandidates'], 20);
+    expect(selection['ambiguity'], 'BLOCK');
+    expect(runner, contains("'area': 'stasis'"));
+    expect(runner, isNot(contains('.first')));
+    expect(runner, isNot(contains('.firstWhere')));
   });
 
   test('runner evidence does not print raw sensitive values', () {

@@ -1,5 +1,20 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-019A-R2E gate
+
+```text
+R2D complete runner
+-> blocked Founder retry due specialist semantic divergence
+-> canonical SelectableSpecialistCatalog audit
+-> manifest v3 + VerifiedPreexistingReadOnlyPolicy
+-> read-only ledger and cleanup exclusion
+-> local guards/tests/simulation
+-> new commit-bound Founder authorization required
+```
+
+G0-G7 are local. G8 closes only after commit and push. Remote execution remains
+outside R2E.
+
 ## FOUNDATION-019A-R2D gate
 
 ```text

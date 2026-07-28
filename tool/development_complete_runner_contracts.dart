@@ -1,8 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-const completeRunnerVersion = 'FOUNDATION-019A-R2D-RUNNER-v1';
-const completeManifestVersion = 'FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v2';
+const completeRunnerVersion = 'FOUNDATION-019A-R2E-RUNNER-v1';
+const completeManifestVersion = 'FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v3';
+const canonicalSpecialistPolicy = 'VERIFIED_PREEXISTING_READ_ONLY';
+const canonicalSpecialistSource = 'SELECTABLE_SPECIALIST_CATALOG';
+const canonicalSpecialistSelectionMode =
+    'EXACT_ONE_AVAILABLE_IN_CANONICAL_AREA';
+const canonicalSpecialistArea = 'stasis';
 
 final class RunnerOperation {
   const RunnerOperation({
@@ -60,6 +65,15 @@ final class CompleteRunnerManifest {
   CompleteRunnerManifest._({
     required this.version,
     required this.runnerVersion,
+    required this.specialistPolicy,
+    required this.specialistSource,
+    required this.specialistSelectionMode,
+    required this.specialistSelectionArea,
+    required this.specialistSelectionLimit,
+    required this.specialistCreation,
+    required this.catalogCreation,
+    required this.specialistCleanup,
+    required this.catalogCleanup,
     required this.states,
     required this.operations,
     required this.failureCleanupFromStates,
@@ -73,14 +87,26 @@ final class CompleteRunnerManifest {
     final rawStates = decoded['states'];
     final rawOperations = decoded['operations'];
     final rawFailureStates = decoded['failureCleanupFromStates'];
+    final rawSelection = decoded['specialistSelection'];
     if (rawStates is! List ||
         rawOperations is! List ||
-        rawFailureStates is! List) {
+        rawFailureStates is! List ||
+        rawSelection is! Map) {
       throw const FormatException('Manifest states and operations required.');
     }
+    final selection = Map<String, Object?>.from(rawSelection);
     return CompleteRunnerManifest._(
       version: decoded['manifestVersion'] as String? ?? '',
       runnerVersion: decoded['runnerVersion'] as String? ?? '',
+      specialistPolicy: decoded['specialistPolicy'] as String? ?? '',
+      specialistSource: decoded['specialistSource'] as String? ?? '',
+      specialistSelectionMode: selection['mode'] as String? ?? '',
+      specialistSelectionArea: selection['canonicalArea'] as String? ?? '',
+      specialistSelectionLimit: selection['maxCandidates'] as int? ?? 0,
+      specialistCreation: decoded['specialistCreation'] as String? ?? '',
+      catalogCreation: decoded['catalogCreation'] as String? ?? '',
+      specialistCleanup: decoded['specialistCleanup'] as String? ?? '',
+      catalogCleanup: decoded['catalogCleanup'] as String? ?? '',
       states: rawStates.map((value) => value as String).toList(growable: false),
       operations: rawOperations
           .map(
@@ -97,6 +123,15 @@ final class CompleteRunnerManifest {
 
   final String version;
   final String runnerVersion;
+  final String specialistPolicy;
+  final String specialistSource;
+  final String specialistSelectionMode;
+  final String specialistSelectionArea;
+  final int specialistSelectionLimit;
+  final String specialistCreation;
+  final String catalogCreation;
+  final String specialistCleanup;
+  final String catalogCleanup;
   final List<String> states;
   final List<RunnerOperation> operations;
   final Set<String> failureCleanupFromStates;
@@ -108,6 +143,17 @@ final class CompleteRunnerManifest {
     }
     if (runnerVersion != completeRunnerVersion) {
       findings.add('Unexpected runner version.');
+    }
+    if (specialistPolicy != canonicalSpecialistPolicy ||
+        specialistSource != canonicalSpecialistSource ||
+        specialistSelectionMode != canonicalSpecialistSelectionMode ||
+        specialistSelectionArea != canonicalSpecialistArea ||
+        specialistSelectionLimit != 20 ||
+        specialistCreation != 'FORBIDDEN' ||
+        catalogCreation != 'FORBIDDEN' ||
+        specialistCleanup != 'NOT_APPLICABLE' ||
+        catalogCleanup != 'NOT_APPLICABLE') {
+      findings.add('Canonical specialist policy is invalid.');
     }
     if (states.isEmpty || states.first != 'INITIAL') {
       findings.add('State path must start at INITIAL.');
@@ -152,11 +198,201 @@ final class CompleteRunnerManifest {
         findings.add('Operation mapping is incomplete.');
       }
     }
+    final specialistOperations = operations
+        .where((operation) => operation.operation == 'specialistResolution')
+        .toList(growable: false);
+    if (specialistOperations.length != 1 ||
+        specialistOperations.single.runnerFunction !=
+            'resolveSpecialistFromCanonicalCatalog' ||
+        specialistOperations.single.ledgerEffect !=
+            'VERIFIED_PREEXISTING_READ_ONLY' ||
+        specialistOperations.single.cleanupEffect != 'NONE') {
+      findings.add('Specialist manifest-runner semantics diverge.');
+    }
     return findings;
   }
 
   RunnerOperation operationFrom(String state) =>
       operations.singleWhere((operation) => operation.fromState == state);
+}
+
+enum CanonicalSpecialistResolutionState {
+  exactlyOneSelectable,
+  noneSelectable,
+  multipleSelectableCandidates,
+  catalogUnavailable,
+  catalogContractInvalid,
+  environmentMismatch,
+  authorizationRejected,
+  unknownFailure,
+}
+
+final class CanonicalSelectableSpecialist {
+  const CanonicalSelectableSpecialist({
+    required this.selectableSpecialistId,
+    required this.displayName,
+    required this.publicArea,
+    required this.publicDescription,
+    required this.accessState,
+  });
+
+  factory CanonicalSelectableSpecialist.fromJson(Map<String, Object?> json) {
+    const expectedKeys = {
+      'selectableSpecialistId',
+      'displayName',
+      'publicArea',
+      'publicDescription',
+      'accessState',
+    };
+    if (json.keys.toSet().difference(expectedKeys).isNotEmpty ||
+        !json.keys.toSet().containsAll(expectedKeys)) {
+      throw const FormatException('Unexpected specialist catalog fields.');
+    }
+    String requiredString(String key) {
+      final value = json[key];
+      if (value is! String || value.trim().isEmpty) {
+        throw FormatException('Invalid specialist field: $key.');
+      }
+      return value.trim();
+    }
+
+    final id = requiredString('selectableSpecialistId');
+    if (!RegExp(
+      r'^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$',
+      caseSensitive: false,
+    ).hasMatch(id)) {
+      throw const FormatException('Invalid specialist identifier.');
+    }
+    final area = requiredString('publicArea');
+    if (!const {
+      'stasis',
+      'health',
+      'nutrition',
+      'training',
+      'wellness',
+    }.contains(area)) {
+      throw const FormatException('Invalid specialist area.');
+    }
+    final accessState = requiredString('accessState');
+    if (!const {
+      'available',
+      'lockedPro',
+      'unavailable',
+    }.contains(accessState)) {
+      throw const FormatException('Invalid specialist access state.');
+    }
+    return CanonicalSelectableSpecialist(
+      selectableSpecialistId: id,
+      displayName: requiredString('displayName'),
+      publicArea: area,
+      publicDescription: requiredString('publicDescription'),
+      accessState: accessState,
+    );
+  }
+
+  final String selectableSpecialistId;
+  final String displayName;
+  final String publicArea;
+  final String publicDescription;
+  final String accessState;
+}
+
+final class CanonicalSpecialistResolutionResult {
+  const CanonicalSpecialistResolutionResult(this.state, [this.specialist]);
+
+  final CanonicalSpecialistResolutionState state;
+  final CanonicalSelectableSpecialist? specialist;
+
+  bool get mayContinue =>
+      state == CanonicalSpecialistResolutionState.exactlyOneSelectable &&
+      specialist != null;
+}
+
+// The interface is the intentional substitution boundary for future policies.
+// ignore: one_member_abstracts
+abstract interface class SpecialistResolutionPolicy {
+  CanonicalSpecialistResolutionResult resolve({
+    required Object? catalogPayload,
+    required bool catalogAvailable,
+    required String environment,
+    required bool policyAuthorized,
+  });
+}
+
+final class VerifiedPreexistingReadOnlyPolicy
+    implements SpecialistResolutionPolicy {
+  const VerifiedPreexistingReadOnlyPolicy({
+    this.canonicalArea = canonicalSpecialistArea,
+    this.maxCandidates = 20,
+  });
+
+  final String canonicalArea;
+  final int maxCandidates;
+
+  @override
+  CanonicalSpecialistResolutionResult resolve({
+    required Object? catalogPayload,
+    required bool catalogAvailable,
+    required String environment,
+    required bool policyAuthorized,
+  }) {
+    if (!policyAuthorized) {
+      return const CanonicalSpecialistResolutionResult(
+        CanonicalSpecialistResolutionState.authorizationRejected,
+      );
+    }
+    if (environment != 'development') {
+      return const CanonicalSpecialistResolutionResult(
+        CanonicalSpecialistResolutionState.environmentMismatch,
+      );
+    }
+    if (!catalogAvailable) {
+      return const CanonicalSpecialistResolutionResult(
+        CanonicalSpecialistResolutionState.catalogUnavailable,
+      );
+    }
+    if (catalogPayload is! List || catalogPayload.length > maxCandidates) {
+      return const CanonicalSpecialistResolutionResult(
+        CanonicalSpecialistResolutionState.catalogContractInvalid,
+      );
+    }
+    try {
+      final candidates = catalogPayload
+          .map(
+            (value) => CanonicalSelectableSpecialist.fromJson(
+              Map<String, Object?>.from(value as Map),
+            ),
+          )
+          .where(
+            (candidate) =>
+                candidate.publicArea == canonicalArea &&
+                candidate.accessState == 'available',
+          )
+          .toList(growable: false);
+      if (candidates.isEmpty) {
+        return const CanonicalSpecialistResolutionResult(
+          CanonicalSpecialistResolutionState.noneSelectable,
+        );
+      }
+      if (candidates.length != 1) {
+        return const CanonicalSpecialistResolutionResult(
+          CanonicalSpecialistResolutionState.multipleSelectableCandidates,
+        );
+      }
+      return CanonicalSpecialistResolutionResult(
+        CanonicalSpecialistResolutionState.exactlyOneSelectable,
+        candidates.single,
+      );
+    } on FormatException {
+      return const CanonicalSpecialistResolutionResult(
+        CanonicalSpecialistResolutionState.catalogContractInvalid,
+      );
+    } on Object {
+      return const CanonicalSpecialistResolutionResult(
+        CanonicalSpecialistResolutionState.unknownFailure,
+      );
+    }
+  }
 }
 
 final class CompleteRunnerStateMachine {
@@ -252,9 +488,18 @@ final class CompleteResourceLedger {
     if (_deleted || _entries.containsKey(entry.category)) {
       throw StateError('LEDGER_INSERT_BLOCKED');
     }
+    if (entry.disposition == ResourceDisposition.unknownBlocking) {
+      throw StateError('LEDGER_OWNERSHIP_UNKNOWN');
+    }
     if (entry.disposition == ResourceDisposition.createdByRun &&
         (entry.cleanupHandle.isEmpty || entry.ownershipProof.isEmpty)) {
       throw StateError('LEDGER_OWNERSHIP_PROOF_REQUIRED');
+    }
+    if (entry.disposition == ResourceDisposition.verifiedPreexistingReadOnly &&
+        (entry.ownershipProof.isEmpty ||
+            entry.cleanupHandle.isNotEmpty ||
+            entry.cleanupRequired)) {
+      throw StateError('LEDGER_READ_ONLY_CONTRACT_BLOCKED');
     }
     _entries[entry.category] = entry;
   }

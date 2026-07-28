@@ -1,5 +1,13 @@
 # Foundation Execution Package Map
 
+## FOUNDATION-019A-R2E
+
+R2E adopts `VERIFIED_PREEXISTING_READ_ONLY` as the sole specialist policy for
+the functional retry. It versions manifest v3, introduces an extensible policy
+contract, resolves exactly one available canonical `stasis` specialist, removes
+fixture mutation from the runner and proves read-only cleanup locally. Remote
+execution is not authorized.
+
 ## FOUNDATION-019A-R2D
 
 R2D replaces the divergent v1 preparation with a complete v2 manifest,
@@ -160,3 +168,4 @@ replace FOUNDATION-014-020 and each requires a separate approval.
 | FOUNDATION-019A-R2A | Instrument focal HTTP response with a closed safe diagnostic contract | VALIDATED_LOCALLY | Package Git gate, then diagnostic-only Founder authorization |
 | FOUNDATION-019A-R2B | Prove runner defect, separate channels and prepare second functional attempt | IMPLEMENTED_LOCALLY | New unique Founder authorization bound to final R2B commit |
 | FOUNDATION-019A-R2D | Complete manifest-equivalent functional runner, state machine, ledger and tests | IMPLEMENTED_LOCALLY_PENDING_PUSH | New Founder authorization bound to final R2D commit |
+| FOUNDATION-019A-R2E | Unify canonical specialist resolution and read-only cleanup semantics | IMPLEMENTED_LOCALLY_PENDING_PUSH | New Founder authorization bound to final R2E commit |

@@ -1,5 +1,30 @@
 # Foundation Session Tracker
 
+## FOUNDATION-019A-R2E status
+
+```text
+baseline: 73ba53e0b1399944b6945581ba88a0a8d377b515
+blocked retry: FOUNDATION-019A-RETRY-V2 BLOCKED_MANIFEST_RUNNER_CONTRACT
+authorization FA-019A-RETRY-20260728-005: NOT_CONSUMED / INVALID_AFTER_R2E_COMMIT
+specialist policy: VERIFIED_PREEXISTING_READ_ONLY
+canonical source: SELECTABLE_SPECIALIST_CATALOG
+selection: EXACT_ONE_AVAILABLE_IN_CANONICAL_AREA(stasis), max 20
+manifest: FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v3
+runner: FOUNDATION-019A-R2E-RUNNER-v1
+specialist/catalog create/delete: 0/0
+specialist/catalog ledger: VERIFIED_PREEXISTING_READ_ONLY
+manifest-runner specialist semantics: PASS
+focal contracts/architecture: 77 pass / 0 failures
+Flutter: 797 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format pass
+SQL local: 740/740 pass after no-seed reset
+remote actions/reads/writes: 0/0/0
+remote skips: CLASSIFIED_NOT_ENABLED
+authorization: NOT_GRANTED
+remote-context: SAFE
+```
+
 ## FOUNDATION-019A-R2D status
 
 ```text

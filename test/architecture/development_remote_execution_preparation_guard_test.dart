@@ -89,7 +89,7 @@ void main() {
     },
   );
 
-  test('versioned operator runner delegates to complete R2D contracts', () {
+  test('versioned operator runner delegates to complete R2E contracts', () {
     final source = File(
       'scripts/run_development_remote_fixture_test.sh',
     ).readAsStringSync();
@@ -97,8 +97,8 @@ void main() {
     expect(source, contains('--authorized-development-run'));
     expect(source, contains('FOUNDER_AUTHORIZATION_REFERENCE'));
     expect(source, contains('AUTHORIZED_COMMIT_SHA'));
-    expect(source, contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v2'));
-    expect(source, contains('FOUNDATION-019A-R2D-RUNNER-v1'));
+    expect(source, contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v3'));
+    expect(source, contains('FOUNDATION-019A-R2E-RUNNER-v1'));
     expect(source, contains('RETENTION_LIMITATION_ACKNOWLEDGED'));
     expect(source, contains('EXECUTABLE_RUNNER_CONTRACT_COMPLETE'));
     expect(source, contains('supabase link --project-ref'));

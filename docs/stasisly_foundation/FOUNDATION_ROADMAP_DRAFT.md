@@ -1,5 +1,13 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Active gate: FOUNDATION-019A-R2E
+
+R2E removes the dual specialist semantics from the Development functional
+runner. Manifest v3 uses the canonical bounded catalog, exactly-one selection
+and read-only ledger semantics. No specialist/catalog fixture is created or
+deleted. The next remote attempt requires a new authorization bound to the R2E
+SHA; no remote action starts automatically.
+
 ## Active gate: FOUNDATION-019A-R2D
 
 R2D completes and validates locally the executable second-attempt runner and
