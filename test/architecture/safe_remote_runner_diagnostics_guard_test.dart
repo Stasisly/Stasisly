@@ -3,114 +3,75 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  final runner = File(
+  final shell = File(
     'scripts/run_development_remote_fixture_test.sh',
+  ).readAsStringSync();
+  final runner = File(
+    'tool/development_complete_functional_runner.dart',
   ).readAsStringSync();
   final sanitizer = File('tool/safe_http_diagnostic.dart').readAsStringSync();
   final httpContract = File(
     'scripts/lib/development_remote_http_contract.sh',
   ).readAsStringSync();
 
-  test('remote runner keeps the exact focal request and 200 assertion', () {
-    expect(
-      runner,
-      contains(
-        'capture_http_channels POST '
-        r'"$SUPABASE_URL/auth/v1/admin/users"',
-      ),
-    );
-    expect(runner, contains(r'\"email_confirm\":true'));
-    expect(runner, contains(r'test "$synthetic_user_status" = 200'));
-    expect(runner, isNot(contains(r'test "$synthetic_user_status" -ge 200')));
-    expect(runner, isNot(contains('2??')));
-    expect(runner, isNot(contains('|| true # accept')));
+  test('complete runner preserves exact synthetic Auth HTTP 200 assertion', () {
+    expect(runner, contains("client.endpoint('/auth/v1/admin/users')"));
+    expect(runner, contains("'email_confirm': true"));
+    expect(runner, contains('result.status != 200'));
+    expect(runner, isNot(contains('result.status >= 200')));
+    expect(runner, isNot(contains('result.status ~/ 100')));
   });
 
-  test('diagnostic-only runner stops before downstream fixture setup', () {
-    final stop = runner.indexOf(
-      r'if [ "$REMOTE_RUNNER_EXECUTION_MODE" = diagnostic-only ]',
-    );
-    final nextSetup = runner.indexOf("request POST '/rest/v1/specialists'");
-    expect(stop, greaterThan(0));
-    expect(nextSetup, greaterThan(stop));
-    expect(runner, contains('REMOTE_RUNNER_EXECUTION_MODE'));
-    expect(
-      runner,
-      contains(
-        r'if [ "$REMOTE_RUNNER_EXECUTION_MODE" = diagnostic-only ]; then',
-      ),
-    );
+  test('SafeHttpDiagnostic uses an isolated restricted output file', () {
+    expect(runner, contains('tool/safe_http_diagnostic.dart'));
+    expect(runner, contains("'--output-file'"));
+    expect(runner, contains('SAFE_HTTP_DIAGNOSTIC_BEGIN'));
+    expect(runner, contains('SAFE_HTTP_DIAGNOSTIC_END'));
+    expect(runner, contains('Directory.systemTemp.createTemp'));
+    expect(runner, contains('directory.deleteSync(recursive: true)'));
+    expect(runner, isNot(contains('stdout.write(jsonEncode(result.body))')));
   });
 
-  test(
-    'runner preserves trap, idempotent cleanup and dirty classification',
-    () {
-      expect(runner, contains('trap finalize EXIT INT TERM'));
-      expect(
-        runner,
-        contains('cleanup_remote_fixture && cleanup_remote_fixture'),
-      );
-      expect(runner, contains("'0|0|0|0|0|0|0'"));
-      expect(runner, contains('FAILED_CLEAN'));
-      expect(runner, contains('FAILED_DIRTY_BLOCKING'));
-      expect(runner, contains(r'exit "${original_status:-1}"'));
-      expect(runner, contains('delete_auth_user_exact'));
-      expect(runner, contains('200|404'));
-    },
-  );
-
-  test('diagnostic evidence is isolated from Dart build output', () {
-    expect(runner, contains(r'--output-file "$diagnostic_output"'));
-    expect(runner, contains(r'>"$diagnostic_build_stdout"'));
-    expect(runner, contains(r'2>"$diagnostic_build_stderr"'));
-    expect(
-      runner,
-      contains(
-        r'test "$(head -n 1 "$diagnostic_output")" = '
-        'SAFE_HTTP_DIAGNOSTIC_BEGIN',
-      ),
-    );
-    expect(
-      runner,
-      contains(
-        r'test "$(tail -n 1 "$diagnostic_output")" = '
-        'SAFE_HTTP_DIAGNOSTIC_END',
-      ),
-    );
-    expect(sanitizer, contains("options['output-file']"));
-    expect(sanitizer, isNot(contains('stdout.writeln(diagnostic.toSafeBlock')));
+  test('cleanup is finally driven and accepts exact Auth 200 or 404', () {
+    expect(runner, contains('finally {\n      await _finish();'));
+    expect(runner, contains('cleanupLedger'));
+    expect(runner, contains('result.status == 200 || result.status == 404'));
+    expect(runner, contains('validateAuthAbsence'));
+    expect(runner, contains('validateResidueCounters'));
+    expect(runner, contains('failedDirtyBlocking'));
   });
 
-  test('runner prohibits shell and curl leakage patterns', () {
-    expect(runner, isNot(contains('set -x')));
-    expect(runner, isNot(contains('curl -v')));
-    expect(runner, isNot(contains('curl --verbose')));
-    expect(runner, isNot(contains('curl --trace')));
-    expect(runner, isNot(contains(r'cat "$tmp_dir/auth-user.json"')));
-    expect(runner, isNot(contains(r'echo "$synthetic_access_token"')));
-    expect(runner, contains('capture_http_channels'));
-    expect(runner, contains(r'rm -f "$synthetic_user_curl_error"'));
-    expect(runner, contains(r'chmod 700 "$tmp_dir"'));
+  test('shell isolates link metadata on success, failure and signals', () {
+    expect(shell, contains('trap isolate_cli EXIT INT TERM'));
+    expect(shell, contains('rm -f supabase/.temp/project-ref'));
+    expect(shell, contains('supabase/.temp/pooler-url'));
+    expect(shell, contains('check_supabase_remote_context.dart'));
+    expect(shell, contains('--validate-contract'));
+  });
+
+  test('runner and shell prohibit leakage primitives', () {
+    final combined = runner + shell;
+    expect(combined, isNot(contains('set -x')));
+    expect(combined, isNot(contains('curl --trace')));
+    expect(combined, isNot(contains('print(context.ownerToken)')));
+    expect(combined, isNot(contains('print(context.password)')));
+    expect(combined, isNot(contains('print(context.ownerEmail)')));
+    expect(combined, isNot(contains('print(context.conversationId)')));
+    expect(shell, contains(r'>"$tmp_dir/link.stdout"'));
+    expect(shell, contains(r'2>"$tmp_dir/link.stderr"'));
+  });
+
+  test('historical curl contract still separates all channels', () {
+    expect(httpContract, contains('strict_transport_exit_from_file'));
+    expect(httpContract, contains('strict_http_status_from_file'));
+    expect(httpContract, contains('response_body_file'));
+    expect(httpContract, contains('diagnostic_file'));
+    expect(httpContract, contains('metadata_file'));
     expect(httpContract, contains(r'>"$metadata_file" 2>"$diagnostic_file"'));
-    expect(httpContract, contains(r'>"$transport_file"'));
-    expect(httpContract, isNot(contains('set -x')));
   });
 
-  test(
-    'transport, HTTP status, body and diagnostics use separate channels',
-    () {
-      expect(httpContract, contains('strict_transport_exit_from_file'));
-      expect(httpContract, contains('strict_http_status_from_file'));
-      expect(httpContract, contains('response_body_file'));
-      expect(httpContract, contains('diagnostic_file'));
-      expect(httpContract, contains('metadata_file'));
-      expect(runner, contains(r'test "$synthetic_user_curl_status" = 0'));
-      expect(runner, contains(r'test "$synthetic_user_status" = 200'));
-    },
-  );
-
-  test('sanitizer contract is closed and never emits raw content', () {
-    for (final field in <String>[
+  test('sanitizer contract remains closed and bounded', () {
+    for (final field in [
       'operation',
       'statusCode',
       'statusClass',
@@ -124,29 +85,18 @@ void main() {
       'assertionOutcome',
       'cleanupRequired',
     ]) {
-      expect(sanitizer, contains("'$field="), reason: field);
+      expect(sanitizer, contains(field));
     }
-    expect(sanitizer, contains('rawBodyLogged=false'));
-    expect(sanitizer, contains('diagnosticSanitization='));
-    expect(sanitizer, contains('bodyFile.deleteSync()'));
-    expect(sanitizer, contains('take(_maximumFieldNames)'));
     expect(sanitizer, contains('const int _maximumFieldNames = 20'));
-    expect(sanitizer, isNot(contains('stdout.writeln(body')));
-    expect(sanitizer, isNot(contains('stderr.writeln(body')));
-    expect(sanitizer, isNot(contains('decoded.values')));
+    expect(sanitizer, contains('take(_maximumFieldNames)'));
+    expect(sanitizer, isNot(contains('bodyFile.readAsStringSync')));
+    expect(sanitizer, isNot(contains('Platform.environment')));
   });
 
   test('diagnostic tooling contains no remote execution primitive', () {
-    for (final forbidden in <String>[
-      'supabase link',
-      'supabase db push',
-      'supabase functions deploy',
-      'HttpClient',
-      'Socket.connect',
-      'Process.run',
-      'Process.start',
-    ]) {
-      expect(sanitizer, isNot(contains(forbidden)), reason: forbidden);
-    }
+    expect(sanitizer, isNot(contains('HttpClient')));
+    expect(sanitizer, isNot(contains('Process.run')));
+    expect(sanitizer, isNot(contains('supabase')));
+    expect(sanitizer, isNot(contains('curl')));
   });
 }

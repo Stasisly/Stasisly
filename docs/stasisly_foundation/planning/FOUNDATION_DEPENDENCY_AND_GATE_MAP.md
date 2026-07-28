@@ -1,5 +1,20 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-019A-R2D gate
+
+```text
+R2B blocked attempt
+-> v2 manifest and complete executable runner
+-> state/ledger/cleanup/test/security gates
+-> local full regression
+-> documentation, commit and push
+-> new commit-specific Founder authorization
+-> future bounded Development attempt
+```
+
+The prior authorization is not consumed but cannot cross the new commit
+boundary. Remote actions and G9-G10 remain closed during R2D.
+
 ## FOUNDATION-019A-R2C-R1 gate
 
 ```text

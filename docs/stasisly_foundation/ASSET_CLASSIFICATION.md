@@ -1,5 +1,18 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-019A-R2D classification
+
+- Manifest-runner equivalence: `FOUNDATION_ADOPTED`.
+- Complete functional state machine: `FOUNDATION_ADOPTED_LOCALLY`.
+- Ephemeral resource ledger: `COMPLETE_AND_VALIDATED_LOCALLY`.
+- Replay, list, detail, no-AI, archive/restore, ownership and routes:
+  `IMPLEMENTED_LOCALLY`.
+- Manifest/runner: `SECOND-FUNCTIONAL-ATTEMPT-v2` /
+  `FOUNDATION-019A-R2D-RUNNER-v1`.
+- `FA-019A-RETRY-20260728-004`: `NOT_CONSUMED`, invalid after the R2D commit.
+- Remote attempt/skips/sustained Development:
+  `NOT_AUTHORIZED/CLASSIFIED_NOT_ENABLED/NOT_AUTHORIZED`.
+
 ## FOUNDATION-019A-R2B classification
 
 - Historical runner defect: `PROVEN_AND_CORRECTED_LOCALLY`.

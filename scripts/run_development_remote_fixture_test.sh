@@ -1,297 +1,80 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Versioned operator-side runner. It is inert unless every authorization input
-# is supplied at invocation time and the local multi-factor gate passes.
+# Inert unless the explicit operator flag and every multifactor input pass.
 test "${1:-}" = "--authorized-development-run" || exit 64
-for command in curl dart flutter git jq uuidgen; do command -v "$command" >/dev/null; done
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-# shellcheck source=scripts/lib/development_remote_http_contract.sh
-source "$repo_root/scripts/lib/development_remote_http_contract.sh"
+for command in dart git supabase; do command -v "$command" >/dev/null; done
 
 required=(
   SUPABASE_URL SUPABASE_ANON_KEY SUPABASE_SERVICE_ROLE_KEY
-  APP_MODE ENABLE_REMOTE_BACKEND ENABLE_REAL_AUTH ENABLE_REAL_DATA
+  SUPABASE_PROJECT_REF APP_MODE BACKEND_TARGET_ENVIRONMENT
+  DEVELOPMENT_OPERATOR DEVELOPMENT_ALLOWED_WEB_ORIGIN
+  ENABLE_REMOTE_BACKEND ENABLE_REAL_AUTH ENABLE_REAL_DATA
   ALLOW_DEV_ROUTES ENABLE_CONVERSATIONS_ROUTE
-  BACKEND_TARGET_ENVIRONMENT REMOTE_CONTEXT_AUTHORIZATION_MODE
-  REMOTE_PROJECT_CONFIRMED DEVELOPMENT_OPERATOR_CONFIRMED
-  FOUNDER_AUTHORIZATION_REFERENCE AUTHORIZED_COMMIT_SHA
-  AUTHORIZED_COMMIT_MATCHES_HEAD DEPLOYMENT_MANIFEST_RUNTIME_APPROVAL
+  REMOTE_CONTEXT_AUTHORIZATION_MODE REMOTE_PROJECT_CONFIRMED
+  DEVELOPMENT_OPERATOR_CONFIRMED FOUNDER_AUTHORIZATION_REFERENCE
+  AUTHORIZED_COMMIT_SHA AUTHORIZED_COMMIT_MATCHES_HEAD
+  DEPLOYMENT_MANIFEST_RUNTIME_APPROVAL
   REMOTE_FIXTURE_MANIFEST_RUNTIME_APPROVAL REMOTE_CLEANUP_PREFLIGHT
-  DEVELOPMENT_ALLOWED_WEB_ORIGIN REMOTE_REQUIRED_CONFIGURATION
-  REMOTE_SECRET_NAMES_ACKNOWLEDGED REMOTE_FIXTURE_RUN_ALIAS
-  REMOTE_RUNNER_EXECUTION_MODE
+  REMOTE_REQUIRED_CONFIGURATION REMOTE_SECRET_NAMES_ACKNOWLEDGED
+  REMOTE_FIXTURE_RUN_ALIAS REMOTE_RUNNER_EXECUTION_MODE
+  SECOND_FUNCTIONAL_ATTEMPT_MANIFEST_VERSION REMOTE_RUNNER_VERSION
+  SECOND_FUNCTIONAL_ATTEMPT_AUTHORIZATION_STATUS
+  RETENTION_LIMITATION_ACKNOWLEDGED
 )
 for name in "${required[@]}"; do test -n "${!name:-}" || exit 65; done
-test "$BACKEND_TARGET_ENVIRONMENT" = development
+
 test "$APP_MODE" = development
+test "$BACKEND_TARGET_ENVIRONMENT" = development
 test "$ENABLE_REMOTE_BACKEND" = true
 test "$ENABLE_REAL_AUTH" = true
 test "$ENABLE_REAL_DATA" = false
 test "$ALLOW_DEV_ROUTES" = true
 test "$ENABLE_CONVERSATIONS_ROUTE" = false
+test "$REMOTE_CONTEXT_AUTHORIZATION_MODE" = FOUNDER_AUTHORIZED
+test "$REMOTE_PROJECT_CONFIRMED" = CONFIRMED
+test "$DEVELOPMENT_OPERATOR_CONFIRMED" = CONFIRMED
+test "$AUTHORIZED_COMMIT_MATCHES_HEAD" = CONFIRMED
+test "$DEPLOYMENT_MANIFEST_RUNTIME_APPROVAL" = APPROVED
+test "$REMOTE_FIXTURE_MANIFEST_RUNTIME_APPROVAL" = APPROVED
+test "$REMOTE_CLEANUP_PREFLIGHT" = PASS
+test "$REMOTE_REQUIRED_CONFIGURATION" = CONFIRMED
+test "$REMOTE_SECRET_NAMES_ACKNOWLEDGED" = CONFIRMED
+test "$REMOTE_RUNNER_EXECUTION_MODE" = second-functional-attempt
+test "$SECOND_FUNCTIONAL_ATTEMPT_MANIFEST_VERSION" = \
+  FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v2
+test "$REMOTE_RUNNER_VERSION" = FOUNDATION-019A-R2D-RUNNER-v1
+test "$SECOND_FUNCTIONAL_ATTEMPT_AUTHORIZATION_STATUS" = GRANTED_AT_RUNTIME
+test "$RETENTION_LIMITATION_ACKNOWLEDGED" = \
+  POST_DEVELOPMENT_OPERATIONAL_BLOCKER
 test "$(git rev-parse HEAD)" = "$AUTHORIZED_COMMIT_SHA"
-test "$REMOTE_FIXTURE_RUN_ALIAS" != '*'
+test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)"
+test -z "$(git status --short)"
 [[ "$REMOTE_FIXTURE_RUN_ALIAS" =~ ^[a-z0-9][a-z0-9-]{7,31}$ ]]
-case "$REMOTE_RUNNER_EXECUTION_MODE" in
-  diagnostic-only|second-functional-attempt) ;;
-  *) exit 66 ;;
-esac
-if [ "$REMOTE_RUNNER_EXECUTION_MODE" = second-functional-attempt ]; then
-  test "${SECOND_FUNCTIONAL_ATTEMPT_MANIFEST_VERSION:-}" = \
-    FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v1
-  test "${REMOTE_RUNNER_VERSION:-}" = R2B
-  test "${SECOND_FUNCTIONAL_ATTEMPT_AUTHORIZATION_STATUS:-}" = GRANTED_AT_RUNTIME
-fi
-dart run tool/check_development_remote_preparation.dart --validate-cors >/dev/null
+[[ "$SUPABASE_PROJECT_REF" =~ ^[a-z]{20}$ ]]
 
-tmp_dir="$(mktemp -d /tmp/stasisly-foundation-019a-r1.XXXXXX)"
+dart run tool/check_supabase_remote_context.dart >/dev/null
+dart run tool/check_development_remote_preparation.dart \
+  --validate-cors >/dev/null
+test "$(dart run tool/development_complete_functional_runner.dart \
+  --validate-contract | tail -n 1)" = EXECUTABLE_RUNNER_CONTRACT_COMPLETE
+
+tmp_dir="$(mktemp -d /tmp/stasisly-foundation-019a-r2d.XXXXXX)"
 chmod 700 "$tmp_dir"
-run_alias="$REMOTE_FIXTURE_RUN_ALIAS"
-specialist_id="$(uuidgen | tr '[:upper:]' '[:lower:]')"
-catalog_id="$(uuidgen | tr '[:upper:]' '[:lower:]')"
-fixture_email="${run_alias}@example.test"
-fixture_password="Synthetic-${run_alias}-Aa9!"
-fixture_display_name="Synthetic ${run_alias}"
-owner_id=""
-synthetic_access_token=""
-flow_status=1
-cleanup_status=1
-runner_state=INITIAL
-ledger_auth=false
-ledger_profile=false
-ledger_specialist=false
-ledger_catalog=false
-cleanup_verifiable=true
-
-transition_state() {
-  local expected=$1 next=$2
-  test "$runner_state" = "$expected"
-  runner_state=$next
-}
-
-request() {
-  local method=$1 endpoint=$2 body=${3:-} output=$4 token=$5
-  local prefix="$tmp_dir/request-$RANDOM"
-  local metadata="$prefix.metadata" diagnostic="$prefix.diagnostic"
-  local transport_file="$prefix.transport" status_file="$prefix.status"
-  local content_type_file="$prefix.content-type" duration_file="$prefix.duration"
-  local transport_exit status
-  capture_http_channels "$method" "$SUPABASE_URL$endpoint" "$body" "$output" \
-    "$token" "$metadata" "$diagnostic" "$transport_file"
-  transport_exit="$(strict_transport_exit_from_file "$transport_file")" ||
-    return 1
-  test "$transport_exit" = 0 || return "$transport_exit"
-  parse_curl_metadata "$metadata" "$status_file" "$content_type_file" \
-    "$duration_file" || return 1
-  status="$(strict_http_status_from_file "$status_file")" || return 1
-  rm -f "$metadata" "$diagnostic" "$transport_file" "$status_file" \
-    "$content_type_file" "$duration_file"
-  printf '%s' "$status"
-}
-
-delete_exact() {
-  local endpoint=$1 status
-  status="$(request DELETE "$endpoint" '' "$tmp_dir/delete.json" \
-    "$SUPABASE_SERVICE_ROLE_KEY")" || return 1
-  case "$status" in 200|204) return 0 ;; *) return 1 ;; esac
-}
-
-delete_auth_user_exact() {
-  local status
-  status="$(request DELETE "/auth/v1/admin/users/$owner_id" '' \
-    "$tmp_dir/delete-auth.json" "$SUPABASE_SERVICE_ROLE_KEY")" || return 1
-  case "$status" in 200|404) return 0 ;; *) return 1 ;; esac
-}
-
-remaining_counts() {
-  local sessions='[]' messages='[]' idempotency='[]' users='[]'
-  local catalog='[]' specialists='[]' auth_count=0 session_ids id
-  if [ -n "$owner_id" ]; then
-    request GET "/rest/v1/chat_sessions?user_id=eq.$owner_id&select=id" '' \
-      "$tmp_dir/count-sessions.json" "$SUPABASE_SERVICE_ROLE_KEY" >/dev/null
-    sessions="$(cat "$tmp_dir/count-sessions.json")"
-    session_ids="$(jq -r '.[].id' <<<"$sessions")"
-    while IFS= read -r id; do
-      test -n "$id" || continue
-      request GET "/rest/v1/messages?session_id=eq.$id&select=id" '' \
-        "$tmp_dir/count-messages.json" "$SUPABASE_SERVICE_ROLE_KEY" >/dev/null
-      messages="$(jq -s 'add' <(printf '%s' "$messages") "$tmp_dir/count-messages.json")"
-    done <<<"$session_ids"
-    request GET "/rest/v1/conversation_idempotency?subject_id=eq.$owner_id&select=id" '' \
-      "$tmp_dir/count-idempotency.json" "$SUPABASE_SERVICE_ROLE_KEY" >/dev/null
-    idempotency="$(cat "$tmp_dir/count-idempotency.json")"
-    request GET "/rest/v1/users?id=eq.$owner_id&select=id" '' \
-      "$tmp_dir/count-users.json" "$SUPABASE_SERVICE_ROLE_KEY" >/dev/null
-    users="$(cat "$tmp_dir/count-users.json")"
-    if test "$(request GET "/auth/v1/admin/users/$owner_id" '' \
-      "$tmp_dir/count-auth.json" "$SUPABASE_SERVICE_ROLE_KEY")" = 200; then auth_count=1; fi
-  fi
-  request GET "/rest/v1/specialist_catalog?id=eq.$catalog_id&select=id" '' \
-    "$tmp_dir/count-catalog.json" "$SUPABASE_SERVICE_ROLE_KEY" >/dev/null
-  catalog="$(cat "$tmp_dir/count-catalog.json")"
-  request GET "/rest/v1/specialists?id=eq.$specialist_id&select=id" '' \
-    "$tmp_dir/count-specialists.json" "$SUPABASE_SERVICE_ROLE_KEY" >/dev/null
-  specialists="$(cat "$tmp_dir/count-specialists.json")"
-  printf '%s|%s|%s|%s|%s|%s|%s' \
-    "$(jq length <<<"$messages")" "$(jq length <<<"$idempotency")" \
-    "$(jq length <<<"$sessions")" "$(jq length <<<"$users")" \
-    "$(jq length <<<"$catalog")" "$(jq length <<<"$specialists")" "$auth_count"
-}
-
-cleanup_remote_fixture() {
-  local sessions session_id
-  test "$cleanup_verifiable" = true || return 1
-  if [ -n "$owner_id" ]; then
-    request GET "/rest/v1/chat_sessions?user_id=eq.$owner_id&select=id" '' \
-      "$tmp_dir/cleanup-sessions.json" "$SUPABASE_SERVICE_ROLE_KEY" >/dev/null || return 1
-    sessions="$(jq -r '.[].id' "$tmp_dir/cleanup-sessions.json")"
-    while IFS= read -r session_id; do
-      test -n "$session_id" || continue
-      delete_exact "/rest/v1/messages?session_id=eq.$session_id" || return 1
-    done <<<"$sessions"
-    delete_exact "/rest/v1/conversation_idempotency?subject_id=eq.$owner_id" || return 1
-    delete_exact "/rest/v1/chat_sessions?user_id=eq.$owner_id" || return 1
-    delete_exact "/rest/v1/users?id=eq.$owner_id" || return 1
-  fi
-  if [ "$ledger_catalog" = true ]; then
-    delete_exact "/rest/v1/specialist_catalog?id=eq.$catalog_id" || return 1
-  fi
-  if [ "$ledger_specialist" = true ]; then
-    delete_exact "/rest/v1/specialists?id=eq.$specialist_id" || return 1
-  fi
-  if [ "$ledger_auth" = true ] && [ -n "$owner_id" ]; then
-    delete_auth_user_exact || return 1
-  fi
-  test "$(remaining_counts)" = '0|0|0|0|0|0|0'
-}
-
-finalize() {
-  local original_status=$?
-  trap - EXIT INT TERM
-  if cleanup_remote_fixture && cleanup_remote_fixture; then cleanup_status=0; fi
+isolate_cli() {
+  rm -f supabase/.temp/project-ref supabase/.temp/pooler-url
   rm -rf "$tmp_dir"
-  if [ "$cleanup_status" -ne 0 ]; then
-    echo 'FAILED_DIRTY_BLOCKING'
-    exit 1
-  fi
-  if [ "$flow_status" -eq 0 ] && [ "$original_status" -eq 0 ]; then
-    echo 'PASSED_CLEAN'
-    exit 0
-  fi
-  echo 'FAILED_CLEAN'
-  exit "${original_status:-1}"
+  dart run tool/check_supabase_remote_context.dart >/dev/null || true
 }
-trap finalize EXIT INT TERM
+trap isolate_cli EXIT INT TERM
 
-test "$(remaining_counts)" = '0|0|0|0|0|0|0'
-transition_state INITIAL PREFLIGHT_VALIDATED
-transition_state PREFLIGHT_VALIDATED TARGET_VERIFIED
-synthetic_user_metadata="$tmp_dir/auth-user.metadata"
-synthetic_user_curl_error="$tmp_dir/auth-user.curl-error"
-synthetic_user_transport_file="$tmp_dir/auth-user.transport"
-synthetic_user_status_file="$tmp_dir/auth-user.status"
-synthetic_user_content_type_file="$tmp_dir/auth-user.content-type"
-synthetic_user_duration_file="$tmp_dir/auth-user.duration"
-synthetic_user_transport=failure
-transition_state TARGET_VERIFIED SETUP_STARTED
-capture_http_channels POST "$SUPABASE_URL/auth/v1/admin/users" \
-  "{\"email\":\"$fixture_email\",\"password\":\"$fixture_password\",\"email_confirm\":true}" \
-  "$tmp_dir/auth-user.json" "$SUPABASE_SERVICE_ROLE_KEY" \
-  "$synthetic_user_metadata" "$synthetic_user_curl_error" \
-  "$synthetic_user_transport_file"
-synthetic_user_curl_status="$(
-  strict_transport_exit_from_file "$synthetic_user_transport_file"
-)" || synthetic_user_curl_status=255
-if [ "$synthetic_user_curl_status" -eq 0 ]; then
-  synthetic_user_transport=ok
-elif [ "$synthetic_user_curl_status" -eq 28 ]; then
-  synthetic_user_transport=timeout
-fi
-rm -f "$synthetic_user_curl_error"
+# First remote action. The authorization is consumed here.
+supabase link --project-ref "$SUPABASE_PROJECT_REF" \
+  >"$tmp_dir/link.stdout" 2>"$tmp_dir/link.stderr"
+test -f supabase/.temp/project-ref
+test "$(tr -d '\r\n' <supabase/.temp/project-ref)" = "$SUPABASE_PROJECT_REF"
+rm -f "$tmp_dir/link.stdout" "$tmp_dir/link.stderr"
+echo REMOTE_TARGET_VERIFIED_DEVELOPMENT
 
-synthetic_user_status=0
-synthetic_user_content_type=''
-synthetic_user_duration=''
-if parse_curl_metadata "$synthetic_user_metadata" "$synthetic_user_status_file" \
-  "$synthetic_user_content_type_file" "$synthetic_user_duration_file"; then
-  synthetic_user_status="$(
-    strict_http_status_from_file "$synthetic_user_status_file"
-  )" || synthetic_user_status=0
-  synthetic_user_content_type="$(cat "$synthetic_user_content_type_file")"
-  synthetic_user_duration="$(cat "$synthetic_user_duration_file")"
-fi
-rm -f "$synthetic_user_metadata" "$synthetic_user_transport_file" \
-  "$synthetic_user_status_file" "$synthetic_user_content_type_file" \
-  "$synthetic_user_duration_file"
-
-if jq -e 'type == "object" and (.id | type == "string")' \
-  "$tmp_dir/auth-user.json" >/dev/null 2>&1; then
-  owner_id="$(jq -r .id "$tmp_dir/auth-user.json")"
-  ledger_auth=true
-elif [ "$synthetic_user_status" = 200 ]; then
-  cleanup_verifiable=false
-fi
-
-diagnostic_output="$tmp_dir/safe-http-diagnostic.txt"
-diagnostic_build_stdout="$tmp_dir/diagnostic-build.stdout"
-diagnostic_build_stderr="$tmp_dir/diagnostic-build.stderr"
-diagnostic_tool_status=0
-if dart run tool/safe_http_diagnostic.dart \
-  --operation syntheticUserCreate \
-  --status-code "$synthetic_user_status" \
-  --content-type "$synthetic_user_content_type" \
-  --duration-seconds "$synthetic_user_duration" \
-  --transport-result "$synthetic_user_transport" \
-  --body-file "$tmp_dir/auth-user.json" \
-  --cleanup-required true \
-  --output-file "$diagnostic_output" \
-  >"$diagnostic_build_stdout" 2>"$diagnostic_build_stderr"; then
-  diagnostic_tool_status=0
-else
-  diagnostic_tool_status=$?
-fi
-rm -f "$diagnostic_build_stdout" "$diagnostic_build_stderr"
-test -f "$diagnostic_output"
-test "$(head -n 1 "$diagnostic_output")" = SAFE_HTTP_DIAGNOSTIC_BEGIN
-test "$(tail -n 1 "$diagnostic_output")" = SAFE_HTTP_DIAGNOSTIC_END
-cat "$diagnostic_output"
-rm -f "$diagnostic_output"
-test "$diagnostic_tool_status" = 0
-test "$synthetic_user_curl_status" = 0
-test "$synthetic_user_status" = 200
-test -n "$owner_id"; test "$owner_id" != null
-transition_state SETUP_STARTED AUTH_USER_CREATED
-
-# A diagnostic-only authorization always stops at the focal assertion.
-if [ "$REMOTE_RUNNER_EXECUTION_MODE" = diagnostic-only ]; then
-  flow_status=0
-  exit 0
-fi
-
-test "$(request POST '/rest/v1/specialists' \
-  "{\"id\":\"$specialist_id\",\"name\":\"$fixture_display_name\",\"category\":\"salud\",\"prompt_template\":{},\"is_premium\":false,\"is_active\":true}" \
-  "$tmp_dir/specialist.json" "$SUPABASE_SERVICE_ROLE_KEY")" = 201
-ledger_specialist=true
-test "$(request POST '/rest/v1/specialist_catalog' \
-  "{\"id\":\"$catalog_id\",\"specialist_id\":\"$specialist_id\",\"slug\":\"$run_alias\",\"display_name\":\"$fixture_display_name\",\"product_area\":\"stasis\",\"short_description\":\"Synthetic bounded fixture.\",\"publication_status\":\"published\",\"is_published\":true,\"availability_status\":\"available\",\"access_tier\":\"free\",\"supported_surfaces\":[\"product\"],\"is_conversable\":true}" \
-  "$tmp_dir/catalog.json" "$SUPABASE_SERVICE_ROLE_KEY")" = 201
-ledger_catalog=true
-transition_state AUTH_USER_CREATED SPECIALIST_RESOLVED
-test "$(request POST '/rest/v1/users' \
-  "{\"id\":\"$owner_id\",\"display_name\":\"$fixture_display_name\"}" \
-  "$tmp_dir/profile.json" "$SUPABASE_SERVICE_ROLE_KEY")" = 201
-ledger_profile=true
-test "$(request POST '/auth/v1/token?grant_type=password' \
-  "{\"email\":\"$fixture_email\",\"password\":\"$fixture_password\"}" \
-  "$tmp_dir/token.json" "$SUPABASE_ANON_KEY")" = 200
-synthetic_access_token="$(jq -r .access_token "$tmp_dir/token.json")"
-test -n "$synthetic_access_token"; test "$synthetic_access_token" != null
-
-export SYNTHETIC_ACCESS_TOKEN="$synthetic_access_token"
-export REMOTE_FIXTURE_SPECIALIST_DISPLAY_NAME="$fixture_display_name"
-flutter test test/features/chat_sessions/data/development_remote_write_test.dart
-runner_state=FLOW_COMPLETED
-flutter test test/features/chat_sessions/data/development_remote_read_test.dart
-flutter test test/features/chat_messages/presentation/development_remote_ux_read_test.dart
-flow_status=0
+dart run tool/development_complete_functional_runner.dart \
+  --authorized-development-run

@@ -56,6 +56,35 @@ void main() {
     });
   }
 
+  test('exact inert R2D operator runner is the only link exception', () {
+    const path = 'scripts/run_development_remote_fixture_test.sh';
+    _write(root, path, r'''
+test "${1:-}" = "--authorized-development-run" || exit 64
+required=(FOUNDER_AUTHORIZATION_REFERENCE AUTHORIZED_COMMIT_SHA)
+test "$AUTHORIZED_COMMIT_MATCHES_HEAD" = CONFIRMED
+test "$SECOND_FUNCTIONAL_ATTEMPT_AUTHORIZATION_STATUS" = GRANTED_AT_RUNTIME
+test "$RETENTION_LIMITATION_ACKNOWLEDGED" = POST_DEVELOPMENT_OPERATIONAL_BLOCKER
+test "$SECOND_FUNCTIONAL_ATTEMPT_MANIFEST_VERSION" = FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v2
+test "$REMOTE_RUNNER_VERSION" = FOUNDATION-019A-R2D-RUNNER-v1
+trap isolate_cli EXIT INT TERM
+supabase link --project-ref "$SUPABASE_PROJECT_REF"
+''');
+    expect(SupabaseRemoteContextScanner(root).scan(), isEmpty);
+
+    _write(
+      root,
+      path,
+      File('${root.path}/$path').readAsStringSync().replaceFirst(
+        'FOUNDATION-019A-R2D-RUNNER-v1',
+        'incomplete',
+      ),
+    );
+    expect(
+      SupabaseRemoteContextScanner(root).scan().single.kind,
+      RemoteContextFindingKind.dangerousCommand,
+    );
+  });
+
   test('documented prohibited command is not executable tooling', () {
     _write(
       root,

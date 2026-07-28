@@ -1,5 +1,12 @@
 # Foundation Execution Package Map
 
+## FOUNDATION-019A-R2D
+
+R2D replaces the divergent v1 preparation with a complete v2 manifest,
+executable monotonic runner, ledger-driven cleanup, guards and local
+simulations. It performs zero remote actions. Publication only makes a new
+commit-specific Founder authorization the next possible gate.
+
 ## FOUNDATION-019A-R2B
 
 R2B proves and corrects the historical runner status-channel defect locally.
@@ -152,3 +159,4 @@ replace FOUNDATION-014-020 and each requires a separate approval.
 | FOUNDATION-019A-R1 | Version remote fixture/cleanup/gate/CORS contracts | IMPLEMENTED_LOCALLY_PENDING_PUSH | New commit-specific Founder authorization and exact CORS |
 | FOUNDATION-019A-R2A | Instrument focal HTTP response with a closed safe diagnostic contract | VALIDATED_LOCALLY | Package Git gate, then diagnostic-only Founder authorization |
 | FOUNDATION-019A-R2B | Prove runner defect, separate channels and prepare second functional attempt | IMPLEMENTED_LOCALLY | New unique Founder authorization bound to final R2B commit |
+| FOUNDATION-019A-R2D | Complete manifest-equivalent functional runner, state machine, ledger and tests | IMPLEMENTED_LOCALLY_PENDING_PUSH | New Founder authorization bound to final R2D commit |

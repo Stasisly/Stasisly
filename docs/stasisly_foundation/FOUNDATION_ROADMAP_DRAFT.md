@@ -1,5 +1,12 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Active gate: FOUNDATION-019A-R2D
+
+R2D completes and validates locally the executable second-attempt runner and
+its v2 manifest. The previous commit-bound authorization remains unconsumed but
+becomes invalid after publication. The next gate is a new explicit Founder
+authorization bound to the R2D SHA; no remote attempt starts automatically.
+
 ## Active gate: FOUNDATION-019A-R2B
 
 R2B closes the historical runner status-channel defect locally and prepares,

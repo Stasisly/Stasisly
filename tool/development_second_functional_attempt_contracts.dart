@@ -180,14 +180,14 @@ final class SecondFunctionalAttemptManifestValidator {
 
     expectValue(
       'manifestVersion',
-      'FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v1',
+      'FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v2',
     );
     expectValue('authorization', 'NOT_GRANTED');
     expectValue('execution', 'NOT_EXECUTED');
     expectValue('authorizedCommit', 'UNASSIGNED');
     expectValue('authorizationReference', 'UNASSIGNED');
     expectValue('environment', 'development');
-    expectValue('runnerVersion', 'R2B');
+    expectValue('runnerVersion', 'FOUNDATION-019A-R2D-RUNNER-v1');
     expectValue('schemaChange', 'FORBIDDEN');
     expectValue('migration', 'FORBIDDEN');
     expectValue('functionDeploy', 'FORBIDDEN');

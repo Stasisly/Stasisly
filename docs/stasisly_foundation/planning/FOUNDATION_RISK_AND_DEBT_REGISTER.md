@@ -1,5 +1,16 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-019A-R2D risks
+
+| Risk | Severity | State | Control | Unblock condition |
+|---|---|---|---|---|
+| Manifest declares a stage the runner skips | Critical | Closed locally | v2 matrix, source guard and adjacent state machine | Keep guards and tests green |
+| Response loss creates untracked residue | Critical | Controlled | One same-key recovery plus exact ledger/counters; uncertainty is dirty | Clean replay or dirty stop |
+| Lifecycle accepted on status alone | High | Closed locally | Detail, list and capability evidence for archive/restore | Preserve contract tests |
+| Foreign resource leaks metadata | Critical | Closed locally | Exact opaque 404 shape and negative leak tests | Only opaque category passes |
+| Old authorization reused after code change | Critical | Blocked | Authorized SHA and unique Founder reference gate | New explicit R2D-bound order |
+| Idempotency retention | High | Open after first bounded run | Immediate exact cleanup; sustained operation forbidden | Separate retention package |
+
 ## FOUNDATION-019A-R2B risks
 
 | Risk | Severity | State | Control | Unblock condition |

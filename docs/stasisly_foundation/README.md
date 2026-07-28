@@ -1,5 +1,14 @@
 # Stasisly Foundation
 
+## Complete Development functional runner gate
+
+FOUNDATION-019A-R2D reconciles the v2 second-attempt manifest with a complete,
+tested executable runner. State transitions, replay, lifecycle, ownership,
+blocked routes and ledger-driven cleanup are local Foundation contracts. No
+remote action occurred and no authorization is active. See
+[ADR-F029](adr/ADR-F029-executable-functional-runner-completeness.md) and the
+[implementation record](implementation/FOUNDATION-019A-R2D_COMPLETE_SECOND_FUNCTIONAL_RUNNER.md).
+
 ## Exact Auth containment gate
 
 FOUNDATION-019A-R2C-R1 reconstructs the historical synthetic Auth lookup key

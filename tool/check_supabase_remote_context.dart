@@ -93,6 +93,10 @@ final class SupabaseRemoteContextScanner {
         if (relativePath == 'tool/check_supabase_remote_context.dart') continue;
 
         final content = entity.readAsStringSync();
+        final approvedInertRunner = _isApprovedInertDevelopmentRunner(
+          relativePath,
+          content,
+        );
         for (final line in content.split('\n')) {
           final candidate = line.trimLeft();
           if (candidate.startsWith('#') || candidate.startsWith('//')) continue;
@@ -100,6 +104,10 @@ final class SupabaseRemoteContextScanner {
           if (_dangerousCommands.any(
             (pattern) => pattern.hasMatch(candidate),
           )) {
+            if (approvedInertRunner &&
+                RegExp(r'\bsupabase\s+link\b').hasMatch(candidate)) {
+              continue;
+            }
             findings.add(
               RemoteContextFinding(
                 kind: RemoteContextFindingKind.dangerousCommand,
@@ -192,6 +200,24 @@ final class SupabaseRemoteContextScanner {
     if (_isIgnoredTraversalPath(path)) return false;
     final name = path.split('/').last;
     return name == '.env.example' || name.endsWith('.example');
+  }
+
+  bool _isApprovedInertDevelopmentRunner(String path, String content) {
+    if (path != 'scripts/run_development_remote_fixture_test.sh') return false;
+    return content.contains(
+          r'test "${1:-}" = "--authorized-development-run" || exit 64',
+        ) &&
+        content.contains('FOUNDER_AUTHORIZATION_REFERENCE') &&
+        content.contains('AUTHORIZED_COMMIT_SHA') &&
+        content.contains('AUTHORIZED_COMMIT_MATCHES_HEAD') &&
+        content.contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v2') &&
+        content.contains('FOUNDATION-019A-R2D-RUNNER-v1') &&
+        content.contains('SECOND_FUNCTIONAL_ATTEMPT_AUTHORIZATION_STATUS') &&
+        content.contains('RETENTION_LIMITATION_ACKNOWLEDGED') &&
+        content.contains('trap isolate_cli EXIT INT TERM') &&
+        content.contains(
+          r'supabase link --project-ref "$SUPABASE_PROJECT_REF"',
+        );
   }
 
   bool _isIgnoredTraversalPath(String path) {

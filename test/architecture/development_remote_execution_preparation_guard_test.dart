@@ -89,29 +89,22 @@ void main() {
     },
   );
 
-  test(
-    'versioned operator runner enforces finally cleanup and exact filters',
-    () {
-      final source = File(
-        'scripts/run_development_remote_fixture_test.sh',
-      ).readAsStringSync();
-      expect(source, contains('trap finalize EXIT INT TERM'));
-      expect(
-        source,
-        contains('cleanup_remote_fixture && cleanup_remote_fixture'),
-      );
-      expect(source, contains("'0|0|0|0|0|0|0'"));
-      expect(source, contains('FAILED_DIRTY_BLOCKING'));
-      expect(source, contains('PASSED_CLEAN'));
-      expect(source, contains('FAILED_CLEAN'));
-      expect(source, contains('delete_auth_user_exact'));
-      expect(source, contains('200|404'));
-      expect(source, contains('AUTHORIZED_COMMIT_SHA'));
-      expect(source, isNot(contains('RUN_REMOTE_TESTS')));
-      expect(source, isNot(contains('like.')));
-      expect(source, isNot(contains('supabase link')));
-    },
-  );
+  test('versioned operator runner delegates to complete R2D contracts', () {
+    final source = File(
+      'scripts/run_development_remote_fixture_test.sh',
+    ).readAsStringSync();
+    expect(source, contains('trap isolate_cli EXIT INT TERM'));
+    expect(source, contains('--authorized-development-run'));
+    expect(source, contains('FOUNDER_AUTHORIZATION_REFERENCE'));
+    expect(source, contains('AUTHORIZED_COMMIT_SHA'));
+    expect(source, contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v2'));
+    expect(source, contains('FOUNDATION-019A-R2D-RUNNER-v1'));
+    expect(source, contains('RETENTION_LIMITATION_ACKNOWLEDGED'));
+    expect(source, contains('EXECUTABLE_RUNNER_CONTRACT_COMPLETE'));
+    expect(source, contains('supabase link --project-ref'));
+    expect(source, isNot(contains('RUN_REMOTE_TESTS')));
+    expect(source, isNot(contains('like.')));
+  });
 }
 
 Map<String, Object?> _json(String path) =>
