@@ -18,6 +18,9 @@ void main() {
   final contracts = File(
     'tool/development_complete_runner_contracts.dart',
   ).readAsStringSync();
+  final adapter = File(
+    'tool/development_catalog_envelope_adapter.dart',
+  ).readAsStringSync();
   final shell = File(
     'scripts/run_development_remote_fixture_test.sh',
   ).readAsStringSync();
@@ -76,8 +79,8 @@ void main() {
     expect(shell, contains('FOUNDER_AUTHORIZATION_REFERENCE'));
     expect(shell, contains('AUTHORIZED_COMMIT_SHA'));
     expect(shell, contains('SECOND_FUNCTIONAL_ATTEMPT_MANIFEST_VERSION'));
-    expect(shell, contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v3'));
-    expect(shell, contains('FOUNDATION-019A-R2E-RUNNER-v1'));
+    expect(shell, contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4'));
+    expect(shell, contains('FOUNDATION-019A-R2G-RUNNER-v1'));
     expect(shell, contains('RETENTION_LIMITATION_ACKNOWLEDGED'));
     expect(shell, contains('supabase link --project-ref'));
     expect(shell, contains('check_supabase_remote_context.dart'));
@@ -139,6 +142,10 @@ void main() {
     expect(runner, contains("'area': 'stasis'"));
     expect(runner, isNot(contains('.first')));
     expect(runner, isNot(contains('.firstWhere')));
+    expect(contracts, contains('DevelopmentCatalogEnvelopeAdapter'));
+    expect(adapter, contains('CATALOG_ADAPTER_SHARED'));
+    expect(adapter, contains('pageLimitReached'));
+    expect(adapter, contains('paginationRequiresAdditionalPage'));
   });
 
   test('runner evidence does not print raw sensitive values', () {

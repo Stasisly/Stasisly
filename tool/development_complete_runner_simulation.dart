@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'development_catalog_envelope_adapter.dart';
 import 'development_complete_runner_contracts.dart';
 
 const _manifestPath =
@@ -127,7 +128,8 @@ void _simulateCanonicalSpecialistPolicy() {
     bool available = true,
     bool authorized = true,
   }) => policy.resolve(
-    catalogPayload: payload,
+    catalogPayload: payload is List ? {'items': payload} : payload,
+    sourceCategory: CatalogEnvelopeSourceCategory.productItemsEnvelope,
     catalogAvailable: available,
     environment: 'development',
     policyAuthorized: authorized,

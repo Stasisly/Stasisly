@@ -1,5 +1,20 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-019A-R2G gate
+
+```text
+R2F diagnosed-clean evidence
+-> Product items-envelope and diagnostic raw-list audit
+-> one explicit shared adapter and canonical page
+-> fail-closed pagination and exact-one selection
+-> corrected clean classification
+-> local regression, ADR and publication
+-> new R2G-SHA-bound Founder authorization
+```
+
+No arrow performs remote execution. Manifest v4 and runner R2G-v1 invalidate
+all earlier functional authorization inputs.
+
 ## FOUNDATION-019A-R2F gate
 
 ```text

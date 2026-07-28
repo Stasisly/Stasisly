@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../tool/development_catalog_envelope_adapter.dart';
 import '../../tool/development_complete_runner_contracts.dart';
 
 void main() {
@@ -162,8 +163,11 @@ void main() {
       bool available = true,
       String environment = 'development',
       bool authorized = true,
+      CatalogEnvelopeSourceCategory source =
+          CatalogEnvelopeSourceCategory.productItemsEnvelope,
     }) => policy.resolve(
-      catalogPayload: payload,
+      catalogPayload: payload is List ? {'items': payload} : payload,
+      sourceCategory: source,
       catalogAvailable: available,
       environment: environment,
       policyAuthorized: authorized,
@@ -223,6 +227,19 @@ void main() {
         CanonicalSpecialistResolutionState.catalogContractInvalid,
       );
       expect(
+        policy
+            .resolve(
+              catalogPayload: [candidate()],
+              sourceCategory:
+                  CatalogEnvelopeSourceCategory.productItemsEnvelope,
+              catalogAvailable: true,
+              environment: 'development',
+              policyAuthorized: true,
+            )
+            .state,
+        CanonicalSpecialistResolutionState.catalogContractInvalid,
+      );
+      expect(
         resolve([
           {...candidate(), 'unknown': true},
         ]).state,
@@ -266,6 +283,20 @@ void main() {
       expect(
         resolve(candidates).state,
         CanonicalSpecialistResolutionState.catalogContractInvalid,
+      );
+    });
+
+    test('full page blocks because an additional page cannot be excluded', () {
+      final candidates = List.generate(
+        20,
+        (index) => candidate(
+          id: '${(index + 1).toString().padLeft(8, '0')}-1111-4111-8111-111111111111',
+        ),
+      );
+      expect(
+        resolve(candidates).state,
+        CanonicalSpecialistResolutionState
+            .catalogPaginationRequiresAdditionalPage,
       );
     });
   });

@@ -70,6 +70,7 @@ final class DevelopmentContainmentDiagnosticRunner {
         classification: classifyContainment(
           catalog: catalog,
           counters: counters,
+          containmentActionCount: plan.length,
           containmentCompleted: contained,
           cliIsolated: isolated,
         ),

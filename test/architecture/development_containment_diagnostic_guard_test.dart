@@ -12,6 +12,9 @@ void main() {
   final gateway = File(
     'tool/development_containment_diagnostic_http_gateway.dart',
   ).readAsStringSync();
+  final adapter = File(
+    'tool/development_catalog_envelope_adapter.dart',
+  ).readAsStringSync();
   final manifest = File(
     'docs/stasisly_foundation/development/'
     'development_containment_diagnostic_manifest.json',
@@ -88,6 +91,29 @@ void main() {
     );
     expect(runner, contains('ContainmentDiagnosticGateway'));
   });
+
+  test(
+    'functional and diagnostic catalog paths share one explicit adapter',
+    () {
+      final functionalContracts = File(
+        'tool/development_complete_runner_contracts.dart',
+      ).readAsStringSync();
+      final functionalRunner = File(
+        'tool/development_complete_functional_runner.dart',
+      ).readAsStringSync();
+      expect(adapter, contains('CATALOG_ADAPTER_SHARED'));
+      expect(adapter, contains('productItemsEnvelope'));
+      expect(adapter, contains('diagnosticDirectRawList'));
+      expect(
+        functionalContracts,
+        contains('DevelopmentCatalogEnvelopeAdapter'),
+      );
+      expect(gateway, contains('DevelopmentCatalogEnvelopeAdapter'));
+      expect(functionalRunner, contains('productItemsEnvelope'));
+      expect(gateway, contains('diagnosticDirectRawList'));
+      expect(functionalContracts, isNot(contains('catalogPayload is! List')));
+    },
+  );
 
   test('safe evidence has categories and no sensitive identity fields', () {
     expect(runner, contains("'catalogCategory'"));

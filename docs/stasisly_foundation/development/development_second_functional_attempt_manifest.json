@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "manifestVersion": "FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v3",
-  "runnerVersion": "FOUNDATION-019A-R2E-RUNNER-v1",
+  "manifestVersion": "FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4",
+  "runnerVersion": "FOUNDATION-019A-R2G-RUNNER-v1",
   "authorization": "NOT_GRANTED",
   "execution": "NOT_EXECUTED",
   "authorizedCommit": "UNASSIGNED",
@@ -19,6 +19,13 @@
     "canonicalArea": "stasis",
     "maxCandidates": 20,
     "ambiguity": "BLOCK"
+  },
+  "catalogEnvelope": {
+    "contractVersion": "FOUNDATION-019A-R2G-CATALOG-v1",
+    "source": "PRODUCT_ITEMS_ENVELOPE",
+    "acceptedShape": "EXACT_ITEMS_OBJECT",
+    "maximumPages": 1,
+    "fullPageWithoutCursor": "BLOCK"
   },
   "specialistCreation": "FORBIDDEN",
   "catalogCreation": "FORBIDDEN",

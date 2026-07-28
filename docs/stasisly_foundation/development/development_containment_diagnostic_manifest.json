@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "manifestVersion": "FOUNDATION-019A-CONTAINMENT-DIAGNOSTIC-v1",
-  "runnerVersion": "FOUNDATION-019A-R2F-CONTAINMENT-RUNNER-v1",
+  "manifestVersion": "FOUNDATION-019A-CONTAINMENT-DIAGNOSTIC-v2",
+  "runnerVersion": "FOUNDATION-019A-R2G-DIAGNOSTIC-RUNNER-v1",
   "environment": "development",
   "remoteAuthorization": "NOT_GRANTED",
   "remoteExecution": "NOT_EXECUTED",
@@ -59,7 +59,14 @@
     "cursor": "NOT_SUPPORTED_BY_CURRENT_BACKEND",
     "failedRunnerInputContract": "RAW_LIST",
     "backendResponseContract": "ITEMS_ENVELOPE",
-    "localFailureCategory": "CATALOG_CONTRACT_INVALID"
+    "localFailureCategory": "CATALOG_CONTRACT_INVALID",
+    "sharedAdapter": "FOUNDATION-019A-R2G-CATALOG-v1",
+    "sourceCategory": "DIAGNOSTIC_DIRECT_RAW_LIST"
+  },
+  "cleanClassification": {
+    "zeroActionsAndZeroResidue": "DIAGNOSED_FAILED_CLEAN",
+    "successfulActionsAndZeroResidue": "CONTAINED_CLEAN",
+    "unnecessaryOrIncompleteContainment": "FAILED_DIRTY_BLOCKING"
   },
   "counters": [
     {"name":"messages","lookupBasis":"MESSAGE_REQUEST_NOT_SENT","queryBound":0,"expectedClean":"ZERO","containmentEligibility":"NOT_ELIGIBLE"},

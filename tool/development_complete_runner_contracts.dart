@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-const completeRunnerVersion = 'FOUNDATION-019A-R2E-RUNNER-v1';
-const completeManifestVersion = 'FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v3';
+import 'development_catalog_envelope_adapter.dart';
+
+const completeRunnerVersion = 'FOUNDATION-019A-R2G-RUNNER-v1';
+const completeManifestVersion = 'FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4';
 const canonicalSpecialistPolicy = 'VERIFIED_PREEXISTING_READ_ONLY';
 const canonicalSpecialistSource = 'SELECTABLE_SPECIALIST_CATALOG';
 const canonicalSpecialistSelectionMode =
@@ -70,6 +72,10 @@ final class CompleteRunnerManifest {
     required this.specialistSelectionMode,
     required this.specialistSelectionArea,
     required this.specialistSelectionLimit,
+    required this.catalogEnvelopeContract,
+    required this.catalogEnvelopeSource,
+    required this.catalogEnvelopeShape,
+    required this.catalogMaximumPages,
     required this.specialistCreation,
     required this.catalogCreation,
     required this.specialistCleanup,
@@ -88,13 +94,16 @@ final class CompleteRunnerManifest {
     final rawOperations = decoded['operations'];
     final rawFailureStates = decoded['failureCleanupFromStates'];
     final rawSelection = decoded['specialistSelection'];
+    final rawEnvelope = decoded['catalogEnvelope'];
     if (rawStates is! List ||
         rawOperations is! List ||
         rawFailureStates is! List ||
-        rawSelection is! Map) {
+        rawSelection is! Map ||
+        rawEnvelope is! Map) {
       throw const FormatException('Manifest states and operations required.');
     }
     final selection = Map<String, Object?>.from(rawSelection);
+    final envelope = Map<String, Object?>.from(rawEnvelope);
     return CompleteRunnerManifest._(
       version: decoded['manifestVersion'] as String? ?? '',
       runnerVersion: decoded['runnerVersion'] as String? ?? '',
@@ -103,6 +112,10 @@ final class CompleteRunnerManifest {
       specialistSelectionMode: selection['mode'] as String? ?? '',
       specialistSelectionArea: selection['canonicalArea'] as String? ?? '',
       specialistSelectionLimit: selection['maxCandidates'] as int? ?? 0,
+      catalogEnvelopeContract: envelope['contractVersion'] as String? ?? '',
+      catalogEnvelopeSource: envelope['source'] as String? ?? '',
+      catalogEnvelopeShape: envelope['acceptedShape'] as String? ?? '',
+      catalogMaximumPages: envelope['maximumPages'] as int? ?? 0,
       specialistCreation: decoded['specialistCreation'] as String? ?? '',
       catalogCreation: decoded['catalogCreation'] as String? ?? '',
       specialistCleanup: decoded['specialistCleanup'] as String? ?? '',
@@ -128,6 +141,10 @@ final class CompleteRunnerManifest {
   final String specialistSelectionMode;
   final String specialistSelectionArea;
   final int specialistSelectionLimit;
+  final String catalogEnvelopeContract;
+  final String catalogEnvelopeSource;
+  final String catalogEnvelopeShape;
+  final int catalogMaximumPages;
   final String specialistCreation;
   final String catalogCreation;
   final String specialistCleanup;
@@ -149,6 +166,10 @@ final class CompleteRunnerManifest {
         specialistSelectionMode != canonicalSpecialistSelectionMode ||
         specialistSelectionArea != canonicalSpecialistArea ||
         specialistSelectionLimit != 20 ||
+        catalogEnvelopeContract != catalogEnvelopeContractVersion ||
+        catalogEnvelopeSource != 'PRODUCT_ITEMS_ENVELOPE' ||
+        catalogEnvelopeShape != 'EXACT_ITEMS_OBJECT' ||
+        catalogMaximumPages != 1 ||
         specialistCreation != 'FORBIDDEN' ||
         catalogCreation != 'FORBIDDEN' ||
         specialistCleanup != 'NOT_APPLICABLE' ||
@@ -222,6 +243,7 @@ enum CanonicalSpecialistResolutionState {
   multipleSelectableCandidates,
   catalogUnavailable,
   catalogContractInvalid,
+  catalogPaginationRequiresAdditionalPage,
   environmentMismatch,
   authorizationRejected,
   unknownFailure,
@@ -313,6 +335,7 @@ final class CanonicalSpecialistResolutionResult {
 abstract interface class SpecialistResolutionPolicy {
   CanonicalSpecialistResolutionResult resolve({
     required Object? catalogPayload,
+    required CatalogEnvelopeSourceCategory sourceCategory,
     required bool catalogAvailable,
     required String environment,
     required bool policyAuthorized,
@@ -332,6 +355,7 @@ final class VerifiedPreexistingReadOnlyPolicy
   @override
   CanonicalSpecialistResolutionResult resolve({
     required Object? catalogPayload,
+    required CatalogEnvelopeSourceCategory sourceCategory,
     required bool catalogAvailable,
     required String environment,
     required bool policyAuthorized,
@@ -351,13 +375,24 @@ final class VerifiedPreexistingReadOnlyPolicy
         CanonicalSpecialistResolutionState.catalogUnavailable,
       );
     }
-    if (catalogPayload is! List || catalogPayload.length > maxCandidates) {
+    final adaptation = DevelopmentCatalogEnvelopeAdapter(
+      maximumItems: maxCandidates,
+    ).adapt(payload: catalogPayload, sourceCategory: sourceCategory);
+    if (adaptation.status ==
+            CatalogEnvelopeStatus.paginationRequiresAdditionalPage ||
+        adaptation.status == CatalogEnvelopeStatus.pageLimitReached) {
+      return const CanonicalSpecialistResolutionResult(
+        CanonicalSpecialistResolutionState
+            .catalogPaginationRequiresAdditionalPage,
+      );
+    }
+    if (!adaptation.isSupported) {
       return const CanonicalSpecialistResolutionResult(
         CanonicalSpecialistResolutionState.catalogContractInvalid,
       );
     }
     try {
-      final candidates = catalogPayload
+      final candidates = adaptation.page!.items
           .map(
             (value) => CanonicalSelectableSpecialist.fromJson(
               Map<String, Object?>.from(value as Map),

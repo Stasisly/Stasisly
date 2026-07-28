@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'development_catalog_envelope_adapter.dart';
 import 'development_complete_runner_contracts.dart';
 
 const _manifestPath =
@@ -257,6 +258,7 @@ final class _FunctionalExecution {
     );
     final resolution = const VerifiedPreexistingReadOnlyPolicy().resolve(
       catalogPayload: result.body,
+      sourceCategory: CatalogEnvelopeSourceCategory.productItemsEnvelope,
       catalogAvailable: result.status == 200,
       environment: context.environment['APP_MODE'] ?? '',
       policyAuthorized:

@@ -210,8 +210,8 @@ final class SupabaseRemoteContextScanner {
         content.contains('FOUNDER_AUTHORIZATION_REFERENCE') &&
         content.contains('AUTHORIZED_COMMIT_SHA') &&
         content.contains('AUTHORIZED_COMMIT_MATCHES_HEAD') &&
-        content.contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v3') &&
-        content.contains('FOUNDATION-019A-R2E-RUNNER-v1') &&
+        content.contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4') &&
+        content.contains('FOUNDATION-019A-R2G-RUNNER-v1') &&
         content.contains('SECOND_FUNCTIONAL_ATTEMPT_AUTHORIZATION_STATUS') &&
         content.contains('RETENTION_LIMITATION_ACKNOWLEDGED') &&
         content.contains('trap isolate_cli EXIT INT TERM') &&

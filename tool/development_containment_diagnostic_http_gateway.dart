@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'development_catalog_envelope_adapter.dart';
 import 'development_containment_diagnostic_contracts.dart';
 
 final class _DiagnosticHttpResult {
@@ -45,18 +46,25 @@ final class HttpContainmentDiagnosticGateway
       if (result.statusCode < 200 || result.statusCode >= 300) {
         return CatalogDiagnosticObservation(httpStatus: result.statusCode);
       }
-      final body = result.body;
-      if (body is! List<Object?>) {
-        return const CatalogDiagnosticObservation(contractValid: false);
-      }
-      if (body.length >= 20) {
+      final adaptation = const DevelopmentCatalogEnvelopeAdapter().adapt(
+        payload: result.body,
+        sourceCategory: CatalogEnvelopeSourceCategory.diagnosticDirectRawList,
+      );
+      if (adaptation.status == CatalogEnvelopeStatus.pageLimitReached ||
+          adaptation.status ==
+              CatalogEnvelopeStatus.paginationRequiresAdditionalPage) {
         return const CatalogDiagnosticObservation(pageLimitReached: true);
       }
+      if (adaptation.status == CatalogEnvelopeStatus.paginationInvalid ||
+          adaptation.status == CatalogEnvelopeStatus.cursorCycle) {
+        return const CatalogDiagnosticObservation(paginationValid: false);
+      }
+      if (!adaptation.isSupported) {
+        return const CatalogDiagnosticObservation(contractValid: false);
+      }
+      final body = adaptation.page!.items;
       final candidates = <CatalogCandidateObservation>[];
       for (final value in body) {
-        if (value is! Map) {
-          return const CatalogDiagnosticObservation(contractValid: false);
-        }
         final row = Map<String, Object?>.from(value);
         const expectedKeys = {
           'access_tier',

@@ -54,7 +54,7 @@ Future<void> main() async {
       'auth-already-absent',
       const CatalogDiagnosticObservation(candidates: [_candidate]),
       _zeros(),
-      ContainmentClassification.containedClean,
+      ContainmentClassification.diagnosedFailedClean,
     ),
     _SimulationCase(
       'unknown-counter',

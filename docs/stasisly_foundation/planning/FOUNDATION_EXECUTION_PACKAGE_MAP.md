@@ -1,5 +1,13 @@
 # Foundation Execution Package Map
 
+## FOUNDATION-019A-R2G
+
+R2G replaces divergent functional/diagnostic catalog envelope parsing with one
+source-qualified canonical adapter, blocks incomplete pagination and corrects
+diagnosed-clean versus contained-clean classification. It versions the future
+functional contract as manifest v4/runner R2G-v1 and performs no remote action.
+Publication enables only a new commit-bound Founder authorization decision.
+
 ## FOUNDATION-019A-R2F
 
 R2F prepares exact failed-run diagnosis and containment without remote access.

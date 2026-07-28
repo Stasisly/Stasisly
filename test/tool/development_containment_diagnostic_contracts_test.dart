@@ -233,6 +233,7 @@ void main() {
               classifyContainment(
                 catalog: CatalogDiagnosticCategory.exactlyOneAvailableCandidate,
                 counters: _replaceCounter(counter),
+                containmentActionCount: 0,
                 containmentCompleted: false,
                 cliIsolated: true,
               ),
@@ -352,16 +353,66 @@ void main() {
       }
     });
 
-    test('nonzero counter after delete remains blocked', () {
+    test('nonzero counter after delete is failed dirty blocking', () {
       expect(
         classifyContainment(
           catalog: CatalogDiagnosticCategory.exactlyOneAvailableCandidate,
           counters: _withExactResidue('profiles'),
+          containmentActionCount: 1,
           containmentCompleted: true,
           cliIsolated: true,
         ),
-        ContainmentClassification.blockedInsufficientExactLookup,
+        ContainmentClassification.failedDirtyBlocking,
       );
+    });
+  });
+
+  group('clean classification semantics', () {
+    test('seven zeros without containment is diagnosed failed clean', () {
+      expect(
+        classifyContainment(
+          catalog: CatalogDiagnosticCategory.exactlyOneAvailableCandidate,
+          counters: _zeroCounters(),
+          containmentActionCount: 0,
+          containmentCompleted: false,
+          cliIsolated: true,
+        ),
+        ContainmentClassification.diagnosedFailedClean,
+      );
+    });
+
+    test(
+      'successful exact removal followed by seven zeros is contained clean',
+      () {
+        expect(
+          classifyContainment(
+            catalog: CatalogDiagnosticCategory.exactlyOneAvailableCandidate,
+            counters: _zeroCounters(),
+            containmentActionCount: 1,
+            containmentCompleted: true,
+            cliIsolated: true,
+          ),
+          ContainmentClassification.containedClean,
+        );
+      },
+    );
+
+    test('unnecessary or incomplete containment fails dirty', () {
+      for (final input in [
+        (actions: 0, completed: true),
+        (actions: 1, completed: false),
+      ]) {
+        expect(
+          classifyContainment(
+            catalog: CatalogDiagnosticCategory.exactlyOneAvailableCandidate,
+            counters: _zeroCounters(),
+            containmentActionCount: input.actions,
+            containmentCompleted: input.completed,
+            cliIsolated: true,
+          ),
+          ContainmentClassification.failedDirtyBlocking,
+        );
+      }
     });
   });
 

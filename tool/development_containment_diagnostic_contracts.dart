@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 const containmentDiagnosticManifestVersion =
-    'FOUNDATION-019A-CONTAINMENT-DIAGNOSTIC-v1';
+    'FOUNDATION-019A-CONTAINMENT-DIAGNOSTIC-v2';
 const containmentDiagnosticRunnerVersion =
-    'FOUNDATION-019A-R2F-CONTAINMENT-RUNNER-v1';
+    'FOUNDATION-019A-R2G-DIAGNOSTIC-RUNNER-v1';
 const consumedFunctionalAuthorization = 'FA-019A-RETRY-20260728-006';
 const consumedFunctionalCommit = '7a37dd651ad2f867b851dfca4def00377d802f44';
 const recommendedContainmentAuthorization = 'FA-019A-CONTAIN-DIAG-20260728-007';
@@ -78,6 +78,8 @@ final class ContainmentDiagnosticManifest {
     required this.catalogArea,
     required this.catalogLimit,
     required this.catalogMaximumPages,
+    required this.cleanWithoutContainment,
+    required this.cleanAfterContainment,
     required this.remoteAuthorization,
     required this.futureAuthorization,
     required this.functionalExecutions,
@@ -99,7 +101,11 @@ final class ContainmentDiagnosticManifest {
     final catalog = decoded['catalogDiagnostic'];
     final counters = decoded['counters'];
     final future = decoded['futureAuthorization'];
-    if (catalog is! Map || counters is! List || future is! Map) {
+    final classification = decoded['cleanClassification'];
+    if (catalog is! Map ||
+        counters is! List ||
+        future is! Map ||
+        classification is! Map) {
       throw const FormatException('Containment manifest sections are missing.');
     }
     return ContainmentDiagnosticManifest._(
@@ -111,6 +117,10 @@ final class ContainmentDiagnosticManifest {
       catalogArea: catalog['area'] as String? ?? '',
       catalogLimit: catalog['limit'] as int? ?? 0,
       catalogMaximumPages: catalog['maximumPages'] as int? ?? 0,
+      cleanWithoutContainment:
+          classification['zeroActionsAndZeroResidue'] as String? ?? '',
+      cleanAfterContainment:
+          classification['successfulActionsAndZeroResidue'] as String? ?? '',
       remoteAuthorization: decoded['remoteAuthorization'] as String? ?? '',
       futureAuthorization: future['state'] as String? ?? '',
       functionalExecutions: decoded['functionalExecutions'] as String? ?? '',
@@ -132,6 +142,8 @@ final class ContainmentDiagnosticManifest {
   final String catalogArea;
   final int catalogLimit;
   final int catalogMaximumPages;
+  final String cleanWithoutContainment;
+  final String cleanAfterContainment;
   final String remoteAuthorization;
   final String futureAuthorization;
   final String functionalExecutions;
@@ -160,6 +172,10 @@ final class ContainmentDiagnosticManifest {
         catalogLimit != 20 ||
         catalogMaximumPages != 1) {
       findings.add('Catalog diagnostic bound is invalid.');
+    }
+    if (cleanWithoutContainment != 'DIAGNOSED_FAILED_CLEAN' ||
+        cleanAfterContainment != 'CONTAINED_CLEAN') {
+      findings.add('Clean classification semantics are invalid.');
     }
     if (remoteAuthorization != 'NOT_GRANTED' ||
         futureAuthorization != 'NOT_GRANTED') {
@@ -378,11 +394,17 @@ void _validateCompleteCounters(List<CounterEvidence> counters) {
 ContainmentClassification classifyContainment({
   required CatalogDiagnosticCategory catalog,
   required List<CounterEvidence> counters,
+  required int containmentActionCount,
   required bool containmentCompleted,
   required bool cliIsolated,
 }) {
   _validateCompleteCounters(counters);
   if (!cliIsolated) return ContainmentClassification.failedDirtyBlocking;
+  if (containmentActionCount < 0 ||
+      (containmentActionCount == 0 && containmentCompleted) ||
+      (containmentActionCount > 0 && !containmentCompleted)) {
+    return ContainmentClassification.failedDirtyBlocking;
+  }
   if (counters.any(
     (counter) =>
         !counter.isValid ||
@@ -396,12 +418,15 @@ ContainmentClassification classifyContainment({
     (counter) => counter.result == CounterResultCategory.nonzeroExact,
   );
   if (nonzero.isNotEmpty) {
+    if (containmentActionCount > 0) {
+      return ContainmentClassification.failedDirtyBlocking;
+    }
     return ContainmentClassification.blockedInsufficientExactLookup;
   }
-  if (containmentCompleted) return ContainmentClassification.containedClean;
-  return catalog == CatalogDiagnosticCategory.exactlyOneAvailableCandidate
-      ? ContainmentClassification.containedClean
-      : ContainmentClassification.diagnosedFailedClean;
+  if (containmentActionCount > 0 && containmentCompleted) {
+    return ContainmentClassification.containedClean;
+  }
+  return ContainmentClassification.diagnosedFailedClean;
 }
 
 bool exactContainmentDeleteSucceeded(int statusCode) =>

@@ -1,5 +1,17 @@
 # Stasisly Foundation
 
+## Catalog envelope and diagnostic classification gate
+
+FOUNDATION-019A-R2G adopts one source-qualified catalog adapter for functional
+and diagnostic tooling. Product accepts the demonstrated exact `{items}`
+envelope; the bounded diagnostic raw list is accepted only under its explicit
+source category. Pagination and ambiguous shapes fail closed. Zero containment
+actions plus seven zero counters now emits `DIAGNOSED_FAILED_CLEAN`. See
+[ADR-F032](adr/ADR-F032-catalog-envelope-adaptation-and-clean-diagnostic-classification.md)
+and the [implementation record](implementation/FOUNDATION-019A-R2G_CATALOG_ENVELOPE_AND_CLASSIFICATION.md).
+Remote remains unauthorized pending a new Founder reference bound to the
+published R2G SHA.
+
 ## Failed-run containment diagnostic gate
 
 FOUNDATION-019A-R2F prepares a separate, fail-closed containment runner for the

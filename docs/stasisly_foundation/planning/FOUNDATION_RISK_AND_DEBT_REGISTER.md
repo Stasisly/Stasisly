@@ -1,5 +1,16 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-019A-R2G risks
+
+| Risk | Severity | State | Control | Residual action |
+|---|---|---|---|---|
+| Functional and diagnostic parsers diverge | High | Closed locally | One source-qualified shared adapter and architecture guard | Keep adapter/guard tests mandatory |
+| Unsupported envelope interpreted as empty | High | Closed locally | Explicit statuses; missing/null items fail closed | Version any future envelope |
+| First page hides additional candidates | High | Controlled | Full 20-item page blocks without cursor contract | Add versioned backend pagination separately |
+| Zero-action diagnostic called contained | Medium | Closed locally | Action-count classification and regression tests | Preserve historical normalized evidence |
+| Prior authorization reused | Critical | Blocked | Manifest v4, runner R2G-v1 and new SHA gate | New unique Founder authorization |
+| Idempotency retention | High | Open | Sustained Development remains forbidden | Separate retention package |
+
 ## FOUNDATION-019A-R2F risks
 
 | Risk | Severity | State | Control | Unblock condition |

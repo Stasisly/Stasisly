@@ -1,5 +1,13 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Active gate: FOUNDATION-019A-R2G
+
+R2G closes the catalog-envelope parser divergence and clean-classification
+error locally. Manifest v4 and runner R2G-v1 require a new Founder
+authorization bound to the published SHA before one controlled functional
+attempt. Remote execution, sustained Development and FOUNDATION-020 remain
+blocked.
+
 ## Active gate: FOUNDATION-019A-R2F
 
 R2F diagnoses the failed specialist-resolution contract locally and prepares a

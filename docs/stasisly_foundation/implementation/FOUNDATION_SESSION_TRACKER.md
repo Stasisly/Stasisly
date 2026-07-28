@@ -1,5 +1,29 @@
 # Foundation Session Tracker
 
+## FOUNDATION-019A-R2G status
+
+```text
+package: FOUNDATION-019A-R2G
+state: VALIDATED_LOCALLY_PENDING_PUBLICATION
+baseline: df872c95bf0ee67d3e314987e9ba4000d18b5936
+remote diagnostic result: DEVELOPMENT FAILED_RUN_DIAGNOSED_CLEAN
+catalog envelope root cause: PRODUCT_ITEMS_OBJECT_VS_FUNCTIONAL_RAW_LIST
+shared adapter: FOUNDATION-019A-R2G-CATALOG-v1
+functional manifest: FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4
+functional runner: FOUNDATION-019A-R2G-RUNNER-v1
+diagnostic manifest: FOUNDATION-019A-CONTAINMENT-DIAGNOSTIC-v2
+diagnostic runner: FOUNDATION-019A-R2G-DIAGNOSTIC-RUNNER-v1
+parser divergence: 0
+incorrect clean classifications: 0
+focal tests: 105 pass
+Flutter: 838 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after no-seed reset
+remote actions/secret reads: 0/0
+next authorization: NEW_FOUNDER_REFERENCE_BOUND_TO_R2G_SHA_REQUIRED
+```
+
 ## FOUNDATION-019A-R2F status
 
 ```text

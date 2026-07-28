@@ -1,5 +1,20 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-019A-R2G classification
+
+- Shared catalog adapter: `FOUNDATION_ADOPTED_LOCALLY`.
+- Canonical internal page: `FOUNDATION_ADOPTED`.
+- Product `{items}` and diagnostic direct-list envelopes:
+  `EXPLICIT_SOURCE_QUALIFIED`.
+- Parser divergence and incorrect clean classification: `CLOSED_LOCALLY`.
+- Functional manifest/runner: `SECOND-FUNCTIONAL-ATTEMPT-v4` /
+  `FOUNDATION-019A-R2G-RUNNER-v1`.
+- Diagnostic manifest/runner: `CONTAINMENT-DIAGNOSTIC-v2` /
+  `FOUNDATION-019A-R2G-DIAGNOSTIC-RUNNER-v1`.
+- Prior remote diagnostic: `DIAGNOSED_FAILED_CLEAN`; historical output
+  preserved.
+- Remote execution and new authorization: `NOT_AUTHORIZED/REQUIRED`.
+
 ## FOUNDATION-019A-R2F classification
 
 - Containment manifest and runner: `ACTIVE_LOCAL_SAFETY_TOOLING`.
