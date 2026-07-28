@@ -1,5 +1,15 @@
 # Stasisly Foundation
 
+## Failed-run containment diagnostic gate
+
+FOUNDATION-019A-R2F prepares a separate, fail-closed containment runner for the
+failed Development run. Versioned evidence classifies the specialist-resolution
+failure as `CATALOG_CONTRACT_INVALID`; remote residue remains blocking until a
+future exact diagnostic. No remote action occurred and the suggested
+containment authorization remains `NOT_GRANTED`. See
+[ADR-F031](adr/ADR-F031-failed-run-containment-and-exact-diagnostics.md) and the
+[implementation record](implementation/FOUNDATION-019A-R2F_CONTAINMENT_AND_CATALOG_DIAGNOSTIC.md).
+
 ## Canonical specialist runner gate
 
 FOUNDATION-019A-R2E unifies the functional retry on a single

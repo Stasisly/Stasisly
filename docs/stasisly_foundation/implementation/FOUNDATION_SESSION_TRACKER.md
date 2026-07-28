@@ -1,5 +1,26 @@
 # Foundation Session Tracker
 
+## FOUNDATION-019A-R2F status
+
+```text
+package: FOUNDATION-019A-R2F
+state: IMPLEMENTED_LOCALLY_PENDING_PUBLICATION
+failed run: DEVELOPMENT SECOND_FUNCTIONAL_ATTEMPT_V3_FAILED_DIRTY_BLOCKING
+catalog cause: CATALOG_CONTRACT_INVALID
+remote residue: UNKNOWN_BLOCKING
+consumed authorization: FA-019A-RETRY-20260728-006 / NOT_REUSABLE
+manifest: FOUNDATION-019A-CONTAINMENT-DIAGNOSTIC-v1
+runner: FOUNDATION-019A-R2F-CONTAINMENT-RUNNER-v1
+future authorization: FA-019A-CONTAIN-DIAG-20260728-007 / NOT_GRANTED
+focal tests: 25 pass
+Flutter: 822 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass
+SQL: 740/740 pass after local no-seed reset
+remote actions: 0
+functional executions: 0
+```
+
 ## FOUNDATION-019A-R2E status
 
 ```text

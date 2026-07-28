@@ -1,5 +1,13 @@
 # Borrador de roadmap Stasisly Foundation
 
+## Active gate: FOUNDATION-019A-R2F
+
+R2F diagnoses the failed specialist-resolution contract locally and prepares a
+separate exact containment path. Current remote residue remains blocking. The
+next gate is a new Founder authorization bound to the published R2F SHA and
+limited to bounded catalog diagnosis, seven exact counters, exact run-owned
+containment and isolation. It cannot authorize a functional retry.
+
 ## Active gate: FOUNDATION-019A-R2E
 
 R2E removes the dual specialist semantics from the Development functional

@@ -1,5 +1,13 @@
 # Foundation Execution Package Map
 
+## FOUNDATION-019A-R2F
+
+R2F prepares exact failed-run diagnosis and containment without remote access.
+It separates containment authorization from functional execution, classifies
+the local catalog-envelope mismatch and blocks broad lookup, canonical mutation
+and every unknown residue. Publication enables only a separate Founder
+authorization decision.
+
 ## FOUNDATION-019A-R2E
 
 R2E adopts `VERIFIED_PREEXISTING_READ_ONLY` as the sole specialist policy for

@@ -1,5 +1,16 @@
 # Foundation Risk and Debt Register
 
+## FOUNDATION-019A-R2F risks
+
+| Risk | Severity | State | Control | Unblock condition |
+|---|---|---|---|---|
+| Unknown attributable remote residue | Critical | Blocking | Seven exact counters; unknown never becomes zero | New commit-bound containment authorization and exact evidence |
+| Broad lookup or deletion harms unrelated data | Critical | Blocked locally | Bounded exact queries, ownership proof and exact handles | Never relaxed in this flow |
+| Canonical catalog/specialist mutation | Critical | Blocked locally | Read-only ownership and unconditional delete guard | Separate architecture decision, not R2F |
+| Functional retry while dirty | Critical | Blocked | Separate runner and incompatible authorization gate | Clean containment classification plus separate package |
+| Profile marker collision | High | Blocking on ambiguity | Limit two; exact owner identifier required for delete | Exactly one matching run-owned row |
+| Catalog response-envelope mismatch | High | Diagnosed locally | `CATALOG_CONTRACT_INVALID` category | Separate backend-fix package if a retry is later approved |
+
 ## FOUNDATION-019A-R2E risks
 
 | Risk | Severity | State | Control | Residual action |

@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "manifestVersion": "FOUNDATION-019A-CONTAINMENT-DIAGNOSTIC-v1",
+  "runnerVersion": "FOUNDATION-019A-R2F-CONTAINMENT-RUNNER-v1",
+  "environment": "development",
+  "remoteAuthorization": "NOT_GRANTED",
+  "remoteExecution": "NOT_EXECUTED",
+  "functionalExecutions": "BLOCKED",
+  "newSyntheticFixtures": "BLOCKED",
+  "newAuthUsers": "BLOCKED",
+  "newConversations": "BLOCKED",
+  "catalogMutation": "FORBIDDEN",
+  "specialistMutation": "FORBIDDEN",
+  "broadLookups": "FORBIDDEN",
+  "broadDeletes": "FORBIDDEN",
+  "consumedAuthorization": {
+    "reference": "FA-019A-RETRY-20260728-006",
+    "commit": "7a37dd651ad2f867b851dfca4def00377d802f44",
+    "state": "CONSUMED",
+    "reusable": false
+  },
+  "futureAuthorization": {
+    "recommendedReference": "FA-019A-CONTAIN-DIAG-20260728-007",
+    "state": "NOT_GRANTED",
+    "scope": "CONTAINMENT_AND_SANITIZED_DIAGNOSTIC"
+  },
+  "failedRunEvidence": {
+    "lastFunctionalState": "AUTH_USER_CREATED",
+    "profileRequest": "SENT",
+    "profileCleanup": "COMPLETED",
+    "ownerAuthCleanup": "COMPLETED",
+    "ownerAuthPostLookup": "ABSENT_CONFIRMED",
+    "catalogRequest": "SENT",
+    "conversationRequest": "NOT_SENT",
+    "idempotencyRequest": "NOT_SENT",
+    "messageRequest": "NOT_SENT",
+    "catalogMutation": "NOT_SENT",
+    "specialistMutation": "NOT_SENT",
+    "sevenCounterVerification": "INCOMPLETE"
+  },
+  "runHandles": [
+    {"name":"runAlias","classification":"AVAILABLE_EPHEMERALLY","sensitive":true},
+    {"name":"operationAttemptId","classification":"RECONSTRUCTABLE_EXACT","sensitive":true},
+    {"name":"syntheticPrincipalDerivation","classification":"RECONSTRUCTABLE_EXACT","sensitive":true},
+    {"name":"idempotencyKeyDerivation","classification":"RECONSTRUCTABLE_EXACT","sensitive":true},
+    {"name":"ownerAuthId","classification":"NOT_AVAILABLE","sensitive":true},
+    {"name":"conversationId","classification":"NOT_AVAILABLE","sensitive":true},
+    {"name":"specialistId","classification":"UNSAFE_FOR_LOOKUP","sensitive":true},
+    {"name":"catalogId","classification":"UNSAFE_FOR_LOOKUP","sensitive":true}
+  ],
+  "catalogDiagnostic": {
+    "mode": "READ_ONLY",
+    "area": "stasis",
+    "areaVocabulary": "CANONICAL",
+    "areaFilter": "SERVER_SIDE",
+    "availability": "PRODUCT_CONTRACT_DEFINED",
+    "limit": 20,
+    "maximumPages": 1,
+    "cursor": "NOT_SUPPORTED_BY_CURRENT_BACKEND",
+    "failedRunnerInputContract": "RAW_LIST",
+    "backendResponseContract": "ITEMS_ENVELOPE",
+    "localFailureCategory": "CATALOG_CONTRACT_INVALID"
+  },
+  "counters": [
+    {"name":"messages","lookupBasis":"MESSAGE_REQUEST_NOT_SENT","queryBound":0,"expectedClean":"ZERO","containmentEligibility":"NOT_ELIGIBLE"},
+    {"name":"idempotency","lookupBasis":"IDEMPOTENCY_REQUEST_NOT_SENT","queryBound":0,"expectedClean":"ZERO","containmentEligibility":"NOT_ELIGIBLE"},
+    {"name":"sessions","lookupBasis":"CONVERSATION_REQUEST_NOT_SENT","queryBound":0,"expectedClean":"ZERO","containmentEligibility":"NOT_ELIGIBLE"},
+    {"name":"profiles","lookupBasis":"EXACT_DERIVED_PROFILE_MARKER","queryBound":2,"expectedClean":"ZERO","containmentEligibility":"EXACT_HANDLE_AND_OWNERSHIP_REQUIRED"},
+    {"name":"catalog","lookupBasis":"MUTATION_FORBIDDEN_AND_NOT_SENT","queryBound":0,"expectedClean":"ZERO","containmentEligibility":"FORBIDDEN_CANONICAL_RESOURCE"},
+    {"name":"specialists","lookupBasis":"MUTATION_FORBIDDEN_AND_NOT_SENT","queryBound":0,"expectedClean":"ZERO","containmentEligibility":"FORBIDDEN_CANONICAL_RESOURCE"},
+    {"name":"auth","lookupBasis":"PRIOR_EXACT_POST_LOOKUP_ABSENT","queryBound":0,"expectedClean":"ZERO","containmentEligibility":"NOT_ELIGIBLE"}
+  ],
+  "containmentOrder": [
+    "messages",
+    "idempotency",
+    "sessions",
+    "profiles",
+    "catalog",
+    "specialists",
+    "auth"
+  ],
+  "containmentRequirements": [
+    "CREATED_BY_FAILED_RUN",
+    "EXACT_OWNERSHIP_PROOF",
+    "EXACT_DELETE_HANDLE"
+  ],
+  "protectedOwnership": [
+    "VERIFIED_PREEXISTING_READ_ONLY",
+    "UNKNOWN_OWNERSHIP",
+    "GLOBAL_RESOURCE",
+    "UNSCOPED_RESOURCE"
+  ],
+  "evidenceOutput": "SANITIZED_CATEGORIES_ONLY",
+  "stopAfterFirstUnsafeCondition": true,
+  "mandatoryCliIsolation": true
+}

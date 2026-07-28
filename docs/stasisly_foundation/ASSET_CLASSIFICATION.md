@@ -1,5 +1,15 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-019A-R2F classification
+
+- Containment manifest and runner: `ACTIVE_LOCAL_SAFETY_TOOLING`.
+- Catalog root-cause diagnosis: `VERIFIED_FROM_VERSIONED_CONTRACTS`.
+- Remote residue: `UNKNOWN_BLOCKING`.
+- Prior functional authorization: `CONSUMED_NOT_REUSABLE`.
+- Suggested future containment authorization: `NOT_GRANTED`.
+- Functional runner, new fixtures and canonical mutations: `BLOCKED`.
+- Remote execution evidence: `NOT_EXECUTED`.
+
 ## FOUNDATION-019A-R2E classification
 
 - Specialist policy: `VERIFIED_PREEXISTING_READ_ONLY`.

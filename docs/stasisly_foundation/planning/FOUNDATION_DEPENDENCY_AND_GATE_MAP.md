@@ -1,5 +1,22 @@
 # Foundation Dependency and Gate Map
 
+## FOUNDATION-019A-R2F gate
+
+```text
+failed Development run
+  -> consumed functional authorization
+  -> versioned catalog contract diagnosis
+  -> exact run-handle classification
+  -> seven-counter contract
+  -> canonical-resource protection
+  -> separate containment runner
+  -> local tests and publication
+  -> new containment-only Founder authorization
+```
+
+No arrow from R2F activates the functional runner. Unknown or inexact evidence
+stops at `FAILED_DIRTY_BLOCKING`.
+
 ## FOUNDATION-019A-R2E gate
 
 ```text
