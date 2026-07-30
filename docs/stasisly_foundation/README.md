@@ -434,3 +434,13 @@ diagnóstico quedan separados; la aserción exacta `200`, `SafeHttpDiagnostic`,
 cleanup `200/404` y los siete contadores se preservan. El segundo intento queda
 `PREPARED_NOT_AUTHORIZED`, con manifest `UNASSIGNED/NOT_GRANTED/NOT_EXECUTED`.
 No se ejecuta remoto y las autorizaciones anteriores permanecen consumidas.
+
+## FOUNDATION-019B-B
+
+FOUNDATION-019B-B conserva ArtifactV1 para operaciones generales y adopta
+`founder-authorization-v2` para operaciones sobre ejecuciones fallidas. V2
+incorpora `subject_run` estructurado, íntegramente hasheado y validado campo a
+campo contra el manifest versionado. R2H pasa a manifest y runner v2 sin cambiar
+gateway, contadores ni contención. No se ejecuta remoto; las autorizaciones
+anteriores quedan superseded y la siguiente aprobación deberá vincularse al
+nuevo SHA publicado.

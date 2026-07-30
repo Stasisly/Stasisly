@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 
 const v4ContainmentManifestVersion =
-    'FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v1';
-const v4ContainmentRunnerVersion = 'FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v1';
+    'FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v2';
+const v4ContainmentRunnerVersion = 'FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v2';
+const v4ContainmentAuthorizationSchema = 'founder-authorization-v2';
 const v4FailedManifestVersion = 'FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4';
 const v4FailedRunnerVersion = 'FOUNDATION-019A-R2G-RUNNER-v1';
 const v4FailedAuthorizationReference = 'FA-019A-RETRY-20260729-008';
 const v4FailedCommit = '7a660c143949ca7fc6cbd423a7c8d30102a5d7f9';
+const v4FailedResult =
+    'DEVELOPMENT SECOND_FUNCTIONAL_ATTEMPT_V4_FAILED_DIRTY_BLOCKING';
 const v4FailedAuthorizationState = 'CONSUMED';
 const v4FutureAuthorizationState = 'NOT_GRANTED';
 const v4RetentionLimitation = 'POST_DEVELOPMENT_OPERATIONAL_BLOCKER';
@@ -175,6 +178,7 @@ final class V4ContainmentManifest {
   V4ContainmentManifest._({
     required this.version,
     required this.runnerVersion,
+    required this.authorizationArtifactSchema,
     required this.environment,
     required this.remoteAuthorization,
     required this.remoteExecution,
@@ -185,6 +189,7 @@ final class V4ContainmentManifest {
     required this.failedCommitBound,
     required this.failedManifestVersion,
     required this.failedRunnerVersion,
+    required this.failedResult,
     required this.lastApprovedState,
     required this.failureCategory,
     required this.cleanupState,
@@ -226,6 +231,8 @@ final class V4ContainmentManifest {
     return V4ContainmentManifest._(
       version: decoded['manifestVersion'] as String? ?? '',
       runnerVersion: decoded['runnerVersion'] as String? ?? '',
+      authorizationArtifactSchema:
+          decoded['authorizationArtifactSchema'] as String? ?? '',
       environment: decoded['environment'] as String? ?? '',
       remoteAuthorization: decoded['remoteAuthorization'] as String? ?? '',
       remoteExecution: decoded['remoteExecution'] as String? ?? '',
@@ -239,6 +246,7 @@ final class V4ContainmentManifest {
       failedCommitBound: failedRun['commitBound'] as bool? ?? false,
       failedManifestVersion: failedRun['manifestVersion'] as String? ?? '',
       failedRunnerVersion: failedRun['runnerVersion'] as String? ?? '',
+      failedResult: failedRun['result'] as String? ?? '',
       lastApprovedState: failedRun['lastApprovedState'] as String? ?? '',
       failureCategory: failedRun['failureCategory'] as String? ?? '',
       cleanupState: failedRun['cleanupState'] as String? ?? '',
@@ -272,6 +280,7 @@ final class V4ContainmentManifest {
 
   final String version;
   final String runnerVersion;
+  final String authorizationArtifactSchema;
   final String environment;
   final String remoteAuthorization;
   final String remoteExecution;
@@ -282,6 +291,7 @@ final class V4ContainmentManifest {
   final bool failedCommitBound;
   final String failedManifestVersion;
   final String failedRunnerVersion;
+  final String failedResult;
   final String lastApprovedState;
   final String failureCategory;
   final String cleanupState;
@@ -311,7 +321,8 @@ final class V4ContainmentManifest {
   List<String> validate() {
     final findings = <String>[];
     if (version != v4ContainmentManifestVersion ||
-        runnerVersion != v4ContainmentRunnerVersion) {
+        runnerVersion != v4ContainmentRunnerVersion ||
+        authorizationArtifactSchema != v4ContainmentAuthorizationSchema) {
       findings.add('V4 containment manifest/runner version mismatch.');
     }
     if (environment != 'development' ||
@@ -326,7 +337,8 @@ final class V4ContainmentManifest {
         failedCommit != v4FailedCommit ||
         !failedCommitBound ||
         failedManifestVersion != v4FailedManifestVersion ||
-        failedRunnerVersion != v4FailedRunnerVersion) {
+        failedRunnerVersion != v4FailedRunnerVersion ||
+        failedResult != v4FailedResult) {
       findings.add('Failed v4 run binding is invalid.');
     }
     if (lastApprovedState != 'CONVERSATION_CREATED' ||

@@ -39,14 +39,19 @@ new exact containment authorization can be considered.
 ## Consequences
 
 - `FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v1` becomes the containment
-  manifest.
-- `FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v1` becomes the only R2H entry point.
+  manifest originally approved by this ADR.
+- `FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v1` becomes the R2H entry point
+  originally approved by this ADR.
 - The consumed v4 authorization remains historical and non-reusable.
 - The remote failure category remains `UNKNOWN_POST_CREATE_FAILURE` until exact
   evidence proves a narrower category.
 - Loss of every exact identity source produces
   `BLOCKED_INSUFFICIENT_EXACT_LOOKUP`; no broad discovery is allowed.
 - The general idempotency retention policy remains unresolved.
+
+ADR-F035 subsequently versions the executable authorization boundary to
+containment manifest v2 and R2H runner v2. Counter, diagnosis, containment and
+canonical-protection semantics from this ADR remain unchanged.
 
 ## Validation
 

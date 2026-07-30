@@ -145,6 +145,7 @@ Future<void> main(List<String> arguments) async {
       ..writeln('V4_SEVEN_COUNTER_CONTRACT_PASS')
       ..writeln('V4_CANONICAL_RESOURCE_PROTECTION_PASS')
       ..writeln('V4_FUNCTIONAL_RUNNER_ISOLATION_PASS')
+      ..writeln('AUTHORIZATION_FAILED_RUN_BINDINGS_MATCH_PASS')
       ..writeln('V4_DIRTY_RUN_CONTAINMENT_GATE_PASS');
     return;
   }
@@ -183,7 +184,11 @@ Future<void> main(List<String> arguments) async {
         'AUTHORIZATION_LEGACY_ENV_CONFLICT',
       );
     }
-    final findings = _authorizationFindings(authorization, headSha: headSha);
+    final findings = validateV4ContainmentAuthorization(
+      authorization,
+      manifest: manifest,
+      headSha: headSha,
+    );
     if (findings.isNotEmpty) {
       throw FounderAuthorizationException(findings.first);
     }
@@ -193,7 +198,7 @@ Future<void> main(List<String> arguments) async {
     return;
   }
 
-  final gate = _runtimeGate(environment, authorization, headSha);
+  final gate = _runtimeGate(environment, authorization, manifest, headSha);
   if (gate.validate().isNotEmpty) {
     stderr.writeln('V4_DIRTY_RUN_CONTAINMENT_GATE_BLOCKED');
     exitCode = 65;
@@ -214,8 +219,11 @@ Future<void> main(List<String> arguments) async {
   try {
     await store.consume(
       authorizationId,
-      validate: (artifact) =>
-          _authorizationFindings(artifact, headSha: headSha),
+      validate: (artifact) => validateV4ContainmentAuthorization(
+        artifact,
+        manifest: manifest,
+        headSha: headSha,
+      ),
     );
   } on FounderAuthorizationException {
     stderr.writeln(
@@ -263,29 +271,53 @@ String _authorizationId(File file) {
   return name.substring(0, name.length - '.json'.length);
 }
 
-List<String> _authorizationFindings(
-  FounderAuthorizationArtifactV1 artifact, {
-  required String headSha,
-}) => artifact.validate(
-  now: DateTime.now().toUtc(),
-  expectedOperation: _authorizedOperation,
-  expectedEnvironment: 'development',
-  expectedCommitSha: headSha,
-  expectedManifest: v4ContainmentManifestVersion,
-  expectedRunner: v4ContainmentRunnerVersion,
+FounderAuthorizationSubjectRun v4SubjectRunFromManifest(
+  V4ContainmentManifest manifest,
+) => FounderAuthorizationSubjectRun(
+  authorizationReference: manifest.failedAuthorizationReference,
+  commitSha: manifest.failedCommit,
+  manifest: manifest.failedManifestVersion,
+  runner: manifest.failedRunnerVersion,
+  result: manifest.failedResult,
+  lastReachedState: manifest.lastApprovedState,
+  failureCategory: manifest.failureCategory,
 );
+
+List<String> validateV4ContainmentAuthorization(
+  FounderAuthorizationArtifactV1 artifact, {
+  required V4ContainmentManifest manifest,
+  required String headSha,
+  DateTime? now,
+}) {
+  if (artifact is! FounderAuthorizationArtifactV2) {
+    return const ['AUTHORIZATION_SCHEMA_VERSION_INSUFFICIENT'];
+  }
+  final findings = artifact.validate(
+    now: now ?? DateTime.now().toUtc(),
+    expectedOperation: _authorizedOperation,
+    expectedEnvironment: 'development',
+    expectedCommitSha: headSha,
+    expectedManifest: v4ContainmentManifestVersion,
+    expectedRunner: v4ContainmentRunnerVersion,
+    expectedSubjectRun: v4SubjectRunFromManifest(manifest),
+  );
+  return findings;
+}
 
 V4ContainmentRuntimeGate _runtimeGate(
   Map<String, String> environment,
   FounderAuthorizationArtifactV1 authorization,
+  V4ContainmentManifest manifest,
   String headSha,
 ) {
   bool exact(String name, String expected) => environment[name] == expected;
   return V4ContainmentRuntimeGate(
     founderAuthorizationMatches:
+        authorization is FounderAuthorizationArtifactV2 &&
         authorization.status == FounderAuthorizationStatus.granted &&
         authorization.decision == 'APPROVED' &&
-        authorization.authorizedOperation == _authorizedOperation,
+        authorization.authorizedOperation == _authorizedOperation &&
+        authorization.subjectRun.matches(v4SubjectRunFromManifest(manifest)),
     authorizedCommitMatches:
         headSha.isNotEmpty && authorization.authorizedCommitSha == headSha,
     developmentTargetMatches:

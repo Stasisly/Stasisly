@@ -17,7 +17,7 @@ Future<void> main(List<String> arguments) async {
     final store = FounderAuthorizationStore(repositoryRoot: Directory.current);
     switch (arguments.first) {
       case 'grant':
-        final proposal = _readProposal(File(arguments.last));
+        final proposal = readFounderAuthorizationProposal(File(arguments.last));
         final head = Process.runSync('git', ['rev-parse', 'HEAD']);
         if (head.exitCode != 0) {
           throw const FounderAuthorizationException(
@@ -32,6 +32,7 @@ Future<void> main(List<String> arguments) async {
           jsonEncode({
             'authorization': artifact.authorizationId,
             'status': artifact.status.value,
+            'schema': artifact.schemaVersion,
             'artifact': 'CREATED',
           }),
         );
@@ -50,7 +51,7 @@ Future<void> main(List<String> arguments) async {
   }
 }
 
-FounderAuthorizationProposalV1 _readProposal(File file) {
+FounderAuthorizationProposalV1 readFounderAuthorizationProposal(File file) {
   final decoded = jsonDecode(file.readAsStringSync());
   if (decoded is! Map<String, Object?>) {
     throw const FounderAuthorizationException('AUTHORIZATION_PROPOSAL_INVALID');
@@ -65,15 +66,115 @@ FounderAuthorizationProposalV1 _readProposal(File file) {
     return entry;
   }
 
-  return FounderAuthorizationProposalV1(
+  final operation = value('authorized_operation');
+  final common = (
     authorizationId: value('authorization_id'),
     decision: value('decision'),
     decisionSource: value('decision_source'),
-    authorizedOperation: value('authorized_operation'),
     authorizedEnvironment: value('authorized_environment'),
     authorizedManifest: value('authorized_manifest'),
     authorizedRunner: value('authorized_runner'),
     scope: value('scope'),
+  );
+  if (founderAuthorizationOperationRequiresSubjectRun(operation)) {
+    final source = value('subject_run_manifest_path');
+    final approvedRoot = Directory(
+      '${Directory.current.path}${Platform.pathSeparator}'
+      'docs${Platform.pathSeparator}stasisly_foundation'
+      '${Platform.pathSeparator}development',
+    ).resolveSymbolicLinksSync();
+    late final String sourcePath;
+    try {
+      sourcePath = File(source).absolute.resolveSymbolicLinksSync();
+    } on FileSystemException {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SUBJECT_RUN_MANIFEST_PATH_BLOCKED',
+      );
+    }
+    if (!sourcePath.startsWith('$approvedRoot${Platform.pathSeparator}') ||
+        !sourcePath.endsWith('.json')) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SUBJECT_RUN_MANIFEST_PATH_BLOCKED',
+      );
+    }
+    return FounderAuthorizationProposalV2(
+      authorizationId: common.authorizationId,
+      decision: common.decision,
+      decisionSource: common.decisionSource,
+      authorizedOperation: operation,
+      authorizedEnvironment: common.authorizedEnvironment,
+      authorizedManifest: common.authorizedManifest,
+      authorizedRunner: common.authorizedRunner,
+      scope: common.scope,
+      subjectRun: readFounderAuthorizationSubjectRun(
+        File(sourcePath),
+        expectedAuthorizedManifest: common.authorizedManifest,
+        expectedAuthorizedRunner: common.authorizedRunner,
+      ),
+    );
+  }
+  if (decoded.containsKey('subject_run_manifest_path')) {
+    throw const FounderAuthorizationException(
+      'AUTHORIZATION_SUBJECT_RUN_FORBIDDEN',
+    );
+  }
+  return FounderAuthorizationProposalV1(
+    authorizationId: common.authorizationId,
+    decision: common.decision,
+    decisionSource: common.decisionSource,
+    authorizedOperation: operation,
+    authorizedEnvironment: common.authorizedEnvironment,
+    authorizedManifest: common.authorizedManifest,
+    authorizedRunner: common.authorizedRunner,
+    scope: common.scope,
+  );
+}
+
+FounderAuthorizationSubjectRun readFounderAuthorizationSubjectRun(
+  File file, {
+  String? expectedAuthorizedManifest,
+  String? expectedAuthorizedRunner,
+}) {
+  final decoded = jsonDecode(file.readAsStringSync());
+  if (decoded is! Map<String, Object?>) {
+    throw const FounderAuthorizationException(
+      'AUTHORIZATION_SUBJECT_RUN_MANIFEST_INVALID',
+    );
+  }
+  final failedRun = decoded['failedRun'];
+  if (failedRun is! Map<String, Object?>) {
+    throw const FounderAuthorizationException(
+      'AUTHORIZATION_SUBJECT_RUN_MANIFEST_INVALID',
+    );
+  }
+  if ((expectedAuthorizedManifest != null &&
+          decoded['manifestVersion'] != expectedAuthorizedManifest) ||
+      (expectedAuthorizedRunner != null &&
+          decoded['runnerVersion'] != expectedAuthorizedRunner) ||
+      decoded['authorizationArtifactSchema'] !=
+          founderAuthorizationSchemaVersionV2) {
+    throw const FounderAuthorizationException(
+      'AUTHORIZATION_SUBJECT_RUN_MANIFEST_BINDING_MISMATCH',
+    );
+  }
+  String value(String key) {
+    final entry = failedRun[key];
+    if (entry is! String || entry.isEmpty) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SUBJECT_RUN_MANIFEST_INVALID',
+      );
+    }
+    return entry;
+  }
+
+  return FounderAuthorizationSubjectRun(
+    authorizationReference: value('authorizationReference'),
+    commitSha: value('commit'),
+    manifest: value('manifestVersion'),
+    runner: value('runnerVersion'),
+    result: value('result'),
+    lastReachedState: value('lastApprovedState'),
+    failureCategory: value('failureCategory'),
   );
 }
 

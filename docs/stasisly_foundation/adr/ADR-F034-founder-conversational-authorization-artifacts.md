@@ -60,6 +60,9 @@ environment, commit, manifest and runner.
   wrong bindings, expiration and stale locks block before remote access.
 - Legacy-only authorization remains detectable but is not the primary R2H
   execution path.
+- ADR-F035 keeps V1 for general operations and requires the structured,
+  fully hashed `founder-authorization-v2` subject-run contract for failed-run
+  operations.
 
 ## Validation
 

@@ -61,6 +61,10 @@ void main() {
       'AUTHORIZATION_EXECUTION_COUNT_EXCEEDED',
       'AUTHORIZATION_LOCKED_FAIL_CLOSED',
       'AUTHORIZATION_REGENERATION_BLOCKED',
+      'AUTHORIZATION_SCHEMA_VERSION_INSUFFICIENT',
+      'AUTHORIZATION_SUBJECT_RUN_REQUIRED',
+      'AUTHORIZATION_SUBJECT_RUN_FORBIDDEN',
+      'AUTHORIZATION_SUBJECT_RUN_UNKNOWN_FIELD',
     ]) {
       expect(tooling, contains(contract), reason: contract);
     }
@@ -68,6 +72,8 @@ void main() {
 
   test('R2H uses artifact primary path and keeps remote logic isolated', () {
     expect(runner, contains('FOUNDER_AUTHORIZATION_ARTIFACT'));
+    expect(runner, contains('FounderAuthorizationArtifactV2'));
+    expect(runner, contains('AUTHORIZATION_FAILED_RUN_BINDINGS_MATCH_PASS'));
     expect(runner, contains('store.consume'));
     expect(runner, contains('resolveAuthorizationSource'));
     expect(wrapper, contains('FOUNDER_AUTHORIZATION_ARTIFACT'));

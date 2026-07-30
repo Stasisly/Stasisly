@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly manifest_version="FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v1"
-readonly runner_version="FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v1"
+readonly manifest_version="FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v2"
+readonly runner_version="FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v2"
 readonly failed_authorization="FA-019A-RETRY-20260729-008"
 
 if [[ "${1:-}" != "--authorized-v4-containment-run" || "$#" -ne 1 ]]; then

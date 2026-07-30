@@ -65,6 +65,9 @@ void main() {
   test('functional and containment authorizations cannot cross-activate', () {
     expect(runner, contains('FOUNDER_AUTHORIZATION_ARTIFACT'));
     expect(runner, contains('FounderAuthorizationStore'));
+    expect(runner, contains('FounderAuthorizationArtifactV2'));
+    expect(runner, contains('validateV4ContainmentAuthorization'));
+    expect(runner, contains('v4SubjectRunFromManifest'));
     expect(runner, contains('resolveAuthorizationSource'));
     expect(runner, contains('store.consume'));
     expect(runner, contains('v4FailedAuthorizationReference'));
@@ -92,6 +95,21 @@ void main() {
   test('manifest keeps creation, replay and mutation closed', () {
     expect(manifest, contains('"remoteAuthorization": "NOT_GRANTED"'));
     expect(manifest, contains('"remoteExecution": "NOT_EXECUTED"'));
+    expect(
+      manifest,
+      contains('"authorizationArtifactSchema": "founder-authorization-v2"'),
+    );
+    for (final binding in [
+      'authorizationReference',
+      'commit',
+      'manifestVersion',
+      'runnerVersion',
+      'result',
+      'lastApprovedState',
+      'failureCategory',
+    ]) {
+      expect(manifest, contains('"$binding"'), reason: binding);
+    }
     for (final key in [
       'functionalRunner',
       'authCreation',
@@ -103,6 +121,23 @@ void main() {
     ]) {
       expect(manifest, contains('"$key": "DISABLED"'), reason: key);
     }
+  });
+
+  test('R2H validates every subject-run binding and cannot accept V1', () {
+    for (final binding in [
+      'failedAuthorizationReference',
+      'failedCommit',
+      'failedManifestVersion',
+      'failedRunnerVersion',
+      'failedResult',
+      'lastApprovedState',
+      'failureCategory',
+    ]) {
+      expect(runner, contains('manifest.$binding'), reason: binding);
+    }
+    expect(runner, contains('AUTHORIZATION_SCHEMA_VERSION_INSUFFICIENT'));
+    expect(contracts, contains('founder-authorization-v2'));
+    expect(wrapper, contains('FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v2'));
   });
 
   test('safe evidence includes no sensitive identity fields', () {

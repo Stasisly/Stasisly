@@ -106,24 +106,26 @@ No remote classification is asserted by this local package.
 
 ## 14. Manifest
 
-`FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v1` binds the consumed attempt,
+`FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v2` binds the consumed attempt,
 identity strategy, counter contracts, dependency order, disabled creation and
 replay paths, canonical protection, mandatory post-delete verification and CLI
-isolation. Remote authorization and execution remain closed.
+isolation. It also declares `founder-authorization-v2` as the required artifact
+schema and records the exact failed-run result. Remote authorization and
+execution remain closed.
 
 ## 15. Runner
 
-`FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v1` is a separate entry point. Its local
+`FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v2` is a separate entry point. Its local
 validation mode has no network action. Its future runtime mode cannot run until
-all 23 exact gates pass under a new commit-bound Founder authorization.
+all exact gates pass under a new commit-bound V2 Founder authorization.
 
 ## 16. Gate
 
 The future gate verifies Founder containment authorization, current commit,
-Development target, failed-run reference and versions, containment versions,
-all creation/replay/mutation disables, exact-only lookups, seven counters,
-Conversation awareness, canonical protection, post-delete verification, CLI
-isolation and retention acknowledgement.
+Development target, all seven `subject_run` bindings against the manifest,
+containment versions, all creation/replay/mutation disables, exact-only lookups,
+seven counters, Conversation awareness, canonical protection, post-delete
+verification, CLI isolation and retention acknowledgement.
 
 ## 17. Tests
 
@@ -167,9 +169,9 @@ G11 gate. Functional retries, new fixtures and FOUNDATION-020 remain blocked.
 
 ## 21. Future authorization requirements
 
-The recommended future reference is
-`FA-019A-V4-CONTAIN-20260730-009`, currently `NOT_GRANTED`. A separate
-authorization must bind the published R2H SHA and may permit only exact
+No future reference is assigned. Prior references `-009` and `-010` are
+superseded and non-reusable. A separate conversational V2 authorization must
+bind the published R2H SHA, manifest v2 and runner v2 and may permit only exact
 failed-run lookups, seven counters, Conversation/idempotency containment, Auth
 absence verification, CLI isolation and final local regression. It may not
 permit functional retry, creation, replay, canonical mutation, migration,

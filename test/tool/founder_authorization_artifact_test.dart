@@ -418,12 +418,11 @@ FounderAuthorizationProposalV1 _proposal(String id) =>
       authorizationId: id,
       decision: 'APPROVED',
       decisionSource: 'EXPLICIT_CONVERSATIONAL_APPROVAL',
-      authorizedOperation:
-          'FOUNDATION-019A_V4_FAILED_RUN_DIAGNOSTIC_AND_CONTAINMENT',
+      authorizedOperation: 'GENERAL_DEVELOPMENT_OPERATION',
       authorizedEnvironment: 'development',
-      authorizedManifest: 'FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v1',
-      authorizedRunner: 'FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v1',
-      scope: 'EXACT_DIAGNOSTIC_AND_RUN_SCOPED_CONTAINMENT',
+      authorizedManifest: 'GENERAL-DEVELOPMENT-MANIFEST-v1',
+      authorizedRunner: 'GENERAL-DEVELOPMENT-RUNNER-v1',
+      scope: 'GENERAL_DEVELOPMENT_SCOPE',
     );
 
 FounderAuthorizationArtifactV1 _artifact({DateTime? now}) =>

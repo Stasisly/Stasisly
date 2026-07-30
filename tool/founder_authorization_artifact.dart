@@ -3,8 +3,16 @@ import 'dart:io';
 import 'dart:typed_data';
 
 const founderAuthorizationSchemaVersion = 'founder-authorization-v1';
+const founderAuthorizationSchemaVersionV2 = 'founder-authorization-v2';
 final _authorizationIdPattern = RegExp(r'^[A-Za-z0-9][A-Za-z0-9_-]{2,127}$');
 final _contractValuePattern = RegExp(r'^[A-Za-z0-9][A-Za-z0-9._-]{1,159}$');
+final _subjectResultPattern = RegExp(r'^[A-Z0-9][A-Z0-9 _-]{1,199}$');
+final _failedRunOperationPattern = RegExp(
+  r'(^|_)FAILED_RUN_(DIAGNOSTIC|CONTAINMENT|DIAGNOSTIC_AND_CONTAINMENT|FORENSIC_REVIEW)$',
+);
+
+bool founderAuthorizationOperationRequiresSubjectRun(String operation) =>
+    _failedRunOperationPattern.hasMatch(operation);
 
 enum FounderAuthorizationStatus {
   granted('GRANTED'),
@@ -33,7 +41,7 @@ final class FounderAuthorizationException implements Exception {
   String toString() => code;
 }
 
-final class FounderAuthorizationProposalV1 {
+class FounderAuthorizationProposalV1 {
   const FounderAuthorizationProposalV1({
     required this.authorizationId,
     required this.decision,
@@ -59,7 +67,136 @@ final class FounderAuthorizationProposalV1 {
   final Duration validFor;
 }
 
-final class FounderAuthorizationArtifactV1 {
+final class FounderAuthorizationSubjectRun {
+  const FounderAuthorizationSubjectRun({
+    required this.authorizationReference,
+    required this.commitSha,
+    required this.manifest,
+    required this.runner,
+    required this.result,
+    required this.lastReachedState,
+    required this.failureCategory,
+  });
+
+  factory FounderAuthorizationSubjectRun.fromJson(Map<String, Object?> json) {
+    const fields = {
+      'authorization_reference',
+      'commit_sha',
+      'manifest',
+      'runner',
+      'result',
+      'last_reached_state',
+      'failure_category',
+    };
+    if (json.keys.toSet().difference(fields).isNotEmpty) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SUBJECT_RUN_UNKNOWN_FIELD',
+      );
+    }
+    if (!json.keys.toSet().containsAll(fields)) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SUBJECT_RUN_REQUIRED_FIELD_MISSING',
+      );
+    }
+    String text(String key) {
+      final value = json[key];
+      if (value is! String || value.isEmpty) {
+        throw const FounderAuthorizationException(
+          'AUTHORIZATION_SUBJECT_RUN_FIELD_INVALID',
+        );
+      }
+      return value;
+    }
+
+    return FounderAuthorizationSubjectRun(
+      authorizationReference: text('authorization_reference'),
+      commitSha: text('commit_sha'),
+      manifest: text('manifest'),
+      runner: text('runner'),
+      result: text('result'),
+      lastReachedState: text('last_reached_state'),
+      failureCategory: text('failure_category'),
+    );
+  }
+
+  final String authorizationReference;
+  final String commitSha;
+  final String manifest;
+  final String runner;
+  final String result;
+  final String lastReachedState;
+  final String failureCategory;
+
+  Map<String, Object?> toJson() => {
+    'authorization_reference': authorizationReference,
+    'commit_sha': commitSha,
+    'manifest': manifest,
+    'runner': runner,
+    'result': result,
+    'last_reached_state': lastReachedState,
+    'failure_category': failureCategory,
+  };
+
+  List<String> validate({FounderAuthorizationSubjectRun? expected}) {
+    final findings = <String>[];
+    if (!_authorizationIdPattern.hasMatch(authorizationReference) ||
+        !RegExp(r'^[0-9a-f]{40}$').hasMatch(commitSha) ||
+        !_contractValuePattern.hasMatch(manifest) ||
+        !_contractValuePattern.hasMatch(runner) ||
+        !_subjectResultPattern.hasMatch(result) ||
+        !_contractValuePattern.hasMatch(lastReachedState) ||
+        !_contractValuePattern.hasMatch(failureCategory)) {
+      findings.add('AUTHORIZATION_SUBJECT_RUN_BINDING_INVALID');
+    }
+    if (expected == null) return findings;
+    if (authorizationReference != expected.authorizationReference) {
+      findings.add('SUBJECT_RUN_AUTHORIZATION_MISMATCH');
+    }
+    if (commitSha != expected.commitSha) {
+      findings.add('SUBJECT_RUN_COMMIT_MISMATCH');
+    }
+    if (manifest != expected.manifest) {
+      findings.add('SUBJECT_RUN_MANIFEST_MISMATCH');
+    }
+    if (runner != expected.runner) {
+      findings.add('SUBJECT_RUN_RUNNER_MISMATCH');
+    }
+    if (result != expected.result) {
+      findings.add('SUBJECT_RUN_RESULT_MISMATCH');
+    }
+    if (lastReachedState != expected.lastReachedState) {
+      findings.add('SUBJECT_RUN_LAST_STATE_MISMATCH');
+    }
+    if (failureCategory != expected.failureCategory) {
+      findings.add('SUBJECT_RUN_FAILURE_CATEGORY_MISMATCH');
+    }
+    return findings;
+  }
+
+  bool matches(FounderAuthorizationSubjectRun other) =>
+      canonicalJson(toJson()) == canonicalJson(other.toJson());
+}
+
+final class FounderAuthorizationProposalV2
+    extends FounderAuthorizationProposalV1 {
+  const FounderAuthorizationProposalV2({
+    required super.authorizationId,
+    required super.decision,
+    required super.decisionSource,
+    required super.authorizedOperation,
+    required super.authorizedEnvironment,
+    required super.authorizedManifest,
+    required super.authorizedRunner,
+    required super.scope,
+    required this.subjectRun,
+    super.maxRemoteExecutions,
+    super.validFor,
+  });
+
+  final FounderAuthorizationSubjectRun subjectRun;
+}
+
+class FounderAuthorizationArtifactV1 {
   FounderAuthorizationArtifactV1({
     required this.schemaVersion,
     required this.authorizationId,
@@ -114,6 +251,9 @@ final class FounderAuthorizationArtifactV1 {
   }
 
   factory FounderAuthorizationArtifactV1.fromJson(Map<String, Object?> json) {
+    if (json['schema_version'] == founderAuthorizationSchemaVersionV2) {
+      return FounderAuthorizationArtifactV2.fromJson(json);
+    }
     const requiredFields = {
       'schema_version',
       'authorization_id',
@@ -238,6 +378,9 @@ final class FounderAuthorizationArtifactV1 {
   final DateTime? completedAt;
   final String? remoteContextFinal;
 
+  String get supportedSchemaVersion => founderAuthorizationSchemaVersion;
+  FounderAuthorizationSubjectRun? get subjectRun => null;
+
   Map<String, Object?> toJson({bool includeHash = true}) => {
     'schema_version': schemaVersion,
     'authorization_id': authorizationId,
@@ -318,10 +461,11 @@ final class FounderAuthorizationArtifactV1 {
     String? expectedCommitSha,
     String? expectedManifest,
     String? expectedRunner,
+    FounderAuthorizationSubjectRun? expectedSubjectRun,
     bool requireGranted = true,
   }) {
     final findings = <String>[];
-    if (schemaVersion != founderAuthorizationSchemaVersion) {
+    if (schemaVersion != supportedSchemaVersion) {
       findings.add('AUTHORIZATION_SCHEMA_MISMATCH');
     }
     if (!_authorizationIdPattern.hasMatch(authorizationId)) {
@@ -352,6 +496,25 @@ final class FounderAuthorizationArtifactV1 {
     }
     if (expectedRunner != null && authorizedRunner != expectedRunner) {
       findings.add('AUTHORIZATION_RUNNER_MISMATCH');
+    }
+    final requiresSubjectRun = founderAuthorizationOperationRequiresSubjectRun(
+      authorizedOperation,
+    );
+    if (requiresSubjectRun && subjectRun == null) {
+      findings.add(
+        schemaVersion == founderAuthorizationSchemaVersion
+            ? 'AUTHORIZATION_SCHEMA_VERSION_INSUFFICIENT'
+            : 'AUTHORIZATION_SUBJECT_RUN_REQUIRED',
+      );
+    }
+    if (!requiresSubjectRun && subjectRun != null) {
+      findings.add('AUTHORIZATION_SUBJECT_RUN_FORBIDDEN');
+    }
+    if (expectedSubjectRun != null && subjectRun == null) {
+      findings.add('AUTHORIZATION_FAILED_RUN_BINDINGS_MISSING');
+    }
+    if (subjectRun != null) {
+      findings.addAll(subjectRun!.validate(expected: expectedSubjectRun));
     }
     if (!hasValidHash) findings.add('AUTHORIZATION_PAYLOAD_HASH_MISMATCH');
     if (!expiresAt.isAfter(createdAt) ||
@@ -391,6 +554,197 @@ final class FounderAuthorizationArtifactV1 {
     }
     return findings;
   }
+}
+
+final class FounderAuthorizationArtifactV2
+    extends FounderAuthorizationArtifactV1 {
+  FounderAuthorizationArtifactV2({
+    required super.authorizationId,
+    required super.decision,
+    required super.decisionSource,
+    required super.authorizedOperation,
+    required super.authorizedEnvironment,
+    required super.authorizedCommitSha,
+    required super.authorizedManifest,
+    required super.authorizedRunner,
+    required super.scope,
+    required super.maxRemoteExecutions,
+    required super.remoteExecutionCount,
+    required super.status,
+    required super.createdAt,
+    required super.expiresAt,
+    required super.consumptionTrigger,
+    required super.payloadSha256,
+    required this.boundSubjectRun,
+    super.consumedAt,
+    super.revokedAt,
+    super.expiredAt,
+    super.finalClassification,
+    super.completedAt,
+    super.remoteContextFinal,
+  }) : super(schemaVersion: founderAuthorizationSchemaVersionV2);
+
+  factory FounderAuthorizationArtifactV2.granted({
+    required FounderAuthorizationProposalV2 proposal,
+    required String commitSha,
+    required DateTime now,
+  }) {
+    final artifact = FounderAuthorizationArtifactV2(
+      authorizationId: proposal.authorizationId,
+      decision: proposal.decision,
+      decisionSource: proposal.decisionSource,
+      authorizedOperation: proposal.authorizedOperation,
+      authorizedEnvironment: proposal.authorizedEnvironment,
+      authorizedCommitSha: commitSha,
+      authorizedManifest: proposal.authorizedManifest,
+      authorizedRunner: proposal.authorizedRunner,
+      scope: proposal.scope,
+      maxRemoteExecutions: proposal.maxRemoteExecutions,
+      remoteExecutionCount: 0,
+      status: FounderAuthorizationStatus.granted,
+      createdAt: now.toUtc(),
+      expiresAt: now.toUtc().add(proposal.validFor),
+      consumptionTrigger: 'FIRST_REMOTE_ACTION',
+      payloadSha256: '',
+      boundSubjectRun: proposal.subjectRun,
+    );
+    return artifact.withRecalculatedHash();
+  }
+
+  factory FounderAuthorizationArtifactV2.fromJson(Map<String, Object?> json) {
+    const allowedFields = {
+      'schema_version',
+      'authorization_id',
+      'decision',
+      'decision_source',
+      'authorized_operation',
+      'authorized_environment',
+      'authorized_commit_sha',
+      'authorized_manifest',
+      'authorized_runner',
+      'scope',
+      'max_remote_executions',
+      'remote_execution_count',
+      'status',
+      'created_at',
+      'expires_at',
+      'consumption_trigger',
+      'payload_sha256',
+      'subject_run',
+      'consumed_at',
+      'revoked_at',
+      'expired_at',
+      'final_classification',
+      'completed_at',
+      'remote_context_final',
+    };
+    if (json.keys.toSet().difference(allowedFields).isNotEmpty) {
+      throw const FounderAuthorizationException('AUTHORIZATION_UNKNOWN_FIELD');
+    }
+    if (json['schema_version'] != founderAuthorizationSchemaVersionV2) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SCHEMA_MISMATCH',
+      );
+    }
+    if (!json.containsKey('subject_run')) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SUBJECT_RUN_REQUIRED',
+      );
+    }
+    final rawSubjectRun = json['subject_run'];
+    if (rawSubjectRun is! Map<String, Object?>) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SUBJECT_RUN_INVALID',
+      );
+    }
+    final commonJson = Map<String, Object?>.from(json)
+      ..remove('subject_run')
+      ..['schema_version'] = founderAuthorizationSchemaVersion;
+    final common = FounderAuthorizationArtifactV1.fromJson(commonJson);
+    return FounderAuthorizationArtifactV2(
+      authorizationId: common.authorizationId,
+      decision: common.decision,
+      decisionSource: common.decisionSource,
+      authorizedOperation: common.authorizedOperation,
+      authorizedEnvironment: common.authorizedEnvironment,
+      authorizedCommitSha: common.authorizedCommitSha,
+      authorizedManifest: common.authorizedManifest,
+      authorizedRunner: common.authorizedRunner,
+      scope: common.scope,
+      maxRemoteExecutions: common.maxRemoteExecutions,
+      remoteExecutionCount: common.remoteExecutionCount,
+      status: common.status,
+      createdAt: common.createdAt,
+      expiresAt: common.expiresAt,
+      consumptionTrigger: common.consumptionTrigger,
+      payloadSha256: common.payloadSha256,
+      boundSubjectRun: FounderAuthorizationSubjectRun.fromJson(rawSubjectRun),
+      consumedAt: common.consumedAt,
+      revokedAt: common.revokedAt,
+      expiredAt: common.expiredAt,
+      finalClassification: common.finalClassification,
+      completedAt: common.completedAt,
+      remoteContextFinal: common.remoteContextFinal,
+    );
+  }
+
+  final FounderAuthorizationSubjectRun boundSubjectRun;
+
+  @override
+  String get supportedSchemaVersion => founderAuthorizationSchemaVersionV2;
+
+  @override
+  FounderAuthorizationSubjectRun get subjectRun => boundSubjectRun;
+
+  @override
+  Map<String, Object?> toJson({bool includeHash = true}) => {
+    ...super.toJson(includeHash: false),
+    'schema_version': founderAuthorizationSchemaVersionV2,
+    'subject_run': boundSubjectRun.toJson(),
+    if (includeHash) 'payload_sha256': payloadSha256,
+  };
+
+  @override
+  FounderAuthorizationArtifactV2 copyWith({
+    FounderAuthorizationStatus? status,
+    int? remoteExecutionCount,
+    DateTime? consumedAt,
+    DateTime? revokedAt,
+    DateTime? expiredAt,
+    String? finalClassification,
+    DateTime? completedAt,
+    String? remoteContextFinal,
+    String? payloadSha256,
+  }) => FounderAuthorizationArtifactV2(
+    authorizationId: authorizationId,
+    decision: decision,
+    decisionSource: decisionSource,
+    authorizedOperation: authorizedOperation,
+    authorizedEnvironment: authorizedEnvironment,
+    authorizedCommitSha: authorizedCommitSha,
+    authorizedManifest: authorizedManifest,
+    authorizedRunner: authorizedRunner,
+    scope: scope,
+    maxRemoteExecutions: maxRemoteExecutions,
+    remoteExecutionCount: remoteExecutionCount ?? this.remoteExecutionCount,
+    status: status ?? this.status,
+    createdAt: createdAt,
+    expiresAt: expiresAt,
+    consumptionTrigger: consumptionTrigger,
+    payloadSha256: payloadSha256 ?? this.payloadSha256,
+    boundSubjectRun: boundSubjectRun,
+    consumedAt: consumedAt ?? this.consumedAt,
+    revokedAt: revokedAt ?? this.revokedAt,
+    expiredAt: expiredAt ?? this.expiredAt,
+    finalClassification: finalClassification ?? this.finalClassification,
+    completedAt: completedAt ?? this.completedAt,
+    remoteContextFinal: remoteContextFinal ?? this.remoteContextFinal,
+  );
+
+  @override
+  FounderAuthorizationArtifactV2 withRecalculatedHash() => copyWith(
+    payloadSha256: sha256Hex(canonicalJson(toJson(includeHash: false))),
+  );
 }
 
 enum FounderAuthorizationSourceResolution {
@@ -535,11 +889,17 @@ final class FounderAuthorizationStore {
           'AUTHORIZATION_REGENERATION_BLOCKED',
         );
       }
-      final artifact = FounderAuthorizationArtifactV1.granted(
-        proposal: proposal,
-        commitSha: currentCommitSha,
-        now: _clock(),
-      );
+      final artifact = proposal is FounderAuthorizationProposalV2
+          ? FounderAuthorizationArtifactV2.granted(
+              proposal: proposal,
+              commitSha: currentCommitSha,
+              now: _clock(),
+            )
+          : FounderAuthorizationArtifactV1.granted(
+              proposal: proposal,
+              commitSha: currentCommitSha,
+              now: _clock(),
+            );
       _atomicWrite(target, artifact);
       _appendAudit(artifact, 'GRANTED');
       return artifact;
@@ -726,7 +1086,13 @@ final class FounderAuthorizationStore {
     );
     final entry = <String, Object?>{
       'authorization_id': artifact.authorizationId,
+      'artifact_schema_version': artifact.schemaVersion,
       'operation_category': artifact.authorizedOperation,
+      'subject_run_binding_status': artifact.subjectRun == null
+          ? 'NOT_APPLICABLE'
+          : transition == 'GRANTED'
+          ? 'PRESENT_VALIDATED_STRUCTURALLY'
+          : 'MATCHED',
       'commit_matched': true,
       'environment_matched': true,
       'manifest_matched': true,
@@ -804,6 +1170,25 @@ final class FounderAuthorizationStore {
         ].every(_contractValuePattern.hasMatch)) {
       throw const FounderAuthorizationException(
         'AUTHORIZATION_PROPOSAL_INVALID',
+      );
+    }
+    final requiresSubjectRun = founderAuthorizationOperationRequiresSubjectRun(
+      proposal.authorizedOperation,
+    );
+    if (requiresSubjectRun && proposal is! FounderAuthorizationProposalV2) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SCHEMA_VERSION_INSUFFICIENT',
+      );
+    }
+    if (!requiresSubjectRun && proposal is FounderAuthorizationProposalV2) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SUBJECT_RUN_FORBIDDEN',
+      );
+    }
+    if (proposal is FounderAuthorizationProposalV2 &&
+        proposal.subjectRun.validate().isNotEmpty) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_SUBJECT_RUN_BINDING_INVALID',
       );
     }
   }

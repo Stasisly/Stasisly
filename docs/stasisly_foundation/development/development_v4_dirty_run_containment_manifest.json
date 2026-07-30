@@ -1,7 +1,8 @@
 {
   "schemaVersion": 1,
-  "manifestVersion": "FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v1",
-  "runnerVersion": "FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v1",
+  "manifestVersion": "FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v2",
+  "runnerVersion": "FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v2",
+  "authorizationArtifactSchema": "founder-authorization-v2",
   "environment": "development",
   "remoteAuthorization": "NOT_GRANTED",
   "remoteExecution": "NOT_EXECUTED",
@@ -13,6 +14,7 @@
     "commitBound": true,
     "manifestVersion": "FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4",
     "runnerVersion": "FOUNDATION-019A-R2G-RUNNER-v1",
+    "result": "DEVELOPMENT SECOND_FUNCTIONAL_ATTEMPT_V4_FAILED_DIRTY_BLOCKING",
     "lastApprovedState": "CONVERSATION_CREATED",
     "failureCategory": "UNKNOWN_POST_CREATE_FAILURE",
     "cleanupState": "CLEANUP_COMPLETED",
@@ -20,7 +22,7 @@
     "sevenCounters": "NOT_VERIFIED_AS_ALL_ZERO"
   },
   "futureAuthorization": {
-    "recommendedReference": "FA-019A-V4-CONTAIN-20260730-009",
+    "recommendedReference": "NOT_ASSIGNED",
     "state": "NOT_GRANTED",
     "scope": "EXACT_DIAGNOSTIC_AND_RUN_SCOPED_CONTAINMENT"
   },

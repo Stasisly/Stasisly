@@ -1,21 +1,44 @@
 # Foundation Session Tracker
 
+## FOUNDATION-019B-B status
+
+```text
+package: FOUNDATION-019B-B
+state: VALIDATED_LOCALLY_PENDING_PUBLICATION
+baseline: f9e9510a927955d97bda6cc57ee6b974c9a9dd10
+artifact schemas: founder-authorization-v1 / founder-authorization-v2
+failed-run schema: FounderAuthorizationArtifactV2
+subject-run bindings: 7 / STRUCTURED / CANONICALLY_HASHED
+manifest: FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v2
+runner: FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v2
+focal tests: 88 pass
+simulations: 11/11 pass
+Flutter: 926 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after no-seed reset
+remote context: SAFE
+remote actions/artifacts consumed/artifacts committed: 0/0/0
+prior authorizations -009/-010: NOT_CONSUMED / SUPERSEDED / NOT_REUSABLE
+```
+
 ## FOUNDATION-019A-R2H status
 
 ```text
 package: FOUNDATION-019A-R2H
-state: IMPLEMENTED_LOCALLY_PENDING_PUBLICATION
+state: UPDATED_LOCALLY_PENDING_PUBLICATION
 baseline: 7a660c143949ca7fc6cbd423a7c8d30102a5d7f9
 failed authorization: FA-019A-RETRY-20260729-008 / CONSUMED / NOT_REUSABLE
 failed point: CONVERSATION_CREATED
 failure category: UNKNOWN_POST_CREATE_FAILURE
 seven remote counters: NOT_VERIFIED_AS_ALL_ZERO
-manifest: FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v1
-runner: FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v1
-future authorization: FA-019A-V4-CONTAIN-20260730-009 / NOT_GRANTED
-focal tests: 41 pass
+manifest: FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v2
+runner: FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v2
+authorization artifact: FounderAuthorizationArtifactV2
+future authorization: NOT_ASSIGNED / NOT_GRANTED
+focal tests: 88 pass
 simulations: 11/11 pass
-Flutter: 879 pass / 5 approved skips / 0 failures
+Flutter: 926 pass / 5 approved skips / 0 failures
 Analyzer: 0 errors / 0 warnings / 36 inherited infos
 Deno: 86/86 pass; format 62 files
 SQL local: 740/740 pass after no-seed reset
@@ -275,7 +298,7 @@ Remote: NOT_AUTHORIZED
 ## FOUNDATION-019B-A closure
 
 ```text
-FOUNDATION-019B-A: IMPLEMENTED_LOCALLY
+FOUNDATION-019B-A: COMPLETED_AND_PUBLISHED
 Runtime path: .runtime/
 Git visibility: IGNORED
 Directory permissions: 0700
@@ -430,11 +453,12 @@ canonical application use cases, typed controllers/providers and inactive local 
 | FOUNDATION-016-R1 | Completed locally | Remove the dead Orchestrator chat consumer, all legacy chat runtime/tests and `/chat/:id`; preserve blocked Orchestrator and transitional session/message infrastructure | 20 legacy files plus `OrchestratorChatPage` removed; replacement eradication guard; zero runtime references; Flutter 610 pass/5 approved skips; analyzer 0 errors/36 inherited infos; Deno 86/86; one no-seed local reset plus SQL 740/740; ADR-F019; no backend/schema/Product page/remote/AI | `LEGACY CHAT_RUNTIME_REMOVED_AND_REFERENCES_ERADICATED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-017 post-activation hardening only after separate approval; G8-G10 remain unauthorized |
 | FOUNDATION-017 | Completed locally | Harden activated canonical Product Conversation with local-safe outcome observability, partial-failure preservation, race/soak guards and accessibility/responsive audit | Closed enum-only contract; runtime NoOp; route/controller instrumentation; 100/200 fixtures; 50 filter switches; 20 retry and lifecycle cycles; Flutter 620 pass/5 approved skips; analyzer 0 errors/36 inherited infos; Deno 86/86; one no-seed reset plus SQL 740/740; ADR-F020; no backend/schema/remote/AI | `PRODUCT CONVERSATION_POST_ACTIVATION_HARDENED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-018 environment-readiness audit only after separate approval; G8-G10 remain unauthorized |
 | FOUNDATION-019B | Completed locally | Isolate ignored Supabase CLI remote-link metadata and prevent implicit remote targeting in local-only work | Two ignored link markers removed without value disclosure; cache preserved; guard 11/11; Flutter 631 pass/5 skips; Deno 86/86; one no-seed reset plus SQL 740/740; ADR-F022; zero remote actions | `SUPABASE CLI_REMOTE_CONTEXT_ISOLATED_LOCAL_AND_PUSHED` upon successful push | Retry FOUNDATION-018 from the new baseline; do not start FOUNDATION-019A |
-| FOUNDATION-019B-A | Implemented locally pending publication | Add ignored, permission-restricted, expiring and single-use Founder authorization artifacts generated from conversational approval | `.runtime/` narrow ignore; canonical SHA-256; atomic rename and exclusive locks; sanitized audit; legacy conflict guard; R2H primary artifact gate; 47 focal pass; Flutter 907 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86; SQL 740/740; ADR-F034; zero remote actions | `FOUNDATION-019B AUTHORIZATION_ARTIFACT_STORAGE_READY_LOCAL_AND_PUSHED` only after successful package push | New conversational Founder authorization bound to the resulting full SHA; prior authorization is superseded |
+| FOUNDATION-019B-A | Completed and published | Add ignored, permission-restricted, expiring and single-use Founder authorization artifacts generated from conversational approval | `.runtime/` narrow ignore; canonical SHA-256; atomic rename and exclusive locks; sanitized audit; legacy conflict guard; R2H primary artifact gate; 47 focal pass; Flutter 907 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86; SQL 740/740; ADR-F034; zero remote actions | `FOUNDATION-019B AUTHORIZATION_ARTIFACT_STORAGE_READY_LOCAL_AND_PUSHED` | Superseded as the active gate by FOUNDATION-019B-B schema v2 bindings |
+| FOUNDATION-019B-B | Validated locally pending publication | Bind failed-run Founder authorizations to the exact historical authorization, commit, manifest, runner, result, last state and failure category | Strict ArtifactV2 `subject_run`; recursive canonical SHA-256; V1 compatibility for general operations; manifest-derived generation; R2H manifest/runner v2; 88 focal pass; 11/11 simulations; Flutter 926 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86; SQL 740/740; ADR-F035; zero remote actions | `FOUNDATION-019B FAILED_RUN_AUTHORIZATION_BINDINGS_READY_LOCAL_AND_PUSHED` only after successful package push | New conversational Founder authorization bound to resulting full SHA, containment manifest v2 and runner v2; prior -009/-010 references are non-reusable |
 | FOUNDATION-018 | Completed locally | Define and guard Development environment readiness without target assignment or remote execution | Explicit Flutter target and fail-closed validation; migration/function/config/secret-name inventories; unapproved manifest; no-network preflight; remote-context integrated; ADR-F021; local Flutter/Deno/SQL/security evidence; five skips unchanged | `DEVELOPMENT REMOTE_PREPARATION READY_FOR_EXPLICIT_AUTHORIZATION_AND_PUSHED` upon successful push | Separate Founder decision between FOUNDATION-019A and FOUNDATION-019C; neither starts implicitly |
 | FOUNDATION-019C | Completed locally | Resolve all decisions needed before a separately authorized first Development execution | Product-safe catalog and Stasis create; analyzer 0 errors/36 inherited infos; Flutter 659 pass/5 approved skips; Deno 86/86 and format 62 files; one local no-seed reset plus SQL 740/740; fixture contract adopted; two canonical API fixture cycles with exact cleanup `0|0|0|0|0|0|0`; retention classified post-Development; closed evidence/smoke schemas; both preflights SAFE; zero remote actions | `DEVELOPMENT EXECUTION_BLOCKERS_RESOLVED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-019A only by separate explicit Founder order; sustained operation additionally requires retention package |
 | FOUNDATION-019A-R1 | Completed locally pending commit/push | Correct remote fixture, cleanup, skip gate, CORS and evidence contracts without remote action | Separate remote manifest; eleven-condition gate; versioned operator runner; success x2 plus forced failure x2; seven-zero cleanup; Flutter 678 pass/5 skips; analyzer 0 errors/36 inherited infos; Deno 86/86; SQL 740/740; CORS `UNASSIGNED`; ADR-F024 | `FOUNDATION-019A READY_FOR_REAUTHORIZATION_LOCAL_AND_PUSHED` only after validation and push | New Founder authorization for new SHA and exact CORS; no automatic remote continuation |
 | FOUNDATION-019A-R2A | Completed locally; package Git gate required | Add allowlisted diagnostics after first Development attempt `FAILED_CLEAN` and R2 evidence blocker | Safe helper/schema; exact `200` unchanged; body deleted before assertion; diagnostic-only stop; focal tests 26/26; runner simulations including sanitizer/cleanup/signal pass; Flutter 704 pass/5 skips; analyzer 0 errors/36 inherited infos; Deno 86/86; SQL 740/740; cleanup preserved; ADR-F025; zero remote actions | `FOUNDATION-019A DIAGNOSTIC_RUNNER_READY_FOR_AUTHORIZATION_LOCAL_AND_PUSHED` only after explicit commit and push | New commit-specific Founder authorization for diagnostic-only attempt; root cause unknown; functional retry unauthorized |
 | FOUNDATION-019A-R2C-R1 | Completed locally | Reconstruct the dirty-run synthetic Auth identity and implement exact, bounded, collision-blocking lookup/delete preparation without remote access | Historical runner compatibility; deterministic redacted key; exact 0/1/>1 contract; five containment simulations; focal 24/24; Flutter 737 pass/5 skips; analyzer 0 errors/36 inherited infos; Deno 86/86; one no-seed local reset plus SQL 740/740; ADR-F027; remote context SAFE; zero remote actions | `FOUNDATION-019A EXACT_AUTH_RESOLUTION_READY_FOR_CONTAINMENT_AUTHORIZATION_LOCAL_AND_PUSHED` upon successful package push | Founder containment-only authorization bound to the resulting commit; fixtures and functional retry remain blocked |
 | FOUNDATION-019A-R2D | Validated locally pending publication | Reconcile v2 attempt manifest with complete executable runner, state machine, ledger, cleanup and tests | Manifest matrix; closed transitions; focal 46/46; Flutter 783 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86; SQL 740/740; safe simulations; ADR-F029; zero remote actions | `FOUNDATION-019A COMPLETE_RUNNER_READY_FOR_SECOND_FUNCTIONAL_AUTHORIZATION_LOCAL_AND_PUSHED` only after push | New unique Founder authorization bound to final R2D SHA; no automatic remote attempt |
-| FOUNDATION-019A-R2H | Implemented locally pending publication | Prepare exact Conversation-aware diagnosis and containment for the v4 dirty run without remote action | Manifest and separate runner; 23-condition future gate; exact seven-counter model; 41 focal tests; 11/11 simulations; Flutter 879 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86; SQL 740/740; ADR-F033; remote context SAFE | `FOUNDATION-019A V4_DIRTY_RUN_CONTAINMENT_READY_FOR_AUTHORIZATION_LOCAL_AND_PUSHED` only after push | Separate Founder containment-only authorization bound to published R2H SHA; functional retry remains blocked |
+| FOUNDATION-019A-R2H | Updated locally pending publication | Prepare exact Conversation-aware diagnosis and containment for the v4 dirty run without remote action | Manifest v2 and runner v2; ArtifactV2 exact subject-run gate; exact seven-counter model unchanged; 88 focal tests; 11/11 simulations; Flutter 926 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86; SQL 740/740; ADR-F033/F035; remote context SAFE | `FOUNDATION-019A V4_DIRTY_RUN_CONTAINMENT_READY_FOR_AUTHORIZATION_LOCAL_AND_PUSHED` only after push | Separate new Founder authorization bound to published SHA, manifest v2 and runner v2; functional retry remains blocked |
