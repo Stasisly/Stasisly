@@ -1,5 +1,17 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-019A-R2J classification
+
+- Historical ArtifactV2 context: `EXACT_AND_AVAILABLE`.
+- Historical Conversation/owner/alias handles: `EXACT_BUT_NOT_AVAILABLE`.
+- Exact historical recovery strategy: `NONE`.
+- Focal manifest/runner:
+  `FOUNDATION-019A-V4-LEGACY-CONVERSATION-RECOVERY-v1` /
+  `FOUNDATION-019A-R2J-LEGACY-IDENTITY-RUNNER-v1`.
+- Remote request budget/delete: `0/DISABLED`.
+- Historical dirty run: `DIRTY_BLOCKING`.
+- R2J remote action/authorization: `0/NOT_GRANTED`.
+
 ## FOUNDATION-019A-R2I classification
 
 - Shared Conversation identity: `FOUNDATION_ADOPTED_LOCALLY`.

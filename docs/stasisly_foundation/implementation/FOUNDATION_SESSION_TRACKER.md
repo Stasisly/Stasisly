@@ -1,5 +1,28 @@
 # Foundation Session Tracker
 
+## FOUNDATION-019A-R2J status
+
+```text
+package: FOUNDATION-019A-R2J
+state: VALIDATED_LOCALLY_PENDING_PUBLICATION
+baseline: f92770f6cba2029891fb59ddf5dbd387e8e79f03
+historical dirty run: LEGACY_DIRTY_RUN_MISSING_EXACT_CONVERSATION_IDENTITY
+historical evidence: ARTIFACT_V2_VALID / RESOURCE_HANDLES_ABSENT
+primary/secondary strategy: NONE_NO_EXACT_HISTORICAL_KEY / NONE
+manifest: FOUNDATION-019A-V4-LEGACY-CONVERSATION-RECOVERY-v1
+runner: FOUNDATION-019A-R2J-LEGACY-IDENTITY-RUNNER-v1
+artifact schema: founder-authorization-v2
+request budget/result cardinality/delete: 0/0/DISABLED
+focal tests: 31/31 pass
+Flutter: 984 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after no-seed reset
+remote context: SAFE
+remote actions/authorization consumptions/lookups/deletes: 0/0/0/0
+readiness: FOUNDATION-019A-R2J BLOCKED_NO_EXACT_HISTORICAL_KEY
+```
+
 ## FOUNDATION-019A-R2I status
 
 ```text
@@ -485,3 +508,4 @@ canonical application use cases, typed controllers/providers and inactive local 
 | FOUNDATION-019A-R2D | Validated locally pending publication | Reconcile v2 attempt manifest with complete executable runner, state machine, ledger, cleanup and tests | Manifest matrix; closed transitions; focal 46/46; Flutter 783 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86; SQL 740/740; safe simulations; ADR-F029; zero remote actions | `FOUNDATION-019A COMPLETE_RUNNER_READY_FOR_SECOND_FUNCTIONAL_AUTHORIZATION_LOCAL_AND_PUSHED` only after push | New unique Founder authorization bound to final R2D SHA; no automatic remote attempt |
 | FOUNDATION-019A-R2H | Updated locally pending publication | Prepare exact Conversation-aware diagnosis and containment for the v4 dirty run without remote action | Manifest v2 and runner v2; ArtifactV2 exact subject-run gate; exact seven-counter model unchanged; 88 focal tests; 11/11 simulations; Flutter 926 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86; SQL 740/740; ADR-F033/F035; remote context SAFE | `FOUNDATION-019A V4_DIRTY_RUN_CONTAINMENT_READY_FOR_AUTHORIZATION_LOCAL_AND_PUSHED` only after push | Separate new Founder authorization bound to published SHA, manifest v2 and runner v2; functional retry remains blocked |
 | FOUNDATION-019A-R2I | Validated locally pending publication | Preserve exact Conversation identity before created state and share it across cleanup/diagnostics | Manifest v5; runner R2I-v1; immutable identity; atomic integrity-bound `.runtime` ledger; lifecycle/restart recovery; 121/121 focal; Flutter 953 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86 and format 62 files; SQL 740/740; ADR-F036; remote context SAFE; zero remote actions | `FOUNDATION-019A CONVERSATION_IDENTITY_RECOVERY_READY_LOCAL_AND_PUSHED` only after successful push | New conversational authorization bound to resulting SHA, manifest v5 and runner R2I-v1; historical v4 residue remains separate and dirty blocking |
+| FOUNDATION-019A-R2J | Validated locally pending publication | Define exact historical existence/absence/ownership proofs and reject every unsafe recovery path | ArtifactV2 inventory; no retained Conversation/owner/alias handle; complete feasibility matrix; request budget 0; delete disabled; 31/31 focal; Flutter 984 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86; SQL 740/740; ADR-F037; remote context SAFE; zero remote actions | `FOUNDATION-019A-R2J BLOCKED_NO_EXACT_HISTORICAL_KEY` | Stop; reopen only if integrity-bound exact historical Conversation, owner and run evidence is discovered; do not authorize remote or start FOUNDATION-020 |

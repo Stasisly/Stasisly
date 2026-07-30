@@ -1,5 +1,16 @@
 # Stasisly Foundation
 
+## Legacy Conversation recovery gate
+
+FOUNDATION-019A-R2J establishes exact existence, absence, ownership and request
+budget contracts for the historical v4 dirty run. The integrity-valid
+ArtifactV2 contains no Conversation, owner or alias handle, so no exact
+historical key is available. The focal manifest permits zero requests and no
+delete; its runner only validates locally. The dirty run remains
+`LEGACY_DIRTY_RUN_MISSING_EXACT_CONVERSATION_IDENTITY`. See
+[ADR-F037](adr/ADR-F037-exact-recovery-of-legacy-conversation-identity.md) and
+the [R2J strategy](implementation/FOUNDATION-019A-R2J_LEGACY_CONVERSATION_RECOVERY_STRATEGY.md).
+
 ## Exact Conversation identity gate
 
 FOUNDATION-019A-R2I requires one immutable `CreatedConversationIdentity`,
