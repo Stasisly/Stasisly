@@ -63,12 +63,20 @@ void main() {
   });
 
   test('functional and containment authorizations cannot cross-activate', () {
-    expect(runner, contains('FOUNDER_CONTAINMENT_AUTHORIZATION_REFERENCE'));
-    expect(runner, contains('CONTAINMENT_AUTHORIZATION_STATUS'));
-    expect(runner, contains('v4RecommendedContainmentAuthorization'));
+    expect(runner, contains('FOUNDER_AUTHORIZATION_ARTIFACT'));
+    expect(runner, contains('FounderAuthorizationStore'));
+    expect(runner, contains('resolveAuthorizationSource'));
+    expect(runner, contains('store.consume'));
     expect(runner, contains('v4FailedAuthorizationReference'));
     expect(runner, isNot(contains("FOUNDER_AUTHORIZATION_REFERENCE'")));
     expect(wrapper, contains('--authorized-v4-containment-run'));
+    expect(wrapper, contains('FOUNDER_AUTHORIZATION_ARTIFACT'));
+    expect(
+      wrapper,
+      isNot(contains('FOUNDER_CONTAINMENT_AUTHORIZATION_REFERENCE')),
+    );
+    expect(wrapper, isNot(contains('CONTAINMENT_AUTHORIZATION_STATUS')));
+    expect(wrapper, isNot(contains('AUTHORIZED_COMMIT_SHA')));
     expect(wrapper, isNot(contains('--authorized-second-functional-attempt')));
   });
 

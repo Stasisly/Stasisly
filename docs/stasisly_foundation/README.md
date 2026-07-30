@@ -70,6 +70,17 @@ Run the local safety gate before local-only Supabase work:
 dart run tool/check_supabase_remote_context.dart
 ```
 
+## FOUNDATION-019B-A Founder authorization artifacts
+
+FOUNDATION-019B-A introduces ignored, permission-restricted and single-use
+Founder authorization artifacts generated from conversational approval.
+Artifacts are commit, environment, manifest and runner bound; they expire,
+detect mutation and consume atomically under an exclusive local lock. Manual
+authorization variables in `.env` are deprecated and cannot override an
+artifact. See [ADR-F034](adr/ADR-F034-founder-conversational-authorization-artifacts.md)
+and the [implementation record](implementation/FOUNDATION-019B-A_AUTHORIZATION_ARTIFACT_STORAGE.md).
+This local package performs no remote action and grants no authorization.
+
 ## FOUNDATION-017 post-activation hardening
 
 FOUNDATION-017 is `IMPLEMENTED_LOCALLY`: canonical Product Conversation now

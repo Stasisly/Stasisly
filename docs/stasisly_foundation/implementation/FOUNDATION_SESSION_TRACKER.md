@@ -272,6 +272,29 @@ Canonical Product routes: NOT_IMPLEMENTED
 Remote: NOT_AUTHORIZED
 ```
 
+## FOUNDATION-019B-A closure
+
+```text
+FOUNDATION-019B-A: IMPLEMENTED_LOCALLY
+Runtime path: .runtime/
+Git visibility: IGNORED
+Directory permissions: 0700
+Artifact and lock permissions: 0600
+Authorization artifact: FounderAuthorizationArtifactV1
+Conversational approval: HUMAN_DECISION
+Technical artifact: CODEX_GENERATED_ENFORCEMENT
+Primary authorization source: VALID_ARTIFACT
+Legacy authorization env: DEPRECATED_COMPATIBILITY_ONLY
+Conflict behavior: BLOCK
+Single use: REQUIRED
+Default expiry: 2_HOURS
+Atomic consumption: IMPLEMENTED
+Parallel consumption: BLOCKED
+R2H authorization integration: IMPLEMENTED_LOCALLY
+Remote actions: 0
+Authorization granted: NO
+```
+
 ## Baselines
 
 ```text
@@ -407,6 +430,7 @@ canonical application use cases, typed controllers/providers and inactive local 
 | FOUNDATION-016-R1 | Completed locally | Remove the dead Orchestrator chat consumer, all legacy chat runtime/tests and `/chat/:id`; preserve blocked Orchestrator and transitional session/message infrastructure | 20 legacy files plus `OrchestratorChatPage` removed; replacement eradication guard; zero runtime references; Flutter 610 pass/5 approved skips; analyzer 0 errors/36 inherited infos; Deno 86/86; one no-seed local reset plus SQL 740/740; ADR-F019; no backend/schema/Product page/remote/AI | `LEGACY CHAT_RUNTIME_REMOVED_AND_REFERENCES_ERADICATED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-017 post-activation hardening only after separate approval; G8-G10 remain unauthorized |
 | FOUNDATION-017 | Completed locally | Harden activated canonical Product Conversation with local-safe outcome observability, partial-failure preservation, race/soak guards and accessibility/responsive audit | Closed enum-only contract; runtime NoOp; route/controller instrumentation; 100/200 fixtures; 50 filter switches; 20 retry and lifecycle cycles; Flutter 620 pass/5 approved skips; analyzer 0 errors/36 inherited infos; Deno 86/86; one no-seed reset plus SQL 740/740; ADR-F020; no backend/schema/remote/AI | `PRODUCT CONVERSATION_POST_ACTIVATION_HARDENED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-018 environment-readiness audit only after separate approval; G8-G10 remain unauthorized |
 | FOUNDATION-019B | Completed locally | Isolate ignored Supabase CLI remote-link metadata and prevent implicit remote targeting in local-only work | Two ignored link markers removed without value disclosure; cache preserved; guard 11/11; Flutter 631 pass/5 skips; Deno 86/86; one no-seed reset plus SQL 740/740; ADR-F022; zero remote actions | `SUPABASE CLI_REMOTE_CONTEXT_ISOLATED_LOCAL_AND_PUSHED` upon successful push | Retry FOUNDATION-018 from the new baseline; do not start FOUNDATION-019A |
+| FOUNDATION-019B-A | Implemented locally pending publication | Add ignored, permission-restricted, expiring and single-use Founder authorization artifacts generated from conversational approval | `.runtime/` narrow ignore; canonical SHA-256; atomic rename and exclusive locks; sanitized audit; legacy conflict guard; R2H primary artifact gate; 47 focal pass; Flutter 907 pass/5 skips; analyzer 0 errors/0 warnings/36 inherited infos; Deno 86/86; SQL 740/740; ADR-F034; zero remote actions | `FOUNDATION-019B AUTHORIZATION_ARTIFACT_STORAGE_READY_LOCAL_AND_PUSHED` only after successful package push | New conversational Founder authorization bound to the resulting full SHA; prior authorization is superseded |
 | FOUNDATION-018 | Completed locally | Define and guard Development environment readiness without target assignment or remote execution | Explicit Flutter target and fail-closed validation; migration/function/config/secret-name inventories; unapproved manifest; no-network preflight; remote-context integrated; ADR-F021; local Flutter/Deno/SQL/security evidence; five skips unchanged | `DEVELOPMENT REMOTE_PREPARATION READY_FOR_EXPLICIT_AUTHORIZATION_AND_PUSHED` upon successful push | Separate Founder decision between FOUNDATION-019A and FOUNDATION-019C; neither starts implicitly |
 | FOUNDATION-019C | Completed locally | Resolve all decisions needed before a separately authorized first Development execution | Product-safe catalog and Stasis create; analyzer 0 errors/36 inherited infos; Flutter 659 pass/5 approved skips; Deno 86/86 and format 62 files; one local no-seed reset plus SQL 740/740; fixture contract adopted; two canonical API fixture cycles with exact cleanup `0|0|0|0|0|0|0`; retention classified post-Development; closed evidence/smoke schemas; both preflights SAFE; zero remote actions | `DEVELOPMENT EXECUTION_BLOCKERS_RESOLVED_LOCAL_AND_PUSHED` upon successful push | FOUNDATION-019A only by separate explicit Founder order; sustained operation additionally requires retention package |
 | FOUNDATION-019A-R1 | Completed locally pending commit/push | Correct remote fixture, cleanup, skip gate, CORS and evidence contracts without remote action | Separate remote manifest; eleven-condition gate; versioned operator runner; success x2 plus forced failure x2; seven-zero cleanup; Flutter 678 pass/5 skips; analyzer 0 errors/36 inherited infos; Deno 86/86; SQL 740/740; CORS `UNASSIGNED`; ADR-F024 | `FOUNDATION-019A READY_FOR_REAUTHORIZATION_LOCAL_AND_PUSHED` only after validation and push | New Founder authorization for new SHA and exact CORS; no automatic remote continuation |

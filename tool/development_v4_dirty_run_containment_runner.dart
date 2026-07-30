@@ -3,10 +3,13 @@ import 'dart:io';
 
 import 'development_v4_dirty_run_containment_contracts.dart';
 import 'development_v4_dirty_run_containment_http_gateway.dart';
+import 'founder_authorization_artifact.dart';
 
 const _manifestPath =
     'docs/stasisly_foundation/development/'
     'development_v4_dirty_run_containment_manifest.json';
+const _authorizedOperation =
+    'FOUNDATION-019A_V4_FAILED_RUN_DIAGNOSTIC_AND_CONTAINMENT';
 
 final class V4ContainmentRunResult {
   const V4ContainmentRunResult({
@@ -147,7 +150,50 @@ Future<void> main(List<String> arguments) async {
   }
 
   final environment = Platform.environment;
-  final gate = _runtimeGate(environment);
+  final head = Process.runSync('git', ['rev-parse', 'HEAD']);
+  if (head.exitCode != 0) {
+    stderr.writeln('V4_DIRTY_RUN_CONTAINMENT_AUTHORIZATION_BLOCKED');
+    exitCode = 65;
+    return;
+  }
+  final headSha = (head.stdout as String).trim();
+  final authorizationPath = environment['FOUNDER_AUTHORIZATION_ARTIFACT'] ?? '';
+  final store = FounderAuthorizationStore(repositoryRoot: Directory.current);
+  FounderAuthorizationArtifactV1 authorization;
+  String authorizationId;
+  try {
+    store
+      ..ensureSecureStorage()
+      ..validateStorageContract();
+    final authorizationFile = File(authorizationPath).absolute;
+    authorizationId = _authorizationId(authorizationFile);
+    if (authorizationFile.path !=
+        store.artifactFile(authorizationId).absolute.path) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_ARTIFACT_PATH_BLOCKED',
+      );
+    }
+    authorization = store.read(authorizationId);
+    final source = resolveAuthorizationSource(
+      artifact: authorization,
+      environment: environment,
+    );
+    if (source == FounderAuthorizationSourceResolution.blockedConflict) {
+      throw const FounderAuthorizationException(
+        'AUTHORIZATION_LEGACY_ENV_CONFLICT',
+      );
+    }
+    final findings = _authorizationFindings(authorization, headSha: headSha);
+    if (findings.isNotEmpty) {
+      throw FounderAuthorizationException(findings.first);
+    }
+  } on Object {
+    stderr.writeln('V4_DIRTY_RUN_CONTAINMENT_AUTHORIZATION_BLOCKED');
+    exitCode = 65;
+    return;
+  }
+
+  final gate = _runtimeGate(environment, authorization, headSha);
   if (gate.validate().isNotEmpty) {
     stderr.writeln('V4_DIRTY_RUN_CONTAINMENT_GATE_BLOCKED');
     exitCode = 65;
@@ -165,6 +211,19 @@ Future<void> main(List<String> arguments) async {
   final identity = V4RunIdentity.reconstruct(
     environment['FAILED_RUN_ALIAS'] ?? '',
   );
+  try {
+    await store.consume(
+      authorizationId,
+      validate: (artifact) =>
+          _authorizationFindings(artifact, headSha: headSha),
+    );
+  } on FounderAuthorizationException {
+    stderr.writeln(
+      'V4_DIRTY_RUN_CONTAINMENT_AUTHORIZATION_CONSUMPTION_BLOCKED',
+    );
+    exitCode = 65;
+    return;
+  }
   final runner = DevelopmentV4DirtyRunContainmentRunner(
     manifest: manifest,
     gateway: HttpV4DirtyRunContainmentGateway(
@@ -173,6 +232,19 @@ Future<void> main(List<String> arguments) async {
     ),
   );
   final result = await runner.run(gate: gate, identity: identity);
+  try {
+    store.completeConsumed(
+      authorizationId,
+      finalClassification: result.classification.value,
+      remoteContextFinal: result.cliIsolated ? 'SAFE' : 'FAILED',
+    );
+  } on FounderAuthorizationException {
+    stderr.writeln(
+      'V4_DIRTY_RUN_CONTAINMENT_AUTHORIZATION_FINALIZATION_BLOCKED',
+    );
+    exitCode = 2;
+    return;
+  }
   stdout.writeln(jsonEncode(result.safeEvidence()));
   if (result.classification != V4ContainmentClassification.containedClean &&
       result.classification !=
@@ -181,21 +253,41 @@ Future<void> main(List<String> arguments) async {
   }
 }
 
-V4ContainmentRuntimeGate _runtimeGate(Map<String, String> environment) {
+String _authorizationId(File file) {
+  final name = file.uri.pathSegments.last;
+  if (!name.endsWith('.json') || name.length == '.json'.length) {
+    throw const FounderAuthorizationException(
+      'AUTHORIZATION_ARTIFACT_PATH_BLOCKED',
+    );
+  }
+  return name.substring(0, name.length - '.json'.length);
+}
+
+List<String> _authorizationFindings(
+  FounderAuthorizationArtifactV1 artifact, {
+  required String headSha,
+}) => artifact.validate(
+  now: DateTime.now().toUtc(),
+  expectedOperation: _authorizedOperation,
+  expectedEnvironment: 'development',
+  expectedCommitSha: headSha,
+  expectedManifest: v4ContainmentManifestVersion,
+  expectedRunner: v4ContainmentRunnerVersion,
+);
+
+V4ContainmentRuntimeGate _runtimeGate(
+  Map<String, String> environment,
+  FounderAuthorizationArtifactV1 authorization,
+  String headSha,
+) {
   bool exact(String name, String expected) => environment[name] == expected;
-  final head = Process.runSync('git', ['rev-parse', 'HEAD']);
-  final authorizedCommit = environment['AUTHORIZED_COMMIT_SHA'] ?? '';
   return V4ContainmentRuntimeGate(
     founderAuthorizationMatches:
-        exact(
-          'FOUNDER_CONTAINMENT_AUTHORIZATION_REFERENCE',
-          v4RecommendedContainmentAuthorization,
-        ) &&
-        exact('CONTAINMENT_AUTHORIZATION_STATUS', 'GRANTED_AT_RUNTIME'),
+        authorization.status == FounderAuthorizationStatus.granted &&
+        authorization.decision == 'APPROVED' &&
+        authorization.authorizedOperation == _authorizedOperation,
     authorizedCommitMatches:
-        head.exitCode == 0 &&
-        authorizedCommit.isNotEmpty &&
-        (head.stdout as String).trim() == authorizedCommit,
+        headSha.isNotEmpty && authorization.authorizedCommitSha == headSha,
     developmentTargetMatches:
         exact('APP_MODE', 'development') &&
         exact('BACKEND_TARGET_ENVIRONMENT', 'development') &&

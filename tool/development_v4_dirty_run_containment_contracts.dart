@@ -8,7 +8,6 @@ const v4FailedManifestVersion = 'FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4';
 const v4FailedRunnerVersion = 'FOUNDATION-019A-R2G-RUNNER-v1';
 const v4FailedAuthorizationReference = 'FA-019A-RETRY-20260729-008';
 const v4FailedCommit = '7a660c143949ca7fc6cbd423a7c8d30102a5d7f9';
-const v4RecommendedContainmentAuthorization = 'FA-019A-V4-CONTAIN-20260730-009';
 const v4FailedAuthorizationState = 'CONSUMED';
 const v4FutureAuthorizationState = 'NOT_GRANTED';
 const v4RetentionLimitation = 'POST_DEVELOPMENT_OPERATIONAL_BLOCKER';

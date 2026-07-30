@@ -43,3 +43,6 @@ android/app/src/main/res/values/secrets.xml
 # Supabase local CLI state
 supabase/.temp/
 supabase/.branches/
+
+# Ephemeral Founder authorization artifacts
+.runtime/
