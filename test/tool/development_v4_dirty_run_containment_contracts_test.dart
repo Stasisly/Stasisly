@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import '../../tool/development_conversation_identity.dart';
 import '../../tool/development_v4_dirty_run_containment_contracts.dart';
 
 void main() {
@@ -72,6 +73,37 @@ void main() {
         strategy['canonicalCatalogId'],
         V4HandleClassification.unsafeForLookup,
       );
+    });
+
+    test('new runs use the shared exact identity without exposing handles', () {
+      final created = CreatedConversationIdentity.validated(
+        conversationHandle: '11111111-1111-4111-8111-111111111111',
+        ownerHandle: '22222222-2222-4222-8222-222222222222',
+        operationAttemptId: 'contained-run-01_create_0001',
+        runMarker: 'contained-run-01',
+        creationRequestFingerprint: 'a' * 64,
+        cleanupHandle: '11111111-1111-4111-8111-111111111111',
+        diagnosticLookupHandle: '11111111-1111-4111-8111-111111111111',
+        ownership: conversationIdentityOwnership,
+        environment: 'development',
+        createdAt: DateTime.utc(2026, 7, 30),
+      );
+      final shared = V4SharedConversationIdentity.fromCreated(created);
+      expect(
+        shared.useCleanupHandle((value) => value == created.conversationHandle),
+        isTrue,
+      );
+      expect(
+        shared.useDiagnosticLookupHandle(
+          (value) => value == created.conversationHandle,
+        ),
+        isTrue,
+      );
+      expect(
+        shared.useOwnerHandle((value) => value == created.ownerHandle),
+        isTrue,
+      );
+      expect(shared.toString(), contains('<redacted>'));
     });
   });
 

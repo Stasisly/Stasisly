@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'development_catalog_envelope_adapter.dart';
 
-const completeRunnerVersion = 'FOUNDATION-019A-R2G-RUNNER-v1';
-const completeManifestVersion = 'FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4';
+const completeRunnerVersion = 'FOUNDATION-019A-R2I-RUNNER-v1';
+const completeManifestVersion = 'FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v5';
 const canonicalSpecialistPolicy = 'VERIFIED_PREEXISTING_READ_ONLY';
 const canonicalSpecialistSource = 'SELECTABLE_SPECIALIST_CATALOG';
 const canonicalSpecialistSelectionMode =
@@ -80,6 +80,7 @@ final class CompleteRunnerManifest {
     required this.catalogCreation,
     required this.specialistCleanup,
     required this.catalogCleanup,
+    required this.conversationIdentityContract,
     required this.states,
     required this.operations,
     required this.failureCleanupFromStates,
@@ -95,11 +96,13 @@ final class CompleteRunnerManifest {
     final rawFailureStates = decoded['failureCleanupFromStates'];
     final rawSelection = decoded['specialistSelection'];
     final rawEnvelope = decoded['catalogEnvelope'];
+    final rawIdentity = decoded['conversationIdentity'];
     if (rawStates is! List ||
         rawOperations is! List ||
         rawFailureStates is! List ||
         rawSelection is! Map ||
-        rawEnvelope is! Map) {
+        rawEnvelope is! Map ||
+        rawIdentity is! Map) {
       throw const FormatException('Manifest states and operations required.');
     }
     final selection = Map<String, Object?>.from(rawSelection);
@@ -120,6 +123,7 @@ final class CompleteRunnerManifest {
       catalogCreation: decoded['catalogCreation'] as String? ?? '',
       specialistCleanup: decoded['specialistCleanup'] as String? ?? '',
       catalogCleanup: decoded['catalogCleanup'] as String? ?? '',
+      conversationIdentityContract: Map<String, Object?>.from(rawIdentity),
       states: rawStates.map((value) => value as String).toList(growable: false),
       operations: rawOperations
           .map(
@@ -149,6 +153,7 @@ final class CompleteRunnerManifest {
   final String catalogCreation;
   final String specialistCleanup;
   final String catalogCleanup;
+  final Map<String, Object?> conversationIdentityContract;
   final List<String> states;
   final List<RunnerOperation> operations;
   final Set<String> failureCleanupFromStates;
@@ -175,6 +180,27 @@ final class CompleteRunnerManifest {
         specialistCleanup != 'NOT_APPLICABLE' ||
         catalogCleanup != 'NOT_APPLICABLE') {
       findings.add('Canonical specialist policy is invalid.');
+    }
+    const expectedIdentity = {
+      'contractVersion': 'FOUNDATION-019A-R2I-CONVERSATION-IDENTITY-v1',
+      'createdStateRequirement': 'EXACT_IDENTITY_PERSISTED_AND_VERIFIED',
+      'incompleteResponse': 'CONVERSATION_CREATE_RESPONSE_INCOMPLETE',
+      'sharedContract': 'CreatedConversationIdentity',
+      'ownership': 'CREATED_BY_RUN',
+      'ledgerBeforeCreatedState': 'MANDATORY',
+      'ownerRunAttemptBinding': 'MANDATORY',
+      'exactCleanupHandle': 'MANDATORY',
+      'exactDiagnosticHandle': 'MANDATORY',
+      'commitManifestRunnerBinding': 'MANDATORY',
+      'lifecycle': 'RESOURCE_CREATED>CLEANUP_PENDING>CLEANED>CLOSED',
+      'storage': '.runtime/runs/<run-marker>/resource-ledger.json',
+      'legacyV4': 'LEGACY_DIRTY_RUN_MISSING_EXACT_CONVERSATION_IDENTITY',
+    };
+    if (conversationIdentityContract.length != expectedIdentity.length ||
+        expectedIdentity.entries.any(
+          (entry) => conversationIdentityContract[entry.key] != entry.value,
+        )) {
+      findings.add('Conversation identity contract is invalid.');
     }
     if (states.isEmpty || states.first != 'INITIAL') {
       findings.add('State path must start at INITIAL.');

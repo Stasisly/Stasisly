@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'development_catalog_envelope_adapter.dart';
 import 'development_complete_runner_contracts.dart';
+import 'development_conversation_identity.dart';
 
 const _manifestPath =
     'docs/stasisly_foundation/development/'
@@ -110,8 +111,29 @@ final class _RunContext {
   String ownerToken = '';
   String foreignToken = '';
   String selectableSpecialistId = '';
-  String conversationId = '';
+  CreatedConversationIdentity? createdConversationIdentity;
   String messageId = '';
+
+  String get conversationId {
+    final identity = createdConversationIdentity;
+    if (identity == null) {
+      throw StateError('EXACT_CONVERSATION_IDENTITY_REQUIRED');
+    }
+    return identity.conversationHandle;
+  }
+
+  late final ConversationIdentityLedgerStore conversationIdentityStore =
+      ConversationIdentityLedgerStore(
+        repositoryRoot: Directory.current,
+        binding: ConversationLedgerBinding.validated(
+          commitSha: environment['AUTHORIZED_COMMIT_SHA'] ?? '',
+          authorizationReference:
+              environment['FOUNDER_AUTHORIZATION_REFERENCE'] ?? '',
+          manifestVersion: completeManifestVersion,
+          runnerVersion: completeRunnerVersion,
+          environment: 'development',
+        ),
+      );
 }
 
 final class _FunctionalExecution {
@@ -127,12 +149,15 @@ final class _FunctionalExecution {
   final _RemoteClient client;
   final CompleteRunnerStateMachine state;
   final CompleteResourceLedger ledger;
+  final ConversationIdentityCommitProtocol conversationIdentityProtocol =
+      ConversationIdentityCommitProtocol();
 
   bool flowPassed = false;
   bool cleanupPassed = false;
   bool authAbsent = false;
   bool evidenceSafe = true;
   bool cliIsolated = false;
+  bool conversationLedgerCommitted = false;
   List<int>? counters;
 
   void _advance(String next, String evidence) {
@@ -331,22 +356,43 @@ final class _FunctionalExecution {
     try {
       first = await _createConversationRequest();
     } on Object {
-      first = await _createConversationRequest();
+      try {
+        // One exact idempotent replay is the only permitted recovery lookup.
+        first = await _createConversationRequest();
+      } on Object {
+        final ambiguous = classifyConversationCreateResponse(
+          status: null,
+          body: null,
+          ownerHandle: context.ownerId,
+          operationAttemptId: context.createAttempt,
+          runMarker: context.alias,
+          normalizedRequest: context.selectableSpecialistId,
+        );
+        throw StateError(ambiguous.failureEvidence);
+      }
     }
-    if (first.status != 200 && first.status != 201) {
-      throw StateError('CONVERSATION_CREATE_FAILED');
-    }
-    context.conversationId = _requiredUuid(
-      _object(_object(first.body)['session'])['sessionId'],
+    final assessment = classifyConversationCreateResponse(
+      status: first.status,
+      body: first.body,
+      ownerHandle: context.ownerId,
+      operationAttemptId: context.createAttempt,
+      runMarker: context.alias,
+      normalizedRequest: context.selectableSpecialistId,
     );
+    if (!assessment.permitsCreatedState) {
+      throw StateError(assessment.failureEvidence);
+    }
+    final identity = assessment.identity!;
+    conversationIdentityProtocol.validateIdentity(identity);
+    context.createdConversationIdentity = identity;
     ledger
       ..register(
         LedgerEntry(
           category: ResourceCategory.conversation,
           disposition: ResourceDisposition.createdByRun,
           creationState: 'CONVERSATION_CREATED',
-          ownershipProof: context.createAttempt,
-          cleanupHandle: context.conversationId,
+          ownershipProof: identity.operationAttemptId,
+          cleanupHandle: identity.cleanupHandle,
           cleanupRequired: true,
         ),
       )
@@ -355,8 +401,8 @@ final class _FunctionalExecution {
           category: ResourceCategory.sessionState,
           disposition: ResourceDisposition.createdByRun,
           creationState: 'CONVERSATION_CREATED',
-          ownershipProof: context.createAttempt,
-          cleanupHandle: context.conversationId,
+          ownershipProof: identity.operationAttemptId,
+          cleanupHandle: identity.cleanupHandle,
           cleanupRequired: false,
         ),
       )
@@ -365,12 +411,22 @@ final class _FunctionalExecution {
           category: ResourceCategory.idempotency,
           disposition: ResourceDisposition.createdByRun,
           creationState: 'CONVERSATION_CREATED',
-          ownershipProof: context.createAttempt,
-          cleanupHandle: context.ownerId,
+          ownershipProof: identity.operationAttemptId,
+          cleanupHandle: identity.ownerHandle,
           cleanupRequired: true,
         ),
       );
+    conversationIdentityProtocol.markLedgerPending();
+    final persisted = context.conversationIdentityStore.persistAndVerify(
+      identity,
+    );
+    if (!identity.sameIdentity(persisted.identity)) {
+      throw StateError('CONVERSATION_IDENTITY_PERSISTENCE_FAILED');
+    }
+    conversationIdentityProtocol.markLedgerCommitted(persisted);
+    conversationLedgerCommitted = true;
     _advance('CONVERSATION_CREATED', 'CONVERSATION_CREATED');
+    conversationIdentityProtocol.markStateTransitionCommitted();
   }
 
   Future<_HttpResult> _createConversationRequest() => client.request(
@@ -695,6 +751,17 @@ final class _FunctionalExecution {
   void completeFlow() => _advance('FLOW_COMPLETED', 'FLOW_COMPLETED');
 
   void startCleanup() {
+    final identity = context.createdConversationIdentity;
+    if (identity != null) {
+      conversationIdentityProtocol.beginCleanup();
+    }
+    if (identity != null && conversationLedgerCommitted) {
+      context.conversationIdentityStore.transition(
+        identity.runMarker,
+        expected: ConversationLedgerLifecycle.resourceCreated,
+        next: ConversationLedgerLifecycle.cleanupPending,
+      );
+    }
     if (state.state == 'FLOW_COMPLETED') {
       _advance('CLEANUP_STARTED', 'CLEANUP_STARTED');
     } else {
@@ -708,6 +775,14 @@ final class _FunctionalExecution {
       startCleanup();
       cleanupPassed = await cleanupLedger();
       if (cleanupPassed) {
+        final identity = context.createdConversationIdentity;
+        if (identity != null && conversationLedgerCommitted) {
+          context.conversationIdentityStore.transition(
+            identity.runMarker,
+            expected: ConversationLedgerLifecycle.cleanupPending,
+            next: ConversationLedgerLifecycle.cleaned,
+          );
+        }
         _advance('CLEANUP_COMPLETED', 'CLEANUP_COMPLETED');
         authAbsent = await validateAuthAbsence();
         if (authAbsent) {
@@ -724,6 +799,18 @@ final class _FunctionalExecution {
                 'LOCAL_REGRESSION_COMPLETED',
               );
               ledger.delete();
+              final identity = context.createdConversationIdentity;
+              if (identity != null) {
+                if (conversationLedgerCommitted) {
+                  context.conversationIdentityStore.transition(
+                    identity.runMarker,
+                    expected: ConversationLedgerLifecycle.cleaned,
+                    next: ConversationLedgerLifecycle.closed,
+                  );
+                }
+                conversationIdentityProtocol.close();
+                context.conversationIdentityStore.delete(identity.runMarker);
+              }
             }
           }
         }
@@ -753,27 +840,27 @@ final class _FunctionalExecution {
     switch (entry.category) {
       case ResourceCategory.messages:
         uri = client.endpoint('/rest/v1/messages', {
-          'session_id': 'eq.${context.conversationId}',
+          'id': 'eq.${entry.cleanupHandle}',
         });
       case ResourceCategory.idempotency:
         uri = client.endpoint('/rest/v1/conversation_idempotency', {
-          'subject_id': 'eq.${context.ownerId}',
+          'subject_id': 'eq.${entry.cleanupHandle}',
         });
       case ResourceCategory.conversation:
         uri = client.endpoint('/rest/v1/chat_sessions', {
-          'id': 'eq.${context.conversationId}',
+          'id': 'eq.${entry.cleanupHandle}',
         });
       case ResourceCategory.profile:
         uri = client.endpoint('/rest/v1/users', {
-          'id': 'eq.${context.ownerId}',
+          'id': 'eq.${entry.cleanupHandle}',
         });
       case ResourceCategory.catalog:
       case ResourceCategory.specialist:
         throw StateError('READ_ONLY_CLEANUP_BLOCKED');
       case ResourceCategory.foreignAuth:
-        uri = client.endpoint('/auth/v1/admin/users/${context.foreignId}');
+        uri = client.endpoint('/auth/v1/admin/users/${entry.cleanupHandle}');
       case ResourceCategory.ownerAuth:
-        uri = client.endpoint('/auth/v1/admin/users/${context.ownerId}');
+        uri = client.endpoint('/auth/v1/admin/users/${entry.cleanupHandle}');
       case ResourceCategory.sessionState:
         return true;
     }

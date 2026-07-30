@@ -1,5 +1,16 @@
 # Stasisly Foundation
 
+## Exact Conversation identity gate
+
+FOUNDATION-019A-R2I requires one immutable `CreatedConversationIdentity`,
+atomically persisted and integrity-verified before
+`CONVERSATION_CREATED`. Cleanup and diagnostics consume the same exact handles;
+broad reconstruction is forbidden. Functional manifest v5 and runner R2I-v1
+remain unassigned and unexecuted. The historical v4 run stays
+`LEGACY_DIRTY_RUN_MISSING_EXACT_CONVERSATION_IDENTITY`. See
+[ADR-F036](adr/ADR-F036-exact-conversation-identity-before-created-state.md)
+and the [implementation record](implementation/FOUNDATION-019A-R2I_CONVERSATION_IDENTITY_RECOVERY.md).
+
 ## Catalog envelope and diagnostic classification gate
 
 FOUNDATION-019A-R2G adopts one source-qualified catalog adapter for functional

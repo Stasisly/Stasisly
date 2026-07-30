@@ -1,5 +1,17 @@
 # Clasificación inicial de activos
 
+## FOUNDATION-019A-R2I classification
+
+- Shared Conversation identity: `FOUNDATION_ADOPTED_LOCALLY`.
+- Created-state gate: `EXACT_IDENTITY_PERSISTED_AND_VERIFIED`.
+- Runtime ledger: `IGNORED/ATOMIC/0600/CANONICALLY_HASHED`.
+- Cleanup and diagnostics: `ONE_SHARED_EXACT_CONTRACT`.
+- Functional manifest/runner: `SECOND-FUNCTIONAL-ATTEMPT-v5` /
+  `FOUNDATION-019A-R2I-RUNNER-v1`.
+- Historical v4 run:
+  `LEGACY_DIRTY_RUN_MISSING_EXACT_CONVERSATION_IDENTITY`.
+- Remote action/authorization: `0/NOT_GRANTED`.
+
 ## FOUNDATION-019A-R2G classification
 
 - Shared catalog adapter: `FOUNDATION_ADOPTED_LOCALLY`.

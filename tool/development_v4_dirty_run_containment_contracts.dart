@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'development_conversation_identity.dart';
+
 const v4ContainmentManifestVersion =
     'FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v2';
 const v4ContainmentRunnerVersion = 'FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v2';
@@ -67,6 +69,29 @@ enum V4ResourceOwnership {
   unknown,
   foreign,
   unscoped,
+}
+
+final class V4SharedConversationIdentity {
+  V4SharedConversationIdentity.fromCreated(this.identity) {
+    if (identity.validate().isNotEmpty ||
+        identity.ownership != conversationIdentityOwnership) {
+      throw const FormatException('SHARED_CONVERSATION_IDENTITY_INVALID');
+    }
+  }
+
+  final CreatedConversationIdentity identity;
+
+  T useCleanupHandle<T>(T Function(String value) operation) =>
+      operation(identity.cleanupHandle);
+
+  T useDiagnosticLookupHandle<T>(T Function(String value) operation) =>
+      operation(identity.diagnosticLookupHandle);
+
+  T useOwnerHandle<T>(T Function(String value) operation) =>
+      operation(identity.ownerHandle);
+
+  @override
+  String toString() => 'V4SharedConversationIdentity(<redacted>)';
 }
 
 enum V4ContainmentClassification {

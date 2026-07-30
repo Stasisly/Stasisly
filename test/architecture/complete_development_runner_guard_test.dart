@@ -18,6 +18,9 @@ void main() {
   final contracts = File(
     'tool/development_complete_runner_contracts.dart',
   ).readAsStringSync();
+  final identity = File(
+    'tool/development_conversation_identity.dart',
+  ).readAsStringSync();
   final adapter = File(
     'tool/development_catalog_envelope_adapter.dart',
   ).readAsStringSync();
@@ -79,8 +82,8 @@ void main() {
     expect(shell, contains('FOUNDER_AUTHORIZATION_REFERENCE'));
     expect(shell, contains('AUTHORIZED_COMMIT_SHA'));
     expect(shell, contains('SECOND_FUNCTIONAL_ATTEMPT_MANIFEST_VERSION'));
-    expect(shell, contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4'));
-    expect(shell, contains('FOUNDATION-019A-R2G-RUNNER-v1'));
+    expect(shell, contains('FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v5'));
+    expect(shell, contains('FOUNDATION-019A-R2I-RUNNER-v1'));
     expect(shell, contains('RETENTION_LIMITATION_ACKNOWLEDGED'));
     expect(shell, contains('supabase link --project-ref'));
     expect(shell, contains('check_supabase_remote_context.dart'));
@@ -161,5 +164,78 @@ void main() {
     ]) {
       expect(runner + shell, isNot(contains(forbidden)));
     }
+  });
+
+  test('created state requires exact persisted and verified identity', () {
+    final parse = runner.indexOf('classifyConversationCreateResponse(');
+    final register = runner.indexOf('LedgerEntry(', parse);
+    final persist = runner.indexOf('persistAndVerify(', register);
+    final transition = runner.indexOf(
+      "_advance('CONVERSATION_CREATED'",
+      persist,
+    );
+    expect(parse, greaterThanOrEqualTo(0));
+    expect(register, greaterThan(parse));
+    expect(persist, greaterThan(register));
+    expect(transition, greaterThan(persist));
+    expect(runner, contains('assessment.permitsCreatedState'));
+    expect(runner, contains('context.createdConversationIdentity = identity'));
+    expect(identity, contains('CONVERSATION_CREATE_RESPONSE_INCOMPLETE'));
+    expect(identity, contains('CREATED_BY_RUN'));
+  });
+
+  test(
+    'functional cleanup uses ledger handles instead of mutable context IDs',
+    () {
+      final cleanupStart = runner.indexOf('Future<bool> _deleteEntry(');
+      final cleanupEnd = runner.indexOf(
+        'Future<bool> validateAuthAbsence()',
+        cleanupStart,
+      );
+      final cleanup = runner.substring(cleanupStart, cleanupEnd);
+      expect(cleanup, contains(r"'id': 'eq.${entry.cleanupHandle}'"));
+      expect(
+        cleanup,
+        isNot(contains(r"'session_id': 'eq.${entry.cleanupHandle}'")),
+      );
+      expect(runner, contains(r"'subject_id': 'eq.${entry.cleanupHandle}'"));
+      expect(identity, contains('.runtime'));
+      expect(identity, contains('resource-ledger.json'));
+      expect(identity, contains('temporary.renameSync(target.path)'));
+      expect(identity, contains("_chmod(target.path, '600')"));
+    },
+  );
+
+  test(
+    'identity recovery forbids broad reconstruction and attempt regeneration',
+    () {
+      final cleanupStart = runner.indexOf('Future<bool> cleanupLedger()');
+      final cleanupEnd = runner.indexOf(
+        'Future<bool> validateAuthAbsence()',
+        cleanupStart,
+      );
+      final cleanup = runner.substring(cleanupStart, cleanupEnd);
+      expect(cleanup, isNot(contains('created_at')));
+      expect(cleanup, isNot(contains('like.')));
+      expect(cleanup, isNot(contains('.first')));
+      expect(runner, contains('late final String createAttempt'));
+      expect(runner.split('late final String createAttempt'), hasLength(2));
+      expect(identity, contains('creationRequestFingerprint'));
+      expect(identity, contains('authorizationReference'));
+      expect(identity, contains('commitSha'));
+      expect(identity, contains('manifestVersion'));
+      expect(identity, contains('runnerVersion'));
+    },
+  );
+
+  test('runtime ledger stays ignored and legacy dirty run stays blocking', () {
+    final ignore = File('.gitignore').readAsLinesSync();
+    expect(ignore.where((line) => line.trim() == '.runtime/'), hasLength(1));
+    expect(
+      identity,
+      contains('LEGACY_DIRTY_RUN_MISSING_EXACT_CONVERSATION_IDENTITY'),
+    );
+    expect(identity, contains('CONVERSATION_LEDGER_INTEGRITY_FAILED'));
+    expect(identity, contains('CONVERSATION_LEDGER_TRANSITION_BLOCKED'));
   });
 }
