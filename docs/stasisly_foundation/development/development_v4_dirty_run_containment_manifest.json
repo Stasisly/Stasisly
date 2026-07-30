@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "manifestVersion": "FOUNDATION-019A-V4-DIRTY-RUN-CONTAINMENT-v1",
+  "runnerVersion": "FOUNDATION-019A-R2H-CONTAINMENT-RUNNER-v1",
+  "environment": "development",
+  "remoteAuthorization": "NOT_GRANTED",
+  "remoteExecution": "NOT_EXECUTED",
+  "failedRun": {
+    "authorizationReference": "FA-019A-RETRY-20260729-008",
+    "authorizationState": "CONSUMED",
+    "authorizationReusable": false,
+    "commit": "7a660c143949ca7fc6cbd423a7c8d30102a5d7f9",
+    "commitBound": true,
+    "manifestVersion": "FOUNDATION-019A-SECOND-FUNCTIONAL-ATTEMPT-v4",
+    "runnerVersion": "FOUNDATION-019A-R2G-RUNNER-v1",
+    "lastApprovedState": "CONVERSATION_CREATED",
+    "failureCategory": "UNKNOWN_POST_CREATE_FAILURE",
+    "cleanupState": "CLEANUP_COMPLETED",
+    "authPostLookup": "ABSENT_CONFIRMED",
+    "sevenCounters": "NOT_VERIFIED_AS_ALL_ZERO"
+  },
+  "futureAuthorization": {
+    "recommendedReference": "FA-019A-V4-CONTAIN-20260730-009",
+    "state": "NOT_GRANTED",
+    "scope": "EXACT_DIAGNOSTIC_AND_RUN_SCOPED_CONTAINMENT"
+  },
+  "runIdentity": {
+    "alias": "AVAILABLE_EPHEMERALLY",
+    "operationAttemptId": "RECONSTRUCTABLE_EXACT",
+    "idempotencyKey": "RECONSTRUCTABLE_EXACT",
+    "syntheticOwnerMarker": "RECONSTRUCTABLE_EXACT",
+    "conversationHandle": "AVAILABLE_FROM_SANITIZED_LEDGER",
+    "authorizationReference": "RECONSTRUCTABLE_EXACT",
+    "manifestVersion": "RECONSTRUCTABLE_EXACT",
+    "runnerVersion": "RECONSTRUCTABLE_EXACT"
+  },
+  "functionalRunner": "DISABLED",
+  "authCreation": "DISABLED",
+  "conversationCreation": "DISABLED",
+  "messageCreation": "DISABLED",
+  "idempotencyReplay": "DISABLED",
+  "catalogMutation": "DISABLED",
+  "specialistMutation": "DISABLED",
+  "broadLookups": "BLOCKED",
+  "broadDeletes": "BLOCKED",
+  "exactLookupsOnly": true,
+  "canonicalResourcesProtected": true,
+  "postDeleteCountersRequired": true,
+  "stopAfterUnsafeCondition": true,
+  "cliIsolationRequired": true,
+  "retentionLimitation": "POST_DEVELOPMENT_OPERATIONAL_BLOCKER",
+  "counters": [
+    {
+      "name": "messages",
+      "lookupBasis": "EXACT_CONVERSATION_HANDLE_OR_REQUEST_NOT_SENT_PLUS_COMPLETED_DELETE",
+      "queryBound": 2,
+      "expectedClean": "ZERO",
+      "containmentEligibility": "EXACT_RUN_OWNED_ONLY"
+    },
+    {
+      "name": "idempotency",
+      "lookupBasis": "EXACT_OPERATION_ID_AND_IDEMPOTENCY_KEY",
+      "queryBound": 2,
+      "expectedClean": "ZERO",
+      "containmentEligibility": "EXACT_RUN_OWNED_ONLY"
+    },
+    {
+      "name": "sessions",
+      "lookupBasis": "EXACT_RESULT_REFERENCE_OR_EXACT_SYNTHETIC_OWNER",
+      "queryBound": 2,
+      "expectedClean": "ZERO",
+      "containmentEligibility": "EXACT_RUN_OWNED_ONLY"
+    },
+    {
+      "name": "profiles",
+      "lookupBasis": "EXACT_DERIVED_SYNTHETIC_PROFILE_MARKER",
+      "queryBound": 2,
+      "expectedClean": "ZERO",
+      "containmentEligibility": "EXACT_RUN_OWNED_ONLY"
+    },
+    {
+      "name": "catalog",
+      "lookupBasis": "VERSIONED_LEDGER_VERIFIED_PREEXISTING_READ_ONLY",
+      "queryBound": 0,
+      "expectedClean": "ZERO",
+      "containmentEligibility": "FORBIDDEN_CANONICAL_RESOURCE"
+    },
+    {
+      "name": "specialists",
+      "lookupBasis": "VERSIONED_LEDGER_VERIFIED_PREEXISTING_READ_ONLY",
+      "queryBound": 0,
+      "expectedClean": "ZERO",
+      "containmentEligibility": "FORBIDDEN_CANONICAL_RESOURCE"
+    },
+    {
+      "name": "auth",
+      "lookupBasis": "EXACT_OWNER_HANDLE_OR_PRIOR_EXACT_ABSENCE_EVIDENCE",
+      "queryBound": 1,
+      "expectedClean": "ZERO",
+      "containmentEligibility": "EXACT_RUN_OWNED_ONLY"
+    }
+  ],
+  "containmentOrder": [
+    "messages",
+    "idempotency",
+    "sessions",
+    "profiles",
+    "auth"
+  ],
+  "postDeleteCounterOrder": [
+    "messages",
+    "idempotency",
+    "sessions",
+    "profiles",
+    "catalog",
+    "specialists",
+    "auth"
+  ],
+  "cleanVector": "0|0|0|0|0|0|0",
+  "classifications": [
+    "CONTAINED_CLEAN",
+    "DIAGNOSED_ALREADY_CLEAN",
+    "FAILED_DIRTY_BLOCKING",
+    "BLOCKED_INSUFFICIENT_EXACT_LOOKUP"
+  ]
+}
