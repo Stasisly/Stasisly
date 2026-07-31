@@ -1,0 +1,49 @@
+# Surfaces Architecture
+
+## Classification
+
+| Layer | Coordinator | Audience | Status |
+|---|---|---|---|
+| Product Surface | Stasis | End users | `ARCHITECTURE_TARGET` |
+| Development Surface | Rector | Technical operators | `ARCHITECTURE_TARGET` |
+| Administration Surface | Gerendi | Authorized operations | `ARCHITECTURE_TARGET` |
+| Founder Private Console | Nexus under Founder authority | Founder only | `ARCHITECTURE_TARGET` |
+| Internal Platform | Nexus-coordinated subsystems | No public audience | `ARCHITECTURE_TARGET` |
+
+## Product Surface
+
+Targets iOS, Android and Web. It contains the user-facing Product capabilities.
+The exact Web domain remains an infrastructure decision.
+
+## Development Surface
+
+Targets `dev.stasisly.com`. It combines technical chat, projects, agents,
+tasks, plans, executions, diffs, gates, sanitized logs, documentation,
+environments, Founder authorizations, audit and release status. External tools
+may inspire it, but no interface is copied literally.
+
+## Administration Surface
+
+Targets `admin.stasisly.com`. It covers authorized operations such as users,
+roles, billing, support, compliance, catalog operations, growth and incidents.
+UI design follows role, use-case, risk, elevation and audit definitions.
+
+## Founder Private Console
+
+Provides Founder-exclusive global visibility and controlled `Standard`,
+`Elevated` and `Emergency` modes. Cross-surface visibility never bypasses audit
+or explicit elevation.
+
+## Internal Platform
+
+Contains API, Data Router, Shard Directory, Agent Registry, Model Gateway,
+Stasis Engine, memory, research, authorization, audit, observability, events and
+workflows. It is not a public surface.
+
+## Boundary rules
+
+- Separate identity, authorization and audit context per surface.
+- No implicit permission transfer between surfaces.
+- Versioned contracts mediate data and actions.
+- Each surface can evolve or scale independently.
+- A new top-level surface requires Founder approval and an ADR.

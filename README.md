@@ -5,9 +5,10 @@ definición documental centrada en Stasis como sistema nervioso central.
 
 ## Estado actual
 
-El proyecto está en fase de estabilización local y modo demo explícito. Backend
-real, producción, datos reales, IA, Stasis Engine, pagos y wiring UI/providers
-requieren aprobación documental y técnica antes de activarse.
+El proyecto está en fase de Re-foundation documental. La arquitectura futura
+está aprobada como diseño, pero no debe confundirse con implementación ni
+operación. Backend remoto, producción, datos reales, IA, Stasis Engine, pagos y
+nuevas surfaces requieren paquetes y aprobaciones posteriores.
 
 ## Requisitos
 
@@ -29,11 +30,13 @@ los harnesses documentados en `supabase/tests/`.
 
 ## Documentación principal
 
-- `docs/stasisly_foundation/README.md`
-- `docs/stasisly_foundation/DOCUMENTATION_GOVERNANCE.md`
-- `docs/stasisly_foundation/DOCUMENT_AUTHORITY_REGISTER.md`
-- `docs/stasisly_foundation/implementation/FOUNDATION_SESSION_TRACKER.md`
-- `docs/archive/discovery/` — material histórico sin autoridad normativa.
+- `docs/stasisly_refoundation/00_MASTER_REFOUNDATION.md` — fuente normativa
+  maestra vigente.
+- `docs/stasisly_refoundation/decisions/` — ADR Re-foundation aprobados.
+- `docs/stasisly_refoundation/10_IMPLEMENTATION_STATUS.md` — separación entre
+  diseño, implementación y operación.
+- `docs/stasisly_foundation/` — evidencia Foundation preservada y no normativa.
+- `docs/archive/discovery/` — evidencia Discovery preservada y no normativa.
 
 La documentación demuestra decisiones. El código y las pruebas demuestran
 implementación. Los prompts y planes bajo el archivo de Descubrimiento no deben
