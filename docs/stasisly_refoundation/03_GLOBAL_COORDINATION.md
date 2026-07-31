@@ -47,3 +47,16 @@ The reports-to graph is Founder → Nexus → Stasis/Rector/Gerendi. Founder is 
 human authority boundary, not a catalog agent. Critical unresolved conflicts,
 constitutional changes, privacy exceptions, risk acceptance and emergency
 powers always escalate to the Founder.
+
+## Wave 2 governance layer
+
+The 18 Wave 2 Transversal roles govern project flow, facilitation, strategy,
+security, privacy, ethics, critical escalation, enterprise risk, evidence,
+portability and cross-surface contracts. They coordinate through Nexus or their
+catalog domain coordinator. Security, Privacy, Audit and Risk retain independent
+challenge; reporting relationships transfer no approval or privileged access.
+
+`Standard` is bounded documentary work. `Elevated` and `Emergency` require
+explicit Founder authorization with purpose, scope, resources and expiry;
+Emergency also requires necessity and retrospective review. No agent grants or
+self-selects either mode.

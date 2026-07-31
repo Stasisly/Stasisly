@@ -24,3 +24,10 @@ Waves are prompt-design cohorts, never activation or runtime authorization.
 
 Wave 1 contains exactly four catalog IDs. STASISLY-AGENTS-002 approved four
 canonical documentary prompts; none is configured, available or active.
+
+## Wave 2 status
+
+Wave 2 contains exactly 18 Transversal catalog IDs (`AG-TRV-0002` through
+`AG-TRV-0019`). STASISLY-AGENTS-003 approved six historical migrations and
+twelve new documentary prompts through P0-P14. None is configured, available
+or active. Wave 3 remains a separate Founder-reviewed package.

@@ -24,7 +24,8 @@ Orphan coordinators: 0
 Historical agents mapped: 43/43
 Historical prompts preserved: 43
 Canonical Wave 1 prompts approved: 4
-Prompt-created catalog records: 47
+Canonical Wave 2 prompts approved: 18
+Prompt-created catalog records: 59
 Runtime agents created: 0
 ```
 

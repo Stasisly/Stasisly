@@ -80,9 +80,11 @@ Prompt governance uses independently versioned constitutional, surface,
 domain/family, agent, runtime, task and temporary-instruction layers. Prompt
 text never grants runtime authority, tools, data or memory access.
 
-Nexus, Stasis, Rector and Gerendi have prompt version `1.0.0` in state
+Nexus, Stasis, Rector and Gerendi plus the exact 18 Wave 2 governance agents
+have prompt version `1.0.0` in state
 `PROMPT_CREATED/APPROVED/DOCUMENTED_ONLY`. They remain `NOT_AVAILABLE`; no
-runtime configuration, tools or memory have been provisioned.
+runtime configuration, tools or memory have been provisioned. Founder remains
+an external human authority and cannot be impersonated or replaced by an agent.
 
 ## Companion documents
 

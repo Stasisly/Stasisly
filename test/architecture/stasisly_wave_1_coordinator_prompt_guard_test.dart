@@ -49,7 +49,8 @@ void main() {
           .where(
             (file) =>
                 RegExp(r'/AG-(TRV|PRO|DEV|ADM)-\d+_').hasMatch(file.path) &&
-                !file.path.startsWith(waveRoot),
+                !file.path.startsWith(waveRoot) &&
+                !file.path.startsWith('$root/agents/prompts/wave_2'),
           ),
       isEmpty,
     );
@@ -114,13 +115,13 @@ void main() {
 
   test('catalog updates exactly four records and preserves availability', () {
     final approved = catalog
-        .where((entry) => entry['implementation_status'] == 'DOCUMENTED_ONLY')
+        .where((entry) => ids.contains(entry['agent_id']))
         .toList();
     expect(approved, hasLength(4));
     expect(approved.map((entry) => entry['agent_id']).toSet(), ids);
     expect(
       catalog.where((entry) => entry['prompt_status'] == 'PROMPT_CREATED'),
-      hasLength(47),
+      hasLength(59),
     );
     expect(
       catalog.where((entry) => entry['availability'] == 'NOT_AVAILABLE'),
@@ -130,7 +131,7 @@ void main() {
       catalog.where(
         (entry) => entry['implementation_status'] == 'NOT_IMPLEMENTED',
       ),
-      hasLength(2996),
+      hasLength(2978),
     );
   });
 

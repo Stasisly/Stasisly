@@ -146,26 +146,38 @@ void main() {
     final canonical = entries
         .where((entry) => entry['historical_mapping'] == 'NONE')
         .toList();
-    final wave1 = canonical
+    final documentedHistorical = historical
         .where(
-          (entry) => approvedWave1CoordinatorIds.contains(entry['agent_id']),
+          (entry) => approvedWave2GovernanceIds.contains(entry['agent_id']),
+        )
+        .toList();
+    final pendingHistorical = historical
+        .where(
+          (entry) => !approvedWave2GovernanceIds.contains(entry['agent_id']),
+        )
+        .toList();
+    final approvedCanonical = canonical
+        .where(
+          (entry) => approvedDocumentaryPromptIds.contains(entry['agent_id']),
         )
         .toList();
     final cataloged = canonical
         .where(
-          (entry) => !approvedWave1CoordinatorIds.contains(entry['agent_id']),
+          (entry) => !approvedDocumentaryPromptIds.contains(entry['agent_id']),
         )
         .toList();
     expect(historical, hasLength(43));
-    expect(wave1, hasLength(4));
-    expect(cataloged, hasLength(2953));
-    for (final entry in historical) {
+    expect(documentedHistorical, hasLength(6));
+    expect(pendingHistorical, hasLength(37));
+    expect(approvedCanonical, hasLength(16));
+    expect(cataloged, hasLength(2941));
+    for (final entry in pendingHistorical) {
       expect(entry['prompt_status'], 'PROMPT_CREATED');
       expect(entry['lifecycle_status'], 'PROMPT_CREATED');
       expect(entry['implementation_status'], 'NOT_IMPLEMENTED');
       expect(entry['availability'], 'NOT_AVAILABLE');
     }
-    for (final entry in wave1) {
+    for (final entry in [...documentedHistorical, ...approvedCanonical]) {
       expect(entry['prompt_status'], 'PROMPT_CREATED');
       expect(entry['lifecycle_status'], 'PROMPT_CREATED');
       expect(entry['implementation_status'], 'DOCUMENTED_ONLY');

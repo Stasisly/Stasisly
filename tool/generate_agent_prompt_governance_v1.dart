@@ -719,6 +719,13 @@ Waves are prompt-design cohorts, never activation or runtime authorization.
 
 Wave 1 contains exactly four catalog IDs. STASISLY-AGENTS-002 approved four
 canonical documentary prompts; none is configured, available or active.
+
+## Wave 2 status
+
+Wave 2 contains exactly 18 Transversal catalog IDs (`AG-TRV-0002` through
+`AG-TRV-0019`). STASISLY-AGENTS-003 approved six historical migrations and
+twelve new documentary prompts through P0-P14. None is configured, available
+or active. Wave 3 remains a separate Founder-reviewed package.
 ''';
 }
 
@@ -770,31 +777,35 @@ String _migrationReadiness(
 ```text
 Governance: DOCUMENTED
 Historical audit: COMPLETED
-Migration: WAVE_1_DOCUMENTARY_BASELINE_COMPLETED
-Prompt implementation: 4 DOCUMENTED_ONLY
+Migration: WAVE_2_DOCUMENTARY_BASELINE_COMPLETED
+Prompt implementation: 22 DOCUMENTED_ONLY
 Runtime: NOT_IMPLEMENTED
 Historical prompts audited: ${audits.length}
 Historical files missing: 0
 Catalog assignments: ${assignments.length}/3000
 Historical wave assignments: 43/43
 CSV/JSON parity: PASS
-New individual prompts created: 4
+New individual prompts created: 16
+Historical prompts migrated to canonical baseline: 6
 Historical prompts modified: 0
 Agents available or active: 0
 Wave 1 P0-P14 evaluations: 60/60 PASS
 Wave 1 evaluation suites: 4 DESIGNED_NOT_RUNTIME_EXECUTED
+Wave 2 P0-P14 evaluations: 270/270 PASS
+Wave 2 evaluation suites: 18 DESIGNED_NOT_RUNTIME_EXECUTED
 ```
 
 ## Gate result
 
-Nexus, Stasis, Rector and Gerendi pass P0-P14 as documentary prompt baselines.
+Nexus, Stasis, Rector, Gerendi and all 18 Wave 2 agents pass P0-P14 as
+documentary prompt baselines.
 P15 runtime configuration, P16 runtime testing and P17 availability are not
 executed and remain outside scope.
 
 ## Next package
 
-`STASISLY-AGENTS-003` may migrate only Wave 2 Governance, Security and Founder
-Control prompts after Founder review. It must not configure or activate them.
+`STASISLY-AGENTS-004` may migrate only Wave 3 Architecture, Data and Multi-Agent
+Platform prompts after Founder review. It must not configure or activate them.
 ''';
 
 Map<String, int> _counts(List<Map<String, Object?>> records, String field) {

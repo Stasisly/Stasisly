@@ -14,6 +14,13 @@ Founder modes are `Standard`, `Elevated` and `Emergency`. Elevated and Emergency
 access require purpose, scope, expiry and audit; Founder authority is not an
 implicit runtime bypass.
 
+Wave 2 makes these modes explicit in every governance prompt. Privileged access
+also requires exact resource and environment binding, minimum privilege,
+separation of duties and safe expiry. Emergency requires demonstrated necessity,
+containment and retrospective review. Security, Privacy, Audit and Risk remain
+independently challengeable; no agent accepts critical risk or weakens controls
+for convenience.
+
 End-to-end encryption for chats remains an architecture objective, not an
 implemented capability. “Secret chats” are not a Product feature.
 

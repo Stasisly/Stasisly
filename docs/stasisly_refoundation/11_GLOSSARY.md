@@ -18,6 +18,11 @@
 | Effective prompt tuple | Exact constitutional, surface, domain, agent, runtime and evaluation version binding |
 | Approved documentary prompt | Versioned prompt that passed P0-P14; it grants no runtime configuration or availability |
 | Documentary-only implementation | Prompt artifact exists and is governed, while executable runtime remains absent |
+| Standard mode | Bounded documentary coordination with no privileged elevation |
+| Elevated mode | Founder-authorized, purpose-bound and expiring privileged context |
+| Emergency mode | Founder-authorized, necessary, time-bound, audited exceptional context with retrospective review |
+| Independent challenge | Security, Privacy, Audit or Risk review that implementers cannot suppress or self-certify |
+| Development Surface | Planned governed conversational and visual interface for building Stasisly; not yet implemented |
 | Data Router | Contractual routing layer for authorized data placement |
 | Shard Directory | Mapping from tenant/user context to approved placement |
 | Discovery Legacy | Preserved, read-only and non-normative Discovery material |

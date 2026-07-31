@@ -21,6 +21,29 @@
 
 Documentation never upgrades a capability to implemented or operational.
 
+## STASISLY-AGENTS-003 status
+
+```text
+Wave 2 prompts: 18/18 APPROVED_DOCUMENTARY_BASELINE
+Historical migrations / new prompts / reclassified: 6 / 12 / 1
+Catalog documentary records: 22/3000
+Catalog prompt-created records: 59/3000
+Remaining catalog records state-preserved: 2982
+Documentary gates: 270/270 PASS
+Evaluation suites: 18 DESIGNED_NOT_RUNTIME_EXECUTED
+Runtime: NOT_IMPLEMENTED
+Availability / active agents: 0 / 0
+P15 / P16 / P17 executed: 0 / 0 / 0
+Development Surface: PURPOSE_DOCUMENTED_NOT_IMPLEMENTED
+Focused Re-foundation and Wave 1/2 guards: 49/49 pass
+Flutter: 1033 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after no-seed reset
+Remote context: SAFE
+Remote actions / Supabase mutations: 0 / 0
+```
+
 ## STASISLY-AGENTS-002 status
 
 ```text
