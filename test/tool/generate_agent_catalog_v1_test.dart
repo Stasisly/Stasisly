@@ -116,7 +116,9 @@ void main() {
       final id = entry['agent_id']! as String;
       final parent = entry['reports_to']! as String;
       expect(parent, isNot(id));
-      if (parent.isNotEmpty) {
+      if (parent == 'FOUNDER') {
+        expect(id, 'AG-TRV-0001');
+      } else if (parent.isNotEmpty) {
         expect(byId, contains(parent));
         final crossesSurface = byId[parent]!['surface'] != entry['surface'];
         if (crossesSurface) {
@@ -130,7 +132,7 @@ void main() {
       }
       final visited = <String>{};
       var cursor = id;
-      while (cursor.isNotEmpty) {
+      while (cursor.isNotEmpty && cursor != 'FOUNDER') {
         expect(visited.add(cursor), isTrue, reason: 'cycle from $id');
         cursor = byId[cursor]!['reports_to']! as String;
       }
@@ -141,15 +143,32 @@ void main() {
     final historical = entries
         .where((entry) => entry['historical_mapping'] != 'NONE')
         .toList();
-    final cataloged = entries
+    final canonical = entries
         .where((entry) => entry['historical_mapping'] == 'NONE')
         .toList();
+    final wave1 = canonical
+        .where(
+          (entry) => approvedWave1CoordinatorIds.contains(entry['agent_id']),
+        )
+        .toList();
+    final cataloged = canonical
+        .where(
+          (entry) => !approvedWave1CoordinatorIds.contains(entry['agent_id']),
+        )
+        .toList();
     expect(historical, hasLength(43));
-    expect(cataloged, hasLength(2957));
+    expect(wave1, hasLength(4));
+    expect(cataloged, hasLength(2953));
     for (final entry in historical) {
       expect(entry['prompt_status'], 'PROMPT_CREATED');
       expect(entry['lifecycle_status'], 'PROMPT_CREATED');
       expect(entry['implementation_status'], 'NOT_IMPLEMENTED');
+      expect(entry['availability'], 'NOT_AVAILABLE');
+    }
+    for (final entry in wave1) {
+      expect(entry['prompt_status'], 'PROMPT_CREATED');
+      expect(entry['lifecycle_status'], 'PROMPT_CREATED');
+      expect(entry['implementation_status'], 'DOCUMENTED_ONLY');
       expect(entry['availability'], 'NOT_AVAILABLE');
     }
     for (final entry in cataloged) {

@@ -97,7 +97,7 @@ void main() {
     expect(implementation, contains('none of them'));
   });
 
-  test('master and implementation status do not imply availability', () {
+  test('master and implementation status keep Wave 1 unavailable', () {
     final master = File('$root/00_MASTER_REFOUNDATION.md').readAsStringSync();
     final architecture = File(
       '$root/04_AGENT_CATALOG_ARCHITECTURE.md',
@@ -105,10 +105,11 @@ void main() {
     final status = File('$root/10_IMPLEMENTATION_STATUS.md').readAsStringSync();
     expect(
       master,
-      matches(RegExp(r'prompts and runtime are\s+not implemented')),
+      matches(RegExp(r'four Wave 1 documentary prompts are\s+implemented')),
     );
-    expect(architecture, contains('2,957 new entries'));
+    expect(architecture, contains('2,953 entries remain'));
     expect(architecture, contains('NOT_AVAILABLE'));
     expect(status, contains('Availability: 0 agents promoted to AVAILABLE'));
+    expect(status, contains('Availability / active agents: 0 / 0'));
   });
 }

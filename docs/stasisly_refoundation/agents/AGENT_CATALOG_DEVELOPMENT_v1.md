@@ -2,7 +2,7 @@
 
 ```text
 Entries: 1200
-Lifecycle default: CATALOGED
+Lifecycle: CATALOGED except approved Wave 1 coordinator and historical prompt records
 Availability default: NOT_AVAILABLE
 ```
 

@@ -34,8 +34,10 @@ summaries.
 - Catalog portability prevents provider lock-in.
 
 The 43 historical prompts remain `PROMPT_CREATED`; they are mapped 43/43, not
-duplicated and not activated by this baseline. All 2,957 new entries are
-`CATALOGED`, `NOT_CREATED`, `NOT_IMPLEMENTED` and `NOT_AVAILABLE`.
+duplicated and not activated. Four canonical Wave 1 coordinators are now
+`PROMPT_CREATED`, `APPROVED`, `DOCUMENTED_ONLY` and `NOT_AVAILABLE`. The other
+2,953 entries remain `CATALOGED`, `NOT_CREATED`, `NOT_IMPLEMENTED` and
+`NOT_AVAILABLE`.
 
 ## Prompt architecture
 
@@ -45,3 +47,7 @@ constitutional, surface and domain policies are versioned references rather
 than duplicated text. Individual prompt, runtime configuration and evaluation
 versions remain independent. The 3,000 wave assignments are design sequencing,
 not activation.
+
+`DOCUMENTED_ONLY` records a versioned prompt baseline, not executable agent
+code. Catalog access and tool classes remain declarative ceilings; runtime
+bindings continue deny-by-default and require P15-P17 in later packages.

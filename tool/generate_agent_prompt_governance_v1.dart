@@ -449,7 +449,7 @@ String _assignmentReason(
 
 String _promptPackage(String wave) => switch (wave) {
   'WAVE_1' => 'STASISLY-AGENTS-002',
-  'WAVE_2' => 'STASISLY-AGENTS-WAVE-002',
+  'WAVE_2' => 'STASISLY-AGENTS-003',
   'WAVE_3' => 'STASISLY-AGENTS-WAVE-003',
   'WAVE_4' => 'STASISLY-AGENTS-WAVE-004',
   'WAVE_5' => 'STASISLY-AGENTS-WAVE-005',
@@ -701,23 +701,24 @@ Waves are prompt-design cohorts, never activation or runtime authorization.
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | WAVE_0 | Governance architecture | RF-002 published | Templates, gates and workflow approved | None | RF009-RF012 | HIGH | PromptOps, Security, Privacy, Evaluation | YES | STASISLY-AGENTS-001 | Not authorized |
 | WAVE_1 | Principal coordinators | Wave 0 ready | Four prompts pass P0-P14; none configured | ${_ids(assignments, 'WAVE_1')} | Wave 0 | CRITICAL | Nexus governance, four surface stewards, Security, Founder | YES | STASISLY-AGENTS-002 | Separate package |
-| WAVE_2 | Governance, security and Founder control | Wave 1 design reviewed | ${counts['WAVE_2']} prompts pass P0-P14 | See assignments | Wave 1 | CRITICAL | Security, Privacy, Audit, Founder | YES | STASISLY-AGENTS-WAVE-002 | Separate package |
+| WAVE_2 | Governance, security and Founder control | Wave 1 design reviewed | ${counts['WAVE_2']} prompts pass P0-P14 | See assignments | Wave 1 | CRITICAL | Security, Privacy, Audit, Founder | YES | STASISLY-AGENTS-003 | Separate package |
 | WAVE_3 | Technical and multi-agent architecture | Constitutional and security layers stable | ${counts['WAVE_3']} prompts pass P0-P14 | See assignments | Waves 1-2 | HIGH | Architecture, Security, Evaluation | YES | STASISLY-AGENTS-WAVE-003 | Separate package |
 | WAVE_4 | Product core | Product policy and architecture stable | ${counts['WAVE_4']} prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Stasis, Product, Safety, Privacy | CONDITIONAL | STASISLY-AGENTS-WAVE-004 | Separate package |
 | WAVE_5 | Development core | Rector and technical architecture stable | ${counts['WAVE_5']} prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Rector, Architecture, Security, QA | CONDITIONAL | STASISLY-AGENTS-WAVE-005 | Separate package |
 | WAVE_6 | Administration core | Gerendi and administrative policy stable | ${counts['WAVE_6']} prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Gerendi, Privacy, Compliance, QA | CONDITIONAL | STASISLY-AGENTS-WAVE-006 | Separate package |
 | WAVE_7_PLUS | Progressive specialization | Relevant core wave approved | Bounded sub-wave passes P0-P14 | ${counts['WAVE_7_PLUS']} deferred assignments | Waves 1-6 by domain | VARIABLE | Domain and mandatory risk reviewers | CONDITIONAL | Future bounded packages | Separate package |
 
-## Wave 1 source and migration preparation
+## Wave 1 source and migration status
 
 | Agent | ID | Historical source | Evidence references | Migration requirement | Approval path |
 |---|---|---|---|---|---|
-| Nexus | AG-TRV-0001 | NONE_NEW_CANONICAL_PROMPT | Director, security and governance audits | Design global coordinator without inheriting Founder authority | Security, Privacy, cross-surface review, Founder |
-| Stasis | AG-PRO-0001 | NONE_NEW_CANONICAL_PROMPT | Product Owner, coherence and Product audits | Design Product coordinator without clinical or global authority | Product, Safety, Privacy, Founder |
-| Rector | AG-DEV-0001 | NONE_NEW_CANONICAL_PROMPT | Architecture and engineering audits | Design Development coordinator without deployment authority | Architecture, Security, QA, Founder |
-| Gerendi | AG-ADM-0001 | NONE_NEW_CANONICAL_PROMPT | Growth, payments and Customer Success audits | Design Administration coordinator without financial authority | Administration, Privacy, Compliance, Founder |
+| Nexus | AG-TRV-0001 | COMPOSITE_HISTORICAL_EVIDENCE | Director, security and governance audits | APPROVED_DOCUMENTARY_BASELINE | Security, Privacy, cross-surface review, Founder |
+| Stasis | AG-PRO-0001 | COMPOSITE_HISTORICAL_EVIDENCE | Product Owner, coherence and Product audits | APPROVED_DOCUMENTARY_BASELINE | Product, Safety, Privacy, Founder |
+| Rector | AG-DEV-0001 | COMPOSITE_HISTORICAL_EVIDENCE | Architecture and engineering audits | APPROVED_DOCUMENTARY_BASELINE | Architecture, Security, QA, Founder |
+| Gerendi | AG-ADM-0001 | COMPOSITE_HISTORICAL_EVIDENCE | Growth, payments and Customer Success audits | APPROVED_DOCUMENTARY_BASELINE | Administration, Privacy, Compliance, Founder |
 
-Wave 1 contains exactly four catalog IDs and creates no prompt in this package.
+Wave 1 contains exactly four catalog IDs. STASISLY-AGENTS-002 approved four
+canonical documentary prompts; none is configured, available or active.
 ''';
 }
 
@@ -769,29 +770,31 @@ String _migrationReadiness(
 ```text
 Governance: DOCUMENTED
 Historical audit: COMPLETED
-Migration: PLANNED
-Prompt implementation: NOT_STARTED
+Migration: WAVE_1_DOCUMENTARY_BASELINE_COMPLETED
+Prompt implementation: 4 DOCUMENTED_ONLY
 Runtime: NOT_IMPLEMENTED
 Historical prompts audited: ${audits.length}
 Historical files missing: 0
 Catalog assignments: ${assignments.length}/3000
 Historical wave assignments: 43/43
 CSV/JSON parity: PASS
-New individual prompts created: 0
+New individual prompts created: 4
 Historical prompts modified: 0
 Agents available or active: 0
+Wave 1 P0-P14 evaluations: 60/60 PASS
+Wave 1 evaluation suites: 4 DESIGNED_NOT_RUNTIME_EXECUTED
 ```
 
 ## Gate result
 
-P0-P14 are defined for later prompt design and approval. No individual prompt
-has passed them in this package. P15 runtime configuration, P16 testing and P17
-availability are explicitly outside scope.
+Nexus, Stasis, Rector and Gerendi pass P0-P14 as documentary prompt baselines.
+P15 runtime configuration, P16 runtime testing and P17 availability are not
+executed and remain outside scope.
 
 ## Next package
 
-`STASISLY-AGENTS-002` may design and migrate only Nexus, Stasis, Rector and
-Gerendi after Founder review. It must not configure or activate them.
+`STASISLY-AGENTS-003` may migrate only Wave 2 Governance, Security and Founder
+Control prompts after Founder review. It must not configure or activate them.
 ''';
 
 Map<String, int> _counts(List<Map<String, Object?>> records, String field) {

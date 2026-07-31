@@ -6,6 +6,7 @@
 | 43 historical prompts | yes | yes | legacy prompt files exist | 43/43 audited; migration not executed | no | no | yes | controlled waves |
 | 3,000-agent catalog | yes | yes | metadata only | deterministic catalog guards | no | no | no | prompts and runtime |
 | Agent prompt governance | yes | yes | documentation only | deterministic audit/wave guards | no | no | no | prompt implementation |
+| Wave 1 coordinator prompts | yes | yes | four documentary prompts | P0-P14 documentary gates | no | no | no | runtime P15-P17 |
 | Product Surface target | yes | yes | partial legacy code exists | legacy tests exist | not asserted | no | yes | reconciliation |
 | Development Surface | yes | yes | no complete surface | no | no | no | no | future phase |
 | Administration Surface | yes | yes | no complete surface | no | no | no | no | future phase |
@@ -19,6 +20,30 @@
 | Stasis Engine | architecture target | yes | not proven | no | no | no | legacy concepts | design |
 
 Documentation never upgrades a capability to implemented or operational.
+
+## STASISLY-AGENTS-002 status
+
+```text
+Wave 1 prompts: 4/4 APPROVED_DOCUMENTARY_BASELINE
+Nexus / Stasis / Rector / Gerendi: PROMPT_CREATED
+Prompt versions: 1.0.0 / 1.0.0 / 1.0.0 / 1.0.0
+Historical prompt files modified: 0
+Catalog prompt-created records: 47/3000
+Catalog records newly updated: 4
+Remaining catalog records state-preserved: 2996
+Documentary gates: 60/60 PASS
+Evaluation suites: 4 DESIGNED_NOT_RUNTIME_EXECUTED
+Runtime: NOT_IMPLEMENTED
+Availability / active agents: 0 / 0
+P15 / P16 / P17 executed: 0 / 0 / 0
+Focused Re-foundation and Wave 1 guards: 39/39 pass
+Flutter: 1023 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after no-seed reset
+Remote context: SAFE
+Remote actions / Supabase mutations: 0 / 0
+```
 
 ## STASISLY-AGENTS-001 status
 

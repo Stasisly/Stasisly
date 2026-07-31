@@ -16,6 +16,8 @@
 | Surface Prompt Steward | Reviewer of prompt consistency within one surface; grants no runtime authority |
 | Prompt wave | Bounded design and migration cohort, never an activation cohort |
 | Effective prompt tuple | Exact constitutional, surface, domain, agent, runtime and evaluation version binding |
+| Approved documentary prompt | Versioned prompt that passed P0-P14; it grants no runtime configuration or availability |
+| Documentary-only implementation | Prompt artifact exists and is governed, while executable runtime remains absent |
 | Data Router | Contractual routing layer for authorized data placement |
 | Shard Directory | Mapping from tenant/user context to approved placement |
 | Discovery Legacy | Preserved, read-only and non-normative Discovery material |

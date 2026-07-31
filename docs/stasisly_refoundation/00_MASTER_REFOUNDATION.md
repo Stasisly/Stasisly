@@ -42,12 +42,13 @@ is an internal capability layer, not a public surface.
 ## Initial baselines
 
 - Agent catalog: 3,000 versioned metadata records, coverage-driven and not
-  simultaneously active. The catalog is implemented; prompts and runtime are
-  not implemented.
+  simultaneously active. The catalog and four Wave 1 documentary prompts are
+  implemented; runtime remains unimplemented.
 - Historical prompts: 43 preserved as `PROMPT_CREATED` and mapped 43/43 in the
   Re-foundation crosswalk. Their content audit and migration-wave assignments
-  are complete; physical migration, approval, configuration and availability
-  have not started.
+  are complete. The four new canonical Wave 1 coordinator prompts are approved
+  documentary baselines; the historical sources remain intact and the other
+  waves have not started.
 - Data: one canonical PostgreSQL database per environment initially.
 - Provider: Supabase is initial and replaceable.
 - Current Supabase project: `DISCOVERY_LEGACY`, read-only candidate,
@@ -78,6 +79,10 @@ legacy migration is authorized by this document.
 Prompt governance uses independently versioned constitutional, surface,
 domain/family, agent, runtime, task and temporary-instruction layers. Prompt
 text never grants runtime authority, tools, data or memory access.
+
+Nexus, Stasis, Rector and Gerendi have prompt version `1.0.0` in state
+`PROMPT_CREATED/APPROVED/DOCUMENTED_ONLY`. They remain `NOT_AVAILABLE`; no
+runtime configuration, tools or memory have been provisioned.
 
 ## Companion documents
 

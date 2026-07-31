@@ -23,7 +23,8 @@ Non-reciprocal coordinates: 0
 Orphan coordinators: 0
 Historical agents mapped: 43/43
 Historical prompts preserved: 43
-Prompts generated: 0
+Canonical Wave 1 prompts approved: 4
+Prompt-created catalog records: 47
 Runtime agents created: 0
 ```
 

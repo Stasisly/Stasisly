@@ -34,11 +34,16 @@ self-approve a high-impact cross-surface change.
 
 ## Prompt governance
 
-Nexus, Stasis, Rector and Gerendi are the exact Wave 1 prompt-design targets.
-Their catalog roles do not make them active, and this plan creates no prompt for
-them. Surface Prompt Stewards review consistency only after their own canonical
-prompt is approved; they cannot self-approve it or inherit Founder authority.
+Nexus, Stasis, Rector and Gerendi are the exact Wave 1 prompt baselines. Their
+canonical prompts are documentary-approved at version `1.0.0`; they remain
+unconfigured and unavailable. Surface Prompt Stewards review consistency but
+cannot self-approve a prompt or inherit Founder authority.
 
 Prompt changes flow through owner, duplication, risk, security/privacy,
 surface, cross-surface and conditional Founder review. Enforcement remains an
 external runtime responsibility.
+
+The reports-to graph is Founder → Nexus → Stasis/Rector/Gerendi. Founder is a
+human authority boundary, not a catalog agent. Critical unresolved conflicts,
+constitutional changes, privacy exceptions, risk acceptance and emergency
+powers always escalate to the Founder.
