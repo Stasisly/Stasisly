@@ -5,11 +5,15 @@
 | ADR-RF001 Re-foundation and archive | NORMATIVE | APPROVED | DOCUMENTED |
 | ADR-RF002 Multi-surface architecture | NORMATIVE | APPROVED | PLANNED |
 | ADR-RF003 Extensible area hierarchy | NORMATIVE | APPROVED | PLANNED |
-| ADR-RF004 3,000-agent catalog | NORMATIVE | APPROVED | PLANNED |
+| ADR-RF004 3,000-agent catalog | NORMATIVE | APPROVED | CATALOG_IMPLEMENTED |
 | ADR-RF005 PostgreSQL/Supabase | NORMATIVE | APPROVED | DOCUMENTED |
 | ADR-RF006 Database topology/sharding readiness | NORMATIVE | APPROVED | PLANNED |
 | ADR-RF007 Clean Development Supabase | NORMATIVE | APPROVED | NOT_IMPLEMENTED |
 | ADR-RF008 Founder cross-surface control | NORMATIVE | APPROVED | PLANNED |
+| ADR-RF009 Initial catalog and expansion | NORMATIVE | APPROVED | CATALOG_IMPLEMENTED |
+| ADR-RF010 Stable IDs and lifecycle | NORMATIVE | APPROVED | CATALOG_IMPLEMENTED |
+| ADR-RF011 Selective activation | NORMATIVE | APPROVED | CATALOG_IMPLEMENTED |
+| ADR-RF012 Historical prompt migration | NORMATIVE | APPROVED | CATALOG_IMPLEMENTED |
 | Global design, proportional implementation | NORMATIVE_MASTER | APPROVED | DOCUMENTED |
 | API distinct from MCP | NORMATIVE_MASTER | ADOPTED | NOT_IMPLEMENTED_AS_COMPLETE_PLATFORM |
 | Flutter independent from MCP | NORMATIVE_MASTER | ADOPTED | PARTIAL_LEGACY_EVIDENCE_ONLY |

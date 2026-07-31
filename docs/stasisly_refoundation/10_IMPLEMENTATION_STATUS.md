@@ -4,7 +4,7 @@
 |---|---|---|---|---|---|---|---|---|
 | Re-foundation baseline | yes | yes | documentation only | pending package validation | yes after publication | no | no | no |
 | 43 historical prompts | yes | yes | prompt files exist | not validated against Re-foundation | no | no | yes | review |
-| 3,000-agent catalog | yes | yes | no | no | no | no | no | taxonomy approval |
+| 3,000-agent catalog | yes | yes | metadata only | deterministic catalog guards | no | no | no | prompts and runtime |
 | Product Surface target | yes | yes | partial legacy code exists | legacy tests exist | not asserted | no | yes | reconciliation |
 | Development Surface | yes | yes | no complete surface | no | no | no | no | future phase |
 | Administration Surface | yes | yes | no complete surface | no | no | no | no | future phase |
@@ -18,6 +18,23 @@
 | Stasis Engine | architecture target | yes | not proven | no | no | no | legacy concepts | design |
 
 Documentation never upgrades a capability to implemented or operational.
+
+## STASISLY-REFOUNDATION-002 status
+
+```text
+Catalog metadata: 3,000/3,000 implemented
+Product / Development / Administration / Transversal: 1050 / 1200 / 700 / 50
+Historical prompts: 43/43 mapped and preserved as PROMPT_CREATED
+New prompts / runtime agents / granted tools / provisioned memory: 0 / 0 / 0 / 0
+Availability: 0 agents promoted to AVAILABLE
+Catalog and architecture guards: 10/10 new tests pass
+Flutter: 1002 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after no-seed reset
+Remote context: SAFE
+Remote actions / Supabase mutations: 0 / 0
+```
 
 ## STASISLY-REFOUNDATION-001 validation
 

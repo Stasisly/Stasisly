@@ -18,10 +18,10 @@ Surface → domain → family → area → subarea → specialty
 
 ## Required record
 
-`agent_id`, `canonical_name`, `display_name`, `surface`, `domain`, `family`,
-`area`, `subarea`, `specialty`, `subspecialty`, `short_mission`, `agent_type`,
-`coordination_level`, `availability`, `activation_mode`, `risk_level`,
-`prompt_status`, `historical_mapping`, `version`, and `lifecycle_status`.
+The normative `AgentCatalogEntryV1` contract and its 29 fields are defined in
+[`agents/AGENT_CATALOG_SCHEMA_v1.md`](agents/AGENT_CATALOG_SCHEMA_v1.md).
+Machine-readable canonical views are CSV and JSON; Markdown views are derived
+summaries.
 
 ## Governance
 
@@ -33,5 +33,6 @@ Surface → domain → family → area → subarea → specialty
   distinct states.
 - Catalog portability prevents provider lock-in.
 
-The 43 historical prompts remain `PROMPT_CREATED`; they are not duplicated or
-activated by this baseline.
+The 43 historical prompts remain `PROMPT_CREATED`; they are mapped 43/43, not
+duplicated and not activated by this baseline. All 2,957 new entries are
+`CATALOGED`, `NOT_CREATED`, `NOT_IMPLEMENTED` and `NOT_AVAILABLE`.

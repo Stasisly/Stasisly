@@ -41,10 +41,11 @@ is an internal capability layer, not a public surface.
 
 ## Initial baselines
 
-- Agent catalog: 3,000 cataloged capacity slots, coverage-driven and not
-  simultaneously active.
-- Historical prompts: 43 preserved as `PROMPT_CREATED`, pending crosswalk
-  validation.
+- Agent catalog: 3,000 versioned metadata records, coverage-driven and not
+  simultaneously active. The catalog is implemented; prompts and runtime are
+  not implemented.
+- Historical prompts: 43 preserved as `PROMPT_CREATED` and mapped 43/43 in the
+  Re-foundation crosswalk. They remain unavailable pending later prompt waves.
 - Data: one canonical PostgreSQL database per environment initially.
 - Provider: Supabase is initial and replaceable.
 - Current Supabase project: `DISCOVERY_LEGACY`, read-only candidate,

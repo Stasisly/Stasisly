@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "catalog_version": "1.0.0",
+  "default_lifecycle": "CATALOGED",
+  "default_prompt_status": "NOT_CREATED",
+  "default_implementation_status": "NOT_IMPLEMENTED",
+  "default_availability": "NOT_AVAILABLE",
+  "surfaces": [
+    {
+      "surface": "PRODUCT",
+      "prefix": "PRO",
+      "total": 1050,
+      "coordinator_name": "stasis",
+      "coordinator_display_name": "Stasis",
+      "contexts": ["personal guidance", "longitudinal follow-up", "preventive planning", "accessible education", "evidence review", "risk-aware triage", "goal adaptation", "multilingual communication"],
+      "groups": [
+        {"domain":"stasis_product_coordination","area":"Stasis","allocation":70,"topics":["product orchestration","cross-area handoff","user intent","plan coherence","collective synthesis","product traceability","experience continuity"]},
+        {"domain":"health","area":"Salud","allocation":450,"topics":["clinical coordination","internal medicine","cardiology","neurology","psychiatry","psychology","endocrinology","pulmonology","gastroenterology","nephrology","urology","gynecology","pediatrics","geriatrics","dermatology","rheumatology","hematology","immunology","infectious diseases","informational oncology","pain","rehabilitation","physiotherapy","prevention","public health","medication information","health monitoring","health education","consultation preparation","clinical safety escalation"]},
+        {"domain":"nutrition","area":"Nutricion","allocation":150,"topics":["general nutrition","sports nutrition","vegan nutrition","vegetarian nutrition","mediterranean nutrition","informational clinical nutrition","allergies intolerances","micronutrients","macronutrients","hydration","meal planning","food shopping","recipes","eating behavior","budget nutrition","food culture","nutrition evidence","nutrition safety"]},
+        {"domain":"training","area":"Entrenamiento","allocation":150,"topics":["strength","hypertrophy","power","endurance","running","cycling","swimming","triathlon","mobility","flexibility","movement technique","calisthenics","functional training","home training","recovery","injury prevention","sport-specific preparation","periodization","fitness assessment","training safety"]},
+        {"domain":"wellness","area":"Wellness","allocation":120,"topics":["sleep","rest","circadian rhythms","mindfulness","meditation","breathing","stress","emotional regulation","habits","routines","digital balance","social wellbeing","work life balance","travel wellbeing","nature exposure","wellness recovery"]},
+        {"domain":"memory_personalization","area":"Stasis","allocation":35,"topics":["preference memory","goal memory","consent-aware personalization","memory provenance","memory correction","memory expiry","cross-area personalization"]},
+        {"domain":"research","area":"Stasis","allocation":25,"topics":["rapid research","deep research","strategic research","source appraisal","participant traceability","research synthesis"]},
+        {"domain":"user_safety","area":"Stasis","allocation":20,"topics":["user safeguarding","harm escalation","medical disclaimer","vulnerability detection","crisis referral"]},
+        {"domain":"accessibility_communication","area":"Stasis","allocation":15,"topics":["accessible communication","plain language","internationalization","conversational experience","inclusive interaction"]},
+        {"domain":"sensors_integrations","area":"Stasis","allocation":10,"topics":["wearable data interpretation","sensor quality","integration consent","device interoperability"]},
+        {"domain":"product_quality","area":"Stasis","allocation":5,"topics":["product quality","user outcome review","product coherence"]}
+      ]
+    },
+    {
+      "surface": "DEVELOPMENT",
+      "prefix": "DEV",
+      "total": 1200,
+      "coordinator_name": "rector",
+      "coordinator_display_name": "Rector",
+      "contexts": ["architecture design", "implementation planning", "code review", "local verification", "release readiness", "incident prevention", "scalability evolution", "technical debt control"],
+      "groups": [
+        {"domain":"technical_direction","area":"Development","allocation":40,"topics":["technical strategy","delivery governance","engineering roadmap","decision management","technical coordination"]},
+        {"domain":"architecture","area":"Development","allocation":80,"topics":["enterprise architecture","modular architecture","contract architecture","event architecture","workflow architecture","regional architecture","service extraction","portability"]},
+        {"domain":"flutter_mobile","area":"Client Engineering","allocation":90,"topics":["Flutter core","mobile performance","offline synchronization","state management","navigation","accessibility engineering","localization engineering","mobile testing","device compatibility"]},
+        {"domain":"platform_clients","area":"Client Engineering","allocation":60,"topics":["iOS engineering","Android engineering","Web engineering","responsive UI","browser compatibility","native integration"]},
+        {"domain":"frontend_design_systems","area":"Client Engineering","allocation":70,"topics":["frontend architecture","design systems","component libraries","visual regression","feature flags","configuration","client caching"]},
+        {"domain":"backend_api","area":"Backend Engineering","allocation":100,"topics":["backend architecture","API design","rate limiting","queueing","events","workflows","search","notifications","file processing","report generation"]},
+        {"domain":"postgres_supabase_data","area":"Data Engineering","allocation":90,"topics":["PostgreSQL","Supabase","schema design","RLS","database testing","migration engineering","backup","restore","data pipelines"]},
+        {"domain":"data_router_sharding","area":"Data Engineering","allocation":70,"topics":["Data Router","Shard Directory","data placement","shard migration","horizontal sharding","cross-shard analytics","regional data"]},
+        {"domain":"security_privacy","area":"Security Engineering","allocation":100,"topics":["application security","privacy engineering","supply-chain security","dependency security","secrets management","forensics","threat modeling","cryptography","security incident response","authorization"]},
+        {"domain":"ai_orchestration","area":"AI Engineering","allocation":110,"topics":["LLM engineering","multi-agent orchestration","Agent Registry","Model Gateway","multi-model routing","agent lifecycle","agent simulation","AI red teaming","prompt injection defense","agent cost control","recommendation systems"]},
+        {"domain":"prompts_memory_rag_evaluation","area":"AI Engineering","allocation":90,"topics":["prompt engineering","PromptOps","federated memory","RAG","embedding evaluation","LLM evaluation","data quality","research orchestration","context optimization"]},
+        {"domain":"testing_qa","area":"Quality Engineering","allocation":80,"topics":["unit testing","integration testing","contract testing","end-to-end testing","QA strategy","test data","accessibility testing","LLM testing"]},
+        {"domain":"devops_sre_observability","area":"Platform Engineering","allocation":90,"topics":["DevOps","CI CD","SRE","observability","incident command","disaster recovery","chaos engineering","release engineering","environment management"]},
+        {"domain":"performance_scalability","area":"Platform Engineering","allocation":50,"topics":["performance engineering","capacity planning","caching","load testing","cost-aware scalability","reliability modeling"]},
+        {"domain":"integrations_commerce_stores","area":"Integration Engineering","allocation":50,"topics":["MCP","external integrations","payments engineering","subscription engineering","App Store release","Play Store release","provider adapters"]},
+        {"domain":"documentation_finops_surfaces","area":"Development Operations","allocation":30,"topics":["technical documentation","FinOps","Development Surface","Founder Console engineering","developer experience"]}
+      ]
+    },
+    {
+      "surface": "ADMINISTRATION",
+      "prefix": "ADM",
+      "total": 700,
+      "coordinator_name": "gerendi",
+      "coordinator_display_name": "Gerendi",
+      "contexts": ["policy design", "daily operations", "case review", "controlled escalation", "service quality", "regulatory evidence", "performance analysis", "continuity planning"],
+      "groups": [
+        {"domain":"administrative_direction_operations","area":"Administration","allocation":50,"topics":["administrative strategy","operating model","service operations","portfolio governance","administrative coordination"]},
+        {"domain":"users_accounts","area":"User Operations","allocation":45,"topics":["user operations","account lifecycle","identity support","account recovery","user communications"]},
+        {"domain":"roles_permissions","area":"Access Operations","allocation":35,"topics":["role governance","permission review","access certification","elevation review","segregation of duties"]},
+        {"domain":"subscriptions_billing_finance","area":"Finance Operations","allocation":85,"topics":["subscriptions","billing","payments operations","financial reconciliation","refunds","tax operations","revenue accounting","pricing operations"]},
+        {"domain":"customer_success_support","area":"Customer Operations","allocation":85,"topics":["Customer Success","customer support","onboarding","adoption","case management","satisfaction","retention service","expansion support"]},
+        {"domain":"moderation_trust_safety","area":"Trust Operations","allocation":45,"topics":["content moderation","trust and safety","abuse response","community standards","safety appeals"]},
+        {"domain":"privacy_legal_compliance","area":"Governance Operations","allocation":45,"topics":["privacy operations","legal operations","regulatory compliance","data subject requests","policy compliance"]},
+        {"domain":"fraud_risk","area":"Risk Operations","allocation":40,"topics":["fraud prevention","risk assessment","transaction monitoring","investigation support","risk controls"]},
+        {"domain":"catalog_content","area":"Content Operations","allocation":35,"topics":["agent catalog operations","content governance","content lifecycle","taxonomy operations","editorial quality"]},
+        {"domain":"analytics","area":"Business Analytics","allocation":35,"topics":["business analytics","product analytics","operational reporting","attribution analysis","decision intelligence"]},
+        {"domain":"marketing_advertising","area":"Marketing","allocation":70,"topics":["marketing strategy","paid advertising","campaign operations","brand management","content marketing","channel planning","marketing measurement"]},
+        {"domain":"growth_lifecycle","area":"Growth","allocation":60,"topics":["growth strategy","acquisition","activation","retention","experimentation","lifecycle marketing","conversion optimization"]},
+        {"domain":"crm_search_social_influence","area":"Audience Operations","allocation":30,"topics":["CRM","SEO","social media","influencer programs","community growth"]},
+        {"domain":"partnerships_revenue_vendors","area":"Commercial Operations","allocation":20,"topics":["partnerships","affiliation","revenue operations","vendor management","procurement"]},
+        {"domain":"people_incidents_continuity_surface","area":"Corporate Operations","allocation":20,"topics":["people operations","administrative incidents","business continuity","Administration Surface","operational resilience"]}
+      ]
+    },
+    {
+      "surface": "TRANSVERSAL",
+      "prefix": "TRV",
+      "total": 50,
+      "coordinator_name": "nexus",
+      "coordinator_display_name": "Nexus",
+      "contexts": ["cross-surface governance", "Founder decision support", "enterprise review", "strategic planning", "system-wide escalation"],
+      "groups": [
+        {"domain":"nexus_coordination","area":"Global","allocation":1,"topics":["global coordination"]},
+        {"domain":"global_strategy_roadmap","area":"Global","allocation":5,"topics":["global strategy","master roadmap","portfolio prioritization"]},
+        {"domain":"global_risk_security_privacy","area":"Global","allocation":8,"topics":["corporate risk","global security","global privacy","critical escalation"]},
+        {"domain":"enterprise_architecture_portability","area":"Global","allocation":7,"topics":["enterprise architecture","provider portability","cross-surface contracts"]},
+        {"domain":"cross_surface_audit_quality","area":"Global","allocation":6,"topics":["transversal audit","system quality","decision traceability"]},
+        {"domain":"cross_surface_resolution","area":"Global","allocation":5,"topics":["surface conflict resolution","dependency arbitration","shared capability review"]},
+        {"domain":"global_costs","area":"Global","allocation":4,"topics":["global cost governance","AI cost portfolio","infrastructure economics"]},
+        {"domain":"resilience_continuity","area":"Global","allocation":5,"topics":["enterprise resilience","global continuity","systemic incident coordination"]},
+        {"domain":"global_compliance","area":"Global","allocation":4,"topics":["global compliance","multi-region policy","corporate ethics"]},
+        {"domain":"founder_liaison","area":"Founder","allocation":5,"topics":["Founder liaison","elevation coordination","Founder evidence preparation"]}
+      ]
+    }
+  ]
+}
