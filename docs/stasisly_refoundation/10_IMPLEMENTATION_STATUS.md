@@ -7,6 +7,8 @@
 | 3,000-agent catalog | yes | yes | metadata only | deterministic catalog guards | no | no | no | prompts and runtime |
 | Agent prompt governance | yes | yes | documentation only | deterministic audit/wave guards | no | no | no | prompt implementation |
 | Wave 1 coordinator prompts | yes | yes | four documentary prompts | P0-P14 documentary gates | no | no | no | runtime P15-P17 |
+| Wave 2 governance prompts | yes | yes | 18 documentary prompts | P0-P14 documentary gates | no | no | no | runtime P15-P17 |
+| Wave 3 architecture prompts | yes | yes | 40 documentary prompts | P0-P14 documentary gates | no | no | no | runtime P15-P17 |
 | Product Surface target | yes | yes | partial legacy code exists | legacy tests exist | not asserted | no | yes | reconciliation |
 | Development Surface | yes | yes | no complete surface | no | no | no | no | future phase |
 | Administration Surface | yes | yes | no complete surface | no | no | no | no | future phase |
@@ -37,6 +39,27 @@ P15 / P16 / P17 executed: 0 / 0 / 0
 Development Surface: PURPOSE_DOCUMENTED_NOT_IMPLEMENTED
 Focused Re-foundation and Wave 1/2 guards: 49/49 pass
 Flutter: 1033 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after no-seed reset
+Remote context: SAFE
+Remote actions / Supabase mutations: 0 / 0
+```
+
+## STASISLY-AGENTS-004 validation
+
+```text
+Wave 3 scope / prompts / evaluations: 40 / 40 / 40
+Historical migrations / new prompts: 13 / 27
+Canonical sections: 1280/1280
+P0-P14: 600/600 PASS
+Adversarial cases: 200/200 DESIGNED_PASS
+P15-P17: NOT_EXECUTED
+Catalog documentary / prompt-created records: 62 / 86
+Runtime agents / tools / memories / privileged access: 0 / 0 / 0 / 0
+Data Router / Shard Directory / Agent Registry / Model Gateway / Stasis Engine: NOT_IMPLEMENTED
+Focused Wave 3 and catalog guards: 44/44 pass
+Flutter: 1043 pass / 5 approved skips / 0 failures
 Analyzer: 0 errors / 0 warnings / 36 inherited infos
 Deno: 86/86 pass; format 62 files
 SQL local: 740/740 pass after no-seed reset

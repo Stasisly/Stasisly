@@ -148,12 +148,12 @@ void main() {
         .toList();
     final documentedHistorical = historical
         .where(
-          (entry) => approvedWave2GovernanceIds.contains(entry['agent_id']),
+          (entry) => approvedDocumentaryPromptIds.contains(entry['agent_id']),
         )
         .toList();
     final pendingHistorical = historical
         .where(
-          (entry) => !approvedWave2GovernanceIds.contains(entry['agent_id']),
+          (entry) => !approvedDocumentaryPromptIds.contains(entry['agent_id']),
         )
         .toList();
     final approvedCanonical = canonical
@@ -167,10 +167,10 @@ void main() {
         )
         .toList();
     expect(historical, hasLength(43));
-    expect(documentedHistorical, hasLength(6));
-    expect(pendingHistorical, hasLength(37));
-    expect(approvedCanonical, hasLength(16));
-    expect(cataloged, hasLength(2941));
+    expect(documentedHistorical, hasLength(19));
+    expect(pendingHistorical, hasLength(24));
+    expect(approvedCanonical, hasLength(43));
+    expect(cataloged, hasLength(2914));
     for (final entry in pendingHistorical) {
       expect(entry['prompt_status'], 'PROMPT_CREATED');
       expect(entry['lifecycle_status'], 'PROMPT_CREATED');

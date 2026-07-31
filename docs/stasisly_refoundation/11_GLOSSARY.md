@@ -25,6 +25,11 @@
 | Development Surface | Planned governed conversational and visual interface for building Stasisly; not yet implemented |
 | Data Router | Contractual routing layer for authorized data placement |
 | Shard Directory | Mapping from tenant/user context to approved placement |
+| Agent Registry | Future internal registry of independently versioned agent runtime bindings; not implemented |
+| Model Gateway | Future internal boundary for approved model selection, policy and cost controls; not implemented |
+| Stasis Engine | Future internal orchestration subsystem; not a surface or client authority |
+| RAG | Attributed retrieval evidence; neither durable memory nor authority |
+| Principal database | Initial canonical PostgreSQL database for one environment before evidence-driven scaling |
 | Discovery Legacy | Preserved, read-only and non-normative Discovery material |
 | Foundation Legacy | Preserved, non-normative Foundation evidence |
 | Re-foundation | Current clean documentary and architectural baseline |

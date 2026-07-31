@@ -86,6 +86,11 @@ have prompt version `1.0.0` in state
 runtime configuration, tools or memory have been provisioned. Founder remains
 an external human authority and cannot be impersonated or replaced by an agent.
 
+The exact 40 Wave 3 Architecture, Data and Multi-Agent roles also have canonical
+prompt version `1.0.0` in `DOCUMENTED_ONLY`. PostgreSQL is canonical, Supabase
+is replaceable, Product uses a versioned API rather than MCP, and all described
+platform components remain `NOT_IMPLEMENTED`.
+
 ## Companion documents
 
 - [Product architecture](01_PRODUCT_ARCHITECTURE.md)

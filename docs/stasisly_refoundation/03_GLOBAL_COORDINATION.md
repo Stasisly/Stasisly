@@ -60,3 +60,10 @@ challenge; reporting relationships transfer no approval or privileged access.
 explicit Founder authorization with purpose, scope, resources and expiry;
 Emergency also requires necessity and retrospective review. No agent grants or
 self-selects either mode.
+
+## Wave 3 technical coordination
+
+The 40 Wave 3 Development roles coordinate through Rector and the Architecture
+domain coordinator. Catalog identity, prompt, runtime, model, tool, memory,
+retrieval and evaluation bindings remain independent. Reporting transfers no
+approval, credentials, data access or execution authority.

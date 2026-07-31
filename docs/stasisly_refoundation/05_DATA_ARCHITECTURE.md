@@ -42,3 +42,9 @@ Portability includes export, migration, verification, rollback and audit.
 Real sharding requires metrics, a dedicated ADR, operational ownership,
 observability, test evidence and rollback. This baseline creates no shards and
 changes no schema.
+
+PostgreSQL is the canonical database contract and Supabase is the initial
+replaceable provider. One principal database per environment is the initial
+implementation model. Data Router and Shard Directory are `NOT_IMPLEMENTED`;
+fixed 1000-user placement blocks are forbidden. Memory, RAG indexes, research
+evidence and evaluations have separate provenance, access and retention.

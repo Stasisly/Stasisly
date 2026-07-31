@@ -21,3 +21,7 @@ from `00001`, synthetic-only seeds, explicit RLS and explicit surface access.
 
 No remote action, deployment, secret mutation or project creation is authorized
 by this document.
+
+Each environment begins with one principal PostgreSQL database. Any future
+replication, partitioning, sharding or extraction requires environment-specific
+metrics, authorization, migration evidence, rollback and a dedicated ADR.

@@ -47,3 +47,8 @@ workflows. It is not a public surface.
 - Versioned contracts mediate data and actions.
 - Each surface can evolve or scale independently.
 - A new top-level surface requires Founder approval and an ADR.
+- Flutter is a Product client and contains no service credentials, cross-surface
+  authorization or sensitive backend logic.
+- MCP is an internal tool protocol, never the Product API.
+- Internal Platform components documented here remain `NOT_IMPLEMENTED` until
+  runtime evidence proves otherwise.

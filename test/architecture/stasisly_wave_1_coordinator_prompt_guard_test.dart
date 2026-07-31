@@ -50,7 +50,8 @@ void main() {
             (file) =>
                 RegExp(r'/AG-(TRV|PRO|DEV|ADM)-\d+_').hasMatch(file.path) &&
                 !file.path.startsWith(waveRoot) &&
-                !file.path.startsWith('$root/agents/prompts/wave_2'),
+                !file.path.startsWith('$root/agents/prompts/wave_2') &&
+                !file.path.startsWith('$root/agents/prompts/wave_3'),
           ),
       isEmpty,
     );
@@ -121,7 +122,7 @@ void main() {
     expect(approved.map((entry) => entry['agent_id']).toSet(), ids);
     expect(
       catalog.where((entry) => entry['prompt_status'] == 'PROMPT_CREATED'),
-      hasLength(59),
+      hasLength(86),
     );
     expect(
       catalog.where((entry) => entry['availability'] == 'NOT_AVAILABLE'),
@@ -131,7 +132,7 @@ void main() {
       catalog.where(
         (entry) => entry['implementation_status'] == 'NOT_IMPLEMENTED',
       ),
-      hasLength(2978),
+      hasLength(2938),
     );
   });
 

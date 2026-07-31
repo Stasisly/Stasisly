@@ -702,7 +702,7 @@ Waves are prompt-design cohorts, never activation or runtime authorization.
 | WAVE_0 | Governance architecture | RF-002 published | Templates, gates and workflow approved | None | RF009-RF012 | HIGH | PromptOps, Security, Privacy, Evaluation | YES | STASISLY-AGENTS-001 | Not authorized |
 | WAVE_1 | Principal coordinators | Wave 0 ready | Four prompts pass P0-P14; none configured | ${_ids(assignments, 'WAVE_1')} | Wave 0 | CRITICAL | Nexus governance, four surface stewards, Security, Founder | YES | STASISLY-AGENTS-002 | Separate package |
 | WAVE_2 | Governance, security and Founder control | Wave 1 design reviewed | ${counts['WAVE_2']} prompts pass P0-P14 | See assignments | Wave 1 | CRITICAL | Security, Privacy, Audit, Founder | YES | STASISLY-AGENTS-003 | Separate package |
-| WAVE_3 | Technical and multi-agent architecture | Constitutional and security layers stable | ${counts['WAVE_3']} prompts pass P0-P14 | See assignments | Waves 1-2 | HIGH | Architecture, Security, Evaluation | YES | STASISLY-AGENTS-WAVE-003 | Separate package |
+| WAVE_3 | Technical and multi-agent architecture | Constitutional and security layers stable | ${counts['WAVE_3']} prompts pass P0-P14 | See assignments | Waves 1-2 | HIGH | Architecture, Security, Evaluation | YES | STASISLY-AGENTS-004 | Separate package |
 | WAVE_4 | Product core | Product policy and architecture stable | ${counts['WAVE_4']} prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Stasis, Product, Safety, Privacy | CONDITIONAL | STASISLY-AGENTS-WAVE-004 | Separate package |
 | WAVE_5 | Development core | Rector and technical architecture stable | ${counts['WAVE_5']} prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Rector, Architecture, Security, QA | CONDITIONAL | STASISLY-AGENTS-WAVE-005 | Separate package |
 | WAVE_6 | Administration core | Gerendi and administrative policy stable | ${counts['WAVE_6']} prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Gerendi, Privacy, Compliance, QA | CONDITIONAL | STASISLY-AGENTS-WAVE-006 | Separate package |
@@ -725,7 +725,14 @@ canonical documentary prompts; none is configured, available or active.
 Wave 2 contains exactly 18 Transversal catalog IDs (`AG-TRV-0002` through
 `AG-TRV-0019`). STASISLY-AGENTS-003 approved six historical migrations and
 twelve new documentary prompts through P0-P14. None is configured, available
-or active. Wave 3 remains a separate Founder-reviewed package.
+or active.
+
+## Wave 3 status
+
+Wave 3 contains exactly 40 Development catalog IDs. STASISLY-AGENTS-004
+approved thirteen historical migrations and twenty-seven new documentary
+prompts through P0-P14. None is configured, available or active. Wave 4
+remains a separate Founder-reviewed package.
 ''';
 }
 
@@ -777,35 +784,37 @@ String _migrationReadiness(
 ```text
 Governance: DOCUMENTED
 Historical audit: COMPLETED
-Migration: WAVE_2_DOCUMENTARY_BASELINE_COMPLETED
-Prompt implementation: 22 DOCUMENTED_ONLY
+Migration: WAVE_3_DOCUMENTARY_BASELINE_COMPLETED
+Prompt implementation: 62 DOCUMENTED_ONLY
 Runtime: NOT_IMPLEMENTED
 Historical prompts audited: ${audits.length}
 Historical files missing: 0
 Catalog assignments: ${assignments.length}/3000
 Historical wave assignments: 43/43
 CSV/JSON parity: PASS
-New individual prompts created: 16
-Historical prompts migrated to canonical baseline: 6
+New individual prompts created: 43
+Historical prompts migrated to canonical baseline: 19
 Historical prompts modified: 0
 Agents available or active: 0
 Wave 1 P0-P14 evaluations: 60/60 PASS
 Wave 1 evaluation suites: 4 DESIGNED_NOT_RUNTIME_EXECUTED
 Wave 2 P0-P14 evaluations: 270/270 PASS
 Wave 2 evaluation suites: 18 DESIGNED_NOT_RUNTIME_EXECUTED
+Wave 3 P0-P14 evaluations: 600/600 PASS
+Wave 3 evaluation suites: 40 DESIGNED_NOT_RUNTIME_EXECUTED
 ```
 
 ## Gate result
 
-Nexus, Stasis, Rector, Gerendi and all 18 Wave 2 agents pass P0-P14 as
+Nexus, Stasis, Rector, Gerendi and all Wave 2 and Wave 3 agents pass P0-P14 as
 documentary prompt baselines.
 P15 runtime configuration, P16 runtime testing and P17 availability are not
 executed and remain outside scope.
 
 ## Next package
 
-`STASISLY-AGENTS-004` may migrate only Wave 3 Architecture, Data and Multi-Agent
-Platform prompts after Founder review. It must not configure or activate them.
+`STASISLY-AGENTS-005` may migrate only Wave 4 Product Core, Safety, Memory and
+Research prompts after Founder review. It must not configure or activate them.
 ''';
 
 Map<String, int> _counts(List<Map<String, Object?>> records, String field) {

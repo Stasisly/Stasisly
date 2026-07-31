@@ -27,3 +27,7 @@ implemented capability. “Secret chats” are not a Product feature.
 MCP does not replace the Product API. Flutter does not depend directly on MCP.
 Stasis Engine is an internal subsystem and is `NOT_IMPLEMENTED` unless later
 evidence explicitly proves otherwise.
+
+Wave 3 adds no runtime authority. Agent Registry, Model Gateway, Data Router and
+Shard Directory are likewise `NOT_IMPLEMENTED`. Tool, model, memory and
+retrieval bindings remain deny-by-default, independently approved and auditable.

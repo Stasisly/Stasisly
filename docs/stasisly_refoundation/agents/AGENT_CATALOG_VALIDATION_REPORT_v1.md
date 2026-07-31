@@ -25,7 +25,8 @@ Historical agents mapped: 43/43
 Historical prompts preserved: 43
 Canonical Wave 1 prompts approved: 4
 Canonical Wave 2 prompts approved: 18
-Prompt-created catalog records: 59
+Canonical Wave 3 prompts approved: 40
+Prompt-created catalog records: 86
 Runtime agents created: 0
 ```
 
