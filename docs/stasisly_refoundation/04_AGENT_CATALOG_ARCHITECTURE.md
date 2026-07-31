@@ -33,13 +33,13 @@ summaries.
   distinct states.
 - Catalog portability prevents provider lock-in.
 
-The 43 historical identities remain mapped 43/43 and not activated. Nineteen of
-their prompts now have a canonical Wave 2 or Wave 3 migration baseline; 24
-retain only their historical prompt state. Four Wave 1 coordinators, 18 Wave 2
-agents and 40 Wave 3 agents
+The 43 historical identities remain mapped 43/43 and not activated. Twenty-eight
+of their prompts now have a canonical Wave 2, Wave 3 or Wave 4 migration
+baseline; 15 retain only their historical prompt state. Four Wave 1
+coordinators, 18 Wave 2 agents, 40 Wave 3 agents and 50 Wave 4 agents
 are `PROMPT_CREATED`, `APPROVED`, `DOCUMENTED_ONLY` and `NOT_AVAILABLE`.
-Prompt-created records total 86 because the 19 migrated historical records
-were already prompt-created. The other 2,914 canonical entries remain
+Prompt-created records total 127 because the 28 migrated historical records
+were already prompt-created. The other 2,873 canonical entries remain
 `CATALOGED`, `NOT_CREATED`, `NOT_IMPLEMENTED` and `NOT_AVAILABLE`.
 
 ## Prompt architecture

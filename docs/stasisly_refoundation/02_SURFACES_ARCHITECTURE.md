@@ -15,6 +15,12 @@
 Targets iOS, Android and Web. It contains the user-facing Product capabilities.
 The exact Web domain remains an infrastructure decision.
 
+Stasis is its planned principal screen and bounded central coordinator. Salud,
+Nutricion, Entrenamiento and Wellness remain independently extensible Product
+areas. Product behavior must preserve safety escalation, transparent agent
+participation, accessibility and inclusive interaction across all three client
+platforms. Wave 4 documents these contracts but implements no Product runtime.
+
 ## Development Surface
 
 Targets `dev.stasisly.com`. It combines technical chat, projects, agents,

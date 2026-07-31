@@ -8,7 +8,7 @@ Waves are prompt-design cohorts, never activation or runtime authorization.
 | WAVE_1 | Principal coordinators | Wave 0 ready | Four prompts pass P0-P14; none configured | AG-PRO-0001, AG-DEV-0001, AG-ADM-0001, AG-TRV-0001 | Wave 0 | CRITICAL | Nexus governance, four surface stewards, Security, Founder | YES | STASISLY-AGENTS-002 | Separate package |
 | WAVE_2 | Governance, security and Founder control | Wave 1 design reviewed | 18 prompts pass P0-P14 | See assignments | Wave 1 | CRITICAL | Security, Privacy, Audit, Founder | YES | STASISLY-AGENTS-003 | Separate package |
 | WAVE_3 | Technical and multi-agent architecture | Constitutional and security layers stable | 40 prompts pass P0-P14 | See assignments | Waves 1-2 | HIGH | Architecture, Security, Evaluation | YES | STASISLY-AGENTS-004 | Separate package |
-| WAVE_4 | Product core | Product policy and architecture stable | 50 prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Stasis, Product, Safety, Privacy | CONDITIONAL | STASISLY-AGENTS-WAVE-004 | Separate package |
+| WAVE_4 | Product core | Product policy and architecture stable | 50 prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Stasis, Product, Safety, Privacy | YES | STASISLY-AGENTS-005 | Separate package |
 | WAVE_5 | Development core | Rector and technical architecture stable | 60 prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Rector, Architecture, Security, QA | CONDITIONAL | STASISLY-AGENTS-WAVE-005 | Separate package |
 | WAVE_6 | Administration core | Gerendi and administrative policy stable | 50 prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Gerendi, Privacy, Compliance, QA | CONDITIONAL | STASISLY-AGENTS-WAVE-006 | Separate package |
 | WAVE_7_PLUS | Progressive specialization | Relevant core wave approved | Bounded sub-wave passes P0-P14 | 2778 deferred assignments | Waves 1-6 by domain | VARIABLE | Domain and mandatory risk reviewers | CONDITIONAL | Future bounded packages | Separate package |
@@ -36,5 +36,11 @@ or active.
 
 Wave 3 contains exactly 40 Development catalog IDs. STASISLY-AGENTS-004
 approved thirteen historical migrations and twenty-seven new documentary
-prompts through P0-P14. None is configured, available or active. Wave 4
-remains a separate Founder-reviewed package.
+prompts through P0-P14. None is configured, available or active.
+
+## Wave 4 status
+
+Wave 4 contains exactly 50 Product catalog IDs. STASISLY-AGENTS-005 approved
+nine historical migrations and forty-one new documentary prompts through
+P0-P14. None is configured, available or active. Wave 5 remains a separate
+Founder-reviewed package.

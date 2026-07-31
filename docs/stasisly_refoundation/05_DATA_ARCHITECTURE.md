@@ -48,3 +48,10 @@ replaceable provider. One principal database per environment is the initial
 implementation model. Data Router and Shard Directory are `NOT_IMPLEMENTED`;
 fixed 1000-user placement blocks are forbidden. Memory, RAG indexes, research
 evidence and evaluations have separate provenance, access and retention.
+
+Wave 4 further requires federated Product memory to preserve consent, scope,
+provenance, timestamp, confidence, retention, deletion and supersession. A
+conflict must remain visible until resolved and may not be silently overwritten.
+Research artifacts separately preserve mode, participants, sources, uncertainty
+and decision traceability. No memory store, RAG index or research runtime is
+created by these documentary contracts.

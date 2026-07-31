@@ -9,6 +9,7 @@
 | Wave 1 coordinator prompts | yes | yes | four documentary prompts | P0-P14 documentary gates | no | no | no | runtime P15-P17 |
 | Wave 2 governance prompts | yes | yes | 18 documentary prompts | P0-P14 documentary gates | no | no | no | runtime P15-P17 |
 | Wave 3 architecture prompts | yes | yes | 40 documentary prompts | P0-P14 documentary gates | no | no | no | runtime P15-P17 |
+| Wave 4 Product prompts | yes | yes | 50 documentary prompts | P0-P14 documentary gates | no | no | no | runtime P15-P17 |
 | Product Surface target | yes | yes | partial legacy code exists | legacy tests exist | not asserted | no | yes | reconciliation |
 | Development Surface | yes | yes | no complete surface | no | no | no | no | future phase |
 | Administration Surface | yes | yes | no complete surface | no | no | no | no | future phase |
@@ -22,6 +23,28 @@
 | Stasis Engine | architecture target | yes | not proven | no | no | no | legacy concepts | design |
 
 Documentation never upgrades a capability to implemented or operational.
+
+## STASISLY-AGENTS-005 validation
+
+```text
+Wave 4 scope / prompts / evaluations: 50 / 50 / 50
+Historical migrations / new prompts / reclassified: 9 / 41 / 0
+Canonical sections: 1600/1600
+P0-P14: 750/750 PASS
+Adversarial cases: 250/250 DESIGNED_PASS
+P15-P17: NOT_EXECUTED
+Catalog documentary / prompt-created records: 112 / 127
+Runtime agents / tools / memories / privileged access: 0 / 0 / 0 / 0
+Product / memory / research runtime: NOT_IMPLEMENTED / NOT_IMPLEMENTED / NOT_IMPLEMENTED
+Availability / active agents: 0 / 0
+Focused Wave 4 and cumulative guards: 67/67 pass
+Flutter: 1054 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after no-seed reset
+Remote context: SAFE
+Remote actions / Supabase mutations: 0 / 0
+```
 
 ## STASISLY-AGENTS-003 status
 

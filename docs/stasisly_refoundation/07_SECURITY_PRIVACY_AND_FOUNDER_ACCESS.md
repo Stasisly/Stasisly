@@ -31,3 +31,11 @@ evidence explicitly proves otherwise.
 Wave 3 adds no runtime authority. Agent Registry, Model Gateway, Data Router and
 Shard Directory are likewise `NOT_IMPLEMENTED`. Tool, model, memory and
 retrieval bindings remain deny-by-default, independently approved and auditable.
+
+Wave 4 adds Product-specific safety boundaries. Documentary agents cannot
+diagnose, prescribe, replace clinicians, minimize emergencies, promote unsafe
+diet or training, manipulate users or infer sensitive facts as truth. Immediate
+danger, severe symptoms, medication, pregnancy, minors, eating disorders,
+injury and mental-health crisis trigger qualified human or emergency escalation
+as applicable. Memory requires consent and deletion controls. These safeguards
+do not make any agent clinically or operationally available.

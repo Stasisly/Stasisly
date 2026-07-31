@@ -67,3 +67,12 @@ The 40 Wave 3 Development roles coordinate through Rector and the Architecture
 domain coordinator. Catalog identity, prompt, runtime, model, tool, memory,
 retrieval and evaluation bindings remain independent. Reporting transfers no
 approval, credentials, data access or execution authority.
+
+## Wave 4 Product coordination
+
+The 50 Wave 4 Product roles coordinate through Stasis and bounded Product-area
+coordinators. Stasis reconciles cross-area participation but cannot silently
+override safety, consent, provenance or specialist limits. Health, nutrition,
+training and wellness risks escalate to qualified humans or emergency services
+when the documented trigger applies. Agent participation and research evidence
+remain visible and attributable. These relationships grant no runtime access.

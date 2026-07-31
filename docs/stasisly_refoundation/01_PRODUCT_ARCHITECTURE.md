@@ -41,6 +41,18 @@ Product may expose Stasis, areas, profile, memory, conversations,
 investigations, specialists, subscriptions and settings. Their presence in the
 architecture does not assert current implementation or operational readiness.
 
+Stasis is the planned principal Product screen, central coordinator and user
+interface to the multi-agent system. It coordinates Salud, Nutricion,
+Entrenamiento and Wellness without diagnosis, prescription, clinician
+replacement or unlimited clinical authority. Safety-sensitive requests require
+bounded guidance, explicit uncertainty and human or emergency escalation.
+
+Federated Product memory requires consent, scoped access, provenance,
+timestamps, confidence, retention, deletion and explicit conflict handling.
+Research is classified as `QUICK`, `DEEP` or `STRATEGIC`, with evidence quality,
+participant transparency and traceability proportional to the mode. These are
+documentary contracts; memory and research runtime are not implemented.
+
 ## Growth rules
 
 - No hard-coded assumption may make the five initial areas permanent.
@@ -57,3 +69,8 @@ architecture does not assert current implementation or operational readiness.
 Final area taxonomy, Product domain (`stasisly.com` or `app.stasisly.com`),
 memory implementation, research execution, subscriptions and production agent
 activation remain phase-specific decisions.
+
+Future Product Surface delivery depends on identity, profile, consent, memory,
+conversation, research, Agent Registry, Model Gateway, Stasis Engine, Product
+safety, observability and audit contracts. No dependency is implemented by the
+Wave 4 prompt baseline.

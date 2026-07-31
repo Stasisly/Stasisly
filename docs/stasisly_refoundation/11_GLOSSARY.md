@@ -5,6 +5,11 @@
 | Founder | Final human authority for major Stasisly decisions |
 | Nexus | Extensible global coordination layer |
 | Stasis | Product nucleus and Product coordinator |
+| Product safety boundary | Limit that requires bounded guidance, refusal or qualified human/emergency escalation without granting clinical authority |
+| Federated Product memory | Consent-bound memory scopes with provenance, retention, deletion, supersession and visible conflict handling; runtime not implemented |
+| Quick Research | Bounded, fast evidence synthesis with explicit sources and uncertainty |
+| Deep Research | Broader evidence investigation with participant and source traceability |
+| Strategic Research | High-impact, multi-perspective research requiring stronger review and decision traceability |
 | Rector | Development coordinator |
 | Gerendi | Administration coordinator |
 | Surface | Independently governed user or operator experience boundary |

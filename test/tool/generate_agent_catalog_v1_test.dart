@@ -167,10 +167,10 @@ void main() {
         )
         .toList();
     expect(historical, hasLength(43));
-    expect(documentedHistorical, hasLength(19));
-    expect(pendingHistorical, hasLength(24));
-    expect(approvedCanonical, hasLength(43));
-    expect(cataloged, hasLength(2914));
+    expect(documentedHistorical, hasLength(28));
+    expect(pendingHistorical, hasLength(15));
+    expect(approvedCanonical, hasLength(84));
+    expect(cataloged, hasLength(2873));
     for (final entry in pendingHistorical) {
       expect(entry['prompt_status'], 'PROMPT_CREATED');
       expect(entry['lifecycle_status'], 'PROMPT_CREATED');
