@@ -31,3 +31,14 @@ domain owner prepares evidence and options
 
 Emergency authority is time-bound, justified and audited. No coordinator may
 self-approve a high-impact cross-surface change.
+
+## Prompt governance
+
+Nexus, Stasis, Rector and Gerendi are the exact Wave 1 prompt-design targets.
+Their catalog roles do not make them active, and this plan creates no prompt for
+them. Surface Prompt Stewards review consistency only after their own canonical
+prompt is approved; they cannot self-approve it or inherit Founder authority.
+
+Prompt changes flow through owner, duplication, risk, security/privacy,
+surface, cross-surface and conditional Founder review. Enforcement remains an
+external runtime responsibility.

@@ -11,6 +11,11 @@
 | Internal Platform | Non-public shared capability layer |
 | Agent catalog | Governed registry of available agent capabilities |
 | Active agent | Catalog agent selected for a bounded execution |
+| Prompt layer | Independently versioned policy or role component in an effective prompt composition |
+| Prompt Owner | Accountable proposer for one prompt; cannot self-approve |
+| Surface Prompt Steward | Reviewer of prompt consistency within one surface; grants no runtime authority |
+| Prompt wave | Bounded design and migration cohort, never an activation cohort |
+| Effective prompt tuple | Exact constitutional, surface, domain, agent, runtime and evaluation version binding |
 | Data Router | Contractual routing layer for authorized data placement |
 | Shard Directory | Mapping from tenant/user context to approved placement |
 | Discovery Legacy | Preserved, read-only and non-normative Discovery material |

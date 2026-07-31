@@ -3,8 +3,9 @@
 | Capability | Designed | Documented | Implemented | Tested | Available | Operational | Legacy | Blocked |
 |---|---|---|---|---|---|---|---|---|
 | Re-foundation baseline | yes | yes | documentation only | pending package validation | yes after publication | no | no | no |
-| 43 historical prompts | yes | yes | prompt files exist | not validated against Re-foundation | no | no | yes | review |
+| 43 historical prompts | yes | yes | legacy prompt files exist | 43/43 audited; migration not executed | no | no | yes | controlled waves |
 | 3,000-agent catalog | yes | yes | metadata only | deterministic catalog guards | no | no | no | prompts and runtime |
+| Agent prompt governance | yes | yes | documentation only | deterministic audit/wave guards | no | no | no | prompt implementation |
 | Product Surface target | yes | yes | partial legacy code exists | legacy tests exist | not asserted | no | yes | reconciliation |
 | Development Surface | yes | yes | no complete surface | no | no | no | no | future phase |
 | Administration Surface | yes | yes | no complete surface | no | no | no | no | future phase |
@@ -18,6 +19,29 @@
 | Stasis Engine | architecture target | yes | not proven | no | no | no | legacy concepts | design |
 
 Documentation never upgrades a capability to implemented or operational.
+
+## STASISLY-AGENTS-001 status
+
+```text
+Governance: DOCUMENTED
+Historical audit: COMPLETED 43/43
+Migration decisions: 40 MIGRATE_AND_UPDATE / 3 RECLASSIFY
+Migration: PLANNED
+Catalog wave assignments: 3000/3000
+Historical wave assignments: 43/43
+Prompt implementation: NOT_STARTED
+Runtime: NOT_IMPLEMENTED
+New individual prompts / rewritten historical prompts: 0 / 0
+Available or active agents: 0
+Focal prompt-governance tests: 11/11 pass
+Combined Re-foundation guards: 29/29 pass
+Flutter: 1013 pass / 5 approved skips / 0 failures
+Analyzer: 0 errors / 0 warnings / 36 inherited infos
+Deno: 86/86 pass; format 62 files
+SQL local: 740/740 pass after no-seed reset
+Remote context: SAFE
+Remote actions / Supabase mutations: 0 / 0
+```
 
 ## STASISLY-REFOUNDATION-002 status
 

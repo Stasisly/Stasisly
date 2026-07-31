@@ -45,7 +45,9 @@ is an internal capability layer, not a public surface.
   simultaneously active. The catalog is implemented; prompts and runtime are
   not implemented.
 - Historical prompts: 43 preserved as `PROMPT_CREATED` and mapped 43/43 in the
-  Re-foundation crosswalk. They remain unavailable pending later prompt waves.
+  Re-foundation crosswalk. Their content audit and migration-wave assignments
+  are complete; physical migration, approval, configuration and availability
+  have not started.
 - Data: one canonical PostgreSQL database per environment initially.
 - Provider: Supabase is initial and replaceable.
 - Current Supabase project: `DISCOVERY_LEGACY`, read-only candidate,
@@ -72,6 +74,10 @@ Founder approves, rejects or requests changes. Nexus coordinates globally;
 Stasis, Rector and Gerendi prepare and govern proposals in their domains.
 No remote environment, clean Supabase project, 3,000-agent prompt generation or
 legacy migration is authorized by this document.
+
+Prompt governance uses independently versioned constitutional, surface,
+domain/family, agent, runtime, task and temporary-instruction layers. Prompt
+text never grants runtime authority, tools, data or memory access.
 
 ## Companion documents
 

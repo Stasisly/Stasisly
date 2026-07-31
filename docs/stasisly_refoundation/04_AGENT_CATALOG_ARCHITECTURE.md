@@ -36,3 +36,12 @@ summaries.
 The 43 historical prompts remain `PROMPT_CREATED`; they are mapped 43/43, not
 duplicated and not activated by this baseline. All 2,957 new entries are
 `CATALOGED`, `NOT_CREATED`, `NOT_IMPLEMENTED` and `NOT_AVAILABLE`.
+
+## Prompt architecture
+
+Prompt governance is defined under
+[`agents/prompts/`](agents/prompts/AGENT_PROMPT_ARCHITECTURE_v1.md). Shared
+constitutional, surface and domain policies are versioned references rather
+than duplicated text. Individual prompt, runtime configuration and evaluation
+versions remain independent. The 3,000 wave assignments are design sequencing,
+not activation.
