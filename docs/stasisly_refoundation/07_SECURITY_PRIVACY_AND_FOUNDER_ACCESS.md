@@ -47,3 +47,6 @@ authorization and durable invariants cannot exist exclusively in Flutter or
 another client. Tests may not use production data by default or weaken
 assertions to pass. Privileged, destructive and remote operations require exact
 scope, independent review, Founder authorization where applicable and rollback.
+## Wave 6 privileged Administration controls
+
+Administrative and financial access is deny-by-default, least-privilege, purpose-bound, expiring and audited. Founder authority cannot be delegated. User suspension, fraud or moderation requires proportional review and appeal; payments require segregation of duties; marketing forbids sensitive health-data targeting and dark patterns. Documentary agents execute none of these actions.

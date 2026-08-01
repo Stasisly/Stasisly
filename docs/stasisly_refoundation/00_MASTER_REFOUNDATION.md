@@ -116,3 +116,6 @@ available.
 - [Roadmap](09_MASTER_ROADMAP.md)
 - [Implementation status](10_IMPLEMENTATION_STATUS.md)
 - [Glossary](11_GLOSSARY.md)
+## Wave 6 Administration prompt baseline
+
+Fifty Administration prompts are `APPROVED_DOCUMENTARY_BASELINE`. They define bounded business-operation, Growth and administrative governance only. Administration Surface, payments, billing, marketing campaigns, Growth experiments and agent runtime remain `NOT_IMPLEMENTED`; available agents and P15-P17 executions remain `0`.

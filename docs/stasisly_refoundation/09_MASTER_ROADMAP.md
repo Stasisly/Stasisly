@@ -44,3 +44,6 @@ Wave 5 establishes documentary contracts for technical direction, client,
 backend, API, PostgreSQL/Supabase, security, QA, testing, CI/CD, DevOps, SRE,
 observability, performance, release and documentation. It implements no runner,
 pipeline, deployment, runtime agent or Development Surface.
+## STASISLY-AGENTS Wave 6
+
+`STASISLY-AGENTS-007` establishes 50 Administration documentary prompts, 50 evaluations, 750 P0-P14 passes and 250 adversarial designed passes. P15-P17 remain unexecuted. The next bounded proposal is `STASISLY-AGENTS-008`, strategy for the remaining 2,778 specialized prompts.

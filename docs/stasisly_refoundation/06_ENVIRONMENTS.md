@@ -32,3 +32,6 @@ approved prompt. Development, staging and production retain separate targets,
 credentials and authorization. Remote link, migration, secret update, deploy
 and release require exact project, commit, operator, manifest, gates, rollback
 and approval. Wave 5 creates no runner, pipeline, environment or deployment.
+## Wave 6 environment status
+
+The Wave 6 package is documentary and local. Administration Surface, billing providers, payment runtime, CRM, campaign systems, advertising providers, live analytics and Growth experiment runtime are not configured in Development, Staging or Production.

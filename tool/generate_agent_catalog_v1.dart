@@ -272,12 +272,65 @@ const approvedWave5DevelopmentIds = {
   'AG-DEV-0100',
   'AG-DEV-0101',
 };
+const approvedWave6AdministrationIds = {
+  'AG-ADM-0002',
+  'AG-ADM-0003',
+  'AG-ADM-0004',
+  'AG-ADM-0005',
+  'AG-ADM-0006',
+  'AG-ADM-0007',
+  'AG-ADM-0008',
+  'AG-ADM-0009',
+  'AG-ADM-0010',
+  'AG-ADM-0011',
+  'AG-ADM-0012',
+  'AG-ADM-0013',
+  'AG-ADM-0014',
+  'AG-ADM-0015',
+  'AG-ADM-0016',
+  'AG-ADM-0017',
+  'AG-ADM-0018',
+  'AG-ADM-0019',
+  'AG-ADM-0020',
+  'AG-ADM-0021',
+  'AG-ADM-0022',
+  'AG-ADM-0023',
+  'AG-ADM-0024',
+  'AG-ADM-0025',
+  'AG-ADM-0026',
+  'AG-ADM-0027',
+  'AG-ADM-0028',
+  'AG-ADM-0029',
+  'AG-ADM-0030',
+  'AG-ADM-0031',
+  'AG-ADM-0032',
+  'AG-ADM-0033',
+  'AG-ADM-0034',
+  'AG-ADM-0035',
+  'AG-ADM-0036',
+  'AG-ADM-0037',
+  'AG-ADM-0038',
+  'AG-ADM-0039',
+  'AG-ADM-0040',
+  'AG-ADM-0041',
+  'AG-ADM-0042',
+  'AG-ADM-0043',
+  'AG-ADM-0044',
+  'AG-ADM-0045',
+  'AG-ADM-0046',
+  'AG-ADM-0047',
+  'AG-ADM-0048',
+  'AG-ADM-0049',
+  'AG-ADM-0050',
+  'AG-ADM-0051',
+};
 const approvedDocumentaryPromptIds = {
   ...approvedWave1CoordinatorIds,
   ...approvedWave2GovernanceIds,
   ...approvedWave3ArchitectureIds,
   ...approvedWave4ProductIds,
   ...approvedWave5DevelopmentIds,
+  ...approvedWave6AdministrationIds,
 };
 const validDataAccessClasses = {
   'NO_USER_DATA',
@@ -1131,6 +1184,7 @@ Canonical Wave 2 prompts approved: ${entries.where((entry) => approvedWave2Gover
 Canonical Wave 3 prompts approved: ${entries.where((entry) => approvedWave3ArchitectureIds.contains(entry['agent_id'])).length}
 Canonical Wave 4 prompts approved: ${entries.where((entry) => approvedWave4ProductIds.contains(entry['agent_id'])).length}
 Canonical Wave 5 prompts approved: ${entries.where((entry) => approvedWave5DevelopmentIds.contains(entry['agent_id'])).length}
+Canonical Wave 6 prompts approved: ${entries.where((entry) => approvedWave6AdministrationIds.contains(entry['agent_id'])).length}
 Prompt-created catalog records: ${entries.where((entry) => entry['prompt_status'] == 'PROMPT_CREATED').length}
 Runtime agents created: 0
 ```
@@ -1353,6 +1407,7 @@ Canonical Wave 2 prompts approved: ${entries.where((entry) => approvedWave2Gover
 Canonical Wave 3 prompts approved: ${entries.where((entry) => approvedWave3ArchitectureIds.contains(entry['agent_id'])).length}
 Canonical Wave 4 prompts approved: ${entries.where((entry) => approvedWave4ProductIds.contains(entry['agent_id'])).length}
 Canonical Wave 5 prompts approved: ${entries.where((entry) => approvedWave5DevelopmentIds.contains(entry['agent_id'])).length}
+Canonical Wave 6 prompts approved: ${entries.where((entry) => approvedWave6AdministrationIds.contains(entry['agent_id'])).length}
 Prompt-created catalog records: ${entries.where((entry) => entry['prompt_status'] == 'PROMPT_CREATED').length}
 Runtime agents created: 0
 ```

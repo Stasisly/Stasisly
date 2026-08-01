@@ -70,3 +70,6 @@ data boundaries. Development may expand across client, backend, data,
 security, QA, delivery, reliability and documentation without becoming a
 fixed list or gaining authority over another surface. The Development Surface
 and its runners remain `NOT_IMPLEMENTED`.
+## Wave 6 Administration boundary
+
+Administration remains separate from Product and Development. Gerendi is its documentary coordinator; `admin.stasisly.com` is a target entry point only. Cross-surface handoffs use versioned contracts and do not transfer permissions, personal data, spending or enforcement authority. `ADMINISTRATION_SURFACE: DOCUMENTED_NOT_IMPLEMENTED`.

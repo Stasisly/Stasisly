@@ -62,3 +62,6 @@ constraints, indexes, RLS, grants, local validation and rollback. Jobs, events,
 workflows, cache and search require ownership, limits, retries, deduplication,
 tenant isolation and observable failure recovery. These are documentary
 requirements; no schema or service is changed by Wave 5.
+## Wave 6 Administration data contracts
+
+Identity, account, profile, role, permission, entitlement, subscription, support history and status are distinct. Plan, price, trial, invoice, payment intent, payment, refund, dispute and ledger entry are also distinct. Administration evidence is minimized, purpose-bound, retained explicitly and auditable; no real data or mutation is authorized by the documentary baseline.

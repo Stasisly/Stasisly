@@ -191,3 +191,13 @@ SQL local: 740/740 pass after no-seed reset
 Remote context: SAFE
 Remote actions / Supabase mutations: 0 / 0
 ```
+## Wave 6 Administration prompts
+
+```text
+Wave 6 prompts: APPROVED_DOCUMENTARY_BASELINE
+Administration Surface: DOCUMENTED_NOT_IMPLEMENTED
+Payments / billing runtime: NOT_IMPLEMENTED / NOT_IMPLEMENTED
+Marketing campaigns / Growth experiments: NOT_IMPLEMENTED / NOT_IMPLEMENTED
+Agents available: 0
+P15 / P16 / P17 executed: 0 / 0 / 0
+```

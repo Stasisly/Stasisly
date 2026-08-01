@@ -48,3 +48,6 @@ ejecutarse.
 - No ejecutar migraciones contra remoto sin aprobación explícita.
 - No conectar datos reales sin RLS, autorización, auditoría y tests.
 - No presentar modo demo, mocks o fixtures como producto real.
+## Re-foundation agent prompt status
+
+Waves 1-6 provide 222 approved documentary prompt baselines across the four principal coordinators and bounded Governance, Architecture, Product, Development and Administration cohorts. All 3,000 catalog agents remain unavailable; no prompt approval implies runtime, tool, memory, privileged access or operational authority. See `docs/stasisly_refoundation/agents/prompts/AGENT_PROMPT_MIGRATION_READINESS_v1.md`.

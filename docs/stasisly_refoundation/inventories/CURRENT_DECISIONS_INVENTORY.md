@@ -64,3 +64,6 @@
 The 37 Foundation ADRs and 12 Discovery ADRs remain historical evidence. They
 have no current authority unless a row above or future Re-foundation ADR adopts
 their decision explicitly.
+## Wave 6 Administration decisions
+
+ADR-RF052 through ADR-RF059 are `APPROVED`. They establish the documentary Administration prompt baseline, surface separation, mutation authority, subscription/billing/entitlement separation, safe Growth, proportional high-impact review, metric traceability and non-execution by documentary agents.

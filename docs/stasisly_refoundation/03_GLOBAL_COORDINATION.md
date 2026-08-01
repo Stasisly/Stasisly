@@ -84,3 +84,6 @@ environment, contracts, risks, tests, rollback and expected evidence. Nexus
 coordinates cross-surface decisions; Stasis owns Product dependencies and
 Gerendi owns Administration dependencies. Coordination never transfers
 credentials, approval, production access or risk ownership.
+## Wave 6 coordination
+
+Nexus coordinates cross-surface decisions and Gerendi coordinates the 50 Wave 6 Administration roles. Product dependencies route to Stasis and implementation dependencies to Rector. High-impact user, financial, legal, privacy, fraud, moderation and campaign decisions retain independent human review and Founder escalation where required.

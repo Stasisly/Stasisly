@@ -10,7 +10,7 @@ Waves are prompt-design cohorts, never activation or runtime authorization.
 | WAVE_3 | Technical and multi-agent architecture | Constitutional and security layers stable | 40 prompts pass P0-P14 | See assignments | Waves 1-2 | HIGH | Architecture, Security, Evaluation | YES | STASISLY-AGENTS-004 | Separate package |
 | WAVE_4 | Product core | Product policy and architecture stable | 50 prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Stasis, Product, Safety, Privacy | YES | STASISLY-AGENTS-005 | Separate package |
 | WAVE_5 | Development core | Rector and technical architecture stable | 60 prompts pass P0-P14 | See assignments | Waves 1-4 | HIGH | Rector, Architecture, Security, QA | YES | STASISLY-AGENTS-006 | Separate package |
-| WAVE_6 | Administration core | Gerendi and administrative policy stable | 50 prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Gerendi, Privacy, Compliance, QA | CONDITIONAL | STASISLY-AGENTS-WAVE-006 | Separate package |
+| WAVE_6 | Administration core | Gerendi and administrative policy stable | 50 prompts pass P0-P14 | See assignments | Waves 1-5 | HIGH | Gerendi, Privacy, Compliance, Finance, Security, QA | YES | STASISLY-AGENTS-007 | Separate package |
 | WAVE_7_PLUS | Progressive specialization | Relevant core wave approved | Bounded sub-wave passes P0-P14 | 2778 deferred assignments | Waves 1-6 by domain | VARIABLE | Domain and mandatory risk reviewers | CONDITIONAL | Future bounded packages | Separate package |
 
 ## Wave 1 source and migration status
@@ -48,5 +48,11 @@ P0-P14. None is configured, available or active.
 
 Wave 5 contains exactly 60 Development catalog IDs. STASISLY-AGENTS-006
 approved ten historical migrations and fifty new documentary prompts through
-P0-P14. None is configured, available or active. Wave 6 remains a separate
-Founder-reviewed package.
+P0-P14. None is configured, available or active.
+
+## Wave 6 status
+
+Wave 6 contains exactly 50 Administration catalog IDs. STASISLY-AGENTS-007
+approved three historical migrations, two reclassified historical migrations
+and forty-five new documentary prompts through P0-P14. The two deferred HIGH
+historical contradictions are resolved. None is configured, available or active.

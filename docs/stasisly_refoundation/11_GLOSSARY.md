@@ -46,3 +46,10 @@
 | Architecture target | Approved design that is not necessarily implemented |
 | Operational | Deployed, monitored and approved for sustained use |
 | Global design, proportional implementation | Plan credible growth while building only justified scope |
+## Wave 6 terms
+
+- **Administration Surface**: Separate governed surface for administrative and business operations; currently documented, not implemented.
+- **Entitlement**: Versioned authorization to a capability, distinct from plan, price, trial, subscription and payment state.
+- **Segregation of duties**: Requirement that proposal, approval, execution and reconciliation of sensitive actions are not silently collapsed into one authority.
+- **Metric definition**: Versioned name, owner, formula, window, source, exclusions and segmentation used to prevent silent drift.
+- **Proportional review**: Evidence-based human review scaled to the impact of a user, fraud or moderation action, including an appeal path.
