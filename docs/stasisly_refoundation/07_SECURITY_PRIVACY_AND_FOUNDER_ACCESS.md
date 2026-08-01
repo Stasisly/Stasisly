@@ -39,3 +39,11 @@ danger, severe symptoms, medication, pregnancy, minors, eating disorders,
 injury and mental-health crisis trigger qualified human or emergency escalation
 as applicable. Memory requires consent and deletion controls. These safeguards
 do not make any agent clinically or operationally available.
+## Wave 5 engineering controls
+
+Engineering work fails closed on secrets, `.env`, credentials, RLS, grants,
+tenant boundaries, production data and supply-chain integrity. Sensitive
+authorization and durable invariants cannot exist exclusively in Flutter or
+another client. Tests may not use production data by default or weaken
+assertions to pass. Privileged, destructive and remote operations require exact
+scope, independent review, Founder authorization where applicable and rollback.

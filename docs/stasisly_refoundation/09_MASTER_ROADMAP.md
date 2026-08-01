@@ -8,6 +8,7 @@
 | 0C Wave 2 governance prompts | Governance, security, privacy, risk, Founder controls and portability | Eighteen prompts pass P0-P14; none configured or available |
 | 0D Wave 3 architecture prompts | Architecture, data and multi-agent platform contracts | Forty prompts pass P0-P14; none configured or available |
 | 0E Wave 4 Product prompts | Product Core, safety, memory, research and inclusive behavior | Fifty prompts pass P0-P14; none configured or available |
+| 0F Wave 5 Development prompts | Development Core and engineering operations | Sixty prompts pass P0-P14; none configured or available |
 | 1 Clean technical baseline | Clean Development project, migration `00001`, environments, secrets, minimum RLS/observability | Local and Development gates pass |
 | 2 Platform Core | Identity, profiles, roles, permissions, audit, API, Data Router contracts, Agent Registry | Core contracts operational |
 | 3 Product shell | Flutter shell, Stasis home, navigation, placeholders, profile, settings, auth | Product shell verified |
@@ -21,8 +22,8 @@ Phases are sequential gates, not automatic execution authorizations. Product
 areas are delivered in waves. The next package must be selected after Founder
 review; parallel initiation is not approved.
 
-Wave 4 documentary migration is complete. The next recommended agent package is
-`STASISLY-AGENTS-006`, limited to Wave 5 Development Core prompts. It does not
+Wave 5 documentary migration is complete. The next recommended agent package is
+`STASISLY-AGENTS-007`, limited to Wave 6 Administration Core prompts. It does not
 include runtime configuration or activation.
 
 Its architecture baseline keeps PostgreSQL canonical, Supabase replaceable and
@@ -38,3 +39,8 @@ a conversational, visual, governed, traceable and auditable interface. Its
 delivery loop uses the minimum sufficient team, isolation, tests, correction,
 evidence, approval, Git and authorized deployment. The surface itself remains
 not implemented.
+
+Wave 5 establishes documentary contracts for technical direction, client,
+backend, API, PostgreSQL/Supabase, security, QA, testing, CI/CD, DevOps, SRE,
+observability, performance, release and documentation. It implements no runner,
+pipeline, deployment, runtime agent or Development Surface.

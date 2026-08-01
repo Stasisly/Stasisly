@@ -45,6 +45,14 @@
 | ADR-RF041 Cross-area coherence and transparency | NORMATIVE | APPROVED | PRODUCT_RUNTIME_NOT_IMPLEMENTED |
 | ADR-RF042 Accessibility and inclusion | NORMATIVE | APPROVED | PRODUCT_RUNTIME_NOT_IMPLEMENTED |
 | ADR-RF043 Documentary agents are not available | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
+| ADR-RF044 Wave 5 Development prompt baseline | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF045 Development governed engineering interface | NORMATIVE | APPROVED | DEVELOPMENT_SURFACE_NOT_IMPLEMENTED |
+| ADR-RF046 Isolated workspaces and reviewable diffs | NORMATIVE | APPROVED | RUNNERS_NOT_IMPLEMENTED |
+| ADR-RF047 Iterative loops preserve tests and evidence | NORMATIVE | APPROVED | RUNNERS_NOT_IMPLEMENTED |
+| ADR-RF048 Git canonical source and change record | NORMATIVE | APPROVED | DOCUMENTED |
+| ADR-RF049 Environment promotion gates | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF050 Sensitive logic not exclusively client-side | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF051 Documentary engineering agents not executors | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
 | Global design, proportional implementation | NORMATIVE_MASTER | APPROVED | DOCUMENTED |
 | API distinct from MCP | NORMATIVE_MASTER | ADOPTED | NOT_IMPLEMENTED_AS_COMPLETE_PLATFORM |
 | Flutter independent from MCP | NORMATIVE_MASTER | ADOPTED | PARTIAL_LEGACY_EVIDENCE_ONLY |

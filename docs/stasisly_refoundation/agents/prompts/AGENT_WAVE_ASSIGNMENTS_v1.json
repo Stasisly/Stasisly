@@ -13676,7 +13676,7 @@
       "assignment_reason": "Historical prompt prioritized by approved surface and dependency order.",
       "historical_prompt": "04_DOCUMENTADOR_TECNICO.md",
       "migration_decision": "MIGRATE_AND_UPDATE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13858,7 +13858,7 @@
       "assignment_reason": "Historical prompt prioritized by approved surface and dependency order.",
       "historical_prompt": "29_FLUTTER_CORE_DEVELOPER.md",
       "migration_decision": "MIGRATE_AND_UPDATE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13871,7 +13871,7 @@
       "assignment_reason": "Historical prompt prioritized by approved surface and dependency order.",
       "historical_prompt": "30_FRONTEND_FEATURE_DEVELOPER.md",
       "migration_decision": "MIGRATE_AND_UPDATE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13884,7 +13884,7 @@
       "assignment_reason": "Historical prompt prioritized by approved surface and dependency order.",
       "historical_prompt": "31_DEVELOPER_DE_COMPONENTES_REUTILIZABLES.md",
       "migration_decision": "MIGRATE_AND_UPDATE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13897,7 +13897,7 @@
       "assignment_reason": "Historical prompt prioritized by approved surface and dependency order.",
       "historical_prompt": "32_BACKEND_SUPABASE_DEVELOPER.md",
       "migration_decision": "MIGRATE_AND_UPDATE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13910,7 +13910,7 @@
       "assignment_reason": "Historical prompt prioritized by approved surface and dependency order.",
       "historical_prompt": "34_QA_ENGINEER.md",
       "migration_decision": "MIGRATE_AND_UPDATE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13923,7 +13923,7 @@
       "assignment_reason": "Historical prompt prioritized by approved surface and dependency order.",
       "historical_prompt": "35_DEVOPS_INFRAESTRUCTURA_RELEASE_ENGINEERING.md",
       "migration_decision": "MIGRATE_AND_UPDATE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13936,7 +13936,7 @@
       "assignment_reason": "Historical prompt prioritized by approved surface and dependency order.",
       "historical_prompt": "36_ESPECIALISTA_EN_OBSERVABILIDAD.md",
       "migration_decision": "MIGRATE_AND_UPDATE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13949,7 +13949,7 @@
       "assignment_reason": "Historical prompt prioritized by approved surface and dependency order.",
       "historical_prompt": "37_ESPECIALISTA_EN_RENDIMIENTO.md",
       "migration_decision": "MIGRATE_AND_UPDATE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13962,7 +13962,7 @@
       "assignment_reason": "Historical prompt prioritized by approved surface and dependency order.",
       "historical_prompt": "40_ESPECIALISTA_EN_APP_STORE_PLAY_STORE_RELEASE_MANAGEMENT.md",
       "migration_decision": "MIGRATE_AND_UPDATE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13975,7 +13975,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -13988,7 +13988,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14001,7 +14001,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14014,7 +14014,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14027,7 +14027,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14040,7 +14040,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14053,7 +14053,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14066,7 +14066,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14079,7 +14079,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14092,7 +14092,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14105,7 +14105,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14118,7 +14118,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14131,7 +14131,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14144,7 +14144,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14157,7 +14157,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14170,7 +14170,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14534,7 +14534,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14547,7 +14547,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14560,7 +14560,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14573,7 +14573,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14586,7 +14586,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14599,7 +14599,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14612,7 +14612,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14625,7 +14625,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14638,7 +14638,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14651,7 +14651,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14664,7 +14664,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14677,7 +14677,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14690,7 +14690,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14703,7 +14703,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14716,7 +14716,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14729,7 +14729,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14742,7 +14742,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14755,7 +14755,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14768,7 +14768,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14781,7 +14781,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14794,7 +14794,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14807,7 +14807,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14820,7 +14820,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14833,7 +14833,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14846,7 +14846,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14859,7 +14859,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14872,7 +14872,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14885,7 +14885,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14898,7 +14898,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14911,7 +14911,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14924,7 +14924,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14937,7 +14937,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14950,7 +14950,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {
@@ -14963,7 +14963,7 @@
       "assignment_reason": "Catalog capability selected to complete the bounded core design cohort.",
       "historical_prompt": "NONE",
       "migration_decision": "NOT_APPLICABLE",
-      "prompt_creation_package": "STASISLY-AGENTS-WAVE-005",
+      "prompt_creation_package": "STASISLY-AGENTS-006",
       "runtime_package": "SEPARATE_RUNTIME_PACKAGE_NOT_AUTHORIZED"
     },
     {

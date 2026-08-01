@@ -25,3 +25,10 @@ by this document.
 Each environment begins with one principal PostgreSQL database. Any future
 replication, partitioning, sharding or extraction requires environment-specific
 metrics, authorization, migration evidence, rollback and a dedicated ADR.
+## Wave 5 promotion contract
+
+Environment promotion is never inferred from a passing local test or an
+approved prompt. Development, staging and production retain separate targets,
+credentials and authorization. Remote link, migration, secret update, deploy
+and release require exact project, commit, operator, manifest, gates, rollback
+and approval. Wave 5 creates no runner, pipeline, environment or deployment.

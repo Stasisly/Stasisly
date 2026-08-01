@@ -55,3 +55,10 @@ conflict must remain visible until resolved and may not be silently overwritten.
 Research artifacts separately preserve mode, participants, sources, uncertainty
 and decision traceability. No memory store, RAG index or research runtime is
 created by these documentary contracts.
+
+Wave 5 requires versioned API and data contracts, bounded pagination, explicit
+errors, idempotency and compatible migration paths. PostgreSQL changes require
+constraints, indexes, RLS, grants, local validation and rollback. Jobs, events,
+workflows, cache and search require ownership, limits, retries, deduplication,
+tenant isolation and observable failure recovery. These are documentary
+requirements; no schema or service is changed by Wave 5.

@@ -28,6 +28,11 @@
 | Emergency mode | Founder-authorized, necessary, time-bound, audited exceptional context with retrospective review |
 | Independent challenge | Security, Privacy, Audit or Risk review that implementers cannot suppress or self-certify |
 | Development Surface | Planned governed conversational and visual interface for building Stasisly; not yet implemented |
+| Rector engineering loop | Bounded inspect, plan, implement, test, diagnose, correct and retest cycle coordinated by Rector |
+| Isolated workspace | Branch or worktree bound to a repository, base SHA, explicit scope and reviewable diff |
+| Reviewable diff | Bounded change record with tests, evidence, ownership and rollback sufficient for independent review |
+| Environment promotion | Explicitly authorized movement between isolated environment targets after required gates |
+| Engineering runtime | Future configured agents, runners, tools and bindings; Wave 5 documents but does not implement it |
 | Data Router | Contractual routing layer for authorized data placement |
 | Shard Directory | Mapping from tenant/user context to approved placement |
 | Agent Registry | Future internal registry of independently versioned agent runtime bindings; not implemented |

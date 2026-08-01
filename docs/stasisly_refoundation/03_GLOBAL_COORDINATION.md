@@ -76,3 +76,11 @@ override safety, consent, provenance or specialist limits. Health, nutrition,
 training and wellness risks escalate to qualified humans or emergency services
 when the documented trigger applies. Agent participation and research evidence
 remain visible and attributable. These relationships grant no runtime access.
+## Wave 5 engineering handoff
+
+Founder intent reaches Development through Rector. Rector selects the minimum
+sufficient documentary team and requires repository, base SHA, bounded scope,
+environment, contracts, risks, tests, rollback and expected evidence. Nexus
+coordinates cross-surface decisions; Stasis owns Product dependencies and
+Gerendi owns Administration dependencies. Coordination never transfers
+credentials, approval, production access or risk ownership.

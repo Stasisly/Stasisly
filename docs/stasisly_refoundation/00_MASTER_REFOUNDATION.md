@@ -42,11 +42,11 @@ is an internal capability layer, not a public surface.
 ## Initial baselines
 
 - Agent catalog: 3,000 versioned metadata records, coverage-driven and not
-  simultaneously active. The catalog and 112 Wave 1-4 documentary prompts are
+  simultaneously active. The catalog and 172 Wave 1-5 documentary prompts are
   implemented; runtime remains unimplemented.
 - Historical prompts: 43 preserved as `PROMPT_CREATED` and mapped 43/43 in the
   Re-foundation crosswalk. Their content audit and migration-wave assignments
-  are complete. Waves 1-4 provide approved documentary baselines; the
+  are complete. Waves 1-5 provide approved documentary baselines; the
   historical sources remain intact and later waves have not started.
 - Data: one canonical PostgreSQL database per environment initially.
 - Provider: Supabase is initial and replaceable.
@@ -94,6 +94,13 @@ The exact 50 Wave 4 Product Core, Safety, Memory and Research roles likewise
 have prompt version `1.0.0` in `DOCUMENTED_ONLY`. Their contracts protect user
 safety, consent, provenance, deletion, uncertainty and human escalation.
 Product, memory and research runtime remain `NOT_IMPLEMENTED`; no agent is
+available.
+
+The exact 60 Wave 5 Development Core and Engineering Operations roles have
+prompt version `1.0.0` in `DOCUMENTED_ONLY`. They define bounded engineering
+work, isolated workspaces, reviewable Git diffs, preserved tests, environment
+promotion gates and secure client/backend boundaries. Development Surface,
+runners and engineering runtime remain `NOT_IMPLEMENTED`; no agent is
 available.
 
 ## Companion documents

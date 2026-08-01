@@ -58,3 +58,15 @@ workflows. It is not a public surface.
 - MCP is an internal tool protocol, never the Product API.
 - Internal Platform components documented here remain `NOT_IMPLEMENTED` until
   runtime evidence proves otherwise.
+## Wave 5 Development contract
+
+Development is the primary governed interface for building and evolving
+Stasisly. Rector coordinates bounded technical decomposition from Founder
+intent through an isolated workspace, iterative implementation and tests,
+reviewable evidence, required authorization, Git and authorized promotion.
+
+Product, Development and Administration retain independent permissions and
+data boundaries. Development may expand across client, backend, data,
+security, QA, delivery, reliability and documentation without becoming a
+fixed list or gaining authority over another surface. The Development Surface
+and its runners remain `NOT_IMPLEMENTED`.

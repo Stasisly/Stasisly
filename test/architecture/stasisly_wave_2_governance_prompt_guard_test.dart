@@ -77,14 +77,14 @@ void main() {
     final documented = catalog
         .where((entry) => entry['implementation_status'] == 'DOCUMENTED_ONLY')
         .toList();
-    expect(documented, hasLength(112));
+    expect(documented, hasLength(172));
     expect(
       documented.map((entry) => entry['agent_id']).toSet(),
       approvedDocumentaryPromptIds,
     );
     expect(
       catalog.where((entry) => entry['prompt_status'] == 'PROMPT_CREATED'),
-      hasLength(127),
+      hasLength(177),
     );
     expect(
       catalog.where((entry) => entry['availability'] == 'NOT_AVAILABLE'),

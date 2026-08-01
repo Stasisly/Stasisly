@@ -105,11 +105,11 @@ void main() {
     final status = File('$root/10_IMPLEMENTATION_STATUS.md').readAsStringSync();
     expect(
       master,
-      matches(RegExp(r'112 Wave 1-4 documentary prompts are\s+implemented')),
+      matches(RegExp(r'172 Wave 1-5 documentary prompts are\s+implemented')),
     );
     expect(status, contains('| Wave 1 coordinator prompts |'));
     expect(status, contains('| four documentary prompts |'));
-    expect(architecture, contains('2,873 canonical entries remain'));
+    expect(architecture, contains('2,823 canonical entries remain'));
     expect(architecture, contains('NOT_AVAILABLE'));
     expect(status, contains('Availability: 0 agents promoted to AVAILABLE'));
     expect(status, contains('Availability / active agents: 0 / 0'));
