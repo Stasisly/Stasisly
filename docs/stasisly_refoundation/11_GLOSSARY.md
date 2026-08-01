@@ -53,3 +53,11 @@
 - **Segregation of duties**: Requirement that proposal, approval, execution and reconciliation of sensitive actions are not silently collapsed into one authority.
 - **Metric definition**: Versioned name, owner, formula, window, source, exclusions and segmentation used to prevent silent drift.
 - **Proportional review**: Evidence-based human review scaled to the impact of a user, fraud or moderation action, including an appeal path.
+
+## Wave 7 strategy terms
+
+- **Effective prompt**: Deterministic composition of approved versioned components for one agent; not a runtime grant.
+- **Family prompt**: Shared domain behavior with deny-by-default access and no individual identity substitution.
+- **Specialty module**: Narrow reusable expertise that may restrict but never elevate authority.
+- **Agent identity contract**: Mandatory per-agent mission, scope, exclusions, reporting, ceilings and escalation record.
+- **Subwave**: Bounded prompt implementation cohort preserving whole families and individual evaluation.

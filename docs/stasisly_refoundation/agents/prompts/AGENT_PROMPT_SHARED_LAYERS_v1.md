@@ -35,3 +35,10 @@ approval. Major expansion to a new top-level surface requires Founder approval.
 Shared layers contain policy, never secrets. Runtime resolvers fail closed on
 missing, incompatible, cyclic or unapproved references and never permit a later
 layer to weaken an earlier one.
+
+## Wave 7 reusable components
+
+The approved reusable types are family prompts, specialty modules, safety and
+authority overlays, identity schemas and evaluation profiles. Their registries
+are strategy artifacts, not final prompts. Effective authority, data, tools and
+memory always resolve to the most restrictive applicable rule.

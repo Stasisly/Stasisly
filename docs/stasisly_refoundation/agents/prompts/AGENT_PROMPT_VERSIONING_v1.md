@@ -28,3 +28,10 @@ version tuple; it never combines arbitrary old and new layers.
 
 Approvals bind agent ID, prompt version, policy versions, review evidence and
 content hash. Editing approved content creates a new version.
+
+## Component and effective versions
+
+Family, specialty, overlay, identity, evaluation and effective-manifest
+versions advance independently. A component change uses the impact index to
+recompose and re-evaluate only affected agents. Generated effective prompts are
+immutable outputs and are never patched directly.

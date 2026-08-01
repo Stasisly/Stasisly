@@ -706,7 +706,7 @@ Waves are prompt-design cohorts, never activation or runtime authorization.
 | WAVE_4 | Product core | Product policy and architecture stable | ${counts['WAVE_4']} prompts pass P0-P14 | See assignments | Waves 1-3 | HIGH | Stasis, Product, Safety, Privacy | YES | STASISLY-AGENTS-005 | Separate package |
 | WAVE_5 | Development core | Rector and technical architecture stable | ${counts['WAVE_5']} prompts pass P0-P14 | See assignments | Waves 1-4 | HIGH | Rector, Architecture, Security, QA | YES | STASISLY-AGENTS-006 | Separate package |
 | WAVE_6 | Administration core | Gerendi and administrative policy stable | ${counts['WAVE_6']} prompts pass P0-P14 | See assignments | Waves 1-5 | HIGH | Gerendi, Privacy, Compliance, Finance, Security, QA | YES | STASISLY-AGENTS-007 | Separate package |
-| WAVE_7_PLUS | Progressive specialization | Relevant core wave approved | Bounded sub-wave passes P0-P14 | ${counts['WAVE_7_PLUS']} deferred assignments | Waves 1-6 by domain | VARIABLE | Domain and mandatory risk reviewers | CONDITIONAL | Future bounded packages | Separate package |
+| WAVE_7_PLUS | Progressive specialization | Strategy baseline and relevant core wave approved | Bounded subwave passes individual P0-P14 | ${counts['WAVE_7_PLUS']} strategy-assigned agents | Waves 1-6 and STASISLY-AGENTS-008 | VARIABLE | Domain and mandatory risk reviewers | CONDITIONAL | STASISLY-AGENTS-009 onward | Separate package |
 
 ## Wave 1 source and migration status
 
@@ -751,6 +751,18 @@ Wave 6 contains exactly 50 Administration catalog IDs. STASISLY-AGENTS-007
 approved three historical migrations, two reclassified historical migrations
 and forty-five new documentary prompts through P0-P14. The two deferred HIGH
 historical contradictions are resolved. None is configured, available or active.
+
+## Wave 7 strategy status
+
+STASISLY-AGENTS-008 assigns all 2,778 remaining catalog agents to exactly one
+prompt strategy and one of 89 domain-preserving subwaves. It approves schemas, family and
+specialty registries, overlays, precedence, deterministic composition and
+individual evaluation requirements. It creates no specialized prompt or
+evaluation, changes no catalog lifecycle state and authorizes no runtime.
+
+The first implementation candidate is `W7-001`: 40 HIGH
+Administration agents in fraud/risk.
+It requires a separate package and the reviewers declared by the subwave plan.
 ''';
 }
 
@@ -802,7 +814,7 @@ String _migrationReadiness(
 ```text
 Governance: DOCUMENTED
 Historical audit: COMPLETED
-Migration: WAVE_6_DOCUMENTARY_BASELINE_COMPLETED
+Migration: WAVE_7_SPECIALIZED_STRATEGY_DOCUMENTED
 Prompt implementation: 222 DOCUMENTED_ONLY
 Runtime: NOT_IMPLEMENTED
 Historical prompts audited: ${audits.length}
@@ -826,6 +838,11 @@ Wave 5 P0-P14 evaluations: 900/900 PASS
 Wave 5 evaluation suites: 60 DESIGNED_NOT_RUNTIME_EXECUTED
 Wave 6 P0-P14 evaluations: 750/750 PASS
 Wave 6 evaluation suites: 50 DESIGNED_NOT_RUNTIME_EXECUTED
+Wave 7 remaining inventory: 2778/2778 STRATEGY_ASSIGNED
+Wave 7 families / modules / overlays: 342 / 342 / 11
+Wave 7 subwaves: 89
+Wave 7 specialized prompts created: 0
+Wave 7 specialized evaluations created: 0
 ```
 
 ## Gate result
@@ -837,8 +854,9 @@ executed and remain outside scope.
 
 ## Next package
 
-`STASISLY-AGENTS-008` may define a bounded strategy for the remaining 2,778
-specialized agents after Founder review. It must not configure or activate them.
+`STASISLY-AGENTS-009` may implement only subwave `W7-001` after separate Founder
+authorization. It must preserve individual identity and evaluation, the
+most-restrictive composition rule and all documentary/runtime boundaries.
 ''';
 
 Map<String, int> _counts(List<Map<String, Object?>> records, String field) {

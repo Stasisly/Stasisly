@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_types": {
+    "CONSTITUTIONAL_POLICY": {
+      "required_fields": [
+        "artifact_id",
+        "artifact_type",
+        "version",
+        "status",
+        "owner",
+        "surface",
+        "domain",
+        "family",
+        "risk_tier",
+        "dependencies",
+        "incompatible_with",
+        "supersedes",
+        "effective_date"
+      ],
+      "authority_rule": "MAY_RESTRICT_NEVER_ELEVATE"
+    },
+    "SURFACE_POLICY": {
+      "required_fields": [
+        "artifact_id",
+        "artifact_type",
+        "version",
+        "status",
+        "owner",
+        "surface",
+        "domain",
+        "family",
+        "risk_tier",
+        "dependencies",
+        "incompatible_with",
+        "supersedes",
+        "effective_date"
+      ],
+      "authority_rule": "MAY_RESTRICT_NEVER_ELEVATE"
+    },
+    "DOMAIN_POLICY": {
+      "required_fields": [
+        "artifact_id",
+        "artifact_type",
+        "version",
+        "status",
+        "owner",
+        "surface",
+        "domain",
+        "family",
+        "risk_tier",
+        "dependencies",
+        "incompatible_with",
+        "supersedes",
+        "effective_date"
+      ],
+      "authority_rule": "MAY_RESTRICT_NEVER_ELEVATE"
+    },
+    "FAMILY_PROMPT": {
+      "required_fields": [
+        "artifact_id",
+        "artifact_type",
+        "version",
+        "status",
+        "owner",
+        "surface",
+        "domain",
+        "family",
+        "risk_tier",
+        "dependencies",
+        "incompatible_with",
+        "supersedes",
+        "effective_date"
+      ],
+      "authority_rule": "MAY_RESTRICT_NEVER_ELEVATE"
+    },
+    "SPECIALTY_MODULE": {
+      "required_fields": [
+        "artifact_id",
+        "artifact_type",
+        "version",
+        "status",
+        "owner",
+        "surface",
+        "domain",
+        "family",
+        "risk_tier",
+        "dependencies",
+        "incompatible_with",
+        "supersedes",
+        "effective_date"
+      ],
+      "authority_rule": "MAY_RESTRICT_NEVER_ELEVATE"
+    },
+    "SAFETY_OVERLAY": {
+      "required_fields": [
+        "artifact_id",
+        "artifact_type",
+        "version",
+        "status",
+        "owner",
+        "surface",
+        "domain",
+        "family",
+        "risk_tier",
+        "dependencies",
+        "incompatible_with",
+        "supersedes",
+        "effective_date"
+      ],
+      "authority_rule": "MAY_RESTRICT_NEVER_ELEVATE"
+    },
+    "AUTHORITY_OVERLAY": {
+      "required_fields": [
+        "artifact_id",
+        "artifact_type",
+        "version",
+        "status",
+        "owner",
+        "surface",
+        "domain",
+        "family",
+        "risk_tier",
+        "dependencies",
+        "incompatible_with",
+        "supersedes",
+        "effective_date"
+      ],
+      "authority_rule": "MAY_RESTRICT_NEVER_ELEVATE"
+    },
+    "AGENT_IDENTITY_CONTRACT": {
+      "required_fields": [
+        "artifact_id",
+        "artifact_type",
+        "version",
+        "status",
+        "owner",
+        "surface",
+        "domain",
+        "family",
+        "risk_tier",
+        "dependencies",
+        "incompatible_with",
+        "supersedes",
+        "effective_date"
+      ],
+      "authority_rule": "MAY_RESTRICT_NEVER_ELEVATE"
+    },
+    "EVALUATION_PROFILE": {
+      "required_fields": [
+        "artifact_id",
+        "artifact_type",
+        "version",
+        "status",
+        "owner",
+        "surface",
+        "domain",
+        "family",
+        "risk_tier",
+        "dependencies",
+        "incompatible_with",
+        "supersedes",
+        "effective_date"
+      ],
+      "authority_rule": "MAY_RESTRICT_NEVER_ELEVATE"
+    },
+    "RUNTIME_CONTRACT": {
+      "required_fields": [
+        "artifact_id",
+        "artifact_type",
+        "version",
+        "status",
+        "owner",
+        "surface",
+        "domain",
+        "family",
+        "risk_tier",
+        "dependencies",
+        "incompatible_with",
+        "supersedes",
+        "effective_date"
+      ],
+      "authority_rule": "MAY_RESTRICT_NEVER_ELEVATE"
+    }
+  }
+}

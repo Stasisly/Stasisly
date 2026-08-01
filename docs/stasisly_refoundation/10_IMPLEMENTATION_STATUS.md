@@ -201,3 +201,14 @@ Marketing campaigns / Growth experiments: NOT_IMPLEMENTED / NOT_IMPLEMENTED
 Agents available: 0
 P15 / P16 / P17 executed: 0 / 0 / 0
 ```
+
+## Wave 7 specialized prompt strategy
+
+```text
+Strategy assignments: 2778/2778
+Families / modules / overlays: 342 / 342 / 11
+Subwaves: 89
+Specialized prompts / evaluations created: 0 / 0
+Catalog state transitions: 0
+Runtime / available agents: NOT_IMPLEMENTED / 0
+```

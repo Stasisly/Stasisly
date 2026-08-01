@@ -35,3 +35,9 @@ not require Founder unless their risk review escalates them.
 Every change records owner, reviewers, decision, version impact, test plan,
 compatibility and rollback tuple. Rejected or superseded drafts remain auditable
 without becoming runtime inputs.
+
+## Wave 7 change impact
+
+Changes to a family, specialty or overlay require an explicit affected-agent
+set, deterministic recomposition, hash comparison and targeted individual gate
+reruns. A shared component approval never bulk-approves dependent agents.

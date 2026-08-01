@@ -87,3 +87,10 @@ credentials, approval, production access or risk ownership.
 ## Wave 6 coordination
 
 Nexus coordinates cross-surface decisions and Gerendi coordinates the 50 Wave 6 Administration roles. Product dependencies route to Stasis and implementation dependencies to Rector. High-impact user, financial, legal, privacy, fraud, moderation and campaign decisions retain independent human review and Founder escalation where required.
+
+## Wave 7 composable coordination
+
+Family and specialty reuse does not merge identities, reporting lines or
+authority. Every pending specialist keeps its catalog `reports_to` relationship
+and an individual escalation contract. Shared components cannot transfer
+authority between surfaces, domains, coordinators or agents.

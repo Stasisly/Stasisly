@@ -53,6 +53,14 @@
 | ADR-RF049 Environment promotion gates | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
 | ADR-RF050 Sensitive logic not exclusively client-side | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
 | ADR-RF051 Documentary engineering agents not executors | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
+| ADR-RF060 Wave 7 scaling strategy | NORMATIVE | APPROVED | STRATEGY_AND_ARCHITECTURE_DOCUMENTED |
+| ADR-RF061 Composable prompt architecture | NORMATIVE | APPROVED | SPECIALIZED_PROMPTS_NOT_CREATED |
+| ADR-RF062 Individual identity mandatory | NORMATIVE | APPROVED | SPECIALIZED_PROMPTS_NOT_CREATED |
+| ADR-RF063 Components cannot elevate authority | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF064 Deterministic prompt reproducibility | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF065 Individual evaluation despite reuse | NORMATIVE | APPROVED | SPECIALIZED_PROMPTS_NOT_CREATED |
+| ADR-RF066 Risk-ordered subwaves | NORMATIVE | APPROVED | SPECIALIZED_PROMPTS_NOT_CREATED |
+| ADR-RF067 Generated artifacts not manually edited | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
 | Global design, proportional implementation | NORMATIVE_MASTER | APPROVED | DOCUMENTED |
 | API distinct from MCP | NORMATIVE_MASTER | ADOPTED | NOT_IMPLEMENTED_AS_COMPLETE_PLATFORM |
 | Flutter independent from MCP | NORMATIVE_MASTER | ADOPTED | PARTIAL_LEGACY_EVIDENCE_ONLY |
@@ -67,3 +75,10 @@ their decision explicitly.
 ## Wave 6 Administration decisions
 
 ADR-RF052 through ADR-RF059 are `APPROVED`. They establish the documentary Administration prompt baseline, surface separation, mutation authority, subscription/billing/entitlement separation, safe Growth, proportional high-impact review, metric traceability and non-execution by documentary agents.
+
+## Wave 7 strategy decisions
+
+ADR-RF060 through ADR-RF067 are `APPROVED`. They establish bounded scaling,
+composable versioned prompts, mandatory identity and evaluation, no authority
+elevation, deterministic reproduction, risk-ordered subwaves and generated-only
+derived artifacts. They do not approve a specialized prompt or runtime.

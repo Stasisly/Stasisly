@@ -58,3 +58,10 @@ bindings continue deny-by-default and require P15-P17 in later packages.
 ## Wave 6 catalog state
 
 Exactly 50 Administration records now have an approved documentary prompt: three historical migrations, two reclassified historical migrations and 45 new prompts. Cumulative documentary prompts are 222; all 3,000 agents remain `NOT_AVAILABLE`, with no tool, memory or runtime configuration implied by catalog metadata.
+
+## Wave 7 strategy state
+
+All 2,778 `NOT_CREATED` records have exactly one strategy and subwave assignment
+outside the catalog. They remain `CATALOGED`, `NOT_IMPLEMENTED` and
+`NOT_AVAILABLE`. Strategy registries are derived planning views and may not
+silently mutate canonical catalog state.

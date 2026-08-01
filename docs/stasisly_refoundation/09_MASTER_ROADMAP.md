@@ -47,3 +47,10 @@ pipeline, deployment, runtime agent or Development Surface.
 ## STASISLY-AGENTS Wave 6
 
 `STASISLY-AGENTS-007` establishes 50 Administration documentary prompts, 50 evaluations, 750 P0-P14 passes and 250 adversarial designed passes. P15-P17 remain unexecuted. The next bounded proposal is `STASISLY-AGENTS-008`, strategy for the remaining 2,778 specialized prompts.
+
+## STASISLY-AGENTS Wave 7 strategy
+
+`STASISLY-AGENTS-008` approves the composable strategy, schemas and 89-subwave
+plan for all 2,778 remaining agents without creating prompts. The next bounded
+proposal is `STASISLY-AGENTS-009`, exclusively `W7-001`: 40 HIGH
+Administration fraud/risk agents. It requires separate Founder authorization.

@@ -1,0 +1,3 @@
+# Wave 7 Agent Identity Contract Schema v1
+
+Required individual fields: `agent_id`, `canonical_name`, `display_name`, `mission`, `specific_scope`, `explicit_non_responsibilities`, `surface`, `domain`, `family`, `specialty`, `subspecialty`, `reports_to`, `coordinates_with`, `specific_responsibilities`, `authority_exceptions`, `risk_tier`, `data_ceiling`, `tool_ceiling`, `memory_ceiling`, `human_escalation`, `Founder_escalation`, `family_prompt_reference`, `specialty_module_references`, `overlay_references`, `evaluation_profile_reference`, `version_references` and `lifecycle_state`. Shared blocks are referenced, not copied. Identity can restrict inherited scope and cannot override higher prohibitions.

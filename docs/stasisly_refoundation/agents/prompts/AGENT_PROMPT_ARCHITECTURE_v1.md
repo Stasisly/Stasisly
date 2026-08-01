@@ -51,3 +51,10 @@ provisions access.
 New surfaces, domains and providers register versioned layer contracts. They do
 not edit unrelated layers or inherit Nexus/Founder authority. Shared policies
 are referenced by ID and version so modules can evolve independently.
+
+## Wave 7 effective composition
+
+Wave 7 extends the layers with family prompts, specialty modules, individual
+identity contracts and explicit authority/safety overlays. Canonical assembly
+order and hashes are recorded in an effective manifest. Shared components are
+deny-by-default and cannot substitute identity or individual evaluation.

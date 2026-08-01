@@ -3,7 +3,7 @@
 ```text
 Governance: DOCUMENTED
 Historical audit: COMPLETED
-Migration: WAVE_6_DOCUMENTARY_BASELINE_COMPLETED
+Migration: WAVE_7_SPECIALIZED_STRATEGY_DOCUMENTED
 Prompt implementation: 222 DOCUMENTED_ONLY
 Runtime: NOT_IMPLEMENTED
 Historical prompts audited: 43
@@ -27,6 +27,11 @@ Wave 5 P0-P14 evaluations: 900/900 PASS
 Wave 5 evaluation suites: 60 DESIGNED_NOT_RUNTIME_EXECUTED
 Wave 6 P0-P14 evaluations: 750/750 PASS
 Wave 6 evaluation suites: 50 DESIGNED_NOT_RUNTIME_EXECUTED
+Wave 7 remaining inventory: 2778/2778 STRATEGY_ASSIGNED
+Wave 7 families / modules / overlays: 342 / 342 / 11
+Wave 7 subwaves: 89
+Wave 7 specialized prompts created: 0
+Wave 7 specialized evaluations created: 0
 ```
 
 ## Gate result
@@ -38,5 +43,6 @@ executed and remain outside scope.
 
 ## Next package
 
-`STASISLY-AGENTS-008` may define a bounded strategy for the remaining 2,778
-specialized agents after Founder review. It must not configure or activate them.
+`STASISLY-AGENTS-009` may implement only subwave `W7-001` after separate Founder
+authorization. It must preserve individual identity and evaluation, the
+most-restrictive composition rule and all documentary/runtime boundaries.

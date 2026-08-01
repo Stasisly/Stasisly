@@ -51,3 +51,7 @@ ejecutarse.
 ## Re-foundation agent prompt status
 
 Waves 1-6 provide 222 approved documentary prompt baselines across the four principal coordinators and bounded Governance, Architecture, Product, Development and Administration cohorts. All 3,000 catalog agents remain unavailable; no prompt approval implies runtime, tool, memory, privileged access or operational authority. See `docs/stasisly_refoundation/agents/prompts/AGENT_PROMPT_MIGRATION_READINESS_v1.md`.
+
+Wave 7 strategy classifies the remaining 2,778 catalog agents into 89 bounded
+subwaves and composable prompt strategies. It creates no specialized prompts,
+evaluations or runtime and changes no catalog lifecycle state.
