@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "deterministic_build_metadata": "STASISLY-AGENTS-018-W7-010-GENERATOR-v1",
+  "agent_id": "AG-PRO-0260",
+  "subwave_id": "W7-010",
+  "prompt_strategy": "FULL_INDIVIDUAL_PROMPT",
+  "constitutional_policy_version": "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+  "surface_policy_version": "POL-SURFACE-PRODUCT-v1",
+  "domain_policy_version": "POL-DOMAIN-PRODUCT-HEALTH-v1",
+  "family_prompt_version": "FAM-PRODUCT-HEALTH-NEPHROLOGY-v1",
+  "specialty_module_versions": [
+    "MOD-PRODUCT-HEALTH-NEPHROLOGY-v1"
+  ],
+  "overlay_versions": [
+    "OVR-CLINICAL-SAFETY-v1"
+  ],
+  "identity_contract_version": "IDENTITY-AG-PRO-0260-v1",
+  "evaluation_profile_version": "EVAL-HIGH-v1",
+  "runtime_contract_version": "NOT_IMPLEMENTED",
+  "assembly_order": [
+    "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+    "POL-SURFACE-PRODUCT-v1",
+    "POL-DOMAIN-PRODUCT-HEALTH-v1",
+    "FAM-PRODUCT-HEALTH-NEPHROLOGY-v1",
+    "MOD-PRODUCT-HEALTH-NEPHROLOGY-v1",
+    "OVR-CLINICAL-SAFETY-v1"
+  ],
+  "content_hashes": {
+    "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1": "d181ae7f977268391e42155eafb111ba93e497dd0d6c42384bcd939c3c571d67",
+    "POL-SURFACE-PRODUCT-v1": "c2b3b5ea31c6a0c1c786da3a73214ef61b1f852d40b59d76485e2c2c2fc58ecc",
+    "POL-DOMAIN-PRODUCT-HEALTH-v1": "bd499b6f0775a97647af7f7eb322819cf0f6c8bd76433ae5fc3d98f8652a2f21",
+    "FAM-PRODUCT-HEALTH-NEPHROLOGY-v1": "840a03d96c917b9b51cb1be740f6cfd5e946ca511a8f1c6fac3c451d08a8cf68",
+    "MOD-PRODUCT-HEALTH-NEPHROLOGY-v1": "4292ab5616881cd7c42d5ca8b68da1047e81de9f910871cb5de5c040c4ff6701",
+    "OVR-CLINICAL-SAFETY-v1": "b40a4e34ec2603f5e8eaac0550e8899b260f251109a3e90d19e0c2809b7f513a",
+    "IDENTITY-AG-PRO-0260-v1": "a5af1ff9c89dd5572a413899742f054c10740cc56655ca5ec3e7cc62be113b9e"
+  },
+  "effective_prompt_hash_input": "{\"agent_id\":\"AG-PRO-0260\",\"assembly_order\":[\"POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1\",\"POL-SURFACE-PRODUCT-v1\",\"POL-DOMAIN-PRODUCT-HEALTH-v1\",\"FAM-PRODUCT-HEALTH-NEPHROLOGY-v1\",\"MOD-PRODUCT-HEALTH-NEPHROLOGY-v1\",\"OVR-CLINICAL-SAFETY-v1\"],\"content_hashes\":{\"FAM-PRODUCT-HEALTH-NEPHROLOGY-v1\":\"840a03d96c917b9b51cb1be740f6cfd5e946ca511a8f1c6fac3c451d08a8cf68\",\"IDENTITY-AG-PRO-0260-v1\":\"a5af1ff9c89dd5572a413899742f054c10740cc56655ca5ec3e7cc62be113b9e\",\"MOD-PRODUCT-HEALTH-NEPHROLOGY-v1\":\"4292ab5616881cd7c42d5ca8b68da1047e81de9f910871cb5de5c040c4ff6701\",\"OVR-CLINICAL-SAFETY-v1\":\"b40a4e34ec2603f5e8eaac0550e8899b260f251109a3e90d19e0c2809b7f513a\",\"POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1\":\"d181ae7f977268391e42155eafb111ba93e497dd0d6c42384bcd939c3c571d67\",\"POL-DOMAIN-PRODUCT-HEALTH-v1\":\"bd499b6f0775a97647af7f7eb322819cf0f6c8bd76433ae5fc3d98f8652a2f21\",\"POL-SURFACE-PRODUCT-v1\":\"c2b3b5ea31c6a0c1c786da3a73214ef61b1f852d40b59d76485e2c2c2fc58ecc\"},\"evaluation_profile_version\":\"EVAL-HIGH-v1\",\"identity_contract_version\":\"1.0.0\",\"runtime_contract_version\":\"NOT_IMPLEMENTED\"}",
+  "effective_prompt_hash": "541f35c6e5c8113ce8c2ed3ccb5f8695b63ad3dbaa294b020430683788d7d1ef",
+  "runtime_configuration": "NOT_CREATED",
+  "availability": "NOT_AVAILABLE"
+}

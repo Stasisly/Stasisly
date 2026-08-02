@@ -99,6 +99,12 @@ subject, tenant, purpose, consent, source, units, recency, uncertainty and owner
 explicit. No schema, health record, diagnosis, memory, access grant or mutation
 is created.
 
+W7-010 preserves the health-data boundary for internal medicine, nephrology,
+immunology, infectious diseases, informational oncology and medication
+information. Evidence keeps subject, tenant, purpose, consent, source, units,
+recency, uncertainty and owner explicit. No schema, health record, diagnosis,
+prescription, memory, access grant or mutation is created.
+
 Wave 5 requires versioned API and data contracts, bounded pagination, explicit
 errors, idempotency and compatible migration paths. PostgreSQL changes require
 constraints, indexes, RLS, grants, local validation and rollback. Jobs, events,

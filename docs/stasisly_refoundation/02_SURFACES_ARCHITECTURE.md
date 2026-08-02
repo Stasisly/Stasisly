@@ -134,3 +134,11 @@ W7-009 adds 90 HIGH documentary specialists while preserving Product surface
 isolation. Gastroenterology, geriatrics, gynecology, health education, health
 monitoring and hematology guidance cannot acquire clinical, record, emergency,
 production or cross-surface authority. `PRODUCT_HEALTH_RUNTIME: NOT_IMPLEMENTED`.
+
+### Product health medicine and evidence boundary
+
+W7-010 adds 90 HIGH documentary specialists while preserving Product surface
+isolation. Internal medicine, nephrology, immunology, infectious-disease,
+informational-oncology and medication-information guidance cannot acquire
+clinical, prescribing, record, emergency, production or cross-surface
+authority. `PRODUCT_HEALTH_RUNTIME: NOT_IMPLEMENTED`.

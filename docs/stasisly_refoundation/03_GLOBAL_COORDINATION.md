@@ -158,3 +158,11 @@ Product coordination, Nexus resolves cross-surface conflict, Rector receives
 technical and data concerns, Gerendi receives Administration/legal impact and
 Founder retains reserved authority. Qualified clinical, privacy, data, product,
 legal and emergency owners retain every decision and operational permission.
+
+## W7-010 Product health coordination
+
+The 90 identities preserve their exact catalog reporting edges. Stasis governs
+Product coordination, Nexus resolves cross-surface conflict, Rector receives
+technical and data concerns, Gerendi receives Administration/legal impact and
+Founder retains reserved authority. Qualified clinical, pharmacy, privacy,
+data, product, legal and emergency owners retain decisions and permissions.

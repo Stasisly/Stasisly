@@ -90,3 +90,11 @@ gastroenterology, geriatrics, gynecology, health education, health monitoring
 and hematology. They may organize minimized evidence and prepare qualified
 human review, but cannot diagnose, prescribe, select treatment, replace care,
 perform emergency actions or mutate records. All agents remain unavailable.
+
+## W7-010 Product health documentary boundary
+
+W7-010 adds 90 HIGH documentary Product health specialists across internal
+medicine, nephrology, immunology, infectious diseases, informational oncology
+and medication information. They may organize minimized evidence and prepare
+qualified review, but cannot diagnose, prescribe, select treatment, establish
+prognosis, replace care or mutate records. All agents remain unavailable.

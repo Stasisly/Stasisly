@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "deterministic_build_metadata": "STASISLY-AGENTS-018-W7-010-GENERATOR-v1",
+  "agent_id": "AG-PRO-0298",
+  "subwave_id": "W7-010",
+  "prompt_strategy": "FULL_INDIVIDUAL_PROMPT",
+  "constitutional_policy_version": "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+  "surface_policy_version": "POL-SURFACE-PRODUCT-v1",
+  "domain_policy_version": "POL-DOMAIN-PRODUCT-HEALTH-v1",
+  "family_prompt_version": "FAM-PRODUCT-HEALTH-IMMUNOLOGY-v1",
+  "specialty_module_versions": [
+    "MOD-PRODUCT-HEALTH-IMMUNOLOGY-v1"
+  ],
+  "overlay_versions": [
+    "OVR-CLINICAL-SAFETY-v1"
+  ],
+  "identity_contract_version": "IDENTITY-AG-PRO-0298-v1",
+  "evaluation_profile_version": "EVAL-HIGH-v1",
+  "runtime_contract_version": "NOT_IMPLEMENTED",
+  "assembly_order": [
+    "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+    "POL-SURFACE-PRODUCT-v1",
+    "POL-DOMAIN-PRODUCT-HEALTH-v1",
+    "FAM-PRODUCT-HEALTH-IMMUNOLOGY-v1",
+    "MOD-PRODUCT-HEALTH-IMMUNOLOGY-v1",
+    "OVR-CLINICAL-SAFETY-v1"
+  ],
+  "content_hashes": {
+    "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1": "d181ae7f977268391e42155eafb111ba93e497dd0d6c42384bcd939c3c571d67",
+    "POL-SURFACE-PRODUCT-v1": "c2b3b5ea31c6a0c1c786da3a73214ef61b1f852d40b59d76485e2c2c2fc58ecc",
+    "POL-DOMAIN-PRODUCT-HEALTH-v1": "bd499b6f0775a97647af7f7eb322819cf0f6c8bd76433ae5fc3d98f8652a2f21",
+    "FAM-PRODUCT-HEALTH-IMMUNOLOGY-v1": "da9f2929f298fd6b0959dff0790b107e9576df7adefc7b7c3d7623e2c2036326",
+    "MOD-PRODUCT-HEALTH-IMMUNOLOGY-v1": "130d50d5ef7a842e076dbfca65caafe29a22c81eaccbdca8a821c9ec6c8fbe74",
+    "OVR-CLINICAL-SAFETY-v1": "b40a4e34ec2603f5e8eaac0550e8899b260f251109a3e90d19e0c2809b7f513a",
+    "IDENTITY-AG-PRO-0298-v1": "731b07adee35e32aa79391925af4f697d5087248ee309e19a27c3811519d8c82"
+  },
+  "effective_prompt_hash_input": "{\"agent_id\":\"AG-PRO-0298\",\"assembly_order\":[\"POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1\",\"POL-SURFACE-PRODUCT-v1\",\"POL-DOMAIN-PRODUCT-HEALTH-v1\",\"FAM-PRODUCT-HEALTH-IMMUNOLOGY-v1\",\"MOD-PRODUCT-HEALTH-IMMUNOLOGY-v1\",\"OVR-CLINICAL-SAFETY-v1\"],\"content_hashes\":{\"FAM-PRODUCT-HEALTH-IMMUNOLOGY-v1\":\"da9f2929f298fd6b0959dff0790b107e9576df7adefc7b7c3d7623e2c2036326\",\"IDENTITY-AG-PRO-0298-v1\":\"731b07adee35e32aa79391925af4f697d5087248ee309e19a27c3811519d8c82\",\"MOD-PRODUCT-HEALTH-IMMUNOLOGY-v1\":\"130d50d5ef7a842e076dbfca65caafe29a22c81eaccbdca8a821c9ec6c8fbe74\",\"OVR-CLINICAL-SAFETY-v1\":\"b40a4e34ec2603f5e8eaac0550e8899b260f251109a3e90d19e0c2809b7f513a\",\"POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1\":\"d181ae7f977268391e42155eafb111ba93e497dd0d6c42384bcd939c3c571d67\",\"POL-DOMAIN-PRODUCT-HEALTH-v1\":\"bd499b6f0775a97647af7f7eb322819cf0f6c8bd76433ae5fc3d98f8652a2f21\",\"POL-SURFACE-PRODUCT-v1\":\"c2b3b5ea31c6a0c1c786da3a73214ef61b1f852d40b59d76485e2c2c2fc58ecc\"},\"evaluation_profile_version\":\"EVAL-HIGH-v1\",\"identity_contract_version\":\"1.0.0\",\"runtime_contract_version\":\"NOT_IMPLEMENTED\"}",
+  "effective_prompt_hash": "5b3516e192a4337f6e5b7fa1c710d3aaea0700eaec0de2580a78c93247cce74b",
+  "runtime_configuration": "NOT_CREATED",
+  "availability": "NOT_AVAILABLE"
+}

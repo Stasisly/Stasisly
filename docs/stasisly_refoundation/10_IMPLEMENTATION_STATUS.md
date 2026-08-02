@@ -208,8 +208,8 @@ P15 / P16 / P17 executed: 0 / 0 / 0
 Strategy assignments: 2778/2778
 Families / modules / overlays: 342 / 342 / 11
 Subwaves: 89
-Specialized prompts / evaluations created: 424 / 424
-Catalog state transitions: 424
+Specialized prompts / evaluations created: 514 / 514
+Catalog state transitions: 514
 Runtime / available agents: NOT_IMPLEMENTED / 0
 ```
 
@@ -240,7 +240,8 @@ W7-006: APPROVED_DOCUMENTARY_BASELINE
 W7-007: APPROVED_DOCUMENTARY_BASELINE
 W7-008: APPROVED_DOCUMENTARY_BASELINE
 W7-009: APPROVED_DOCUMENTARY_BASELINE
-W7-010 through W7-089: NOT_STARTED
+W7-010: APPROVED_DOCUMENTARY_BASELINE
+W7-011 through W7-089: NOT_STARTED
 People / incident / continuity / Emergency runtime: NOT_IMPLEMENTED
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
 ```
@@ -259,7 +260,8 @@ W7-006: APPROVED_DOCUMENTARY_BASELINE
 W7-007: APPROVED_DOCUMENTARY_BASELINE
 W7-008: APPROVED_DOCUMENTARY_BASELINE
 W7-009: APPROVED_DOCUMENTARY_BASELINE
-W7-010 through W7-089: NOT_STARTED
+W7-010: APPROVED_DOCUMENTARY_BASELINE
+W7-011 through W7-089: NOT_STARTED
 Privacy / legal / compliance runtime: NOT_IMPLEMENTED
 Privacy requests / deletions / notifications / certifications: 0 / 0 / 0 / 0
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
@@ -278,7 +280,8 @@ W7-006: APPROVED_DOCUMENTARY_BASELINE
 W7-007: APPROVED_DOCUMENTARY_BASELINE
 W7-008: APPROVED_DOCUMENTARY_BASELINE
 W7-009: APPROVED_DOCUMENTARY_BASELINE
-W7-010 through W7-089: NOT_STARTED
+W7-010: APPROVED_DOCUMENTARY_BASELINE
+W7-011 through W7-089: NOT_STARTED
 Financial runtime / mutations: NOT_IMPLEMENTED / 0
 Payments / refunds / ledger writes / provider approvals: 0 / 0 / 0 / 0
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
@@ -296,7 +299,8 @@ W7-006: APPROVED_DOCUMENTARY_BASELINE
 W7-007: APPROVED_DOCUMENTARY_BASELINE
 W7-008: APPROVED_DOCUMENTARY_BASELINE
 W7-009: APPROVED_DOCUMENTARY_BASELINE
-W7-010 through W7-089: NOT_STARTED
+W7-010: APPROVED_DOCUMENTARY_BASELINE
+W7-011 through W7-089: NOT_STARTED
 Incident runtime / operational actions: NOT_IMPLEMENTED / 0
 Commands / deployments / rollbacks / infrastructure mutations: 0 / 0 / 0 / 0
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
@@ -313,7 +317,8 @@ Catalog PROMPT_CREATED / NOT_CREATED: 366 / 2634
 W7-007: APPROVED_DOCUMENTARY_BASELINE
 W7-008: APPROVED_DOCUMENTARY_BASELINE
 W7-009: APPROVED_DOCUMENTARY_BASELINE
-W7-010 through W7-089: NOT_STARTED
+W7-010: APPROVED_DOCUMENTARY_BASELINE
+W7-011 through W7-089: NOT_STARTED
 Payment runtime / financial mutations: NOT_IMPLEMENTED / 0
 Payments / ledger writes / provider approvals / store submissions: 0 / 0 / 0 / 0
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
@@ -329,7 +334,8 @@ Adversarial cases / CRITICAL reviews: 1000 / 900
 Catalog PROMPT_CREATED / NOT_CREATED: 466 / 2534
 W7-008: APPROVED_DOCUMENTARY_BASELINE
 W7-009: APPROVED_DOCUMENTARY_BASELINE
-W7-010 through W7-089: NOT_STARTED
+W7-010: APPROVED_DOCUMENTARY_BASELINE
+W7-011 through W7-089: NOT_STARTED
 Security/privacy runtime / operational actions: NOT_IMPLEMENTED / 0
 Scans / exploits / permission changes / key operations / disclosures: 0 / 0 / 0 / 0 / 0
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
@@ -345,7 +351,8 @@ P0-P14: 1350/1350 PASS
 Adversarial cases / risk reviews: 900 / 570
 Catalog PROMPT_CREATED / NOT_CREATED: 556 / 2444
 W7-009: APPROVED_DOCUMENTARY_BASELINE
-W7-010 through W7-089: NOT_STARTED
+W7-010: APPROVED_DOCUMENTARY_BASELINE
+W7-011 through W7-089: NOT_STARTED
 Product health runtime / operational actions: NOT_IMPLEMENTED / 0
 Diagnoses / prescriptions / record mutations / emergency actions: 0 / 0 / 0 / 0
 Tools / memories / models / agents available: NOT_PROVISIONED / NOT_PROVISIONED / NOT_CONFIGURED / 0
@@ -360,7 +367,23 @@ Risk: 90 HIGH
 P0-P14: 1350/1350 PASS
 Adversarial cases / risk reviews: 720 / 540
 Catalog PROMPT_CREATED / NOT_CREATED: 646 / 2354
-W7-010 through W7-089: NOT_STARTED
+W7-010: APPROVED_DOCUMENTARY_BASELINE
+W7-011 through W7-089: NOT_STARTED
+Product health runtime / operational actions: NOT_IMPLEMENTED / 0
+Diagnoses / prescriptions / record mutations / emergency actions: 0 / 0 / 0 / 0
+Tools / memories / models / agents available: NOT_PROVISIONED / NOT_PROVISIONED / NOT_CONFIGURED / 0
+```
+
+## W7-010 Product health prompts
+
+```text
+W7-010 status: APPROVED_DOCUMENTARY_BASELINE
+Agents / identities / prompts / manifests / evaluations: 90 / 90 / 90 / 90 / 90
+Risk: 90 HIGH
+P0-P14: 1350/1350 PASS
+Adversarial cases / risk reviews: 720 / 540
+Catalog PROMPT_CREATED / NOT_CREATED: 736 / 2264
+W7-011 through W7-089: NOT_STARTED
 Product health runtime / operational actions: NOT_IMPLEMENTED / 0
 Diagnoses / prescriptions / record mutations / emergency actions: 0 / 0 / 0 / 0
 Tools / memories / models / agents available: NOT_PROVISIONED / NOT_PROVISIONED / NOT_CONFIGURED / 0

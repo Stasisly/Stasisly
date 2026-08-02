@@ -130,3 +130,11 @@ producing 646 documentary prompts and leaving 2,354 `NOT_CREATED`. Identity,
 hierarchy, strategy and HIGH-risk metadata are unchanged. All 3,000 records
 remain `NOT_AVAILABLE`; catalog state creates no clinical, health-record,
 emergency, production or external-communication authority.
+
+## W7-010 catalog transition
+
+Exactly 90 `W7-010` records moved to `PROMPT_CREATED` and `DOCUMENTED_ONLY`,
+producing 736 documentary prompts and leaving 2,264 `NOT_CREATED`. Identity,
+hierarchy, strategy and HIGH-risk metadata are unchanged. All 3,000 records
+remain `NOT_AVAILABLE`; catalog state creates no clinical, prescribing,
+health-record, emergency, production or external-communication authority.

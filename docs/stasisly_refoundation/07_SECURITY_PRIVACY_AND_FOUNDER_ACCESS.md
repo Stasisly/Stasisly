@@ -115,3 +115,10 @@ Health evidence remains purpose-limited, minimum-necessary, consent-aware,
 redacted, need-to-know and user/tenant/case-scoped. Specialty monitoring and
 education cannot infer diagnosis, select treatment, mutate records, contact
 third parties, bypass qualified review or acquire Founder authority.
+
+## W7-010 health and clinical-safety safeguards
+
+Health and medication evidence remains purpose-limited, minimum-necessary,
+consent-aware, redacted, need-to-know and user/tenant/case-scoped. Specialty
+guidance cannot infer diagnosis or prognosis, prescribe or dose medication,
+mutate records, bypass qualified review or acquire Founder authority.

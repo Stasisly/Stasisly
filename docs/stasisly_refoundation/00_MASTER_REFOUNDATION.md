@@ -193,4 +193,13 @@ identities across gastroenterology, geriatrics, gynecology, health education,
 health monitoring and hematology. Guidance remains non-diagnostic, bounded by
 clinical uncertainty, health-data minimization and qualified-human authority.
 No treatment, prescription, emergency action, health operation or runtime is
-created. W7-010 through W7-089 remain `NOT_STARTED`.
+created. W7-011 through W7-089 remain `NOT_STARTED`.
+
+## W7-010 documentary baseline
+
+The tenth specialized subwave approves exactly 90 HIGH Product `health`
+identities across internal medicine, nephrology, immunology, infectious
+diseases, informational oncology and medication information. Guidance remains
+non-diagnostic, evidence-bound and subject to qualified-human authority. No
+treatment, prescription, emergency action, health operation or runtime is
+created. W7-011 through W7-089 remain `NOT_STARTED`.

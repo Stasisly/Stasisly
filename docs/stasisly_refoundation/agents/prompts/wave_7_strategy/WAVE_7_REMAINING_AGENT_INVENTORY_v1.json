@@ -31840,8 +31840,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -31984,8 +31984,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32128,8 +32128,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32146,8 +32146,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32164,8 +32164,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32272,8 +32272,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32380,8 +32380,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32524,8 +32524,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32668,8 +32668,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32686,8 +32686,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32704,8 +32704,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32812,8 +32812,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -32920,8 +32920,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33064,8 +33064,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33208,8 +33208,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33226,8 +33226,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33244,8 +33244,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33352,8 +33352,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33460,8 +33460,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33604,8 +33604,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33748,8 +33748,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33766,8 +33766,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33784,8 +33784,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -33892,8 +33892,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34000,8 +34000,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34144,8 +34144,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34288,8 +34288,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34306,8 +34306,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34324,8 +34324,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34432,8 +34432,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34540,8 +34540,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34684,8 +34684,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34828,8 +34828,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34846,8 +34846,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34864,8 +34864,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -34972,8 +34972,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35080,8 +35080,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35224,8 +35224,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35368,8 +35368,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35386,8 +35386,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35404,8 +35404,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35512,8 +35512,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35620,8 +35620,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35764,8 +35764,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35908,8 +35908,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35926,8 +35926,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -35944,8 +35944,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -36052,8 +36052,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -36160,8 +36160,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -36304,8 +36304,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -36448,8 +36448,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -36466,8 +36466,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -36484,8 +36484,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -36592,8 +36592,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -36700,8 +36700,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -36844,8 +36844,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -36988,8 +36988,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37006,8 +37006,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37024,8 +37024,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37132,8 +37132,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37240,8 +37240,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37384,8 +37384,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37528,8 +37528,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37546,8 +37546,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37564,8 +37564,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37672,8 +37672,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37780,8 +37780,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -37924,8 +37924,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38068,8 +38068,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38086,8 +38086,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38104,8 +38104,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38212,8 +38212,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38320,8 +38320,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38464,8 +38464,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38608,8 +38608,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38626,8 +38626,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38644,8 +38644,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38752,8 +38752,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -38860,8 +38860,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39004,8 +39004,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39148,8 +39148,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39166,8 +39166,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39184,8 +39184,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39292,8 +39292,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39400,8 +39400,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39544,8 +39544,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39688,8 +39688,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39706,8 +39706,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39724,8 +39724,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -39832,8 +39832,8 @@
       "reports_to": "AG-PRO-0071",
       "risk_tier": "HIGH",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {

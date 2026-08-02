@@ -259,11 +259,11 @@ void _validateCatalogBaseline(
   if (catalog.length != 3000) throw StateError('CATALOG_COUNT');
   if (scope.length != 2778) throw StateError('WAVE_7_SCOPE_COUNT');
   if (catalog.where((e) => e['prompt_status'] == 'PROMPT_CREATED').length !=
-      646) {
+      736) {
     throw StateError('CREATED_COUNT');
   }
   if (catalog.where((e) => e['prompt_status'] == 'NOT_CREATED').length !=
-      2354) {
+      2264) {
     throw StateError('NOT_CREATED_COUNT');
   }
   if (catalog.map((e) => e['agent_id']).toSet().length != 3000) {
@@ -453,6 +453,11 @@ final w7009AgentIds = <String>{
     for (final offset in const [79, 82, 84, 87, 97, 98])
       'AG-PRO-${(offset + group * 30).toString().padLeft(4, '0')}',
 };
+final w7010AgentIds = <String>{
+  for (var group = 0; group < 15; group++)
+    for (final offset in const [72, 80, 88, 89, 90, 96])
+      'AG-PRO-${(offset + group * 30).toString().padLeft(4, '0')}',
+};
 final approvedWave7AgentIds = <String>{
   ...w7001AgentIds,
   ...w7002AgentIds,
@@ -463,6 +468,7 @@ final approvedWave7AgentIds = <String>{
   ...w7007AgentIds,
   ...w7008AgentIds,
   ...w7009AgentIds,
+  ...w7010AgentIds,
 };
 
 List<Map<String, Object?>> _buildFamilies(
@@ -591,7 +597,8 @@ List<Map<String, Object?>> _buildSubwaves(
               id == 'W7-006' ||
               id == 'W7-007' ||
               id == 'W7-008' ||
-              id == 'W7-009'
+              id == 'W7-009' ||
+              id == 'W7-010'
           ? 'DOCUMENTARY_PROMPTS_APPROVED'
           : 'NOT_STARTED',
       'sequence': i + 1,
@@ -665,7 +672,8 @@ Map<String, Object?> _strategyAssignment(
             subwaveId == 'W7-006' ||
             subwaveId == 'W7-007' ||
             subwaveId == 'W7-008' ||
-            subwaveId == 'W7-009'
+            subwaveId == 'W7-009' ||
+            subwaveId == 'W7-010'
         ? 'DOCUMENTARY_PROMPTS_APPROVED'
         : 'NOT_STARTED',
     'current_prompt_status': agent['prompt_status'],
@@ -927,7 +935,7 @@ Exact duplicate agent IDs: `0`. Exact duplicate canonical identities: `0`. Famil
         '''
 # Wave 7 Catalog Coverage and Gaps v1
 
-Wave 7 scope by surface: `${jsonEncode(surfaceCounts)}`. Domains: `${remaining.map((e) => '${e['surface']}|${e['domain']}').toSet().length}`. Families: `${families.length}`. W7-001 through W7-009 have 424 approved documentary prompts; the remaining 2,354 records stay NOT_STARTED. Runtime coverage remains absent.
+Wave 7 scope by surface: `${jsonEncode(surfaceCounts)}`. Domains: `${remaining.map((e) => '${e['surface']}|${e['domain']}').toSet().length}`. Families: `${families.length}`. W7-001 through W7-010 have 514 approved documentary prompts; the remaining 2,264 records stay NOT_STARTED. Runtime coverage remains absent.
 '''
             .trimLeft(),
     '$wave7StrategyRoot/WAVE_7_COMPOSABLE_PROMPT_ARCHITECTURE_v1.md':
@@ -995,7 +1003,7 @@ Result: `PASS`. Composition fails closed. The most restrictive rule wins. Compon
 
 ```text
 Catalog: 3000
-Existing prompts: 646
+Existing prompts: 736
 Remaining strategy assignments: ${assignments.length}
 Families / modules / overlays: ${families.length} / ${modules.length} / ${wave7OverlayDefinitions.length}
 Risk distribution: ${jsonEncode(riskCounts)}
@@ -1030,7 +1038,10 @@ W7-008 P0-P14: 1350 PASS; P15-P17: NOT_EXECUTED
 W7-009 specialized prompts / evaluations created: 90 / 90
 W7-009 prompt, lifecycle and implementation transitions: 90
 W7-009 P0-P14: 1350 PASS; P15-P17: NOT_EXECUTED
-Remaining Wave 7 agents: 2354 NOT_STARTED
+W7-010 specialized prompts / evaluations created: 90 / 90
+W7-010 prompt, lifecycle and implementation transitions: 90
+W7-010 P0-P14: 1350 PASS; P15-P17: NOT_EXECUTED
+Remaining Wave 7 agents: 2264 NOT_STARTED
 Runtime / agents available: NOT_IMPLEMENTED / 0
 Readiness: APPROVED_STRATEGY_BASELINE
 ```

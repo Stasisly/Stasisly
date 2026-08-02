@@ -194,3 +194,11 @@ documentary Product health prompts while preserving non-diagnostic guidance,
 specialty boundaries, clinical uncertainty, emergency escalation, health-data
 minimization, qualified-human and Founder authority, deterministic composition
 and the absence of runtime.
+
+## W7-010 Product health decisions
+
+ADR-RF131 through ADR-RF137 are `APPROVED`. They approve 90 individual HIGH
+documentary Product health prompts while preserving non-diagnostic guidance,
+medical and medication boundaries, clinical uncertainty, emergency escalation,
+health-data minimization, qualified-human and Founder authority, deterministic
+composition and the absence of runtime.
