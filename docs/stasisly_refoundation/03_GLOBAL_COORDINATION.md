@@ -134,3 +134,11 @@ Nexus resolves cross-surface conflict, Stasis receives Product/user impact,
 Gerendi receives finance and Administration impact, and Founder retains only
 reserved authority. Authenticated payment, finance, merchant, reconciliation
 and store owners retain every operational decision and execution permission.
+
+## W7-007 Development security and privacy coordination
+
+`AG-DEV-0601` reports to Rector and the other 99 identities report to
+`AG-DEV-0601`. Nexus receives cross-surface conflicts, Stasis receives Product
+and user impact, Gerendi receives Administration and legal impact, and Founder
+retains reserved authority. Authenticated security, privacy, data, legal,
+service, cryptography and incident owners retain all operational decisions.

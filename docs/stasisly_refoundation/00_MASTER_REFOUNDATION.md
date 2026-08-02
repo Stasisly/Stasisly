@@ -142,7 +142,7 @@ The third specialized subwave approves exactly 45 HIGH-risk Administration
 `privacy_legal_compliance` identities. They document bounded privacy, legal and
 compliance analysis but cannot execute rights requests, provide final legal
 authority, certify compliance, notify regulators, delete data or approve
-exceptions. W7-004 through W7-006 are approved; W7-007 through W7-089 remain `NOT_STARTED`.
+exceptions. W7-004 through W7-007 are approved; W7-008 through W7-089 remain `NOT_STARTED`.
 
 ## W7-004 documentary baseline
 
@@ -166,4 +166,13 @@ The sixth specialized subwave approves exactly seven HIGH Development
 provider-independent contracts with idempotency, webhook verification and
 reconciliation boundaries but cannot execute payments, mutate ledgers or
 commerce state, access credentials, approve providers or submit store actions.
-W7-007 through W7-089 remain `NOT_STARTED`.
+W7-008 through W7-089 remain `NOT_STARTED`.
+
+## W7-007 documentary baseline
+
+The seventh specialized subwave approves exactly 100 CRITICAL Development
+`security_privacy` identities across ten families. They preserve restricted
+data, privacy rights, least privilege, software provenance, dependency and
+secret integrity, forensic custody, cryptographic boundaries, incident
+authority and human review. No exploitation, permission change, key operation,
+privacy decision, disclosure or runtime authority is created.

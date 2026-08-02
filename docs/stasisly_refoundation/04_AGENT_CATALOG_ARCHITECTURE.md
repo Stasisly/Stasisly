@@ -105,3 +105,12 @@ Exactly seven `W7-006` records moved to `PROMPT_CREATED` and
 `NOT_CREATED`. Identity, hierarchy, strategy and HIGH-risk metadata are
 unchanged. All 3,000 records remain `NOT_AVAILABLE`; catalog state creates no
 payment, ledger, provider, merchant, store or commerce-mutation authority.
+
+## W7-007 catalog transition
+
+Exactly 100 `W7-007` records moved to `PROMPT_CREATED` and `DOCUMENTED_ONLY`,
+producing 466 documentary prompts and leaving 2,534 `NOT_CREATED`. Identity,
+hierarchy, strategy and CRITICAL-risk metadata are unchanged. All 3,000 records
+remain `NOT_AVAILABLE`; catalog state creates no security operation, privacy
+decision, credential, key, privileged-access, incident-command or disclosure
+authority.

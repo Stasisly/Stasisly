@@ -324,7 +324,7 @@ const approvedWave6AdministrationIds = {
   'AG-ADM-0050',
   'AG-ADM-0051',
 };
-const approvedDocumentaryPromptIds = {
+final approvedDocumentaryPromptIds = {
   ...approvedWave1CoordinatorIds,
   ...approvedWave2GovernanceIds,
   ...approvedWave3ArchitectureIds,
@@ -337,6 +337,7 @@ const approvedDocumentaryPromptIds = {
   ...approvedW7004Ids,
   ...approvedW7005Ids,
   ...approvedW7006Ids,
+  ...approvedW7007Ids,
 };
 const approvedW7001Ids = {
   'AG-ADM-0391',
@@ -493,6 +494,10 @@ const approvedW7006Ids = {
   'AG-DEV-1151',
   'AG-DEV-1158',
   'AG-DEV-1165',
+};
+final approvedW7007Ids = <String>{
+  for (var value = 601; value <= 700; value++)
+    'AG-DEV-${value.toString().padLeft(4, '0')}',
 };
 const validDataAccessClasses = {
   'NO_USER_DATA',

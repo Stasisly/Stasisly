@@ -170,3 +170,11 @@ documentary prompts while preserving amount/currency integrity, idempotency,
 webhook verification, provider/ledger separation, human financial authority,
 restrictive data/tool/memory ceilings, deterministic composition and the
 absence of runtime.
+
+## W7-007 Development security and privacy decisions
+
+ADR-RF110 through ADR-RF116 are `APPROVED`. They approve 100 individual
+CRITICAL documentary prompts while preserving privacy rights, least privilege,
+supply-chain and dependency provenance, secret and cryptographic boundaries,
+forensic evidence integrity, human and Founder authority, deterministic
+composition and the absence of runtime.

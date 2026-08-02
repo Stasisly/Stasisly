@@ -91,3 +91,12 @@ forbidden. Provider and environment identity, amount and currency integrity,
 idempotency, signed webhook verification, replay protection, reconciliation and
 segregation of duties are mandatory. Agents cannot execute financial mutations,
 approve providers, access secrets or exercise Founder authority.
+
+## W7-007 security and privacy safeguards
+
+Security-restricted evidence is purpose-limited, minimized, redacted,
+need-to-know and case-scoped. Least privilege, privacy rights, supply-chain and
+dependency provenance, secret and key protection, forensic custody,
+cryptographic review and incident-authority separation are mandatory. Agents
+cannot exploit, mutate controls, change permissions, access raw secrets, deny
+rights, attribute attackers, disclose externally or exercise Founder authority.

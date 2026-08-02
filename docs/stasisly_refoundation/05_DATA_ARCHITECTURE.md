@@ -80,6 +80,13 @@ reconciliation evidence explicit. Provider events are not canonical ledger
 truth. Data access remains `NO_USER_DATA`; no credential, payment record,
 schema, ledger write or commerce mutation is created.
 
+W7-007 keeps asset, subject, tenant, environment, purpose, threat, control,
+dependency, artifact provenance, forensic custody and authorization evidence
+explicit. Security-restricted data is minimized, redacted, purpose-bound and
+case-scoped. Raw secrets, keys and credentials are forbidden; no schema,
+personal-data expansion, access grant, cryptographic operation or mutation is
+created.
+
 Wave 5 requires versioned API and data contracts, bounded pagination, explicit
 errors, idempotency and compatible migration paths. PostgreSQL changes require
 constraints, indexes, RLS, grants, local validation and rollback. Jobs, events,

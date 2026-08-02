@@ -111,3 +111,11 @@ provider-independent payment contracts but cannot execute payments, mutate
 ledgers or commerce state, access credentials, approve providers, submit store
 actions or acquire Product/Administration authority.
 `PAYMENTS_ENGINEERING_RUNTIME: NOT_IMPLEMENTED`.
+
+### Security and privacy boundary
+
+W7-007 adds 100 CRITICAL documentary Development specialists. They may analyze
+bounded security and privacy evidence but cannot exploit systems, access
+credentials or keys, change permissions, mutate production, decide privacy
+rights, attribute attackers, command incidents or disclose externally.
+`SECURITY_PRIVACY_RUNTIME: NOT_IMPLEMENTED`.

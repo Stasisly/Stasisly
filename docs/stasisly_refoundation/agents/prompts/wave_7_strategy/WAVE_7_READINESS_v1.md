@@ -2,7 +2,7 @@
 
 ```text
 Catalog: 3000
-Existing prompts: 366
+Existing prompts: 466
 Remaining strategy assignments: 2778
 Families / modules / overlays: 342 / 342 / 11
 Risk distribution: {"MODERATE":1504,"HIGH":549,"CRITICAL":176,"LOW":549}
@@ -28,7 +28,10 @@ W7-005 P0-P14: 150 PASS; P15-P17: NOT_EXECUTED
 W7-006 specialized prompts / evaluations created: 7 / 7
 W7-006 prompt, lifecycle and implementation transitions: 7
 W7-006 P0-P14: 105 PASS; P15-P17: NOT_EXECUTED
-Remaining Wave 7 agents: 2634 NOT_STARTED
+W7-007 specialized prompts / evaluations created: 100 / 100
+W7-007 prompt, lifecycle and implementation transitions: 100
+W7-007 P0-P14: 1500 PASS; P15-P17: NOT_EXECUTED
+Remaining Wave 7 agents: 2534 NOT_STARTED
 Runtime / agents available: NOT_IMPLEMENTED / 0
 Readiness: APPROVED_STRATEGY_BASELINE
 ```
