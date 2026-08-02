@@ -91,7 +91,7 @@
     },
     {
       "subwave_id": "W7-004",
-      "subwave_status": "NOT_STARTED",
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
       "sequence": 4,
       "surface": "ADMINISTRATION",
       "domain": "subscriptions_billing_finance",

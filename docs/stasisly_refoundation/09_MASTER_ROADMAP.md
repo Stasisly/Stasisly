@@ -55,6 +55,11 @@ plan for all 2,778 remaining agents without creating prompts. The next bounded
 first implementation was `STASISLY-AGENTS-009`, exclusively `W7-001`: 40 HIGH
 Administration fraud/risk agents.
 
-## Wave 7 progress after W7-001
+## Wave 7 progress after W7-004
 
-`STASISLY-AGENTS-009`, `010` and `011` completed W7-001 through W7-003. The third baseline contains exactly 45 HIGH-risk Administration `privacy_legal_compliance` prompts with individual P0-P14 and reinforced review. No privacy request, legal operation, compliance runtime or availability was created. The next bounded candidate must be resolved exactly as `W7-004` from the approved plan and requires a separate package.
+`STASISLY-AGENTS-009` through `012` completed W7-001 through W7-004. The fourth
+baseline contains exactly 22 HIGH-risk Administration
+`subscriptions_billing_finance` prompts with individual P0-P14 and reinforced
+review. No payment, refund, ledger, provider, entitlement, financial runtime or
+availability was created. The next bounded candidate must be resolved exactly as
+`W7-005` from the approved plan and requires a separate package.

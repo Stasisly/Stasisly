@@ -183,13 +183,13 @@ void main() {
   test('catalog transitions exactly W7-003 and preserves availability', () {
     expect(
       catalog.where((r) => r['prompt_status'] == 'PROMPT_CREATED'),
-      hasLength(327),
+      hasLength(349),
     );
     expect(
       catalog.where((r) => r['prompt_status'] == 'NOT_CREATED'),
-      hasLength(2673),
+      hasLength(2651),
     );
-    expect(approvedDocumentaryPromptIds, hasLength(327));
+    expect(approvedDocumentaryPromptIds, hasLength(349));
     for (final id in w7003AgentIds) {
       final row = catalog.singleWhere((r) => r['agent_id'] == id);
       expect(row['lifecycle_status'], 'PROMPT_CREATED');

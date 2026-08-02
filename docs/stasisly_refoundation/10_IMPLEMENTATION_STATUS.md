@@ -208,8 +208,8 @@ P15 / P16 / P17 executed: 0 / 0 / 0
 Strategy assignments: 2778/2778
 Families / modules / overlays: 342 / 342 / 11
 Subwaves: 89
-Specialized prompts / evaluations created: 105 / 105
-Catalog state transitions: 105
+Specialized prompts / evaluations created: 127 / 127
+Catalog state transitions: 127
 Runtime / available agents: NOT_IMPLEMENTED / 0
 ```
 
@@ -234,7 +234,8 @@ P0-P14: 300/300 PASS
 Adversarial cases / CRITICAL reviews: 200 / 180
 Catalog PROMPT_CREATED / NOT_CREATED: 282 / 2718
 W7-003: APPROVED_DOCUMENTARY_BASELINE
-W7-004 through W7-089: NOT_STARTED
+W7-004: APPROVED_DOCUMENTARY_BASELINE
+W7-005 through W7-089: NOT_STARTED
 People / incident / continuity / Emergency runtime: NOT_IMPLEMENTED
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
 ```
@@ -247,8 +248,23 @@ Agents / identities / prompts / manifests / evaluations: 45 / 45 / 45 / 45 / 45
 P0-P14: 675/675 PASS
 Adversarial cases / HIGH reviews: 360 / 315
 Catalog PROMPT_CREATED / NOT_CREATED: 327 / 2673
-W7-004 through W7-089: NOT_STARTED
+W7-004: APPROVED_DOCUMENTARY_BASELINE
+W7-005 through W7-089: NOT_STARTED
 Privacy / legal / compliance runtime: NOT_IMPLEMENTED
 Privacy requests / deletions / notifications / certifications: 0 / 0 / 0 / 0
+Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
+```
+
+## W7-004 subscriptions, billing and finance prompts
+
+```text
+W7-004 status: APPROVED_DOCUMENTARY_BASELINE
+Agents / identities / prompts / manifests / evaluations: 22 / 22 / 22 / 22 / 22
+P0-P14: 330/330 PASS
+Adversarial cases / HIGH reviews: 176 / 154
+Catalog PROMPT_CREATED / NOT_CREATED: 349 / 2651
+W7-005 through W7-089: NOT_STARTED
+Financial runtime / mutations: NOT_IMPLEMENTED / 0
+Payments / refunds / ledger writes / provider approvals: 0 / 0 / 0 / 0
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
 ```

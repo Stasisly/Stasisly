@@ -67,3 +67,11 @@ retention and deletion are purpose-bound. Legal uncertainty, cross-border
 transfers, subprocessors, high-impact automation and possible breaches require
 qualified review. Agents cannot expose Founder-private data, self-certify,
 notify regulators or perform operational privacy actions.
+
+## W7-004 financial safeguards
+
+Financial data is purpose-limited, minimized, redacted and need-to-know.
+Segregation of duties, exact identity, amount, currency, period, idempotency and
+immutable evidence are mandatory. Agents cannot move money, expose payment
+credentials, mutate balances or ledgers, self-approve exceptions, approve
+providers or exercise Founder financial authority.

@@ -81,3 +81,11 @@ producing 327 documentary prompts and leaving 2,673 `NOT_CREATED`. Identity,
 hierarchy, strategy and HIGH-risk metadata are unchanged. All 3,000 records
 remain `NOT_AVAILABLE`; catalog state creates no privacy, legal, compliance,
 deletion, notification or certification authority.
+
+## W7-004 catalog transition
+
+Exactly 22 `W7-004` records moved to `PROMPT_CREATED` and `DOCUMENTED_ONLY`,
+producing 349 documentary prompts and leaving 2,651 `NOT_CREATED`. Identity,
+hierarchy, strategy and HIGH-risk metadata are unchanged. All 3,000 records
+remain `NOT_AVAILABLE`; catalog state creates no financial mutation, provider
+approval, ledger, payment, refund or entitlement authority.

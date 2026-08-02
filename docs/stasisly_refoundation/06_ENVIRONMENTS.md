@@ -38,3 +38,9 @@ The Wave 6 package is documentary and local. Administration Surface, billing pro
 ## Documentary critical-agent boundary
 
 W7-002 prompt approval changes no environment. Development, Staging and Production receive no agent runtime, incident provider, people provider, communications provider, credentials, tools, memory, continuity automation or Emergency authorization. Production shutdown, failover and recovery remain separately authorized operational actions.
+
+## W7-004 environment status
+
+Prompt approval configures no payment processor, billing provider, ledger,
+financial credential, webhook, settlement service, runtime agent, tool or
+memory in Development, Staging or Production. Operational actions remain `0`.

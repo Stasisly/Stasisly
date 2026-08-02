@@ -55,7 +55,8 @@ void main() {
       (r) =>
           r['subwave_id'] != 'W7-001' &&
           r['subwave_id'] != 'W7-002' &&
-          r['subwave_id'] != 'W7-003',
+          r['subwave_id'] != 'W7-003' &&
+          r['subwave_id'] != 'W7-004',
     );
     expect(outside.every((r) => r['subwave_status'] == 'NOT_STARTED'), isTrue);
   });
@@ -204,9 +205,9 @@ void main() {
     final pending = catalog
         .where((r) => r['prompt_status'] == 'NOT_CREATED')
         .toList();
-    expect(completed, hasLength(327));
-    expect(pending, hasLength(2673));
-    expect(approvedDocumentaryPromptIds, hasLength(327));
+    expect(completed, hasLength(349));
+    expect(pending, hasLength(2651));
+    expect(approvedDocumentaryPromptIds, hasLength(349));
     for (final id in w7002AgentIds) {
       final row = catalog.singleWhere((r) => r['agent_id'] == id);
       expect(row['lifecycle_status'], 'PROMPT_CREATED');

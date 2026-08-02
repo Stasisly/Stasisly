@@ -127,3 +127,10 @@ documentary prompts while preserving identity verification, privacy rights,
 consent, retention, deletion, sensitive-data minimization, legal uncertainty,
 compliance evidence, transfers, processors, automated-decision safeguards,
 qualified human authority and the absence of operational runtime.
+
+## W7-004 subscriptions, billing and finance decisions
+
+ADR-RF090 through ADR-RF095 are `APPROVED`. They approve 22 individual HIGH
+documentary prompts while preserving financial mutation denial, segregation of
+duties, evidence provenance, restrictive data/tool/memory ceilings, human and
+Founder boundaries, deterministic composition and the absence of runtime.

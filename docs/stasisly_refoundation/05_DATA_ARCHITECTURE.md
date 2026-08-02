@@ -62,6 +62,12 @@ explicit. Sensitive health and private data remain need-to-know and minimized.
 No schema, remote data, transfer, deletion, export or operational request is
 created by this documentary baseline.
 
+W7-004 distinguishes customer, account, subscription, entitlement, invoice,
+transaction, charge, refund, dispute, settlement, payout, ledger and
+reconciliation evidence. Currency, amount, period, provider, source,
+idempotency and immutable provenance remain explicit. No schema, credential,
+financial record or operational mutation is created.
+
 Wave 5 requires versioned API and data contracts, bounded pagination, explicit
 errors, idempotency and compatible migration paths. PostgreSQL changes require
 constraints, indexes, RLS, grants, local validation and rollback. Jobs, events,

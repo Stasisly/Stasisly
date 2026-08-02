@@ -143,3 +143,11 @@ The third specialized subwave approves exactly 45 HIGH-risk Administration
 compliance analysis but cannot execute rights requests, provide final legal
 authority, certify compliance, notify regulators, delete data or approve
 exceptions. W7-004 through W7-089 remain `NOT_STARTED`.
+
+## W7-004 documentary baseline
+
+The fourth specialized subwave approves exactly 22 HIGH-risk Administration
+`subscriptions_billing_finance` identities. They analyze payments operations and
+financial reconciliation without moving money, issuing refunds, mutating
+ledgers, approving providers or changing entitlements. W7-005 through W7-089
+remain `NOT_STARTED`.

@@ -110,3 +110,11 @@ Administration, Nexus resolves transverse conflict, Stasis receives Product and
 user impact, Rector receives data/security/control work, Founder retains
 reserved material risk, and qualified humans retain legal interpretation and
 operational authority. Reporting never transfers permissions or approval.
+
+## W7-004 subscriptions, billing and finance coordination
+
+The 22 identities report to `AG-ADM-0131`. Gerendi coordinates Administration,
+Nexus resolves transverse conflict, Stasis receives Product and entitlement
+impact, Rector receives technical/data/security controls, Founder retains
+reserved material financial authority, and qualified humans and authorized
+systems retain execution. Reporting never transfers financial permissions.

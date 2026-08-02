@@ -89,3 +89,10 @@ consent, retention, deletion, legal interpretation, compliance evidence,
 transfers, processors and automated decisions require scoped evidence and
 qualified human review. No prompt executes a request, deletion, disclosure,
 notification, certification or legal decision. `PRIVACY_LEGAL_COMPLIANCE_RUNTIME: NOT_IMPLEMENTED`.
+
+### Subscriptions, billing and finance boundary
+
+W7-004 adds 22 HIGH-risk documentary Administration specialists. Financial
+records and Product entitlements remain separate; analysis transfers bounded
+evidence, never payment, refund, payout, ledger, balance, provider or entitlement
+authority. `SUBSCRIPTIONS_BILLING_FINANCE_RUNTIME: NOT_IMPLEMENTED`.

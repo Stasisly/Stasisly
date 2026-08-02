@@ -72,3 +72,5 @@
 - **Privacy-rights request**: Identity-verified, scoped and jurisdiction-aware request with legal basis, affected systems, exceptions, deadline, evidence and appeal; W7-003 executes none.
 - **Compliance evidence**: Distinct implementation or operating proof tied to a requirement, control, owner and review; documentation alone is not certification.
 - **Legal uncertainty boundary**: Requirement to state limitations, preserve a safe default and escalate to qualified human review instead of inventing law or final authority.
+- **Financial mutation boundary**: Documentary analysis cannot initiate, retry, refund, reverse, settle, transfer, post, adjust, reconcile by mutation or change entitlements; execution requires separate human authority and an authorized system.
+- **Reconciliation exception**: Visible, evidence-backed difference between expected and actual financial records with currency, amount, period, owner, expiry and independent review; it is never silently closed.

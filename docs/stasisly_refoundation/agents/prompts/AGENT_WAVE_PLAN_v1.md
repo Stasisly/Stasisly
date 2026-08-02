@@ -65,9 +65,10 @@ specialty registries, overlays, precedence, deterministic composition and
 individual evaluation requirements. STASISLY-AGENTS-009 approved forty W7-001
 prompts, STASISLY-AGENTS-010 approved twenty W7-002 CRITICAL prompts and
 STASISLY-AGENTS-011 approved 45 W7-003 HIGH privacy, legal and compliance
-documentary prompts and evaluations through P0-P14. The other 2,673 Wave 7
-records remain `NOT_STARTED`; no privacy, legal, compliance or agent runtime is
-authorized.
+documentary prompts and evaluations through P0-P14. STASISLY-AGENTS-012 approved
+22 W7-004 HIGH subscriptions, billing and finance documentary prompts and
+evaluations through P0-P14. The other 2,651 Wave 7 records remain `NOT_STARTED`;
+no financial operation or agent runtime is authorized.
 
-The next implementation candidate is the exact `W7-003` scope resolved from the
+The next implementation candidate is the exact `W7-005` scope resolved from the
 approved subwave plan. It requires a separate package and its declared reviewers.

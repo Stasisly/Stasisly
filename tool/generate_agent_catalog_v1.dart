@@ -334,6 +334,7 @@ const approvedDocumentaryPromptIds = {
   ...approvedW7001Ids,
   ...approvedW7002Ids,
   ...approvedW7003Ids,
+  ...approvedW7004Ids,
 };
 const approvedW7001Ids = {
   'AG-ADM-0391',
@@ -445,6 +446,30 @@ const approvedW7003Ids = {
   'AG-ADM-0388',
   'AG-ADM-0389',
   'AG-ADM-0390',
+};
+const approvedW7004Ids = {
+  'AG-ADM-0133',
+  'AG-ADM-0134',
+  'AG-ADM-0141',
+  'AG-ADM-0142',
+  'AG-ADM-0149',
+  'AG-ADM-0150',
+  'AG-ADM-0157',
+  'AG-ADM-0158',
+  'AG-ADM-0165',
+  'AG-ADM-0166',
+  'AG-ADM-0173',
+  'AG-ADM-0174',
+  'AG-ADM-0181',
+  'AG-ADM-0182',
+  'AG-ADM-0189',
+  'AG-ADM-0190',
+  'AG-ADM-0197',
+  'AG-ADM-0198',
+  'AG-ADM-0205',
+  'AG-ADM-0206',
+  'AG-ADM-0213',
+  'AG-ADM-0214',
 };
 const validDataAccessClasses = {
   'NO_USER_DATA',
