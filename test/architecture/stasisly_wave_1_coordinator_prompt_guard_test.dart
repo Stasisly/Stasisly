@@ -126,7 +126,7 @@ void main() {
     expect(approved.map((entry) => entry['agent_id']).toSet(), ids);
     expect(
       catalog.where((entry) => entry['prompt_status'] == 'PROMPT_CREATED'),
-      hasLength(282),
+      hasLength(327),
     );
     expect(
       catalog.where((entry) => entry['availability'] == 'NOT_AVAILABLE'),
@@ -136,7 +136,7 @@ void main() {
       catalog.where(
         (entry) => entry['implementation_status'] == 'NOT_IMPLEMENTED',
       ),
-      hasLength(2718),
+      hasLength(2673),
     );
   });
 

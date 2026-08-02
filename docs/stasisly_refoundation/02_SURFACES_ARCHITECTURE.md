@@ -81,3 +81,11 @@ W7-001 adds forty documentary Administration specialists without coupling Produc
 ### People, incidents and continuity boundary
 
 W7-002 adds twenty CRITICAL documentary Administration specialists. They may assess and coordinate within scope but cannot declare emergencies, execute HR actions, interrupt production, activate continuity or recovery, or release crisis communications. Product impact routes to Stasis, technical response to Rector, Administration coordination to Gerendi, cross-surface conflict to Nexus, reserved authority to Founder and execution to authorized humans. `PEOPLE_INCIDENT_CONTINUITY_RUNTIME: NOT_IMPLEMENTED`.
+
+### Privacy, legal and compliance boundary
+
+W7-003 adds 45 HIGH-risk documentary Administration specialists. Rights,
+consent, retention, deletion, legal interpretation, compliance evidence,
+transfers, processors and automated decisions require scoped evidence and
+qualified human review. No prompt executes a request, deletion, disclosure,
+notification, certification or legal decision. `PRIVACY_LEGAL_COMPLIANCE_RUNTIME: NOT_IMPLEMENTED`.

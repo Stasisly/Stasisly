@@ -1,0 +1,1988 @@
+{
+ "schema_version": "1.0.0",
+ "component_count": 15,
+ "W7-001_changed": 0,
+ "W7-002_changed": 0,
+ "components": [
+  {
+   "component_id": "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+   "affected_count": 45,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0346",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0346_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0347",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0347_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0348",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0348_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0349",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0349_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0350",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0350_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0351",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0351_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0352",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0352_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0353",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0353_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0354",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0354_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0355",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0355_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0356",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0356_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0357",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0357_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0358",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0358_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0359",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0359_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0360",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0360_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0361",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0361_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0362",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0362_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0363",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0363_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0364",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0364_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0365",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0365_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0366",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0366_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0367",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0367_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0368",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0368_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0369",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0369_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0370",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0370_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0371",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0371_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0372",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0372_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0373",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0373_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0374",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0374_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0375",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0375_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0376",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0376_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0377",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0377_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0378",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0378_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0379",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0379_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0380",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0380_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0381",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0381_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0382",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0382_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0383",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0383_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0384",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0384_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0385",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0385_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0386",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0386_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0387",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0387_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0388",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0388_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0389",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0389_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0390",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0390_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "POL-SURFACE-ADMINISTRATION-v1",
+   "affected_count": 45,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0346",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0346_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0347",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0347_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0348",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0348_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0349",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0349_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0350",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0350_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0351",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0351_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0352",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0352_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0353",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0353_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0354",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0354_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0355",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0355_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0356",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0356_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0357",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0357_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0358",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0358_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0359",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0359_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0360",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0360_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0361",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0361_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0362",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0362_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0363",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0363_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0364",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0364_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0365",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0365_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0366",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0366_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0367",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0367_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0368",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0368_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0369",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0369_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0370",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0370_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0371",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0371_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0372",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0372_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0373",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0373_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0374",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0374_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0375",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0375_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0376",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0376_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0377",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0377_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0378",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0378_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0379",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0379_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0380",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0380_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0381",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0381_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0382",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0382_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0383",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0383_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0384",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0384_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0385",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0385_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0386",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0386_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0387",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0387_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0388",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0388_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0389",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0389_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0390",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0390_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "POL-DOMAIN-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-v1",
+   "affected_count": 45,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0346",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0346_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0347",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0347_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0348",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0348_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0349",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0349_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0350",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0350_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0351",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0351_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0352",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0352_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0353",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0353_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0354",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0354_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0355",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0355_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0356",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0356_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0357",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0357_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0358",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0358_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0359",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0359_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0360",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0360_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0361",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0361_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0362",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0362_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0363",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0363_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0364",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0364_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0365",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0365_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0366",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0366_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0367",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0367_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0368",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0368_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0369",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0369_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0370",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0370_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0371",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0371_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0372",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0372_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0373",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0373_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0374",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0374_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0375",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0375_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0376",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0376_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0377",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0377_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0378",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0378_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0379",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0379_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0380",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0380_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0381",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0381_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0382",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0382_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0383",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0383_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0384",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0384_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0385",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0385_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0386",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0386_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0387",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0387_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0388",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0388_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0389",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0389_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0390",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0390_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "FAM-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-PRIVACY-OPERATIONS-v1",
+   "affected_count": 9,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0346",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0346_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0351",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0351_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0356",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0356_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0361",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0361_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0366",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0366_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0371",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0371_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0376",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0376_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0381",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0381_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0386",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0386_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "MOD-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-PRIVACY-OPERATIONS-v1",
+   "affected_count": 9,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0346",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0346_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0351",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0351_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0356",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0356_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0361",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0361_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0366",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0366_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0371",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0371_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0376",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0376_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0381",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0381_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0386",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0386_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "OVR-LEGAL-UNCERTAINTY-v1",
+   "affected_count": 45,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0346",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0346_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0347",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0347_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0348",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0348_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0349",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0349_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0350",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0350_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0351",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0351_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0352",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0352_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0353",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0353_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0354",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0354_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0355",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0355_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0356",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0356_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0357",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0357_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0358",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0358_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0359",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0359_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0360",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0360_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0361",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0361_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0362",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0362_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0363",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0363_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0364",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0364_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0365",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0365_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0366",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0366_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0367",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0367_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0368",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0368_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0369",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0369_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0370",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0370_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0371",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0371_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0372",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0372_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0373",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0373_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0374",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0374_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0375",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0375_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0376",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0376_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0377",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0377_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0378",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0378_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0379",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0379_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0380",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0380_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0381",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0381_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0382",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0382_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0383",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0383_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0384",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0384_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0385",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0385_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0386",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0386_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0387",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0387_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0388",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0388_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0389",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0389_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0390",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0390_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "OVR-PRIVACY-RIGHTS-v1",
+   "affected_count": 45,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0346",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0346_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0346_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0347",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0347_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0348",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0348_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0349",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0349_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0350",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0350_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0351",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0351_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0351_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0352",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0352_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0353",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0353_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0354",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0354_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0355",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0355_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0356",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0356_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0356_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0357",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0357_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0358",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0358_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0359",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0359_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0360",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0360_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0361",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0361_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0361_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0362",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0362_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0363",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0363_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0364",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0364_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0365",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0365_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0366",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0366_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0366_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0367",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0367_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0368",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0368_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0369",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0369_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0370",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0370_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0371",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0371_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0371_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0372",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0372_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0373",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0373_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0374",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0374_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0375",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0375_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0376",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0376_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0376_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0377",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0377_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0378",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0378_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0379",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0379_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0380",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0380_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0381",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0381_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0381_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0382",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0382_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0383",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0383_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0384",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0384_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0385",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0385_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0386",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0386_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0386_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_PRIVACY_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0387",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0387_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0388",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0388_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0389",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0389_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0390",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0390_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "FAM-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-LEGAL-OPERATIONS-v1",
+   "affected_count": 9,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0347",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0347_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0352",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0352_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0357",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0357_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0362",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0362_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0367",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0367_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0372",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0372_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0377",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0377_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0382",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0382_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0387",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0387_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "MOD-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-LEGAL-OPERATIONS-v1",
+   "affected_count": 9,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0347",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0347_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0347_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0352",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0352_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0352_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0357",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0357_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0357_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0362",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0362_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0362_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0367",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0367_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0367_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0372",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0372_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0372_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0377",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0377_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0377_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0382",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0382_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0382_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0387",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0387_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0387_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_LEGAL_OPERATIONS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "FAM-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-REGULATORY-COMPLIANCE-v1",
+   "affected_count": 9,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0348",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0348_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0353",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0353_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0358",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0358_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0363",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0363_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0368",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0368_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0373",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0373_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0378",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0378_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0383",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0383_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0388",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0388_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "MOD-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-REGULATORY-COMPLIANCE-v1",
+   "affected_count": 9,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0348",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0348_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0348_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0353",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0353_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0353_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0358",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0358_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0358_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0363",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0363_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0363_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0368",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0368_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0368_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0373",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0373_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0373_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0378",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0378_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0378_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0383",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0383_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0383_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0388",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0388_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0388_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_REGULATORY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "FAM-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-DATA-SUBJECT-REQUESTS-v1",
+   "affected_count": 9,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0349",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0349_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0354",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0354_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0359",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0359_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0364",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0364_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0369",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0369_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0374",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0374_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0379",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0379_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0384",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0384_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0389",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0389_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "MOD-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-DATA-SUBJECT-REQUESTS-v1",
+   "affected_count": 9,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0349",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0349_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0349_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0354",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0354_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0354_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0359",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0359_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0359_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0364",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0364_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0364_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0369",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0369_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0369_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0374",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0374_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0374_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0379",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0379_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0379_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0384",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0384_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0384_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0389",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0389_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0389_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_DATA_SUBJECT_REQUESTS_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "FAM-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-POLICY-COMPLIANCE-v1",
+   "affected_count": 9,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0350",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0350_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0355",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0355_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0360",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0360_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0365",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0365_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0370",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0370_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0375",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0375_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0380",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0380_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0385",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0385_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0390",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0390_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "MOD-ADMINISTRATION-PRIVACY-LEGAL-COMPLIANCE-POLICY-COMPLIANCE-v1",
+   "affected_count": 9,
+   "dependents": [
+    {
+     "agent_id": "AG-ADM-0350",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0350_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0350_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0355",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0355_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0355_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0360",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0360_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0360_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0365",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0365_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0365_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0370",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0370_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0370_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0375",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0375_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0375_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0380",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0380_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0380_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0385",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0385_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0385_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-ADM-0390",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/manifests/AG-ADM-0390_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/effective_prompts/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-003/evaluations/AG-ADM-0390_ADMINISTRATION_PRIVACY_LEGAL_COMPLIANCE_POLICY_COMPLIANCE_VALIDATE_POLICY_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  }
+ ]
+}

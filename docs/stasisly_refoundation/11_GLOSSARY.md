@@ -69,3 +69,6 @@
 - **Incident command**: Explicit human operational authority for an incident; documentary coordination never inherits it.
 - **Continuity activation**: Separately authorized operational decision to invoke approved continuity procedures; a prompt cannot activate it.
 - **Emergency authority**: Reserved, explicit, scoped and time-bounded authority that no documentary agent can declare or infer.
+- **Privacy-rights request**: Identity-verified, scoped and jurisdiction-aware request with legal basis, affected systems, exceptions, deadline, evidence and appeal; W7-003 executes none.
+- **Compliance evidence**: Distinct implementation or operating proof tied to a requirement, control, owner and review; documentation alone is not certification.
+- **Legal uncertainty boundary**: Requirement to state limitations, preserve a safe default and escalate to qualified human review instead of inventing law or final authority.

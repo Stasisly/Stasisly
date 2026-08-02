@@ -134,4 +134,12 @@ The first specialized subwave is approved for exactly forty HIGH-risk Administra
 
 ## W7-002 documentary baseline
 
-The second specialized subwave is approved for exactly twenty CRITICAL Administration `people_incidents_continuity_surface` identities. Detection does not grant Emergency authority; people actions, incident command, continuity activation, production changes, crisis release and recovery execution remain human-authorized runtime concerns. W7-003 through W7-089 remain `NOT_STARTED`.
+The second specialized subwave is approved for exactly twenty CRITICAL Administration `people_incidents_continuity_surface` identities. Detection does not grant Emergency authority; people actions, incident command, continuity activation, production changes, crisis release and recovery execution remain human-authorized runtime concerns.
+
+## W7-003 documentary baseline
+
+The third specialized subwave approves exactly 45 HIGH-risk Administration
+`privacy_legal_compliance` identities. They document bounded privacy, legal and
+compliance analysis but cannot execute rights requests, provide final legal
+authority, certify compliance, notify regulators, delete data or approve
+exceptions. W7-004 through W7-089 remain `NOT_STARTED`.

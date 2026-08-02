@@ -75,6 +75,14 @@
 | ADR-RF079 Authorized crisis communications | NORMATIVE | APPROVED | INCIDENT_RUNTIME_NOT_IMPLEMENTED |
 | ADR-RF080 Preserve incident evidence and timelines | NORMATIVE | APPROVED | INCIDENT_RUNTIME_NOT_IMPLEMENTED |
 | ADR-RF081 Documentary critical agents do not execute | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
+| ADR-RF082 W7-003 privacy legal compliance baseline | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF083 No final legal authority or self-certification | NORMATIVE | APPROVED | LEGAL_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF084 Privacy rights identity scope and evidence | NORMATIVE | APPROVED | REQUEST_EXECUTION_NOT_IMPLEMENTED |
+| ADR-RF085 Purpose-bound consent retention and deletion | NORMATIVE | APPROVED | PRIVACY_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF086 Sensitive data strict need-to-know | NORMATIVE | APPROVED | PRIVACY_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF087 Transfers and subprocessors require review | NORMATIVE | APPROVED | COMPLIANCE_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF088 Scores require high-impact safeguards | NORMATIVE | APPROVED | COMPLIANCE_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF089 Documentary agents do not execute requests | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
 | Global design, proportional implementation | NORMATIVE_MASTER | APPROVED | DOCUMENTED |
 | API distinct from MCP | NORMATIVE_MASTER | ADOPTED | NOT_IMPLEMENTED_AS_COMPLETE_PLATFORM |
 | Flutter independent from MCP | NORMATIVE_MASTER | ADOPTED | PARTIAL_LEGACY_EVIDENCE_ONLY |
@@ -111,3 +119,11 @@ CRITICAL documentary prompts while preserving people safety, fair process,
 incident-state separation, evidence integrity, authorized incident command,
 continuity and recovery activation boundaries, verified crisis communications,
 Founder authority and the absence of runtime or availability.
+
+## W7-003 privacy, legal and compliance decisions
+
+ADR-RF082 through ADR-RF089 are `APPROVED`. They approve 45 individual HIGH
+documentary prompts while preserving identity verification, privacy rights,
+consent, retention, deletion, sensitive-data minimization, legal uncertainty,
+compliance evidence, transfers, processors, automated-decision safeguards,
+qualified human authority and the absence of operational runtime.

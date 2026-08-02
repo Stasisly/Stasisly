@@ -58,3 +58,12 @@ Fraud signals, rules and scores are not verified facts or enforcement decisions.
 ## W7-002 critical incident safeguards
 
 Incident evidence, people data and crisis communications are confidential and purpose-bound. Health, HR, identity and security data require strict necessity and separate authorization. Founder authority is explicit, scoped, time-bounded, non-transferable and cannot be created, inferred, expanded, reused or consumed by documentary agents. Emergency, HR, production, continuity and communications execution remain unavailable.
+
+## W7-003 privacy, legal and compliance safeguards
+
+Privacy rights require identity verification, scope, legal basis, evidence,
+transparent exceptions and appeal. Consent is affirmative and versioned;
+retention and deletion are purpose-bound. Legal uncertainty, cross-border
+transfers, subprocessors, high-impact automation and possible breaches require
+qualified review. Agents cannot expose Founder-private data, self-certify,
+notify regulators or perform operational privacy actions.

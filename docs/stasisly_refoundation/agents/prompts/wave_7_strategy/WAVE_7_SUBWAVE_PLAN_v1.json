@@ -62,7 +62,7 @@
     },
     {
       "subwave_id": "W7-003",
-      "subwave_status": "NOT_STARTED",
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
       "sequence": 3,
       "surface": "ADMINISTRATION",
       "domain": "privacy_legal_compliance",

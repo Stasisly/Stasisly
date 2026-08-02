@@ -102,3 +102,11 @@ The forty fraud-risk identities preserve catalog `reports_to` edges. Product/use
 ## W7-002 critical coordination
 
 The twenty people, incident and continuity identities preserve their catalog hierarchy and distinguish support from command. Stasis receives Product impact, Rector technical response, Gerendi Administration coordination, Nexus cross-surface conflicts, Founder reserved authority and authorized humans all execution. Emergency services remain external human institutions; no prompt can impersonate or replace them.
+
+## W7-003 privacy, legal and compliance coordination
+
+The 45 identities preserve catalog `reports_to` edges. Gerendi coordinates
+Administration, Nexus resolves transverse conflict, Stasis receives Product and
+user impact, Rector receives data/security/control work, Founder retains
+reserved material risk, and qualified humans retain legal interpretation and
+operational authority. Reporting never transfers permissions or approval.

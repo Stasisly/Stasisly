@@ -57,4 +57,4 @@ Administration fraud/risk agents.
 
 ## Wave 7 progress after W7-001
 
-`STASISLY-AGENTS-009` completed W7-001 and `STASISLY-AGENTS-010` completed the documentary W7-002 baseline: twenty CRITICAL Administration `people_incidents_continuity_surface` prompts passed individual P0-P14 and reinforced review. No runtime, Emergency authority or availability was created. The next bounded candidate must be resolved exactly as `W7-003` from the approved plan and requires a separate package.
+`STASISLY-AGENTS-009`, `010` and `011` completed W7-001 through W7-003. The third baseline contains exactly 45 HIGH-risk Administration `privacy_legal_compliance` prompts with individual P0-P14 and reinforced review. No privacy request, legal operation, compliance runtime or availability was created. The next bounded candidate must be resolved exactly as `W7-004` from the approved plan and requires a separate package.

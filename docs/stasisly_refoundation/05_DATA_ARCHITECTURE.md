@@ -56,6 +56,12 @@ Research artifacts separately preserve mode, participants, sources, uncertainty
 and decision traceability. No memory store, RAG index or research runtime is
 created by these documentary contracts.
 
+W7-003 makes purpose, legal basis, data category, jurisdiction, retention,
+deletion, backup, derived-data, residency, transfer and processor evidence
+explicit. Sensitive health and private data remain need-to-know and minimized.
+No schema, remote data, transfer, deletion, export or operational request is
+created by this documentary baseline.
+
 Wave 5 requires versioned API and data contracts, bounded pagination, explicit
 errors, idempotency and compatible migration paths. PostgreSQL changes require
 constraints, indexes, RLS, grants, local validation and rollback. Jobs, events,
