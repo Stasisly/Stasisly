@@ -54,3 +54,7 @@ Administrative and financial access is deny-by-default, least-privilege, purpose
 ## W7-001 fraud safeguards
 
 Fraud signals, rules and scores are not verified facts or enforcement decisions. High-impact actions require scoped evidence, proportionality, human review, reason code, appeal path and audit trail. Health, wellness, private conversations and unrelated Product memory are denied by default. No W7-001 prompt grants privileged access, financial mutation, account restriction, critical-risk acceptance or Founder authority.
+
+## W7-002 critical incident safeguards
+
+Incident evidence, people data and crisis communications are confidential and purpose-bound. Health, HR, identity and security data require strict necessity and separate authorization. Founder authority is explicit, scoped, time-bounded, non-transferable and cannot be created, inferred, expanded, reused or consumed by documentary agents. Emergency, HR, production, continuity and communications execution remain unavailable.

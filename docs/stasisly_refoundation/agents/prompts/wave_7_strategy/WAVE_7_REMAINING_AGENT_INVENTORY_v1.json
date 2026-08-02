@@ -11338,8 +11338,8 @@
       "reports_to": "AG-ADM-0001",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11356,8 +11356,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11374,8 +11374,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11392,8 +11392,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11410,8 +11410,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11428,8 +11428,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11446,8 +11446,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11464,8 +11464,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11482,8 +11482,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11500,8 +11500,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11518,8 +11518,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11536,8 +11536,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11554,8 +11554,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11572,8 +11572,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11590,8 +11590,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11608,8 +11608,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11626,8 +11626,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11644,8 +11644,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11662,8 +11662,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {
@@ -11680,8 +11680,8 @@
       "reports_to": "AG-ADM-0681",
       "risk_tier": "CRITICAL",
       "historical_source": "NONE",
-      "prompt_status": "NOT_CREATED",
-      "implementation_status": "NOT_IMPLEMENTED",
+      "prompt_status": "PROMPT_CREATED",
+      "implementation_status": "DOCUMENTED_ONLY",
       "availability": "NOT_AVAILABLE"
     },
     {

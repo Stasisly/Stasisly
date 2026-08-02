@@ -98,3 +98,7 @@ authority between surfaces, domains, coordinators or agents.
 ## W7-001 coordination
 
 The forty fraud-risk identities preserve catalog `reports_to` edges. Product/user impact goes to Stasis, technical controls to Rector, cross-surface conflicts to Nexus, reserved or critical-risk decisions to Founder and decisions or enforcement to authorized humans. Composition cannot create self-approval, reporting cycles or authority inheritance.
+
+## W7-002 critical coordination
+
+The twenty people, incident and continuity identities preserve their catalog hierarchy and distinguish support from command. Stasis receives Product impact, Rector technical response, Gerendi Administration coordination, Nexus cross-surface conflicts, Founder reserved authority and authorized humans all execution. Emergency services remain external human institutions; no prompt can impersonate or replace them.

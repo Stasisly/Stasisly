@@ -65,3 +65,7 @@
 - **Fraud hypothesis**: Testable, uncertain explanation requiring scoped evidence and conflicting-evidence review.
 - **High-impact fraud action**: Account, payment, subscription, identity, privilege, moderation, appeal or data-sharing outcome requiring evidence, proportionality, human review, reason code, appeal and audit.
 - **Effective prompt manifest**: Deterministic record of ordered component versions, hashes, identity, evaluation profile and reserved runtime state for one composed agent prompt.
+- **Incident signal**: Observation requiring bounded assessment; it is not by itself a confirmed incident, crisis or emergency.
+- **Incident command**: Explicit human operational authority for an incident; documentary coordination never inherits it.
+- **Continuity activation**: Separately authorized operational decision to invoke approved continuity procedures; a prompt cannot activate it.
+- **Emergency authority**: Reserved, explicit, scoped and time-bounded authority that no documentary agent can declare or infer.

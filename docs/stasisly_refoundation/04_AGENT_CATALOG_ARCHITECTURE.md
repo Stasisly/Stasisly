@@ -61,11 +61,15 @@ Exactly 50 Administration records now have an approved documentary prompt: three
 
 ## Wave 7 strategy state
 
-All 2,778 `NOT_CREATED` records have exactly one strategy and subwave assignment
-outside the catalog. They remain `CATALOGED`, `NOT_IMPLEMENTED` and
-`NOT_AVAILABLE`. Strategy registries are derived planning views and may not
-silently mutate canonical catalog state.
+All original 2,778 Wave 7 records have exactly one strategy and subwave
+assignment outside the catalog. Approved subwaves may transition records only
+through explicit packages. Strategy registries are derived planning views and
+may not silently mutate canonical catalog identity or hierarchy.
 
 ## W7-001 catalog transition
 
 Exactly forty `W7-001` records moved to `PROMPT_CREATED` and `DOCUMENTED_ONLY`, producing 262 documentary prompts and leaving 2,738 `NOT_CREATED`. Identity, hierarchy, strategy and risk metadata are unchanged. All 3,000 records remain `NOT_AVAILABLE`; catalog state does not provision runtime, tools, memory or enforcement.
+
+## W7-002 catalog transition
+
+Exactly twenty `W7-002` records moved to `PROMPT_CREATED` and `DOCUMENTED_ONLY`, producing 282 documentary prompts and leaving 2,718 `NOT_CREATED`. Identity, hierarchy, strategy and CRITICAL risk metadata are unchanged. All 3,000 records remain `NOT_AVAILABLE`; catalog state creates no incident, people, continuity, Emergency or production authority.

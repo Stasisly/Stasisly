@@ -122,12 +122,16 @@ Fifty Administration prompts are `APPROVED_DOCUMENTARY_BASELINE`. They define bo
 
 ## Wave 7 specialized prompt strategy
 
-The remaining 2,778 catalog agents have an approved strategy assignment but no
-prompt. Composable components, individual identity, most-restrictive precedence,
+The original 2,778 Wave 7 catalog agents have an approved strategy assignment.
+Composable components, individual identity, most-restrictive precedence,
 deterministic generation and individual evaluation are mandatory. The 89
 subwaves are planning boundaries only; catalog states and availability do not
 change until separately approved implementation and runtime gates pass.
 
 ## W7-001 documentary baseline
 
-The first specialized subwave is approved for exactly forty HIGH-risk Administration `fraud_risk` identities. Its composable prompts, manifests and evaluations are documentary artifacts only. Fraud runtime, enforcement, tools, memories and agent availability remain unimplemented; W7-002 through W7-089 remain `NOT_STARTED`.
+The first specialized subwave is approved for exactly forty HIGH-risk Administration `fraud_risk` identities. Its composable prompts, manifests and evaluations are documentary artifacts only. Fraud runtime, enforcement, tools, memories and agent availability remain unimplemented.
+
+## W7-002 documentary baseline
+
+The second specialized subwave is approved for exactly twenty CRITICAL Administration `people_incidents_continuity_surface` identities. Detection does not grant Emergency authority; people actions, incident command, continuity activation, production changes, crisis release and recovery execution remain human-authorized runtime concerns. W7-003 through W7-089 remain `NOT_STARTED`.

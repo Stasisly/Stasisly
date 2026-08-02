@@ -1,0 +1,811 @@
+{
+  "schema_version": "1.0.0",
+  "w7_001_changed_artifacts": 0,
+  "component_count": 14,
+  "components": [
+    {
+      "component_id": "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+      "affected_count": 20,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0681",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0681_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0682",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0682_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0683",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0683_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0684",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0684_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0685",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0685_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0686",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0686_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0687",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0687_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0688",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0688_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0689",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0689_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0690",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0690_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0691",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0691_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0692",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0692_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0693",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0693_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0694",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0694_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0695",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0695_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0696",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0696_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0697",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0697_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0698",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0698_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0699",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0699_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0700",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0700_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "POL-SURFACE-ADMINISTRATION-v1",
+      "affected_count": 20,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0681",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0681_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0682",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0682_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0683",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0683_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0684",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0684_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0685",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0685_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0686",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0686_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0687",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0687_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0688",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0688_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0689",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0689_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0690",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0690_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0691",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0691_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0692",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0692_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0693",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0693_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0694",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0694_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0695",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0695_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0696",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0696_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0697",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0697_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0698",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0698_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0699",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0699_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0700",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0700_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "POL-DOMAIN-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-v1",
+      "affected_count": 20,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0681",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0681_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0682",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0682_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0683",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0683_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0684",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0684_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0685",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0685_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0686",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0686_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0687",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0687_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0688",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0688_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0689",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0689_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0690",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0690_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0691",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0691_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0692",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0692_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0693",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0693_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0694",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0694_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0695",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0695_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0696",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0696_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0697",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0697_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0698",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0698_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0699",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0699_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0700",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0700_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "FAM-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-PEOPLE-OPERATIONS-v1",
+      "affected_count": 4,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0681",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0681_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0686",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0686_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0691",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0691_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0696",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0696_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "MOD-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-PEOPLE-OPERATIONS-v1",
+      "affected_count": 4,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0681",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0681_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0686",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0686_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0691",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0691_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0696",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0696_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "OVR-FOUNDER-EXCLUSIVE-v1",
+      "affected_count": 20,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0681",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0681_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0681_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0682",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0682_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0683",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0683_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0684",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0684_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0685",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0685_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0686",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0686_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0686_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0687",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0687_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0688",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0688_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0689",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0689_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0690",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0690_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0691",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0691_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0691_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0692",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0692_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0693",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0693_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0694",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0694_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0695",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0695_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0696",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0696_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0696_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_PEOPLE_OPERATIONS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0697",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0697_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0698",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0698_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0699",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0699_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0700",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0700_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "FAM-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-ADMINISTRATIVE-INCIDENTS-v1",
+      "affected_count": 4,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0682",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0682_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0687",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0687_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0692",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0692_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0697",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0697_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "MOD-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-ADMINISTRATIVE-INCIDENTS-v1",
+      "affected_count": 4,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0682",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0682_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0682_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0687",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0687_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0687_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0692",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0692_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0692_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0697",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0697_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0697_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATIVE_INCIDENTS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "FAM-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-BUSINESS-CONTINUITY-v1",
+      "affected_count": 4,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0683",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0683_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0688",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0688_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0693",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0693_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0698",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0698_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "MOD-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-BUSINESS-CONTINUITY-v1",
+      "affected_count": 4,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0683",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0683_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0683_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0688",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0688_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0688_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0693",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0693_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0693_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0698",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0698_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0698_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_BUSINESS_CONTINUITY_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "FAM-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-ADMINISTRATION-SURFACE-v1",
+      "affected_count": 4,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0684",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0684_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0689",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0689_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0694",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0694_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0699",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0699_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "MOD-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-ADMINISTRATION-SURFACE-v1",
+      "affected_count": 4,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0684",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0684_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0684_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0689",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0689_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0689_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0694",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0694_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0694_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0699",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0699_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0699_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_ADMINISTRATION_SURFACE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "FAM-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-OPERATIONAL-RESILIENCE-v1",
+      "affected_count": 4,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0685",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0685_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0690",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0690_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0695",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0695_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0700",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0700_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "MOD-ADMINISTRATION-PEOPLE-INCIDENTS-CONTINUITY-SURFACE-OPERATIONAL-RESILIENCE-v1",
+      "affected_count": 4,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0685",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0685_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0685_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0690",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0690_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0690_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0695",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0695_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0695_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0700",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/manifests/AG-ADM-0700_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/effective_prompts/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-002/evaluations/AG-ADM-0700_ADMINISTRATION_PEOPLE_INCIDENTS_CONTINUITY_SURFACE_OPERATIONAL_RESILIENCE_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    }
+  ]
+}

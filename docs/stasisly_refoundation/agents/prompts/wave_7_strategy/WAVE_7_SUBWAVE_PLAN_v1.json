@@ -33,7 +33,7 @@
     },
     {
       "subwave_id": "W7-002",
-      "subwave_status": "NOT_STARTED",
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
       "sequence": 2,
       "surface": "ADMINISTRATION",
       "domain": "people_incidents_continuity_surface",

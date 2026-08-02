@@ -68,6 +68,13 @@
 | ADR-RF072 Individual identity and validation | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
 | ADR-RF073 Deterministic generated artifacts | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
 | ADR-RF074 No enforcement or financial authority | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
+| ADR-RF075 W7-002 critical prompt baseline | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF076 Detection is not Emergency authority | NORMATIVE | APPROVED | EMERGENCY_AUTHORIZATION_NOT_IMPLEMENTED |
+| ADR-RF077 Continuity activation requires authorization | NORMATIVE | APPROVED | CONTINUITY_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF078 People-impacting fair process | NORMATIVE | APPROVED | PEOPLE_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF079 Authorized crisis communications | NORMATIVE | APPROVED | INCIDENT_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF080 Preserve incident evidence and timelines | NORMATIVE | APPROVED | INCIDENT_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF081 Documentary critical agents do not execute | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
 | Global design, proportional implementation | NORMATIVE_MASTER | APPROVED | DOCUMENTED |
 | API distinct from MCP | NORMATIVE_MASTER | ADOPTED | NOT_IMPLEMENTED_AS_COMPLETE_PLATFORM |
 | Flutter independent from MCP | NORMATIVE_MASTER | ADOPTED | PARTIAL_LEGACY_EVIDENCE_ONLY |
@@ -96,3 +103,11 @@ ADR-RF068 through ADR-RF074 are `APPROVED`. They approve forty individual
 documentary composable prompts while preserving signal/decision separation,
 human review, appeal, data minimization, deterministic generation and the
 absence of enforcement, financial authority, tools, runtime and availability.
+
+## W7-002 people, incidents and continuity decisions
+
+ADR-RF075 through ADR-RF081 are `APPROVED`. They approve twenty individual
+CRITICAL documentary prompts while preserving people safety, fair process,
+incident-state separation, evidence integrity, authorized incident command,
+continuity and recovery activation boundaries, verified crisis communications,
+Founder authority and the absence of runtime or availability.

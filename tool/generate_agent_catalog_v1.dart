@@ -332,6 +332,7 @@ const approvedDocumentaryPromptIds = {
   ...approvedWave5DevelopmentIds,
   ...approvedWave6AdministrationIds,
   ...approvedW7001Ids,
+  ...approvedW7002Ids,
 };
 const approvedW7001Ids = {
   'AG-ADM-0391',
@@ -374,6 +375,28 @@ const approvedW7001Ids = {
   'AG-ADM-0428',
   'AG-ADM-0429',
   'AG-ADM-0430',
+};
+const approvedW7002Ids = {
+  'AG-ADM-0681',
+  'AG-ADM-0682',
+  'AG-ADM-0683',
+  'AG-ADM-0684',
+  'AG-ADM-0685',
+  'AG-ADM-0686',
+  'AG-ADM-0687',
+  'AG-ADM-0688',
+  'AG-ADM-0689',
+  'AG-ADM-0690',
+  'AG-ADM-0691',
+  'AG-ADM-0692',
+  'AG-ADM-0693',
+  'AG-ADM-0694',
+  'AG-ADM-0695',
+  'AG-ADM-0696',
+  'AG-ADM-0697',
+  'AG-ADM-0698',
+  'AG-ADM-0699',
+  'AG-ADM-0700',
 };
 const validDataAccessClasses = {
   'NO_USER_DATA',

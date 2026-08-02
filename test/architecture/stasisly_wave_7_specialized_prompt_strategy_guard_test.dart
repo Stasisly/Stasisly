@@ -44,12 +44,12 @@ void main() {
     expect(assignments.map((row) => row['agent_id']).toSet(), hasLength(2778));
     expect(
       catalog.where((row) => row['prompt_status'] == 'PROMPT_CREATED'),
-      hasLength(262),
+      hasLength(282),
     );
     final pending = catalog.where(
       (row) => row['prompt_status'] == 'NOT_CREATED',
     );
-    expect(pending, hasLength(2738));
+    expect(pending, hasLength(2718));
     for (final row in pending) {
       expect(row['lifecycle_status'], 'CATALOGED');
       expect(row['implementation_status'], 'NOT_IMPLEMENTED');
@@ -132,6 +132,9 @@ void main() {
     expect(subwaves.first['agent_count'], 40);
     expect(subwaves.first['HIGH_count'], 40);
     expect(subwaves.first['CRITICAL_count'], 0);
+    expect(subwaves[1]['subwave_id'], 'W7-002');
+    expect(subwaves[1]['agent_count'], 20);
+    expect(subwaves[1]['CRITICAL_count'], 20);
   });
 
   test(

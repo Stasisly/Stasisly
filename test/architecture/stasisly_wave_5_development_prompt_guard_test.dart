@@ -78,25 +78,25 @@ void main() {
   test('catalog records exact cumulative documentary state', () {
     expect(
       catalog.where((e) => e['implementation_status'] == 'DOCUMENTED_ONLY'),
-      hasLength(262),
+      hasLength(282),
     );
     expect(
       catalog.where((e) => e['prompt_status'] == 'PROMPT_CREATED'),
-      hasLength(262),
+      hasLength(282),
     );
     expect(
       catalog.where((e) => e['implementation_status'] == 'NOT_IMPLEMENTED'),
-      hasLength(2738),
+      hasLength(2718),
     );
     expect(
       catalog.where((e) => e['prompt_status'] == 'NOT_CREATED'),
-      hasLength(2738),
+      hasLength(2718),
     );
     expect(
       catalog.where((e) => e['availability'] == 'NOT_AVAILABLE'),
       hasLength(3000),
     );
-    expect(approvedDocumentaryPromptIds, hasLength(262));
+    expect(approvedDocumentaryPromptIds, hasLength(282));
   });
 
   test(

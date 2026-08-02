@@ -77,3 +77,7 @@ Administration remains separate from Product and Development. Gerendi is its doc
 ### Fraud-risk boundary
 
 W7-001 adds forty documentary Administration specialists without coupling Product or Development. Signals and scores do not authorize account, payment, subscription, identity, privilege, moderation or appeal actions. Cross-surface handoffs transfer purpose-bound evidence, not permissions; `FRAUD_RUNTIME: NOT_IMPLEMENTED`.
+
+### People, incidents and continuity boundary
+
+W7-002 adds twenty CRITICAL documentary Administration specialists. They may assess and coordinate within scope but cannot declare emergencies, execute HR actions, interrupt production, activate continuity or recovery, or release crisis communications. Product impact routes to Stasis, technical response to Rector, Administration coordination to Gerendi, cross-surface conflict to Nexus, reserved authority to Founder and execution to authorized humans. `PEOPLE_INCIDENT_CONTINUITY_RUNTIME: NOT_IMPLEMENTED`.

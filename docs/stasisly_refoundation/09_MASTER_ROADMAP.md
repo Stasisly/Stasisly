@@ -52,9 +52,9 @@ pipeline, deployment, runtime agent or Development Surface.
 
 `STASISLY-AGENTS-008` approves the composable strategy, schemas and 89-subwave
 plan for all 2,778 remaining agents without creating prompts. The next bounded
-proposal is `STASISLY-AGENTS-009`, exclusively `W7-001`: 40 HIGH
-Administration fraud/risk agents. It requires separate Founder authorization.
+first implementation was `STASISLY-AGENTS-009`, exclusively `W7-001`: 40 HIGH
+Administration fraud/risk agents.
 
 ## Wave 7 progress after W7-001
 
-`STASISLY-AGENTS-009` completed the documentary W7-001 baseline: forty HIGH Administration `fraud_risk` prompts and evaluations passed individual P0-P14. No runtime or availability was created. The next bounded candidate from the approved plan is `W7-002`: twenty CRITICAL Administration agents in `people_incidents_continuity_surface`; it requires a separate package and approval.
+`STASISLY-AGENTS-009` completed W7-001 and `STASISLY-AGENTS-010` completed the documentary W7-002 baseline: twenty CRITICAL Administration `people_incidents_continuity_surface` prompts passed individual P0-P14 and reinforced review. No runtime, Emergency authority or availability was created. The next bounded candidate must be resolved exactly as `W7-003` from the approved plan and requires a separate package.

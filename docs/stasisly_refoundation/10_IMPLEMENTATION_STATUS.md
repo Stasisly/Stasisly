@@ -208,8 +208,8 @@ P15 / P16 / P17 executed: 0 / 0 / 0
 Strategy assignments: 2778/2778
 Families / modules / overlays: 342 / 342 / 11
 Subwaves: 89
-Specialized prompts / evaluations created: 0 / 0
-Catalog state transitions: 0
+Specialized prompts / evaluations created: 60 / 60
+Catalog state transitions: 60
 Runtime / available agents: NOT_IMPLEMENTED / 0
 ```
 
@@ -220,8 +220,20 @@ W7-001 status: APPROVED_DOCUMENTARY_BASELINE
 Agents / identities / prompts / manifests / evaluations: 40 / 40 / 40 / 40 / 40
 P0-P14: 600/600 PASS
 Adversarial cases: 280
-Catalog PROMPT_CREATED / NOT_CREATED: 262 / 2738
-W7-002 through W7-089: NOT_STARTED
+Catalog after W7-001: 262 PROMPT_CREATED / 2738 NOT_CREATED
 Fraud runtime / enforcement: NOT_IMPLEMENTED / NOT_IMPLEMENTED
+Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
+```
+
+## W7-002 people, incidents and continuity prompts
+
+```text
+W7-002 status: APPROVED_DOCUMENTARY_BASELINE
+Agents / identities / prompts / manifests / evaluations: 20 / 20 / 20 / 20 / 20
+P0-P14: 300/300 PASS
+Adversarial cases / CRITICAL reviews: 200 / 180
+Catalog PROMPT_CREATED / NOT_CREATED: 282 / 2718
+W7-003 through W7-089: NOT_STARTED
+People / incident / continuity / Emergency runtime: NOT_IMPLEMENTED
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
 ```

@@ -35,3 +35,6 @@ and approval. Wave 5 creates no runner, pipeline, environment or deployment.
 ## Wave 6 environment status
 
 The Wave 6 package is documentary and local. Administration Surface, billing providers, payment runtime, CRM, campaign systems, advertising providers, live analytics and Growth experiment runtime are not configured in Development, Staging or Production.
+## Documentary critical-agent boundary
+
+W7-002 prompt approval changes no environment. Development, Staging and Production receive no agent runtime, incident provider, people provider, communications provider, credentials, tools, memory, continuity automation or Emergency authorization. Production shutdown, failover and recovery remain separately authorized operational actions.
