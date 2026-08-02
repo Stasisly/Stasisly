@@ -96,6 +96,13 @@
 | ADR-RF100 W7-005 human Founder escalation boundaries | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
 | ADR-RF101 W7-005 deterministic individual evaluation | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
 | ADR-RF102 W7-005 documentary agents not executors | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
+| ADR-RF103 W7-006 specialized prompt baseline | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF104 W7-006 domain and scope boundaries | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF105 W7-006 authority and operational restrictions | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF106 W7-006 data tool memory ceilings | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF107 W7-006 human Founder escalation boundaries | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF108 W7-006 deterministic individual evaluation | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF109 W7-006 documentary agents not executors | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
 | Global design, proportional implementation | NORMATIVE_MASTER | APPROVED | DOCUMENTED |
 | API distinct from MCP | NORMATIVE_MASTER | ADOPTED | NOT_IMPLEMENTED_AS_COMPLETE_PLATFORM |
 | Flutter independent from MCP | NORMATIVE_MASTER | ADOPTED | PARTIAL_LEGACY_EVIDENCE_ONLY |
@@ -155,3 +162,11 @@ CRITICAL documentary prompts while preserving incident-state separation,
 environment and evidence integrity, human command authority, Founder reserved
 authority, restrictive data/tool/memory ceilings, deterministic composition and
 the absence of runtime.
+
+## W7-006 Development payment-engineering decisions
+
+ADR-RF103 through ADR-RF109 are `APPROVED`. They approve seven individual HIGH
+documentary prompts while preserving amount/currency integrity, idempotency,
+webhook verification, provider/ledger separation, human financial authority,
+restrictive data/tool/memory ceilings, deterministic composition and the
+absence of runtime.

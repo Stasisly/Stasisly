@@ -44,12 +44,12 @@ void main() {
     expect(assignments.map((row) => row['agent_id']).toSet(), hasLength(2778));
     expect(
       catalog.where((row) => row['prompt_status'] == 'PROMPT_CREATED'),
-      hasLength(359),
+      hasLength(366),
     );
     final pending = catalog.where(
       (row) => row['prompt_status'] == 'NOT_CREATED',
     );
-    expect(pending, hasLength(2641));
+    expect(pending, hasLength(2634));
     for (final row in pending) {
       expect(row['lifecycle_status'], 'CATALOGED');
       expect(row['implementation_status'], 'NOT_IMPLEMENTED');

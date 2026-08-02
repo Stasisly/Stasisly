@@ -51,3 +51,9 @@ Prompt approval configures no incident runtime, telemetry provider, credential,
 production access, deployment, rollback, infrastructure tool, agent or memory
 in any environment. Development documentation confers no staging or production
 authority; operational actions remain `0`.
+
+## W7-006 environment status
+
+Prompt approval configures no payment processor, merchant or store account,
+credential, webhook endpoint, ledger, reconciliation service, runtime agent,
+tool or memory in any environment. Payment and commerce operations remain `0`.

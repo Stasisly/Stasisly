@@ -103,3 +103,11 @@ W7-005 adds ten CRITICAL documentary Development specialists. They may analyze
 incident evidence and coordinate bounded handoffs but cannot declare or close
 incidents, execute commands, deploy, rollback, mutate infrastructure, suppress
 telemetry or issue external communications. `INCIDENT_COMMAND_RUNTIME: NOT_IMPLEMENTED`.
+
+### Integrations, commerce and stores payment-engineering boundary
+
+W7-006 adds seven HIGH documentary Development specialists. They may design
+provider-independent payment contracts but cannot execute payments, mutate
+ledgers or commerce state, access credentials, approve providers, submit store
+actions or acquire Product/Administration authority.
+`PAYMENTS_ENGINEERING_RUNTIME: NOT_IMPLEMENTED`.

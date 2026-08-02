@@ -126,3 +126,11 @@ handoffs, Nexus resolves cross-surface conflict, Stasis receives Product and
 user impact, Gerendi receives Administration impact, Founder retains reserved
 authority, and authenticated human incident commanders and operators retain
 declaration, execution and closure authority. Reporting transfers no permission.
+
+## W7-006 Development payment-engineering coordination
+
+The seven identities report to `AG-DEV-1121`. Rector governs Development,
+Nexus resolves cross-surface conflict, Stasis receives Product/user impact,
+Gerendi receives finance and Administration impact, and Founder retains only
+reserved authority. Authenticated payment, finance, merchant, reconciliation
+and store owners retain every operational decision and execution permission.

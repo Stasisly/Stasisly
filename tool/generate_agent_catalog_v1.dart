@@ -336,6 +336,7 @@ const approvedDocumentaryPromptIds = {
   ...approvedW7003Ids,
   ...approvedW7004Ids,
   ...approvedW7005Ids,
+  ...approvedW7006Ids,
 };
 const approvedW7001Ids = {
   'AG-ADM-0391',
@@ -483,6 +484,15 @@ const approvedW7005Ids = {
   'AG-DEV-1048',
   'AG-DEV-1057',
   'AG-DEV-1066',
+};
+const approvedW7006Ids = {
+  'AG-DEV-1123',
+  'AG-DEV-1130',
+  'AG-DEV-1137',
+  'AG-DEV-1144',
+  'AG-DEV-1151',
+  'AG-DEV-1158',
+  'AG-DEV-1165',
 };
 const validDataAccessClasses = {
   'NO_USER_DATA',

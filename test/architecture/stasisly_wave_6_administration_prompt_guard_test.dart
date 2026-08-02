@@ -81,25 +81,25 @@ void main() {
   test('catalog records exact cumulative documentary state', () {
     expect(
       catalog.where((e) => e['implementation_status'] == 'DOCUMENTED_ONLY'),
-      hasLength(359),
+      hasLength(366),
     );
     expect(
       catalog.where((e) => e['prompt_status'] == 'PROMPT_CREATED'),
-      hasLength(359),
+      hasLength(366),
     );
     expect(
       catalog.where((e) => e['implementation_status'] == 'NOT_IMPLEMENTED'),
-      hasLength(2641),
+      hasLength(2634),
     );
     expect(
       catalog.where((e) => e['prompt_status'] == 'NOT_CREATED'),
-      hasLength(2641),
+      hasLength(2634),
     );
     expect(
       catalog.where((e) => e['availability'] == 'NOT_AVAILABLE'),
       hasLength(3000),
     );
-    expect(approvedDocumentaryPromptIds, hasLength(359));
+    expect(approvedDocumentaryPromptIds, hasLength(366));
   });
 
   test('evaluations cover canonical, Administration and adversarial cases', () {

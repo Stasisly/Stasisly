@@ -1,0 +1,299 @@
+{
+ "schema_version": "1.0.0",
+ "component_count": 6,
+ "W7-001_changed": 0,
+ "W7-002_changed": 0,
+ "W7-003_changed": 0,
+ "W7-004_changed": 0,
+ "W7-005_changed": 0,
+ "components": [
+  {
+   "component_id": "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+   "affected_count": 7,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-1123",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1123_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1130",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1130_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1137",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1137_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1144",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1144_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1151",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1151_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1158",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1158_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1165",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1165_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "POL-SURFACE-DEVELOPMENT-v1",
+   "affected_count": 7,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-1123",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1123_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1130",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1130_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1137",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1137_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1144",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1144_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1151",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1151_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1158",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1158_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1165",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1165_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "POL-DOMAIN-DEVELOPMENT-INTEGRATIONS-COMMERCE-STORES-v1",
+   "affected_count": 7,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-1123",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1123_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1130",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1130_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1137",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1137_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1144",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1144_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1151",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1151_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1158",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1158_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1165",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1165_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "FAM-DEVELOPMENT-INTEGRATIONS-COMMERCE-STORES-PAYMENTS-ENGINEERING-v1",
+   "affected_count": 7,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-1123",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1123_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1130",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1130_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1137",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1137_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1144",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1144_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1151",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1151_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1158",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1158_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1165",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1165_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "MOD-DEVELOPMENT-INTEGRATIONS-COMMERCE-STORES-PAYMENTS-ENGINEERING-v1",
+   "affected_count": 7,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-1123",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1123_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1130",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1130_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1137",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1137_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1144",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1144_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1151",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1151_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1158",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1158_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1165",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1165_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "OVR-FINANCIAL-MUTATION-v1",
+   "affected_count": 7,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-1123",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1123_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1123_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1130",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1130_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1130_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1137",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1137_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1137_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1144",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1144_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1144_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1151",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1151_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1151_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1158",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1158_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1158_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1165",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/manifests/AG-DEV-1165_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/effective_prompts/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-006/evaluations/AG-DEV-1165_DEVELOPMENT_INTEGRATIONS_COMMERCE_STORES_PAYMENTS_ENGINEERING_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  }
+ ]
+}

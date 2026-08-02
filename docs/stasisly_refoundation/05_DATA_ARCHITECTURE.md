@@ -74,6 +74,12 @@ Telemetry is minimized and redacted; secrets and cross-tenant data are
 forbidden. No schema, credential, production access, runtime memory or
 operational mutation is created.
 
+W7-006 keeps provider, merchant, store, environment, transaction lineage,
+amount, currency, minor-unit representation, event provenance, idempotency and
+reconciliation evidence explicit. Provider events are not canonical ledger
+truth. Data access remains `NO_USER_DATA`; no credential, payment record,
+schema, ledger write or commerce mutation is created.
+
 Wave 5 requires versioned API and data contracts, bounded pagination, explicit
 errors, idempotency and compatible migration paths. PostgreSQL changes require
 constraints, indexes, RLS, grants, local validation and rollback. Jobs, events,

@@ -83,3 +83,11 @@ and need-to-know. Environment identity, timeline provenance, stop conditions,
 segregation of command from execution and independent recovery verification are
 mandatory. Agents cannot expose secrets, suppress evidence, mutate production,
 self-approve exceptions or exercise Founder authority.
+
+## W7-006 payment-engineering safeguards
+
+Data access is `NO_USER_DATA`; raw payment credentials and card data are
+forbidden. Provider and environment identity, amount and currency integrity,
+idempotency, signed webhook verification, replay protection, reconciliation and
+segregation of duties are mandatory. Agents cannot execute financial mutations,
+approve providers, access secrets or exercise Founder authority.

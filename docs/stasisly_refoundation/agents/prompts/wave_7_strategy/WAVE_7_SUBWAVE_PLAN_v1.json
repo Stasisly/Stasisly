@@ -142,7 +142,7 @@
     },
     {
       "subwave_id": "W7-006",
-      "subwave_status": "NOT_STARTED",
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
       "sequence": 6,
       "surface": "DEVELOPMENT",
       "domain": "integrations_commerce_stores",

@@ -169,8 +169,8 @@ void main() {
     expect(historical, hasLength(43));
     expect(documentedHistorical, hasLength(43));
     expect(pendingHistorical, isEmpty);
-    expect(approvedCanonical, hasLength(316));
-    expect(cataloged, hasLength(2641));
+    expect(approvedCanonical, hasLength(323));
+    expect(cataloged, hasLength(2634));
     for (final entry in pendingHistorical) {
       expect(entry['prompt_status'], 'PROMPT_CREATED');
       expect(entry['lifecycle_status'], 'PROMPT_CREATED');
