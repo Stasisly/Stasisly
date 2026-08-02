@@ -142,7 +142,7 @@ The third specialized subwave approves exactly 45 HIGH-risk Administration
 `privacy_legal_compliance` identities. They document bounded privacy, legal and
 compliance analysis but cannot execute rights requests, provide final legal
 authority, certify compliance, notify regulators, delete data or approve
-exceptions. W7-004 through W7-008 are approved; W7-009 through W7-089 remain `NOT_STARTED`.
+exceptions. W7-004 through W7-009 are approved; W7-010 through W7-089 remain `NOT_STARTED`.
 
 ## W7-004 documentary baseline
 
@@ -184,4 +184,13 @@ The eighth specialized subwave approves exactly 90 Product `health` identities:
 non-diagnostic guidance with clinical uncertainty, emergency escalation,
 health-data minimization and qualified-human authority. No diagnosis,
 prescription, treatment, care replacement, health operation or runtime is
-created. W7-009 through W7-089 remain `NOT_STARTED`.
+created. W7-010 through W7-089 remain `NOT_STARTED`.
+
+## W7-009 documentary baseline
+
+The ninth specialized subwave approves exactly 90 HIGH Product `health`
+identities across gastroenterology, geriatrics, gynecology, health education,
+health monitoring and hematology. Guidance remains non-diagnostic, bounded by
+clinical uncertainty, health-data minimization and qualified-human authority.
+No treatment, prescription, emergency action, health operation or runtime is
+created. W7-010 through W7-089 remain `NOT_STARTED`.

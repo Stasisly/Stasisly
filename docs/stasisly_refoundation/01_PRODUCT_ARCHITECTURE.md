@@ -82,3 +82,11 @@ coordination, cardiology, endocrinology, dermatology, consultation preparation
 and clinical safety escalation. Their output is bounded guidance, not diagnosis,
 prescription, treatment, emergency response or replacement of qualified care.
 All agents remain unavailable; Product health runtime is not implemented.
+
+## W7-009 Product health documentary boundary
+
+W7-009 adds 90 HIGH documentary Product health specialists across
+gastroenterology, geriatrics, gynecology, health education, health monitoring
+and hematology. They may organize minimized evidence and prepare qualified
+human review, but cannot diagnose, prescribe, select treatment, replace care,
+perform emergency actions or mutate records. All agents remain unavailable.

@@ -212,13 +212,13 @@ void main() {
   test('catalog transitions exactly W7-008 and preserves availability', () {
     expect(
       catalog.where((r) => r['prompt_status'] == 'PROMPT_CREATED'),
-      hasLength(556),
+      hasLength(646),
     );
     expect(
       catalog.where((r) => r['prompt_status'] == 'NOT_CREATED'),
-      hasLength(2444),
+      hasLength(2354),
     );
-    expect(approvedDocumentaryPromptIds, hasLength(556));
+    expect(approvedDocumentaryPromptIds, hasLength(646));
     for (final id in w7008AgentIds) {
       final row = catalog.singleWhere((r) => r['agent_id'] == id);
       expect(row['lifecycle_status'], 'PROMPT_CREATED');
@@ -266,7 +266,7 @@ void main() {
     expect((result.stdout as String).trim(), isEmpty);
     expect(
       Directory(
-        'docs/stasisly_refoundation/agents/prompts/wave_7/W7-009',
+        'docs/stasisly_refoundation/agents/prompts/wave_7/W7-010',
       ).existsSync(),
       isFalse,
     );

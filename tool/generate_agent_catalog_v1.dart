@@ -339,6 +339,7 @@ final approvedDocumentaryPromptIds = {
   ...approvedW7006Ids,
   ...approvedW7007Ids,
   ...approvedW7008Ids,
+  ...approvedW7009Ids,
 };
 const approvedW7001Ids = {
   'AG-ADM-0391',
@@ -503,6 +504,11 @@ final approvedW7007Ids = <String>{
 final approvedW7008Ids = <String>{
   for (var group = 0; group < 15; group++)
     for (final offset in const [71, 73, 77, 85, 99, 100])
+      'AG-PRO-${(offset + group * 30).toString().padLeft(4, '0')}',
+};
+final approvedW7009Ids = <String>{
+  for (var group = 0; group < 15; group++)
+    for (final offset in const [79, 82, 84, 87, 97, 98])
       'AG-PRO-${(offset + group * 30).toString().padLeft(4, '0')}',
 };
 const validDataAccessClasses = {

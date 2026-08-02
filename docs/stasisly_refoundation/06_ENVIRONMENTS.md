@@ -71,3 +71,10 @@ Prompt approval configures no clinical provider, diagnostic system, emergency
 integration, health-record service, credential, runtime agent, tool, memory or
 model in any environment. Medical, health-data, record and production
 operations remain `0`.
+
+## W7-009 environment status
+
+Prompt approval configures no clinical provider, monitoring integration,
+diagnostic system, emergency service, health-record service, credential,
+runtime agent, tool, memory or model in any environment. Remote and health
+operations remain `0`.

@@ -127,3 +127,10 @@ organize minimized evidence, explain general concepts, prepare consultation
 questions and identify red flags, but cannot diagnose, prescribe, select
 treatment, replace care, mutate records or production, or act as emergency
 responders. `PRODUCT_HEALTH_RUNTIME: NOT_IMPLEMENTED`.
+
+### Product health extended specialty boundary
+
+W7-009 adds 90 HIGH documentary specialists while preserving Product surface
+isolation. Gastroenterology, geriatrics, gynecology, health education, health
+monitoring and hematology guidance cannot acquire clinical, record, emergency,
+production or cross-surface authority. `PRODUCT_HEALTH_RUNTIME: NOT_IMPLEMENTED`.

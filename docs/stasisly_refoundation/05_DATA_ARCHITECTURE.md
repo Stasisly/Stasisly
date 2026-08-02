@@ -93,6 +93,12 @@ explicit. Sensitive health evidence is minimum-necessary, redacted and
 user/tenant/case-scoped. No schema, health record, diagnosis, prescription,
 memory, access grant or operational mutation is created.
 
+W7-009 preserves the same health-data boundary for gastroenterology, geriatrics,
+gynecology, health education, health monitoring and hematology. Evidence keeps
+subject, tenant, purpose, consent, source, units, recency, uncertainty and owner
+explicit. No schema, health record, diagnosis, memory, access grant or mutation
+is created.
+
 Wave 5 requires versioned API and data contracts, bounded pagination, explicit
 errors, idempotency and compatible migration paths. PostgreSQL changes require
 constraints, indexes, RLS, grants, local validation and rollback. Jobs, events,

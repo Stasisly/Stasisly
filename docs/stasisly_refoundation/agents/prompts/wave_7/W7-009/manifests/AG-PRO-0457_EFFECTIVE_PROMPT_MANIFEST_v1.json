@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0.0",
+  "deterministic_build_metadata": "STASISLY-AGENTS-017-W7-009-GENERATOR-v1",
+  "agent_id": "AG-PRO-0457",
+  "subwave_id": "W7-009",
+  "prompt_strategy": "FULL_INDIVIDUAL_PROMPT",
+  "constitutional_policy_version": "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+  "surface_policy_version": "POL-SURFACE-PRODUCT-v1",
+  "domain_policy_version": "POL-DOMAIN-PRODUCT-HEALTH-v1",
+  "family_prompt_version": "FAM-PRODUCT-HEALTH-HEALTH-MONITORING-v1",
+  "specialty_module_versions": [
+    "MOD-PRODUCT-HEALTH-HEALTH-MONITORING-v1"
+  ],
+  "overlay_versions": [
+    "OVR-CLINICAL-SAFETY-v1"
+  ],
+  "identity_contract_version": "IDENTITY-AG-PRO-0457-v1",
+  "evaluation_profile_version": "EVAL-HIGH-v1",
+  "runtime_contract_version": "NOT_IMPLEMENTED",
+  "assembly_order": [
+    "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+    "POL-SURFACE-PRODUCT-v1",
+    "POL-DOMAIN-PRODUCT-HEALTH-v1",
+    "FAM-PRODUCT-HEALTH-HEALTH-MONITORING-v1",
+    "MOD-PRODUCT-HEALTH-HEALTH-MONITORING-v1",
+    "OVR-CLINICAL-SAFETY-v1"
+  ],
+  "content_hashes": {
+    "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1": "d181ae7f977268391e42155eafb111ba93e497dd0d6c42384bcd939c3c571d67",
+    "POL-SURFACE-PRODUCT-v1": "c2b3b5ea31c6a0c1c786da3a73214ef61b1f852d40b59d76485e2c2c2fc58ecc",
+    "POL-DOMAIN-PRODUCT-HEALTH-v1": "bd499b6f0775a97647af7f7eb322819cf0f6c8bd76433ae5fc3d98f8652a2f21",
+    "FAM-PRODUCT-HEALTH-HEALTH-MONITORING-v1": "126f843ce3f2cc46fce2021fb3eb66b3b644ad95e0063a68f649effb2003a58c",
+    "MOD-PRODUCT-HEALTH-HEALTH-MONITORING-v1": "52ed4a94cb83bcbc47a3ee5738c2bf04d0783fbd3ce4efedcd1d63734899e899",
+    "OVR-CLINICAL-SAFETY-v1": "b40a4e34ec2603f5e8eaac0550e8899b260f251109a3e90d19e0c2809b7f513a",
+    "IDENTITY-AG-PRO-0457-v1": "c8aca7507acecd5b982b7d63ab08f07c396d451f94fba4ea19ac73d7a70b84a2"
+  },
+  "effective_prompt_hash_input": "{\"agent_id\":\"AG-PRO-0457\",\"assembly_order\":[\"POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1\",\"POL-SURFACE-PRODUCT-v1\",\"POL-DOMAIN-PRODUCT-HEALTH-v1\",\"FAM-PRODUCT-HEALTH-HEALTH-MONITORING-v1\",\"MOD-PRODUCT-HEALTH-HEALTH-MONITORING-v1\",\"OVR-CLINICAL-SAFETY-v1\"],\"content_hashes\":{\"FAM-PRODUCT-HEALTH-HEALTH-MONITORING-v1\":\"126f843ce3f2cc46fce2021fb3eb66b3b644ad95e0063a68f649effb2003a58c\",\"IDENTITY-AG-PRO-0457-v1\":\"c8aca7507acecd5b982b7d63ab08f07c396d451f94fba4ea19ac73d7a70b84a2\",\"MOD-PRODUCT-HEALTH-HEALTH-MONITORING-v1\":\"52ed4a94cb83bcbc47a3ee5738c2bf04d0783fbd3ce4efedcd1d63734899e899\",\"OVR-CLINICAL-SAFETY-v1\":\"b40a4e34ec2603f5e8eaac0550e8899b260f251109a3e90d19e0c2809b7f513a\",\"POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1\":\"d181ae7f977268391e42155eafb111ba93e497dd0d6c42384bcd939c3c571d67\",\"POL-DOMAIN-PRODUCT-HEALTH-v1\":\"bd499b6f0775a97647af7f7eb322819cf0f6c8bd76433ae5fc3d98f8652a2f21\",\"POL-SURFACE-PRODUCT-v1\":\"c2b3b5ea31c6a0c1c786da3a73214ef61b1f852d40b59d76485e2c2c2fc58ecc\"},\"evaluation_profile_version\":\"EVAL-HIGH-v1\",\"identity_contract_version\":\"1.0.0\",\"runtime_contract_version\":\"NOT_IMPLEMENTED\"}",
+  "effective_prompt_hash": "375584c74ddba2a7812c632e9741205864ba52c2dd0decb8c2e227df04c3b88d",
+  "runtime_configuration": "NOT_CREATED",
+  "availability": "NOT_AVAILABLE"
+}

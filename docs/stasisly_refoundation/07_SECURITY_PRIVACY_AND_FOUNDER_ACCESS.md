@@ -108,3 +108,10 @@ redacted, need-to-know and user/tenant/case-scoped. Identity, provenance,
 recency, uncertainty, emergency escalation and vulnerable-person safeguards are
 mandatory. Agents cannot diagnose, prescribe, replace care, mutate records,
 contact emergency services autonomously or exercise Founder authority.
+
+## W7-009 health and clinical-safety safeguards
+
+Health evidence remains purpose-limited, minimum-necessary, consent-aware,
+redacted, need-to-know and user/tenant/case-scoped. Specialty monitoring and
+education cannot infer diagnosis, select treatment, mutate records, contact
+third parties, bypass qualified review or acquire Founder authority.

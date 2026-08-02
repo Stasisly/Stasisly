@@ -186,3 +186,11 @@ HIGH/CRITICAL documentary Product health prompts while preserving
 non-diagnostic guidance, clinical uncertainty, emergency escalation,
 health-data minimization, qualified-human and Founder authority, deterministic
 composition and the absence of runtime.
+
+## W7-009 Product health decisions
+
+ADR-RF124 through ADR-RF130 are `APPROVED`. They approve 90 individual HIGH
+documentary Product health prompts while preserving non-diagnostic guidance,
+specialty boundaries, clinical uncertainty, emergency escalation, health-data
+minimization, qualified-human and Founder authority, deterministic composition
+and the absence of runtime.

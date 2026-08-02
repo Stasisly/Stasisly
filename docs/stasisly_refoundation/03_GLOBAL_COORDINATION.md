@@ -150,3 +150,11 @@ health coordinator. Stasis governs user-facing coordination, Nexus resolves
 cross-surface conflict, Rector receives technical concerns, Gerendi receives
 Administration/legal impact and Founder retains reserved authority. Qualified
 clinical, privacy, data, product, legal and emergency owners retain decisions.
+
+## W7-009 Product health coordination
+
+The 90 identities preserve their exact catalog reporting edges. Stasis governs
+Product coordination, Nexus resolves cross-surface conflict, Rector receives
+technical and data concerns, Gerendi receives Administration/legal impact and
+Founder retains reserved authority. Qualified clinical, privacy, data, product,
+legal and emergency owners retain every decision and operational permission.

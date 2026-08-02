@@ -231,7 +231,7 @@
     },
     {
       "subwave_id": "W7-009",
-      "subwave_status": "NOT_STARTED",
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
       "sequence": 9,
       "surface": "PRODUCT",
       "domain": "health",
