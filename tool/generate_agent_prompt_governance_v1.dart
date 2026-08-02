@@ -754,15 +754,16 @@ historical contradictions are resolved. None is configured, available or active.
 
 ## Wave 7 strategy status
 
-STASISLY-AGENTS-008 assigns all 2,778 remaining catalog agents to exactly one
+STASISLY-AGENTS-008 assigns the original 2,778 Wave 7 catalog agents to exactly one
 prompt strategy and one of 89 domain-preserving subwaves. It approves schemas, family and
 specialty registries, overlays, precedence, deterministic composition and
-individual evaluation requirements. It creates no specialized prompt or
-evaluation, changes no catalog lifecycle state and authorizes no runtime.
+individual evaluation requirements. STASISLY-AGENTS-009 has now approved the
+forty W7-001 documentary prompts and evaluations through P0-P14. The other
+2,738 Wave 7 records remain `NOT_STARTED`; no runtime is authorized.
 
-The first implementation candidate is `W7-001`: 40 HIGH
-Administration agents in fraud/risk.
-It requires a separate package and the reviewers declared by the subwave plan.
+The next implementation candidate is `W7-002`: 20 CRITICAL Administration
+agents in `people_incidents_continuity_surface`. It requires a separate package
+and the reviewers declared by the exact subwave plan.
 ''';
 }
 
@@ -815,14 +816,14 @@ String _migrationReadiness(
 Governance: DOCUMENTED
 Historical audit: COMPLETED
 Migration: WAVE_7_SPECIALIZED_STRATEGY_DOCUMENTED
-Prompt implementation: 222 DOCUMENTED_ONLY
+Prompt implementation: 262 DOCUMENTED_ONLY
 Runtime: NOT_IMPLEMENTED
 Historical prompts audited: ${audits.length}
 Historical files missing: 0
 Catalog assignments: ${assignments.length}/3000
 Historical wave assignments: 43/43
 CSV/JSON parity: PASS
-New individual prompts created: 179
+New individual prompts created: 219
 Historical prompts migrated to canonical baseline: 43
 Historical prompts modified: 0
 Agents available or active: 0
@@ -838,11 +839,13 @@ Wave 5 P0-P14 evaluations: 900/900 PASS
 Wave 5 evaluation suites: 60 DESIGNED_NOT_RUNTIME_EXECUTED
 Wave 6 P0-P14 evaluations: 750/750 PASS
 Wave 6 evaluation suites: 50 DESIGNED_NOT_RUNTIME_EXECUTED
-Wave 7 remaining inventory: 2778/2778 STRATEGY_ASSIGNED
+Wave 7 strategy inventory: 2778/2778 STRATEGY_ASSIGNED
+Wave 7 remaining NOT_STARTED: 2738
 Wave 7 families / modules / overlays: 342 / 342 / 11
 Wave 7 subwaves: 89
-Wave 7 specialized prompts created: 0
-Wave 7 specialized evaluations created: 0
+Wave 7 specialized prompts created: 40
+Wave 7 specialized evaluations created: 40
+W7-001 P0-P14 evaluations: 600/600 PASS
 ```
 
 ## Gate result
@@ -854,9 +857,10 @@ executed and remain outside scope.
 
 ## Next package
 
-`STASISLY-AGENTS-009` may implement only subwave `W7-001` after separate Founder
-authorization. It must preserve individual identity and evaluation, the
-most-restrictive composition rule and all documentary/runtime boundaries.
+`STASISLY-AGENTS-010` may implement only subwave `W7-002` after separate Founder
+authorization. Its exact approved scope is 20 CRITICAL Administration agents in
+`people_incidents_continuity_surface`; it must preserve individual identity,
+evaluation, most-restrictive composition and all documentary/runtime boundaries.
 ''';
 
 Map<String, int> _counts(List<Map<String, Object?>> records, String field) {

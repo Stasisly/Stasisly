@@ -212,3 +212,16 @@ Specialized prompts / evaluations created: 0 / 0
 Catalog state transitions: 0
 Runtime / available agents: NOT_IMPLEMENTED / 0
 ```
+
+## W7-001 Administration fraud-risk prompts
+
+```text
+W7-001 status: APPROVED_DOCUMENTARY_BASELINE
+Agents / identities / prompts / manifests / evaluations: 40 / 40 / 40 / 40 / 40
+P0-P14: 600/600 PASS
+Adversarial cases: 280
+Catalog PROMPT_CREATED / NOT_CREATED: 262 / 2738
+W7-002 through W7-089: NOT_STARTED
+Fraud runtime / enforcement: NOT_IMPLEMENTED / NOT_IMPLEMENTED
+Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
+```

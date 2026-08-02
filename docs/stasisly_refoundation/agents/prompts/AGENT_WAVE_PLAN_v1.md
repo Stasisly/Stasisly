@@ -59,12 +59,13 @@ historical contradictions are resolved. None is configured, available or active.
 
 ## Wave 7 strategy status
 
-STASISLY-AGENTS-008 assigns all 2,778 remaining catalog agents to exactly one
+STASISLY-AGENTS-008 assigns the original 2,778 Wave 7 catalog agents to exactly one
 prompt strategy and one of 89 domain-preserving subwaves. It approves schemas, family and
 specialty registries, overlays, precedence, deterministic composition and
-individual evaluation requirements. It creates no specialized prompt or
-evaluation, changes no catalog lifecycle state and authorizes no runtime.
+individual evaluation requirements. STASISLY-AGENTS-009 has now approved the
+forty W7-001 documentary prompts and evaluations through P0-P14. The other
+2,738 Wave 7 records remain `NOT_STARTED`; no runtime is authorized.
 
-The first implementation candidate is `W7-001`: 40 HIGH
-Administration agents in fraud/risk.
-It requires a separate package and the reviewers declared by the subwave plan.
+The next implementation candidate is `W7-002`: 20 CRITICAL Administration
+agents in `people_incidents_continuity_surface`. It requires a separate package
+and the reviewers declared by the exact subwave plan.

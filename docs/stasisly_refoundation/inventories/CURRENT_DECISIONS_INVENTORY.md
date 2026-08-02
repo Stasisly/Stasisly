@@ -61,6 +61,13 @@
 | ADR-RF065 Individual evaluation despite reuse | NORMATIVE | APPROVED | SPECIALIZED_PROMPTS_NOT_CREATED |
 | ADR-RF066 Risk-ordered subwaves | NORMATIVE | APPROVED | SPECIALIZED_PROMPTS_NOT_CREATED |
 | ADR-RF067 Generated artifacts not manually edited | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF068 W7-001 Administration fraud-risk baseline | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF069 Fraud signals are not enforcement | NORMATIVE | APPROVED | FRAUD_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF070 High-impact fraud review and appeal | NORMATIVE | APPROVED | ENFORCEMENT_NOT_IMPLEMENTED |
+| ADR-RF071 Fraud minimization and health-data exclusion | NORMATIVE | APPROVED | FRAUD_RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF072 Individual identity and validation | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF073 Deterministic generated artifacts | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF074 No enforcement or financial authority | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
 | Global design, proportional implementation | NORMATIVE_MASTER | APPROVED | DOCUMENTED |
 | API distinct from MCP | NORMATIVE_MASTER | ADOPTED | NOT_IMPLEMENTED_AS_COMPLETE_PLATFORM |
 | Flutter independent from MCP | NORMATIVE_MASTER | ADOPTED | PARTIAL_LEGACY_EVIDENCE_ONLY |
@@ -82,3 +89,10 @@ ADR-RF060 through ADR-RF067 are `APPROVED`. They establish bounded scaling,
 composable versioned prompts, mandatory identity and evaluation, no authority
 elevation, deterministic reproduction, risk-ordered subwaves and generated-only
 derived artifacts. They do not approve a specialized prompt or runtime.
+
+## W7-001 fraud-risk decisions
+
+ADR-RF068 through ADR-RF074 are `APPROVED`. They approve forty individual
+documentary composable prompts while preserving signal/decision separation,
+human review, appeal, data minimization, deterministic generation and the
+absence of enforcement, financial authority, tools, runtime and availability.

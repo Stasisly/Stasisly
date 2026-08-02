@@ -50,3 +50,7 @@ scope, independent review, Founder authorization where applicable and rollback.
 ## Wave 6 privileged Administration controls
 
 Administrative and financial access is deny-by-default, least-privilege, purpose-bound, expiring and audited. Founder authority cannot be delegated. User suspension, fraud or moderation requires proportional review and appeal; payments require segregation of duties; marketing forbids sensitive health-data targeting and dark patterns. Documentary agents execute none of these actions.
+
+## W7-001 fraud safeguards
+
+Fraud signals, rules and scores are not verified facts or enforcement decisions. High-impact actions require scoped evidence, proportionality, human review, reason code, appeal path and audit trail. Health, wellness, private conversations and unrelated Product memory are denied by default. No W7-001 prompt grants privileged access, financial mutation, account restriction, critical-risk acceptance or Founder authority.

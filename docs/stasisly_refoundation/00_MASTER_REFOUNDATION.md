@@ -127,3 +127,7 @@ prompt. Composable components, individual identity, most-restrictive precedence,
 deterministic generation and individual evaluation are mandatory. The 89
 subwaves are planning boundaries only; catalog states and availability do not
 change until separately approved implementation and runtime gates pass.
+
+## W7-001 documentary baseline
+
+The first specialized subwave is approved for exactly forty HIGH-risk Administration `fraud_risk` identities. Its composable prompts, manifests and evaluations are documentary artifacts only. Fraud runtime, enforcement, tools, memories and agent availability remain unimplemented; W7-002 through W7-089 remain `NOT_STARTED`.

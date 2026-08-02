@@ -73,3 +73,7 @@ and its runners remain `NOT_IMPLEMENTED`.
 ## Wave 6 Administration boundary
 
 Administration remains separate from Product and Development. Gerendi is its documentary coordinator; `admin.stasisly.com` is a target entry point only. Cross-surface handoffs use versioned contracts and do not transfer permissions, personal data, spending or enforcement authority. `ADMINISTRATION_SURFACE: DOCUMENTED_NOT_IMPLEMENTED`.
+
+### Fraud-risk boundary
+
+W7-001 adds forty documentary Administration specialists without coupling Product or Development. Signals and scores do not authorize account, payment, subscription, identity, privilege, moderation or appeal actions. Cross-surface handoffs transfer purpose-bound evidence, not permissions; `FRAUD_RUNTIME: NOT_IMPLEMENTED`.

@@ -65,3 +65,7 @@ All 2,778 `NOT_CREATED` records have exactly one strategy and subwave assignment
 outside the catalog. They remain `CATALOGED`, `NOT_IMPLEMENTED` and
 `NOT_AVAILABLE`. Strategy registries are derived planning views and may not
 silently mutate canonical catalog state.
+
+## W7-001 catalog transition
+
+Exactly forty `W7-001` records moved to `PROMPT_CREATED` and `DOCUMENTED_ONLY`, producing 262 documentary prompts and leaving 2,738 `NOT_CREATED`. Identity, hierarchy, strategy and risk metadata are unchanged. All 3,000 records remain `NOT_AVAILABLE`; catalog state does not provision runtime, tools, memory or enforcement.

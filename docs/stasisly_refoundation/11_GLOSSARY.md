@@ -61,3 +61,7 @@
 - **Specialty module**: Narrow reusable expertise that may restrict but never elevate authority.
 - **Agent identity contract**: Mandatory per-agent mission, scope, exclusions, reporting, ceilings and escalation record.
 - **Subwave**: Bounded prompt implementation cohort preserving whole families and individual evaluation.
+- **Fraud signal**: Purpose-bound observation that may justify analysis but is not guilt, a verified fact or enforcement authority.
+- **Fraud hypothesis**: Testable, uncertain explanation requiring scoped evidence and conflicting-evidence review.
+- **High-impact fraud action**: Account, payment, subscription, identity, privilege, moderation, appeal or data-sharing outcome requiring evidence, proportionality, human review, reason code, appeal and audit.
+- **Effective prompt manifest**: Deterministic record of ordered component versions, hashes, identity, evaluation profile and reserved runtime state for one composed agent prompt.

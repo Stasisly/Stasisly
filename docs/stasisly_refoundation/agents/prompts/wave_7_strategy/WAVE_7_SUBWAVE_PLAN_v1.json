@@ -4,6 +4,7 @@
   "records": [
     {
       "subwave_id": "W7-001",
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
       "sequence": 1,
       "surface": "ADMINISTRATION",
       "domain": "fraud_risk",
@@ -32,6 +33,7 @@
     },
     {
       "subwave_id": "W7-002",
+      "subwave_status": "NOT_STARTED",
       "sequence": 2,
       "surface": "ADMINISTRATION",
       "domain": "people_incidents_continuity_surface",
@@ -60,6 +62,7 @@
     },
     {
       "subwave_id": "W7-003",
+      "subwave_status": "NOT_STARTED",
       "sequence": 3,
       "surface": "ADMINISTRATION",
       "domain": "privacy_legal_compliance",
@@ -88,6 +91,7 @@
     },
     {
       "subwave_id": "W7-004",
+      "subwave_status": "NOT_STARTED",
       "sequence": 4,
       "surface": "ADMINISTRATION",
       "domain": "subscriptions_billing_finance",
@@ -113,6 +117,7 @@
     },
     {
       "subwave_id": "W7-005",
+      "subwave_status": "NOT_STARTED",
       "sequence": 5,
       "surface": "DEVELOPMENT",
       "domain": "devops_sre_observability",
@@ -137,6 +142,7 @@
     },
     {
       "subwave_id": "W7-006",
+      "subwave_status": "NOT_STARTED",
       "sequence": 6,
       "surface": "DEVELOPMENT",
       "domain": "integrations_commerce_stores",
@@ -161,6 +167,7 @@
     },
     {
       "subwave_id": "W7-007",
+      "subwave_status": "NOT_STARTED",
       "sequence": 7,
       "surface": "DEVELOPMENT",
       "domain": "security_privacy",
@@ -194,6 +201,7 @@
     },
     {
       "subwave_id": "W7-008",
+      "subwave_status": "NOT_STARTED",
       "sequence": 8,
       "surface": "PRODUCT",
       "domain": "health",
@@ -223,6 +231,7 @@
     },
     {
       "subwave_id": "W7-009",
+      "subwave_status": "NOT_STARTED",
       "sequence": 9,
       "surface": "PRODUCT",
       "domain": "health",
@@ -252,6 +261,7 @@
     },
     {
       "subwave_id": "W7-010",
+      "subwave_status": "NOT_STARTED",
       "sequence": 10,
       "surface": "PRODUCT",
       "domain": "health",
@@ -281,6 +291,7 @@
     },
     {
       "subwave_id": "W7-011",
+      "subwave_status": "NOT_STARTED",
       "sequence": 11,
       "surface": "PRODUCT",
       "domain": "health",
@@ -310,6 +321,7 @@
     },
     {
       "subwave_id": "W7-012",
+      "subwave_status": "NOT_STARTED",
       "sequence": 12,
       "surface": "PRODUCT",
       "domain": "health",
@@ -339,6 +351,7 @@
     },
     {
       "subwave_id": "W7-013",
+      "subwave_status": "NOT_STARTED",
       "sequence": 13,
       "surface": "TRANSVERSAL",
       "domain": "cross_surface_audit_quality",
@@ -365,6 +378,7 @@
     },
     {
       "subwave_id": "W7-014",
+      "subwave_status": "NOT_STARTED",
       "sequence": 14,
       "surface": "TRANSVERSAL",
       "domain": "cross_surface_resolution",
@@ -391,6 +405,7 @@
     },
     {
       "subwave_id": "W7-015",
+      "subwave_status": "NOT_STARTED",
       "sequence": 15,
       "surface": "TRANSVERSAL",
       "domain": "enterprise_architecture_portability",
@@ -416,6 +431,7 @@
     },
     {
       "subwave_id": "W7-016",
+      "subwave_status": "NOT_STARTED",
       "sequence": 16,
       "surface": "TRANSVERSAL",
       "domain": "founder_liaison",
@@ -442,6 +458,7 @@
     },
     {
       "subwave_id": "W7-017",
+      "subwave_status": "NOT_STARTED",
       "sequence": 17,
       "surface": "TRANSVERSAL",
       "domain": "global_compliance",
@@ -468,6 +485,7 @@
     },
     {
       "subwave_id": "W7-018",
+      "subwave_status": "NOT_STARTED",
       "sequence": 18,
       "surface": "TRANSVERSAL",
       "domain": "global_costs",
@@ -494,6 +512,7 @@
     },
     {
       "subwave_id": "W7-019",
+      "subwave_status": "NOT_STARTED",
       "sequence": 19,
       "surface": "TRANSVERSAL",
       "domain": "resilience_continuity",
@@ -520,6 +539,7 @@
     },
     {
       "subwave_id": "W7-020",
+      "subwave_status": "NOT_STARTED",
       "sequence": 20,
       "surface": "ADMINISTRATION",
       "domain": "analytics",
@@ -544,6 +564,7 @@
     },
     {
       "subwave_id": "W7-021",
+      "subwave_status": "NOT_STARTED",
       "sequence": 21,
       "surface": "ADMINISTRATION",
       "domain": "catalog_content",
@@ -568,6 +589,7 @@
     },
     {
       "subwave_id": "W7-022",
+      "subwave_status": "NOT_STARTED",
       "sequence": 22,
       "surface": "ADMINISTRATION",
       "domain": "crm_search_social_influence",
@@ -592,6 +614,7 @@
     },
     {
       "subwave_id": "W7-023",
+      "subwave_status": "NOT_STARTED",
       "sequence": 23,
       "surface": "ADMINISTRATION",
       "domain": "customer_success_support",
@@ -616,6 +639,7 @@
     },
     {
       "subwave_id": "W7-024",
+      "subwave_status": "NOT_STARTED",
       "sequence": 24,
       "surface": "ADMINISTRATION",
       "domain": "growth_lifecycle",
@@ -640,6 +664,7 @@
     },
     {
       "subwave_id": "W7-025",
+      "subwave_status": "NOT_STARTED",
       "sequence": 25,
       "surface": "ADMINISTRATION",
       "domain": "marketing_advertising",
@@ -664,6 +689,7 @@
     },
     {
       "subwave_id": "W7-026",
+      "subwave_status": "NOT_STARTED",
       "sequence": 26,
       "surface": "ADMINISTRATION",
       "domain": "moderation_trust_safety",
@@ -688,6 +714,7 @@
     },
     {
       "subwave_id": "W7-027",
+      "subwave_status": "NOT_STARTED",
       "sequence": 27,
       "surface": "ADMINISTRATION",
       "domain": "partnerships_revenue_vendors",
@@ -712,6 +739,7 @@
     },
     {
       "subwave_id": "W7-028",
+      "subwave_status": "NOT_STARTED",
       "sequence": 28,
       "surface": "ADMINISTRATION",
       "domain": "roles_permissions",
@@ -736,6 +764,7 @@
     },
     {
       "subwave_id": "W7-029",
+      "subwave_status": "NOT_STARTED",
       "sequence": 29,
       "surface": "ADMINISTRATION",
       "domain": "subscriptions_billing_finance",
@@ -760,6 +789,7 @@
     },
     {
       "subwave_id": "W7-030",
+      "subwave_status": "NOT_STARTED",
       "sequence": 30,
       "surface": "DEVELOPMENT",
       "domain": "ai_orchestration",
@@ -784,6 +814,7 @@
     },
     {
       "subwave_id": "W7-031",
+      "subwave_status": "NOT_STARTED",
       "sequence": 31,
       "surface": "DEVELOPMENT",
       "domain": "backend_api",
@@ -808,6 +839,7 @@
     },
     {
       "subwave_id": "W7-032",
+      "subwave_status": "NOT_STARTED",
       "sequence": 32,
       "surface": "DEVELOPMENT",
       "domain": "data_router_sharding",
@@ -832,6 +864,7 @@
     },
     {
       "subwave_id": "W7-033",
+      "subwave_status": "NOT_STARTED",
       "sequence": 33,
       "surface": "DEVELOPMENT",
       "domain": "devops_sre_observability",
@@ -856,6 +889,7 @@
     },
     {
       "subwave_id": "W7-034",
+      "subwave_status": "NOT_STARTED",
       "sequence": 34,
       "surface": "DEVELOPMENT",
       "domain": "documentation_finops_surfaces",
@@ -880,6 +914,7 @@
     },
     {
       "subwave_id": "W7-035",
+      "subwave_status": "NOT_STARTED",
       "sequence": 35,
       "surface": "DEVELOPMENT",
       "domain": "flutter_mobile",
@@ -904,6 +939,7 @@
     },
     {
       "subwave_id": "W7-036",
+      "subwave_status": "NOT_STARTED",
       "sequence": 36,
       "surface": "DEVELOPMENT",
       "domain": "frontend_design_systems",
@@ -928,6 +964,7 @@
     },
     {
       "subwave_id": "W7-037",
+      "subwave_status": "NOT_STARTED",
       "sequence": 37,
       "surface": "DEVELOPMENT",
       "domain": "integrations_commerce_stores",
@@ -952,6 +989,7 @@
     },
     {
       "subwave_id": "W7-038",
+      "subwave_status": "NOT_STARTED",
       "sequence": 38,
       "surface": "DEVELOPMENT",
       "domain": "performance_scalability",
@@ -976,6 +1014,7 @@
     },
     {
       "subwave_id": "W7-039",
+      "subwave_status": "NOT_STARTED",
       "sequence": 39,
       "surface": "DEVELOPMENT",
       "domain": "platform_clients",
@@ -1000,6 +1039,7 @@
     },
     {
       "subwave_id": "W7-040",
+      "subwave_status": "NOT_STARTED",
       "sequence": 40,
       "surface": "DEVELOPMENT",
       "domain": "postgres_supabase_data",
@@ -1024,6 +1064,7 @@
     },
     {
       "subwave_id": "W7-041",
+      "subwave_status": "NOT_STARTED",
       "sequence": 41,
       "surface": "DEVELOPMENT",
       "domain": "prompts_memory_rag_evaluation",
@@ -1048,6 +1089,7 @@
     },
     {
       "subwave_id": "W7-042",
+      "subwave_status": "NOT_STARTED",
       "sequence": 42,
       "surface": "DEVELOPMENT",
       "domain": "testing_qa",
@@ -1072,6 +1114,7 @@
     },
     {
       "subwave_id": "W7-043",
+      "subwave_status": "NOT_STARTED",
       "sequence": 43,
       "surface": "PRODUCT",
       "domain": "accessibility_communication",
@@ -1096,6 +1139,7 @@
     },
     {
       "subwave_id": "W7-044",
+      "subwave_status": "NOT_STARTED",
       "sequence": 44,
       "surface": "PRODUCT",
       "domain": "memory_personalization",
@@ -1120,6 +1164,7 @@
     },
     {
       "subwave_id": "W7-045",
+      "subwave_status": "NOT_STARTED",
       "sequence": 45,
       "surface": "PRODUCT",
       "domain": "nutrition",
@@ -1144,6 +1189,7 @@
     },
     {
       "subwave_id": "W7-046",
+      "subwave_status": "NOT_STARTED",
       "sequence": 46,
       "surface": "PRODUCT",
       "domain": "product_quality",
@@ -1168,6 +1214,7 @@
     },
     {
       "subwave_id": "W7-047",
+      "subwave_status": "NOT_STARTED",
       "sequence": 47,
       "surface": "PRODUCT",
       "domain": "research",
@@ -1192,6 +1239,7 @@
     },
     {
       "subwave_id": "W7-048",
+      "subwave_status": "NOT_STARTED",
       "sequence": 48,
       "surface": "PRODUCT",
       "domain": "sensors_integrations",
@@ -1216,6 +1264,7 @@
     },
     {
       "subwave_id": "W7-049",
+      "subwave_status": "NOT_STARTED",
       "sequence": 49,
       "surface": "PRODUCT",
       "domain": "training",
@@ -1240,6 +1289,7 @@
     },
     {
       "subwave_id": "W7-050",
+      "subwave_status": "NOT_STARTED",
       "sequence": 50,
       "surface": "PRODUCT",
       "domain": "user_safety",
@@ -1264,6 +1314,7 @@
     },
     {
       "subwave_id": "W7-051",
+      "subwave_status": "NOT_STARTED",
       "sequence": 51,
       "surface": "PRODUCT",
       "domain": "wellness",
@@ -1288,6 +1339,7 @@
     },
     {
       "subwave_id": "W7-052",
+      "subwave_status": "NOT_STARTED",
       "sequence": 52,
       "surface": "PRODUCT",
       "domain": "nutrition",
@@ -1323,6 +1375,7 @@
     },
     {
       "subwave_id": "W7-053",
+      "subwave_status": "NOT_STARTED",
       "sequence": 53,
       "surface": "PRODUCT",
       "domain": "nutrition",
@@ -1351,6 +1404,7 @@
     },
     {
       "subwave_id": "W7-054",
+      "subwave_status": "NOT_STARTED",
       "sequence": 54,
       "surface": "PRODUCT",
       "domain": "training",
@@ -1387,6 +1441,7 @@
     },
     {
       "subwave_id": "W7-055",
+      "subwave_status": "NOT_STARTED",
       "sequence": 55,
       "surface": "PRODUCT",
       "domain": "training",
@@ -1416,6 +1471,7 @@
     },
     {
       "subwave_id": "W7-056",
+      "subwave_status": "NOT_STARTED",
       "sequence": 56,
       "surface": "PRODUCT",
       "domain": "user_safety",
@@ -1443,6 +1499,7 @@
     },
     {
       "subwave_id": "W7-057",
+      "subwave_status": "NOT_STARTED",
       "sequence": 57,
       "surface": "PRODUCT",
       "domain": "wellness",
@@ -1479,6 +1536,7 @@
     },
     {
       "subwave_id": "W7-058",
+      "subwave_status": "NOT_STARTED",
       "sequence": 58,
       "surface": "PRODUCT",
       "domain": "wellness",
@@ -1504,6 +1562,7 @@
     },
     {
       "subwave_id": "W7-059",
+      "subwave_status": "NOT_STARTED",
       "sequence": 59,
       "surface": "DEVELOPMENT",
       "domain": "ai_orchestration",
@@ -1537,6 +1596,7 @@
     },
     {
       "subwave_id": "W7-060",
+      "subwave_status": "NOT_STARTED",
       "sequence": 60,
       "surface": "DEVELOPMENT",
       "domain": "architecture",
@@ -1568,6 +1628,7 @@
     },
     {
       "subwave_id": "W7-061",
+      "subwave_status": "NOT_STARTED",
       "sequence": 61,
       "surface": "DEVELOPMENT",
       "domain": "backend_api",
@@ -1600,6 +1661,7 @@
     },
     {
       "subwave_id": "W7-062",
+      "subwave_status": "NOT_STARTED",
       "sequence": 62,
       "surface": "DEVELOPMENT",
       "domain": "data_router_sharding",
@@ -1629,6 +1691,7 @@
     },
     {
       "subwave_id": "W7-063",
+      "subwave_status": "NOT_STARTED",
       "sequence": 63,
       "surface": "DEVELOPMENT",
       "domain": "devops_sre_observability",
@@ -1659,6 +1722,7 @@
     },
     {
       "subwave_id": "W7-064",
+      "subwave_status": "NOT_STARTED",
       "sequence": 64,
       "surface": "DEVELOPMENT",
       "domain": "documentation_finops_surfaces",
@@ -1686,6 +1750,7 @@
     },
     {
       "subwave_id": "W7-065",
+      "subwave_status": "NOT_STARTED",
       "sequence": 65,
       "surface": "DEVELOPMENT",
       "domain": "flutter_mobile",
@@ -1717,6 +1782,7 @@
     },
     {
       "subwave_id": "W7-066",
+      "subwave_status": "NOT_STARTED",
       "sequence": 66,
       "surface": "DEVELOPMENT",
       "domain": "frontend_design_systems",
@@ -1746,6 +1812,7 @@
     },
     {
       "subwave_id": "W7-067",
+      "subwave_status": "NOT_STARTED",
       "sequence": 67,
       "surface": "DEVELOPMENT",
       "domain": "integrations_commerce_stores",
@@ -1774,6 +1841,7 @@
     },
     {
       "subwave_id": "W7-068",
+      "subwave_status": "NOT_STARTED",
       "sequence": 68,
       "surface": "DEVELOPMENT",
       "domain": "performance_scalability",
@@ -1802,6 +1870,7 @@
     },
     {
       "subwave_id": "W7-069",
+      "subwave_status": "NOT_STARTED",
       "sequence": 69,
       "surface": "DEVELOPMENT",
       "domain": "platform_clients",
@@ -1830,6 +1899,7 @@
     },
     {
       "subwave_id": "W7-070",
+      "subwave_status": "NOT_STARTED",
       "sequence": 70,
       "surface": "DEVELOPMENT",
       "domain": "postgres_supabase_data",
@@ -1861,6 +1931,7 @@
     },
     {
       "subwave_id": "W7-071",
+      "subwave_status": "NOT_STARTED",
       "sequence": 71,
       "surface": "DEVELOPMENT",
       "domain": "prompts_memory_rag_evaluation",
@@ -1892,6 +1963,7 @@
     },
     {
       "subwave_id": "W7-072",
+      "subwave_status": "NOT_STARTED",
       "sequence": 72,
       "surface": "DEVELOPMENT",
       "domain": "testing_qa",
@@ -1922,6 +1994,7 @@
     },
     {
       "subwave_id": "W7-073",
+      "subwave_status": "NOT_STARTED",
       "sequence": 73,
       "surface": "PRODUCT",
       "domain": "accessibility_communication",
@@ -1949,6 +2022,7 @@
     },
     {
       "subwave_id": "W7-074",
+      "subwave_status": "NOT_STARTED",
       "sequence": 74,
       "surface": "PRODUCT",
       "domain": "memory_personalization",
@@ -1978,6 +2052,7 @@
     },
     {
       "subwave_id": "W7-075",
+      "subwave_status": "NOT_STARTED",
       "sequence": 75,
       "surface": "PRODUCT",
       "domain": "product_quality",
@@ -2003,6 +2078,7 @@
     },
     {
       "subwave_id": "W7-076",
+      "subwave_status": "NOT_STARTED",
       "sequence": 76,
       "surface": "PRODUCT",
       "domain": "research",
@@ -2031,6 +2107,7 @@
     },
     {
       "subwave_id": "W7-077",
+      "subwave_status": "NOT_STARTED",
       "sequence": 77,
       "surface": "PRODUCT",
       "domain": "sensors_integrations",
@@ -2057,6 +2134,7 @@
     },
     {
       "subwave_id": "W7-078",
+      "subwave_status": "NOT_STARTED",
       "sequence": 78,
       "surface": "PRODUCT",
       "domain": "stasis_product_coordination",
@@ -2087,6 +2165,7 @@
     },
     {
       "subwave_id": "W7-079",
+      "subwave_status": "NOT_STARTED",
       "sequence": 79,
       "surface": "ADMINISTRATION",
       "domain": "analytics",
@@ -2114,6 +2193,7 @@
     },
     {
       "subwave_id": "W7-080",
+      "subwave_status": "NOT_STARTED",
       "sequence": 80,
       "surface": "ADMINISTRATION",
       "domain": "catalog_content",
@@ -2141,6 +2221,7 @@
     },
     {
       "subwave_id": "W7-081",
+      "subwave_status": "NOT_STARTED",
       "sequence": 81,
       "surface": "ADMINISTRATION",
       "domain": "crm_search_social_influence",
@@ -2168,6 +2249,7 @@
     },
     {
       "subwave_id": "W7-082",
+      "subwave_status": "NOT_STARTED",
       "sequence": 82,
       "surface": "ADMINISTRATION",
       "domain": "customer_success_support",
@@ -2198,6 +2280,7 @@
     },
     {
       "subwave_id": "W7-083",
+      "subwave_status": "NOT_STARTED",
       "sequence": 83,
       "surface": "ADMINISTRATION",
       "domain": "growth_lifecycle",
@@ -2227,6 +2310,7 @@
     },
     {
       "subwave_id": "W7-084",
+      "subwave_status": "NOT_STARTED",
       "sequence": 84,
       "surface": "ADMINISTRATION",
       "domain": "marketing_advertising",
@@ -2256,6 +2340,7 @@
     },
     {
       "subwave_id": "W7-085",
+      "subwave_status": "NOT_STARTED",
       "sequence": 85,
       "surface": "ADMINISTRATION",
       "domain": "moderation_trust_safety",
@@ -2283,6 +2368,7 @@
     },
     {
       "subwave_id": "W7-086",
+      "subwave_status": "NOT_STARTED",
       "sequence": 86,
       "surface": "ADMINISTRATION",
       "domain": "partnerships_revenue_vendors",
@@ -2310,6 +2396,7 @@
     },
     {
       "subwave_id": "W7-087",
+      "subwave_status": "NOT_STARTED",
       "sequence": 87,
       "surface": "ADMINISTRATION",
       "domain": "roles_permissions",
@@ -2337,6 +2424,7 @@
     },
     {
       "subwave_id": "W7-088",
+      "subwave_status": "NOT_STARTED",
       "sequence": 88,
       "surface": "ADMINISTRATION",
       "domain": "subscriptions_billing_finance",
@@ -2365,6 +2453,7 @@
     },
     {
       "subwave_id": "W7-089",
+      "subwave_status": "NOT_STARTED",
       "sequence": 89,
       "surface": "ADMINISTRATION",
       "domain": "users_accounts",

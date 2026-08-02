@@ -1,0 +1,2022 @@
+{
+  "schema_version": "1.0.0",
+  "component_count": 16,
+  "components": [
+    {
+      "component_id": "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+      "affected_count": 40,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0391",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0391_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0392",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0392_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0393",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0393_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0394",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0394_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0395",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0395_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0396",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0396_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0397",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0397_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0398",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0398_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0399",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0399_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0400",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0400_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0401",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0401_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0402",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0402_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0403",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0403_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0404",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0404_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0405",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0405_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0406",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0406_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0407",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0407_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0408",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0408_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0409",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0409_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0410",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0410_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0411",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0411_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0412",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0412_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0413",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0413_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0414",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0414_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0415",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0415_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0416",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0416_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0417",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0417_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0418",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0418_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0419",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0419_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0420",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0420_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0421",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0421_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0422",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0422_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0423",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0423_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0424",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0424_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0425",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0425_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0426",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0426_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0427",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0427_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0428",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0428_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0429",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0429_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0430",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0430_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "POL-SURFACE-ADMINISTRATION-v1",
+      "affected_count": 40,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0391",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0391_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0392",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0392_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0393",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0393_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0394",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0394_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0395",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0395_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0396",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0396_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0397",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0397_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0398",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0398_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0399",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0399_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0400",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0400_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0401",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0401_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0402",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0402_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0403",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0403_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0404",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0404_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0405",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0405_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0406",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0406_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0407",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0407_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0408",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0408_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0409",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0409_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0410",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0410_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0411",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0411_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0412",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0412_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0413",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0413_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0414",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0414_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0415",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0415_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0416",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0416_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0417",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0417_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0418",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0418_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0419",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0419_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0420",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0420_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0421",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0421_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0422",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0422_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0423",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0423_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0424",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0424_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0425",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0425_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0426",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0426_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0427",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0427_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0428",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0428_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0429",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0429_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0430",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0430_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "POL-DOMAIN-ADMINISTRATION-FRAUD-RISK-v1",
+      "affected_count": 40,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0391",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0391_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0392",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0392_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0393",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0393_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0394",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0394_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0395",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0395_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0396",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0396_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0397",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0397_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0398",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0398_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0399",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0399_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0400",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0400_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0401",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0401_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0402",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0402_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0403",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0403_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0404",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0404_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0405",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0405_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0406",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0406_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0407",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0407_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0408",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0408_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0409",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0409_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0410",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0410_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0411",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0411_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0412",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0412_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0413",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0413_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0414",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0414_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0415",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0415_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0416",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0416_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0417",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0417_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0418",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0418_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0419",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0419_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0420",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0420_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0421",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0421_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0422",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0422_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0423",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0423_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0424",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0424_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0425",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0425_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0426",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0426_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0427",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0427_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0428",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0428_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0429",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0429_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0430",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0430_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "FAM-ADMINISTRATION-FRAUD-RISK-FRAUD-PREVENTION-v1",
+      "affected_count": 8,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0391",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0391_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0396",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0396_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0401",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0401_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0406",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0406_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0411",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0411_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0416",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0416_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0421",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0421_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0426",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0426_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "MOD-ADMINISTRATION-FRAUD-RISK-FRAUD-PREVENTION-v1",
+      "affected_count": 8,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0391",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0391_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0396",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0396_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0401",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0401_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0406",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0406_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0411",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0411_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0416",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0416_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0421",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0421_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0426",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0426_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "OVR-MODERATION-HIGH-IMPACT-v1",
+      "affected_count": 40,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0391",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0391_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0392",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0392_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0393",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0393_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0394",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0394_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0395",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0395_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0396",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0396_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0397",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0397_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0398",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0398_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0399",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0399_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0400",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0400_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0401",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0401_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0402",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0402_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0403",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0403_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0404",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0404_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0405",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0405_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0406",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0406_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0407",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0407_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0408",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0408_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0409",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0409_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0410",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0410_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0411",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0411_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0412",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0412_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0413",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0413_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0414",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0414_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0415",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0415_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0416",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0416_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0417",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0417_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0418",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0418_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0419",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0419_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0420",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0420_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0421",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0421_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0422",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0422_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0423",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0423_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0424",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0424_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0425",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0425_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0426",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0426_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0427",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0427_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0428",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0428_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0429",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0429_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0430",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0430_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "OVR-PRIVILEGED-ACCESS-v1",
+      "affected_count": 40,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0391",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0391_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0392",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0392_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0393",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0393_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0394",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0394_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0395",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0395_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0396",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0396_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0397",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0397_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0398",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0398_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0399",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0399_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0400",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0400_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0401",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0401_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0402",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0402_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0403",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0403_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0404",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0404_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0405",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0405_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0406",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0406_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0407",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0407_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0408",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0408_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0409",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0409_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0410",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0410_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0411",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0411_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0412",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0412_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0413",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0413_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0414",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0414_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0415",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0415_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0416",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0416_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0417",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0417_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0418",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0418_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0419",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0419_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0420",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0420_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0421",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0421_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0422",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0422_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0423",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0423_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0424",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0424_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0425",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0425_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0426",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0426_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0427",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0427_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0428",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0428_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0429",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0429_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0430",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0430_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "OVR-SECURITY-RESTRICTED-v1",
+      "affected_count": 40,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0391",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0391_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0391_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0392",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0392_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0393",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0393_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0394",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0394_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0395",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0395_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0396",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0396_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0396_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0397",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0397_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0398",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0398_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0399",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0399_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0400",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0400_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0401",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0401_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0401_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0402",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0402_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0403",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0403_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0404",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0404_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0405",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0405_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0406",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0406_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0406_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0407",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0407_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0408",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0408_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0409",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0409_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0410",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0410_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0411",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0411_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0411_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0412",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0412_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0413",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0413_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0414",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0414_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0415",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0415_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0416",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0416_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0416_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0417",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0417_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0418",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0418_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0419",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0419_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0420",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0420_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0421",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0421_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0421_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0422",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0422_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0423",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0423_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0424",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0424_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0425",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0425_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0426",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0426_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0426_ADMINISTRATION_FRAUD_RISK_FRAUD_PREVENTION_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0427",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0427_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0428",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0428_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0429",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0429_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0430",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0430_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "FAM-ADMINISTRATION-FRAUD-RISK-RISK-ASSESSMENT-v1",
+      "affected_count": 8,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0392",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0392_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0397",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0397_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0402",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0402_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0407",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0407_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0412",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0412_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0417",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0417_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0422",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0422_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0427",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0427_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "MOD-ADMINISTRATION-FRAUD-RISK-RISK-ASSESSMENT-v1",
+      "affected_count": 8,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0392",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0392_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0392_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0397",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0397_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0397_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0402",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0402_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0402_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0407",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0407_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0407_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0412",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0412_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0412_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0417",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0417_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0417_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0422",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0422_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0422_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0427",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0427_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0427_ADMINISTRATION_FRAUD_RISK_RISK_ASSESSMENT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "FAM-ADMINISTRATION-FRAUD-RISK-TRANSACTION-MONITORING-v1",
+      "affected_count": 8,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0393",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0393_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0398",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0398_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0403",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0403_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0408",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0408_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0413",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0413_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0418",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0418_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0423",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0423_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0428",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0428_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "MOD-ADMINISTRATION-FRAUD-RISK-TRANSACTION-MONITORING-v1",
+      "affected_count": 8,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0393",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0393_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0393_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0398",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0398_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0398_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0403",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0403_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0403_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0408",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0408_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0408_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0413",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0413_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0413_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0418",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0418_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0418_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0423",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0423_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0423_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0428",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0428_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0428_ADMINISTRATION_FRAUD_RISK_TRANSACTION_MONITORING_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "FAM-ADMINISTRATION-FRAUD-RISK-INVESTIGATION-SUPPORT-v1",
+      "affected_count": 8,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0394",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0394_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0399",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0399_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0404",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0404_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0409",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0409_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0414",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0414_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0419",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0419_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0424",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0424_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0429",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0429_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "MOD-ADMINISTRATION-FRAUD-RISK-INVESTIGATION-SUPPORT-v1",
+      "affected_count": 8,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0394",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0394_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0394_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0399",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0399_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0399_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0404",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0404_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0404_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0409",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0409_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0409_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0414",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0414_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0414_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0419",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0419_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0419_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0424",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0424_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0424_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0429",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0429_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0429_ADMINISTRATION_FRAUD_RISK_INVESTIGATION_SUPPORT_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "FAM-ADMINISTRATION-FRAUD-RISK-RISK-CONTROLS-v1",
+      "affected_count": 8,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0395",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0395_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0400",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0400_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0405",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0405_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0410",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0410_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0415",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0415_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0420",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0420_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0425",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0425_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0430",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0430_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    },
+    {
+      "component_id": "MOD-ADMINISTRATION-FRAUD-RISK-RISK-CONTROLS-v1",
+      "affected_count": 8,
+      "dependents": [
+        {
+          "agent_id": "AG-ADM-0395",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0395_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0395_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_COORDINATE_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0400",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0400_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0400_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ASSESS_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0405",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0405_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0405_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_PLAN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0410",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0410_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0410_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_MONITOR_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0415",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0415_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0415_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_REVIEW_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0420",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0420_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0420_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_RESEARCH_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0425",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0425_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0425_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_DESIGN_POLICY_DESIGN_EVALUATION_v1.md"
+        },
+        {
+          "agent_id": "AG-ADM-0430",
+          "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/manifests/AG-ADM-0430_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+          "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/effective_prompts/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EFFECTIVE_PROMPT_v1.md",
+          "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-001/evaluations/AG-ADM-0430_ADMINISTRATION_FRAUD_RISK_RISK_CONTROLS_ENGINEER_POLICY_DESIGN_EVALUATION_v1.md"
+        }
+      ]
+    }
+  ]
+}

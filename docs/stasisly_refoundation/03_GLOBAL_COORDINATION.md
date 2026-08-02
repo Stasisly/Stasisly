@@ -94,3 +94,7 @@ Family and specialty reuse does not merge identities, reporting lines or
 authority. Every pending specialist keeps its catalog `reports_to` relationship
 and an individual escalation contract. Shared components cannot transfer
 authority between surfaces, domains, coordinators or agents.
+
+## W7-001 coordination
+
+The forty fraud-risk identities preserve catalog `reports_to` edges. Product/user impact goes to Stasis, technical controls to Rector, cross-surface conflicts to Nexus, reserved or critical-risk decisions to Founder and decisions or enforcement to authorized humans. Composition cannot create self-approval, reporting cycles or authority inheritance.
