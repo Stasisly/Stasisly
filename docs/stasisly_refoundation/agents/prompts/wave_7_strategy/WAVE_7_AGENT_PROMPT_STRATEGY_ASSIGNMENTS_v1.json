@@ -26058,10 +26058,10 @@
       "priority": "P1_RISK",
       "dependency_status": "COMPONENTS_NOT_YET_IMPLEMENTED",
       "redesign_status": "NO_ISSUE",
-      "subwave_status": "NOT_STARTED",
-      "current_prompt_status": "NOT_CREATED",
-      "current_lifecycle_status": "CATALOGED",
-      "current_implementation_status": "NOT_IMPLEMENTED"
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
+      "current_prompt_status": "PROMPT_CREATED",
+      "current_lifecycle_status": "PROMPT_CREATED",
+      "current_implementation_status": "DOCUMENTED_ONLY"
     },
     {
       "agent_id": "AG-DEV-0986",
@@ -26211,10 +26211,10 @@
       "priority": "P1_RISK",
       "dependency_status": "COMPONENTS_NOT_YET_IMPLEMENTED",
       "redesign_status": "NO_ISSUE",
-      "subwave_status": "NOT_STARTED",
-      "current_prompt_status": "NOT_CREATED",
-      "current_lifecycle_status": "CATALOGED",
-      "current_implementation_status": "NOT_IMPLEMENTED"
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
+      "current_prompt_status": "PROMPT_CREATED",
+      "current_lifecycle_status": "PROMPT_CREATED",
+      "current_implementation_status": "DOCUMENTED_ONLY"
     },
     {
       "agent_id": "AG-DEV-0995",
@@ -26364,10 +26364,10 @@
       "priority": "P1_RISK",
       "dependency_status": "COMPONENTS_NOT_YET_IMPLEMENTED",
       "redesign_status": "NO_ISSUE",
-      "subwave_status": "NOT_STARTED",
-      "current_prompt_status": "NOT_CREATED",
-      "current_lifecycle_status": "CATALOGED",
-      "current_implementation_status": "NOT_IMPLEMENTED"
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
+      "current_prompt_status": "PROMPT_CREATED",
+      "current_lifecycle_status": "PROMPT_CREATED",
+      "current_implementation_status": "DOCUMENTED_ONLY"
     },
     {
       "agent_id": "AG-DEV-1004",
@@ -26517,10 +26517,10 @@
       "priority": "P1_RISK",
       "dependency_status": "COMPONENTS_NOT_YET_IMPLEMENTED",
       "redesign_status": "NO_ISSUE",
-      "subwave_status": "NOT_STARTED",
-      "current_prompt_status": "NOT_CREATED",
-      "current_lifecycle_status": "CATALOGED",
-      "current_implementation_status": "NOT_IMPLEMENTED"
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
+      "current_prompt_status": "PROMPT_CREATED",
+      "current_lifecycle_status": "PROMPT_CREATED",
+      "current_implementation_status": "DOCUMENTED_ONLY"
     },
     {
       "agent_id": "AG-DEV-1013",
@@ -26670,10 +26670,10 @@
       "priority": "P1_RISK",
       "dependency_status": "COMPONENTS_NOT_YET_IMPLEMENTED",
       "redesign_status": "NO_ISSUE",
-      "subwave_status": "NOT_STARTED",
-      "current_prompt_status": "NOT_CREATED",
-      "current_lifecycle_status": "CATALOGED",
-      "current_implementation_status": "NOT_IMPLEMENTED"
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
+      "current_prompt_status": "PROMPT_CREATED",
+      "current_lifecycle_status": "PROMPT_CREATED",
+      "current_implementation_status": "DOCUMENTED_ONLY"
     },
     {
       "agent_id": "AG-DEV-1022",
@@ -26823,10 +26823,10 @@
       "priority": "P1_RISK",
       "dependency_status": "COMPONENTS_NOT_YET_IMPLEMENTED",
       "redesign_status": "NO_ISSUE",
-      "subwave_status": "NOT_STARTED",
-      "current_prompt_status": "NOT_CREATED",
-      "current_lifecycle_status": "CATALOGED",
-      "current_implementation_status": "NOT_IMPLEMENTED"
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
+      "current_prompt_status": "PROMPT_CREATED",
+      "current_lifecycle_status": "PROMPT_CREATED",
+      "current_implementation_status": "DOCUMENTED_ONLY"
     },
     {
       "agent_id": "AG-DEV-1031",
@@ -26976,10 +26976,10 @@
       "priority": "P1_RISK",
       "dependency_status": "COMPONENTS_NOT_YET_IMPLEMENTED",
       "redesign_status": "NO_ISSUE",
-      "subwave_status": "NOT_STARTED",
-      "current_prompt_status": "NOT_CREATED",
-      "current_lifecycle_status": "CATALOGED",
-      "current_implementation_status": "NOT_IMPLEMENTED"
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
+      "current_prompt_status": "PROMPT_CREATED",
+      "current_lifecycle_status": "PROMPT_CREATED",
+      "current_implementation_status": "DOCUMENTED_ONLY"
     },
     {
       "agent_id": "AG-DEV-1040",
@@ -27129,10 +27129,10 @@
       "priority": "P1_RISK",
       "dependency_status": "COMPONENTS_NOT_YET_IMPLEMENTED",
       "redesign_status": "NO_ISSUE",
-      "subwave_status": "NOT_STARTED",
-      "current_prompt_status": "NOT_CREATED",
-      "current_lifecycle_status": "CATALOGED",
-      "current_implementation_status": "NOT_IMPLEMENTED"
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
+      "current_prompt_status": "PROMPT_CREATED",
+      "current_lifecycle_status": "PROMPT_CREATED",
+      "current_implementation_status": "DOCUMENTED_ONLY"
     },
     {
       "agent_id": "AG-DEV-1049",
@@ -27282,10 +27282,10 @@
       "priority": "P1_RISK",
       "dependency_status": "COMPONENTS_NOT_YET_IMPLEMENTED",
       "redesign_status": "NO_ISSUE",
-      "subwave_status": "NOT_STARTED",
-      "current_prompt_status": "NOT_CREATED",
-      "current_lifecycle_status": "CATALOGED",
-      "current_implementation_status": "NOT_IMPLEMENTED"
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
+      "current_prompt_status": "PROMPT_CREATED",
+      "current_lifecycle_status": "PROMPT_CREATED",
+      "current_implementation_status": "DOCUMENTED_ONLY"
     },
     {
       "agent_id": "AG-DEV-1058",
@@ -27435,10 +27435,10 @@
       "priority": "P1_RISK",
       "dependency_status": "COMPONENTS_NOT_YET_IMPLEMENTED",
       "redesign_status": "NO_ISSUE",
-      "subwave_status": "NOT_STARTED",
-      "current_prompt_status": "NOT_CREATED",
-      "current_lifecycle_status": "CATALOGED",
-      "current_implementation_status": "NOT_IMPLEMENTED"
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
+      "current_prompt_status": "PROMPT_CREATED",
+      "current_lifecycle_status": "PROMPT_CREATED",
+      "current_implementation_status": "DOCUMENTED_ONLY"
     },
     {
       "agent_id": "AG-DEV-1067",

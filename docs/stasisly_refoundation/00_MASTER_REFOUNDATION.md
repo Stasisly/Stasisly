@@ -142,12 +142,19 @@ The third specialized subwave approves exactly 45 HIGH-risk Administration
 `privacy_legal_compliance` identities. They document bounded privacy, legal and
 compliance analysis but cannot execute rights requests, provide final legal
 authority, certify compliance, notify regulators, delete data or approve
-exceptions. W7-004 through W7-089 remain `NOT_STARTED`.
+exceptions. W7-004 and W7-005 are approved; W7-006 through W7-089 remain `NOT_STARTED`.
 
 ## W7-004 documentary baseline
 
 The fourth specialized subwave approves exactly 22 HIGH-risk Administration
 `subscriptions_billing_finance` identities. They analyze payments operations and
 financial reconciliation without moving money, issuing refunds, mutating
-ledgers, approving providers or changing entitlements. W7-005 through W7-089
-remain `NOT_STARTED`.
+ledgers, approving providers or changing entitlements.
+
+## W7-005 documentary baseline
+
+The fifth specialized subwave approves exactly ten CRITICAL Development
+`devops_sre_observability` incident-command identities. They analyze and
+coordinate bounded evidence without declaring or closing incidents, executing
+commands, deploying, rolling back, mutating infrastructure, suppressing alerts
+or communicating externally. W7-006 through W7-089 remain `NOT_STARTED`.

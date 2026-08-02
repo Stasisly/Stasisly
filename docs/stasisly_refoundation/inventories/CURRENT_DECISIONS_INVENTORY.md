@@ -83,6 +83,19 @@
 | ADR-RF087 Transfers and subprocessors require review | NORMATIVE | APPROVED | COMPLIANCE_RUNTIME_NOT_IMPLEMENTED |
 | ADR-RF088 Scores require high-impact safeguards | NORMATIVE | APPROVED | COMPLIANCE_RUNTIME_NOT_IMPLEMENTED |
 | ADR-RF089 Documentary agents do not execute requests | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
+| ADR-RF090 W7-004 specialized prompt baseline | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF091 W7-004 domain and authority boundaries | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF092 W7-004 data tool memory ceilings | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF093 W7-004 human Founder escalation | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF094 W7-004 deterministic individual evaluation | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF095 W7-004 documentary agents not executors | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
+| ADR-RF096 W7-005 specialized prompt baseline | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF097 W7-005 domain and scope boundaries | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF098 W7-005 authority and operational restrictions | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF099 W7-005 data tool memory ceilings | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF100 W7-005 human Founder escalation boundaries | NORMATIVE | APPROVED | RUNTIME_NOT_IMPLEMENTED |
+| ADR-RF101 W7-005 deterministic individual evaluation | NORMATIVE | APPROVED | DOCUMENTARY_PROMPTS_IMPLEMENTED |
+| ADR-RF102 W7-005 documentary agents not executors | NORMATIVE | APPROVED | AGENTS_NOT_AVAILABLE |
 | Global design, proportional implementation | NORMATIVE_MASTER | APPROVED | DOCUMENTED |
 | API distinct from MCP | NORMATIVE_MASTER | ADOPTED | NOT_IMPLEMENTED_AS_COMPLETE_PLATFORM |
 | Flutter independent from MCP | NORMATIVE_MASTER | ADOPTED | PARTIAL_LEGACY_EVIDENCE_ONLY |
@@ -134,3 +147,11 @@ ADR-RF090 through ADR-RF095 are `APPROVED`. They approve 22 individual HIGH
 documentary prompts while preserving financial mutation denial, segregation of
 duties, evidence provenance, restrictive data/tool/memory ceilings, human and
 Founder boundaries, deterministic composition and the absence of runtime.
+
+## W7-005 Development incident-command decisions
+
+ADR-RF096 through ADR-RF102 are `APPROVED`. They approve ten individual
+CRITICAL documentary prompts while preserving incident-state separation,
+environment and evidence integrity, human command authority, Founder reserved
+authority, restrictive data/tool/memory ceilings, deterministic composition and
+the absence of runtime.

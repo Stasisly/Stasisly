@@ -44,3 +44,10 @@ W7-002 prompt approval changes no environment. Development, Staging and Producti
 Prompt approval configures no payment processor, billing provider, ledger,
 financial credential, webhook, settlement service, runtime agent, tool or
 memory in Development, Staging or Production. Operational actions remain `0`.
+
+## W7-005 environment status
+
+Prompt approval configures no incident runtime, telemetry provider, credential,
+production access, deployment, rollback, infrastructure tool, agent or memory
+in any environment. Development documentation confers no staging or production
+authority; operational actions remain `0`.

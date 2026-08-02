@@ -117,7 +117,7 @@
     },
     {
       "subwave_id": "W7-005",
-      "subwave_status": "NOT_STARTED",
+      "subwave_status": "DOCUMENTARY_PROMPTS_APPROVED",
       "sequence": 5,
       "surface": "DEVELOPMENT",
       "domain": "devops_sre_observability",

@@ -208,8 +208,8 @@ P15 / P16 / P17 executed: 0 / 0 / 0
 Strategy assignments: 2778/2778
 Families / modules / overlays: 342 / 342 / 11
 Subwaves: 89
-Specialized prompts / evaluations created: 127 / 127
-Catalog state transitions: 127
+Specialized prompts / evaluations created: 137 / 137
+Catalog state transitions: 137
 Runtime / available agents: NOT_IMPLEMENTED / 0
 ```
 
@@ -235,7 +235,8 @@ Adversarial cases / CRITICAL reviews: 200 / 180
 Catalog PROMPT_CREATED / NOT_CREATED: 282 / 2718
 W7-003: APPROVED_DOCUMENTARY_BASELINE
 W7-004: APPROVED_DOCUMENTARY_BASELINE
-W7-005 through W7-089: NOT_STARTED
+W7-005: APPROVED_DOCUMENTARY_BASELINE
+W7-006 through W7-089: NOT_STARTED
 People / incident / continuity / Emergency runtime: NOT_IMPLEMENTED
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
 ```
@@ -249,7 +250,8 @@ P0-P14: 675/675 PASS
 Adversarial cases / HIGH reviews: 360 / 315
 Catalog PROMPT_CREATED / NOT_CREATED: 327 / 2673
 W7-004: APPROVED_DOCUMENTARY_BASELINE
-W7-005 through W7-089: NOT_STARTED
+W7-005: APPROVED_DOCUMENTARY_BASELINE
+W7-006 through W7-089: NOT_STARTED
 Privacy / legal / compliance runtime: NOT_IMPLEMENTED
 Privacy requests / deletions / notifications / certifications: 0 / 0 / 0 / 0
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
@@ -263,8 +265,23 @@ Agents / identities / prompts / manifests / evaluations: 22 / 22 / 22 / 22 / 22
 P0-P14: 330/330 PASS
 Adversarial cases / HIGH reviews: 176 / 154
 Catalog PROMPT_CREATED / NOT_CREATED: 349 / 2651
-W7-005 through W7-089: NOT_STARTED
+W7-005: APPROVED_DOCUMENTARY_BASELINE
+W7-006 through W7-089: NOT_STARTED
 Financial runtime / mutations: NOT_IMPLEMENTED / 0
 Payments / refunds / ledger writes / provider approvals: 0 / 0 / 0 / 0
+Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
+```
+
+## W7-005 Development DevOps SRE observability incident-command prompts
+
+```text
+W7-005 status: APPROVED_DOCUMENTARY_BASELINE
+Agents / identities / prompts / manifests / evaluations: 10 / 10 / 10 / 10 / 10
+P0-P14: 150/150 PASS
+Adversarial cases / CRITICAL reviews: 100 / 90
+Catalog PROMPT_CREATED / NOT_CREATED: 359 / 2641
+W7-006 through W7-089: NOT_STARTED
+Incident runtime / operational actions: NOT_IMPLEMENTED / 0
+Commands / deployments / rollbacks / infrastructure mutations: 0 / 0 / 0 / 0
 Tools / memories / agents available: NOT_PROVISIONED / NOT_PROVISIONED / 0
 ```

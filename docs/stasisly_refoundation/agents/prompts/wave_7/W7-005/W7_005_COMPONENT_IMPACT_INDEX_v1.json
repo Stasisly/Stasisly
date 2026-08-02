@@ -1,0 +1,406 @@
+{
+ "schema_version": "1.0.0",
+ "component_count": 6,
+ "W7-001_changed": 0,
+ "W7-002_changed": 0,
+ "W7-003_changed": 0,
+ "W7-004_changed": 0,
+ "components": [
+  {
+   "component_id": "POL-CONSTITUTIONAL-FOUNDER-DENY-BY-DEFAULT-v1",
+   "affected_count": 10,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-0985",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0985_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-0994",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0994_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1003",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1003_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1012",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1012_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1021",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1021_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1030",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1030_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1039",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1039_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1048",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1048_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1057",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1057_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1066",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1066_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "POL-SURFACE-DEVELOPMENT-v1",
+   "affected_count": 10,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-0985",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0985_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-0994",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0994_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1003",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1003_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1012",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1012_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1021",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1021_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1030",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1030_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1039",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1039_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1048",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1048_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1057",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1057_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1066",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1066_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "POL-DOMAIN-DEVELOPMENT-DEVOPS-SRE-OBSERVABILITY-v1",
+   "affected_count": 10,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-0985",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0985_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-0994",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0994_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1003",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1003_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1012",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1012_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1021",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1021_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1030",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1030_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1039",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1039_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1048",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1048_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1057",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1057_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1066",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1066_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "FAM-DEVELOPMENT-DEVOPS-SRE-OBSERVABILITY-INCIDENT-COMMAND-v1",
+   "affected_count": 10,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-0985",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0985_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-0994",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0994_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1003",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1003_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1012",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1012_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1021",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1021_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1030",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1030_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1039",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1039_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1048",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1048_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1057",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1057_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1066",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1066_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "MOD-DEVELOPMENT-DEVOPS-SRE-OBSERVABILITY-INCIDENT-COMMAND-v1",
+   "affected_count": 10,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-0985",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0985_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-0994",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0994_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1003",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1003_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1012",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1012_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1021",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1021_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1030",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1030_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1039",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1039_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1048",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1048_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1057",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1057_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1066",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1066_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  },
+  {
+   "component_id": "OVR-FOUNDER-EXCLUSIVE-v1",
+   "affected_count": 10,
+   "dependents": [
+    {
+     "agent_id": "AG-DEV-0985",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0985_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0985_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_COORDINATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-0994",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-0994_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-0994_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ASSESS_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1003",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1003_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1003_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_PLAN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1012",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1012_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1012_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_MONITOR_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1021",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1021_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1021_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_REVIEW_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1030",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1030_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1030_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_RESEARCH_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1039",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1039_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1039_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_DESIGN_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1048",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1048_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1048_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_ENGINEER_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1057",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1057_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1057_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_VALIDATE_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    },
+    {
+     "agent_id": "AG-DEV-1066",
+     "manifest": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/manifests/AG-DEV-1066_EFFECTIVE_PROMPT_MANIFEST_v1.json",
+     "effective_prompt": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/effective_prompts/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EFFECTIVE_PROMPT_v1.md",
+     "evaluation": "docs/stasisly_refoundation/agents/prompts/wave_7/W7-005/evaluations/AG-DEV-1066_DEVELOPMENT_DEVOPS_SRE_OBSERVABILITY_INCIDENT_COMMAND_AUDIT_ARCHITECTURE_DESIGN_EVALUATION_v1.md"
+    }
+   ]
+  }
+ ]
+}

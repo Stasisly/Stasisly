@@ -68,6 +68,12 @@ reconciliation evidence. Currency, amount, period, provider, source,
 idempotency and immutable provenance remain explicit. No schema, credential,
 financial record or operational mutation is created.
 
+W7-005 keeps service, environment, region, release, severity, impact, signal,
+timeline, owner, decision, stop condition and verification evidence explicit.
+Telemetry is minimized and redacted; secrets and cross-tenant data are
+forbidden. No schema, credential, production access, runtime memory or
+operational mutation is created.
+
 Wave 5 requires versioned API and data contracts, bounded pagination, explicit
 errors, idempotency and compatible migration paths. PostgreSQL changes require
 constraints, indexes, RLS, grants, local validation and rollback. Jobs, events,

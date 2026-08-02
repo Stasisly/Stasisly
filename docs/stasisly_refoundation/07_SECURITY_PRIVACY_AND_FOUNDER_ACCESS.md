@@ -75,3 +75,11 @@ Segregation of duties, exact identity, amount, currency, period, idempotency and
 immutable evidence are mandatory. Agents cannot move money, expose payment
 credentials, mutate balances or ledgers, self-approve exceptions, approve
 providers or exercise Founder financial authority.
+
+## W7-005 incident-command safeguards
+
+Telemetry and operational evidence are purpose-limited, minimized, redacted
+and need-to-know. Environment identity, timeline provenance, stop conditions,
+segregation of command from execution and independent recovery verification are
+mandatory. Agents cannot expose secrets, suppress evidence, mutate production,
+self-approve exceptions or exercise Founder authority.

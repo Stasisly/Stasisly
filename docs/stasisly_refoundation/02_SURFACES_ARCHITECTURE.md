@@ -96,3 +96,10 @@ W7-004 adds 22 HIGH-risk documentary Administration specialists. Financial
 records and Product entitlements remain separate; analysis transfers bounded
 evidence, never payment, refund, payout, ledger, balance, provider or entitlement
 authority. `SUBSCRIPTIONS_BILLING_FINANCE_RUNTIME: NOT_IMPLEMENTED`.
+
+### DevOps, SRE and observability incident-command boundary
+
+W7-005 adds ten CRITICAL documentary Development specialists. They may analyze
+incident evidence and coordinate bounded handoffs but cannot declare or close
+incidents, execute commands, deploy, rollback, mutate infrastructure, suppress
+telemetry or issue external communications. `INCIDENT_COMMAND_RUNTIME: NOT_IMPLEMENTED`.

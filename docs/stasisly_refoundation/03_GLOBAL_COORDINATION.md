@@ -118,3 +118,11 @@ Nexus resolves transverse conflict, Stasis receives Product and entitlement
 impact, Rector receives technical/data/security controls, Founder retains
 reserved material financial authority, and qualified humans and authorized
 systems retain execution. Reporting never transfers financial permissions.
+
+## W7-005 Development incident-command coordination
+
+The ten identities report to `AG-DEV-0981`. Rector governs Development command
+handoffs, Nexus resolves cross-surface conflict, Stasis receives Product and
+user impact, Gerendi receives Administration impact, Founder retains reserved
+authority, and authenticated human incident commanders and operators retain
+declaration, execution and closure authority. Reporting transfers no permission.
