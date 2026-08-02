@@ -142,3 +142,11 @@ and store owners retain every operational decision and execution permission.
 and user impact, Gerendi receives Administration and legal impact, and Founder
 retains reserved authority. Authenticated security, privacy, data, legal,
 service, cryptography and incident owners retain all operational decisions.
+
+## W7-008 Product health coordination
+
+The 90 exact identities preserve catalog reporting edges under the Product
+health coordinator. Stasis governs user-facing coordination, Nexus resolves
+cross-surface conflict, Rector receives technical concerns, Gerendi receives
+Administration/legal impact and Founder retains reserved authority. Qualified
+clinical, privacy, data, product, legal and emergency owners retain decisions.

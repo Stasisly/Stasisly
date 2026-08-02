@@ -64,3 +64,10 @@ Prompt approval configures no scanner, security provider, privacy workflow,
 secret store, cryptographic key, privileged credential, incident runtime,
 production access, agent, tool or memory in any environment. Security and
 privacy operations remain `0`.
+
+## W7-008 environment status
+
+Prompt approval configures no clinical provider, diagnostic system, emergency
+integration, health-record service, credential, runtime agent, tool, memory or
+model in any environment. Medical, health-data, record and production
+operations remain `0`.

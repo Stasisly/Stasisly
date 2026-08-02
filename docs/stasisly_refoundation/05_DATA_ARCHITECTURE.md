@@ -87,6 +87,12 @@ case-scoped. Raw secrets, keys and credentials are forbidden; no schema,
 personal-data expansion, access grant, cryptographic operation or mutation is
 created.
 
+W7-008 keeps user, subject, tenant, purpose, consent, symptoms, clinical
+context, source, units, recency, uncertainty, safety flags and accountable owner
+explicit. Sensitive health evidence is minimum-necessary, redacted and
+user/tenant/case-scoped. No schema, health record, diagnosis, prescription,
+memory, access grant or operational mutation is created.
+
 Wave 5 requires versioned API and data contracts, bounded pagination, explicit
 errors, idempotency and compatible migration paths. PostgreSQL changes require
 constraints, indexes, RLS, grants, local validation and rollback. Jobs, events,

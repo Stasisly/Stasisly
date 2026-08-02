@@ -72,7 +72,9 @@ Development incident-command prompts and evaluations through P0-P14.
 STASISLY-AGENTS-014 approved seven W7-006 HIGH Development payment-engineering
 prompts and evaluations through P0-P14. STASISLY-AGENTS-015 approved 100 W7-007
 CRITICAL Development security and privacy prompts and evaluations through
-P0-P14. The other 2,534 Wave 7 records remain `NOT_STARTED`; no security,
-privacy, payment or agent runtime operation is authorized.
+P0-P14. STASISLY-AGENTS-016 approved 90 W7-008 HIGH/CRITICAL Product health
+prompts and evaluations through P0-P14. The other 2,444 Wave 7 records remain
+`NOT_STARTED`; no clinical, security, privacy, payment or agent runtime
+operation is authorized.
 
-W7-008 requires a separate package and exact resolution from the approved plan.
+W7-009 requires a separate package and exact resolution from the approved plan.

@@ -74,3 +74,11 @@ Future Product Surface delivery depends on identity, profile, consent, memory,
 conversation, research, Agent Registry, Model Gateway, Stasis Engine, Product
 safety, observability and audit contracts. No dependency is implemented by the
 Wave 4 prompt baseline.
+
+## W7-008 Product health documentary boundary
+
+W7-008 adds 90 documentary Product health specialists across clinical
+coordination, cardiology, endocrinology, dermatology, consultation preparation
+and clinical safety escalation. Their output is bounded guidance, not diagnosis,
+prescription, treatment, emergency response or replacement of qualified care.
+All agents remain unavailable; Product health runtime is not implemented.

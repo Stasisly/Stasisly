@@ -767,10 +767,12 @@ Development incident-command prompts and evaluations through P0-P14.
 STASISLY-AGENTS-014 approved seven W7-006 HIGH Development payment-engineering
 prompts and evaluations through P0-P14. STASISLY-AGENTS-015 approved 100 W7-007
 CRITICAL Development security and privacy prompts and evaluations through
-P0-P14. The other 2,534 Wave 7 records remain `NOT_STARTED`; no security,
-privacy, payment or agent runtime operation is authorized.
+P0-P14. STASISLY-AGENTS-016 approved 90 W7-008 HIGH/CRITICAL Product health
+prompts and evaluations through P0-P14. The other 2,444 Wave 7 records remain
+`NOT_STARTED`; no clinical, security, privacy, payment or agent runtime
+operation is authorized.
 
-W7-008 requires a separate package and exact resolution from the approved plan.
+W7-009 requires a separate package and exact resolution from the approved plan.
 ''';
 }
 
@@ -823,14 +825,14 @@ String _migrationReadiness(
 Governance: DOCUMENTED
 Historical audit: COMPLETED
 Migration: WAVE_7_SPECIALIZED_STRATEGY_DOCUMENTED
-Prompt implementation: 466 DOCUMENTED_ONLY
+Prompt implementation: 556 DOCUMENTED_ONLY
 Runtime: NOT_IMPLEMENTED
 Historical prompts audited: ${audits.length}
 Historical files missing: 0
 Catalog assignments: ${assignments.length}/3000
 Historical wave assignments: 43/43
 CSV/JSON parity: PASS
-New individual prompts created: 423
+New individual prompts created: 513
 Historical prompts migrated to canonical baseline: 43
 Historical prompts modified: 0
 Agents available or active: 0
@@ -847,11 +849,11 @@ Wave 5 evaluation suites: 60 DESIGNED_NOT_RUNTIME_EXECUTED
 Wave 6 P0-P14 evaluations: 750/750 PASS
 Wave 6 evaluation suites: 50 DESIGNED_NOT_RUNTIME_EXECUTED
 Wave 7 strategy inventory: 2778/2778 STRATEGY_ASSIGNED
-Wave 7 remaining NOT_STARTED: 2534
+Wave 7 remaining NOT_STARTED: 2444
 Wave 7 families / modules / overlays: 342 / 342 / 11
 Wave 7 subwaves: 89
-Wave 7 specialized prompts created: 244
-Wave 7 specialized evaluations created: 244
+Wave 7 specialized prompts created: 334
+Wave 7 specialized evaluations created: 334
 W7-001 P0-P14 evaluations: 600/600 PASS
 W7-002 P0-P14 evaluations: 300/300 PASS
 W7-003 P0-P14 evaluations: 675/675 PASS
@@ -859,6 +861,7 @@ W7-004 P0-P14 evaluations: 330/330 PASS
 W7-005 P0-P14 evaluations: 150/150 PASS
 W7-006 P0-P14 evaluations: 105/105 PASS
 W7-007 P0-P14 evaluations: 1500/1500 PASS
+W7-008 P0-P14 evaluations: 1350/1350 PASS
 ```
 
 ## Gate result
@@ -870,7 +873,7 @@ executed and remain outside scope.
 
 ## Next package
 
-The next package may implement only the exact `W7-008` scope resolved from
+The next package may implement only the exact `W7-009` scope resolved from
 `WAVE_7_SUBWAVE_PLAN_v1` after separate authorization. It must preserve
 individual identity, evaluation, most-restrictive composition and all
 documentary/runtime boundaries.

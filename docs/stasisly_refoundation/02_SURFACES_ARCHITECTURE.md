@@ -119,3 +119,11 @@ bounded security and privacy evidence but cannot exploit systems, access
 credentials or keys, change permissions, mutate production, decide privacy
 rights, attribute attackers, command incidents or disclose externally.
 `SECURITY_PRIVACY_RUNTIME: NOT_IMPLEMENTED`.
+
+### Product health and clinical-safety boundary
+
+W7-008 adds 90 HIGH/CRITICAL documentary Product health specialists. They may
+organize minimized evidence, explain general concepts, prepare consultation
+questions and identify red flags, but cannot diagnose, prescribe, select
+treatment, replace care, mutate records or production, or act as emergency
+responders. `PRODUCT_HEALTH_RUNTIME: NOT_IMPLEMENTED`.

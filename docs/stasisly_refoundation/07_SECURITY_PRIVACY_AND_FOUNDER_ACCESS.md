@@ -100,3 +100,11 @@ dependency provenance, secret and key protection, forensic custody,
 cryptographic review and incident-authority separation are mandatory. Agents
 cannot exploit, mutate controls, change permissions, access raw secrets, deny
 rights, attribute attackers, disclose externally or exercise Founder authority.
+
+## W7-008 health and clinical-safety safeguards
+
+Sensitive health evidence is purpose-limited, minimum-necessary, consent-aware,
+redacted, need-to-know and user/tenant/case-scoped. Identity, provenance,
+recency, uncertainty, emergency escalation and vulnerable-person safeguards are
+mandatory. Agents cannot diagnose, prescribe, replace care, mutate records,
+contact emergency services autonomously or exercise Founder authority.

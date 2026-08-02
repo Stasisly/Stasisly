@@ -114,3 +114,11 @@ hierarchy, strategy and CRITICAL-risk metadata are unchanged. All 3,000 records
 remain `NOT_AVAILABLE`; catalog state creates no security operation, privacy
 decision, credential, key, privileged-access, incident-command or disclosure
 authority.
+
+## W7-008 catalog transition
+
+Exactly 90 `W7-008` records moved to `PROMPT_CREATED` and `DOCUMENTED_ONLY`,
+producing 556 documentary prompts and leaving 2,444 `NOT_CREATED`. Identity,
+hierarchy, strategy and HIGH/CRITICAL metadata are unchanged. All 3,000 records
+remain `NOT_AVAILABLE`; catalog state creates no clinician, diagnosis,
+prescription, treatment, emergency, health-record or production authority.

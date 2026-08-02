@@ -178,3 +178,11 @@ CRITICAL documentary prompts while preserving privacy rights, least privilege,
 supply-chain and dependency provenance, secret and cryptographic boundaries,
 forensic evidence integrity, human and Founder authority, deterministic
 composition and the absence of runtime.
+
+## W7-008 Product health decisions
+
+ADR-RF117 through ADR-RF123 are `APPROVED`. They approve 90 individual
+HIGH/CRITICAL documentary Product health prompts while preserving
+non-diagnostic guidance, clinical uncertainty, emergency escalation,
+health-data minimization, qualified-human and Founder authority, deterministic
+composition and the absence of runtime.
